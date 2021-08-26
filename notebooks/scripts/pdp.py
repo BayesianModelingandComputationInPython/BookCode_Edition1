@@ -53,23 +53,23 @@ def plot_pdp(bart, X=None, Y=None, style="pdp", kind="linear", xs_values=None, v
     for i in var_idx: 
         indices_mi = indices[:]
         indices_mi.pop(i)
-        coco = []
+        preds = []
         if style == "pdp":
             if kind == "linear":
-                dada = np.linspace(X[:,i].min(), X[:,i].max(),  xs_values) 
+                X_is = np.linspace(X[:,i].min(), X[:,i].max(),  xs_values) 
             elif kind == "quantiles":
-                dada = np.quantile(X[:,i], q=xs_values)
+                X_is = np.quantile(X[:,i], q=xs_values)
             elif kind == "insample":
-                dada = X[:,i]
-    
-            for obs in dada:
+                X_is = X[:,i]
+
+            for x_i in X_is:
                 if subsample:
                     new_X[:,indices_mi] = X[idx_s][:,indices_mi]
                 else:
                     new_X[:,indices_mi] = X[:,indices_mi]
-                new_X[:,i] =  obs
-                coco.append(barto.predict(new_X).mean(1)) # average over the X-i variables
-            new_X_target.append(dada)
+                new_X[:,i] =  x_i
+                preds.append(barto.predict(new_X).mean(1)) # average over the X-i variables
+            new_X_target.append(X_is)
         else:
             if subsample:
                 num_observations = subsample
@@ -80,13 +80,13 @@ def plot_pdp(bart, X=None, Y=None, style="pdp", kind="linear", xs_values=None, v
                 tmp.append(new_X)
             new_X_ = np.vstack(tmp)
             count = 0
-            predicto = barto.predict(new_X_)
+            predicted = barto.predict(new_X_)
             for _ in range(subsample):
-                xx = predicto[:,count:count+subsample]
-                coco.append(xx.mean(0))
+                xx = predicted[:,count:count+subsample]
+                preds.append(xx.mean(0))
                 count += subsample
             new_X_target.append(new_X[:,i])
-        new_Y.append(np.array(coco).T)
+        new_Y.append(np.array(preds).T)
 
     
     if ax is None:
