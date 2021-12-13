@@ -1,4 +1,4 @@
-# BookCode_Edition1
+# Book Code: Edition 1
 
 ## How to set up the enviorment and run the code
 
