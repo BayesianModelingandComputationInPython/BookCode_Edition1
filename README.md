@@ -18,6 +18,7 @@ We have provided instructions below for common options.
 ### Conda
 ```
 conda env create -f environment.yml
+conda activate bmcp
 ```
 
 ### Colab
