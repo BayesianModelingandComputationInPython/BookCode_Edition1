@@ -1,4 +1,4 @@
-# Bayesian Computation in Python Book Code Repository
+# Bayesian Modeling and Computation in Python Book Code Repository
 
 ![Book Cover](jupyter_book/img/Cover.jpg)
 
