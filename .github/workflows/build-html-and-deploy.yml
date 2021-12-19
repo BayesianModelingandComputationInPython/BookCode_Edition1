@@ -12,20 +12,23 @@ jobs:
         uses: actions/checkout@v2
         with:
           persist-credentials: false
-
-      - name: Setup Miniconda
-        uses: conda-incubator/setup-miniconda@v2
+      - uses: actions/setup-python@v2
         with:
-          auto-update-conda: true
-          auto-activate-base: false
-          miniconda-version: 'latest'
-          python-version: 3.9.6
-          environment-file: environment.yml
-          activate-environment: bmcp
+          python-version: '3.9.6'
+
+#      - name: Setup Miniconda
+#        uses: conda-incubator/setup-miniconda@v2
+#        with:
+#          auto-update-conda: true
+#          auto-activate-base: false
+#          miniconda-version: 'latest'
+#          python-version: 3.9.6
+#          environment-file: environment.yml
+#          activate-environment: bmcp
 
       - name: Install jupyterbook requirements
         shell: bash -l {0}
-        run: pip install -r requirements-docs.txt
+        run: pip install jupyter-book==0.12.1
 
       - name: Build Website
         shell: bash -l {0}
