@@ -1,6 +1,9 @@
 # Bayesian Modeling and Computation in Python Book Code Repository
 
-![Book Cover](jupyter_book/img/Cover.jpg)
+
+<p align="center">
+  <img src="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/raw/main/jupyter_book/img/Cover.jpg" width="650"/>
+</p>
 
 This repository contains the all the code used to produce the book. 
 This includes the visible code, and all code used to generate figures, tables, etc.  
