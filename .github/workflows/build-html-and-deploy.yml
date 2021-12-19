@@ -33,6 +33,13 @@ jobs:
       - name: Build Website
         shell: bash -l {0}
         run: jb build .
+        
+      # Add nojekyll to deployment so underscore 
+      # https://stackoverflow.com/a/39691475/414104
+      - name: Add nojekyll 
+        shell: bash -l {0}
+        run: touch _build/html/.nojekyll
+
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.7.1
