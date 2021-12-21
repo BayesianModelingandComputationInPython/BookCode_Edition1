@@ -15,6 +15,7 @@ NOTE: This repository is still a work in progress
 If you see any issues please create an issue on [the issue tracker](https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues)
 
 ## Code Website
+The notebooks can be viewed more easily at www.bayesiancomputationbook.com
 
 ## Environment installation
 To run the code you will need to install the correct packages in a computational environment.
