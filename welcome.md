@@ -1,10 +1,17 @@
 # Welcome
-Welcome to the reference material for  Bayesian Modeling Computation in Python
+Welcome to the reference material for Bayesian Modeling Computation in Python
 
-You can purchase the book
-[from the publisher here](https://www.routledge.com/Bayesian-Modeling-and-Computation-in-Python/Martin-Kumar-Lao/p/book/9780367894368) or on amazon.
+If you'd like a physical copy it can purchased 
+[from the publisher here](https://www.routledge.com/Bayesian-Modeling-and-Computation-in-Python/Martin-Kumar-Lao/p/book/9780367894368) or on Amazon.
 <p align="center">
-  <a href="https://www.amazon.com/Bayesian-Modeling-Computation-Chapman-Statistical/dp/036789436X?_encoding=UTF8&camp=1789&creative=9325&linkCode=ur2&tag=storypodca-20&linkId=2P4S6EY6B462X4AR" target="_blank" rel="noopener noreferrer" style="border:none;text-decoration:none"><img src="https://www.niftybuttons.com/amazon/amazon-button2.png"></a></p>
+  <a href="https://www.amazon.com/Bayesian-Modeling-Computation-Chapman-Statistical/dp/036789436X?_encoding=UTF8&camp=1789&creative=9325&linkCode=ur2&tag=storypodca-20&linkId=2P4S6EY6B462X4AR" target="_blank" rel="noopener noreferrer" style="border:none;text-decoration:none"><img src="https://www.niftybuttons.com/amazon/amazon-button2.png"></a>
+
+</p>
+
+```{admonition} Open Access Coming Soon
+This will also be an open access textbook.
+We will also make the full textbook available here for free at this same site.
+```
 
 <p align="center">
   <img src="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/raw/main/jupyter_book/img/Cover.jpg" width="50%"/>
