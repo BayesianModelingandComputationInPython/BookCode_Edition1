@@ -13,7 +13,12 @@ You can purchase the book
 
 This is the reference repository for the manuscript.
 It includes the visible code, and all code used to generate figures, tables, etc.  
-NOTE: This site is still a work in progress 
+
+```{admonition} Work in Progress
+We're still working on this site. 
+File an [issue](https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues)
+if you notice anything broken
+```
 
 ## Reporting Issues
 If you see any issues please create an issue on [the issue tracker](https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues)
