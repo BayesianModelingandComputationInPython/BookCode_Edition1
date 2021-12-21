@@ -23,7 +23,6 @@ if you notice anything broken
 ## Reporting Issues
 If you see any issues please create an issue on [the issue tracker](https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues)
 
-## Code Website
 
 ## Environment installation
 To run the code you will need to install the correct packages in a computational environment.
