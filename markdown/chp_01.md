@@ -112,7 +112,7 @@ data or even a different kind of data.
 Throughout this book we will discuss different ways to perform each of
 these 3 steps and we will learn about ways to expand them into a more
 complex **Bayesian workflow**. We consider this topic so important that
-we dedicated an entire Chapter [chap9](chap9) to revisit and
+we dedicated an entire Chapter [9](chap9) to revisit and
 rediscuss these ideas.
 
 (Bayesian_inference)=
@@ -345,7 +345,7 @@ Closed form expressions for the integral in Equation
 modern Bayesian inference is done using numerical methods that we call
 **Universal Inference Engines** (see
 [inference_methods](inference_methods)) just to compensate for the
-fact we live in the 21^st^ century and we still do not have flying cars.
+fact we live in the $21^\text{st}$ century and we still do not have flying cars.
 Anyway, there are many well-tested Python libraries providing such
 numerical methods so in general it is very unlikely that a Bayesian
 practitioner will need to code their own Universal Inference Engine.
@@ -518,7 +518,7 @@ draws as interchangeably.
 Since MCMC draws samples sequentially we also say we get a *chain* of
 draws as result, or just MCMC chain for short. Usually it is desired to
 draw many chains for computational and diagnostic reasons (we discuss
-how to do this in Chapter [chap1bis](chap1bis)). All the output
+how to do this in Chapter [2](chap1bis)). All the output
 chains, whether singular or plural, are typically referred to as a trace
 or simple the posterior. Unfortunately spoken language is imprecise so
 if precision is needed the best approach is to review the code to
@@ -569,20 +569,31 @@ Generally it is also useful to compute some numerical summaries. Here we
 will use the Python package ArviZ {cite:p}`Kumar2019` to compute these
 statistics:
 
+```python
     az.summary(trace, kind="stats", round_to=2))
+```
 
-::: {#tab:posterior_summary}
-              **mean**   **sd**   **hdi_3%**   **hdi_97%**
-  ---------- ---------- -------- ------------ -------------
-  $\theta$      0.69      0.01       0.52         0.87
-:::
+```{list-table}
+:name: tab:posterior_summary
+* -
+  - **mean**
+  - **sd**
+  - **hdi_3%**
+  - **hdi_97%**
+* - $\theta$
+  - 0.69
+  - 0.01
+  - 0.52
+  - 0.87
+```
+
 
 ArviZ's function `summary` computes the mean, standard deviation and the
 highest density interval (HDI) 94% of our parameter $\theta$. The HDI is
 the shortest interval containing a given probability density, 94% for
 this particular example [^12]. {numref}`fig:plot_posterior`, generated
 with `az.plot_posterior(trace)` is a close visual equivalent of the
-above summary in [tab:posterior_summary](tab:posterior_summary). We
+above summary in {numref}`tab:posterior_summary`. We
 can see the mean and the HDI, on top of a curve representing the entire
 posterior distribution. The curve is computed using a **kernel density
 estimator (KDE)**, which is like the smooth version of a histogram.
@@ -601,7 +612,7 @@ figure.
 The HDI is a common choice in Bayesian statistics and *round* values
 like 50% or 95% are commonplace. But ArviZ uses 94% (or 0.94) as the
 default value as seen in both the summary Table
-[tab:posterior_summary](tab:posterior_summary) and
+{numref}`tab:posterior_summary` and
 {numref}`fig:plot_posterior`. The reason for this choice is that 94 is
 close to the *widely used* 95 but is different enough to serve as a
 friendly reminder that there is nothing special about these *round*
@@ -1235,7 +1246,7 @@ constraints are [^19]:
     case of the binomial)
 
 It is interesting to note that many of the generalized linear models
-like the ones described in Chapter [chap2](chap2) are traditionally
+like the ones described in Chapter [3](chap2) are traditionally
 defined using maximum entropy distributions, given the constraints of
 the models. Similar to objective priors, MaxEnt prior may not exist or
 are difficult to derive.
@@ -1357,7 +1368,7 @@ prior predictive samples and use them to choose reasonable priors.
 
 Problems are labeled Easy (E), Medium (M), and Hard (H).
 
-**E1.** As we discussed, models are artificial
+**1E1.** As we discussed, models are artificial
 representations used to help define and understand an object or process.
 However, no model is able to perfectly replicate what it represents and
 thus is deficient in some way. In this book we focus on a particular
@@ -1365,7 +1376,7 @@ type of models, statistical models. What are other types of models you
 can think of? How do they aid understanding of the thing that is being
 modeled? How are they deficient?
 
-**E2.** Match each of these verbal descriptions to their
+**1E2.** Match each of these verbal descriptions to their
 corresponding mathematical expression:
 
 1.  The probability of a parameter given the observed data
@@ -1378,7 +1389,7 @@ corresponding mathematical expression:
 
 5.  The probability of an unseen observation before seeing any data
 
-**E3.** From the following expressions, which one
+**1E3.** From the following expressions, which one
 corresponds to the sentence, The probability of being sunny given that
 it is July 9th of 1816?
 
@@ -1388,16 +1399,16 @@ it is July 9th of 1816?
 
 3.  $p(\text{sunny} \mid \text{July 9th of 1816})$
 
-4.  $p(\text{July 9th of 1816} \mid sunny)$
+4.  $p(\text{July 9th of 1816} \mid \text{sunny})$
 
 5.  $p(\text{sunny}, \text{July 9th of 1816}) / p(\text{July 9th of 1816})$
 
-**E4.** Show that the probability of choosing a human at
+**1E4.** Show that the probability of choosing a human at
 random and picking the Pope is not the same as the probability of the
 Pope being human. In the animated series Futurama, the (Space) Pope is a
 reptile. How does this change your previous calculations?
 
-**E5.** Sketch what the distribution of possible observed
+**1E5.** Sketch what the distribution of possible observed
 values could be for the following cases:
 
 1.  The number of people visiting your local cafe assuming Poisson
@@ -1412,27 +1423,27 @@ values could be for the following cases:
 4.  The weight of adult humans in pounds assuming skew Normal
     distribution
 
-**E6.** For each example in the previous exercise, use SciPy
+**1E6.** For each example in the previous exercise, use SciPy
 to specify the distribution in Python. Pick parameters that you believe
 are reasonable, take a random sample of size 1000, and plot the
 resulting distribution. Does this distribution look reasonable given
 your domain knowledge? If not adjust the parameters and repeat the
 process until they seem reasonable.
 
-**E7.** Compare priors $\text{Beta}(0.5, 0.5)$,
+**1E7.** Compare priors $\text{Beta}(0.5, 0.5)$,
 $\text{Beta}(1, 1)$, $\text{Beta}(1, 4)$. How do the priors differ in
 terms of shape?
 
-**E8**. Rerun Code block
+**1E8**. Rerun Code block
 [binomial_update](binomial_update) but using two
 Beta-priors of your choice. Hint: you may what to try priors with
 $\alpha \neq \beta$ like $\text{Beta}(2, 5)$.
 
-**E9.** Try to come up with new constraints in order to
+**1E9.** Try to come up with new constraints in order to
 obtain new Max-Ent distributions (Code Block
 [max_ent_priors](max_ent_priors))
 
-**E10.** In Code Block [metropolis_hastings](metropolis_hastings), change the
+**1E10.** In Code Block [metropolis_hastings](metropolis_hastings), change the
 value of `can_sd` and run the Metropolis-Hastings sampler. Try values
 like 0.001 and 1.
 
@@ -1442,7 +1453,7 @@ like 0.001 and 1.
 
 2.  Use the function `az.plot_posterior`.
 
-**E11.** You need to estimate the weights of blue whales,
+**1E11.** You need to estimate the weights of blue whales,
 humans, and mice. You assume they are normally distributed, and you set
 the same prior $\mathcal{HN}(200\text{kg})$ for the variance. What type
 of prior is this for adult blue whales? Strongly informative, weakly
@@ -1450,7 +1461,7 @@ informative, or non-informative? What about for mice and for humans? How
 does informativeness of the prior correspond to our real world
 intuitions about these animals?
 
-**E12.** Use the following function to explore different
+**1E12.** Use the following function to explore different
 combinations of priors (change the parameters `a` and `b`) and data
 (change heads and trials). Summarize your observations.
 
@@ -1479,7 +1490,7 @@ interact(posterior_grid,
     trials=ipyw.IntSlider(min=0, max=20, step=1, value=9))
 ```
 
-**E13.** Between the prior, prior predictive, posterior, and
+**1E13.** Between the prior, prior predictive, posterior, and
 posterior predictive distributions which distribution would help answer
 each of these questions. Some items may have multiple answers.
 
@@ -1500,7 +1511,7 @@ each of these questions. Some items may have multiple answers.
 
 6.  Which can can be used to to visualize a Highest Density Interval?
 
-**M14.** Equation {eq}`eq:posterior_dist` contains the
+**1M14.** Equation {eq}`eq:posterior_dist` contains the
 marginal likelihood in the denominator, which is difficult to calculate.
 In Equation {eq}`eq:proportional_bayes` we show that knowing the
 posterior up to a proportional constant is sufficient for inference.
@@ -1508,7 +1519,7 @@ Show why the marginal likelihood is not needed for the
 Metropolis-Hasting method to work. Hint: this is a pen and paper
 exercise, try by expanding Equation {eq}`acceptance_prob`.
 
-**M15.** In the following definition of a probabilistic
+**1M15.** In the following definition of a probabilistic
 model, identify the prior, the likelihood, and the posterior:
 
 ```{math} 
@@ -1519,17 +1530,17 @@ Y \sim \mathcal{N}(\mu, \sigma)\\
 \end{split}
 ```
 
-**M16.** In the previous model, how many parameters will the
+**1M16.** In the previous model, how many parameters will the
 posterior have? Compare your answer with that from the model in the
 coin-flipping problem in Equation {eq}`eq:beta_binomial`.
 
-**M17.** Suppose that we have two coins; when we toss the
+**1M17.** Suppose that we have two coins; when we toss the
 first coin, half of the time it lands tails and half of the time on
 heads. The other coin is a loaded coin that always lands on heads. If we
 choose one of the coins at random and observe a head, what is the
 probability that this coin is the loaded one?
 
-**M18.** Modify Code Block
+**1M18.** Modify Code Block
 [metropolis_hastings_sampler_rvs](metropolis_hastings_sampler_rvs) to generate random
 samples from a Poisson distribution with parameters of your choosing.
 Then modify Code Blocks [metropolis_hastings_sampler](metropolis_hastings_sampler) and
@@ -1537,7 +1548,7 @@ Then modify Code Blocks [metropolis_hastings_sampler](metropolis_hastings_sample
 parameters. Test how the number of samples, MCMC iterations, and initial
 starting point affect convergence to your true chosen parameter.
 
-**M19.** Assume we are building a model to estimate the mean
+**1M19.** Assume we are building a model to estimate the mean
 and standard deviation of adult human heights in centimeters. Build a
 model that will make these estimation. Start with Code Block
 [beta_binom](beta_binom) and change the likelihood and
@@ -1549,14 +1560,14 @@ priors as needed. After doing so then
 2.  Using the outputs from (a) to justify your choices of priors and
     likelihoods
 
-**M20.** From domain knowledge you have that a given
+**1M20.** From domain knowledge you have that a given
 parameter can not be negative, and has a mean that is roughly between 3
 and 10 units, and a standard deviation of around 2. Determine two prior
 distribution that satisfy these constraints using Python. This may
 require trial and error by drawing samples and verifying these criteria
 have been met using both plots and numerical summaries.
 
-**M21.** A store is visited by $n$ customers on a given day.
+**1M21.** A store is visited by $n$ customers on a given day.
 The number of customers that make a purchase $Y$ is distributed as
 $\text{Bin}(n, \theta)$, where $\theta$ is the probability that a
 customer makes a purchase. Assume we know $\theta$ and the prior for $n$
@@ -1568,7 +1579,7 @@ is $\text{Pois}(4.5)$.
 
 2.  Summarize the effect of $Y$ and $\theta$ on the posterior
 
-**H22.** Modify Code Block
+**1H22.** Modify Code Block
 [metropolis_hastings_sampler_rvs](metropolis_hastings_sampler_rvs) to generate samples from
 a Normal Distribution, noting your choice of parameters for the mean and
 standard deviation. Then modify Code Blocks
@@ -1576,7 +1587,7 @@ standard deviation. Then modify Code Blocks
 sample from a Normal model and see if you can recover your chosen
 parameters.
 
-**H23.** Make a model that estimates the proportion of the
+**1H23.** Make a model that estimates the proportion of the
 number of sunny versus cloudy days in your area. Use the past 5 days of
 data from your personal observations. Think through the data collection
 process. How hard is it to remember the past 5 days. What if needed the
@@ -1586,7 +1597,7 @@ cloudy days. Generate predictions for the next 10 days of weather.
 Communicate your answer using both numerical summaries and
 visualizations.
 
-**H24.** You planted 12 seedlings and 3 germinate. Let us
+**1H24.** You planted 12 seedlings and 3 germinate. Let us
 call $\theta$ the probability that a seedling germinates. Assuming
 $\text{Beta}(1, 1)$ prior distribution for $\theta$.
 
@@ -1665,6 +1676,7 @@ and ArviZ
     than the one provided, we still think the example conveys a useful
     intuition, that will be refined as we progress through this book.
 
+## References
 
 ```{bibliography}
 :style: unsrt
