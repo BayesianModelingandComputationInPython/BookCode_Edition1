@@ -287,7 +287,7 @@ prior predictive distributions in practice, and how the prior predictive
 distributions inform the validity, or lack thereof, in subsequent
 modeling choices.
 
-::: {admotion} Bayesian models as generative models
+::: {admonition} Bayesian models as generative models
 
 Adopting a probabilistic perspective for modeling leads to the mantra *models generate data*
 {cite:p}`WestfallUnderstandingAdvancedStatistical2013`. We consider this
@@ -322,7 +322,7 @@ predictions are computed by integrating out (or marginalizing) over the
 posterior distribution of parameters. As a consequence predictions
 computed this way will incorporate the uncertainty about our estimates.
 
-::: {admotion} Bayesian posteriors in a Frequentist light
+::: {admonition} Bayesian posteriors in a Frequentist light
 
 Because posteriors are derived from the model and the observed data only, we are not making
 statements based on non-observed, but potentially observed realizations
@@ -343,7 +343,7 @@ of these!
 Closed form expressions for the integral in Equation
 {eq}`eq:marginal_likelihood` are not always possible and thus much of
 modern Bayesian inference is done using numerical methods that we call
-**Universal Inference Engines** (see
+**Universal Inference Engines** (see Section
 [inference_methods](inference_methods)) just to compensate for the
 fact we live in the $21^\text{st}$ century and we still do not have flying cars.
 Anyway, there are many well-tested Python libraries providing such
@@ -454,14 +454,14 @@ functions:
 ```{code-block} python
 :name: metropolis_hastings_sampler
 :caption: metropolis_hastings_sampler
-    def post(θ, Y, α=1, β=1):
-        if 0 <= θ <= 1:
-            prior = stats.beta(α, β).pdf(θ)
-            like  = stats.bernoulli(θ).pmf(Y).prod()
-            prob = like * prior
-        else:
-            prob = -np.inf
-        return prob
+def post(θ, Y, α=1, β=1):
+    if 0 <= θ <= 1:
+        prior = stats.beta(α, β).pdf(θ)
+        like  = stats.bernoulli(θ).pmf(Y).prod()
+        prob = like * prior
+    else:
+        prob = -np.inf
+    return prob
 ```
 
 We also need data, so we will generate some random fake data for this
@@ -536,7 +536,7 @@ engines is best left to experts. Similarly, the value of `can_sd`, is a
 parameter of the Metropolis-Hastings algorithm, not a parameter from the
 Bayesian model. In theory this parameter should not affect the correct
 behavior of the algorithm, but in practice it is very important as the
-efficiency of the method will certainly be affected by its value (see
+efficiency of the method will certainly be affected by its value (see Section
 [inference_methods](inference_methods) for an in-depth discussion).
 
 Returning to our example, now that we have our MCMC samples we want to
@@ -570,10 +570,10 @@ will use the Python package ArviZ {cite:p}`Kumar2019` to compute these
 statistics:
 
 ```python
-    az.summary(trace, kind="stats", round_to=2))
+az.summary(trace, kind="stats", round_to=2))
 ```
 
-```{list-table}
+```{list-table} Posterior summary
 :name: tab:posterior_summary
 * -
   - **mean**
@@ -645,16 +645,16 @@ Equation {eq}`eq:beta_binomial` using PyMC3:
 ```{code-block} python
 :name: beta_binom
 :caption: beta_binom
-    # Declare a model in PyMC3
-    with pm.Model() as model:
-        # Specify the prior distribution of unknown parameter
-        θ = pm.Beta("θ", alpha=1, beta=1)
-        
-        # Specify the likelihood distribution and condition on the observed data
-        y_obs = pm.Binomial("y_obs", n=1, p=θ, observed=Y)
-        
-        # Sample from the posterior distribution
-        idata = pm.sample(1000, return_inferencedata=True)
+# Declare a model in PyMC3
+with pm.Model() as model:
+    # Specify the prior distribution of unknown parameter
+    θ = pm.Beta("θ", alpha=1, beta=1)
+    
+    # Specify the likelihood distribution and condition on the observed data
+    y_obs = pm.Binomial("y_obs", n=1, p=θ, observed=Y)
+    
+    # Sample from the posterior distribution
+    idata = pm.sample(1000, return_inferencedata=True)
 ```
 
 You should check by yourself that this piece of code provides
@@ -709,7 +709,7 @@ first one is a distribution over the parameters in a model.
 {numref}`fig:quartet` helps us visualize this difference and also
 includes the prior distribution for completeness.
 
-::: {admotion} Expressing models in multiple ways
+::: {admonition} Expressing models in multiple ways
 
 There are numerous methods to communicate the architecture of statistical models. These can be, in no
 particular order:
@@ -1183,24 +1183,24 @@ choices will be less flat and more concentrated, for example, obtaining
 6), which will also have 1.5 as the expected value.
 
 ```python
-    ite = 100_000
-    entropies = np.zeros((3, ite))
-    for idx in range(ite):
-        rnds = np.zeros(6)
-        total = 0
-        x_ = np.random.choice(np.arange(1, 7), size=6, replace=False)
-        for i in x_[:-1]:
-            rnd = np.random.uniform(0, 1-total)
-            rnds[i-1] = rnd
-            total = rnds.sum()
-        rnds[-1] = 1 - rnds[:-1].sum()
-        H = entropy(rnds)
-        entropies[0, idx] = H
-        if abs(1.5 - np.sum(rnds * x_)) < 0.01:
-            entropies[1, idx] = H
-        prob_34 = sum(rnds[np.argwhere((x_ == 3) | (x_ == 4)).ravel()])
-        if abs(0.8 - prob_34) < 0.01:
-            entropies[2, idx] = H
+ite = 100_000
+entropies = np.zeros((3, ite))
+for idx in range(ite):
+    rnds = np.zeros(6)
+    total = 0
+    x_ = np.random.choice(np.arange(1, 7), size=6, replace=False)
+    for i in x_[:-1]:
+        rnd = np.random.uniform(0, 1-total)
+        rnds[i-1] = rnd
+        total = rnds.sum()
+    rnds[-1] = 1 - rnds[:-1].sum()
+    H = entropy(rnds)
+    entropies[0, idx] = H
+    if abs(1.5 - np.sum(rnds * x_)) < 0.01:
+        entropies[1, idx] = H
+    prob_34 = sum(rnds[np.argwhere((x_ == 3) | (x_ == 4)).ravel()])
+    if abs(0.8 - prob_34) < 0.01:
+        entropies[2, idx] = H
 ```
 
 {numref}`fig:max_entropy_vs_random_dist` shows the distribution of
@@ -1327,7 +1327,7 @@ other aspects of the Bayesian modeling workflow. But we will also show
 some examples of using prior predictive checks to help us calibrate our
 priors.
 
-::: {admotion} Overfitting
+::: {admonition} Overfitting
 
 Overfitting occurs when a model generates predictions very
 close to the limited dataset used to fit it, but it fails to fit
@@ -1362,7 +1362,7 @@ language and can even help us to debug our model. In the following
 chapters, we will see more concrete examples of how to reason about
 prior predictive samples and use them to choose reasonable priors.
 
-(exercises)=
+(exercises1)=
 
 ## Exercises
 
@@ -1640,7 +1640,7 @@ and ArviZ
     [metropolis_hastings](metropolis_hastings).
 
 [^9]: For a more extensive discussion about inference methods you should
-    read the [inference_methods](inference_methods) and references
+    read Section [inference_methods](inference_methods) and references
     therein.
 
 [^10]: This is sometimes referred to as a kernel in other Universal

@@ -1640,7 +1640,7 @@ posterior predictive samples. The weights can be taken from anywhere,
 but using the weights computed with `az.compare(., method="stacking")`,
 makes a lot of sense.
 
-(exercises)=
+(exercises2)=
 
 ## Exercises
 
