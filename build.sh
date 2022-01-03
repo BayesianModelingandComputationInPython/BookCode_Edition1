@@ -1,3 +1,3 @@
 #/bin/sh
-pip3 install -r requirementsi-docs.txt &&
+pip3 install -r requirements-docs.txt &&
 jb build .
