@@ -537,10 +537,10 @@ of modes the MCMC chains explored. For `bad_chains1` we also get a low
 number $\approx 111$ and only ESS for `good_chains` is close to the
 actual number of samples.
 
-::: {admonition}
-On the effectiveness of effective samples If you rerun the generation of
-these synthetic posteriors, using a different random seed, you will see
-that the effective sample size you get will be different each time. This
+::: {admonition} On the effectiveness of effective samples
+
+If you rerun the generation of these synthetic posteriors, using a different random seed,
+you will see that the effective sample size you get will be different each time. This
 is expected as the samples will not be exactly the same, they are after
 all samples. For `good_chains`, on average, the value of effective
 sample size will be lower than the number of samples. But notice that
@@ -1238,7 +1238,7 @@ idatas_cmp["mC"] = idataC
 To compute LOO we just need samples from the posterior [^16]. Then we
 can call `az.loo(.)`, which allows us to compute LOO for a single model.
 In practice it is common to compute LOO for two or more models, and thus
-a commonly used function is `az.compare(.)`. Table
+a commonly used function is `az.compare(.)`.
 {numref}`table:compare_00` was generated using `az.compare(idatas_cmp)`.
 
 
@@ -1286,7 +1286,7 @@ a commonly used function is `az.compare(.)`. Table
    - log
 ```
 
-There are many columns in Table {numref}`table:compare_00`  so let us detail their meaning one by one:
+There are many columns in {numref}`table:compare_00`  so let us detail their meaning one by one:
 
 1.  The first column is the index which lists the names of the models
     taken from the keys of the dictionary passed to `az.compare(.)`.
@@ -1330,7 +1330,7 @@ There are many columns in Table {numref}`table:compare_00`  so let us detail the
     better). And negative-log, this is the log-score multiplied by -1,
     as with the deviance scale, a lower value is better.
 
-We can also represent part of the information in Table
+We can also represent part of the information in
 {numref}`table:compare_00`  graphically in {numref}`fig:compare_dummy`.
 Models are also ranked from higher predictive accuracy to lower. The
 open dots represent the values of `loo`, the black dots are the
@@ -1340,7 +1340,7 @@ grey segments, centered at the triangles, represent the standard errors
 of the difference `dse` between the values of LOO for each model and the
 best ranked model. We can see that `mB` $\approx$ `mC` $>$ `mA`.
 
-From Table {numref}`table:compare_00`  and {numref}`fig:compare_dummy` we
+From {numref}`table:compare_00`  and {numref}`fig:compare_dummy` we
 can see that model `mA` is ranked as the lowest one and clearly
 separated from the other two. We will now discuss the other two as their
 differences are more subtle. `mB` is the one with the highest predictive
@@ -1436,7 +1436,7 @@ When this is the case the recommendations are {cite:p}`loo_glossary`:
 
 When we get at least one value of $\hat \kappa > 0.7$ we will get a
 warning when calling `az.loo(.)` or `az.compare(.)`. The `warning`
-column in Table {numref}`table:compare_00`  has only `False` values because
+column in {numref}`table:compare_00`  has only `False` values because
 all the computed values of $\hat \kappa$ are $< 0.7$ which we can check
 by ourselves from {numref}`fig:loo_k_dummy`. We have annotated the
 observations with $\hat \kappa > 0.09$ values in
@@ -1627,7 +1627,7 @@ in Equation {eq}`eq_stacking` the weights are computed by maximizing the
 combined log-score, i.e. even when the models have been fitted
 independently as in pseudo Bayesian model averaging, the computation of
 the weights take into account all models together. This helps to explain
-why model `mB` gets a weight of 1 and `mC` a weight of 0 (see Table
+why model `mB` gets a weight of 1 and `mC` a weight of 0 (see
 {numref}`table:compare_00` ), even if they are very similar models. Why are
 the weights not around 0.5 for each one of them? The reason is that
 according to the stacking procedure once `mB` is included in our set of
@@ -1946,4 +1946,6 @@ does each tell us about our statistical models?
 ## References
 
 ```{bibliography}
+:filter: docname in docnames
 :style: unsrt
+```

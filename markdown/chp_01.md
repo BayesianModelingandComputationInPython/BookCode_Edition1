@@ -611,7 +611,7 @@ figure.
 
 The HDI is a common choice in Bayesian statistics and *round* values
 like 50% or 95% are commonplace. But ArviZ uses 94% (or 0.94) as the
-default value as seen in both the summary Table
+default value as seen in both the summary
 {numref}`tab:posterior_summary` and
 {numref}`fig:plot_posterior`. The reason for this choice is that 94 is
 close to the *widely used* 95 but is different enough to serve as a
@@ -1679,5 +1679,6 @@ and ArviZ
 ## References
 
 ```{bibliography}
+:filter: docname in docnames
 :style: unsrt
 ```

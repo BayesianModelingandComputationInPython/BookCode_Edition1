@@ -317,4 +317,6 @@ Matamoros, Kevin Murphy, and Aki Vehtari.
 ## References
 
 ```{bibliography}
+:filter: docname in docnames
 :style: unsrt
+```
