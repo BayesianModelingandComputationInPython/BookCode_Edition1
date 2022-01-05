@@ -449,7 +449,7 @@ bottom panel) represent the observed number of rented bikes.
 
 {numref}`fig:bart_bikes` shows the result of fitting BART to the bike
 dataset (number of rented bikes vs hour of the day). The figure provides
-a similar fit compared to [fig:bikes_data2](fig:bikes_data2),
+a similar fit compared to {numref}`fig:bikes_data2`,
 created using splines. The more clear difference is the more jagged
 aspect of the BART's fit compared to the one obtained using splines.
 This is not to say there are not other differences like the width of the
@@ -461,7 +461,7 @@ HDI.
 Bikes data (black dots) fitted using BARTs (specifically `bart_model`).
 The shaded curve represents the 94% HDI interval (of the mean) and the
 blue curve represents the mean trend. Compare with
-[fig:bikes_data2](fig:bikes_data2).
+{numref}`fig:bikes_data2`.
 ```
 
 The literature around BART tends to highlight its ability to, generally,
@@ -560,7 +560,7 @@ what makes for the richness of sound and complexity in individual
 interpretation.
 
 We may still get some useful information by directly inspecting a sum of
-trees (see {ref}`sec:variable_selection` variable selection), but not as
+trees (see Section {ref}`sec:variable_selection` variable selection), but not as
 transparent or useful as with a simpler individual tree. Thus to help us
 interpret results from BART models we generally rely on model
 diagnostics tools {cite:p}`Molnarbook, Molnar2020`, e.g. tools also used for
@@ -1004,17 +1004,17 @@ and improve our models we can try with other likelihoods:
     [5](chap3_5)? Could you explain the difference?
 
 **7M10.** Use BART to redo the first penguin classification
-examples we performed in
+examples we performed in Section
 [classifying_penguins](classifying_penguins) (i.e. use
 "bill_length_mm" as covariate and the species "Adelie" and "Chistrap" as
 the response). Try different values of `m` like, 4, 10, 20 and 50 and
 pick a suitable value as we did in the book. Visually compare the
 results with the fit in
-[fig:Logistic_bill_length](fig:Logistic_bill_length). Which model do
+{numref}`fig:Logistic_bill_length`. Which model do
 you think performs the best?
 
 **7M11.** Use BART to redo the penguin classification we
-performed in [classifying_penguins](classifying_penguins). Set
+performed in Section [classifying_penguins](classifying_penguins). Set
 `m=50` and use the covariates "bill_length_mm", "bill_depth_mm",
 "flipper_length_mm" and "body_mass_g".
 
@@ -1027,7 +1027,7 @@ Refit the model but this time using only 3 covariates "bill_depth_m",
 the four covariates? Justify.
 
 **7M12.** Use BART to redo the penguin classification we
-performed in [classifying_penguins](classifying_penguins). Build a
+performed in Section [classifying_penguins](classifying_penguins). Build a
 model with the covariates "bill_length_mm", "bill_depth_mm",
 "flipper_length_mm", and "body_mass_g" and assess their relative
 variable importance. Compare the results with the PDPs from the previous

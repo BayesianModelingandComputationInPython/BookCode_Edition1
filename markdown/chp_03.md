@@ -1260,7 +1260,7 @@ a model and use the growth of plants to estimate the amount of rain,
 even when plant growth do not cause rain [^7]. The statistical sub-field
 of Causal Inference is concerned with the tools and procedures necessary
 to make causal statements either in the context of randomized
-experiments or observational studies (see Chapter [chap6](chap6) for
+experiments or observational studies (see Chapter [7](chap6) for
 a brief discussion)
 :::
 
@@ -1830,7 +1830,7 @@ translates to setting the mean of the prior for intercept $\beta_0$ to
 be 50 and the prior mean for the coefficient $\beta_1$ to be 0. We also
 set a wide dispersion to express our lack of knowledge about both the
 intercept and the effect of attractiveness on sex ratio. This is not a
-fully *uninformative priors*, of which we covered in
+fully *uninformative priors*, of which we covered in Section
 [make_prior_count](make_prior_count), however, a very wide prior.
 Given these choices we can write our model in Code Block
 [uninformative_prior_sex_ratio](uninformative_prior_sex_ratio)),
@@ -1897,7 +1897,7 @@ attractiveness more data should be collected to showcase the effect.
 
 This time we see that estimated effect of attractiveness on gender is
 negligible, there simply was not enough information to affect the
-posterior. As we mentioned in [make_prior_count](make_prior_count)
+posterior. As we mentioned in Section [make_prior_count](make_prior_count)
 choosing a prior is both a burden and a blessing. Regardless of which
 you believe it is, it is important to use this statistical tool with an
 explainable and principled choice.
@@ -2040,8 +2040,7 @@ Tensorflow Probability. List three of the syntax differences.
 into PyMC3. List three of the syntax differences.
 
 **M16.** Use a logistic regression with increasing number of
-covariates to reproduce the prior predictive
-[fig:prior_predictive_check_01](fig:prior_predictive_check_01).
+covariates to reproduce the prior predictive distributions in {numref}`fig:prior_predictive_check_01`.
 Explain why its the case that a logistic regression with many covariates
 generate a prior response with extreme values.
 

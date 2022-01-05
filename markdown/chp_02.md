@@ -546,7 +546,7 @@ you will see that the effective sample size you get will be different each time.
 is expected as the samples will not be exactly the same, they are after
 all samples. For `good_chains`, on average, the value of effective
 sample size will be lower than the number of samples. But notice that
-ESS could be in fact larger! When using the NUTS sampler (see
+ESS could be in fact larger! When using the NUTS sampler (see Section
 [inference_methods](inference_methods)) values of ESS larger than
 the total number of samples can happen for parameters which posterior
 distributions are close to Gaussian and which are almost independent of
@@ -661,7 +661,7 @@ When using MCMC methods we introduce an additional layer of uncertainty
 as we are approximating the posterior with a finite number of samples.
 We can estimate the amount of error introduced using the Monte Carlo
 standard error (MCSE), which is based on Markov chain central limit
-theorem (see [markov_chains](markov_chains)). The MCSE takes into
+theorem (see Section [markov_chains](markov_chains)). The MCSE takes into
 account that the samples are not truly independent of each other and are
 in fact computed from the ESS {cite:p}`vehtari_rank_2019`. While the values of
 ESS and $\hat R$ are independent of the scale of the parameters,
@@ -1020,7 +1020,7 @@ been reduced dramatically for `model1`, but we still can see a few of
 them. One easy option we can try to reduce divergences is increasing the
 value of `target_accept` as shown in Code Block
 [divm2](divm2), by default this value is 0.8 and the
-maximum valid value is 1 (see [hmc](hmc) for details).
+maximum valid value is 1 (see Section [hmc](hmc) for details).
 
 ```{code-block} python
 :name: divm2
@@ -1048,7 +1048,7 @@ present. For example, we can use it to speed up sampling or increase the
 number of effective samples, without having to increase the
 computational cost. Additionally, reparameterization can also help to
 better interpret or communicate models and their results (see Alice and
-Bob example in [conjugate_priors](conjugate_priors)).
+Bob example in Section [conjugate_priors](conjugate_priors)).
 :::
 
 (sampler-parameters-and-other-diagnostics)=
@@ -1185,7 +1185,7 @@ compute $n$ posteriors, i.e. as many values of
 $\boldsymbol{\theta_{-i}}$ as observations we have in our dataset.
 Fortunately, we can approximate $\text{ELPD}_\text{LOO-CV}$ from a
 single fit to the data by using a method known as Pareto smoothed
-importance sampling leave-one-out cross validation PSIS-LOO-CV (see
+importance sampling leave-one-out cross validation PSIS-LOO-CV (see Section
 [loo_depth](loo_depth) for details). For brevity, and for
 consistency with ArviZ, in this book we call this method LOO. It is
 important to remember we are are talking about PSIS-LOO-CV and unless we
@@ -1317,7 +1317,7 @@ There are many columns in {numref}`table:compare_00`  so let us detail their mea
 
 6.  `weight`: The weights assigned to each model. These weights can be
     loosely interpreted as the probability of each model (among the
-    compared models) given the data. See {ref}`model_averaging` for
+    compared models) given the data. See Section {ref}`model_averaging` for
     details.
 
 7.  `se`: The standard error for the ELPD computations.
@@ -1328,7 +1328,7 @@ There are many columns in {numref}`table:compare_00`  so let us detail their mea
     value of `dse` is always 0 for the top-ranked model.
 
 9.  `warning`: If `True` this is a warning that the LOO approximation
-    may not be reliable (see {ref}`k-paretto` for details).
+    may not be reliable (see Section {ref}`k-paretto` for details).
 
 10. `loo_scale`: The scale of the reported values. The default is the
     log scale. Other options are deviance, this is the log-score
@@ -1364,7 +1364,7 @@ are highly correlated.
 Given the small difference between `mB` and `mC`, it is expected that
 under a slightly different dataset the rank of these model could swap,
 with `mC` becoming the highest ranked model. Also the values of the
-weights are expected to change (see {ref}`model_averaging`). We can
+weights are expected to change (see Section {ref}`model_averaging`). We can
 easily check this is true by changing the random seed and refitting the
 model a few times.
 
@@ -1420,7 +1420,7 @@ better resolved for the first model than the second.
 
 As we already mentioned we use LOO to approximate
 $\text{ELPD}_\text{LOO-CV}$. This approximation involves the computation
-of a Pareto distribution (see details in [loo_depth](loo_depth)),
+of a Pareto distribution (see details in Section [loo_depth](loo_depth)),
 the main purpose is to obtain a more robust estimation, the side-effect
 of this computation is that the $\hat \kappa$ parameter of such Pareto
 distribution can be used to detect highly influential observations, i.e.
@@ -1523,7 +1523,7 @@ LOO as a fast and reliable approximation to cross-validation in order to
 avoid using the data twice. The "PIT part\", stands for Probability
 Integral Transform[^19], which is transformation in 1D where we can get
 a $\mathcal{U}(0, 1)$ distribution from any continuous random variable
-if we transform that random variable using its own CDF (for details see
+if we transform that random variable using its own CDF (for details see Section
 [loo_depth](loo_depth)). In LOO-PIT we do not know the true CDF, but
 we approximate it with the empirical CDF. Putting aside these
 mathematical details for a moment, the take-home-message is that for a
@@ -1579,7 +1579,7 @@ weight to the models that seem to explain or predict the data better.
 A *natural* way to weight Bayesian models is by their marginal
 likelihoods, this is known as Bayesian Model Averaging
 {cite:p}`hoeting_bayesian_1999`. While this is theoretically appealing, it is
-problematic in practice (see
+problematic in practice (see Section
 [marginal_likelihood](marginal_likelihood) for details). An
 alternative is to use the values of LOO to estimate weights for each
 model. We can do this by using the following formula:
@@ -1743,7 +1743,7 @@ plot will be one with a difference of zero.
 
 **2E8.** In your own words explain why MCMC posterior
 estimation techniques need convergence diagnostics. In particular
-contrast these to the conjugate methods described in
+contrast these to the conjugate methods described in Section
 [conjugate_priors](conjugate_priors) which do not need those
 diagnostics. What is different about the two inference methods?
 
