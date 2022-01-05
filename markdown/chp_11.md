@@ -57,7 +57,7 @@ def experiment(N=10):
 experiment()
 ```
 
-```
+```none
 1: 0
 2: 0.1
 3: 0.4
@@ -2476,7 +2476,7 @@ y = np.array([0])
 stats.norm.logpdf(loc=0, scale=(σ_0**2 + σ_1**2)**0.5, x=y).sum()
 ```
 
-```
+```none
 -1.2655121234846454
 ```
 
