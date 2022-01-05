@@ -294,7 +294,7 @@ shown in Code Block [fraud_detector](fraud_detector). No
 external libraries needed either, making this function quite easy to
 deploy.
 
-``` {code-block} python
+``` {code-block} ipython3
 :name: fraud_detector
 :caption: fraud_detector
 
@@ -1546,8 +1546,7 @@ posterior distribution for `x` and `z` when we observe `y = 5.0`.
 # Observed y = 5.
 y.set_value(np.array(5.))
 
-posterior_density = lambda xval, zval: x.log_prob(xval) + z.log_prob(zval) + \ 
-                y.log_prob()
+posterior_density = lambda xval, zval: x.log_prob(xval) + z.log_prob(zval) + y.log_prob()
 posterior_density(np.array(0.), np.array(1.))
 ```
 
