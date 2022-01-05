@@ -106,7 +106,7 @@ decide to use a geometric model [^4]. Following the sketch in
 {numref}`fig:football_sketch` and a little bit of trigonometry we come
 up with the following formula for the probability of scoring a goal:
 
-```{math} 
+```{math}
 :label: eq:geometric_football
 p\left(|\alpha| < \tan^{-1}\left(\frac{L}{x}\right)\right) = 2\Phi\left(\frac{\tan^{-1}\left(\frac{L}{x}\right)}{\sigma}\right) - 1
 
@@ -135,7 +135,7 @@ football. As good Bayesians, when we do not know a quantity, we assign a
 prior to it and then try to build a Bayesian model, for example, we
 could write:
 
-```{math} 
+```{math}
 :label: eq:geometric_model
 \begin{split}
 \sigma &= \mathcal{HN}(\sigma_{\sigma}) \\
@@ -268,10 +268,10 @@ Posterior predictive checks are not restricted to plots. We can also
 perform numerical tests {cite:p}`GelmanBayesianDataAnalysis2013`. One way of
 doing this is by computing:
 
-```{math} 
+```{math}
 :label: eq:post_pred_test_quantity
 p_{B} = p(T_{sim} \leq T_{obs} \mid \tilde Y)
-    
+
 ```
 
 where $p_{B}$ is a Bayesian p-value and is defined as the probability
@@ -470,14 +470,14 @@ sample.
 
 ```python
 good_chains = stats.beta.rvs(2, 5,size=(2, 2000))
-bad_chains0 = np.random.normal(np.sort(good_chains, axis=None), 0.05, 
+bad_chains0 = np.random.normal(np.sort(good_chains, axis=None), 0.05,
                                size=4000).reshape(2, -1)
 
 bad_chains1 = good_chains.copy()
 for i in np.random.randint(1900, size=4):
     bad_chains1[i%2:,i:i+100] = np.random.beta(i, 950, size=100)
-    
-chains = {"good_chains":good_chains, 
+
+chains = {"good_chains":good_chains,
           "bad_chains0":bad_chains0,
           "bad_chains1":bad_chains1}
 ```
@@ -517,7 +517,9 @@ Using ArviZ we can compute the effective sample size for the mean with
 
 ```python
 az.ess(chains)
+```
 
+```none
 <xarray.Dataset>
 Dimensions:      ()
 Data variables:
@@ -633,7 +635,9 @@ function
 
 ```python
 az.rhat(chains)
+```
 
+```none
 <xarray.Dataset>
 Dimensions:      ()
 Data variables:
@@ -673,7 +677,9 @@ Using ArviZ we can compute the MCSE with the function `az.mcse()`
 
 ```python
 az.mcse(chains)
+```
 
+```none
 <xarray.Dataset>
 Dimensions:      ()
 Data variables:
@@ -732,7 +738,7 @@ az.summary(chains, kind="diagnostics")
   - 0.013
   - 111.0
   - 105.0
-  - 1.03 
+  - 1.03
 ```
 
 
@@ -1109,10 +1115,10 @@ shown that the logarithmic scoring rule has very nice theoretical
 properties {cite:p}`gneiting_2007`, and thus is widely used. Under a Bayesian
 setting the log scoring rule can be computed as.
 
-```{math} 
+```{math}
 :label: eq:elpd
 \text{ELPD} = \sum_{i=1}^{n} \int p_t(\tilde y_i) \; \log p(\tilde y_i \mid y_i) \; d\tilde y_i
-    
+
 ```
 
 where $p_t(\tilde y_i)$ is distribution of the true data-generating
@@ -1129,10 +1135,10 @@ For real problems we do not know $p_t(\tilde y_i)$ and thus the ELPD as
 defined in Equation {eq}`eq:elpd` is of no immediate use, in practice we
 can instead compute:
 
-```{math} 
+```{math}
 :label: eq:elpd_practice
 \sum_{i=1}^{n} \log \int \ p(y_i \mid \boldsymbol{\theta}) \; p(\boldsymbol{\theta} \mid y) d\boldsymbol{\theta}
-    
+
 ```
 
 The quantity defined by Equation {eq}`eq:elpd_practice` (or that
@@ -1166,11 +1172,11 @@ Leave-one-out cross-validation (LOO-CV) is a particular type of
 cross-validation when the data excluded is a single data-point. The ELPD
 computed using LOO-CV is $\text{ELPD}_\text{LOO-CV}$:
 
-```{math} 
+```{math}
 :label: eq:elpd_loo_cv
 \text{ELPD}_\text{LOO-CV} = \sum_{i=1}^{n} \log
     \int \ p(y_i \mid \boldsymbol{\theta}) \; p(\boldsymbol{\theta} \mid y_{-i}) d\boldsymbol{\theta}
-    
+
 ```
 
 Computing Equation {eq}`eq:elpd_loo_cv` can easily become too costly as
@@ -1531,7 +1537,7 @@ in {ref}`posterior_pd` with the function
 LOO-PIT is obtained by comparing the observed data $y$ to posterior
 predicted data $\tilde y$. The comparison is done point-wise. We have:
 
-```{math} 
+```{math}
 p_i = P(\tilde y_i \leq y_i \mid y_{-i})
 ```
 
@@ -1578,10 +1584,10 @@ problematic in practice (see
 alternative is to use the values of LOO to estimate weights for each
 model. We can do this by using the following formula:
 
-```{math} 
+```{math}
 :label: eq_pseudo_avg
 w_i = \frac {e^{-\Delta_i }} {\sum_j^k e^{-\Delta_j }}
-    
+
 ```
 
 where $\Delta_i$ is the difference between the $i$ value of LOO and the
@@ -1606,10 +1612,10 @@ models in a meta-model in such a way that we minimize the divergence
 between the meta-model and the *true* generating model. When using a
 logarithmic scoring rule this is equivalently to compute:
 
-```{math} 
+```{math}
 :label: eq_stacking
 \max_{n} \frac{1}{n} \sum_{i=1}^{n}log\sum_{j=1}^{k} w_j p(y_i \mid y_{-i}, M_j)
-    
+
 ```
 
 where $n$ is the number of data points and $k$ the number of models. To

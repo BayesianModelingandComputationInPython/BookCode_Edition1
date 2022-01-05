@@ -127,7 +127,7 @@ us with a general recipe to estimate the value of the parameter
 $\boldsymbol{\theta}$ given that we have observed some data
 $\boldsymbol{Y}$:
 
-```{math} 
+```{math}
 :label: eq:posterior_dist
 \underbrace{p(\boldsymbol{\theta} \mid \boldsymbol{Y})}_{\text{posterior}} = \frac{\overbrace{p(\boldsymbol{Y} \mid \boldsymbol{\theta})}^{\text{likelihood}}\; \overbrace{p(\boldsymbol{\theta})}^{\text{prior}}}{\underbrace{{p(\boldsymbol{Y})}}_{\text{marginal likelihood}}}
 
@@ -175,7 +175,7 @@ normalizing constant. Unfortunately, difficulties arise from the need to
 compute the normalizing constant $p(\boldsymbol{Y})$. This is easier to
 see if we write the marginal likelihood as:
 
-```{math} 
+```{math}
 :label: eq:marginal_likelihood
 {p(\boldsymbol{Y}) = \int_{\boldsymbol{\Theta}} p(\boldsymbol{Y} \mid \boldsymbol{\theta})p(\boldsymbol{\theta}) d\boldsymbol{\theta}}
 
@@ -192,7 +192,7 @@ numerical methods that can help us with this challenge if used properly.
 As the marginal likelihood is not generally computed, it is very common
 to see Bayes' theorem expressed as a proportionality:
 
-```{math} 
+```{math}
 :label: eq:proportional_bayes
 \underbrace{p(\boldsymbol{\theta} \mid \boldsymbol{Y})}_{\text{posterior}} \propto \overbrace{p(\boldsymbol{Y} \mid \boldsymbol{\theta})}^{\text{likelihood}}\; \overbrace{p(\boldsymbol{\theta})}^{\text{prior}}
 ```
@@ -231,7 +231,7 @@ have a healthy quota of skepticism about our data, models, and results.
 To make this more explicit, we may want to express Bayes' theorem in a
 more nuanced way:
 
-```{math} 
+```{math}
 p(\boldsymbol{\theta} \mid  \boldsymbol{Y}, M) \propto  p(\boldsymbol{Y} \mid \boldsymbol{\theta}, M) \; p(\boldsymbol{\theta}, M)
 ```
 
@@ -242,7 +242,7 @@ Having said that, once we have a posterior distribution we can use it to
 derive other quantities of interest. This is generally done by computing
 expectations, for example:
 
-```{math} 
+```{math}
 :label: eq:posterior_expectation
 J = \int f(\boldsymbol{\theta}) \; p(\boldsymbol{\theta} \mid \boldsymbol{Y}) \; d\boldsymbol{\theta}
 
@@ -251,7 +251,7 @@ J = \int f(\boldsymbol{\theta}) \; p(\boldsymbol{\theta} \mid \boldsymbol{Y}) \;
 If $f$ is the identity function $J$ will turn out be the mean [^7] of
 $\boldsymbol{\theta}.$:
 
-```{math} 
+```{math}
 \bar{\boldsymbol{\theta}} = \int_{\boldsymbol{\Theta}} \boldsymbol{\theta}  p(\boldsymbol{\theta} \mid \boldsymbol{Y})  d\boldsymbol{\theta}
 ```
 
@@ -260,7 +260,7 @@ but it is not the only one. Besides making inferences about parameter
 values, we may want to make inferences about data. This can be done by
 computing the **prior predictive distribution**:
 
-```{math} 
+```{math}
 :label: eq:prior_pred_dist
 p(\boldsymbol{Y}^\ast) =  \int_{\boldsymbol{\Theta}} p(\boldsymbol{Y^\ast} \mid \boldsymbol{\theta}) \; p(\boldsymbol{\theta}) \; d\boldsymbol{\theta}
 
@@ -305,7 +305,7 @@ Iterate if necessary.
 
 Another useful quantity to compute is the **posterior predictive distribution**:
 
-```{math} 
+```{math}
 :label: eq:post_pred_dist
 p(\tilde{\boldsymbol{Y}} \mid \boldsymbol{Y}) = \int_{\boldsymbol{\Theta}} p(\tilde{\boldsymbol{Y}} \mid \boldsymbol{\theta}) \, p(\boldsymbol{\theta} \mid \boldsymbol{Y}) \, d\boldsymbol{\theta}
 
@@ -385,9 +385,9 @@ The Metropolis-Hasting algorithm is defined as follows:
 
 3.  Compute the probability of accepting the new value as:
 
-    ```{math} 
+    ```{math}
     :label: acceptance_prob
-    p_a (x_{i + 1} \mid x_i) = \min \left (1, \frac{p(x_{i + 1}) \; 
+    p_a (x_{i + 1} \mid x_i) = \min \left (1, \frac{p(x_{i + 1}) \;
     q(x_i \mid x_{i + 1})} {p(x_i) \; q (x_{i + 1} \mid x_i)} \right)
 
     ```
@@ -427,7 +427,7 @@ statistics, because it is a simple model that we can solve and compute
 with ease. In statistical notation we can write the Beta-Binomial models
 as:
 
-```{math} 
+```{math}
 :label: eq:beta_binomial
 
 \begin{split}
@@ -479,16 +479,17 @@ algorithm:
 ```{code-block} python
 :name: metropolis_hastings
 :caption: metropolis_hastings
+:linenos:
 n_iters = 1000
 can_sd = 0.05
 α = β =  1
-θ = 0.5 
+θ = 0.5
 trace = {"θ":np.zeros(n_iters)}
 p2 = post(θ, Y, α, β)
 
 for iter in range(n_iters):
     θ_can = stats.norm(θ, can_sd).rvs(1)
-    p1 = post(θ_can, Y, α, β)  
+    p1 = post(θ_can, Y, α, β)
     pa = p1 / p2
 
     if pa > stats.uniform(0, 1).rvs(1):
@@ -502,7 +503,7 @@ At line 9 of Code Block [metropolis_hastings](metropolis_hastings) we generate a
 distribution by sampling from a Normal distribution with standard
 deviation `can_sd`. At line 10 we evaluate the posterior at the new
 generated value `θ_can` and at line 11 we compute the probability of
-acceptance. At line 20 we save a value of `θ` in the `trace` array.
+acceptance. At line 17 we save a value of `θ` in the `trace` array.
 Whether this value is a new one or we repeat the previous one, it will
 depends on the result of the comparison at line 13.
 
@@ -570,7 +571,7 @@ will use the Python package ArviZ {cite:p}`Kumar2019` to compute these
 statistics:
 
 ```python
-az.summary(trace, kind="stats", round_to=2))
+az.summary(trace, kind="stats", round_to=2)
 ```
 
 ```{list-table} Posterior summary
@@ -649,10 +650,10 @@ Equation {eq}`eq:beta_binomial` using PyMC3:
 with pm.Model() as model:
     # Specify the prior distribution of unknown parameter
     θ = pm.Beta("θ", alpha=1, beta=1)
-    
+
     # Specify the likelihood distribution and condition on the observed data
     y_obs = pm.Binomial("y_obs", n=1, p=θ, observed=Y)
-    
+
     # Sample from the posterior distribution
     idata = pm.sample(1000, return_inferencedata=True)
 ```
@@ -819,20 +820,20 @@ model.
 As the name suggests, the conjugate prior for the binomial distribution
 is the Beta distribution:
 
-```{math} 
+```{math}
 p(\theta \mid Y) \propto \overbrace{\frac{N!}{y!(N-y)!} \theta^y (1 - \theta)^{N-y}}^{\text{binomial-likelihood}} \: \overbrace{\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\, \theta^{\alpha-1}(1-\theta)^{\beta-1}}^{\text{beta.prior}}
 ```
 
 Because all the terms not depending on $\theta$ are constant we can drop
 them and we get:
 
-```{math} 
+```{math}
 p(\theta \mid Y) \propto \overbrace{\theta^y (1 - \theta)^{N-y}}^{\text{binomial-likelihood}} \: \overbrace{ \theta^{\alpha-1}(1-\theta)^{\beta-1}}^{\text{beta.prior}}
 ```
 
 Reordering:
 
-```{math} 
+```{math}
 :label: eq:kernel_beta
 p(\theta \mid Y) \propto \theta^{\alpha-1+y}(1-\theta)^{\beta-1+N-y}
 
@@ -846,7 +847,7 @@ distribution, thus by adding the normalization constant of a Beta
 distribution we arrive to the conclusion that the posterior distribution
 for a Beta-Binomial model is:
 
-```{math} 
+```{math}
 :label: eq:beta_posterior
 p(\theta \mid Y) \propto \frac{\Gamma(\alpha_{post}+\beta_{post})}{\Gamma(\alpha_{post})\Gamma(\beta_{post})} \theta^{\alpha_{post}-1}(1-\theta)^{\beta_{post}-1} = \text{Beta}(\alpha_{post}, \beta_{post})
 
@@ -915,13 +916,13 @@ $\hat \theta = \frac{y}{n}$.
 The mean of the Beta distribution is $\frac{\alpha}{\alpha + \beta}$,
 thus the prior mean is:
 
-```{math} 
+```{math}
 \mathbb{E}[\theta]  = \frac{\alpha}{\alpha + \beta}
 ```
 
 and the posterior mean is:
 
-```{math} 
+```{math}
 :label: eq:beta_binom_mean
 \mathbb{E}[\theta \mid Y]  = \frac{\alpha + y}{\alpha + \beta + n}
 
@@ -938,7 +939,7 @@ choose for $\alpha$ and $\beta$.
 
 For the Beta Binomial model the posterior mode is:
 
-```{math} 
+```{math}
 :label: eq:beta_binom_mode
 \operatorname*{argmax}_{\theta}{[\theta \mid Y]}  = \frac{\alpha + y - 1}{\alpha + \beta + n - 2}
 
@@ -1008,15 +1009,15 @@ posteriors that are coherent.
 
 For the one-dimensional case JP for $\theta$ is
 
-```{math} 
+```{math}
 :label: eq:Jeffreys_prior0
-p(\theta) \propto \sqrt{I(\theta)}   
+p(\theta) \propto \sqrt{I(\theta)}
 
 ```
 
 where $I(\theta)$ is the expected Fisher information:
 
-```{math} 
+```{math}
 :label: eq:Jeffreys_prior
 I(\theta) = - \mathbb{E_{Y}}\left[\frac{d^2}{d\theta^2} \log p(Y \mid \theta)\right]
 
@@ -1031,7 +1032,7 @@ For a detailed derivation of the JPs for both Alice and Bob problem see
 [Jeffrey\'s_prior_derivation](Jeffrey's_prior_derivation). If you
 want to skip those details here we have the JP for Alice:
 
-```{math} 
+```{math}
 \begin{aligned}
 p(\theta) \propto \theta^{-0.5} (1-\theta)^{-0.5}\end{aligned}
 ```
@@ -1042,7 +1043,7 @@ Which is a u-shaped distribution as shown in the left-top panel of
 
 For Bob the JP is:
 
-```{math} 
+```{math}
 :label: fig:bob_prior
 p(\kappa) \propto \kappa^{-0.5} (1 + \kappa)^{-1}
 
@@ -1522,7 +1523,7 @@ exercise, try by expanding Equation {eq}`acceptance_prob`.
 **1M15.** In the following definition of a probabilistic
 model, identify the prior, the likelihood, and the posterior:
 
-```{math} 
+```{math}
 \begin{split}
 Y \sim \mathcal{N}(\mu, \sigma)\\
 \mu \sim \mathcal{N}(0, 1)\\

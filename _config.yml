@@ -3,6 +3,7 @@
 
 title: Bayesian Modeling and Computation in Python
 author: Martin, Kumar, Lao
+exclude_patterns: [_build, Thumbs.db, .DS_Store, "**.ipynb_checkpoints", "**/README.md"]
 # logo: logo.png
 execute:
   execute_notebooks         : off  # Whether to execute notebooks at build time. Must be one of ("auto", "force", "cache", "off")
@@ -15,6 +16,8 @@ execute:
   stderr_output             : show  # One of 'show', 'remove', 'remove-warn', 'warn', 'error', 'severe'
 
 sphinx:
+    extra_extensions:
+      - sphinx_codeautolink
     config:
       html_theme_options:
         use_download_button: false
@@ -23,6 +26,23 @@ sphinx:
         use_repository_button: true
         search_bar_text: Search this book...
         home_page_in_toc: true
+      intersphinx_mapping:
+        arviz:
+          - https://arviz-devs.github.io/arviz/
+          - null
+        numpy:
+          - https://numpy.org/doc/stable
+          - null
+        matplotlib:
+          - https://matplotlib.org/stable
+          - null
+        scipy:
+          - https://docs.scipy.org/doc/scipy
+          - null
+      codeautolink_autodoc_inject: false
+      codeautolink_concat_default: true
+      codeautolink_global_preface: "import arviz as az; import numpy as np; import matplotlib.pyplot as plt; import scipy.stats as stats"
+
 
 bibtex_bibfiles:
     - bibtex.bib
