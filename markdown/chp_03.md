@@ -103,11 +103,11 @@ estimates of uncertainty is by using Bayesian methods. In order to do so
 we need to conjecture a relationship of observations to parameters as
 example:
 
-```{math} 
+```{math}
 :label: eq:gaussian_bayes
-\overbrace{p(\mu, \sigma \mid Y)}^{Posterior} \propto \overbrace{\mathcal{N}(Y \mid \mu, \sigma)}^{Likelihood}\;  \overbrace{\underbrace{\mathcal{N}(4000, 3000)}_{\mu} 
+\overbrace{p(\mu, \sigma \mid Y)}^{Posterior} \propto \overbrace{\mathcal{N}(Y \mid \mu, \sigma)}^{Likelihood}\;  \overbrace{\underbrace{\mathcal{N}(4000, 3000)}_{\mu}
      \underbrace{\mathcal{H}\text{T}(100, 2000)}_{\sigma}}^{Prior}
-    
+
 ```
 
 Equation {eq}`eq:gaussian_bayes` is a restatement of Equation
@@ -257,7 +257,7 @@ with pm.Model() as model_penguin_mass_all_species:
     # Note the addition of the shape parameter
     σ = pm.HalfStudentT("σ", 100, 2000, shape=3)
     μ = pm.Normal("μ", 4000, 3000, shape=3)
-    mass = pm.Normal("mass", 
+    mass = pm.Normal("mass",
                      mu=μ[all_species.codes],
                      sigma=σ[all_species.codes],
                      observed=penguins["body_mass_g"])
@@ -526,7 +526,7 @@ inf_data_model_penguin_mass_all_species2 = az.from_dict(
     posterior={
         # TFP mcmc returns (num_samples, num_chains, ...), we swap
         # the first and second axis below for each RV so the shape
-        # is what ArviZ expected. 
+        # is what ArviZ expected.
         k:np.swapaxes(v, 1, 0)
         for k, v in mcmc_samples._asdict().items()},
     sample_stats={
@@ -599,7 +599,7 @@ this relationship of observed flipper length on estimated mass is to fit
 a linear regression model, where the mean is *conditionally* modeled as
 a linear combination of other variables
 
-```{math} 
+```{math}
 :label: eq:expanded_regression
 
 \begin{split}
@@ -626,9 +626,9 @@ hyperplane.
 Alternatively we can express Equation {eq}`eq:expanded_regression` using
 matrix notation:
 
-```{math} 
+```{math}
 :label: eq:linear_model_matrix
-\mu = \mathbf{X}\boldsymbol{\beta} 
+\mu = \mathbf{X}\boldsymbol{\beta}
 
 ```
 
@@ -639,7 +639,7 @@ An alternative expression you might have seen in other (non-Bayesian)
 occasions is to rewrite Equation {eq}`eq:expanded_regression` as noisy
 observation of some linear prediction:
 
-```{math} 
+```{math}
 :label: eq:linear_model_enginner
 
 Y = \mathbf{X}\boldsymbol{\beta} + \epsilon,\; \epsilon \sim \mathcal{N}(0, \sigma)
@@ -730,9 +730,9 @@ with pm.Model() as model_adelie_flipper_regression:
     β_0 = pm.Normal("β_0", 0, 4000)
     β_1 = pm.Normal("β_1", 0, 4000)
     μ = pm.Deterministic("μ", β_0 + β_1 * adelie_flipper_length)
-    
+
     mass = pm.Normal("mass", mu=μ, sigma=σ, observed = adelie_mass_obs)
-    
+
     inf_data_adelie_flipper_regression = pm.sample(return_inferencedata=True)
 ```
 
@@ -901,7 +901,7 @@ centers its mean value at zero as shown in Code Block
 :name: flipper_centering
 :caption: flipper_centering
 
-adelie_flipper_length_c = (adelie_flipper_length_obs - 
+adelie_flipper_length_c = (adelie_flipper_length_obs -
                            adelie_flipper_length_obs.mean())
 ```
 
@@ -1013,12 +1013,12 @@ with pm.Model() as model_penguin_mass_categorical:
     β_0 = pm.Normal("β_0", 0, 3000)
     β_1 = pm.Normal("β_1", 0, 3000)
     β_2 = pm.Normal("β_2", 0, 3000)
-    
+
     μ = pm.Deterministic(
         "μ", β_0 + β_1 * adelie_flipper_length_obs + β_2 * sex_obs)
-    
+
     mass = pm.Normal("mass", mu=μ, sigma=σ, observed=adelie_mass_obs)
-    
+
     inf_data_penguin_mass_categorical = pm.sample(
         target_accept=.9, return_inferencedata=True)
 ```
@@ -1056,7 +1056,7 @@ write:
 :name: bambi_categorical
 :caption: bambi_categorical
 
-import bambi as bmb 
+import bambi as bmb
 model = bmb.Model("body_mass_g ~ flipper_length_mm + sex",
                   penguins[adelie_mask])
 trace = model.fit()
@@ -1156,7 +1156,7 @@ model building and inference is shown in Code Block
 
 def gen_jd_flipper_bill_sex(flipper_length, sex, bill_length, dtype=tf.float32):
     flipper_length, sex, bill_length = tf.nest.map_structure(
-        lambda x: tf.constant(x, dtype), 
+        lambda x: tf.constant(x, dtype),
         (flipper_length, sex, bill_length)
     )
 
@@ -1168,8 +1168,8 @@ def gen_jd_flipper_bill_sex(flipper_length, sex, bill_length, dtype=tf.float32):
         β_1 = yield root(tfd.Normal(loc=0, scale=3000, name="beta_1"))
         β_2 = yield root(tfd.Normal(loc=0, scale=3000, name="beta_2"))
         β_3 = yield root(tfd.Normal(loc=0, scale=3000, name="beta_3"))
-        μ = (β_0[..., None] 
-             + β_1[..., None] * flipper_length 
+        μ = (β_0[..., None]
+             + β_1[..., None] * flipper_length
              + β_2[..., None] * sex
              + β_3[..., None] * bill_length
             )
@@ -1278,11 +1278,11 @@ linear function, $\mathbf{X} \mathit{\beta}$, and modify it using an
 inverse link function [^8] $\phi$ as shown in Equation
 {eq}`eq:generalized_linear_model`.
 
-```{math} 
+```{math}
 :label: eq:generalized_linear_model
 \begin{split}
 \mu =& \phi(\mathbf{X} \beta) \\
-Y \sim& \Psi (\mu, \theta)     
+Y \sim& \Psi (\mu, \theta)
 
 \end{split}
 ```
@@ -1317,7 +1317,7 @@ interval. This is handy because now we can map linear functions to the
 range we would expect for a parameter that estimates probability values,
 that must be in the range 0 and 1 by definition.
 
-```{math} 
+```{math}
 :label: eq:logistic
 p = \frac{1}{1+e^{-\mathbf{X}\beta}}
 
@@ -1339,11 +1339,11 @@ prediction in the set ${0,1}$. Let us assume we want our decision
 boundary set at a probability of 0.5. For a model with an intercept and
 one covariate we have:
 
-```{math} 
+```{math}
 \begin{split}
 0.5 &= logistic(\beta_{0} + \beta_{1}*x) \\
-logit(0.5) &= \beta_{0} + \beta_{1}*x \\  
-0 &= \beta_{0} + \beta_{1}*x \\ 
+logit(0.5) &= \beta_{0} + \beta_{1}*x \\
+0 &= \beta_{0} + \beta_{1}*x \\
 x &= -\frac{\beta_{0}}{\beta_{1}} \\
 \end{split}
 ```
@@ -1376,18 +1376,18 @@ species = pd.Categorical(penguins.loc[species_filter, "species"])
 with pm.Model() as model_logistic_penguins_bill_length:
     β_0 = pm.Normal("β_0", mu=0, sigma=10)
     β_1 = pm.Normal("β_1", mu=0, sigma=10)
-    
-    μ = β_0 + pm.math.dot(bill_length_obs, β_1)  
-    
+
+    μ = β_0 + pm.math.dot(bill_length_obs, β_1)
+
     # Application of our sigmoid  link function
     θ = pm.Deterministic("θ", pm.math.sigmoid(μ))
-    
+
     # Useful for plotting the decision boundary later
     bd = pm.Deterministic("bd", -β_0/β_1)
-    
+
     # Note the change in likelihood
     yl = pm.Bernoulli("yl", p=θ, observed=species.codes)
-    
+
     prior_predictive_logistic_penguins_bill_length = pm.sample_prior_predictive()
     trace_logistic_penguins_bill_length = pm.sample(5000, chains=2)
     inf_data_logistic_penguins_bill_length = az.from_pymc3(
@@ -1473,11 +1473,11 @@ mass_obs = penguins.loc[species_filter, "body_mass_g"].values
 with pm.Model() as model_logistic_penguins_mass:
     β_0 = pm.Normal("β_0", mu=0, sigma=10)
     β_1 = pm.Normal("β_1", mu=0, sigma=10)
-    
-    μ = β_0 + pm.math.dot(mass_obs, β_1)  
+
+    μ = β_0 + pm.math.dot(mass_obs, β_1)
     θ = pm.Deterministic("θ", pm.math.sigmoid(μ))
     bd = pm.Deterministic("bd", -β_0/β_1)
-    
+
     yl = pm.Bernoulli("yl", p=θ, observed=species.codes)
 
     inf_data_logistic_penguins_mass = pm.sample(
@@ -1550,11 +1550,11 @@ X = X.values
 with pm.Model() as model_logistic_penguins_bill_length_mass:
     β = pm.Normal("β", mu=0, sigma=20, shape=3)
 
-    μ = pm.math.dot(X, β)  
+    μ = pm.math.dot(X, β)
 
     θ = pm.Deterministic("θ", pm.math.sigmoid(μ))
     bd = pm.Deterministic("bd", -β[0]/β[2] - β[1]/β[2] * X[:,1])
-    
+
     yl = pm.Bernoulli("yl", p=θ, observed=species.codes)
 
     inf_data_logistic_penguins_bill_length_mass = pm.sample(
@@ -1622,7 +1622,7 @@ and now we have a numerical confirmation as well.
 :caption: penguin_model_loo
 
 az.compare({"mass":inf_data_logistic_penguins_mass,
-            "bill": inf_data_logistic_penguins_bill_length, 
+            "bill": inf_data_logistic_penguins_bill_length,
             "mass_bill":inf_data_logistic_penguins_bill_length_mass})
 ```
 
@@ -1725,7 +1725,7 @@ natural log of the odds which is the fraction shown in Equation
 {eq}`eq:logit`. We can rewrite the logistic regression in Equation
 {eq}`eq:logistic` in an alternative form of using the logit.
 
-```{math} 
+```{math}
 :label: eq:logit
 \log \left(\frac{p}{1-p} \right) = \boldsymbol{X} \beta
 
@@ -1753,8 +1753,8 @@ bill_length = 45
 val_1 = β_0 + β_1*bill_length
 val_2 = β_0 + β_1*(bill_length+1)
 
-f"(Class Probability change from 45mm Bill Length to 46mm:
-{(special.expit(val_2) -  special.expit(val_1))*100:.0f}%)"
+f"""(Class Probability change from 45mm Bill Length to 46mm:
+{(special.expit(val_2) -  special.expit(val_1))*100:.0f}%)"""
 ```
 
 ```
@@ -1802,15 +1802,15 @@ with pm.Model() as model_uninformative_prior_sex_ratio:
     β_0 = pm.Normal("β_0", 50, 20)
 
     μ = pm.Deterministic("μ", β_0 + β_1 * x)
-    
+
     ratio = pm.Normal("ratio", mu=μ, sigma=σ, observed=y)
-    
+
     prior_predictive_uninformative_prior_sex_ratio = pm.sample_prior_predictive(
         samples=10000
     )
     trace_uninformative_prior_sex_ratio = pm.sample()
     inf_data_uninformative_prior_sex_ratio = az.from_pymc3(
-        trace=trace_uninformative_prior_sex_ratio, 
+        trace=trace_uninformative_prior_sex_ratio,
         prior=prior_predictive_uninformative_prior_sex_ratio
     )
 ```
@@ -1869,14 +1869,14 @@ possible ratios.
 
 with pm.Model() as model_informative_prior_sex_ratio:
     σ = pm.Exponential("σ", .5)
-    
+
     # Note the now more informative priors
     β_1 = pm.Normal("β_1", 0, .5)
     β_0 = pm.Normal("β_0", 48.5, .5)
 
     μ = pm.Deterministic("μ", β_0 + β_1 * x)
     ratio = pm.Normal("ratio", mu=μ, sigma=σ, observed=y)
-    
+
     prior_predictive_informative_prior_sex_ratio = pm.sample_prior_predictive(
         samples=10000
     )
