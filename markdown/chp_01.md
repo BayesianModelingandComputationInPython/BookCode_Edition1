@@ -480,6 +480,7 @@ algorithm:
 :name: metropolis_hastings
 :caption: metropolis_hastings
 :linenos:
+
 n_iters = 1000
 can_sd = 0.05
 α = β =  1
@@ -529,7 +530,7 @@ understand exactly what is happening.
 Note that the code implemented in Code Block [metropolis_hastings](metropolis_hastings) is
 not intended to be efficient, in fact there are many changes that would
 be present in production-grade code, like computing the probabilities on
-the log scale to avoid under/overflow issues (see
+the log scale to avoid under/overflow issues (see Section
 [log_probabilities](log_probabilities)), or pre-computing the
 proposal and the Uniform values. This is where the purity of math needs
 to be adjusted to meet the reality of computers, and why building these
@@ -812,7 +813,7 @@ that modern computational methods allow us to perform inference with
 virtually any choice of priors and not just those that are
 mathematically convenient. Nevertheless, conjugate priors can be useful
 when learning Bayesian inference and also under some situations when
-there is a need to use analytical expressions for the posterior (see
+there is a need to use analytical expressions for the posterior (see Section
 [conjugate_case_study](conjugate_case_study) for an example). As is
 such, we will briefly discuss analytical priors using the Beta Binomial
 model.
@@ -841,7 +842,7 @@ p(\theta \mid Y) \propto \theta^{\alpha-1+y}(1-\theta)^{\beta-1+N-y}
 
 If we want to ensure that the posterior is a proper probability
 distribution function, we need to add a normalization constant ensuring
-that the integral of the PDF is 1 (see [cont_rvs](cont_rvs)). Notice
+that the integral of the PDF is 1 (see Section [cont_rvs](cont_rvs)). Notice
 that expression {eq}`eq:kernel_beta` looks like the kernel of a Beta
 distribution, thus by adding the normalization constant of a Beta
 distribution we arrive to the conclusion that the posterior distribution
@@ -1029,7 +1030,7 @@ discussion over prior choices, until that annoying person at the back of
 the conference room objects your choice of a JP in the first place.
 
 For a detailed derivation of the JPs for both Alice and Bob problem see
-[Jeffrey\'s_prior_derivation](Jeffrey's_prior_derivation). If you
+Section [Jeffreys prior derivation](Jeffreys_prior_derivation). If you
 want to skip those details here we have the JP for Alice:
 
 ```{math}
@@ -1065,7 +1066,7 @@ term of the odds $\kappa$ (right). Bottom: Jeffreys' posteriors
 (unnormalized) for the binomial likelihood parameterized in term of the
 number of success $\theta$ (left) or in term of the odds $\kappa$
 (right). The arrows between the posteriors indicate that the posterior
-are inter-convertible by applying the change of variable rule (see
+are inter-convertible by applying the change of variable rule (see Section
 [transformations](transformations) for details).
 ```
 
@@ -1088,7 +1089,7 @@ that allow us to reason about our model.
 
 JPs are not the only way to obtain an objective prior. Another possible
 route is to obtain a prior by maximizing the expected Kullback-Leibler
-divergence (see [DKL](DKL)) between the prior and posterior. These
+divergence (see Section [DKL](DKL)) between the prior and posterior. These
 kind of priors are known as Bernardo reference priors. They are
 objective as these are the priors that *allow the data to bring* the
 maximal amount of information into the posterior distribution. Bernardo
@@ -1435,7 +1436,7 @@ process until they seem reasonable.
 $\text{Beta}(1, 1)$, $\text{Beta}(1, 4)$. How do the priors differ in
 terms of shape?
 
-**1E8**. Rerun Code block
+**1E8**. Rerun Code Block
 [binomial_update](binomial_update) but using two
 Beta-priors of your choice. Hint: you may what to try priors with
 $\alpha \neq \beta$ like $\text{Beta}(2, 5)$.
