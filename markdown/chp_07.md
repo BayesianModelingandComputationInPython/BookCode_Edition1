@@ -382,7 +382,7 @@ automatically assign this sampler to a `pm.BART` distribution and if
 other random variables are present in the model, PyMC3 will assign other
 samplers like NUTS to those variables.
 
-(chap6_bart_bike)=
+(bart_bike)=
 
 ## BART Bikes
 

@@ -1077,7 +1077,7 @@ Sum{acc_dtype=float64} [id A] '__logp'
 
 Just like algebraic optimization this graph can then be optimized in
 ways that benefit the Bayesian user {cite:p}`willard2020minikanren`. Recall the
-discussion in [chap3_model_geometry](chap3_model_geometry), certain
+discussion in [model_geometry](model_geometry), certain
 models benefit from non-centered parameterizations, as this helps
 eliminate challenging geometry such as Neal's funnel. Without automatic
 optimization the user must be aware of the geometrical challenge to the
@@ -1941,7 +1941,7 @@ the entire workflow.
 **10H11.** We have explained reparameterization in previous
 chapter, for example, center and non-center parameterization for linear
 model in Chapter [4](chap3)
-[chap3_model_geometry](chap3_model_geometry). One of the use case
+[model_geometry](model_geometry). One of the use case
 for effect handling is to perform automatic reparameterization 
 {cite:p}`gorinova2019automatic`. Try to write a effect handler in NumPyro to
 perform automatic non-centering of a random variable in a model. Hint:

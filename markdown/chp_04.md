@@ -1165,7 +1165,7 @@ priors on how each store was doing. This allows easy comparisons in mean
 and variation, and expands the application in many different ways based
 on a single model.
 
-(chap3_model_geometry)=
+(model_geometry)=
 
 ### Posterior Geometry Matters
 
@@ -1566,7 +1566,7 @@ point/group/etc being close to each other.
 
 Prior choice is all the more important for multilevel models, because of
 how the prior interacts with the informativeness of the likelihood, as
-shown above in Section {ref}`chap3_model_geometry`. Moreover, not only does the
+shown above in Section {ref}`model_geometry`. Moreover, not only does the
 shape of prior distribution matter, we also have additional choices of
 how to parameterize them. This does not limit us to Gaussian priors as
 it applies to all distributions in the location-scale distribution

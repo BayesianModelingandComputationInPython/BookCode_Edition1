@@ -1795,7 +1795,7 @@ with pm.Model() as model:
     [poisson_football](poisson_football) or alternatively
     using the mean and standard deviation.
 
-**2M12.** In Code Block [code:mh](code:mh) from
+**2M12.** In Code Block [metropolis_hastings](metropolis_hastings) from
 Chapter [1](chap1), change the value of `can_sd` and run the
 Metropolis sampler. Try values like 0.2 and 1.
 
@@ -1803,7 +1803,7 @@ Metropolis sampler. Try values like 0.2 and 1.
     the autocorrelation plot, trace plot and the ESS. Explain the
     observed differences.
 
-2.  Modify Code Block [code:mh](code:mh) so you get more than one
+2.  Modify Code Block [metropolis_hastings](metropolis_hastings) so you get more than one
     independent chain. Use ArviZ to compute rank plots and $\hat R$.
 
 **2M13.** Generate a random sample using
@@ -1939,7 +1939,7 @@ does each tell us about our statistical models?
     example.
 
 [^19]: A deeper give into Probability Integral Transform can be found in
-    [prob_integral_transform](prob_integral_transform)
+    [probability-integral-transform-pit](probability-integral-transform-pit)
 
 [^20]: The Akaike information criterion (AIC) is an estimator of the
     generalization error, it is commonly used in frequentists

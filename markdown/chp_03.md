@@ -436,7 +436,7 @@ some axis when computing the log-likelihood, which specified by the
 `reinterpreted_batch_ndims` function argument. Usually we wrap the
 distributions associated with the observation with `tfd.Independent`
 [^2]. You can read a bit more about shape handling in TFP and PPL in
-[ch10_shape_ppl](ch10_shape_ppl).
+[shape_ppl](shape_ppl).
 
 An interesting signature of a `tfd.JointDistributionCoroutine` model is,
 as the name suggests, the usage of Coroutine in Python. Without getting
