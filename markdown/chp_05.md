@@ -866,7 +866,10 @@ advantages such as having better intuition of how to perform exploratory
 analysis of the model and then possible routes for making changes into
 the model either to simplify it or to make it more complex.
 
-```python
+```{code-block} python
+:name: sp_global
+:caption: sp_global
+
 with pm.Model() as sp_global:
     τ = pm.HalfCauchy("τ", 1)
     β = pm.Normal("β", mu=0, sigma=τ, shape=Bg.shape[1])
@@ -887,7 +890,7 @@ specific plants.
 The black dots represents the C0₂ uptake measured at seven C0₂
 concentrations for each one of 12 plants (Qn1, Qn2, Qn3, Qc1, Qc2, Qc3,
 Mn1, Mn2, Mn3, Mc1, Mc2, Mc3). The black line is the mean spline fit
-from the model in Code Block [code:sp_global](code:sp_global) and
+from the model in Code Block [sp_global](sp_global) and
 the gray shaded curve represents the 94% HDI interval for that fit.
 ```
 

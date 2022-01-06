@@ -1932,7 +1932,7 @@ will be helpful.
 
 **10H10.** Implement the linear penguins model defined in
 Code Block
-[code:non_centered_regression](code:non_centered_regression) in
+[non_centered_regression](non_centered_regression) in
 NumPyro. After verifying the result are roughly the same as TFP and
 PyMC3, what differences do you see from the TFP and PyMC3 syntax? What
 similarities do you see? Be sure not just compare models, but compare
