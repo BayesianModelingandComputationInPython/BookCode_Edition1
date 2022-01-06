@@ -749,7 +749,7 @@ line.
 Historically this distribution arose to estimate the mean of a normally
 distributed population when the sample size is small [^12]. In Bayesian
 statistics, a common use case is to generate models that are robust
-against aberrant data as we discussed in
+against aberrant data as we discussed in Section
 [robust_regression](robust_regression).
 
 ```{math} 

@@ -1077,7 +1077,7 @@ Sum{acc_dtype=float64} [id A] '__logp'
 
 Just like algebraic optimization this graph can then be optimized in
 ways that benefit the Bayesian user {cite:p}`willard2020minikanren`. Recall the
-discussion in [chap3_model_geometry](chap3_model_geometry), certain
+discussion in [model_geometry](model_geometry), certain
 models benefit from non-centered parameterizations, as this helps
 eliminate challenging geometry such as Neal's funnel. Without automatic
 optimization the user must be aware of the geometrical challenge to the
@@ -1644,7 +1644,7 @@ with Pyro {cite:p}`bingham2019pyro` (and NumPyro {cite:p}`phan2019composable`),
 Edward2 {cite:p}`tran2018simple, moore2018effect`, and JointDistribution in
 TensorFlow Probability {cite:p}`piponi2020joint` [^26] [^27].
 
-(ch10_shape_ppl)=
+(shape_ppl)=
 
 ### Shape Handling in PPLs
 
@@ -1932,7 +1932,7 @@ will be helpful.
 
 **10H10.** Implement the linear penguins model defined in
 Code Block
-[code:non_centered_regression](code:non_centered_regression) in
+[non_centered_regression](non_centered_regression) in
 NumPyro. After verifying the result are roughly the same as TFP and
 PyMC3, what differences do you see from the TFP and PyMC3 syntax? What
 similarities do you see? Be sure not just compare models, but compare
@@ -1941,7 +1941,7 @@ the entire workflow.
 **10H11.** We have explained reparameterization in previous
 chapter, for example, center and non-center parameterization for linear
 model in Chapter [4](chap3)
-[chap3_model_geometry](chap3_model_geometry). One of the use case
+[model_geometry](model_geometry). One of the use case
 for effect handling is to perform automatic reparameterization 
 {cite:p}`gorinova2019automatic`. Try to write a effect handler in NumPyro to
 perform automatic non-centering of a random variable in a model. Hint:

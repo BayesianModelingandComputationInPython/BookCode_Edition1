@@ -807,15 +807,15 @@ black line corresponds to the mean spline function computed from
 
 (modeling-co2-uptake-with-splines)=
 
-## Modeling C0₂ Uptake with Splines
+## Modeling CO₂ Uptake with Splines
 
 For a final example of splines we are going to use data from an
 experimental study {cite:p}`Potvin1990, Pedersen2019`. The experiment consists
-of measuring the C0₂ uptake in 12 different plants under varying
-conditions. Here we will only explore the effect of the external C0₂
-concentration, i.e. how the C0₂ concentration in the environment
-affects the consumption of C0₂ by different plants. The C0₂ uptake
-was measured at seven C0₂ concentrations for each plant, the same
+of measuring the CO₂ uptake in 12 different plants under varying
+conditions. Here we will only explore the effect of the external CO₂
+concentration, i.e. how the CO₂ concentration in the environment
+affects the consumption of CO₂ by different plants. The CO₂ uptake
+was measured at seven CO₂ concentrations for each plant, the same
 seven values for each one of the 12 plants. Let us begin by loading and
 tidying up the data.
 
@@ -866,7 +866,10 @@ advantages such as having better intuition of how to perform exploratory
 analysis of the model and then possible routes for making changes into
 the model either to simplify it or to make it more complex.
 
-```python
+```{code-block} python
+:name: sp_global
+:caption: sp_global
+
 with pm.Model() as sp_global:
     τ = pm.HalfCauchy("τ", 1)
     β = pm.Normal("β", mu=0, sigma=τ, shape=Bg.shape[1])
@@ -884,10 +887,10 @@ specific plants.
 ```{figure} figures/sp_global.png
 :name: fig:sp_global
 :width: 8.00in
-The black dots represents the C0₂ uptake measured at seven C0₂
+The black dots represents the CO₂ uptake measured at seven CO₂
 concentrations for each one of 12 plants (Qn1, Qn2, Qn3, Qc1, Qc2, Qc3,
 Mn1, Mn2, Mn3, Mc1, Mc2, Mc3). The black line is the mean spline fit
-from the model in Code Block [code:sp_global](code:sp_global) and
+from the model in Code Block [sp_global](sp_global) and
 the gray shaded curve represents the 94% HDI interval for that fit.
 ```
 
@@ -930,7 +933,7 @@ better fit for each one of the 12 plants.
 ```{figure} figures/sp_individual.png
 :name: fig:sp_individual
 :width: 8.00in
-C0₂ uptake measured at seven C0₂ concentrations for 12 plants. The
+CO₂ uptake measured at seven CO₂ concentrations for 12 plants. The
 black line is the mean spline fit from the model in Code Block
 [sp_individual](sp_individual) and the gray shaded curve
 represents the 94% HDI interval for that fit.
@@ -968,7 +971,7 @@ shape of their functional responses.
 ```{figure} figures/sp_mix_decomposed.png
 :name: fig:sp_mix_decomposed
 :width: 8.00in
-C0₂ uptake measured at seven C0₂ concentrations for 12 plants. The
+CO₂ uptake measured at seven CO₂ concentrations for 12 plants. The
 blue line is the mean spline fit from model in Code Block
 [sp_mix](sp_mix) and the gray shaded curve represents the
 94% HDI interval for that fit. This fit is decomposed into two terms. In
@@ -999,7 +1002,7 @@ cmp = az.compare({"global":idata_sp_global,
 ```{figure} figures/sp_compare.png
 :name: fig:sp_compare
 :width: 8.00in
-Model comparison using LOO for the 3 different C0₂ uptake models
+Model comparison using LOO for the 3 different CO₂ uptake models
 discussed in this chapter (`sp_global`, `sp_individual`, `sp_mix`).
 Models are ranked from higher predictive accuracy to lower. The open
 dots represent the values of LOO, the black dots are the in-sample
