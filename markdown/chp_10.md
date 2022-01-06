@@ -1644,7 +1644,7 @@ with Pyro {cite:p}`bingham2019pyro` (and NumPyro {cite:p}`phan2019composable`),
 Edward2 {cite:p}`tran2018simple, moore2018effect`, and JointDistribution in
 TensorFlow Probability {cite:p}`piponi2020joint` [^26] [^27].
 
-(ch10_shape_ppl)=
+(shape_ppl)=
 
 ### Shape Handling in PPLs
 
