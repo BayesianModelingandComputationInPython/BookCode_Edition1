@@ -59,6 +59,11 @@ conda activate bmcp
 The book code can also be run using Google Colab.
 https://colab.research.google.com
 
+
+### Donation
+
+This book is only possible because open source contributors working on the projects we used. If you like this book we encourage you to make a donation to [ArviZ](https://numfocus.org/donate-to-arviz).
+
 ### License
 
 ```{image} https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-nc-sa.png
