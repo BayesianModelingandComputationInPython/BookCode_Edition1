@@ -58,3 +58,13 @@ conda activate bmcp
 ### Colab
 The book code can also be run using Google Colab.
 https://colab.research.google.com
+
+### License
+
+```{image} https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-nc-sa.png
+:alt: by-nc-sa
+:width: 150px
+:align: center
+```
+
+This book is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/), except for the code (including the code blocks and jupyter notebooks) which are licensed under the [GNU GENERAL PUBLIC LICENSE Version 2](https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/blob/main/LICENSE).
