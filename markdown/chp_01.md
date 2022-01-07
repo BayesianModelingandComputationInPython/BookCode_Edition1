@@ -185,7 +185,7 @@ where $\Theta$ means we are integrating over all the possible values of
 $\theta$.
 
 Computing integrals like this can be much harder than would first appear
-(see [marginal_likelihood](marginal_likelihood) and a funny XKCD
+(see Section {ref}`marginal_likelihood` and a funny XKCD
 comic [^6]). Especially when we realize that for most problems a
 closed-form expression is not even available. Fortunately, there are
 numerical methods that can help us with this challenge if used properly.
@@ -343,8 +343,7 @@ of these!
 Closed form expressions for the integral in Equation
 {eq}`eq:marginal_likelihood` are not always possible and thus much of
 modern Bayesian inference is done using numerical methods that we call
-**Universal Inference Engines** (see Section
-[inference_methods](inference_methods)) just to compensate for the
+**Universal Inference Engines** (see Section {ref}`inference_methods`) just to compensate for the
 fact we live in the $21^\text{st}$ century and we still do not have flying cars.
 Anyway, there are many well-tested Python libraries providing such
 numerical methods so in general it is very unlikely that a Bayesian
@@ -530,16 +529,15 @@ understand exactly what is happening.
 Note that the code implemented in Code Block [metropolis_hastings](metropolis_hastings) is
 not intended to be efficient, in fact there are many changes that would
 be present in production-grade code, like computing the probabilities on
-the log scale to avoid under/overflow issues (see Section
-[log_probabilities](log_probabilities)), or pre-computing the
+the log scale to avoid under/overflow issues (see Section {ref}`log_probabilities`), or pre-computing the
 proposal and the Uniform values. This is where the purity of math needs
 to be adjusted to meet the reality of computers, and why building these
 engines is best left to experts. Similarly, the value of `can_sd`, is a
 parameter of the Metropolis-Hastings algorithm, not a parameter from the
 Bayesian model. In theory this parameter should not affect the correct
 behavior of the algorithm, but in practice it is very important as the
-efficiency of the method will certainly be affected by its value (see Section
-[inference_methods](inference_methods) for an in-depth discussion).
+efficiency of the method will certainly be affected by its value (see Section 
+{ref}`inference_methods` for an in-depth discussion).
 
 Returning to our example, now that we have our MCMC samples we want to
 understand *what it looks like*. A common way to inspect the results of
@@ -814,7 +812,7 @@ virtually any choice of priors and not just those that are
 mathematically convenient. Nevertheless, conjugate priors can be useful
 when learning Bayesian inference and also under some situations when
 there is a need to use analytical expressions for the posterior (see Section
-[conjugate_case_study](conjugate_case_study) for an example). As is
+{ref}`conjugate_case_study` for an example). As is
 such, we will briefly discuss analytical priors using the Beta Binomial
 model.
 
@@ -842,7 +840,7 @@ p(\theta \mid Y) \propto \theta^{\alpha-1+y}(1-\theta)^{\beta-1+N-y}
 
 If we want to ensure that the posterior is a proper probability
 distribution function, we need to add a normalization constant ensuring
-that the integral of the PDF is 1 (see Section [cont_rvs](cont_rvs)). Notice
+that the integral of the PDF is 1 (see Section {ref}`cont_rvs`). Notice
 that expression {eq}`eq:kernel_beta` looks like the kernel of a Beta
 distribution, thus by adding the normalization constant of a Beta
 distribution we arrive to the conclusion that the posterior distribution
@@ -1030,7 +1028,7 @@ discussion over prior choices, until that annoying person at the back of
 the conference room objects your choice of a JP in the first place.
 
 For a detailed derivation of the JPs for both Alice and Bob problem see
-Section [Jeffreys prior derivation](Jeffreys_prior_derivation). If you
+Section {ref}`Jeffreys_prior_derivation`. If you
 want to skip those details here we have the JP for Alice:
 
 ```{math}
@@ -1067,7 +1065,7 @@ term of the odds $\kappa$ (right). Bottom: Jeffreys' posteriors
 number of success $\theta$ (left) or in term of the odds $\kappa$
 (right). The arrows between the posteriors indicate that the posterior
 are inter-convertible by applying the change of variable rule (see Section
-[transformations](transformations) for details).
+{ref}`transformations` for details).
 ```
 
 Notice that as the expectation in Equation {eq}`eq:Jeffreys_prior` is
@@ -1089,7 +1087,7 @@ that allow us to reason about our model.
 
 JPs are not the only way to obtain an objective prior. Another possible
 route is to obtain a prior by maximizing the expected Kullback-Leibler
-divergence (see Section [DKL](DKL)) between the prior and posterior. These
+divergence (see Section {ref}`DKL`) between the prior and posterior. These
 kind of priors are known as Bernardo reference priors. They are
 objective as these are the priors that *allow the data to bring* the
 maximal amount of information into the posterior distribution. Bernardo
@@ -1122,7 +1120,7 @@ examples to gain some intuition.
 {numref}`fig:max_entropy` shows 3 distributions obtained by entropy
 maximization. The purple distribution is obtained under no constraint,
 and we are happy to find that this is indeed the Uniform distribution as
-expected from the discussion about entropy in [entropy](entropy). If
+expected from the discussion about entropy in Section {ref}`entropy`. If
 we do not know anything about the problem all events are equally likely
 a priori. The second distribution, in cyan, is obtained under the
 constraint that we know the mean value of the distribution. In this
@@ -1338,8 +1336,7 @@ is it fails to generalize its predictions to a wider set of possible
 observations. The counterpart of overfitting is underfitting, which is
 when a model fails to adequately capture the underlying structure of the
 data. We will discuss more about there topics in Sections
-[model_cmp](model_cmp) and
-[information_criterion](information_criterion).
+{ref}`model_cmp` and {ref}`information_criterion`.
 :::
 
 (using-prior-predictive-distributions-to-assess-priors)=
@@ -1635,14 +1632,12 @@ and ArviZ
 [^6]: <https://xkcd.com/2117/>
 
 [^7]: Technically we should talk about the expectation of a random
-    variable. See [expectations](expectations) for details.
+    variable. See Section {ref}`expectations` for details.
 
-[^8]: See detailed balance at Sections
-    [markov_chains](markov_chains) and
-    [metropolis_hastings](metropolis_hastings).
+[^8]: See detailed balance at Sections {ref}`markov_chains` and {ref}`sec_metropolis_hastings`.
 
 [^9]: For a more extensive discussion about inference methods you should
-    read Section [inference_methods](inference_methods) and references
+    read Section [{ref}`inference_methods` and references
     therein.
 
 [^10]: This is sometimes referred to as a kernel in other Universal
@@ -1669,7 +1664,7 @@ and ArviZ
 
 [^17]: <https://en.wikipedia.org/wiki/Likelihood_principle>
 
-[^18]: See [entropy](entropy) for more details.
+[^18]: See Section {ref}`entropy` for more details.
 
 [^19]: Wikipedia has a longer list at
     <https://en.wikipedia.org/wiki/Maximum_entropy_probability_distribution#Other_examples>
@@ -1677,10 +1672,3 @@ and ArviZ
 [^20]: Even when the definition of such priors will require more context
     than the one provided, we still think the example conveys a useful
     intuition, that will be refined as we progress through this book.
-
-## References
-
-```{bibliography}
-:filter: docname in docnames
-:style: unsrt
-```

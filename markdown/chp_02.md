@@ -73,7 +73,7 @@ computational features, or fundamental mathematics.
 
 ## Understanding Your Assumptions
 
-As we discussed in [make_prior_count](make_prior_count), "what is
+As we discussed in Section {ref}`make_prior_count`, "what is
 the best-ever prior?\" is a tempting question to ask. However, it is
 difficult to give a straight satisfying answer other than: "it
 depends\". We can certainly find default priors for a given model or
@@ -90,7 +90,7 @@ understand their effect as they propagate down the model into the data.
 The choices we made in the parameter space may induce something
 unexpected in the observable data space. A very helpful tool to better
 understand our assumptions is the prior predictive distribution, which
-we presented in [Bayesian_inference](Bayesian_inference) and
+we presented in Section {ref}`Bayesian_inference` and
 Equation [eq:prior_pred_dist](eq:prior_pred_dist). In practice we
 can compute a prior predictive distribution by sampling from the model,
 but without conditioning on the observed data. By sampling from the
@@ -225,7 +225,7 @@ environment.
 As we can use synthetic data, that is generated data, from the prior
 predictive distribution to help us inspect our model, we can perform a
 similar analysis with the posterior predictive distribution, introduced
-in [Bayesian_inference](Bayesian_inference) and Equation
+in Section {ref}`Bayesian_inference` and Equation
 [eq:post_pred_dist](eq:post_pred_dist). This procedure is generally
 referred as **posterior predictive checks**. The basic idea is to
 evaluate how close the synthetic observations are to the actual
@@ -547,7 +547,7 @@ is expected as the samples will not be exactly the same, they are after
 all samples. For `good_chains`, on average, the value of effective
 sample size will be lower than the number of samples. But notice that
 ESS could be in fact larger! When using the NUTS sampler (see Section
-[inference_methods](inference_methods)) values of ESS larger than
+{ref}`inference_methods`) values of ESS larger than
 the total number of samples can happen for parameters which posterior
 distributions are close to Gaussian and which are almost independent of
 other parameters in the model.
@@ -661,7 +661,7 @@ When using MCMC methods we introduce an additional layer of uncertainty
 as we are approximating the posterior with a finite number of samples.
 We can estimate the amount of error introduced using the Monte Carlo
 standard error (MCSE), which is based on Markov chain central limit
-theorem (see Section [markov_chains](markov_chains)). The MCSE takes into
+theorem (see Section {ref}`markov_chains`). The MCSE takes into
 account that the samples are not truly independent of each other and are
 in fact computed from the ESS {cite:p}`vehtari_rank_2019`. While the values of
 ESS and $\hat R$ are independent of the scale of the parameters,
@@ -1020,7 +1020,7 @@ been reduced dramatically for `model1`, but we still can see a few of
 them. One easy option we can try to reduce divergences is increasing the
 value of `target_accept` as shown in Code Block
 [divm2](divm2), by default this value is 0.8 and the
-maximum valid value is 1 (see Section [hmc](hmc) for details).
+maximum valid value is 1 (see Section {ref}`hmc` for details).
 
 ```{code-block} python
 :name: divm2
@@ -1048,7 +1048,7 @@ present. For example, we can use it to speed up sampling or increase the
 number of effective samples, without having to increase the
 computational cost. Additionally, reparameterization can also help to
 better interpret or communicate models and their results (see Alice and
-Bob example in Section [conjugate_priors](conjugate_priors)).
+Bob example in Section {ref}`conjugate_priors`).
 :::
 
 (sampler-parameters-and-other-diagnostics)=
@@ -1186,7 +1186,7 @@ $\boldsymbol{\theta_{-i}}$ as observations we have in our dataset.
 Fortunately, we can approximate $\text{ELPD}_\text{LOO-CV}$ from a
 single fit to the data by using a method known as Pareto smoothed
 importance sampling leave-one-out cross validation PSIS-LOO-CV (see Section
-[loo_depth](loo_depth) for details). For brevity, and for
+{ref}`loo_depth` for details). For brevity, and for
 consistency with ArviZ, in this book we call this method LOO. It is
 important to remember we are are talking about PSIS-LOO-CV and unless we
 state it otherwise when we refer to ELPD we are talking about the ELPD
@@ -1420,7 +1420,7 @@ better resolved for the first model than the second.
 
 As we already mentioned we use LOO to approximate
 $\text{ELPD}_\text{LOO-CV}$. This approximation involves the computation
-of a Pareto distribution (see details in Section [loo_depth](loo_depth)),
+of a Pareto distribution (see details in Section {ref}`loo_depth`),
 the main purpose is to obtain a more robust estimation, the side-effect
 of this computation is that the $\hat \kappa$ parameter of such Pareto
 distribution can be used to detect highly influential observations, i.e.
@@ -1524,7 +1524,7 @@ avoid using the data twice. The "PIT part\", stands for Probability
 Integral Transform[^19], which is transformation in 1D where we can get
 a $\mathcal{U}(0, 1)$ distribution from any continuous random variable
 if we transform that random variable using its own CDF (for details see Section
-[loo_depth](loo_depth)). In LOO-PIT we do not know the true CDF, but
+{ref}`loo_depth`). In LOO-PIT we do not know the true CDF, but
 we approximate it with the empirical CDF. Putting aside these
 mathematical details for a moment, the take-home-message is that for a
 well calibrated model we should expect an approximately Uniform
@@ -1579,8 +1579,7 @@ weight to the models that seem to explain or predict the data better.
 A *natural* way to weight Bayesian models is by their marginal
 likelihoods, this is known as Bayesian Model Averaging
 {cite:p}`hoeting_bayesian_1999`. While this is theoretically appealing, it is
-problematic in practice (see Section
-[marginal_likelihood](marginal_likelihood) for details). An
+problematic in practice (see Section {ref}`marginal_likelihood`) for details). An
 alternative is to use the values of LOO to estimate weights for each
 model. We can do this by using the following formula:
 
@@ -1744,7 +1743,7 @@ plot will be one with a difference of zero.
 **2E8.** In your own words explain why MCMC posterior
 estimation techniques need convergence diagnostics. In particular
 contrast these to the conjugate methods described in Section
-[conjugate_priors](conjugate_priors) which do not need those
+{ref}`conjugate_priors` which do not need those
 diagnostics. What is different about the two inference methods?
 
 **2E9.** Visit the ArviZ plot gallery at
@@ -1754,7 +1753,7 @@ documentation what is this diagnostic assessing?
 
 **2E10.** List some plots and numerical quantities that
 are useful at each step during the Bayesian workflow (shown visually in
-[BayesWorkflowSection](BayesWorkflowSection)). Explain how they work
+{numref}`fig:BayesianWorkflow`). Explain how they work
 and what they are assessing. Feel free to use anything you have seen in
 this chapter or in the ArviZ documentation.
 
@@ -1912,14 +1911,13 @@ does each tell us about our statistical models?
 [^11]: Most useful and commonly used sampling methods for Bayesian
     inference are variants of HMC, including for example, the default
     method for continuous variables in PyMC3. For more details of this
-    method, see [hmc](hmc)).
+    method, see Section {ref}`hmc`).
 
 [^12]: A function which is zero everywhere and infinite at zero.
 
 [^13]: For a sampler like Sequential Monte Carlo, increasing the number
     of draws also increases the number of particles, and thus it could
-    actually provide better convergence. See
-    [smc_details](smc_details).
+    actually provide better convergence. See Section {ref}`smc_details`.
 
 [^14]: Strictly speaking we should use probabilities for discrete
     models, but that distinction rapidly becomes annoying in practice.
@@ -1938,8 +1936,8 @@ does each tell us about our statistical models?
     <https://avehtari.github.io/modelselection/roaches.html> for an
     example.
 
-[^19]: A deeper give into Probability Integral Transform can be found in
-    [probability-integral-transform-pit](probability-integral-transform-pit)
+[^19]: A deeper give into Probability Integral Transform can be found in Section
+      {ref}`probability-integral-transform-pit`.
 
 [^20]: The Akaike information criterion (AIC) is an estimator of the
     generalization error, it is commonly used in frequentists
@@ -1948,10 +1946,3 @@ does each tell us about our statistical models?
 
 [^21]: This formula also works for WAIC [^22] and other information
     criteria
-
-## References
-
-```{bibliography}
-:filter: docname in docnames
-:style: unsrt
-```

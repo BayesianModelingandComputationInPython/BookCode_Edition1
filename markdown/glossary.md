@@ -28,7 +28,7 @@ $p(\boldsymbol{\theta} \mid \boldsymbol{Y}) \propto p(\boldsymbol{Y} \mid \bolds
 requires significant statistical and domain knowledge expertise. Such
 design is typically carried out through an iterative process called
 Bayesian workflow. This process includes the three steps of model
-building [@Gelman2020]: inference, model checking/improvement, and model
+building {cite:p}`Gelman2020`: inference, model checking/improvement, and model
 comparison. In this context the purpose of model comparison is not
 necessarily restricted to pick the *best* model, but more importantly to
 better understand the models.
@@ -65,7 +65,7 @@ in `az.compare`) for individual models. The reason being that generally
 some observations are as easy/hard to predict for all models and thus
 this introduce correlations.
 
-**`d_loo`**: The difference in `elpd_loo`) for two models. If more than
+**d_loo**: The difference in `elpd_loo` for two models. If more than
 two models are compared, the difference is computed relative to the
 model with highest `elpd_loo`).
 
@@ -187,7 +187,7 @@ outcome to the number that do not. Odds are commonly used in gambling.
 **Overfitting**: A model overfits when produces predictions too closely
 to the dataset used for fitting the model failing to fit new datasets.
 In terms of the number of parameters an overfitted model contains more
-parameters than can be justified by the data.\[2\] An arbitrary
+parameters than can be justified by the data. An arbitrary
 over-complex model will fit not only the data but also the noise,
 leading to poor predictions.
 
@@ -220,7 +220,7 @@ values describing the unknown quantity. We can also contrast a point
 estimate with distributional estimates, like the posterior distribution
 or its marginals.
 
-**`p_loo`**: The difference between `elpd_loo`: and the
+**p_loo**: The difference between `elpd_loo`: and the
 non-cross-validated log posterior predictive density. It describes how
 much more difficult it is to predict future data than the observed data.
 Asymptotically under certain regularity conditions, `p_loo` can be

@@ -167,7 +167,7 @@ but we can achieve it using a Sequential Monte Carlo (SMC) method. This
 is a general sampler method, like the MCMC methods we have been using in
 the book. SMC can be adapted to perform ABC and then it is called
 SMC-ABC. If you want to learn more about the detail of the SMC method
-you can read Section [inference_methods](inference_methods), but to
+you can read Section {ref}`inference_methods`, but to
 understand this chapter you just need to know that SMC proceeds by
 increasing the value of a auxiliary parameter $\beta$ in $s$ successive
 stages $\{\beta_0=0 < \beta_1  < ...  < \beta_s=1\}$. This is done in
@@ -368,7 +368,7 @@ will destroy the structure in the data. This could happen, for example,
 with a time series, see Chapter [6](chap4).
 
 Another distance introduced to avoid the need to define a summary
-statistic is the use of the KL divergence (see [DKL](DKL)). The KL
+statistic is the use of the KL divergence (see Section {ref}`DKL`). The KL
 divergence is approximated using the following expression
 {cite:p}`Perez2008, Jiang2018`:
 
@@ -869,8 +869,7 @@ One common quantity used to perform model comparison for ABC methods is
 the marginal likelihood. Generally such comparison takes the form of a
 ratio of marginal likelihoods, which is known as Bayes factors. If the
 value of a Bayes factor is larger than 1, the model in the numerator is
-preferred over the one in the denominator and vice versa. In the
-appendix [Bayes_factors](Bayes_factors) we discuss more details
+preferred over the one in the denominator and vice versa. In Section {ref}`Bayes_factors` we discuss more details
 about Bayes factors, including their caveats. One such caveat is that
 the marginal likelihood is generally difficult to compute. Fortunately,
 SMC methods and by extension SMC-ABC methods are able to compute the
@@ -892,7 +891,7 @@ model comparison. This is worrisome as, outside a few formal examples or
 particular models, there is no general guide to ensure sufficiency
 across models {cite:p}`Robert2011`. This is not a problem if we use all the
 data i.e. we do not rely on summary statistics [^10]. This resembles our
-discussion (see Section [Bayes_factors](Bayes_factors)) about how computing
+discussion (see Section {ref}`Bayes_factors`) about how computing
 the marginal likelihood is generally a much more difficult problem that
 computing the posterior. Even if we manage to find a summary statistic
 that is good enough to compute a posterior, that is not a guarantee it
@@ -922,7 +921,7 @@ column we see that `model_1` is consistently chosen as better than
 slopes) is larger for the log marginal likelihood than for LOO, this can
 be explained as the computation of the marginal likelihood explicitly
 takes the prior into account while LOO only does it indirectly through
-the posterior (see Section [Bayes_factors](Bayes_factors) for details). Even
+the posterior (see Section {ref}`Bayes_factors` for details). Even
 when the values of LOO and the marginal likelihood vary across samples
 they do it in a consistent way. We can see this from the slopes of the
 lines connecting `model_0` and `model_1`. While the slopes of the lines
@@ -1399,11 +1398,9 @@ proportion of unpaired socks, and the number of pairs.
     few possible values.
 
 [^2]: This is another manifestation of the curse of dimensionality. See
-    Chapter [11](app) [high_dimensions](high_dimensions) for a
-    full explanation.
+    Section {ref}`high_dimensions` for a full explanation.
 
-[^3]: The default SMC `kernel` is `"metropolis"`. See
-    [inference_methods](inference_methods) for details.
+[^3]: The default SMC `kernel` is `"metropolis"`. See {ref}`inference_methods` for details.
 
 [^4]: Is similar to the Gaussian distribution but without the
     normalization term $\frac{1}{\sigma\sqrt{2\pi}}$.
@@ -1431,11 +1428,3 @@ proportion of unpaired socks, and the number of pairs.
 
 [^12]: In future versions of PyMC `pm.sample_smc` will return and
     InferenceData object with the proper groups.
-
-## References
-
-```{bibliography}
-:filter: docname in docnames
-:style: unsrt
-```
-

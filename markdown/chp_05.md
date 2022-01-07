@@ -45,8 +45,8 @@ single predictor.
 We call $m$ the degree of the polynomial. The linear regressions models
 from Chapter [3](chap2) and Chapter [4](chap3) were all
 polynomials of degree $1$. With the one exception of the varying
-variance example in
-[transforming_covariates](transforming_covariates) where we used
+variance example in Section
+{ref}`transforming_covariates` where we used
 $m=1/2$.
 
 {numref}`fig:polynomial_regression` shows 3 examples of such polynomial
@@ -123,8 +123,8 @@ There are many choices for the $B_i$ basis functions, we can use
 polynomials and thus obtain polynomial regression as we just saw, or
 maybe apply an arbitrary set of functions such as a power of two, a
 logarithm, or a square root. Such functions may be motivated by the
-problem at hand, for example, in
-[transforming_covariates](transforming_covariates) we modeled how
+problem at hand, for example, in Section
+{ref}`transforming_covariates` we modeled how
 the length of babies changes with their age by computing the square root
 of the length, motivated by the fact that human babies, same as other
 mammals, grow more rapidly in the earlier stages of their life and then
@@ -637,7 +637,7 @@ LOO as the best model.
 One interesting observation from {numref}`tab:loo_splines`, is that
 the weights are 0.88 for model `m_12k` (the top ranked model) and 0.12
 to `m_3k` (the last ranked model). With virtually 0 weight for the rest
-of the models. As we explained in Section [model_averaging](model_averaging)
+of the models. As we explained in Section {ref}`model_averaging`
 by default the weights are computed using stacking, which is a method
 that attempts to combine several models in a meta-model in order to
 minimize the divergence between the meta-model and the *true* generating
@@ -991,7 +991,7 @@ shorter for `sp_global`). We note that LOO computation returns warnings
 about the estimated shape parameter of Pareto distribution being greater
 than 0.7. For this example we are going to stop here, but for a real
 analysis, we should pay further attention to these warnings and try to
-follow some of the actions described in Section [k-paretto](k-paretto)
+follow some of the actions described in Section {ref}`k-paretto`.
 
 ```python
 cmp = az.compare({"global":idata_sp_global, 
@@ -1259,11 +1259,3 @@ for each covariate. Fit a model with a NegativeBinomial likelihood.
 
 [^13]: Yes, this is also known as a mixed-effect model, you might recall
     the related concept we discussed in Chapter [4](chap3).
-
-## References
-
-```{bibliography}
-:filter: docname in docnames
-:style: unsrt
-```
-

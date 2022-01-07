@@ -2,8 +2,7 @@
 
 # Chapter 10: Probabilistic Programming Languages
 
-In Chapter [1](chap1) Section
-[bayesian_modeling](bayesian_modeling), we used cars as analogy to
+In Chapter [1](chap1) Section {ref}`bayesian_modeling`, we used cars as analogy to
 understand applied Bayesian concepts. We will revisit this analogy but
 this time to understand Probabilistic Programming Languages. If we treat
 a car as a system, their purpose is to move people or cargo to a chosen
@@ -120,7 +119,7 @@ are numerous algorithms to compute the posterior [^5], from exact
 computations when using conjugate models, to numerical approximations
 like grid search to Hamiltonian Monte Carlo (HMC), to model
 approximation like Laplace approximation and variational inference
-(covered in more detail in Section [vi_details](vi_details)). When selecting
+(covered in more detail in Section {ref}`vi_details`). When selecting
 an inference algorithms both the PPL designer and the user need to make
 a series of choices. For the PPL designer the algorithms have different
 levels of implementation complexity. For example, conjugate methods are
@@ -393,8 +392,7 @@ statistics this can be a lot to take in. When starting out we suggest
 using a simple text editor and a few supporting packages to allow for
 your focus to be on the code and model, before moving onto more complex
 interfaces such as notebooks or Integrated Development Environments. We
-provide more guidance regarding this topic in Section
-[dev_environment](dev_environment).
+provide more guidance regarding this topic in Section {ref}`dev_environment`.
 :::
 
 On the art side API is the interface for human users. This interface is
@@ -694,7 +692,7 @@ $\infty$). These transformations however, need to be done with care as
 we must now correct for the volume changes in our transformed
 distributions. To do so we need to compute the Jacobians of the
 transformation and accumulate the calculated log probabilities,
-explained in further detail in Section [transformations](transformations).
+explained in further detail in Section {ref}`transformations`.
 
 PPLs usually transform bounded random variables into unbounded random
 variables and perform inference in the unbounded space, and then
@@ -1077,7 +1075,7 @@ Sum{acc_dtype=float64} [id A] '__logp'
 
 Just like algebraic optimization this graph can then be optimized in
 ways that benefit the Bayesian user {cite:p}`willard2020minikanren`. Recall the
-discussion in [model_geometry](model_geometry), certain
+discussion in Section {ref}`model_geometry`, certain
 models benefit from non-centered parameterizations, as this helps
 eliminate challenging geometry such as Neal's funnel. Without automatic
 optimization the user must be aware of the geometrical challenge to the
@@ -1865,7 +1863,7 @@ single point. With the knowledge of how PPLs are constructed from this
 chapter, and personal experience through "taking some for a spin\" we
 hope you will be finding the one that works best for you.
 
-(exercises)=
+(exercises10)=
 
 ## Exercises
 
@@ -1927,7 +1925,7 @@ differences can you note?
 **10H9.** BlackJAX is a library of samplers for JAX. Generate
 a random sample of from $\mathcal(N)(0,10)$ of size 20. Use the HMC
 sampler in JAX to recover the parameters of the data generating
-distribution. The BlackJAX documentation and Section [hmc](hmc)
+distribution. The BlackJAX documentation and Section {ref}`hmc`
 will be helpful.
 
 **10H10.** Implement the linear penguins model defined in
@@ -1940,8 +1938,7 @@ the entire workflow.
 
 **10H11.** We have explained reparameterization in previous
 chapter, for example, center and non-center parameterization for linear
-model in Chapter [4](chap3)
-[model_geometry](model_geometry). One of the use case
+model in Section {ref}`model_geometry`. One of the use case
 for effect handling is to perform automatic reparameterization 
 {cite:p}`gorinova2019automatic`. Try to write a effect handler in NumPyro to
 perform automatic non-centering of a random variable in a model. Hint:
@@ -1963,7 +1960,7 @@ NumPyro already provides this functionality with
     the development of Rainer is described in a podcast
     <https://www.learnbayesstats.com/episode/22-eliciting-priors-and-doing-bayesian-inference-at-scale-with-avi-bryant>
 
-[^5]: See [inference_methods](inference_methods) for a discussion of
+[^5]: See Section {ref}`inference_methods` for a discussion of
     some of more prevalent posterior computation methods.
 
 [^6]: In terms of effective samples per second.
@@ -1998,7 +1995,7 @@ NumPyro already provides this functionality with
 [^17]: <https://docs.scipy.org/doc/scipy/reference/stats.html>
 
 [^18]: We will go into more details about random variable in Chapter
-    [app](app).
+    [11](app).
 
 [^19]: To be more precise, a Python object with a `__array__` method.
 
@@ -2038,10 +2035,3 @@ NumPyro already provides this functionality with
     <https://lucianopaz.github.io/2019/08/19/pymc3-shape-handling/>
 
 [^30]: <https://en.wikipedia.org/wiki/Block_diagram>
-
-## References
-
-```{bibliography}
-:filter: docname in docnames
-:style: unsrt
-```

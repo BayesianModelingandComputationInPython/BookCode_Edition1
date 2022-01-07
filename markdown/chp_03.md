@@ -436,7 +436,7 @@ some axis when computing the log-likelihood, which specified by the
 `reinterpreted_batch_ndims` function argument. Usually we wrap the
 distributions associated with the observation with `tfd.Independent`
 [^2]. You can read a bit more about shape handling in TFP and PPL in
-[shape_ppl](shape_ppl).
+Section {ref}`shape_ppl`.
 
 An interesting signature of a `tfd.JointDistributionCoroutine` model is,
 as the name suggests, the usage of Coroutine in Python. Without getting
@@ -452,7 +452,7 @@ function as a decorator to get the model (i.e., a
 `tfd.JointDistribution`) directly.
 
 The resulting `jd_penguin_mass_all_species` is the intercept only
-regression model from [nocovariate_mass](nocovariate_mass)
+regression model in Code Block [nocovariate_mass](nocovariate_mass)
 restated in TFP. It has similar methods like other `tfd.Distribution`,
 which we can utilize in our Bayesian workflow. For example, to draw
 prior and prior predictive samples, we can call the `.sample(.)` method,
@@ -1416,8 +1416,8 @@ that was being estimated in earlier models.
 ```
 
 After fitting the parameters in our model we can inspect the
-coefficients using `az.summary(.)` function (see Table
-[1.3](table:logistic_penguins_bill_length)). While we can read the
+coefficients using `az.summary(.)` function (see {numref}`table:logistic_penguins_bill_length`). 
+While we can read the
 coefficients they are not as directly interpretable as in a linear
 regression. We can tell there is some relationship with bill length and
 species given the positive $\beta_1$ coefficient whose HDI does not
@@ -1738,8 +1738,7 @@ given a change in the observed bill length as shown in Code Block
 [logistic_interpretation](logistic_interpretation).
 Transformations like these are both interesting mathematically, but also
 very practically useful when discussing statistical results, a topic we
-will discuss more deeply in
-[section_sharing_results](section_sharing_results).
+will discuss more deeply in {ref}`section_sharing_results`).
 
 ```{code-block} python
 :name: logistic_interpretation
@@ -1831,7 +1830,7 @@ be 50 and the prior mean for the coefficient $\beta_1$ to be 0. We also
 set a wide dispersion to express our lack of knowledge about both the
 intercept and the effect of attractiveness on sex ratio. This is not a
 fully *uninformative priors*, of which we covered in Section
-[make_prior_count](make_prior_count), however, a very wide prior.
+{ref}`make_prior_count`, however, a very wide prior.
 Given these choices we can write our model in Code Block
 [uninformative_prior_sex_ratio](uninformative_prior_sex_ratio)),
 run inference, and generate samples to estimate posterior distribution.
@@ -1897,7 +1896,7 @@ attractiveness more data should be collected to showcase the effect.
 
 This time we see that estimated effect of attractiveness on gender is
 negligible, there simply was not enough information to affect the
-posterior. As we mentioned in Section [make_prior_count](make_prior_count)
+posterior. As we mentioned in Section {ref}`make_prior_count`
 choosing a prior is both a burden and a blessing. Regardless of which
 you believe it is, it is important to use this statistical tool with an
 explainable and principled choice.
@@ -2115,11 +2114,3 @@ chapter.
     value.
 
 [^10]: Estimate shown in corresponding notebook.
-
-
-## References
-
-```{bibliography}
-:filter: docname in docnames
-:style: unsrt
-```
