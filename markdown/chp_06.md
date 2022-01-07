@@ -220,7 +220,7 @@ additional shape handling in the model using `tfp` compared to other
 PPLs. For example, in Code Block
 [regression_model_for_timeseries](regression_model_for_timeseries)
 we use `einsum` instead of `matmul` with Python Ellipsis so it can
-handle arbitrary *batch shape* (see Section [shape_ppl](shape_ppl)
+handle arbitrary *batch shape* (see Section {ref}`shape_ppl`)
 for more details).
 
 Running the Code Block
@@ -371,7 +371,7 @@ step linear function is used to model the trend {cite:p}`TaylorLetham2018`. By
 allowing the slope to change at some specific breakpoints, we can
 generate a trend line that could capture the long-term trend much better
 than a straight line. This is similar to the idea of indicator functions
-we discussed in Section [expanding_feature_space](expanding_feature_space). In a time series
+we discussed in Section {ref}`expanding_feature_space`. In a time series
 context we specify this idea mathematically in Equation
 {eq}`eq:step_linear_function`
 
@@ -1367,7 +1367,7 @@ square matrix and $\mathbf{H}_t$ has a lower rank than $\mathbf{F}_t$
 that "push-forward" the states from latent space to measurement space.
 $\mathbf{R}_t$, $\mathbf{Q}_t$ are covariance matrices (positive
 semidefinite matrices). You can also find some intuitive examples of
-transition matrix in [markov_chains](markov_chains).
+transition matrix in Section {ref}`markov_chains`.
 
 Since $\epsilon_t$ and $\eta_t$ are random variables following Gaussian
 distribution, the linear function above performs affine transformation
@@ -2223,7 +2223,7 @@ poor forecast in the long run. In a real world application where time
 series are most likely non-stationary, we should be ready to adjust the
 prior accordingly.
 
-(exercises)=
+(exercises6)=
 
 ## Exercises
 
@@ -2294,7 +2294,7 @@ number of the following design matrix of the same rank using
     from a Normal distribution *and* one of the column being identical
     to another.
 
-**6M6.** The `gen_fourier_basis` function from Section
+**6M6.** The `gen_fourier_basis` function from Code Block
 [fourier_basis_as_seasonality](fourier_basis_as_seasonality)
 takes a time index `t` as the first input. There are a few different
 ways to represent the time index, for example, if we are observing some
@@ -2477,8 +2477,7 @@ pattern:
 
 [^8]: That is why is called autoregressive, it applies a linear
     regression to itself. Hence the similar naming to the
-    autocorrelation diagnostic introduced in
-    [autocorr_plot](autocorr_plot).
+    autocorrelation diagnostic introduced in Section {ref}`autocorr_plot`.
 
 [^9]: Actually, the AR example in this section *is* a Gaussian Process.
 
@@ -2510,10 +2509,3 @@ pattern:
     {eq}`eq:horse_shoe` a little bit differently.
 
 [^18]: <https://en.wikipedia.org/wiki/Federal_holidays_in_the_United_States#List_of_federal_holidays>
-
-## References
-
-```{bibliography}
-:filter: docname in docnames
-:style: unsrt
-```

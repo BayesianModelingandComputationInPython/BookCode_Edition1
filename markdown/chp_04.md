@@ -744,7 +744,7 @@ sandwich groups.
 
 The unpooled model is no different than if we have created three
 separated models with subsets of the data, exactly as we did in
-Section [comparing_distributions](comparing_distributions), where the
+Section {ref}`comparing_distributions`, where the
 parameters of each group were estimated separately so we can consider
 the unpooled model architecture syntactic sugar for modeling independent
 linear regressions of each group. More importantly now we can use the
@@ -1178,7 +1178,7 @@ work. Certain posterior geometries are challenging for samplers, a
 common example is Neal's Funnel{cite:p}`neal_2003` shown in
 {numref}`fig:Neals_Funnel`. As the name funnel connotes, the shape at
 one end is quite wide, before narrowing into a small neck. Recalling Section
-[sampling_methods_intro](sampling_methods_intro) samplers function
+{ref}`sampling_methods_intro` samplers function
 by taking steps from one set of parameter values to another, and a key
 setting is how big of a step to take when exploring the posterior
 surface. In complex geometries, such as with Neal's funnel, a step size
@@ -1326,7 +1326,7 @@ We reuse the inference code previously shown in Code Block
 [tfp_posterior_inference](tfp_posterior_inference) to run
 our model. After running our model the first indication of issues is the
 divergences, the details of which we covered in Section
-[divergences](divergences). A plot of the sample space is the next
+{ref}`divergences`. A plot of the sample space is the next
 diagnostic and is shown in {numref}`fig:Neals_Funnel_Salad_Centered`.
 Note how as the hyperprior $\beta_{\sigma h}$ approaches zero, the width
 of the posterior estimate of the $\beta_m$ parameters tend to shrink. In
@@ -1685,7 +1685,7 @@ summaries. The dataset is available at the GitHub repository. Perform a
 regression on the third case of Anscombe's quartet with both robust and
 non-robust regression. Plot the results.
 
-**4M10.** Revisit the penguin mass model defined in Section
+**4M10.** Revisit the penguin mass model defined in Code Block
 [nocovariate_mass](nocovariate_mass). Add a hierarchical
 term for $\mu$. What is the estimated mean of the hyperprior? What is
 the average mass for all penguins? Compare the empirical mean to the
@@ -1790,13 +1790,6 @@ Your friend asks you to estimate the following quantities
 [^5]: The commemoration of the first Argentine government and the
     Argentine independence day respectively.
 
-[^6]: [https://en.wikipedia.org/wiki/Location--scale_family](https://en.wikipedia.org/wiki/Location–scale_family){.uri}
+[^6]: [https://en.wikipedia.org/wiki/Location--scale_family](https://en.wikipedia.org/wiki/Location–scale_family)
 
 [^7]: <https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations>
-
-## References
-
-```{bibliography}
-:filter: docname in docnames
-:style: unsrt
-```

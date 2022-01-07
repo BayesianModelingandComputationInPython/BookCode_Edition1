@@ -383,7 +383,7 @@ so commonly used, they have their own names. It is a good idea to become
 familiar with them as they appear quite often. If you check the models
 defined in this book you will see that most of them use combinations of
 predefined probability distributions and only a few examples used custom
-defined distribution. For example, in [ABC_MA](ABC_MA) Code Block
+defined distribution. For example, in Section {ref}`ABC_MA` Code Block
 [MA2_abc](MA2_abc) we used a Uniform distribution and two
 potentials to define a 2D triangular distribution.
 
@@ -749,8 +749,7 @@ line.
 Historically this distribution arose to estimate the mean of a normally
 distributed population when the sample size is small [^12]. In Bayesian
 statistics, a common use case is to generate models that are robust
-against aberrant data as we discussed in Section
-[robust_regression](robust_regression).
+against aberrant data as we discussed in Section {ref}`robust_regression`.
 
 ```{math} 
 p (x \mid \nu, \mu, \sigma) = \frac {\Gamma (\frac {\nu + 1} {2})} {\Gamma (\frac{\nu} {2}) \sqrt {\pi \nu} \sigma} \left (1+ \frac{1}{\nu} \left (\frac {x- \mu} {\sigma} \right)^2 \right)^{-\frac{\nu + 1}{2}}
@@ -1527,12 +1526,11 @@ Metropolis-Hastings is guaranteed to, asymptotically, work.
 
 Markov chains satisfy a central limit theorem which is similar to
 Equation {eq}`eq:central_limit` except that instead of dividing by $n$
-we need to divide by the effective sample size (ESS). In Section [ess](ess)
+we need to divide by the effective sample size (ESS). In Section {ref}`ess`
 we discussed how to estimate the effective sample size from a Markov
 Chain and how to use it to diagnose the quality of the chain. The square
 root of $\frac{\sigma^2} {\text{ESS}}$ is the Monte Carlo standard error
-(MCSE) that we also discussed in Section
-[Monte_Carlo_standard_error](Monte_Carlo_standard_error).
+(MCSE) that we also discussed in Section {ref}`Monte_Carlo_standard_error`.
 
 (entropy)=
 
@@ -1921,7 +1919,7 @@ Likelihood, but we do not discuss them in this book.
 
 ## LOO in Depth
 
-As discussed in Section [CV_and_LOO](CV_and_LOO) in this book we use the
+As discussed in Section {ref}`CV_and_LOO` in this book we use the
 term LOO to refer to a particular method to approximate Leave-One-Out
 Cross-Validation (LOO-CV) known as Pareto Smooth Importance Sampling
 Leave Once Out Cross Validation (PSIS-LOO-CV). In this section we are
@@ -2056,14 +2054,12 @@ Recall from Chapter [1](chap1), for the one-dimensional case JP
 for $\theta$ is defined as:
 
 ```{math}
-:label: eq:Jeffreys_prior0
 p(\theta) \propto \sqrt{I(\theta)}   
 ```
 
 where $I(\theta)$ is the Fisher information:
 
 ```{math}
-:label: eq:Jeffreys_prior
 I(\theta) = - \mathbb{E_{Y}}\left[\frac{d^2}{d\theta^2} \log p(Y \mid \theta)\right]
 ```
 
@@ -2790,13 +2786,13 @@ The biggest caveat of the grid approach is that this method scales
 poorly with the number of parameters as explained in
 {ref}`high_dimensions`.
 
-(metropolis_hastings)=
+(sec_metropolis_hastings)=
 
 ### Metropolis-Hastings
 
 We introduced Metropolis-Hastings algorithm
-{cite:p}`Metropolis1953, Hastings1970, Rosenbluth2003` very early in Section
-[sampling_methods_intro](sampling_methods_intro) and show a simple Python implementation in Code Block
+{cite:p}`Metropolis1953, Hastings1970, Rosenbluth2003` very early in Section {ref}`sampling_methods_intro`
+and show a simple Python implementation in Code Block
 [metropolis_hastings](metropolis_hastings). We will now provide more detail about why this
 method works. We will do it using the language of Markov Chains
 introduced in Section {ref}`markov_chains`.
@@ -3172,12 +3168,12 @@ elliptical trajectory.
 
 We show another example in {numref}`fig:funnel_leapgrog`, which contains
 3 different trajectory around the same Neal's funnel, a common geometry
-arising in (centered) hierarchical models as we showed in Section
-[chap3_model_geometry](chap3_model_geometry). This is an example of
+arising in (centered) hierarchical models as we showed in Section {ref}`model_geometry`. 
+This is an example of
 a trajectory failing to properly simulate following the correct
 distribution, we call such trajectories divergent trajectories, or
 simply divergences. They are useful diagnostics as explained in Section
-[divergences](divergences). Usually, Symplectic integrators like
+{ref}`divergences`. Usually, Symplectic integrators like
 leapfrog integrator are highly accurate even for long trajectories, as
 they tend to be tolerant of small errors and *oscillate* around the
 correct trajectory. Moreover, these small errors can be corrected
@@ -3693,7 +3689,7 @@ only tools you can use, these are just the ones we used.
     <https://colindcarroll.com/2019/04/11/hamiltonian-monte-carlo-from-scratch/>
 
 [^27]: This value is in the interval $[0, 1]$, and by default this value
-    is 0.8. See [divergences](divergences).
+    is 0.8. See Section {ref}`divergences`.
 
 [^28]: We mean true purely from a mathematical point of view, without
     any reference to how adequate is such posterior to any particular
@@ -3710,11 +3706,3 @@ only tools you can use, these are just the ones we used.
     weights which is different from the ESS we have been computing to
     diagnosing MCMC samplers, that is computed from the autocorrelation
     of the samples.
-
-
-## References
-
-```{bibliography}
-:filter: docname in docnames
-:style: unsrt
-```

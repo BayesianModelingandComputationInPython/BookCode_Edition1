@@ -544,11 +544,10 @@ prior.
 
 3.  Can our inference engine produce a posterior with the chosen prior?
 
-We have covered the priors extensively in previous sections. In Section
-[make_prior_count](make_prior_count) we showed multiple principled
+We have covered the priors extensively in previous sections. In Section 
+{ref}`make_prior_count` we showed multiple principled
 options for prior selected, such as Jeffrey's prior or weakly
-informative priors. In Section
-[prior_predictive_checks](prior_predictive_checks) we showed how to
+informative priors. In Section {ref}`prior_predictive_checks` we showed how to
 evaluate choices of priors computationally as well. As a quick
 refresher, prior choice should be justified in context with likelihood,
 model goal such as whether that is parameter estimation or prediction.
@@ -656,8 +655,7 @@ Let us run our samplers and evaluate our MCMC chains using the typical
 diagnostics. Our first indication of sampling challenges would be
 divergences during MCMC sampling. With this data and model none were
 raised. If some were raised however, this would indicate that further
-exploration should be done such as the steps we performed in Section
-[model_geometry](model_geometry).
+exploration should be done such as the steps we performed in Section {ref}`model_geometry`.
 
 
 ```{code-block} python
@@ -937,7 +935,7 @@ Normal model is having a hard time at capturing this observation
 together with observations 158 and 164. Inspection of the data reveals
 that these 3 observations are the ones with the largest delays.
 
-We can also generate a visual check with
+We can also generate a visual check with Code Block
 [delays_comparison_plot](delays_comparison_plot) which
 results in {numref}`fig:model_comparison_airlines`. We see that even
 when considering the uncertainty in LOO the Gumbel model is better
@@ -983,7 +981,7 @@ posterior predictive sampling to move from parameter space to observed
 quantity space. Reward functions, also sometimes referred to as cost,
 loss, or utility functions, are yet another transformation from observed
 quantity space to the reward derived from an outcome (or the decision
-space). Recall the [bike example](bart_bike) we have the posterior estimates
+space). Recall the example in Section {ref}`bart_bike` we have the posterior estimates
 of the count of bikes rented in each hour (see e.g.
 {numref}`fig:bart_bikes`. If we were instead interested in
 revenue per day we could use a reward function to calculate the revenue
@@ -1721,7 +1719,7 @@ dispersion, helping an engineer understand where and how the material
 can be used, safely, in real world applications. It is quite convenient
 that one model can help us reach multiple conclusions.
 
-(exercises)=
+(exercises9)=
 
 ## Exercises
 
@@ -1900,11 +1898,3 @@ into your environment and using external documentation as needed.
 [^11]: This is in an ideal situation. Factors other than ultimate
     strength can limit the true load bearing capacity in real world
     situations.
-
-
-## References
-
-```{bibliography}
-:filter: docname in docnames
-:style: unsrt
-```

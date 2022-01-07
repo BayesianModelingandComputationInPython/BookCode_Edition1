@@ -76,7 +76,7 @@ practitioners, we assume prior exposure, but not mastery, of the basic
 ideas from Bayesian statistics such as priors, likelihoods and
 posteriors as well as some basic statistical concepts like random
 variables, probability distributions, expectations. For those of you
-that are a little bit rusty, we provide a whole section inside [Appendiceal Topics](app),
+that are a little bit rusty, we provide a whole section inside Chapter [11](app),
 with a refresher about basic statistical concepts.
 A couple of good books explaining these concepts
 in more depth are Understanding Advanced Statistical Methods
@@ -107,9 +107,8 @@ scientific computer programming. Using the Python language we will also
 use a number of specialized packages, in particular Probabilistic
 Programming Languages. It will help, but is not necessary, to have fit
 at least one model in a Probabilistic Programming language prior to
-reading this book. For a reference on Python, or how to setup the
-computation environment needed for this book, go to [README.md](https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1) in GitHub
-to understand how to setup a code environment
+reading this book. For a reference how to setup the
+computation environment needed for this book, read [environment](https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1#environment-installation) installation.
 
 (how-to-read-this-book)=
 
@@ -127,52 +126,53 @@ self-contained, there is an extensive amount of documentation on these
 tools online and referring it will aid in both learning this book, as
 well as utilizing the tools on your own.
 
-Chapter 1 offers a refresher or a quick introduction to the basic and
+[Chapter 1](chap1) offers a refresher or a quick introduction to the basic and
 central notions in Bayesian inference. The concepts from this chapter
 are revisited and applied in the rest of the book.
 
-Chapter 2 offers an introduction to Exploratory Analysis of Bayesian
+[Chapter 2](chap1bis) offers an introduction to Exploratory Analysis of Bayesian
 models. Namely introduces many of the concepts that are part of the
 Bayesian workflow but are not inference itself. We apply and revisit the
 concepts from this chapter in the rest of the book.
 
-Chapter 3 is the first chapter dedicated to a specific model
+[Chapter 3](chap2) is the first chapter dedicated to a specific model
 architecture. It offers an introduction to Linear Regression models and
 establishes the basic groundwork for the next 5 chapters. Chapter 3 also
 fully introduces the primary probabilistic programming languages used in
 the book, PyMC3 and TensorFlow Probability.
 
-Chapter 4 extends Linear Regression models and discusses more advanced
+[Chapter 4](chap3) extends Linear Regression models and discusses more advanced
 topics like robust regression, hierarchical models and model
 reparametrization. This chapter uses PyMC3 and TensorFlow Probability.
 
-Chapter 5 introduces basis functions and in particular splines as an
+[Chapter 5](chap3_5) introduces basis functions and in particular splines as an
 extension to linear models that allows us to build more flexible models.
 This chapter uses PyMC3.
 
-Chapter 6 focuses on time series models, from modeling time series as a
+[Chapter 6](chap4) focuses on time series models, from modeling time series as a
 regression to more complex model like ARIMA and linear Gaussian State
 Space model. This chapter uses TensorFlow Probability.
 
-Chapter 7 offers an introduction to Bayesian additive regression trees a
+[Chapter 7](chap6) offers an introduction to Bayesian additive regression trees a
 non-parametric model. We discuss the interpretability of this model and
 variable importance. This Chapter use PyMC3.
 
-Chapter 8 brings the attention to the Approximate Bayesian Computation
+[Chapter 8](chap8) brings the attention to the Approximate Bayesian Computation
 (ABC) framework, which is useful for problems where we do not have an
 explicit formulation for the likelihood. This chapter uses PyMC3.
 
-Chapter 9 gives an overview of end-to-end Bayesian workflows. It
+[Chapter 9](chap9)  gives an overview of end-to-end Bayesian workflows. It
 showcases both an observational study in a business setting and an
 experimental study in a research setting. This chapter uses PyMC3.
 
-Chapter 10 provides a deep dive on Probabilistic Programming Languages.
+[Chapter 10](chap10)  provides a deep dive on Probabilistic Programming Languages.
 Various different Probabilistic Programming languages are shown in this
 chapter.
 
-Chapter 11 serves as a support when reading other chapters, as the
+[Chapter 11](app) serves as a support when reading other chapters, as the
 topics inside it are loosely related to each other, and you may not want
 to read linearly.
+
 
 (text-highlights)=
 
@@ -194,7 +194,9 @@ followed by the number of the Code Block. For example:
 ```python
 for i in range(3):
     print(i**2)
+```
 
+```none
 0
 1
 4
@@ -313,10 +315,3 @@ Matamoros, Kevin Murphy, and Aki Vehtari.
 
 [^1]: <https://www.youtube.com/channel/UCYO_jab_esuFRV4b17AJtAw>, we
     recommend these videos even if you do not need a refresher.
-
-## References
-
-```{bibliography}
-:filter: docname in docnames
-:style: unsrt
-```
