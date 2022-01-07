@@ -67,4 +67,4 @@ https://colab.research.google.com
 :align: center
 ```
 
-This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
+This book is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/), except for the code (including the code blocks and jupyter notebooks) which are licensed under the [GNU GENERAL PUBLIC LICENSE Version 2](https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/blob/main/LICENSE).
