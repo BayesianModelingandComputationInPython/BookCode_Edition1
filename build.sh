@@ -1,4 +1,4 @@
 #/bin/sh
 pip3 install -r requirements-docs.txt &&
-jb clean . &&
+rm _build/html
 jb build .
