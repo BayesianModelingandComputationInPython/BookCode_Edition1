@@ -1,0 +1,2347 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chapter 9: End to End Bayesian Workflows &#8212; Bayesian Modeling and Computation in Python</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-codeautolink.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Chapter 10: Probabilistic Programming Languages" href="chp_10.html" />
+    <link rel="prev" title="Chapter 8: Approximate Bayesian Computation" href="chp_08.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-702QMHG8ST"></script>
+<script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', 'G-702QMHG8ST');
+                </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Bayesian Modeling and Computation in Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="dedication.html">
+   Dedication
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="foreword.html">
+   Foreword
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="preface.html">
+   Preface
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="symbollist.html">
+   Symbols
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_01.html">
+   Chapter 1: Bayesian Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_02.html">
+   Chapter 2: Exploratory Analysis of Bayesian Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_03.html">
+   Chapter 3: Linear Models and Probabilistic Programming Languages
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_04.html">
+   Chapter 4: Extending Linear Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_05.html">
+   Chapter 5: Splines
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_06.html">
+   Chapter 6: Time Series
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_07.html">
+   Chapter 7: Bayesian Additive Regression Trees
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_08.html">
+   Chapter 8: Approximate Bayesian Computation
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Chapter 9: End to End Bayesian Workflows
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_10.html">
+   Chapter 10: Probabilistic Programming Languages
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_11.html">
+   Chapter 11: Appendiceal Topics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="glossary.html">
+   Glossary
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="references.html">
+   References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_01.html">
+   Code 1: Bayesian Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_02.html">
+   Code 2: Exploratory Analysis of Bayesian Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_03.html">
+   Code 3: Linear Models and Probabilistic Programming Languages
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_04.html">
+   Code 4: Extending Linear Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_05.html">
+   Code 5: Splines
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_06.html">
+   Code 6: Time Series
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_07.html">
+   Code 7: Bayesian Additive Regression Trees
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_08.html">
+   Code 8: Approximate Bayesian Computation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_09.html">
+   Code 9: End to End Bayesian Workflows
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_10.html">
+   Code 10: Probabilistic Programming Languages
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_11.html">
+   Code 11: Appendiceal Topics
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_09.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#workflows-contexts-and-questions">
+   Workflows, Contexts, and Questions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#applied-example-airlines-flight-delays-problem">
+     Applied Example: Airlines Flight Delays Problem
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#getting-data">
+   Getting Data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sample-surveys">
+     Sample Surveys
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#experimental-design">
+     Experimental Design
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#observational-studies">
+     Observational Studies
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#missing-data">
+     Missing Data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#applied-example-collecting-airline-flight-delays-data">
+     Applied Example: Collecting Airline Flight Delays Data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#making-a-model-and-probably-more-than-one">
+   Making a Model and Probably More Than One
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#questions-to-ask-before-building-a-bayesian-model">
+     Questions to Ask Before Building a Bayesian Model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#applied-example-picking-flight-delay-likelihoods">
+     Applied Example: Picking Flight Delay Likelihoods
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#choosing-priors-and-predictive-priors">
+   Choosing Priors and Predictive Priors
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#applied-example-picking-priors-for-flight-delays-model">
+     Applied Example: Picking Priors for Flight Delays Model
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inference-and-inference-diagnostics">
+   Inference and Inference Diagnostics
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#applied-example-running-inference-on-flight-delays-models">
+     Applied Example: Running Inference on Flight Delays Models
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#posterior-plots">
+   Posterior Plots
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#applied-example-posterior-of-flight-delays-models">
+     Applied Example: Posterior of Flight Delays Models
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#evaluating-posterior-predictive-distributions">
+   Evaluating Posterior Predictive Distributions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#applied-example-posterior-predictive-distributions-of-flight-delays">
+     Applied Example: Posterior Predictive Distributions of Flight Delays
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-comparison">
+   Model Comparison
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#applied-example-model-comparison-with-loo-of-flight-delays">
+     Applied Example: Model Comparison with LOO of Flight Delays
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reward-functions-and-decisions">
+   Reward Functions and Decisions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#applied-example-making-decisions-based-on-flight-delays-modeling-result">
+     Applied Example: Making Decisions Based on Flight Delays Modeling Result
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sharing-the-results-with-a-particular-audience">
+   Sharing the Results With a Particular Audience
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#reproducibility-of-analysis-workflow">
+     Reproducibility of Analysis Workflow
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#understanding-the-audience">
+     Understanding the Audience
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#numerical-summaries">
+       Numerical Summaries
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#static-visual-aids">
+     Static Visual Aids
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#animation">
+       Animation
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#interactive-aids">
+       Interactive Aids
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#reproducible-computing-environments">
+     Reproducible Computing Environments
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#applied-example-presenting-the-flight-delay-model-and-conclusions">
+     Applied Example: Presenting the Flight Delay Model and Conclusions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#experimental-example-comparing-between-two-groups">
+   Experimental Example: Comparing Between Two Groups
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="chapter-9-end-to-end-bayesian-workflows">
+<span id="chap9"></span><h1>Chapter 9: End to End Bayesian Workflows<a class="headerlink" href="#chapter-9-end-to-end-bayesian-workflows" title="Permalink to this headline">¶</a></h1>
+<p>Some restaurants offer a style of dining called menu <em>dégustation</em>, or
+in English a tasting menu. In this dining style, the guest is provided a
+curated series of dishes, typically starting with <em>amuse bouche</em>, then
+progressing through courses that could vary from soups, salads,
+proteins, and finally dessert. To create this experience a recipe book
+alone will do nothing. A chef is responsible for using good judgement to
+determine selecting specific recipes, preparing each one, and
+structuring the courses as a whole to create an impactful experience for
+the guest all with impeccable quality and presentation.</p>
+<p>This same idea holds true for Bayesian analysis. A book of math and code
+alone will do nothing. A statistician haphazardly applying techniques
+will not get far either. Successful statisticians must be able to
+identify the desired outcome, determine the techniques needed, and work
+through a series of steps to achieve that outcome.</p>
+<div class="section" id="workflows-contexts-and-questions">
+<span id="bayesworkflowsection"></span><h2>Workflows, Contexts, and Questions<a class="headerlink" href="#workflows-contexts-and-questions" title="Permalink to this headline">¶</a></h2>
+<p>Generically all cooking recipes follow a similar structure: ingredients
+are selected, processed through one or more methods, and then finally
+assembled. How it is done specifically depends on the diner. If they
+want a sandwich the ingredients include tomatoes and bread, and a knife
+for processing. If they want tomato soup, tomatoes are still needed but
+now a stove is also needed for processing. Considering the surroundings
+is relevant as well. If the meal is being prepared at a picnic and there
+is no stove, making soup, from scratch, is not possible.</p>
+<p>At a high level performing Bayesian analysis shares some similarities
+with a cooking recipe, but the resemblance is only superficial. The
+Bayesian data analysis process is generally very iterative, with the
+steps performed in a non-linear fashion. Moreover, the exact necessary
+steps needed to obtain good results are more difficult to anticipate.
+This process is called Bayesian workflow <span id="id1">[<a class="reference internal" href="references.html#id78">17</a>]</span> and a simplified
+version of it is shown in <a class="reference internal" href="#fig-bayesianworkflow"><span class="std std-numref">Fig. 152</span></a>. The Bayesian
+workflow includes the three steps of model building: inference, model
+checking/improvement, and model comparison. In this context the purpose
+of model comparison is not necessarily restricted to pick the <em>best</em>
+model, but more importantly to better understand the models. A Bayesian
+workflow, and not just Bayesian inference, is important for several
+reasons. Bayesian computation can be challenging and generally requires
+exploration and iteration over alternative models in order to achieve
+inference that we can trust. Even more, for complex problems we
+typically do not know ahead of time what models we want to fit and even
+if so, we would still want to understand the fitted model and its
+relation to the data. Some commons elements to all Bayesian analyses,
+that are reflected in <a class="reference internal" href="#fig-bayesianworkflow"><span class="std std-numref">Fig. 152</span></a>, are the need of
+data and some prior (or domain) knowledge, some technique used to
+process the data, and an audience typically wanting a report of some
+kind with the conclusion of what we learn.</p>
+<div class="figure align-default" id="fig-bayesianworkflow">
+<a class="reference internal image-reference" href="../_images/Bayesian_workflow.png"><img alt="../_images/Bayesian_workflow.png" src="../_images/Bayesian_workflow.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 152 </span><span class="caption-text">A high level generic Bayesian workflow showing the main steps involved.
+The workflow has many junctures requiring decisions, and some steps may
+be omitted entirely. It is the responsibility of the practitioner to
+make this determination in each situation. For example, “pick a model”
+could mean choosing a single model, averaging some of all of them, or
+even presenting all the models and discussing their strength and
+shortcomings. Also notice that all the “evaluate” steps can be used for
+model comparison. We can compare models based on their posterior
+predictive distributions or pick a model with good convergence
+diagnostics or the one with the prior predictive distribution closer to
+our domain knowledge. Finally, we must notice that sometimes we,
+unfortunately, will need to give up. Even if we are not entirely happy
+with some model it may be the best model we can achieve given the
+available resources. A more detailed version of the Bayesian workflow
+can be see in a paper aptly titled Bayesian Workflow by Gelman et al
+<span id="id2">[<a class="reference internal" href="references.html#id78">17</a>]</span> and the article Towards a Principled Bayesian Workflow by
+Betancourt <span id="id3">[<a class="reference internal" href="references.html#id135">43</a>]</span>.</span><a class="headerlink" href="#fig-bayesianworkflow" title="Permalink to this image">¶</a></p>
+</div>
+<p>The most influential factor in the specific techniques used is what we
+will refer to as the <em>driving question</em>. This is the question that is of
+value to our colleagues and stakeholders, that we are trying to answer
+with our analysis, and is worth the time and effort to try to find an
+answer. It is important to differentiate this question from any others.
+During our analysis we will run into many other questions, such as data
+questions, modeling questions, inference questions, which answer “How
+should we conduct our analysis”; but should not be confused with
+driving question, which is “why we are conducting our analysis”.</p>
+<p>So before starting any statistical analysis, the first and foremost task
+is to clearly define the questions you are trying to answer. The simple
+reason is that the driving question affects every downstream choice in a
+Bayesian workflow. This will help us determine, what data you should
+collect, what tools are needed, if a model is appropriate, what model is
+appropriate, how to formulate models, how to choose priors, what to
+expect from the posterior, how to pick between models, what the results
+are indicating, how to summarize results, what conclusion to
+communicate. The answers to each of these affect whether the analysis
+will be useful to your audience or will just collect digital dust in a
+hard drive. And equally as important how much time and effort is
+worthwhile in pursuit of the answer.</p>
+<p>All too often data practitioners, given an idea of a question, decide it
+needs an answer and instantly reach for the most complex and nuanced
+statistical tools, spending little to no time understanding the need.
+Consider the equivalent situation if we were a chef. They hear someone
+is hungry so they prepare a $10,000 dish of caviar only to learn a
+simple bowl of cereal would have sufficed. Yet there have been actual
+instances where Data Scientists generate $10,000 cloud computing bills
+on big GPU machines using neural networks when a linear regression may
+have been sufficient. Do not be the Data Scientist and statistician that
+immediately reaches for Bayesian Methods, Neural Networks, Distributed
+Computing Clusters, or other complex tools before truly understanding
+the need.</p>
+<div class="section" id="applied-example-airlines-flight-delays-problem">
+<span id="id4"></span><h3>Applied Example: Airlines Flight Delays Problem<a class="headerlink" href="#applied-example-airlines-flight-delays-problem" title="Permalink to this headline">¶</a></h3>
+<p>For most sections in this chapter each example will build upon the
+previous section, which we will start with here. Let us imagine we work
+at the Madison Wisconsin airport, in the United States, as a
+statistician. Delays in flight arrivals are leading to frustrations and
+our mathematical skills can help quantify the situation. We first
+recognize there are multiple individuals involved, a traveler who has to
+decide when to arrive at an airport, an accountant working for the
+airport, or the CEO of the airport who has to manage the whole
+operation.</p>
+<p>Each of these folks has different concerns, which leads to different
+questions, some of which could be:</p>
+<ol class="simple">
+<li><p>What is the chance my flight departure is going to get delayed?</p></li>
+<li><p>What is the chance my flight arrival is going to get delayed?</p></li>
+<li><p>How many flight arrivals were delayed last week?</p></li>
+<li><p>How much do flight delays cost the airport?</p></li>
+<li><p>Given two business choices which one should I make?</p></li>
+<li><p>What correlates with flight departure delays?</p></li>
+<li><p>What is causing flight departure delays?</p></li>
+</ol>
+<p>Each of these questions, while all related, are subtly different. The
+traveler is concerned with the delay of their particular flight, but the
+airport accountant and executives care about the delays across all
+flights. The accountant is not worried about the time duration of flight
+delays, but is interested in the cost of those delays for financial
+records. The executive is less concerned about history, and more
+concerned about what strategic decision to make given future flight
+delays.</p>
+<p>At this point you as the reader might be asking, I came here to learn
+Bayesian Modeling, when are we getting to that? Before we get there
+consider this case. If the driving question is <em>“How many plane arrivals
+were late last week?”</em> do we need a Bayesian model? The unsatisfying
+answer is no, inference is not needed, just basic counting. Do not
+assume that Bayesian statistics is needed for every problem. Strongly
+consider whether summary statistics such as simple counts, means, and
+plots, will be enough to answer the driving question.</p>
+<p>Now, suppose the airport CEO comes to you, the airport statistician,
+with a dilemma. For each arrival the airport must keep staff on standby
+to guide the airplane landing and a gate available to unload passengers.
+This means when airplanes arrive late, staff and airport infrastructure
+are left idle waiting for the arrival and ultimately money wasted on
+unused resources. Because of this the airport and airlines have an
+agreement that for each minute late the airline will pay the airport 300
+dollars a minute. The airlines however have now asked this agreement be
+changed. They propose all delays under 10 minutes to cost a flat rate of
+1000 dollars, a delay between 10 minutes and 100 minutes to cost 5000
+dollars, and a delay over 100 minutes to cost 30,000 dollars. Your CEO
+suspects the airlines are proposing this structure to save themselves
+money. The airport CEO asks you to use your data abilities to answer the
+question, “Should we accept the new late fee structure or keep the old
+one?”. The airline CEO mentions how expensive this decision could be if
+it was made incorrectly and asks you to prepare a report regarding the
+potential financial affects. As experienced statistician you decide to
+quantify the underlying distribution of delays and use decision analysis
+to aid with the infrastructure investment choice. We believe an
+integrated End to End Bayesian analysis will provide a more complete
+understanding of future outcomes. You are able to justify the cost and
+complexity of model development as the financial risk of making a poor
+decision far outweights the time and cost to make a Bayesian model. If
+you are not sure how we reached this conclusion do not worry, we will
+walk through the thought process step by step in subsequent sections. We
+come back to this flight delay problem in the sub-sections with title
+start with <em>Applied Example</em>.</p>
+</div>
+</div>
+<div class="section" id="getting-data">
+<span id="id5"></span><h2>Getting Data<a class="headerlink" href="#getting-data" title="Permalink to this headline">¶</a></h2>
+<p>Cooking a good dish is impossible for a chef without ingredients and
+challenging with poor quality ingredients. Likewise inference is
+impossible without data. challenging with poor quality data, and the
+best statisticians dedicate a fair amount of time understanding the
+nuance and detail of their information. Unfortunately there is no one
+size fits all strategy for what data is available or how to collect it
+for every driving question. Considerations span topics from required
+precision needed, to cost, to ethics, to speed of collection. There are
+however, some broad categories of data collection that we can consider,
+each with its pros and cons.</p>
+<div class="section" id="sample-surveys">
+<span id="id6"></span><h3>Sample Surveys<a class="headerlink" href="#sample-surveys" title="Permalink to this headline">¶</a></h3>
+<p>In American history there is this folk idea of “asking for your
+neighbors for a cup of sugar”, convenient for the times when you run
+out. For statistician the equivalent is Sample surveys, also known as
+polling. The typical motivation of polling is to estimate a population
+parameter, <span class="math notranslate nohighlight">\(Y\)</span>, using a finite number of observations. Sample surveys
+also can include covariates, for example age, gender, nationality, to
+find correlations. Various methodologies for sampling exist, such as
+random sampling, stratified sampling, and cluster sampling. Different
+methods make tradeoffs between cost, ignorability and other factors.</p>
+</div>
+<div class="section" id="experimental-design">
+<span id="id7"></span><h3>Experimental Design<a class="headerlink" href="#experimental-design" title="Permalink to this headline">¶</a></h3>
+<p>A very popular dining concept these days is farm to table. For a chef
+this can be appealing as they are free from the constraints of what is
+typically available, and can instead acquire a much broader range of
+ingredients while maintaining control over every aspect. For
+statisticians the equivalent process is called experimental design. In
+experiments statisticians are able to decide what they want to study,
+then design the data generating process that will help them best
+understand their topic of interest. Typically this involves a
+“treatment” where the experimenter can change part of the process, or
+in other words vary a covariate, to see the effect on
+<span class="math notranslate nohighlight">\(\boldsymbol{y}_{obs}\)</span>. The typical example is pharmaceutical drug
+trials, where the effectiveness of new drugs is tested withholding the
+drug from one group and giving the drug to another group. Examples of
+treatment patterns in experimental design include randomization,
+blocking, and factorial design. Examples of data collection
+methodologies include topics such as double blind studies, where neither
+the subject nor the data collector know which treatment was applied.
+Experimental design is typically the best choice to identify causality,
+but running experiments typically comes at a high cost.</p>
+</div>
+<div class="section" id="observational-studies">
+<span id="id8"></span><h3>Observational Studies<a class="headerlink" href="#observational-studies" title="Permalink to this headline">¶</a></h3>
+<p>Farming your own ingredients can be expensive, so a cheaper alternative
+could be foraging for ingredients are growing by themselves. The
+statistician’s version of this is observational studies. In
+observational studies the statistician has little to no control over the
+treatments or the data collection. This makes inference challenging as
+the available data may not be adequate to achieve the goals of the
+analysis effort. The benefit however is that, especially in modern
+times, observational studies are occurring all the time. For example
+when studying the use of public transportation during inclement weather,
+it is not feasible to randomize rain or no rain, but the effect can be
+estimated by recording the weather for the day with other measurements
+like ticket sales of the day. Like experimental design, observational
+studies can be used to determine causality, but much more care must be
+taken to ensure data collection is ignorable (you will see a definition
+shortly below) and that the model does not exclude any hidden effects.</p>
+</div>
+<div class="section" id="missing-data">
+<span id="id9"></span><h3>Missing Data<a class="headerlink" href="#missing-data" title="Permalink to this headline">¶</a></h3>
+<p>All data collection is susceptible to missing data. Folks may fail to
+respond to a poll, an experimenter could forget to write things down, or
+in observational studies a day’s logs could be deleted accidentally.
+Missing data is not always a binary condition either, it could also mean
+part of the data is missing. For example, failing to record digits after
+a decimal points leading e.g. missing precision.</p>
+<p>To account for this we can extend our formulation of Bayes’ theorem to
+account for missingness by adding a terms as shown in Equation
+<a class="reference internal" href="#equation-eq-missing-data">(77)</a> <span id="id10">[<a class="reference internal" href="references.html#id3">18</a>]</span>. In this
+formulation <span class="math notranslate nohighlight">\(\boldsymbol{I}\)</span> is the inclusion vector that denotes which
+data points are missing or included, and <span class="math notranslate nohighlight">\(\boldsymbol{\phi}\)</span> represents
+the parameters of the distribution inclusion vector.</p>
+<div class="math notranslate nohighlight" id="equation-eq-missing-data">
+<span class="eqno">(77)<a class="headerlink" href="#equation-eq-missing-data" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+    Y_{obs} &amp;= {(i,j):  \boldsymbol{I}_{ij}=1} \\
+     Y_{mis} &amp;= {(i,j): \boldsymbol{I}_{ij}=0}  \\
+         p(\boldsymbol{\theta}, \boldsymbol{\phi} \mid  Y_{obs},I) &amp;\propto  p(Y_{obs}, I \mid \boldsymbol{\theta}, \boldsymbol{\phi})p(\boldsymbol{\theta}, \boldsymbol{\phi})
+    \end{split}
+    \end{split}\]</div>
+<p>Even if missing data is not explicitly modeled it is prudent to remain
+aware that your observed data is biased just due to the fact that it has
+been observed! When collecting data be sure not only pay attention to
+what is present, but consider what may not be present.</p>
+</div>
+<div class="section" id="applied-example-collecting-airline-flight-delays-data">
+<span id="id11"></span><h3>Applied Example: Collecting Airline Flight Delays Data<a class="headerlink" href="#applied-example-collecting-airline-flight-delays-data" title="Permalink to this headline">¶</a></h3>
+<p>Working at the airport you have access to many datasets, from current
+temperature, to revenue from the restaurants and shops, to airport
+hours, number of gates, to data regarding the flight.</p>
+<p>Recalling our driving question, “Based on the late arrivals of
+airplanes, which late fee structure would we prefer?”. We need a
+dataset the quantifies that notion of lateness. If the late fee
+structures had been binary, for example, 100 dollars for each late
+arrival, then a boolean True/False would have sufficed. In this case
+both the current late fee structure and previous late fee structure
+require minute level data on arrival delays.</p>
+<p>You realize that as a small airport, Madison has never had a flight
+arrival from far off destinations such as London Gatwick Airport, or
+Singapore Changi Airport, a big gap in your observed dataset. You ask
+your CEO about this and she mentions this agreement will only apply to
+flights coming from Minneapolis and Detroit airports. With all this
+information you feel comfortable that you understand the data you will
+need to model the relevant flight delays.</p>
+<p>From knowledge of the “data generating process” you know that weather
+and airline companies have an effect on flight delays. However you
+decide not to include these in your analysis for three reasons. Your
+boss is not asking why flights are delayed, obviating the need for an
+analysis of covariates. You independently assume that historical weather
+and airline company behavior will remain consistent, meaning you will
+not need to perform any counterfactual adjustments for expected future
+scenarios. And lastly you know your boss is under a short deadline so
+you specifically designed a simple model that can be completed
+relatively quickly.</p>
+<p>With all that your data needs have narrowed down to minute level dataset
+of flight arrival delays. In this situation using the prior history of
+observational data is the clear choice above experimental designs or
+surveys. The United States Bureau of Transportation Statistics keeps
+detailed logs of flight data which includes delays information. The
+information is kept to the minute precision which is adequate for our
+analysis, and given how regulated airline travel is we expect the data
+to be reliable. With our data in hand we can move to our first dedicated
+Bayesian task.</p>
+</div>
+</div>
+<div class="section" id="making-a-model-and-probably-more-than-one">
+<span id="id12"></span><h2>Making a Model and Probably More Than One<a class="headerlink" href="#making-a-model-and-probably-more-than-one" title="Permalink to this headline">¶</a></h2>
+<p>With our question and data firmly in hand we are ready to start
+constructing our model. Remember model building is iterative and your
+first model will likely be wrong in some way. While this may seem
+concerning, it actually can be freeing, as we can start from good
+fundamentals and then use the feedback we get from our computational
+tools to iterate to a model that answers our driving question.</p>
+<div class="section" id="questions-to-ask-before-building-a-bayesian-model">
+<span id="id13"></span><h3>Questions to Ask Before Building a Bayesian Model<a class="headerlink" href="#questions-to-ask-before-building-a-bayesian-model" title="Permalink to this headline">¶</a></h3>
+<p>In the construction of a Bayesian model a natural place to start is the
+Bayes Formula. We could use the original formulation but instead we
+suggest using Formula <a class="reference internal" href="#equation-eq-missing-data">(77)</a> and thinking through each
+parameter individually</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(p(Y)\)</span>: (Likelihood) What distribution describes the observed data
+given X?</p></li>
+<li><p><span class="math notranslate nohighlight">\(p(X)\)</span>: (Covariates) What is the structure of the latent data
+generating process?</p></li>
+<li><p><span class="math notranslate nohighlight">\(p(\boldsymbol{I})\)</span>: (Ignorability) Do we need to model the data
+collection process?</p></li>
+<li><p><span class="math notranslate nohighlight">\(p(\boldsymbol{\theta})\)</span>: (Priors) Before seeing any data what is a
+reasonable set of parameters?</p></li>
+</ul>
+<p>Additionally since we are computational Bayesians we must also answer
+another set of questions</p>
+<ul class="simple">
+<li><p>Can I express my model in a Probabilistic Programming framework?</p></li>
+<li><p>Can we estimate the posterior distributions in a reasonable amount
+of time?</p></li>
+<li><p>Does the posterior computation show any deficiencies?</p></li>
+</ul>
+<p>All of these questions do not need to be answered immediately and nearly
+everyone gets them wrong when initially building a new model. While the
+ultimate goal of the final model is to answer the driving question, this
+is not typically the goal of the first model. The goal of the first
+model is to express the simplest reasonable and computable model. We
+then use this simple model to inform our understanding, tweak the model,
+and rerun as shown in <a class="reference internal" href="#fig-bayesianworkflow"><span class="std std-numref">Fig. 152</span></a>. We do this using
+numerous tools, diagnostics, and visualizations that we have seen
+through out this book.</p>
+<div class="admonition-types-of-statistical-models admonition">
+<p class="admonition-title">Types of Statistical Models</p>
+<p>If we refer to D. R. Cox <span id="id14">[<a class="reference internal" href="references.html#id12">112</a>]</span> there
+are two general ways to think about building statistical models, a model
+based approach where “The parameters of interest are intended to capture
+important and interpretable features of that generating process,
+separated from the accidental features of the particular data. Or a
+design based approach where “sampling existing populations and of
+experimental design there is a different approach in which the
+probability calculations are based on the randomization used by the
+investigator in the planning phases of the investigation”. The
+fundamentals of Bayes formula has no opinion on which approach is used
+and Bayesian methods can be used in both approaches. Our airline example
+is a model based approach, whereas the experimental model at the end of
+the chapter is a design based approach. For example, it can be argued
+that most frequentist based analyses follow the design based approach.
+This does not make them right or wrong, just different approaches for
+different situations.</p>
+</div>
+</div>
+<div class="section" id="applied-example-picking-flight-delay-likelihoods">
+<span id="id15"></span><h3>Applied Example: Picking Flight Delay Likelihoods<a class="headerlink" href="#applied-example-picking-flight-delay-likelihoods" title="Permalink to this headline">¶</a></h3>
+<p>For our flight delay dilemma we decide to start the modeling journey by
+picking a likelihood for the observed flight delays. We take a moment to
+collect our detail our existing domain knowledge. In our dataset, delays
+can be negative or positive valued. Positive valued means flight is
+late, negative valued means flight is early. We could make choice here
+to only model delays and ignore all early arrivals. However, we will
+choose to model all arrivals so we can build a generative model for all
+flight arrivals. This may come in handy for the decision analysis we
+will be doing later.</p>
+<p>Our driving question does not pose any questions about correlation or
+causation, so we will model the observed distribution without any
+covariates for simplicity. This way we can just focus on likelihood and
+priors. Adding covariates may help modeling the observed distribution
+even if they are of no individual interest themselves, but we do not
+want to get ahead of ourselves. Let us plot the observed data to get a
+sense of its distribution using Code Block
+<a class="reference internal" href="#plot-flight-data"><span class="std std-ref">plot_flight_data</span></a>, the result is shown
+in <a class="reference internal" href="#fig-arrivaldistributions"><span class="std std-numref">Fig. 153</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="plot-flight-data">
+<div class="code-block-caption"><span class="caption-number">Listing 112 </span><span class="caption-text">plot_flight_data</span><a class="headerlink" href="#plot-flight-data" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/948363589_T_ONTIME_MARKETING.zip&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="n">msn_arrivals</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;DEST&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;MSN&quot;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;ORIGIN&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s2">&quot;MSP&quot;</span><span class="p">,</span> <span class="s2">&quot;DTW&quot;</span><span class="p">])][</span><span class="s2">&quot;ARR_DELAY&quot;</span><span class="p">]</span>
+
+<span class="n">az</span><span class="o">.</span><span class="n">plot_kde</span><span class="p">(</span><span class="n">msn_arrivals</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Minutes late&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="figure align-default" id="fig-arrivaldistributions">
+<a class="reference internal image-reference" href="../_images/ArrivalDistributions.png"><img alt="../_images/ArrivalDistributions.png" src="../_images/ArrivalDistributions.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 153 </span><span class="caption-text">Kernel density estimate plot for the observed arrival delay data. Note a
+couple of interesting features. The bulk of all flight arrivals is
+between -20 and 40 and in this region there is a general bell shaped
+pattern. However, there is a long tail of large values indicating that
+while relatively few flights are late, some of them can be really late
+in arriving to the Madison airport.</span><a class="headerlink" href="#fig-arrivaldistributions" title="Permalink to this image">¶</a></p>
+</div>
+<p>Thinking through likelihood we have a couple of choices. We could model
+this as a discrete categorical distribution, where every possible minute
+is assigned a probability. But this might pose some challenges: from a
+statistical perspective we need to pick the number of buckets. While
+there are non-parametric techniques that allow the number of buckets to
+vary, this now means we also have to create a model that can estimate
+bucket number, on top of estimating each probability for each bucket.</p>
+<p>From domain expertise we know each minute is not quite independent of
+each other. If many planes are 5 minutes late, it makes intuitive sense
+that many planes will also be 4 minutes late or 6 minutes late. Because
+of this a continuous distribution seems more natural. We would like to
+model both early and late arrivals so distribution must have support
+over negative and positive numbers. Combining statistical and domain
+knowledge we know that most planes are on time, and that flights usually
+arrive a little early or a little late, but if they are late they can be
+really late.</p>
+<p>Exhausting our domain expertise we can now plot the data, checking for
+both consistency with our domain expertise and for further clues to help
+form our model. From <a class="reference internal" href="#fig-arrivaldistributions"><span class="std std-numref">Fig. 153</span></a>, we have a few
+reasonable choices of likelihood distributions: Normal, Skew-Normal, and
+Gumbel distribution. A plain Normal is symmetrical which is inconsistent
+with the skewness of the distribution, but it is an intuitive
+distribution that could be used for baseline comparison. The Skew-Normal
+as the name suggests has an additional parameter <span class="math notranslate nohighlight">\(\alpha\)</span> controlling
+the skewness of the distribution. And lastly the Gumbel distribution is
+specifically designed to describe the maximum value of a set of values.
+If we imagine that an airplane delay is caused from the maximum value of
+luggage loading, passenger loading, and other latent factors the idea of
+this distribution fits with the reality of flight arrival processes.</p>
+<p>As airline processes are tightly regulated we do not feel that we need
+to model missing data at this time. Additionally we choose to ignore
+covariates to simplify our Bayesian workflow. It is generally advised to
+start with a simple model, and let the full Bayesian workflow inform
+your decisions to add complexity as needed, versus starting with a
+complex model that becomes more challenging to debug in later steps.
+Typically we would pick one likelihood and work all the way through the
+Bayesian workflow before trying another. But to avoid backtracking this
+example we will continue through two in parallel. For now we will move
+forward with the Normal and Gumbel likelihood in Code Block
+<a class="reference internal" href="#plane-likelihoods"><span class="std std-ref">plane_likelihoods</span></a>, leaving the
+Skew-Normal likelihood model as an exercise for the reader.</p>
+<div class="literal-block-wrapper docutils container" id="plane-likelihoods">
+<div class="code-block-caption"><span class="caption-number">Listing 113 </span><span class="caption-text">plane_likelihoods</span><a class="headerlink" href="#plane-likelihoods" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">normal_model</span><span class="p">:</span>
+    <span class="n">normal_alpha</span> <span class="o">=</span> <span class="o">...</span>
+    <span class="n">normal_sd</span> <span class="o">=</span> <span class="o">...</span>
+    
+    <span class="n">normal_delay</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;delays&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sd</span><span class="p">,</span>  
+                             <span class="n">observed</span><span class="o">=</span><span class="n">delays_obs</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">gumbel_model</span><span class="p">:</span>
+    <span class="n">gumbel_beta</span> <span class="o">=</span> <span class="o">...</span>
+    <span class="n">gumbel_mu</span> <span class="o">=</span> <span class="o">...</span>
+    
+    <span class="n">gumbel_delays</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Gumbel</span><span class="p">(</span><span class="s2">&quot;delays&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">beta</span><span class="p">,</span> 
+                              <span class="n">observed</span><span class="o">=</span><span class="n">delays_obs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>For now all the priors have the placeholder Ellipsis operator (…).
+Picking priors will be the topic of the next section.</p>
+</div>
+</div>
+<div class="section" id="choosing-priors-and-predictive-priors">
+<span id="id16"></span><h2>Choosing Priors and Predictive Priors<a class="headerlink" href="#choosing-priors-and-predictive-priors" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have settled on likelihoods we need to pick priors. Similar
+to before there are some general questions that help guide the choice of
+prior.</p>
+<ol class="simple">
+<li><p>Does the prior make sense in the context of math?</p></li>
+<li><p>Does the prior make sense in the context of the domain?</p></li>
+<li><p>Can our inference engine produce a posterior with the chosen prior?</p></li>
+</ol>
+<p>We have covered the priors extensively in previous sections. In Section
+<a class="reference internal" href="chp_01.html#make-prior-count"><span class="std std-ref">A Few Options to Quantify Your Prior Information</span></a> we showed multiple principled
+options for prior selected, such as Jeffrey’s prior or weakly
+informative priors. In Section <a class="reference internal" href="chp_02.html#prior-predictive-checks"><span class="std std-ref">Understanding Your Assumptions</span></a> we showed how to
+evaluate choices of priors computationally as well. As a quick
+refresher, prior choice should be justified in context with likelihood,
+model goal such as whether that is parameter estimation or prediction.
+And we can also use prior distributions to codify our prior domain
+knowledge about the data generating process. We may also use priors as a
+tool to focus the inference process, to avoid spending time and
+computation exploring parameter spaces that are “clearly wrong”, at
+least as we would expect using our domain expertise.</p>
+<p>In a workflow, sampling and plotting the prior and prior predictive
+distribution gives us two key pieces of information. The first is that
+we can express our model in our PPL of choice, and the second is an
+understanding of the characteristics of our model choice, and the
+sensitivity to our priors. If our model fails in prior predictive
+sampling, or we realize we do not understand our model’s response in the
+absence of data we may need to repeat previous steps before moving
+forward. Luckily with PPLs we can change the parameterization of our
+priors, or the structure of our model, to understand its effects and
+ultimately the informativeness of the chosen specification.</p>
+<p>There should be no illusion that the prior distribution or likelihood
+distributions are preordained, What is printed in this book is the
+result of numerous trials and tweaking to find parameters that provided
+a sensible prior predictive distribution. When writing your own models
+expect that you should also iterate on the priors and likelihood before
+moving onto the next step, inference.</p>
+<div class="section" id="applied-example-picking-priors-for-flight-delays-model">
+<span id="id17"></span><h3>Applied Example: Picking Priors for Flight Delays Model<a class="headerlink" href="#applied-example-picking-priors-for-flight-delays-model" title="Permalink to this headline">¶</a></h3>
+<p>Before making any specific numerical choices we take stock of our domain
+knowledge about flight arrivals. Airline flight arrivals can be early or
+late (negative or positive respectively) but exhibit some bounds. For
+example, it seems unlikely that a flight would arrive more than 3 hours
+late, but also unlikely it will be more than 3 hours early. Let us
+specify a parameterization and plot the prior predictive to ensure
+consistency with our domain knowledge, shown in Code Block
+<a class="reference internal" href="#airline-model-definition"><span class="std std-ref">airline_model_definition</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="airline-model-definition">
+<div class="code-block-caption"><span class="caption-number">Listing 114 </span><span class="caption-text">airline_model_definition</span><a class="headerlink" href="#airline-model-definition" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">normal_model</span><span class="p">:</span>
+    <span class="n">normal_sd</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfStudentT</span><span class="p">(</span><span class="s2">&quot;sd&quot;</span><span class="p">,</span><span class="n">sigma</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">normal_mu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;mu&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span> 
+
+    <span class="n">normal_delay</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;delays&quot;</span><span class="p">,</span><span class="n">mu</span><span class="o">=</span><span class="n">normal_mu</span><span class="p">,</span>
+                             <span class="n">sigma</span><span class="o">=</span><span class="n">normal_sd</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">msn_arrivals</span><span class="p">)</span>
+    <span class="n">normal_prior_predictive</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample_prior_predictive</span><span class="p">()</span>
+    
+<span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">gumbel_model</span><span class="p">:</span>
+    <span class="n">gumbel_beta</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfStudentT</span><span class="p">(</span><span class="s2">&quot;beta&quot;</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">gumbel_mu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;mu&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+    
+    <span class="n">gumbel_delays</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Gumbel</span><span class="p">(</span><span class="s2">&quot;delays&quot;</span><span class="p">,</span>
+                              <span class="n">mu</span><span class="o">=</span><span class="n">gumbel_mu</span><span class="p">,</span>
+                              <span class="n">beta</span><span class="o">=</span><span class="n">gumbel_beta</span><span class="p">,</span>
+                              <span class="n">observed</span><span class="o">=</span><span class="n">msn_arrivals</span><span class="p">)</span>
+    <span class="n">gumbel_prior_predictive</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample_prior_predictive</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="figure align-default" id="fig-airline-prior-predictive">
+<a class="reference internal image-reference" href="../_images/Airline_Prior_Predictive.png"><img alt="../_images/Airline_Prior_Predictive.png" src="../_images/Airline_Prior_Predictive.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 154 </span><span class="caption-text">Prior predictive distributions for each of the models. Prior to
+conditioning on data both distributions look reasonable for our domain
+problem and similar to each other.</span><a class="headerlink" href="#fig-airline-prior-predictive" title="Permalink to this image">¶</a></p>
+</div>
+<p>With no errors in our prior predictive simulation reported from the PPL
+and with reasonable prior predictive distributions in
+<a class="reference internal" href="#fig-airline-prior-predictive"><span class="std std-numref">Fig. 154</span></a> we decide our choice of priors
+are sufficient to continue to our next steps.</p>
+</div>
+</div>
+<div class="section" id="inference-and-inference-diagnostics">
+<span id="id18"></span><h2>Inference and Inference Diagnostics<a class="headerlink" href="#inference-and-inference-diagnostics" title="Permalink to this headline">¶</a></h2>
+<p>Dear reader, we hope that you have not skipped straight to this section.
+Inference is the “most fun” part where everything comes together and
+the computer gives us “the answer”. But inference without a good
+understanding of the question, data, and model (including priors) could
+be useless, and misleading. In a Bayesian workflow inference builds upon
+the previous steps. A common mistake is to attempt to fix divergences by
+first tweaking sampler parameters, or running extra long chains, when
+really it is the choice of priors or likelihood that is the root cause
+of the issue. The folk theorem of statistical computing says: “when you
+have computational problems, often there is a problem with your
+model <span id="id19">[<a class="reference internal" href="references.html#id175">113</a>]</span>.</p>
+<p>That being said we have a strong prior that if you made it this far you
+are a diligent reader and understand all our choices thus far so let us
+dive into inference.</p>
+<div class="section" id="applied-example-running-inference-on-flight-delays-models">
+<span id="id20"></span><h3>Applied Example: Running Inference on Flight Delays Models<a class="headerlink" href="#applied-example-running-inference-on-flight-delays-models" title="Permalink to this headline">¶</a></h3>
+<p>We choose to use the default HMC sampler in PyMC3 to sample from the
+posterior distribution.</p>
+<p>Let us run our samplers and evaluate our MCMC chains using the typical
+diagnostics. Our first indication of sampling challenges would be
+divergences during MCMC sampling. With this data and model none were
+raised. If some were raised however, this would indicate that further
+exploration should be done such as the steps we performed in Section <a class="reference internal" href="chp_04.html#model-geometry"><span class="std std-ref">Posterior Geometry Matters</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="airline-model-inference">
+<div class="code-block-caption"><span class="caption-number">Listing 115 </span><span class="caption-text">airline_model_inference</span><a class="headerlink" href="#airline-model-inference" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">normal_model</span><span class="p">:</span>
+    <span class="n">normal_delay_trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">random_seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">chains</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">az</span><span class="o">.</span><span class="n">plot_rank</span><span class="p">(</span><span class="n">normal_delay_trace</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">gumbel_model</span><span class="p">:</span>
+    <span class="n">gumbel_delay_trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">chains</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">az</span><span class="o">.</span><span class="n">plot_rank</span><span class="p">(</span><span class="n">gumbel_delay_trace</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="figure align-default" id="fig-airline-rank-plot">
+<a class="reference internal image-reference" href="../_images/rank_plot_bars_normal.png"><img alt="../_images/rank_plot_bars_normal.png" src="../_images/rank_plot_bars_normal.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 155 </span><span class="caption-text">Rank plot of the posterior samples from the model with Normal
+likelihood.</span><a class="headerlink" href="#fig-airline-rank-plot" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="fig-rank-plot-bars-gumbel">
+<a class="reference internal image-reference" href="../_images/rank_plot_bars_gumbel.png"><img alt="../_images/rank_plot_bars_gumbel.png" src="../_images/rank_plot_bars_gumbel.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 156 </span><span class="caption-text">Rank plot of the posterior samples from the model with Gumbel
+likelihood.</span><a class="headerlink" href="#fig-rank-plot-bars-gumbel" title="Permalink to this image">¶</a></p>
+</div>
+<p>For both models the rank plots, shown in Figures
+<a class="reference internal" href="#fig-airline-rank-plot"><span class="std std-numref">Fig. 155</span></a> and <a class="reference internal" href="#fig-rank-plot-bars-gumbel"><span class="std std-numref">Fig. 156</span></a>,
+look fairly uniform across all ranks, which indicates little bias across
+chains. Due to the lack of challenges in this example it seems that
+inference is as easy as “pushing a button and getting results”.
+However, it was easy because we had already spent time up front
+understanding the data, thinking about good model architectures, and
+setting good priors. In the exercises you will be asked to deliberately
+make “bad” choices and then run inference to see what occurs during
+sampling.</p>
+<p>Satisfied with the posterior samples generated from NUTS sampler we will
+move onto our next step, generating posterior predictive samples of
+estimated delays.</p>
+</div>
+</div>
+<div class="section" id="posterior-plots">
+<span id="id21"></span><h2>Posterior Plots<a class="headerlink" href="#posterior-plots" title="Permalink to this headline">¶</a></h2>
+<p>As we have discussed posterior plots are primarily used to visualize the
+posterior distribution. Sometimes a posterior plot is the end goal of an
+analysis, see <a class="reference internal" href="#applied-experimental-example"><span class="std std-ref">Experimental Example: Comparing Between Two Groups</span></a> for an example. In
+some other cases direct inspection of the posterior distribution is of
+very little interest. This is the case for our airline example which we
+elaborate on further below.</p>
+<div class="section" id="applied-example-posterior-of-flight-delays-models">
+<span id="id22"></span><h3>Applied Example: Posterior of Flight Delays Models<a class="headerlink" href="#applied-example-posterior-of-flight-delays-models" title="Permalink to this headline">¶</a></h3>
+<p>After ensuring there are no inference errors in our model we quickly
+check the posterior plots of the Normal and Gumbel models in Figures
+<a class="reference internal" href="#fig-posterior-plot-normal"><span class="std std-numref">Fig. 157</span></a> and
+<a class="reference internal" href="#fig-posterior-plot-gumbel"><span class="std std-numref">Fig. 158</span></a>. At a glance they look well formed,
+with no unexpected aberrations. In both distributions, from a domain
+perspective it is reasonable to see the mean value for <span class="math notranslate nohighlight">\(\mu\)</span> estimated
+below zero, indicating that most planes are on time. Other than those
+two observations the parameters themselves are not very meaningful.
+After all your boss needs to make a decision of whether to stay with the
+current fee structure or accept the airlines proposal for a new one.
+Given that a decision is the goal of our analysis, after a quick sanity
+check we continue with the workflow.</p>
+<div class="figure align-default" id="fig-posterior-plot-normal">
+<a class="reference internal image-reference" href="../_images/posterior_plot_delays_normal.png"><img alt="../_images/posterior_plot_delays_normal.png" src="../_images/posterior_plot_delays_normal.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 157 </span><span class="caption-text">Posterior plot for Normal model. Both distributions looks reasonably
+formed and there are no divergences adding more evidence that our
+sampler has reasonably estimated the parameters.</span><a class="headerlink" href="#fig-posterior-plot-normal" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="fig-posterior-plot-gumbel">
+<a class="reference internal image-reference" href="../_images/posterior_plot_delays_gumbel.png"><img alt="../_images/posterior_plot_delays_gumbel.png" src="../_images/posterior_plot_delays_gumbel.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 158 </span><span class="caption-text">Posterior plot for Gumbel model parameters. Similar to
+<a class="reference internal" href="#fig-posterior-plot-normal"><span class="std std-numref">Fig. 157</span></a> these estimates look well formed and
+give us confidence in our parameter estimates.</span><a class="headerlink" href="#fig-posterior-plot-gumbel" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+<div class="section" id="evaluating-posterior-predictive-distributions">
+<span id="workflow-posterior-predictive"></span><h2>Evaluating Posterior Predictive Distributions<a class="headerlink" href="#evaluating-posterior-predictive-distributions" title="Permalink to this headline">¶</a></h2>
+<p>As shown in the workflow in <a class="reference internal" href="#fig-bayesianworkflow"><span class="std std-numref">Fig. 152</span></a>, a Bayesian
+analysis does not concludes once the posterior estimates are obtained.
+We can take many additional steps, like for example generating posterior
+predictive distributions if any of the following are desired.</p>
+<ul class="simple">
+<li><p>We want to use posterior predictive checks to evaluate our model
+calibration.</p></li>
+<li><p>We want to obtain predictions or perform counterfactual analyses</p></li>
+<li><p>We want to be able to communicate our results in the units of the
+observed data, and not in term of the parameters of our model.</p></li>
+</ul>
+<p>We specified the mathematical definition for a posterior predictive
+distribution in Equation <a class="reference internal" href="chp_01.html#equation-eq-post-pred-dist">(6)</a>.
+Using modern PPLs sampling from the posterior predictive distribution is
+easy as adding a couple lines of code shown in Code Block
+<a class="reference internal" href="#posterior-predictive-airlines"><span class="std std-ref">posterior_predictive_airlines</span></a>.</p>
+<div class="section" id="applied-example-posterior-predictive-distributions-of-flight-delays">
+<span id="id23"></span><h3>Applied Example: Posterior Predictive Distributions of Flight Delays<a class="headerlink" href="#applied-example-posterior-predictive-distributions-of-flight-delays" title="Permalink to this headline">¶</a></h3>
+<p>In our airline example we have been asked to help make a decision based
+on unseen future flight delays. To do that we will need estimates of the
+distribution of future flight delays. Currently however, we have two
+models and need to pick between the two. We can use posterior predictive
+checks to evaluate the fit against the observed data visually as well as
+using test statistics to compare certain specific features.</p>
+<p>Let us generate posterior predictive samples for our Normal likelihood
+model shown in Code Block
+<a class="reference internal" href="#posterior-predictive-airlines"><span class="std std-ref">posterior_predictive_airlines</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="posterior-predictive-airlines">
+<div class="code-block-caption"><span class="caption-number">Listing 116 </span><span class="caption-text">posterior_predictive_airlines</span><a class="headerlink" href="#posterior-predictive-airlines" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">normal_model</span><span class="p">:</span>
+    <span class="n">normal_delay_trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">random_seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">normal_ppc</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample_posterior_predictive</span><span class="p">(</span><span class="n">normal_delay_trace</span><span class="p">)</span>
+    <span class="n">normal_data</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">from_pymc3</span><span class="p">(</span><span class="n">trace</span><span class="o">=</span><span class="n">normal_delay_trace</span><span class="p">,</span>
+                            <span class="n">posterior_predictive</span><span class="o">=</span><span class="n">normal_ppc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="figure align-default" id="fig-delays-model-posterior-predictive">
+<a class="reference internal image-reference" href="../_images/Delays_Model_Posterior_Predictive.png"><img alt="../_images/Delays_Model_Posterior_Predictive.png" src="../_images/Delays_Model_Posterior_Predictive.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 159 </span><span class="caption-text">Posterior predictive checks for Normal and Gumbel models. The Normal
+model does not capture the long tail well and also return more
+predictions below the bound of the observed data. The Gumbel model fit
+is better but there is still quite a bit of mismatch for values below 0
+and the tail.</span><a class="headerlink" href="#fig-delays-model-posterior-predictive" title="Permalink to this image">¶</a></p>
+</div>
+<p>From <a class="reference internal" href="#fig-delays-model-posterior-predictive"><span class="std std-numref">Fig. 159</span></a> we can see that the
+Normal model is failing to capture the distribution of arrival times.
+Moving onto the Gumbel model we can see that the posterior predictive
+samples seem to do a poor job at predicting flights that arrive early,
+but a better job at simulating flights that arrive late. We can run
+posterior predictive checks using two test statistics to confirm. The
+first is to check the proportion of flights arriving late, and the
+second is to check the median of flight delays (in minutes) between the
+posterior predictive distribution and the observed data.
+<a class="reference internal" href="#fig-arrival-test-statistics-for-gumbel-posterior-predictive"><span class="std std-numref">Fig. 160</span></a>
+shows that the Gumbel model does a better job of fitting the median of
+flight delays than the Normal model, but does a poor job of fitting the
+proportion of on time arrivals. The Gumbel model also does a better job
+of fitting the median of flight delays.</p>
+<div class="figure align-default" id="fig-arrival-test-statistics-for-gumbel-posterior-predictive">
+<a class="reference internal image-reference" href="../_images/Arrival_Test_Statistics_for_Gumbel_Posterior_Predictive.png"><img alt="../_images/Arrival_Test_Statistics_for_Gumbel_Posterior_Predictive.png" src="../_images/Arrival_Test_Statistics_for_Gumbel_Posterior_Predictive.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 160 </span><span class="caption-text">Posterior predictive checks with test statistics for Gumbel model. On
+the left we see the estimated distribution of on time proportion
+compared to the observed proportion. On the right is the test statistic
+of median minutes late. It seems the Gumbel model is better at
+estimating how late a flight will be versus what proportion of flights
+will be late.</span><a class="headerlink" href="#fig-arrival-test-statistics-for-gumbel-posterior-predictive" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+<div class="section" id="model-comparison">
+<span id="id24"></span><h2>Model Comparison<a class="headerlink" href="#model-comparison" title="Permalink to this headline">¶</a></h2>
+<p>So far we have used posterior predictive checks to evaluate each model
+independently. That type of evaluation is useful to understand each
+model individually. When we have multiple models however, it begs the
+question how models perform relative to each other. Model comparison can
+further help us understand in what regions one model may be performing
+well, where another is struggling, or which data points are particularly
+challenging to fit.</p>
+<div class="section" id="applied-example-model-comparison-with-loo-of-flight-delays">
+<span id="id25"></span><h3>Applied Example: Model Comparison with LOO of Flight Delays<a class="headerlink" href="#applied-example-model-comparison-with-loo-of-flight-delays" title="Permalink to this headline">¶</a></h3>
+<p>For our flight delay model we have two candidate models. From our
+previous visual posterior predictive check it seemed clear that the
+Normal likelihood did not tend to fit the skewed distribution of flight
+delays well, particularly compared to the Gumbel distribution. We can
+verify this observation using the comparison method in ArviZ:</p>
+<div class="literal-block-wrapper docutils container" id="delays-comparison">
+<div class="code-block-caption"><span class="caption-number">Listing 117 </span><span class="caption-text">delays_comparison</span><a class="headerlink" href="#delays-comparison" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">compare_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;normal&quot;</span><span class="p">:</span> <span class="n">normal_data</span><span class="p">,</span><span class="s2">&quot;gumbel&quot;</span><span class="p">:</span> <span class="n">gumbel_data</span><span class="p">}</span>
+<span class="n">comp</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">compare</span><span class="p">(</span><span class="n">compare_dict</span><span class="p">,</span> <span class="n">ic</span><span class="o">=</span><span class="s2">&quot;loo&quot;</span><span class="p">)</span>
+<span class="n">comp</span>
+</pre></div>
+</div>
+</div>
+<table class="table" id="tab-airline-delays-loo">
+<caption><span class="caption-number">Table 17 </span><span class="caption-text">Summary of model comparison for the gumbel and normal models</span><a class="headerlink" href="#tab-airline-delays-loo" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td></td>
+<td><p><strong>rank</strong></p></td>
+<td><p><strong>loo</strong></p></td>
+<td><p><strong>p_loo</strong></p></td>
+<td><p><strong>d_loo</strong></p></td>
+<td><p><strong>weight</strong></p></td>
+<td><p><strong>se</strong></p></td>
+<td><p><strong>dse</strong></p></td>
+<td><p><strong>warning</strong></p></td>
+<td><p><strong>loo_scale</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>gumbel</p></td>
+<td><p>0</p></td>
+<td><p>-1410.39</p></td>
+<td><p>5.85324</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>67.4823</p></td>
+<td><p>0</p></td>
+<td><p>False</p></td>
+<td><p>log</p></td>
+</tr>
+<tr class="row-odd"><td><p>normal</p></td>
+<td><p>1</p></td>
+<td><p>-1654.16</p></td>
+<td><p>21.8291</p></td>
+<td><p>243.767</p></td>
+<td><p>0</p></td>
+<td><p>46.1046</p></td>
+<td><p>27.5559</p></td>
+<td><p>True</p></td>
+<td><p>log</p></td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference internal" href="#tab-airline-delays-loo"><span class="std std-numref">Table 17</span></a>, generated with Code Block
+<a class="reference internal" href="#delays-comparison"><span class="std std-ref">delays_comparison</span></a>, shows the model
+ranked by their ELPD. It should be no surprise that the Gumbel model
+does much better job modeling the observed data.</p>
+<div class="figure align-default" id="fig-loo-pit-delays">
+<a class="reference internal image-reference" href="../_images/loo_pit_delays.png"><img alt="../_images/loo_pit_delays.png" src="../_images/loo_pit_delays.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 161 </span><span class="caption-text">Model calibration using LOO-PIT. We can see that both models have
+problems at capturing the same portion of the data. The models are
+underestimating the largest observations (largest delays) and over
+estimating earlier arrivals. These observations are in line with
+<a class="reference internal" href="#fig-delays-model-posterior-predictive"><span class="std std-numref">Fig. 159</span></a>. Even when both models
+show problems the Gumbel model has smaller deviations from the expected
+Uniform distribution.</span><a class="headerlink" href="#fig-loo-pit-delays" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="fig-elpd-plot-delays">
+<a class="reference internal image-reference" href="../_images/elpd_plot_delays.png"><img alt="../_images/elpd_plot_delays.png" src="../_images/elpd_plot_delays.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 162 </span><span class="caption-text">Top panel ELPD difference between the Gumbel and Normal model. The 3
+observations with the largest deviation are annotated (157, 158 and
+164). Bottom panels, plots for the <span class="math notranslate nohighlight">\(\hat \kappa\)</span> values from the Pareto
+smooth importance sampling. Observations 157, 158 and 164 has values
+larger than 0.7</span><a class="headerlink" href="#fig-elpd-plot-delays" title="Permalink to this image">¶</a></p>
+</div>
+<p>From <a class="reference internal" href="#tab-airline-delays-loo"><span class="std std-numref">Table 17</span></a> we can see that the Normal
+model is giving a value of <code class="docutils literal notranslate"><span class="pre">p_loo</span></code> way higher than the number of
+parameters in the model, showing the model is missespecified. Also we
+are getting a warning indicating that we have at least one high value of
+<span class="math notranslate nohighlight">\(\hat \kappa\)</span>. From <a class="reference internal" href="#fig-elpd-plot-delays"><span class="std std-numref">Fig. 162</span></a> (bottom right panel)
+we can see that the offending observation is the datapoint 157. From top panel we can
+also see (Figure <a class="reference internal" href="#fig-elpd-plot-delays"><span class="std std-numref">Fig. 162</span></a> top panel) that the
+Normal model is having a hard time at capturing this observation
+together with observations 158 and 164. Inspection of the data reveals
+that these 3 observations are the ones with the largest delays.</p>
+<p>We can also generate a visual check with Code Block
+<a class="reference internal" href="#delays-comparison-plot"><span class="std std-ref">delays_comparison_plot</span></a> which
+results in <a class="reference internal" href="#fig-model-comparison-airlines"><span class="std std-numref">Fig. 163</span></a>. We see that even
+when considering the uncertainty in LOO the Gumbel model is better
+representation of the data than the Normal model.</p>
+<div class="literal-block-wrapper docutils container" id="delays-comparison-plot">
+<div class="code-block-caption"><span class="caption-number">Listing 118 </span><span class="caption-text">delays_comparison_plot</span><a class="headerlink" href="#delays-comparison-plot" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_compare</span><span class="p">(</span><span class="n">comp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="figure align-default" id="fig-model-comparison-airlines">
+<a class="reference internal image-reference" href="../_images/model_comparison_airlines.png"><img alt="../_images/model_comparison_airlines.png" src="../_images/model_comparison_airlines.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 163 </span><span class="caption-text">Model comparison using LOO of the two flight delay models from Code
+Block <a class="reference internal" href="#delays-comparison-plot"><span class="std std-ref">delays_comparison_plot</span></a>. We
+confirm our notion that the Gumbel data is better at estimating the
+observed distribution than the Normal model.</span><a class="headerlink" href="#fig-model-comparison-airlines" title="Permalink to this image">¶</a></p>
+</div>
+<p>From our previous comparison of the posterior predictive check, and our
+direct LOO comparison, we can make the informed choice to proceed only
+with the Gumbel model. This does not imply our Normal model was useless,
+in fact quite the opposite. Developing multiple models helps build
+confidence in our selection of one, or a subset of models. It also does
+not mean that the Gumbel model is the true or even the best possible
+model, in fact we have evidence of it shortcomings. Thus, there still
+room for improvement if we explore different likelihoods, collect more
+data, or make some other modification. What is important at this step is
+we are sufficiently convinced that the Gumbel model is the most
+“adequate” model from all the reasonable models we have evaluated.</p>
+</div>
+</div>
+<div class="section" id="reward-functions-and-decisions">
+<span id="reward-functions"></span><h2>Reward Functions and Decisions<a class="headerlink" href="#reward-functions-and-decisions" title="Permalink to this headline">¶</a></h2>
+<p>Throughout this book we have seen how converting a set of quantities in
+one space to another allows us to make calculations simpler or shifts
+our mode of thinking. For example, in the last section we used the
+posterior predictive sampling to move from parameter space to observed
+quantity space. Reward functions, also sometimes referred to as cost,
+loss, or utility functions, are yet another transformation from observed
+quantity space to the reward derived from an outcome (or the decision
+space). Recall the example in Section <a class="reference internal" href="chp_07.html#bart-bike"><span class="std std-ref">BART Bikes</span></a> we have the posterior estimates
+of the count of bikes rented in each hour (see e.g.
+<a class="reference internal" href="chp_07.html#fig-bart-bikes"><span class="std std-numref">Fig. 125</span></a>. If we were instead interested in
+revenue per day we could use a reward function to calculate the revenue
+per rental and sum the total counts, effectively converting counts to
+revenue. Another example is to estimate a person’s level of happiness if
+they are rained on, versus if they are dry. If we have a model and an
+estimate of whether it will rain or not (based on weather data), and we
+have a function that maps how wet or dry a person’s clothes is to a
+happiness value, we can map our weather estimate to an expected
+happiness estimate.</p>
+<p>Where reward functions become particularly useful is in the presence of
+a decision. By being able to estimate all future outcomes, and map those
+outcomes to expected reward, you are able to make the choice that is
+likely to yield the maximum reward. An intuitive example is deciding to
+pack an umbrella in the morning. Carrying an umbrella is annoying, which
+can be considered a negative reward, but being wet from rain is a worse
+outcome. The choice of whether you pack an umbrella depends on how
+likely it is to rain.</p>
+<p>We can extend this example a bit more to expose a key idea. Let us say
+you want to build a model that helps individuals in your family decide
+when to pack an umbrella. You build a Bayesian model that will estimate
+the probability it will rain, this is the inference portion. However,
+after you build the model you learn your brother hates carrying an
+umbrella so much he will never carry one unless it is already raining,
+whereas your mother dislikes being wet so much she will preemptively
+carry an umbrella even if there is not a cloud in the sky. In this case
+the quantity under estimation, the probability it is going to rain, is
+exactly the same, but because the reward differs, the action taken is
+different. More specifically, the Bayesian portion of the model is
+consistent, but the difference in reward yields a different action.</p>
+<p>Neither rewards nor actions need to be binary, both can be continuous. A
+classic example in supply chain is the newsvendor model <a class="footnote-reference brackets" href="#id50" id="id26">1</a>, in which a
+newsvendor must decide how many newspapers to buy each morning when
+demand is uncertain. If they buy too little they risk losing sales, if
+they buy too many they lose money on unsold inventory.</p>
+<p>Because Bayesian statistics provide full distributions we are able to
+provide better estimates of future reward than methods that provide
+point estimates <a class="footnote-reference brackets" href="#id51" id="id27">2</a>. Intuitively we can get a sense of this when we
+consider that Bayes’ theorem includes features such as tail risk,
+whereas point estimates will not.</p>
+<p>With a generative Bayesian model, particularly a computational one, it
+becomes possible to convert a posterior distribution of model parameters
+of parameters, to a posterior predictive distributions in the domain of
+observed units, to a distributional estimate of reward (in financial
+units), to a point estimate of most likely outcome. Using this framework
+we can then test the outcomes of various possible decisions.</p>
+<div class="section" id="applied-example-making-decisions-based-on-flight-delays-modeling-result">
+<span id="id28"></span><h3>Applied Example: Making Decisions Based on Flight Delays Modeling Result<a class="headerlink" href="#applied-example-making-decisions-based-on-flight-delays-modeling-result" title="Permalink to this headline">¶</a></h3>
+<p>Recall that delays are quite costly to the airport. In preparation for a
+flight arrival the airport must ready the gate, have staff on hand to
+direct the airplane when it lands, and with a finite amount of capacity,
+late flights arrivals ultimately mean less flight arrivals. We also
+recall the late flight penalty structure. For every minute late a flight
+is, the airline must pay the airport a fee of 300 dollars. We can
+convert this statement into a reward function in Code Block
+<a class="reference internal" href="#current-revenue"><span class="std std-ref">current_revenue</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="current-revenue">
+<div class="code-block-caption"><span class="caption-number">Listing 119 </span><span class="caption-text">current_revenue</span><a class="headerlink" href="#current-revenue" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">current_revenue</span><span class="p">(</span><span class="n">delay</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">delay</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">300</span> <span class="o">*</span> <span class="n">delay</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+</pre></div>
+</div>
+</div>
+<p>Now given any individual late flight we can calculate the revenue we
+will receive from the flight delay. Since we have a model can produce a
+posterior predictive distribution of delays we can convert this into an
+estimate of expected revenue as shown in Code Block
+<a class="reference internal" href="#reward-calculator"><span class="std std-ref">reward_calculator</span></a>, which provides
+both an array of revenue for each late flight, and the average estimate.</p>
+<div class="literal-block-wrapper docutils container" id="reward-calculator">
+<div class="code-block-caption"><span class="caption-number">Listing 120 </span><span class="caption-text">reward_calculator</span><a class="headerlink" href="#reward-calculator" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">revenue_calculator</span><span class="p">(</span><span class="n">posterior_pred</span><span class="p">,</span> <span class="n">revenue_func</span><span class="p">):</span>    
+    <span class="n">revenue_per_flight</span> <span class="o">=</span> <span class="n">revenue_func</span><span class="p">(</span><span class="n">posterior_pred</span><span class="p">)</span>
+    <span class="n">average_revenue</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">revenue_per_flight</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">revenue_per_flight</span><span class="p">,</span> <span class="n">average_revenue</span>
+
+<span class="n">revenue_per_flight</span><span class="p">,</span> <span class="n">average_revenue</span> <span class="o">=</span> <span class="n">revenue_calculator</span><span class="p">(</span><span class="n">posterior_pred</span><span class="p">,</span>
+<span class="n">current_revenue</span><span class="p">)</span>
+<span class="n">average_revenue</span>
+</pre></div>
+</div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>3930.88
+</pre></div>
+</div>
+<div class="figure align-default" id="fig-late-fee-current-structure-hist">
+<a class="reference internal image-reference" href="../_images/Late_fee_current_structure_hist.png"><img alt="../_images/Late_fee_current_structure_hist.png" src="../_images/Late_fee_current_structure_hist.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 164 </span><span class="caption-text">Expected late flight revenue from current late fee structure calculated
+using reward function and posterior predictive distribution. There are
+very few very late flights hence the seemingly empty right portion of
+the plot.</span><a class="headerlink" href="#fig-late-fee-current-structure-hist" title="Permalink to this image">¶</a></p>
+</div>
+<p>From the posterior predictive distribution and the current late fee
+structure we expect each late flight to provide 3930 dollars of revenue
+on average. We can also plot the distribution of late flight revenue per
+flight in <a class="reference internal" href="#fig-late-fee-current-structure-hist"><span class="std std-numref">Fig. 164</span></a>.</p>
+<p>Recalling the cost structure proposed by the airline, If a flight is
+between 0 and 10 minutes late, the fee is 1,000 dollars. if the flight
+is between 10 and 300 minutes late the fee is 5,000 dollars, and if more
+than 100 minutes late the fee is 30,000 dollars. Assuming that the cost
+structure has no effect on the on time or late arrival of planes, you
+are able to estimate the revenue under the new proposal by writing a new
+cost function and reusing the previously calculated posterior predictive
+distribution.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@np</span><span class="o">.</span><span class="n">vectorize</span>
+<span class="k">def</span> <span class="nf">proposed_revenue</span><span class="p">(</span><span class="n">delay</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculate proposed revenue for each delay &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">delay</span> <span class="o">&gt;=</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">30000</span>
+    <span class="k">elif</span> <span class="n">delay</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">5000</span>
+    <span class="k">elif</span> <span class="n">delay</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1000</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="n">revenue_per_flight_proposed</span><span class="p">,</span> <span class="n">average_revenue_proposed</span> <span class="o">=</span> <span class="n">revenue_calculator</span><span class="p">(</span><span class="n">posterior_pred</span><span class="p">,</span> <span class="n">proposed_revenue</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>2921.97
+</pre></div>
+</div>
+<div class="figure align-default" id="fig-late-fee-proposed-structure-hist">
+<a class="reference internal image-reference" href="../_images/Late_fee_proposed_structure_hist.png"><img alt="../_images/Late_fee_proposed_structure_hist.png" src="../_images/Late_fee_proposed_structure_hist.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 165 </span><span class="caption-text">Expected late flight revenue calculated using proposed reward function
+and posterior predictive distribution. Note that the posterior
+predictive distribution is exactly the same as in
+<a class="reference internal" href="#fig-late-fee-current-structure-hist"><span class="std std-numref">Fig. 164</span></a>. It is simply the change
+in reward function which makes this plot differ.</span><a class="headerlink" href="#fig-late-fee-proposed-structure-hist" title="Permalink to this image">¶</a></p>
+</div>
+<p>In the new cost structure you estimate that on average the airport will
+make 2921.97 dollars per late flight, which is less than the current
+penalty pricing structure. We again can plot the distribution of
+estimated late flight revenue in
+<a class="reference internal" href="#fig-late-fee-proposed-structure-hist"><span class="std std-numref">Fig. 165</span></a>.</p>
+</div>
+</div>
+<div class="section" id="sharing-the-results-with-a-particular-audience">
+<span id="section-sharing-results"></span><h2>Sharing the Results With a Particular Audience<a class="headerlink" href="#sharing-the-results-with-a-particular-audience" title="Permalink to this headline">¶</a></h2>
+<p>One of the most important steps in the Bayesian workflow is to
+communicate your results to others. Throwing numbers and graphs on
+paper, or on screens, does nothing. The conclusion portion of inference
+only matters when it changes or informs a decision, whether indirectly
+or directly. This will require some preparation, the amount of effort
+required should not be underestimated. In some situations this step
+takes more time than all the previous one combined. There is no specific
+formulation here, what needs to be done depends heavily on the specific
+situation and audience, but we will cover the concepts in a high level
+to survey the landscape.</p>
+<div class="section" id="reproducibility-of-analysis-workflow">
+<span id="id29"></span><h3>Reproducibility of Analysis Workflow<a class="headerlink" href="#reproducibility-of-analysis-workflow" title="Permalink to this headline">¶</a></h3>
+<p>Reproducibility of an analysis workflow is the notion that another
+individual or group is able to go through all the steps and achieve the
+same, or similar conclusions that were previously reported.
+Reproducibility allows people, including yourself, to understand what
+work was performed, what assumptions were made, and why that led to a
+result. If reproducibility is neglected then it will be challenging or
+impossible to understand the reasoning behind a conclusion, or extend
+the result at a future date. Often times the outcome is at best wasted
+resources recreating the same workflow steps and at worst invalidation
+of the original conclusion and possibly also loss of reputation. The
+ideal of reproducibility is complete reproducibility which means the
+conclusion can be recreated automatically “from scratch”. We instead
+will focus on analysis reproducibility, which means given a conclusion,
+all the steps from the raw data through the Bayesian workflow, to the
+final result are reproducible. Analysis reproducibility is comprised of
+four main pillars which we will detail in turn</p>
+<ul class="simple">
+<li><p>Management of the source data</p></li>
+<li><p>Modeling and analysis code</p></li>
+<li><p>Compute environment specification</p></li>
+<li><p>Documentation</p></li>
+</ul>
+<p>When performing an analysis it is important to note or preserve the raw
+data that serves as the basis for the analysis. This is why you will
+tend to see the same datasets, such as Palmer Penguins, Radon, and Eight
+Schools, over and over again. The data is well understood and commonly
+available which make it a simple reference for those looking to share
+methods. The specific methods in which specific data is tagged,
+recognized, stored, and accessed will differ per situation, size,
+organization, as well as ethical and legality but is important to note
+this. Some examples are including the data in code version control or
+referencing a link to a dataset stored on a server.</p>
+<p>The next is the modeling and analysis code, such as all the code seen
+throughout this book. Ideally this code would be versioned with a
+version control system, such as git, and stored in an accessible
+location, such as an open source repository. We want to highlight that
+version control is useful even if you are a solo practitioner and not
+working in a group. Using version control will allow you to jump between
+versions of your code, it enables you to test ideas easily, with less
+risk of knowledge loss or losing results. This helps tremendously with
+increasing iteration speed between steps in the workflow and comparing
+results.</p>
+<p>In computational statistics a key portion of any result is the computer
+itself. While the mechanics of computation are largely unchanging, the
+libraries that are used for computation change rapidly. As we have seen,
+modern Bayesian methods rely at least on a PPL but that is just the tip
+of the iceberg. The operating system version as well as the hundreds of
+other software libraries that are used in conjunction all play a part in
+providing a result. When environments cannot be replicated one outcome
+is code that was working, now throws exceptions or errors and fails.
+This outcome, while frustrating, is at least helpful in that the failure
+state is obvious. An even more dangerous but subtle issue is that the
+code still runs but the results are different. This can occur because
+the library may change, or the algorithm itself. For example, TFP may
+change the number of tuning samples or PyMC3 may refactor the sampler
+between one version and the next. No matter what the reason, even if the
+data and analysis code is the same, the two alone are insufficient to
+fully computationally reproduce an analysis without the full
+specification of the compute environment. A common way to specify an
+environment is through an explicit list of dependencies, commonly seen
+in Python packages as <em>requirements.txt</em> or <em>environment.yml</em> files.
+Another way is through compute environment virtualization, such as
+virtual machines or containerization.</p>
+<div class="admonition-seeding-pseudo-random-number-generator admonition">
+<p class="admonition-title">Seeding pseudo random number generator</p>
+<p>One challenge in creating
+reproducible Bayesian workflow is the stochastic-ness in the pseudo
+random number generator being used in the algorithm. In general, your
+workflow should be robust that changing the seed to the pseudo random
+number generator does not change your conclusion, but there are
+situations where you might want to fix the seed to get fully
+reproducible results. This is tricky as fixing the seed alone does not
+mean you will always get completely reproducible results, as the actual
+pseudo random number generator used in different operating systems could
+be different. If your inference algorithm and conclusion is sensitive to
+the choice of seeds, it is usually a red flag of your workflow.</p>
+</div>
+<p>With the data, code, and compute environment, the computer is able to
+reproduce only a portion of the analysis. The last pillar,
+documentation, is for the human to understand the analysis as well. As
+we have seen through this book there are many choices that statistical
+practitioners need to make throughout the modeling process, from choices
+of priors, to filtering data, to model architecture. Over time it is
+quite easy to forget why a certain choice was made which is why so many
+tools exist solely to help the humans behind the keyboard. The simplest
+is code documentation which is comments within the code. Another popular
+method for applied scientists is the notebook format that mixes code
+blocks, with documentation blocks containing text, code, and images. The
+Jupyter notebooks used with this book are an example. For Bayesian
+practitioners dedicated tools such as ArviZ exist to help make analysis
+reproducible as well.</p>
+<p>At this point it is worth restating the primary beneficiary in
+reproducibility is yourself. Few things are worse than being asked to
+extend an analysis, or discovering a bug, only to realize your code will
+not run anymore. The secondary beneficiaries are your peers. Their
+ability to reproduce your work is the most immersive way to share your
+workflow and results. In short reproducible analyses both helps you and
+others build confidence in your prior results, and also helps future
+efforts extend the work.</p>
+</div>
+<div class="section" id="understanding-the-audience">
+<span id="id30"></span><h3>Understanding the Audience<a class="headerlink" href="#understanding-the-audience" title="Permalink to this headline">¶</a></h3>
+<p>It is important to understand who your audience is and how to
+communicate with them, both in terms of content and the way of delivery.
+As you get to your final set of results you end up with many ideas,
+visualizations, and results generated along the way, which were
+necessary to achieve the result, but not of any interest otherwise.
+Recalling our cooking analogy, a diner wants to be served a dish, but
+does not want the dirty pans and food waste that was generated during
+the process alongside it. The same idea holds with statistical analysis.
+Take a moment to consider:</p>
+<ul class="simple">
+<li><p>What does your audience want and not want?</p></li>
+<li><p>In what ways can you deliver it?</p></li>
+<li><p>How long do they have to consume it?</p></li>
+</ul>
+<p>It takes concerted effort and thought to distill your results to the
+most digestible version. This means reviewing the original questions and
+motivation for the analysis, who wanted the results and why they wanted
+it. It also means considering the background and aptitude of the
+audience. For example, a more statistical audience may prefer to see
+details about models and assumptions. A more domain-oriented audience
+may still be interested in the assumptions in the model but mostly in
+the context of the domain problem.</p>
+<p>Think through presentation format, is it verbal or visual? If it is
+visual will it be static, such as this book, or a pdf or paper, or in a
+potentially dynamic format, like a webpage or video? And consider the
+timing as well, does your audience have a couple moments to hear the
+highlights, or is there a dedicated time slot solely focused on going
+through the details? Answers to all these questions will inform what you
+share, but also you share it</p>
+<div class="section" id="numerical-summaries">
+<span id="id31"></span><h4>Numerical Summaries<a class="headerlink" href="#numerical-summaries" title="Permalink to this headline">¶</a></h4>
+<p>Numerical summaries, as the name implies, are numbers that summarize
+your results. In this book we have seen many, from means and medians
+which summarize the position of a distribution, to variance or HDI which
+summarize the dispersion, or PDFs which summarize probability. For
+example <a class="reference internal" href="chp_03.html#tab-penguin-mass-parameters-bayesian-estimates"><span class="std std-numref">Table 4</span></a>,
+which summarized penguin mass. Numerical summaries confer a great
+advantage as they compress a great deal of information into a small
+representation, can be easily remembered, easily compared, and presented
+in many formats. They are particularly effective in verbal conversations
+as no other aides are required to disseminate them. In business
+conversations reward functions, as discussed in Section <a class="reference internal" href="#reward-functions"><span class="std std-ref">Reward Functions and Decisions</span></a>,
+can capture the full uncertainty of your analysis into a single number
+and can also be framed in the most universal business language, money.</p>
+<p>Unfortunately numerical summaries may obscure the nuances of
+distributions and can be misunderstood. Many people when hearing a mean
+value tend to overly expect that value, even though in reality the
+probability of the mean outcome may be rare. To aid with this sharing a
+set of numerical summaries at once can help the audience understand
+various aspects of a distribution, for example a maximumlLikelihood to
+get a sense of the mode and HDI to get a sense of dispersion. However,
+sharing too many numerical summaries becomes harmful. It is both
+difficult to a recite table of numbers and hard for your audience to
+retain all the information if many numbers are shared at once.</p>
+</div>
+</div>
+<div class="section" id="static-visual-aids">
+<span id="id32"></span><h3>Static Visual Aids<a class="headerlink" href="#static-visual-aids" title="Permalink to this headline">¶</a></h3>
+<p>There is an adage that says a picture is worth a 1000 words. This is
+particularly true with Bayesian statistics where posterior plots convey
+a level of detail that is not as easily described with words. ArviZ
+comes prepackaged with many of the common visualizations such as
+posterior plots. However, we also suggest making bespoke graphics as
+well. Examples in this text include posterior estimates such as <a class="reference internal" href="chp_07.html#fig-bart-bikes"><span class="std std-numref">Fig. 125</span></a>
+which shows both the observed data,
+mean trend, and uncertainty for all hours a day. Static visual aids are
+like numerical summaries, they are also fairly easily shared these days.
+With the widespread use of laptops and phones, as well as internet
+connected devices, sharing a picture has become easier than before.
+However, the downside is they do require paper or a screen to share, and
+need to be either prepped or quickly found in the event they are needed.
+Another risk is they can communicate too much to your audience, who
+sometimes might just want the mean or maximum likelihood value.</p>
+<div class="section" id="animation">
+<span id="id33"></span><h4>Animation<a class="headerlink" href="#animation" title="Permalink to this headline">¶</a></h4>
+<p>Anyone who has seen the difference between a picture and film, even a
+silent film, understands how powerful motion can be in communication.
+Often times ideas that are are very easily understood when animated than
+in other formats <a class="footnote-reference brackets" href="#id52" id="id34">3</a>, such as MCMC sampling <a class="footnote-reference brackets" href="#id53" id="id35">4</a>. Animations can now be
+generated in many visualization packages, including Matplotlib, which
+ArviZ utilizes for animated Posterior Predictive Checks. Notable
+examples of animation used in uncertainty communication are the New York
+Times Election Needle <a class="footnote-reference brackets" href="#id54" id="id36">5</a>, which used a shaking needle gauge to
+highlight . Another election example is Matthew Kay’s Presidential
+Plinko <a class="footnote-reference brackets" href="#id55" id="id37">6</a>. Both of these visualizations used motion to show the
+estimated outcome of various United States election results and how it
+was generated. Most importantly both used animation give a sense of the
+uncertainty, from the shaking needle in the New York Times
+visualization, or the randomness of the plinko drops in Matthey Kay’s
+example.</p>
+<p>Animations are able to display many images to show a changing state, and
+therefore convey a sense of motion, progression, and iteration. As with
+static images, widespread use of digital screens means they can be
+viewed more easily, but they require more time from the viewer who has
+to pause and watch the full animation. They also require more work from
+a developer, as they are more challenging to generate and share than a
+simple picture.</p>
+</div>
+<div class="section" id="interactive-aids">
+<span id="id38"></span><h4>Interactive Aids<a class="headerlink" href="#interactive-aids" title="Permalink to this headline">¶</a></h4>
+<p>Interactive aids give the viewers control over what is being displayed.
+In both static visualization and animations the audience is being told a
+story they have no control over. Interactive aids flip the script, the
+user is able to create their own story. A simple example may include a
+slider that changes what is being displayed, such as limits of the axes
+or the opacity of data points. It may also include a tooltip which shows
+the user a value at a particular point. The user may also be able to
+control the computation. For example in our posterior predictive
+predictions of penguins which picked the mean flipper length and plotted
+the results of <a class="reference internal" href="chp_03.html#fig-flipper-length-mass-posterior-predictive"><span class="std std-numref">Fig. 42</span></a>.
+Different people may be interested in the posterior predictive
+distribution at a different value hence the interactivity. Examples
+include visualizations of various MCMC techniques <a class="footnote-reference brackets" href="#id56" id="id39">7</a> where allowing
+the user to select different samplers, distributions, and parameters
+allows the user to make the specific comparisons they would like.</p>
+<p>Similar to static plots and animations many software libraries support
+animation for instance, Matplotlib or Bokeh, another Python
+visualization library which is explicitly designed for this type of
+interaction. The downside of interactivity is that they typically
+require a live computing environment and software deployment of some
+sort. It is not as easy as sharing a static image or a video.</p>
+</div>
+</div>
+<div class="section" id="reproducible-computing-environments">
+<span id="id40"></span><h3>Reproducible Computing Environments<a class="headerlink" href="#reproducible-computing-environments" title="Permalink to this headline">¶</a></h3>
+<p>Thinking back to reproducibility above, the gold standard of sharing
+results is a fully reproducible computation environment that contains
+everything needed to replicate your result. This historically was a high
+hurdle, it took time and expertise, to setup a local computation
+environment on one’s own device, but is becoming much easier through
+virtualization technologies like containerization. These days the
+computation environment and code can be packaged and easily distributed
+over the internet. With projects like Binder, make it literally one
+click for a colleague to gain access to a bespoke environment in their
+browser, no local install needed. Most people will only want the
+results, not all the raw ingredients per say. But in the situations
+where someone absolutely needs to run the code, for example a tutorial
+or an in depth review, being able to share a live environment easily is
+quite helpful.</p>
+</div>
+<div class="section" id="applied-example-presenting-the-flight-delay-model-and-conclusions">
+<span id="id41"></span><h3>Applied Example: Presenting the Flight Delay Model and Conclusions<a class="headerlink" href="#applied-example-presenting-the-flight-delay-model-and-conclusions" title="Permalink to this headline">¶</a></h3>
+<p>Confident with your rigor in model building, inference run, and cost
+function correctness you now need to communicate the results to other in
+your organization, both to justify your analysis approach to your data
+peers and to aid your boss’s decision between the current fee structure,
+and the proposed fee structure. You realize you have two different
+groups of audiences and prepare content differently for each one.</p>
+<p>Before approaching your boss you need to complete a peer review with
+your peers. As your peers are statistically and computation savvy you
+provide them the Jupyter Notebook of your analysis that mixes narration,
+code, and results. This notebook includes all the previous models,
+assumptions, and plots, that you used to come to the recommendation for
+your boss. Since the notebook has all the details and is reproducible
+your colleagues are able to confidently assess your work is correct.
+Some of your colleagues ask if they can run the model with different
+priors to check for prior sensitivity. You provide the Dockerfile<a class="footnote-reference brackets" href="#id57" id="id42">8</a>,
+which fully specifies the environment. With that they are able to run
+the Jupyter notebook and recreate portions of your workflow.</p>
+<p>Focusing now on your initial task of informing your boss you start
+thinking through strategies of how to communicate to her. You know that
+you have at most 30 minutes and it will be in her office. You will have
+your laptop to show visual aids but you know your boss also needs to be
+able to communicate this idea to her peers in situations where she will
+not have visual aids. You also know your boss might want to test
+different fee structures to understand where she can safely negotiate.
+In other words she wants to see the effect of different reward
+functions. You set up a simple notebook that takes the reward function
+as an input and produces the revenue histogram and table. You set a
+meeting with your boss and quickly explain “I spent some time using past
+late flight delays to create a model of what future flights delays could
+look like. Using the model I estimate in the current fee structure we
+will make 3930 dollars per late flight on average, in the airline’s
+proposed fee structure we will make 2921 dollars per late flight on
+average”. You show your boss the bottom plot
+<a class="reference internal" href="#fig-delays-model-posterior-predictive"><span class="std std-numref">Fig. 159</span></a>, explaining this is the
+distribution of late flights both expected and modeled, and
+<a class="reference internal" href="#fig-late-fee-current-structure-hist"><span class="std std-numref">Fig. 164</span></a> showing the revenue that
+is projected to be generated in the future. You then show your boss
+<a class="reference internal" href="#table-late-flight-revenue"><span class="std std-numref">Table 18</span></a> showing the expected revenue
+under the new paradigm. You chose a table over a figure because the
+proportion of flights in the 100+ minute lateness category was not
+evident in a plot. You use the table to explain that there are so few
+flights that are likely to be over 100 minutes late, that from a revenue
+perspective that category is negligible in your simulations. You
+recommend that your boss either reject the proposal, or that she
+negotiates a higher late fees for delays that lie within the 0 to 100
+minute categories. Your boss then asks if you can test a couple
+different fee structures of her choosing so she can see the effect. With
+your boss’s understanding the goal of inference has been achieved, your
+boss has all the information needed to make an informed decision in her
+negotiation.</p>
+<table class="table" id="table-late-flight-revenue">
+<caption><span class="caption-number">Table 18 </span><span class="caption-text">Percentages of expected revenue from each fee category. There are so few late flights in the $30000 fee category that it is essentially negligible.</span><a class="headerlink" href="#table-late-flight-revenue" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>Late Fee</strong></p></td>
+<td><p><strong>Revenue</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>$1000</p></td>
+<td><p>52%</p></td>
+</tr>
+<tr class="row-odd"><td><p>$5000</p></td>
+<td><p>47%</p></td>
+</tr>
+<tr class="row-even"><td><p>$30000</p></td>
+<td><p>.03%</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="experimental-example-comparing-between-two-groups">
+<span id="applied-experimental-example"></span><h2>Experimental Example: Comparing Between Two Groups<a class="headerlink" href="#experimental-example-comparing-between-two-groups" title="Permalink to this headline">¶</a></h2>
+<p>For our second applied example will show the use of Bayesian statistics
+in a more experimental setting where the difference between two groups
+is of interest. Before addressing the statistics we will explain the
+motivation.</p>
+<p>When mechanical engineers are designing products, a primary
+consideration is the properties of the material that will be used. After
+all, no one wants their airplane to fall apart midflight. Mechanical
+engineers have reference books of weight, strength, and stiffness for
+materials such as ceramics, metals, woods which have existed for eons.
+More recently plastics and fiber reinforced composites have become
+available and more commonly used. Fiber reinforced composites are often
+made from a combination of plastic and woven cloth which gives them
+unique properties.</p>
+<p>To quantify the strength properties of materials a physical test
+mechanical engineers run a procedure called a tensile test, where a
+specimen of material is held in two clamps and a tensile test machine
+pulls on the specimen until it breaks. Many data points and physical
+characteristics can be estimated from this one test. In this experiment
+the focus was on ultimate strength, or in other words, the maximum load
+before total material failure. As part of a research project <a class="footnote-reference brackets" href="#id58" id="id43">9</a> one of
+the authors manufactured 2 sets, of 8 samples each, that were identical
+in every way except for the weave of the reinforcing fibers. In one the
+fibers were flat on top of each other referred to as unidirectional
+weave. In the other the fibers were woven together into an interlocking
+pattern referred to as a bidirectional weave.</p>
+<p>A series of tensile tests were run independently on each sample and the
+results were recorded in pound-force <a class="footnote-reference brackets" href="#id59" id="id44">10</a>. Customary to mechanical
+engineering the force is divided by area to quantify force per unit
+area, in this case pound force per square inch. For example, the first
+bidirectional specimen failed at 3774 lbf (1532 kg) at a cross section
+area of .504 inches (12.8mm) by .057 inches (1.27), yielding an ultimate
+strength of 131.393 ksi (kilopound per square inch). For reference this
+means a coupon with a cross sectional area of 1/3 a USB A connector is
+theoretically capable of lifting the weight of a small car <a class="footnote-reference brackets" href="#id60" id="id45">11</a>.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p><strong>Bidirectional Ultimate Strength (ksi)</strong></p></th>
+<th class="text-align:right head"><p><strong>Unidirectional Ultimate Strength (ksi)</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p>131.394</p></td>
+<td class="text-align:right"><p>127.839</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>125.503</p></td>
+<td class="text-align:right"><p>132.76</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>112.323</p></td>
+<td class="text-align:right"><p>133.662</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>116.288</p></td>
+<td class="text-align:right"><p>136.401</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>122.13</p></td>
+<td class="text-align:right"><p>138.242</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>107.711</p></td>
+<td class="text-align:right"><p>138.507</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>129.246</p></td>
+<td class="text-align:right"><p>138.988</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>124.756</p></td>
+<td class="text-align:right"><p>139.441</p></td>
+</tr>
+</tbody>
+</table>
+<p>In the original experiment a frequentist hypothesis test was performed
+which concluded in the rejection the null hypothesis that the ultimate
+tensile were equivalent. This type of statistical test however, could
+not characterize either the distribution of ultimate strengths for each
+material independently or the magnitude of difference in strengths.
+While this represents an interesting research result, it yields a
+non-useful practical result, as engineers who intend to choose one
+material over another in a practical setting need to know <em>how</em> much
+“better” one material is than another, not just that there is a
+significant result. While additional statistical tests could be
+performed to answer these questions, in this text we will focus on how
+we can answer all these questions using a single Bayesian model well as
+extend the results further.</p>
+<p>Let us define a model for the unidirectional specimens in Code Block
+<a class="reference internal" href="#uni-model"><span class="std std-ref">uni_model</span></a>. The prior parameters have already
+been assessed using domain knowledge. In this case the prior knowledge
+comes from the reported strength properties of other composite specimens
+of similar type. This is a great case where the knowledge from other
+experimental data and empirical evidence can help reduce the amount of
+data needed to reach conclusions. Something especially important when
+each data point requires a great deal of time and cost to obtain, like
+in this experiment.</p>
+<div class="literal-block-wrapper docutils container" id="uni-model">
+<div class="code-block-caption"><span class="caption-number">Listing 121 </span><span class="caption-text">uni_model</span><a class="headerlink" href="#uni-model" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">unidirectional_model</span><span class="p">:</span>
+    <span class="n">sd</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfStudentT</span><span class="p">(</span><span class="s2">&quot;sd_uni&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;mu_uni&quot;</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+    
+    <span class="n">uni_ksi</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;uni_ksi&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sd</span><span class="p">,</span> 
+                        <span class="n">observed</span><span class="o">=</span><span class="n">unidirectional</span><span class="p">)</span>
+    
+    <span class="n">uni_trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">draws</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>We plot the posterior results in <a class="reference internal" href="#fig-uni-sd-posterior-plot"><span class="std std-numref">Fig. 166</span></a>. As
+seen many times with the Bayesian modeling approach we get distribution
+estimates for both the mean ultimate strength and the standard deviation
+parameters, which is very helpful in understanding how reliable this
+particular material is.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_posterior</span><span class="p">(</span><span class="n">uni_data</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default" id="fig-uni-sd-posterior-plot">
+<a class="reference internal image-reference" href="../_images/Posterior_Uni.png"><img alt="../_images/Posterior_Uni.png" src="../_images/Posterior_Uni.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 166 </span><span class="caption-text">Posterior Plot of all parameters with 94% HDI and point statistic</span><a class="headerlink" href="#fig-uni-sd-posterior-plot" title="Permalink to this image">¶</a></p>
+</div>
+<p>Our research question however, was about the differences in the ultimate
+strength between unidirectional and bidirectional composites. While we
+could run another model for the bidirectional specimens and compare
+estimates, a more convenient option would be to compare both in a single
+model., We can leverage John Kruschke’s model framework as defined in
+“Bayesian estimation supersedes the t-test” <span id="id46">[<a class="reference internal" href="references.html#id15">114</a>]</span> to obtain
+this “one and done” comparison as shown in Code Block
+<a class="reference internal" href="#comparison-model"><span class="std std-ref">comparison_model</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="comparison-model">
+<div class="code-block-caption"><span class="caption-number">Listing 122 </span><span class="caption-text">comparison_model</span><a class="headerlink" href="#comparison-model" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">μ_m</span> <span class="o">=</span> <span class="mi">120</span>
+<span class="n">μ_s</span> <span class="o">=</span> <span class="mi">30</span>
+
+<span class="n">σ_low</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">σ_high</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
+    <span class="n">uni_mean</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;uni_mean&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">μ_m</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">μ_s</span><span class="p">)</span>
+    <span class="n">bi_mean</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;bi_mean&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">μ_m</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">μ_s</span><span class="p">)</span>
+    
+    <span class="n">uni_std</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">&quot;uni_std&quot;</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="n">σ_low</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="n">σ_high</span><span class="p">)</span>
+    <span class="n">bi_std</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">&quot;bi_std&quot;</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="n">σ_low</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="n">σ_high</span><span class="p">)</span>
+    
+    <span class="n">ν</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Exponential</span><span class="p">(</span><span class="s2">&quot;ν_minus_one&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mf">29.</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+    
+    <span class="n">λ1</span> <span class="o">=</span> <span class="n">uni_std</span><span class="o">**-</span><span class="mi">2</span>
+    <span class="n">λ2</span> <span class="o">=</span> <span class="n">bi_std</span><span class="o">**-</span><span class="mi">2</span>
+
+    <span class="n">group1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">StudentT</span><span class="p">(</span><span class="s2">&quot;uni&quot;</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="n">ν</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">uni_mean</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="n">λ1</span><span class="p">,</span>
+        <span class="n">observed</span><span class="o">=</span><span class="n">unidirectional</span><span class="p">)</span>
+    <span class="n">group2</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">StudentT</span><span class="p">(</span><span class="s2">&quot;bi&quot;</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="n">ν</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">bi_mean</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="n">λ2</span><span class="p">,</span> 
+        <span class="n">observed</span><span class="o">=</span><span class="n">bidirectional</span><span class="p">)</span>
+    
+    <span class="n">diff_of_means</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;difference of means&quot;</span><span class="p">,</span> 
+                                     <span class="n">uni_mean</span> <span class="o">-</span> <span class="n">bi_mean</span><span class="p">)</span>
+    <span class="n">diff_of_stds</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;difference of stds&quot;</span><span class="p">,</span>
+                                    <span class="n">uni_std</span> <span class="o">-</span> <span class="n">bi_std</span><span class="p">)</span>
+    <span class="n">pooled_std</span> <span class="o">=</span> <span class="p">((</span><span class="n">uni_std</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">bi_std</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
+    <span class="n">effect_size</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;effect size&quot;</span><span class="p">,</span>
+                                   <span class="n">diff_of_means</span> <span class="o">/</span> <span class="n">pooled_std</span><span class="p">)</span>
+    
+    <span class="n">t_trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">draws</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+
+<span class="n">compare_data</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">from_pymc3</span><span class="p">(</span><span class="n">t_trace</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>After fitting the model we can visualize the difference in means using a
+Forest Plot in <a class="reference internal" href="#fig-composite-forest-plot"><span class="std std-numref">Fig. 167</span></a>, there does not seem
+to be much overlap between the mean of two types of samples, suggesting
+their ultimate strength is indeed different, with the unidirectional
+being stronger and perhaps even being a little bit more reliable.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>az.plot_forest(t_trace, var_names=[&quot;uni_mean&quot;,&quot;bi_mean&quot;])
+</pre></div>
+</div>
+<div class="figure align-default" id="fig-composite-forest-plot">
+<a class="reference internal image-reference" href="../_images/Posterior_Forest_Plot.png"><img alt="../_images/Posterior_Forest_Plot.png" src="../_images/Posterior_Forest_Plot.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 167 </span><span class="caption-text">Forest plot of the means of each group. The 94% HDI is separated
+indicating a difference in the means.</span><a class="headerlink" href="#fig-composite-forest-plot" title="Permalink to this image">¶</a></p>
+</div>
+<p>There is an additional benefit to both Kruschke’s formulation, and a
+trick in our PPL. We can have the model automatically calculate the
+difference directly, in this case one of them being posterior
+distribution of the difference of means.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_posterior</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> 
+                  <span class="n">var_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;difference of means&quot;</span><span class="p">,</span><span class="s2">&quot;effectsize&quot;</span><span class="p">],</span>
+                  <span class="n">hdi_prob</span><span class="o">=</span><span class="mf">.95</span><span class="p">,</span> <span class="n">ref_val</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default" id="fig-composite-difference-of-means">
+<a class="reference internal image-reference" href="../_images/Composite_Difference_Of_Means.png"><img alt="../_images/Composite_Difference_Of_Means.png" src="../_images/Composite_Difference_Of_Means.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 168 </span><span class="caption-text">Posterior Plot of difference of means and effect size including
+reference value at 0. In both the plots a value of 0 seems is relatively
+unlikely indicating there is both an effect and a difference.</span><a class="headerlink" href="#fig-composite-difference-of-means" title="Permalink to this image">¶</a></p>
+</div>
+<p>We can compare the numerical summaries for each parameter as well.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">t_trace</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;stats&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p></p></th>
+<th class="head"><p><strong>mean</strong></p></th>
+<th class="head"><p><strong>sd</strong></p></th>
+<th class="head"><p><strong>hpd_3%</strong></p></th>
+<th class="text-align:right head"><p><strong>hpd_97%</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p><strong>uni_mean</strong></p></td>
+<td><p>135.816</p></td>
+<td><p>1.912</p></td>
+<td><p>132.247</p></td>
+<td class="text-align:right"><p>139.341</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><strong>bi_mean</strong></p></td>
+<td><p>121.307</p></td>
+<td><p>3.777</p></td>
+<td><p>114.108</p></td>
+<td class="text-align:right"><p>128.431</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><strong>uni_std</strong></p></td>
+<td><p>4.801</p></td>
+<td><p>1.859</p></td>
+<td><p>2.161</p></td>
+<td class="text-align:right"><p>8.133</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><strong>bi_std</strong></p></td>
+<td><p>9.953</p></td>
+<td><p>3.452</p></td>
+<td><p>4.715</p></td>
+<td class="text-align:right"><p>16.369</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><span class="math notranslate nohighlight">\(\boldsymbol{\nu}\)</span><strong>_minus_one</strong></p></td>
+<td><p>33.196</p></td>
+<td><p>30.085</p></td>
+<td><p>0.005</p></td>
+<td class="text-align:right"><p>87.806</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><strong>difference of means</strong></p></td>
+<td><p>14.508</p></td>
+<td><p>4.227</p></td>
+<td><p>6.556</p></td>
+<td class="text-align:right"><p>22.517</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><strong>difference of stds</strong></p></td>
+<td><p>-5.152</p></td>
+<td><p>3.904</p></td>
+<td><p>-13.145</p></td>
+<td class="text-align:right"><p>1.550</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><strong>effect size</strong></p></td>
+<td><p>1.964</p></td>
+<td><p>0.727</p></td>
+<td><p>0.615</p></td>
+<td class="text-align:right"><p>3.346</p></td>
+</tr>
+</tbody>
+</table>
+<p>From these numerical summary and posterior plot we can be more sure
+there is a difference in the mean strength of the two composites which
+helps when making a selection between the two material types. We also
+have obtained the specific estimated values of strength, with their
+dispersion, helping an engineer understand where and how the material
+can be used, safely, in real world applications. It is quite convenient
+that one model can help us reach multiple conclusions.</p>
+</div>
+<div class="section" id="exercises">
+<span id="exercises9"></span><h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<p><strong>9E1.</strong> What kind of data collection scheme would be most
+appropriate for these situations scenarios. Justify your choices by
+asking questions such as “How important is it that the information is
+reliable?” or “Can we collect the data in a reason time?” Explain how
+you would collect the data</p>
+<ol class="simple">
+<li><p>A medical trial for for a new drug treatment for cancer patients</p></li>
+<li><p>An estimate of the most popular ice cream flavors for a local
+newspaper article</p></li>
+<li><p>An estimate of which parts needed for a factory have the longest
+delivery lead times</p></li>
+</ol>
+<p><strong>9E2.</strong> What kind likelihood is suited for these types of
+data? Justify your choice. What other information would be useful to
+pick a likelihood?</p>
+<ol class="simple">
+<li><p>Count of customers that visit a shop each day</p></li>
+<li><p>Proportion of parts that fail in a high volume manufacturing line</p></li>
+<li><p>Weekly revenue of a restaurant</p></li>
+</ol>
+<p><strong>9E3.</strong> For our airline model provide a justification, or
+lack thereof, for each of these priors of the mean of a Gumbel
+likelihood, using your domain knowledge and a prior predictive check. Do
+these seem reasonable to use in a model? Why or why not?</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathcal{U}(-200, 200)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathcal{N}(10, .01)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\text(Pois)(20)\)</span></p></li>
+</ol>
+<p><strong>9E4.</strong> For each of the priors in the exercise above perform
+an inference run using the Gumbel model in Code Block
+<a class="reference internal" href="#airline-model-definition"><span class="std std-ref">airline_model_definition</span></a></p>
+<ol class="simple">
+<li><p>Are any errors raised by the sampler?</p></li>
+<li><p>For the completed inference run generate post sampling diagnostics
+such as autocorrelation plots. What are the results? Would you
+consider the run to be a successful inference run?</p></li>
+</ol>
+<p><strong>9E5.</strong> For our airline delays model we initially included
+arrivals from the MSP and DTW airports. We are now asked to include
+another arrival airport, ORD, into the analysis. Which steps of the
+Bayesian Workflow do we need to reconsider? Why is that the case? What
+if instead we are asked to include SNA? What steps would we need to
+reconsider?</p>
+<p><strong>9E6.</strong> In Chapter <a class="reference internal" href="chp_06.html#chap4"><span class="std std-ref">6</span></a> we forecasted the
+CO~2~ concentration. Using the figures and models in the chapter what
+conclusions can we reach about CO~2~? Communicate your understanding of
+projected CO~2~ levels, including an explanation of the uncertainty, in
+the following ways. Be sure to include specific numbers. You may need to
+run the examples to obtain them. Justify which model you chose and why</p>
+<ol class="simple">
+<li><p>A 1 minute verbal explanation without visual aid to data scientist
+colleague</p></li>
+<li><p>A 3 slide presentation for an non-statistician executive.</p></li>
+<li><p>Use a Jupyter notebook for a software engineering colleague who
+wants to productionize the model as well.</p></li>
+<li><p>Write a half page document for a general internet audience. Be sure
+to include at least one figure.</p></li>
+</ol>
+<p><strong>9E7.</strong> As the airport statistician your boss asks you to
+rerun the fee revenue analysis with a different cost function than the
+one specified in Code Block
+<a class="reference internal" href="#current-revenue"><span class="std std-ref">current_revenue</span></a>. She asks that any
+minute delay that is even costs 1.5 dollars per minute of delay, any
+that minute delay that is odd costs 1 dollar a minute of delay. What
+will the average revenue per late flight be the airport be with this fee
+model?</p>
+<p><strong>9M8.</strong> Read the workflow article and paper from
+Betancourt<span id="id47">[<a class="reference internal" href="references.html#id135">43</a>]</span> and Gelman<span id="id48">[<a class="reference internal" href="references.html#id78">17</a>]</span>. From each
+list a step which is the same? Which steps are different? Explain why
+these examples workflows may be different. Do all practitioners follow
+the same workflow? Why would they differ if not?</p>
+<p><strong>9M9.</strong> In our bike rental model from Code Block
+<a class="reference internal" href="chp_05.html#splines"><span class="std std-ref">splines</span></a> we used splines to estimate bike
+rentals per hour. The bike rental company wants to know how much money
+they will make from rentals. Assume each rental costs 3 dollars. Now
+assume that the rental company is proposing that from the hours of 0 to
+5 bike rentals are reduced to 1.5 dollars, but it is projected rentals
+will increase 20% due to the reduced cost. What is the expected revenue
+per hour?</p>
+<p>Write a reward function specifically to estimate both situations above.</p>
+<ol class="simple">
+<li><p>What is the mean projected revenue per day? What would be reasonable
+upper and lower estimates?</p></li>
+<li><p>Does the estimated mean and revenue seem reasonable? Note any issues
+you see and explain you may fix them? (Don’t actually make any
+changes)</p></li>
+<li><p>Now assume that the rental company is proposing that from the hours
+of 0 to 5 bike rentals are reduced to 1.5 dollars, but it is
+projected rentals will increase 20% due to the reduced cost. What is
+the expected revenue per day?</p></li>
+</ol>
+<p><strong>9M10.</strong> For the airline delay model replace the likelihood
+in Code Block
+<a class="reference internal" href="#airline-model-definition"><span class="std std-ref">airline_model_definition</span></a> with
+a Skew Normal likelihood. Prior to refitting explain why this likelihood
+is, or is not, a reasonable choice for the airline flight delay problem.
+After refitting make the same assessment. In particular justify if the
+Skew Normal is “better” than the Gumbel model for the airline delays
+problem.</p>
+<p><strong>9H11.</strong> Clark and Westerberg<span id="id49">[<a class="reference internal" href="references.html#id32">115</a>]</span> ran an
+experiment with their students to see if coin flips can be biased
+through tosser skill. The data from this experiment is in the repository
+under <code class="docutils literal notranslate"><span class="pre">CoinFlips.csv</span></code>. Fit a model that estimates the proportion of coin
+tosses that will come up heads from each student.</p>
+<ol class="simple">
+<li><p>Generate 5000 posterior predictive samples for each student. What is
+the expected distribution of heads for each student?</p></li>
+<li><p>From the posterior predictive samples which student is the worst at
+biasing coin towards heads?</p></li>
+<li><p>The bet is changed to 1.5 dollars for you if heads comes up, and 1
+dollar of tails comes up. Assuming the students don’t change their
+behavior, which student do you play against and what is your
+expected earnings?</p></li>
+</ol>
+<p><strong>9H12.</strong> Make an interactive plot of the posterior airline
+flights using Jupyter Notebook and Bokeh. You will need to install Bokeh
+into your environment and using external documentation as needed.</p>
+<ol class="simple">
+<li><p>Compare this to the static Matplotlib in terms of understanding the
+plotted values, and in terms of story telling.</p></li>
+<li><p>Craft a 1 minute explanation posterior for general audience that
+isn’t familiar statistics using Matplotlib static visualization.</p></li>
+<li><p>Craft a 1 minute explanation to the same audience using the Bokeh
+plot, incorporating the additional interactivity allowed by Bokeh.</p></li>
+</ol>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="id50"><span class="brackets"><a class="fn-backref" href="#id26">1</a></span></dt>
+<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Newsvendor_model">https://en.wikipedia.org/wiki/Newsvendor_model</a></p>
+</dd>
+<dt class="label" id="id51"><span class="brackets"><a class="fn-backref" href="#id27">2</a></span></dt>
+<dd><p>&lt;<a class="reference external" href="http://www.ee.columbia.edu/~vittorio/BayesProof.pdf">www.ee.columbia.edu/~vittorio/BayesProof.pdf</a>&gt;</p>
+</dd>
+<dt class="label" id="id52"><span class="brackets"><a class="fn-backref" href="#id34">3</a></span></dt>
+<dd><p>See <a class="reference external" href="https://bost.ocks.org/mike/algorithms/">https://bost.ocks.org/mike/algorithms/</a></p>
+</dd>
+<dt class="label" id="id53"><span class="brackets"><a class="fn-backref" href="#id35">4</a></span></dt>
+<dd><p>See
+<a class="reference external" href="https://elevanth.org/blog/2017/11/28/build-a-better-markov-chain/">https://elevanth.org/blog/2017/11/28/build-a-better-markov-chain/</a></p>
+</dd>
+<dt class="label" id="id54"><span class="brackets"><a class="fn-backref" href="#id36">5</a></span></dt>
+<dd><p>See
+<a class="reference external" href="https://www.nytimes.com/interactive/2020/11/03/us/elections/forecast-president.html">https://www.nytimes.com/interactive/2020/11/03/us/elections/forecast-president.html</a></p>
+</dd>
+<dt class="label" id="id55"><span class="brackets"><a class="fn-backref" href="#id37">6</a></span></dt>
+<dd><p>See <a class="reference external" href="http://presidential-plinko.com/">http://presidential-plinko.com/</a></p>
+</dd>
+<dt class="label" id="id56"><span class="brackets"><a class="fn-backref" href="#id39">7</a></span></dt>
+<dd><p><a class="reference external" href="https://chi-feng.github.io/mcmc-demo/app.html">https://chi-feng.github.io/mcmc-demo/app.html</a></p>
+</dd>
+<dt class="label" id="id57"><span class="brackets"><a class="fn-backref" href="#id42">8</a></span></dt>
+<dd><p>Docker is one method to create fully reproducible environments
+that has become quite popular</p>
+</dd>
+<dt class="label" id="id58"><span class="brackets"><a class="fn-backref" href="#id43">9</a></span></dt>
+<dd><p>Much gratitude to Dr. Mehrdad Haghi and Dr. Winny Dong for funding
+and facilitating this research</p>
+</dd>
+<dt class="label" id="id59"><span class="brackets"><a class="fn-backref" href="#id44">10</a></span></dt>
+<dd><p>A recordings of the tests are available
+<a class="reference external" href="https://www.youtube.com/watch?v=u_XDUWgzs_Y">https://www.youtube.com/watch?v=u_XDUWgzs_Y</a></p>
+</dd>
+<dt class="label" id="id60"><span class="brackets"><a class="fn-backref" href="#id45">11</a></span></dt>
+<dd><p>This is in an ideal situation. Factors other than ultimate
+strength can limit the true load bearing capacity in real world
+situations.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./markdown"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="chp_08.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Chapter 8: Approximate Bayesian Computation</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="chp_10.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Chapter 10: Probabilistic Programming Languages</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Martin, Kumar, Lao<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

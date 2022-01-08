@@ -1,0 +1,1549 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chapter 5: Splines &#8212; Bayesian Modeling and Computation in Python</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-codeautolink.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Chapter 6: Time Series" href="chp_06.html" />
+    <link rel="prev" title="Chapter 4: Extending Linear Models" href="chp_04.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-702QMHG8ST"></script>
+<script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', 'G-702QMHG8ST');
+                </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Bayesian Modeling and Computation in Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="dedication.html">
+   Dedication
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="foreword.html">
+   Foreword
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="preface.html">
+   Preface
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="symbollist.html">
+   Symbols
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_01.html">
+   Chapter 1: Bayesian Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_02.html">
+   Chapter 2: Exploratory Analysis of Bayesian Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_03.html">
+   Chapter 3: Linear Models and Probabilistic Programming Languages
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_04.html">
+   Chapter 4: Extending Linear Models
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Chapter 5: Splines
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_06.html">
+   Chapter 6: Time Series
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_07.html">
+   Chapter 7: Bayesian Additive Regression Trees
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_08.html">
+   Chapter 8: Approximate Bayesian Computation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_09.html">
+   Chapter 9: End to End Bayesian Workflows
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_10.html">
+   Chapter 10: Probabilistic Programming Languages
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_11.html">
+   Chapter 11: Appendiceal Topics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="glossary.html">
+   Glossary
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="references.html">
+   References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_01.html">
+   Code 1: Bayesian Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_02.html">
+   Code 2: Exploratory Analysis of Bayesian Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_03.html">
+   Code 3: Linear Models and Probabilistic Programming Languages
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_04.html">
+   Code 4: Extending Linear Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_05.html">
+   Code 5: Splines
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_06.html">
+   Code 6: Time Series
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_07.html">
+   Code 7: Bayesian Additive Regression Trees
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_08.html">
+   Code 8: Approximate Bayesian Computation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_09.html">
+   Code 9: End to End Bayesian Workflows
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_10.html">
+   Code 10: Probabilistic Programming Languages
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_11.html">
+   Code 11: Appendiceal Topics
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_05.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#polynomial-regression">
+   Polynomial Regression
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#expanding-the-feature-space">
+   Expanding the Feature Space
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introducing-splines">
+   Introducing Splines
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#building-the-design-matrix-using-patsy">
+   Building the Design Matrix using Patsy
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fitting-splines-in-pymc3">
+   Fitting Splines in PyMC3
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#choosing-knots-and-prior-for-splines">
+   Choosing Knots and Prior for Splines
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#regularizing-prior-for-splines">
+     Regularizing Prior for Splines
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#modeling-co2-uptake-with-splines">
+   Modeling CO₂ Uptake with Splines
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="chapter-5-splines">
+<span id="chap3-5"></span><h1>Chapter 5: Splines<a class="headerlink" href="#chapter-5-splines" title="Permalink to this headline">¶</a></h1>
+<p>In this chapter we will discuss splines, which is an extension of
+concepts introduced into Chapter <a class="reference internal" href="chp_03.html#chap2"><span class="std std-ref">3</span></a> with the aim of
+adding more flexibility. In the models introduced in Chapter
+<a class="reference internal" href="chp_03.html#chap2"><span class="std std-ref">3</span></a> the relationship between the dependent and
+independent variables was the same for their entire domain. Splines, in
+contrast, can split a problem into multiple local solutions, which can
+all be combined to produce a useful global solution. Let us see how.</p>
+<div class="section" id="polynomial-regression">
+<span id="id1"></span><h2>Polynomial Regression<a class="headerlink" href="#polynomial-regression" title="Permalink to this headline">¶</a></h2>
+<p>As we already saw in Chapter <a class="reference internal" href="chp_03.html#chap2"><span class="std std-ref">3</span></a>, we can write a linear
+model as:</p>
+<div class="math notranslate nohighlight" id="equation-eq-lin-model">
+<span class="eqno">(41)<a class="headerlink" href="#equation-eq-lin-model" title="Permalink to this equation">¶</a></span>\[\mathbb{E}[Y]= \beta_0 + \beta_1 X\]</div>
+<p>where <span class="math notranslate nohighlight">\(\beta_0\)</span> is the intercept, <span class="math notranslate nohighlight">\(\beta_1\)</span> the slope and
+<span class="math notranslate nohighlight">\(\mathbb{E}[Y]\)</span> is the expected value, or mean, of the response (random)
+variable <span class="math notranslate nohighlight">\(Y\)</span>. We can rewrite Equation <a class="reference internal" href="#equation-eq-lin-model">(41)</a> into the
+following form:</p>
+<div class="math notranslate nohighlight" id="equation-eq-polynomial-reg">
+<span class="eqno">(42)<a class="headerlink" href="#equation-eq-polynomial-reg" title="Permalink to this equation">¶</a></span>\[\mathbb{E}[Y]= \beta_0 + \beta_1 X + \beta_2 X^2 + \cdots + \beta_m X^m\]</div>
+<p>This is known as polynomial regression. At first it may seem that
+Expression <a class="reference internal" href="#equation-eq-polynomial-reg">(42)</a> is representing a multiple linear
+regression of the covariates <span class="math notranslate nohighlight">\(X, X^2 \cdots + X^m\)</span>. And in a sense this
+is right, but the key element to notice and keep in mind is that the
+covariates <span class="math notranslate nohighlight">\(X^m\)</span> are all derived from <span class="math notranslate nohighlight">\(X\)</span> by applying successive powers
+from 1 to <span class="math notranslate nohighlight">\(m\)</span>. So in terms of our actual problem we are still fitting a
+single predictor.</p>
+<p>We call <span class="math notranslate nohighlight">\(m\)</span> the degree of the polynomial. The linear regressions models
+from Chapter <a class="reference internal" href="chp_03.html#chap2"><span class="std std-ref">3</span></a> and Chapter <a class="reference internal" href="chp_04.html#chap3"><span class="std std-ref">4</span></a> were all
+polynomials of degree <span class="math notranslate nohighlight">\(1\)</span>. With the one exception of the varying
+variance example in Section
+<a class="reference internal" href="chp_04.html#transforming-covariates"><span class="std std-ref">Transforming Covariates</span></a> where we used
+<span class="math notranslate nohighlight">\(m=1/2\)</span>.</p>
+<p><a class="reference internal" href="#fig-polynomial-regression"><span class="std std-numref">Fig. 87</span></a> shows 3 examples of such polynomial
+regression using degrees 2, 10, and 15. As we increase the order of the
+polynomial, we get a more flexible curve.</p>
+<div class="figure align-default" id="fig-polynomial-regression">
+<a class="reference internal image-reference" href="../_images/polynomial_regression.png"><img alt="../_images/polynomial_regression.png" src="../_images/polynomial_regression.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 87 </span><span class="caption-text">An example of polynomial regression with degrees 2, 10 and 15. As the
+degree increases the fit gets more <em>wiggly</em>. The dashed lines are the
+fit when removing the observation indicated with a blue cross. The
+removal of a data point has a small effect when the degree of polynomial
+is 2 or 10, but larger when the degree is 15. The fit was calculated
+using the least squares method.</span><a class="headerlink" href="#fig-polynomial-regression" title="Permalink to this image">¶</a></p>
+</div>
+<p>One problem with polynomials is that they act <em>globally</em>, when we apply
+a polynomial of degree <span class="math notranslate nohighlight">\(m\)</span> we are saying that the relationship between
+the independent and dependent variables is of degree <span class="math notranslate nohighlight">\(m\)</span> for the entire
+dataset. This can be problematic when different regions of our data need
+different levels of flexibility. This could lead, for example, to curves
+that are <em>too flexible</em> <a class="footnote-reference brackets" href="#id24" id="id2">1</a>. For example, in the last panel of
+<a class="reference internal" href="#fig-polynomial-regression"><span class="std std-numref">Fig. 87</span></a> (degree=15), we can see that the
+fitted curve presents a <em>deep valley</em> followed by a <em>high peak</em> towards
+high values of <span class="math notranslate nohighlight">\(X\)</span>, even when there are no data points with such low or
+high values.</p>
+<p>Additionally, as the degree increases the fit becomes more to the
+removal of points, or equivalently to the addition of future data, in
+other words as the degree increases the model becomes more prone to
+overfitting. For example, in <a class="reference internal" href="#fig-polynomial-regression"><span class="std std-numref">Fig. 87</span></a> the
+black lines represent the fit to the entire data and the dashed lines
+the fit when we remove one data point, indicated with a cross in the
+figure. We can see, especially in the last panel, that removing even a
+single data point changes the model fit with effects even far away from
+the location of the point.</p>
+</div>
+<div class="section" id="expanding-the-feature-space">
+<span id="expanding-feature-space"></span><h2>Expanding the Feature Space<a class="headerlink" href="#expanding-the-feature-space" title="Permalink to this headline">¶</a></h2>
+<p>At a conceptual level we can think of polynomial regression as a recipe
+for creating new predictors, or in more formal terms to <strong>expanding the
+feature space</strong>. By performing this expansion we are able to fit a line
+in the expanded space which gives us a curve on the space of the
+original data, pretty neat! Nevertheless, feature expansion is not an
+invitation to statistical anarchy, we can not just apply random
+transformations to our data and then expect to always get good results.
+In fact, as we just saw applying polynomials is not problem-free.</p>
+<p>To generalize the idea of feature expansion, beyond polynomials we can
+expand Equation <a class="reference internal" href="#equation-eq-lin-model">(41)</a> into the following form:</p>
+<div class="math notranslate nohighlight" id="equation-eq-bfr">
+<span class="eqno">(43)<a class="headerlink" href="#equation-eq-bfr" title="Permalink to this equation">¶</a></span>\[\mathbb{E}[Y]= \beta_0 + \beta_1 B_{1}(X_{1}) + \beta_2 B_{2}(X_{2}) + \cdots + \beta_m B_{m}(X_{m})\]</div>
+<p>where the <span class="math notranslate nohighlight">\(B_i\)</span> are arbitrary functions. In this context we call these
+functions basis functions. A linear combination of them gives us a
+function <span class="math notranslate nohighlight">\(f\)</span> that is what we actually “see” as the fit of the model to
+the data. In this sense the <span class="math notranslate nohighlight">\(B_i\)</span> are an under the hood trick to build a
+flexible function <span class="math notranslate nohighlight">\(f\)</span>.</p>
+<div class="math notranslate nohighlight" id="equation-eq-bfr2">
+<span class="eqno">(44)<a class="headerlink" href="#equation-eq-bfr2" title="Permalink to this equation">¶</a></span>\[\mathbb{E}[Y]= \sum_i^m \beta_i B_{i}(X_{i}) = f(X)\]</div>
+<p>There are many choices for the <span class="math notranslate nohighlight">\(B_i\)</span> basis functions, we can use
+polynomials and thus obtain polynomial regression as we just saw, or
+maybe apply an arbitrary set of functions such as a power of two, a
+logarithm, or a square root. Such functions may be motivated by the
+problem at hand, for example, in Section
+<a class="reference internal" href="chp_04.html#transforming-covariates"><span class="std std-ref">Transforming Covariates</span></a> we modeled how
+the length of babies changes with their age by computing the square root
+of the length, motivated by the fact that human babies, same as other
+mammals, grow more rapidly in the earlier stages of their life and then
+the growth tends to level off (similar to how a square root function
+does).</p>
+<p>Another alternative is to use indicator functions like
+<span class="math notranslate nohighlight">\(I(c_i \leq x_k &lt; c_j)\)</span> to break up the original <span class="math notranslate nohighlight">\(\boldsymbol{X}\)</span>
+predictor into (non-overlapping) subsets. And then fit polynomial
+<em>locally</em>, i.e., only inside these subsets. This procedure leads to
+fitting <strong>piecewise polynomials</strong> <a class="footnote-reference brackets" href="#id25" id="id3">2</a> as shown in
+<a class="reference internal" href="#fig-piecewise"><span class="std std-numref">Fig. 88</span></a>.</p>
+<div class="figure align-default" id="fig-piecewise">
+<a class="reference internal image-reference" href="../_images/piecewise.png"><img alt="../_images/piecewise.png" src="../_images/piecewise.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 88 </span><span class="caption-text">The blue line is the <em>true</em> function we are trying to approximate. The
+black-solid lines are piecewise polynomials of increasing order (1, 2,
+3, and 4). The dashed vertical gray lines are marking the limits of each
+subdomain on the x-axis.</span><a class="headerlink" href="#fig-piecewise" title="Permalink to this image">¶</a></p>
+</div>
+<p>In the four panels in <a class="reference internal" href="#fig-piecewise"><span class="std std-numref">Fig. 88</span></a> the goal is the same, to
+approximate the blue function. We proceed by first splitting the
+function into 3 subdomains, delimited by the gray dashed lines, and then
+we fit a different function to each subdomain. In the first subpanel
+(piecewise constant) we fit a constant function. We can think of a
+constant function as a zero degree polynomial. The aggregated solution,
+i.e. the 3 segments in black is known as a <strong>step-function</strong>. This may
+seem to be a rather crude approximation but it may be all that we need.
+For example, step-functions may be OK if we are trying to find out a
+discontinuous outcome like the expected mean temperature during morning,
+afternoon, and night. Or when we are OK about getting a non-smooth
+approximation even if we think the outcome is smooth <a class="footnote-reference brackets" href="#id26" id="id4">3</a>.</p>
+<p>In the second panel (piecewise linear) we do the same as in the first
+but instead of a constant function we use a linear function, which is a
+first degree polynomial. Notice that the contiguous linear solutions
+meet at the dashed lines, this is done on purpose. We could justify this
+restriction as trying to make the solution as smooth as possible <a class="footnote-reference brackets" href="#id27" id="id5">4</a>.</p>
+<p>In the third panel (piecewise quadratic) and fourth panel (piecewise
+cubic) we use quadratic and cubic piecewise polynomials. As we can see
+by increasing the degree of the piecewise polynomials we get further and
+further flexible solutions, which brings better fits but also a higher
+chance of overfitting.</p>
+<p>Because the final fit is a function <span class="math notranslate nohighlight">\(f\)</span> constructed from local solutions
+(the <span class="math notranslate nohighlight">\(B_i\)</span> basis functions) we can more easily accommodate the
+flexibility of the model to the demands of the data at different
+regions. In this particular case, we can use a simpler function
+(polynomial with lower degree) to fit the data at different regions,
+while providing a good overall model fit to the whole domain of the
+data.</p>
+<p>So far we have assumed we have a single predictor <span class="math notranslate nohighlight">\(X\)</span>, but the same idea
+can be extended to more than one predictor <span class="math notranslate nohighlight">\(X_0, X_1, \cdots, X_p\)</span>. And
+we can even add an inverse link function <span class="math notranslate nohighlight">\(\phi\)</span> <a class="footnote-reference brackets" href="#id28" id="id6">5</a> models of this form
+are known as Generalized Additive Models (GAM):
+<span id="id7">[<a class="reference internal" href="references.html#id3">18</a>, <a class="reference internal" href="references.html#id4">49</a>]</span>.</p>
+<div class="math notranslate nohighlight" id="equation-eq-gam">
+<span class="eqno">(45)<a class="headerlink" href="#equation-eq-gam" title="Permalink to this equation">¶</a></span>\[\mathbb{E}[Y]= \phi \left(\sum_i^p f(X_i)\right)\]</div>
+<p>Recapitulating what we learn in this section, the <span class="math notranslate nohighlight">\(B_i\)</span> functions in
+Equation <a class="reference internal" href="#equation-eq-bfr">(43)</a> are a clever statistical device that allows us to
+fit more flexible models. In principle we are free to choose arbitrary
+<span class="math notranslate nohighlight">\(B_i\)</span> functions, and we may do it based on our domain knowledge, as a
+result of an exploratory data analysis phase, or even by trial and
+error. As not all transformations will have the same statistical
+properties, it would be nice to have access to some <em>default</em> functions
+with good general properties over a wider range of datasets. Starting in
+the next section and for the remainder of this chapter we will restrict
+the discussion to a family of basis functions known as B-splines <a class="footnote-reference brackets" href="#id29" id="id8">6</a>.</p>
+</div>
+<div class="section" id="introducing-splines">
+<span id="id9"></span><h2>Introducing Splines<a class="headerlink" href="#introducing-splines" title="Permalink to this headline">¶</a></h2>
+<p>Splines can be seen as an attempt to use the flexibility of polynomials
+but keeping them under control and thus obtaining a model with overall
+good statistical properties. To define a spline we need to define knots
+<a class="footnote-reference brackets" href="#id30" id="id10">7</a>. The purpose of the knots is to split the domain of the variable
+<span class="math notranslate nohighlight">\(\boldsymbol{X}\)</span> into contiguous intervals. For example, the dashed
+vertical gray lines in <a class="reference internal" href="#fig-piecewise"><span class="std std-numref">Fig. 88</span></a> represent knots. For our
+purposes a spline is a piecewise polynomial constrained to be
+continuous, that is we enforce two contiguous sub-polynomials to meet at
+the knots. If the sub-polynomials are of degree <span class="math notranslate nohighlight">\(n\)</span> we say the spline is
+of degree <span class="math notranslate nohighlight">\(n\)</span>. Sometimes splines are referred to by their order which
+would be <span class="math notranslate nohighlight">\(n+1\)</span>.</p>
+<p>In <a class="reference internal" href="#fig-piecewise"><span class="std std-numref">Fig. 88</span></a> we can see that as we increase the order of
+the piecewise polynomial the <em>smoothness</em> of the resulting function also
+increases. As we already mentioned the sub-polynomials should meet at
+the knots. On the first panel it may seem we are cheating as there is a
+step, also known as a discontinuity, between each line, but this is the
+best we can do if we use constant values at each interval.</p>
+<p>When talking about splines, the sub-polynomials are formally known as
+basis splines or B-splines for short. Any spline function of a given
+degree can be constructed as a linear combination of basis splines of
+that degree. <a class="reference internal" href="#fig-splines-basis"><span class="std std-numref">Fig. 89</span></a> shows examples of B-splines of
+increasing degree from 0 to 3 (top to bottom), the dots at the bottom
+represent the knots, the blue ones mark the interval at which the
+highlighted B-spline (in black continuous line) is not zero. All other
+B-splines are represented with a thinner dashed line for clarity, but
+all B-splines are equally important. In fact, each subplots in
+<a class="reference internal" href="#fig-splines-basis"><span class="std std-numref">Fig. 89</span></a> is showing all the B-splines as defined by
+the given knots. In other words B-splines are completely defined by a
+set of knots and a degree.</p>
+<div class="figure align-default" id="fig-splines-basis">
+<a class="reference internal image-reference" href="../_images/splines_basis.png"><img alt="../_images/splines_basis.png" src="../_images/splines_basis.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 89 </span><span class="caption-text">B-splines of increasing degree, from 0 to 3. On the top subplot we have
+a step function, on second a triangular function and then increasingly
+Gaussian-like functions. The <em>stacked</em> knots at the boundary (smaller
+black dots) are added in order to be able to define the splines close to
+the borders.</span><a class="headerlink" href="#fig-splines-basis" title="Permalink to this image">¶</a></p>
+</div>
+<p>From <a class="reference internal" href="#fig-splines-basis"><span class="std std-numref">Fig. 89</span></a> we can see that as we increase the
+degree of the B-spline, the domain of the B-spline spans more and more
+<a class="footnote-reference brackets" href="#id31" id="id11">8</a>. Thus, for higher degree spline to make sense we need to define
+more knots. Note that in all cases B-splines are restricted to be
+non-zero only inside a given interval. This property make splines
+regression more <em>local</em> than what we would get from a polynomial
+regression.</p>
+<p>As the number of knots controlling each B-splines grows with the degree,
+for all degrees larger than 0, we are not able to define a B-spline near
+to the boundaries. This is the reason the B-spline is highlighted in
+black in <a class="reference internal" href="#fig-splines-basis"><span class="std std-numref">Fig. 89</span></a> to the right as we increase the
+degree. This presents a potential problem, because it leaves us with
+less B-splines at the boundaries, so our approximation will suffer
+there. Fortunately, this boundary problem is easy to solve, we just need
+to add knots at the boundaries (see the small dots in
+<a class="reference internal" href="#fig-splines-basis"><span class="std std-numref">Fig. 89</span></a>). So if our knots are (0,1,2,3,4,5) and we
+want to fit a cubic spline (like in the last subplot of
+<a class="reference internal" href="#fig-splines-basis"><span class="std std-numref">Fig. 89</span></a>) we will need to actually use the set of
+knots (0,0,0,0,1,2,3,4,5,5,5,5). That is, we pad the 0 three times at
+the beginning and we pad the 5 three times at the end. By doing so we
+now have the five necessary knots (0,0,0,0,1) to define the first
+B-spline (see the dashed indigo line that looks like an Exponential
+distribution in the last subpanel of <a class="reference internal" href="#fig-splines-basis"><span class="std std-numref">Fig. 89</span></a>). Then
+we will use the knots 0,0,0,1,2 to define the second B-spline (the one
+that looks like a Beta distribution), etc. See how the first <em>complete</em>
+B-splines (highlighted in black) is defined by the knots (0,1,2,3,4)
+which are the knots in blue. Notice that we need to pad the knots at the
+boundaries as many times as the degree of the spline. That is why we
+have no extra knots for degree 0 and 6 extra knots for degree 3.</p>
+<p>Each single B-spline is not very useful on its own, but a linear
+combination of all of them allows us to fit complex functions. Thus, in
+practice fitting splines requires that we choose the order of the
+B-splines, the number and locations of knots and then find the set of
+coefficients to weight each B-spline. This is represented in
+<a class="reference internal" href="#fig-splines-weighted"><span class="std std-numref">Fig. 90</span></a>. We can see the basis functions
+represented using a different color to help individualize each
+individual basis function. The knots are represented with black dots at
+the bottom of each subplot. The second row is more interesting as we can
+see the same basis functions from the first row scaled by a set of
+<span class="math notranslate nohighlight">\(\beta_i\)</span> coefficients. The thicker continuous black line represents the
+spline that is obtained by a weighted sum of the B-splines with the
+weights given by the <span class="math notranslate nohighlight">\(\beta\)</span> coefficients.</p>
+<div class="figure align-default" id="fig-splines-weighted">
+<a class="reference internal image-reference" href="../_images/splines_weighted.png"><img alt="../_images/splines_weighted.png" src="../_images/splines_weighted.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 90 </span><span class="caption-text">B-splines defined using Patsy. On the first row we can see splines of
+increasing order 1 (piecewise constant), 2 (piecewise linear) and 4
+(cubic) represented with gray dashed lines. For clarity each basis
+function is represented with a different color. On the second row we
+have the basis splines from the first row scaled by a set of
+coefficients. The thick black line represents the sum of these basis
+functions. Because the value of the coefficients was randomly chosen we
+can see each sub-panel in the second row as a random sample from a prior
+distribution over the <em>spline space</em>.</span><a class="headerlink" href="#fig-splines-weighted" title="Permalink to this image">¶</a></p>
+</div>
+<p>In this example we generated the <span class="math notranslate nohighlight">\(\beta_i\)</span> coefficients by sampling from
+a Half Normal distribution (Line 17 in Code Block
+<a class="reference internal" href="#splines-patsy-plot"><span class="std std-ref">splines_patsy_plot</span></a>). Thus, each
+panel in <a class="reference internal" href="#fig-splines-weighted"><span class="std std-numref">Fig. 90</span></a> is showing only one realization
+of a probability distribution over splines. You can easily see this is
+true by removing the random seed and running Code Block
+<a class="reference internal" href="#splines-patsy-plot"><span class="std std-ref">splines_patsy_plot</span></a> a few times, each
+time you will see a different spline. Additionally, you may also try
+replacing the Half Normal distribution, with another one like the
+Normal, Exponential, etc. <a class="reference internal" href="#fig-splines-realizations"><span class="std std-numref">Fig. 91</span></a> shows four
+realization of cubic splines.</p>
+<div class="figure align-default" id="fig-splines-realizations">
+<a class="reference internal image-reference" href="../_images/splines_realizations.png"><img alt="../_images/splines_realizations.png" src="../_images/splines_realizations.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 91 </span><span class="caption-text">Four realizations of cubic splines with <span class="math notranslate nohighlight">\(\beta_i\)</span> coefficients sampled
+from a Half Normal distribution.</span><a class="headerlink" href="#fig-splines-realizations" title="Permalink to this image">¶</a></p>
+</div>
+<div class="admonition-four-is-a-crowd-for-splines admonition">
+<p class="admonition-title">Four is a crowd for splines</p>
+<p>Of all possible splines, probably cubic splines are the most commonly used.
+But why are cubic splines the queen
+of splines? Figures <a class="reference internal" href="#fig-piecewise"><span class="std std-numref">Fig. 88</span></a> and
+<a class="reference internal" href="#fig-splines-weighted"><span class="std std-numref">Fig. 90</span></a> offer some hints. Cubic splines provide
+us with the lowest order of splines able to generate <em>smooth enough</em>
+curves for most common scenarios, rendering higher order splines less
+attractive. What do we mean by <em>smooth enough</em>? Without going into the
+mathematical details, we meant that the fitted function does not present
+sudden changes of slope. One way of doing this is by adding the
+restriction that two contiguous piecewise polynomials should meet at
+their common knots. Cubic splines have two additional restrictions, the
+first and second derivatives are also continuous, meaning that the slope
+is continuous at the knots and also the slope of the slope <a class="footnote-reference brackets" href="#id32" id="id12">9</a>. In
+fact, a spline of degree <span class="math notranslate nohighlight">\(m\)</span> will have <span class="math notranslate nohighlight">\(m-1\)</span> derivatives at the knots.
+Having said all that, splines of lower or higher order can still be
+useful for some problems, it is just that cubic splines are good
+defaults.</p>
+</div>
+</div>
+<div class="section" id="building-the-design-matrix-using-patsy">
+<span id="id13"></span><h2>Building the Design Matrix using Patsy<a class="headerlink" href="#building-the-design-matrix-using-patsy" title="Permalink to this headline">¶</a></h2>
+<p>In Figures <a class="reference internal" href="#fig-splines-basis"><span class="std std-numref">Fig. 89</span></a> and
+<a class="reference internal" href="#fig-splines-weighted"><span class="std std-numref">Fig. 90</span></a> we plot the B-splines, but so far we have
+omitted how to compute them. The main reason is that computation can be
+cumbersome and there are already efficient algorithms available in
+packages like Scipy <a class="footnote-reference brackets" href="#id33" id="id14">10</a>. Thus, instead of discussing how the B-splines
+can be computed from scratch we are going to rely on Patsy, a package
+for describing statistical models, especially linear models, or models
+that have a linear component, and building design matrices. It is
+closely inspired by the <em>formula mini-language</em> widely used in many
+packages from the R programming language ecosystem. Just for you to get
+a taste of the formula language, a linear model with two covariates
+looks like <code class="docutils literal notranslate"><span class="pre">&quot;y</span> <span class="pre">~</span> <span class="pre">x1</span> <span class="pre">+</span> <span class="pre">x2&quot;</span></code> and if we want to add an interaction we can
+write <code class="docutils literal notranslate"><span class="pre">&quot;y</span> <span class="pre">~</span> <span class="pre">x1</span> <span class="pre">+</span> <span class="pre">x2</span> <span class="pre">+</span> <span class="pre">x1:x2&quot;</span></code>. This is a similar syntax as the one shown
+in Chapter <a class="reference internal" href="chp_03.html#chap2"><span class="std std-ref">3</span></a> in the box highlighting Bambi. For more
+details please check the patsy documentation <a class="footnote-reference brackets" href="#id34" id="id15">11</a>.</p>
+<p>To define a basis spline design matrix in Patsy we need to pass a string
+to the <code class="docutils literal notranslate"><span class="pre">dmatrix</span></code> function starting with the <em>particle</em> <code class="docutils literal notranslate"><span class="pre">bs()</span></code>, while
+this particle is a string is parsed by Patsy as a function. And thus it
+can also take several arguments including the data, an array-like of
+knots indicating their location and the degree of the spline. In Code
+Block <a class="reference internal" href="#splines-patsy"><span class="std std-ref">splines_patsy</span></a> we define 3 design
+matrices, one with degree 0 (piecewise constant), another with degree 1
+(piecewise linear) and finally one with degree 3 (cubic spline).</p>
+<div class="literal-block-wrapper docutils container" id="splines-patsy">
+<div class="code-block-caption"><span class="caption-number">Listing 62 </span><span class="caption-text">splines_patsy</span><a class="headerlink" href="#splines-patsy" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">knots</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">]</span>
+
+<span class="n">B0</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;bs(x, knots=knots, degree=0, include_intercept=True) - 1&quot;</span><span class="p">,</span> 
+             <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="s2">&quot;knots&quot;</span><span class="p">:</span><span class="n">knots</span><span class="p">})</span>
+<span class="n">B1</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;bs(x, knots=knots, degree=1, include_intercept=True) - 1&quot;</span><span class="p">,</span>
+             <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="s2">&quot;knots&quot;</span><span class="p">:</span><span class="n">knots</span><span class="p">})</span>
+<span class="n">B3</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;bs(x, knots=knots, degree=3,include_intercept=True) - 1&quot;</span><span class="p">,</span>
+             <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="s2">&quot;knots&quot;</span><span class="p">:</span><span class="n">knots</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<p><a class="reference internal" href="#fig-design-matrices"><span class="std std-numref">Fig. 92</span></a> represents the 3 design matrices computed
+with Code Block <a class="reference internal" href="#splines-patsy"><span class="std std-ref">splines_patsy</span></a>. To better
+grasp what Patsy is doing we also recommend you use Jupyter notebook/lab
+or your favorite IDE to inspect the objects <code class="docutils literal notranslate"><span class="pre">B0</span></code>, <code class="docutils literal notranslate"><span class="pre">B1</span></code> and <code class="docutils literal notranslate"><span class="pre">B2</span></code>.</p>
+<div class="figure align-default" id="fig-design-matrices">
+<a class="reference internal image-reference" href="../_images/design_matrices.png"><img alt="../_images/design_matrices.png" src="../_images/design_matrices.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 92 </span><span class="caption-text">Design matrices generated with Patsy in Code Block
+<a class="reference internal" href="#splines-patsy"><span class="std std-ref">splines_patsy</span></a>. The color goes from black
+(1) to light-gray (0), the number of columns is the number of B-splines
+and the number of rows the number of datapoints.</span><a class="headerlink" href="#fig-design-matrices" title="Permalink to this image">¶</a></p>
+</div>
+<p>The first subplot of <a class="reference internal" href="#fig-design-matrices"><span class="std std-numref">Fig. 92</span></a> corresponds to <code class="docutils literal notranslate"><span class="pre">B0</span></code>,
+a spline of degree 0. We can see that the design matrix is a matrix with
+only zeros (light-gray) and ones (black). The first B-spline (column 0)
+is 1 for the first 5 observations and 0 otherwise, the second B-spline
+(column 1) is 0 for the first 5 observations, 1 for the second 5
+observations and 0 again. And the same pattern is repeated. Compare this
+with the first subplot (first row) of <a class="reference internal" href="#fig-splines-weighted"><span class="std std-numref">Fig. 90</span></a>,
+you should see how the design matrix is encoding that plot.</p>
+<p>For the second subplot in <a class="reference internal" href="#fig-design-matrices"><span class="std std-numref">Fig. 92</span></a> we have the
+first B-spline going from 1 to 0, the second, third and fourth goes from
+0 to 1 and then back from 1 to 0. The fifth B-spline goes from 0 to 1.
+You should see how this patterns match the line with negative slope, the
+3 triangular functions and the line with positive slope in the second
+subplot (first row) of <a class="reference internal" href="#fig-splines-weighted"><span class="std std-numref">Fig. 90</span></a>.</p>
+<p>Finally we can see something similar if we compare how the 7 columns in
+the third subplot in <a class="reference internal" href="#fig-design-matrices"><span class="std std-numref">Fig. 92</span></a> match the 7 curves in
+the third subplot (first row) of <a class="reference internal" href="#fig-splines-weighted"><span class="std std-numref">Fig. 90</span></a>.</p>
+<p>Code Block <a class="reference internal" href="#splines-patsy"><span class="std std-ref">splines_patsy</span></a> was used to
+generate the B-splines in Figures <a class="reference internal" href="#fig-splines-weighted"><span class="std std-numref">Fig. 90</span></a> and
+<a class="reference internal" href="#fig-design-matrices"><span class="std std-numref">Fig. 92</span></a>, the only different is that for the former
+we used <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">np.linspace(0.,</span> <span class="pre">1.,</span> <span class="pre">500)</span></code>, so the curves look smoother and
+we use <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">np.linspace(0.,</span> <span class="pre">1.,</span> <span class="pre">20)</span></code> in the later so the matrices are
+easier to understand.</p>
+<div class="literal-block-wrapper docutils container" id="splines-patsy-plot">
+<div class="code-block-caption"><span class="caption-number">Listing 63 </span><span class="caption-text">splines_patsy_plot</span><a class="headerlink" href="#splines-patsy-plot" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="s2">&quot;row&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">((</span><span class="n">B0</span><span class="p">,</span> <span class="n">B1</span><span class="p">,</span> <span class="n">B3</span><span class="p">),</span>
+                                     <span class="p">(</span><span class="s2">&quot;Piecewise constant&quot;</span><span class="p">,</span>
+                                      <span class="s2">&quot;Piecewise linear&quot;</span><span class="p">,</span>
+                                      <span class="s2">&quot;Cubic spline&quot;</span><span class="p">))):</span>
+    <span class="c1"># plot spline basis functions</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">B</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span>
+                          <span class="n">color</span><span class="o">=</span><span class="n">viridish</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+    <span class="c1"># we generate some positive random coefficients </span>
+    <span class="c1"># there is nothing wrong with negative values</span>
+    <span class="n">β</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="c1"># plot spline basis functions scaled by its β</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">B</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">β</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                          <span class="n">color</span><span class="o">=</span><span class="n">viridish</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+    <span class="c1"># plot the sum of the basis functions</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">β</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="c1"># plot the knots</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">knots</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">knots</span><span class="p">),</span> <span class="s2">&quot;ko&quot;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">knots</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">knots</span><span class="p">),</span> <span class="s2">&quot;ko&quot;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>So far we have explored a couple of examples to gain intuition into what
+splines are and how to automate their creation with the help of Patsy.
+We can now move forward into computing the weights. Let us see how we
+can do that in a Bayesian model with PyMC3.</p>
+</div>
+<div class="section" id="fitting-splines-in-pymc3">
+<span id="id16"></span><h2>Fitting Splines in PyMC3<a class="headerlink" href="#fitting-splines-in-pymc3" title="Permalink to this headline">¶</a></h2>
+<p>In this section we are going to use PyMC3 to obtain the values of the
+regression coefficients <span class="math notranslate nohighlight">\(\beta\)</span> by fitting a set of B-splines to the
+data.</p>
+<p>Modern bike sharing systems allow people in many cities around the globe
+to rent and return bikes in a completely automated fashion, helping to
+increase the efficiency of the public transportation and probably making
+part of the society healthier and even happier. We are going to use a
+dataset from such a bike sharing system from the University of
+California Irvine’s Machine Learning Repository <a class="footnote-reference brackets" href="#id35" id="id17">12</a>. For our example
+we are going to estimate the number of rental bikes rented per hour over
+a 24 hour period. Let us load and plot the data:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/bikes_hour.csv&quot;</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;hour&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># We standardize the response variable</span>
+<span class="n">data_cnt_om</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">data_cnt_os</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">data</span><span class="p">[</span><span class="s2">&quot;count_normalized&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">data_cnt_om</span><span class="p">)</span> <span class="o">/</span> <span class="n">data_cnt_os</span>
+<span class="c1"># Remove data, you may later try to refit the model to the whole data</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[::</span><span class="mi">50</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="figure align-default" id="fig-bikes-data">
+<a class="reference internal image-reference" href="../_images/bikes_data.png"><img alt="../_images/bikes_data.png" src="../_images/bikes_data.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 93 </span><span class="caption-text">A visualization of the bikes data. Each point is the normalized number
+of bikes rented per hour of the day (on the interval 0, 23). The
+points are semi-transparent to avoid excessive overlapping of points and
+thus help see the distribution of the data.</span><a class="headerlink" href="#fig-bikes-data" title="Permalink to this image">¶</a></p>
+</div>
+<p>A quick look at <a class="reference internal" href="#fig-bikes-data"><span class="std std-numref">Fig. 93</span></a> shows that the relationship
+between the hour of the day and the number of rental bikes is not going
+to be very well captured by fitting a single line. So, let us try to use
+a spline regression to better approximate the non-linear pattern.</p>
+<p>As we already mentioned in order to work with splines we need to define
+the number and position of the knots. We are going to use 6 knots and
+use the simplest option to position them, equal spacing between each
+knot.</p>
+<div class="literal-block-wrapper docutils container" id="knot-list">
+<div class="code-block-caption"><span class="caption-number">Listing 64 </span><span class="caption-text">knot_list</span><a class="headerlink" href="#knot-list" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">num_knots</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">knot_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="n">num_knots</span><span class="o">+</span><span class="mi">2</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>Notice that in Code Block <a class="reference internal" href="#knot-list"><span class="std std-ref">knot_list</span></a> we define
+8 knots, but then we remove the first and last knots, ensuring we keep 6
+knots which are defined in the <em>interior</em> of the data. Whether this is a
+useful strategy will depends on the data. For example, if the bulk of
+the data is away from the borders this will be a good idea, also the
+larger the number of knots the less important their positions.</p>
+<p>Now we use Patsy to define and build the design matrix for us</p>
+<div class="literal-block-wrapper docutils container" id="bikes-dmatrix">
+<div class="code-block-caption"><span class="caption-number">Listing 65 </span><span class="caption-text">bikes_dmatrix</span><a class="headerlink" href="#bikes-dmatrix" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span>
+    <span class="s2">&quot;bs(cnt, knots=knots, degree=3, include_intercept=True) - 1&quot;</span><span class="p">,</span>
+    <span class="p">{</span><span class="s2">&quot;cnt&quot;</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">hour</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="s2">&quot;knots&quot;</span><span class="p">:</span> <span class="n">knot_list</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]})</span>
+</pre></div>
+</div>
+</div>
+<p>The proposed statistical model is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\begin{split}
+    \tau \sim&amp; \; \mathcal{HC}(1) \\
+    \boldsymbol{\beta} \sim&amp; \; \mathcal{N}(0, \tau) \\
+    \sigma \sim&amp; \; \mathcal{HN}(1) \\
+    Y \sim&amp; \; \mathcal{N}(\boldsymbol{B}(X)\boldsymbol{\beta},\sigma)
+\end{split}\end{aligned}\end{split}\]</div>
+<p>Our spline regression model is very similar to the linear models from
+Chapter <a class="reference internal" href="chp_03.html#chap2"><span class="std std-ref">3</span></a>. All the hard-work is done by the design
+matrix <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span> and its expansion of the feature space. Notice
+that we are using linear algebra notation to write the multiplications
+and sums of Equations <a class="reference internal" href="#equation-eq-bfr">(43)</a> and <a class="reference internal" href="#equation-eq-bfr2">(44)</a> in a shorter form,
+that is we write <span class="math notranslate nohighlight">\(\boldsymbol{\mu} = \boldsymbol{B}\boldsymbol{\beta}\)</span>
+instead of <span class="math notranslate nohighlight">\(\boldsymbol{\mu} = \sum_i^n B_i \boldsymbol{\beta}_i\)</span>.</p>
+<p>As usual the statistical syntax is translated into PyMC3 in nearly a
+one-to-one fashion.</p>
+<div class="literal-block-wrapper docutils container" id="splines">
+<div class="code-block-caption"><span class="caption-number">Listing 66 </span><span class="caption-text">splines</span><a class="headerlink" href="#splines" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">splines</span><span class="p">:</span>
+    <span class="n">τ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfCauchy</span><span class="p">(</span><span class="s2">&quot;τ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> 
+    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="n">τ</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;μ&quot;</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">β</span><span class="p">))</span>
+    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;count_normalized&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+    <span class="n">idata_s</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">return_inferencedata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>We show in <a class="reference internal" href="#fig-bikes-spline-raw-data"><span class="std std-numref">Fig. 94</span></a> the final fitted linear
+prediction as a solid black line and each weighted B-spline as a dashed
+line. It is a nice representation as we can see how the B-splines are
+contributing to the final result.</p>
+<div class="figure align-default" id="fig-bikes-spline-raw-data">
+<a class="reference internal image-reference" href="../_images/bikes_spline_raw_data.png"><img alt="../_images/bikes_spline_raw_data.png" src="../_images/bikes_spline_raw_data.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 94 </span><span class="caption-text">Bikes data fitted using splines. The B-splines are represented with
+dashed lines. The sum of them generates the thicker solid black line.
+The plotted values correspond to mean values from the posterior. The
+black dots represent the knots. The splines in this figure look very
+<em>jagged</em>, relative to the splines plotted in
+<a class="reference internal" href="#fig-splines-weighted"><span class="std std-numref">Fig. 90</span></a>. The reason is that we are evaluating the
+function in fewer points. 24 points here because the data is binned per
+hour compared to 500 in <a class="reference internal" href="#fig-splines-weighted"><span class="std std-numref">Fig. 90</span></a>.</span><a class="headerlink" href="#fig-bikes-spline-raw-data" title="Permalink to this image">¶</a></p>
+</div>
+<p>A more useful plot when we want to display the results of the model is
+to plot the data with the overlaid splines and its uncertainty as in
+<a class="reference internal" href="#fig-bikes-data2"><span class="std std-numref">Fig. 95</span></a>. From this figure we can easily see that the
+number of rental bikes is at the lowest number late at night. There is
+then an increase, probably as people wake up and go to work. We have a
+first peak at around hour 10, which levels-off, or perhaps slightly
+declines, then followed by a second peak as people commute back home at
+around hour 18, after which there a steady decline.</p>
+<div class="figure align-default" id="fig-bikes-data2">
+<a class="reference internal image-reference" href="../_images/bikes_spline_data.png"><img alt="../_images/bikes_spline_data.png" src="../_images/bikes_spline_data.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 95 </span><span class="caption-text">Bikes data (black dots) fitted using splines. The shaded curve
+represents the 94% HDI interval (of the mean) and the blue curve
+represents the mean trend.</span><a class="headerlink" href="#fig-bikes-data2" title="Permalink to this image">¶</a></p>
+</div>
+<p>In this bike rental example we are dealing with a circular variable,
+meaning that hour 0 is equal to the hour 24. This may be more or less
+obvious to us, but it is definitely not obvious to our model. Patsy
+offers a simple solution to tell our model that the variable is
+circular. Instead of defining the design matrix using <code class="docutils literal notranslate"><span class="pre">bs</span></code> we can use
+<code class="docutils literal notranslate"><span class="pre">cc</span></code>, this is a cubic spline that is <em>circular-aware</em>. We recommend you
+check the Patsy documentation for more details and explore using <code class="docutils literal notranslate"><span class="pre">cc</span></code> in
+the previous model and compare results.</p>
+</div>
+<div class="section" id="choosing-knots-and-prior-for-splines">
+<span id="id18"></span><h2>Choosing Knots and Prior for Splines<a class="headerlink" href="#choosing-knots-and-prior-for-splines" title="Permalink to this headline">¶</a></h2>
+<p>One modeling decision we have to make when working with splines is to
+choose the number and location of the knots. This can be a little bit
+concerning, given that in general the number of knots and their spacing
+are not obvious decisions. When faced with this type of choice we can
+always try to fit more than one model and then use methods such as LOO
+to help us pick the best model. <a class="reference internal" href="#tab-loo-splines"><span class="std std-numref">Table 12</span></a> shows the
+results of fitting a model like the one defined in Code Block
+<a class="reference internal" href="#splines"><span class="std std-ref">splines</span></a> with, 3, 6, 9, 12, and 18 equally
+distanced knots. We can see that the spline with 12 knots is selected by
+LOO as the best model.</p>
+<p>One interesting observation from <a class="reference internal" href="#tab-loo-splines"><span class="std std-numref">Table 12</span></a>, is that
+the weights are 0.88 for model <code class="docutils literal notranslate"><span class="pre">m_12k</span></code> (the top ranked model) and 0.12
+to <code class="docutils literal notranslate"><span class="pre">m_3k</span></code> (the last ranked model). With virtually 0 weight for the rest
+of the models. As we explained in Section <a class="reference internal" href="chp_02.html#model-averaging"><span class="std std-ref">Model Averaging</span></a>
+by default the weights are computed using stacking, which is a method
+that attempts to combine several models in a meta-model in order to
+minimize the divergence between the meta-model and the <em>true</em> generating
+model. As a result even when models <code class="docutils literal notranslate"><span class="pre">m_6k</span></code>, <code class="docutils literal notranslate"><span class="pre">m_9k</span></code> and <code class="docutils literal notranslate"><span class="pre">m_18k</span></code> have
+better values of <code class="docutils literal notranslate"><span class="pre">loo</span></code>, once <code class="docutils literal notranslate"><span class="pre">m_12k</span></code> is included they do not have much
+to add and while <code class="docutils literal notranslate"><span class="pre">m_3k</span></code> is the lowest ranked model, it seems that it
+still has something new to contribute to the model averaging.
+<a class="reference internal" href="#fig-bikes-spline-loo-knots"><span class="std std-numref">Fig. 96</span></a> show the mean fitted spline for all
+these models.</p>
+<table class="table" id="tab-loo-splines">
+<caption><span class="caption-number">Table 12 </span><span class="caption-text">Summary of model comparison using LOO for splines models with different number of knots.</span><a class="headerlink" href="#tab-loo-splines" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td></td>
+<td><p><strong>rank</strong></p></td>
+<td><p><strong>loo</strong></p></td>
+<td><p><strong>p_loo</strong></p></td>
+<td><p><strong>d_loo</strong></p></td>
+<td><p><strong>weight</strong></p></td>
+<td><p><strong>se</strong></p></td>
+<td><p><strong>dse</strong></p></td>
+<td><p><strong>warning</strong></p></td>
+<td><p><strong>loo_scale</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>m_12k</p></td>
+<td><p>0</p></td>
+<td><p>-377.67</p></td>
+<td><p>14.21</p></td>
+<td><p>0.00</p></td>
+<td><p>0.88</p></td>
+<td><p>17.86</p></td>
+<td><p>0.00</p></td>
+<td><p>False</p></td>
+<td><p>log</p></td>
+</tr>
+<tr class="row-odd"><td><p>m_18k</p></td>
+<td><p>1</p></td>
+<td><p>-379.78</p></td>
+<td><p>17.56</p></td>
+<td><p>2.10</p></td>
+<td><p>0.00</p></td>
+<td><p>17.89</p></td>
+<td><p>1.45</p></td>
+<td><p>False</p></td>
+<td><p>log</p></td>
+</tr>
+<tr class="row-even"><td><p>m_9k</p></td>
+<td><p>2</p></td>
+<td><p>-380.42</p></td>
+<td><p>11.43</p></td>
+<td><p>2.75</p></td>
+<td><p>0.00</p></td>
+<td><p>18.12</p></td>
+<td><p>2.97</p></td>
+<td><p>False</p></td>
+<td><p>log</p></td>
+</tr>
+<tr class="row-odd"><td><p>m_6k</p></td>
+<td><p>3</p></td>
+<td><p>-389.43</p></td>
+<td><p>9.41</p></td>
+<td><p>11.76</p></td>
+<td><p>0.00</p></td>
+<td><p>18.16</p></td>
+<td><p>5.72</p></td>
+<td><p>False</p></td>
+<td><p>log</p></td>
+</tr>
+<tr class="row-even"><td><p>m_3k</p></td>
+<td><p>4</p></td>
+<td><p>400.25</p></td>
+<td><p>7.17</p></td>
+<td><p>22.58</p></td>
+<td><p>0.12</p></td>
+<td><p>18.01</p></td>
+<td><p>7.78</p></td>
+<td><p>False</p></td>
+<td><p>log</p></td>
+</tr>
+</tbody>
+</table>
+<div class="figure align-default" id="fig-bikes-spline-loo-knots">
+<a class="reference internal image-reference" href="../_images/bikes_spline_loo_knots.png"><img alt="../_images/bikes_spline_loo_knots.png" src="../_images/bikes_spline_loo_knots.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 96 </span><span class="caption-text">Mean posterior spline for the model described in Code Block
+<a class="reference internal" href="#splines"><span class="std std-ref">splines</span></a> with different number of knots (3, 6,
+9, 12, 18) . Model <code class="docutils literal notranslate"><span class="pre">m_12k</span></code> is highlighted in blue as the top ranked
+model according to LOO. Model <code class="docutils literal notranslate"><span class="pre">m_3k</span></code> is highlighted in black, while the
+rest of the models are in grayed-out as they have being assigned a
+weight of zero (see <a class="reference internal" href="#tab-loo-splines"><span class="std std-numref">Table 12</span></a>).</span><a class="headerlink" href="#fig-bikes-spline-loo-knots" title="Permalink to this image">¶</a></p>
+</div>
+<p>One piece of advice that may help decide the locations of knots is to
+place them based on quantiles, instead of uniformly. In Code Block
+<a class="reference internal" href="#knot-list"><span class="std std-ref">knot_list</span></a> we could have defined the
+<code class="docutils literal notranslate"><span class="pre">knot_list</span></code> using
+<code class="docutils literal notranslate"><span class="pre">knot_list</span> <span class="pre">=</span> <span class="pre">np.quantile(data.hour,</span> <span class="pre">np.linspace(0,</span> <span class="pre">1,</span> <span class="pre">num_knots))</span></code>. In
+this way we will be putting more knots where we have more data and less
+knots where less data. This translates into a more flexible
+approximation for data-richer portions.</p>
+<div class="section" id="regularizing-prior-for-splines">
+<span id="id19"></span><h3>Regularizing Prior for Splines<a class="headerlink" href="#regularizing-prior-for-splines" title="Permalink to this headline">¶</a></h3>
+<p>As choosing too few knots could lead to under-fitting and too many to
+overfitting, we may want to use a <em>rather large</em> number of knots and
+then choose a regularizing prior. From the definition of splines and
+<a class="reference internal" href="#fig-splines-weighted"><span class="std std-numref">Fig. 90</span></a> we can see that the closer the
+consecutive <span class="math notranslate nohighlight">\(\boldsymbol{\beta}\)</span> coefficients are to each other, the
+smoother the resulting function will be. Imagine you are dropping two
+consecutive columns of the design matrix in
+<a class="reference internal" href="#fig-splines-weighted"><span class="std std-numref">Fig. 90</span></a>, effectively setting those coefficients
+to 0, the fit will be much less <em>smooth</em> as we do not have enough
+information in the predictor to cover some sub region (recall that
+splines are <em>local</em>). Thus we can achieve smoother fitted regression
+line by choosing a prior for the <span class="math notranslate nohighlight">\(\boldsymbol{\beta}\)</span> coefficients in
+such a way that the value of <span class="math notranslate nohighlight">\(\beta_{i+1}\)</span> is correlated with the value
+of <span class="math notranslate nohighlight">\(\beta_{i}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\begin{split}
+\beta_i \sim&amp; \mathcal{N}(0, 1) \\
+\tau\sim&amp; \mathcal{N}(0,1) \\
+\beta \sim&amp; \mathcal{N}(\beta_{i-1}, \tau) 
+\end{split}\end{aligned}\end{split}\]</div>
+<p>Using PyMC3 we can write an equivalent version using a Gaussian Random
+Walk prior distribution:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\begin{split}
+\tau\sim&amp; \mathcal{N}(0, 1) \\
+\beta \sim&amp; \mathcal{G}RW(\beta, \tau) 
+\end{split}\end{aligned}\end{split}\]</div>
+<p>To see the effect of this prior we are going to repeat the analysis of
+the bike dataset, but this time using <code class="docutils literal notranslate"><span class="pre">num_knots</span> <span class="pre">=</span> <span class="pre">12</span></code>. We refit the
+data using <code class="docutils literal notranslate"><span class="pre">splines</span></code> model and the following model:</p>
+<div class="literal-block-wrapper docutils container" id="splines-rw">
+<div class="code-block-caption"><span class="caption-number">Listing 67 </span><span class="caption-text">splines_rw</span><a class="headerlink" href="#splines-rw" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">splines_rw</span><span class="p">:</span>
+    <span class="n">τ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfCauchy</span><span class="p">(</span><span class="s2">&quot;τ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> 
+    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">GaussianRandomWalk</span><span class="p">(</span><span class="s2">&quot;β&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">τ</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;μ&quot;</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">β</span><span class="p">))</span>
+    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;count_normalized&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+    <span class="n">trace_splines_rw</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>On <a class="reference internal" href="#fig-bikes-spline-data-grw"><span class="std std-numref">Fig. 97</span></a> we can see that the spline mean
+function for the model <code class="docutils literal notranslate"><span class="pre">splines_rw</span></code> (black line) is less wiggly than the
+spline mean function without smoothing prior (gray thick line), although
+we admit that the difference seems to be rather small.</p>
+<div class="figure align-default" id="fig-bikes-spline-data-grw">
+<a class="reference internal image-reference" href="../_images/bikes_spline_data_grw.png"><img alt="../_images/bikes_spline_data_grw.png" src="../_images/bikes_spline_data_grw.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 97 </span><span class="caption-text">Bikes data fitted with either a Gaussian prior (black) or a regularizing
+Gaussian Random Walk Prior (blue). We use 22 knots for both cases. The
+black line corresponds to the mean spline function computed from
+<code class="docutils literal notranslate"><span class="pre">splines</span></code> model. The blue line is the mean function for the model
+<code class="docutils literal notranslate"><span class="pre">splines_rw</span></code>.</span><a class="headerlink" href="#fig-bikes-spline-data-grw" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+<div class="section" id="modeling-co2-uptake-with-splines">
+<span id="id20"></span><h2>Modeling CO₂ Uptake with Splines<a class="headerlink" href="#modeling-co2-uptake-with-splines" title="Permalink to this headline">¶</a></h2>
+<p>For a final example of splines we are going to use data from an
+experimental study <span id="id21">[<a class="reference internal" href="references.html#id120">50</a>, <a class="reference internal" href="references.html#id121">51</a>]</span>. The experiment consists
+of measuring the CO₂ uptake in 12 different plants under varying
+conditions. Here we will only explore the effect of the external CO₂
+concentration, i.e. how the CO₂ concentration in the environment
+affects the consumption of CO₂ by different plants. The CO₂ uptake
+was measured at seven CO₂ concentrations for each plant, the same
+seven values for each one of the 12 plants. Let us begin by loading and
+tidying up the data.</p>
+<div class="literal-block-wrapper docutils container" id="plants-co2-import">
+<div class="code-block-caption"><span class="caption-number">Listing 68 </span><span class="caption-text">plants_co2_import</span><a class="headerlink" href="#plants-co2-import" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plants_CO2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/CO2_uptake.csv&quot;</span><span class="p">)</span>
+<span class="n">plant_names</span> <span class="o">=</span> <span class="n">plants_CO2</span><span class="o">.</span><span class="n">Plant</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+
+<span class="c1"># Index the first 7 CO2 measurements per plant</span>
+<span class="n">CO2_conc</span> <span class="o">=</span> <span class="n">plants_CO2</span><span class="o">.</span><span class="n">conc</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="mi">7</span><span class="p">]</span>
+
+<span class="c1"># Get full array which are the 7 measurements above repeated 12 times</span>
+<span class="n">CO2_concs</span> <span class="o">=</span> <span class="n">plants_CO2</span><span class="o">.</span><span class="n">conc</span><span class="o">.</span><span class="n">values</span>
+<span class="n">uptake</span> <span class="o">=</span> <span class="n">plants_CO2</span><span class="o">.</span><span class="n">uptake</span><span class="o">.</span><span class="n">values</span>
+
+<span class="n">index</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">groups</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The first model we are going to fit is one with a single response curve,
+i.e. assuming the response curve is the same for all the 12 plants. We
+first define the design matrix, using Patsy, just as we previously did.
+We set <code class="docutils literal notranslate"><span class="pre">num_knots=2</span></code> because we have 7 observations per plant, so a
+relatively low number of knots should work fine. In Code Block
+<a class="reference internal" href="#plants-co2-import"><span class="std std-ref">plants_co2_import</span></a>, <code class="docutils literal notranslate"><span class="pre">CO2_concs</span></code> is a
+list with the values <code class="docutils literal notranslate"><span class="pre">[95,</span> <span class="pre">175,</span> <span class="pre">250,</span> <span class="pre">350,</span> <span class="pre">500,</span> <span class="pre">675,</span> <span class="pre">1000]</span></code> repeated 12
+times, one time per plant.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">num_knots</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">knot_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">CO2_conc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">CO2_conc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">num_knots</span><span class="o">+</span><span class="mi">2</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">Bg</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span>
+    <span class="s2">&quot;bs(conc, knots=knots, degree=3, include_intercept=True) - 1&quot;</span><span class="p">,</span>
+    <span class="p">{</span><span class="s2">&quot;conc&quot;</span><span class="p">:</span> <span class="n">CO2_concs</span><span class="p">,</span> <span class="s2">&quot;knots&quot;</span><span class="p">:</span> <span class="n">knot_list</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>This problem looks similar to the bike rental problem from previous
+sections and thus we can start by applying the same model. Using a model
+that we have already applied in some previous problem or the ones we
+learned from the literature is a good way to start an analysis. This
+model-template approach can be viewed as a shortcut to the otherwise
+longer process of model design <span id="id22">[<a class="reference internal" href="references.html#id78">17</a>]</span>. In addition to the obvious
+advantage of not having to think of a model from scratch, we have other
+advantages such as having better intuition of how to perform exploratory
+analysis of the model and then possible routes for making changes into
+the model either to simplify it or to make it more complex.</p>
+<div class="literal-block-wrapper docutils container" id="sp-global">
+<div class="code-block-caption"><span class="caption-number">Listing 69 </span><span class="caption-text">sp_global</span><a class="headerlink" href="#sp-global" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">sp_global</span><span class="p">:</span>
+    <span class="n">τ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfCauchy</span><span class="p">(</span><span class="s2">&quot;τ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">τ</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">Bg</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">μg</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;μg&quot;</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Bg</span><span class="p">,</span> <span class="n">β</span><span class="p">))</span>
+    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">up</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;up&quot;</span><span class="p">,</span> <span class="n">μg</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">uptake</span><span class="p">)</span>
+    <span class="n">idata_sp_global</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="n">return_inferencedata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>From <a class="reference internal" href="#fig-sp-global"><span class="std std-numref">Fig. 98</span></a> we can clearly see that the model is only
+providing a good fit for some of the plants. The model is good on
+average, i.e. if we pool all the species together, but not very good for
+specific plants.</p>
+<div class="figure align-default" id="fig-sp-global">
+<a class="reference internal image-reference" href="../_images/sp_global.png"><img alt="../_images/sp_global.png" src="../_images/sp_global.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 98 </span><span class="caption-text">The black dots represents the CO₂ uptake measured at seven CO₂
+concentrations for each one of 12 plants (Qn1, Qn2, Qn3, Qc1, Qc2, Qc3,
+Mn1, Mn2, Mn3, Mc1, Mc2, Mc3). The black line is the mean spline fit
+from the model in Code Block <a class="reference internal" href="#sp-global"><span class="std std-ref">sp_global</span></a> and
+the gray shaded curve represents the 94% HDI interval for that fit.</span><a class="headerlink" href="#fig-sp-global" title="Permalink to this image">¶</a></p>
+</div>
+<p>Let us try now with a model with a different response per plant, in
+order to do this we define the design matrix <code class="docutils literal notranslate"><span class="pre">Bi</span></code> in Code Block
+<a class="reference internal" href="#bi-matrix"><span class="std std-ref">Bi_matrix</span></a>. To define <code class="docutils literal notranslate"><span class="pre">Bi</span></code> we use the list
+<code class="docutils literal notranslate"><span class="pre">CO2_conc</span> <span class="pre">=</span> <span class="pre">[95,</span>&#160; <span class="pre">175,</span>&#160; <span class="pre">250,</span>&#160; <span class="pre">350,</span>&#160; <span class="pre">500,</span>&#160; <span class="pre">675,</span> <span class="pre">1000]</span></code>, thus <code class="docutils literal notranslate"><span class="pre">Bi</span></code> is a
+<span class="math notranslate nohighlight">\(7 \times 7\)</span> matrix while <code class="docutils literal notranslate"><span class="pre">Bg</span></code> is a <span class="math notranslate nohighlight">\(84 \times 7\)</span> matrix.</p>
+<div class="literal-block-wrapper docutils container" id="bi-matrix">
+<div class="code-block-caption"><span class="caption-number">Listing 70 </span><span class="caption-text">Bi_matrix</span><a class="headerlink" href="#bi-matrix" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Bi</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span>
+    <span class="s2">&quot;bs(conc, knots=knots, degree=3, include_intercept=True) - 1&quot;</span><span class="p">,</span>
+    <span class="p">{</span><span class="s2">&quot;conc&quot;</span><span class="p">:</span> <span class="n">CO2_conc</span><span class="p">,</span> <span class="s2">&quot;knots&quot;</span><span class="p">:</span> <span class="n">knot_list</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<p>Accordingly with the shape of <code class="docutils literal notranslate"><span class="pre">Bi</span></code>, the parameter <span class="math notranslate nohighlight">\(\beta\)</span> in Code Block
+<a class="reference internal" href="#sp-individual"><span class="std std-ref">sp_individual</span></a> has now shape
+<code class="docutils literal notranslate"><span class="pre">shape=(Bi.shape[1],</span> <span class="pre">groups))</span></code> (instead of <code class="docutils literal notranslate"><span class="pre">shape=(Bg.shape[1]))</span></code>) and
+we reshape <code class="docutils literal notranslate"><span class="pre">μi[:,index].T.ravel()</span></code></p>
+<div class="literal-block-wrapper docutils container" id="sp-individual">
+<div class="code-block-caption"><span class="caption-number">Listing 71 </span><span class="caption-text">sp_individual</span><a class="headerlink" href="#sp-individual" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">sp_individual</span><span class="p">:</span>
+    <span class="n">τ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfCauchy</span><span class="p">(</span><span class="s2">&quot;τ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">τ</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">Bi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">groups</span><span class="p">))</span>
+    <span class="n">μi</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;μi&quot;</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Bi</span><span class="p">,</span> <span class="n">β</span><span class="p">))</span>
+    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">up</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;up&quot;</span><span class="p">,</span> <span class="n">μi</span><span class="p">[:,</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">uptake</span><span class="p">)</span>
+    <span class="n">idata_sp_individual</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="n">return_inferencedata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>From <a class="reference internal" href="#fig-sp-individual"><span class="std std-numref">Fig. 99</span></a> we can now see that we have a much
+better fit for each one of the 12 plants.</p>
+<div class="figure align-default" id="fig-sp-individual">
+<a class="reference internal image-reference" href="../_images/sp_individual.png"><img alt="../_images/sp_individual.png" src="../_images/sp_individual.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 99 </span><span class="caption-text">CO₂ uptake measured at seven CO₂ concentrations for 12 plants. The
+black line is the mean spline fit from the model in Code Block
+<a class="reference internal" href="#sp-individual"><span class="std std-ref">sp_individual</span></a> and the gray shaded curve
+represents the 94% HDI interval for that fit.</span><a class="headerlink" href="#fig-sp-individual" title="Permalink to this image">¶</a></p>
+</div>
+<p>We can also mix both previous models <a class="footnote-reference brackets" href="#id36" id="id23">13</a>. This may be interesting if
+we want to estimate a global trend for the 12 plants plus individual
+fits. Model <code class="docutils literal notranslate"><span class="pre">sp_mix</span></code> in Code Block <a class="reference internal" href="#sp-mix"><span class="std std-ref">sp_mix</span></a> use
+both previously defined design matrices <code class="docutils literal notranslate"><span class="pre">Bg</span></code> and <code class="docutils literal notranslate"><span class="pre">Bi</span></code>.</p>
+<div class="literal-block-wrapper docutils container" id="sp-mix">
+<div class="code-block-caption"><span class="caption-number">Listing 72 </span><span class="caption-text">sp_mix</span><a class="headerlink" href="#sp-mix" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">sp_mix</span><span class="p">:</span>
+    <span class="n">τ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfCauchy</span><span class="p">(</span><span class="s2">&quot;τ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">βg</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;βg&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">τ</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">Bg</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">μg</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;μg&quot;</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Bg</span><span class="p">,</span> <span class="n">βg</span><span class="p">))</span>
+    <span class="n">βi</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;βi&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">τ</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">Bi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">groups</span><span class="p">))</span>
+    <span class="n">μi</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;μi&quot;</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Bi</span><span class="p">,</span> <span class="n">βi</span><span class="p">))</span>
+    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">up</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;up&quot;</span><span class="p">,</span> <span class="n">μg</span><span class="o">+</span><span class="n">μi</span><span class="p">[:,</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">uptake</span><span class="p">)</span>
+    <span class="n">idata_sp_mix</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="n">return_inferencedata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p><a class="reference internal" href="#fig-sp-mix-decomposed"><span class="std std-numref">Fig. 100</span></a> show the fit of model <code class="docutils literal notranslate"><span class="pre">sp_mix</span></code>. One
+advantage of this model is that we can decompose the individual fit (in
+blue) into two terms, a global trend, in black, and the deviation of
+that trend for each plant, in gray. Notice how the global trend, in
+black, is repeated in each subplot. We can see that the deviations are
+different not only in the average uptake, i.e. they are not flat
+straight lines, but they are also different, to various extents, in the
+shape of their functional responses.</p>
+<div class="figure align-default" id="fig-sp-mix-decomposed">
+<a class="reference internal image-reference" href="../_images/sp_mix_decomposed.png"><img alt="../_images/sp_mix_decomposed.png" src="../_images/sp_mix_decomposed.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 100 </span><span class="caption-text">CO₂ uptake measured at seven CO₂ concentrations for 12 plants. The
+blue line is the mean spline fit from model in Code Block
+<a class="reference internal" href="#sp-mix"><span class="std std-ref">sp_mix</span></a> and the gray shaded curve represents the
+94% HDI interval for that fit. This fit is decomposed into two terms. In
+black, and a dark gray band, the global contribution and in gray, and a
+light gray band, the deviations from that global contribution. The blue
+line, and blue band, is the sum of the global trend and deviations from
+it.</span><a class="headerlink" href="#fig-sp-mix-decomposed" title="Permalink to this image">¶</a></p>
+</div>
+<p><a class="reference internal" href="#fig-sp-compare"><span class="std std-numref">Fig. 101</span></a> shows that according to LOO <code class="docutils literal notranslate"><span class="pre">sp_mix</span></code> is a
+better model than the other two. We can see there is still some
+uncertainty about this statement as the standard errors for models
+<code class="docutils literal notranslate"><span class="pre">sp_mix</span></code> and <code class="docutils literal notranslate"><span class="pre">sp_individual</span></code> partially overlap. We can also see that
+models <code class="docutils literal notranslate"><span class="pre">sp_mix</span></code> and <code class="docutils literal notranslate"><span class="pre">sp_individual</span></code> are penalized harder than
+<code class="docutils literal notranslate"><span class="pre">sp_global</span></code> (the distance between the empty circle and black circle is
+shorter for <code class="docutils literal notranslate"><span class="pre">sp_global</span></code>). We note that LOO computation returns warnings
+about the estimated shape parameter of Pareto distribution being greater
+than 0.7. For this example we are going to stop here, but for a real
+analysis, we should pay further attention to these warnings and try to
+follow some of the actions described in Section <a class="reference internal" href="chp_02.html#k-paretto"><span class="std std-ref">Pareto Shape Parameter</span></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cmp</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">compare</span><span class="p">({</span><span class="s2">&quot;global&quot;</span><span class="p">:</span><span class="n">idata_sp_global</span><span class="p">,</span> 
+                  <span class="s2">&quot;individual&quot;</span><span class="p">:</span><span class="n">idata_sp_individual</span><span class="p">,</span> 
+                  <span class="s2">&quot;mix&quot;</span><span class="p">:</span><span class="n">idata_sp_mix</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="figure align-default" id="fig-sp-compare">
+<a class="reference internal image-reference" href="../_images/sp_compare.png"><img alt="../_images/sp_compare.png" src="../_images/sp_compare.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 101 </span><span class="caption-text">Model comparison using LOO for the 3 different CO₂ uptake models
+discussed in this chapter (<code class="docutils literal notranslate"><span class="pre">sp_global</span></code>, <code class="docutils literal notranslate"><span class="pre">sp_individual</span></code>, <code class="docutils literal notranslate"><span class="pre">sp_mix</span></code>).
+Models are ranked from higher predictive accuracy to lower. The open
+dots represent the values of LOO, the black dots are the in-sample
+predictive accuracy. The black segments represent the standard error for
+the LOO computations. The gray segments, centered at the triangles,
+represent the standard errors of the difference between the values of
+LOO for each model and the best ranked model.</span><a class="headerlink" href="#fig-sp-compare" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="exercises">
+<span id="exercises5"></span><h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<p><strong>5E1.</strong>. Splines are quite powerful so its good to know
+when and where to use them. To reinforce this explain each of the
+following</p>
+<ol class="simple">
+<li><p>The differences between linear regression and splines.</p></li>
+<li><p>When you may want to use linear regression over splines</p></li>
+<li><p>Why splines is usually preferred over polynomial regression of high
+order.</p></li>
+</ol>
+<p><strong>5E2.</strong> Redo <a class="reference internal" href="#fig-polynomial-regression"><span class="std std-numref">Fig. 87</span></a> but
+fitting a polynomial of degree 0 and of degree 1. Does they look similar
+to any other type of model. Hint: you may want to use the code in the
+GitHub repository.</p>
+<p><strong>5E3.</strong> Redo <a class="reference internal" href="#fig-piecewise"><span class="std std-numref">Fig. 88</span></a> but changing the
+value of one or the two knots. How the position of the knots affects the
+fit? You will find the code in the GitHub repository.</p>
+<p><strong>5E4.</strong> Below we provide some data. To each data fit a 0,
+1, and 3 degree spline. Plot the fit, including the data and position of
+the knots. Use <code class="docutils literal notranslate"><span class="pre">knots</span> <span class="pre">=</span> <span class="pre">np.linspace(-0.8,</span> <span class="pre">0.8,</span> <span class="pre">4)</span></code>. Describe the fit.</p>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">np.linspace(-1,</span> <span class="pre">1.,</span> <span class="pre">200)</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">np.random.normal(2*x,</span> <span class="pre">0.25)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">np.linspace(-1,</span> <span class="pre">1.,</span> <span class="pre">200)</span></code> and
+<code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">np.random.normal(x**2,</span> <span class="pre">0.25)</span></code></p></li>
+<li><p>pick a function you like.</p></li>
+</ol>
+<p><strong>5E5.</strong> In Code Block
+<a class="reference internal" href="#bikes-dmatrix"><span class="std std-ref">bikes_dmatrix</span></a> we used a non-cyclic aware
+design matrix. Plot this design matrix. Then generate a cyclic design
+matrix. Plot this one too what is the difference?</p>
+<p><strong>5E6.</strong> Generate the following design matrices using
+Patsy.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">knots</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">]</span>
+
+<span class="n">B0</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;bs(x, knots=knots, degree=3, include_intercept=False) +1&quot;</span><span class="p">,</span>
+            <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="s2">&quot;knots&quot;</span><span class="p">:</span><span class="n">knots</span><span class="p">})</span>
+<span class="n">B1</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;bs(x, knots=knots, degree=3, include_intercept=True) +1&quot;</span><span class="p">,</span>
+            <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="s2">&quot;knots&quot;</span><span class="p">:</span><span class="n">knots</span><span class="p">})</span>
+<span class="n">B2</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;bs(x, knots=knots, degree=3, include_intercept=False) -1&quot;</span><span class="p">,</span>
+            <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="s2">&quot;knots&quot;</span><span class="p">:</span><span class="n">knots</span><span class="p">})</span>
+<span class="n">B3</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;bs(x, knots=knots, degree=3, include_intercept=True) -1&quot;</span><span class="p">,</span>
+            <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="s2">&quot;knots&quot;</span><span class="p">:</span><span class="n">knots</span><span class="p">})</span>
+</pre></div>
+</div>
+<ol class="simple">
+<li><p>What is the shape of each one of the matrices? Can you justify the
+values for the shapes?</p></li>
+<li><p>Could you explain what the arguments <code class="docutils literal notranslate"><span class="pre">include_intercept=True/False</span></code>
+and the <code class="docutils literal notranslate"><span class="pre">+1/-1</span></code> do? Try generating figures like
+<a class="reference internal" href="#fig-splines-basis"><span class="std std-numref">Fig. 89</span></a> and <a class="reference internal" href="#fig-design-matrices"><span class="std std-numref">Fig. 92</span></a> to
+help you answer this question</p></li>
+</ol>
+<p><strong>5E7.</strong> Refit the bike rental example using the options
+listed below. Visually compare the results and try to explain the
+results:</p>
+<ol class="simple">
+<li><p>Code Block <a class="reference internal" href="#knot-list"><span class="std std-ref">knot_list</span></a> but do not remove
+the first and last knots (i.e. without using 1:-1)</p></li>
+<li><p>Use quantiles to set the knots instead of spacing them linearly.</p></li>
+<li><p>Repeat the previous two points but with less knots</p></li>
+</ol>
+<p><strong>5E8.</strong> In the GitHub repository you will find the spectra
+dataset use it to:</p>
+<ol class="simple">
+<li><p>Fit a cubic spline with knots
+<code class="docutils literal notranslate"><span class="pre">np.quantile(X,</span> <span class="pre">np.arange(0.1,</span> <span class="pre">1,</span> <span class="pre">0.02))</span></code> and a Gaussian prior (like
+in Code Block <a class="reference internal" href="#splines"><span class="std std-ref">splines</span></a>)</p></li>
+<li><p>Fit a cubic spline with knots
+<code class="docutils literal notranslate"><span class="pre">np.quantile(X,</span> <span class="pre">np.arange(0.1,</span> <span class="pre">1,</span> <span class="pre">0.02))</span></code> and a Gaussian Random Walk
+prior (like in Code Block <a class="reference internal" href="#splines-rw"><span class="std std-ref">splines_rw</span></a>)</p></li>
+<li><p>Fit a cubic spline with knots
+<code class="docutils literal notranslate"><span class="pre">np.quantile(X,</span> <span class="pre">np.arange(0.1,</span> <span class="pre">1,</span> <span class="pre">0.1))</span></code> and a Gaussian prior (like
+in Code Block <a class="reference internal" href="#splines"><span class="std std-ref">splines</span></a>)</p></li>
+<li><p>compare the fits visually and using LOO</p></li>
+</ol>
+<p><strong>5M9.</strong> Redo <a class="reference internal" href="#fig-piecewise"><span class="std std-numref">Fig. 88</span></a> extending <code class="docutils literal notranslate"><span class="pre">x_max</span></code>
+from 6 to 12.</p>
+<ol class="simple">
+<li><p>How this change affects the fit?</p></li>
+<li><p>What are the implications for extrapolation?</p></li>
+<li><p>add one more knot and make the necessary changes in the code so the
+fit actually use the 3 knots.</p></li>
+<li><p>change the position of the third new knot to improve the fit as much
+as possible.</p></li>
+</ol>
+<p><strong>5M10.</strong> For the bike rental example increase the number
+of knots. What is the effect on the fit? Change the width of the prior
+and visually evaluate the effect on the fit. What do you think the
+combination of knot number and prior weights controls?</p>
+<p><strong>5M11.</strong> Fit the baby regression example from Chapter
+<a class="reference internal" href="chp_04.html#chap3"><span class="std std-ref">4</span></a> using splines.</p>
+<p><strong>5M12.</strong> In Code Block
+<a class="reference internal" href="#bikes-dmatrix"><span class="std std-ref">bikes_dmatrix</span></a> we used a non-circular
+aware design matrix. Since we describe the hours in a day as cyclic, we
+want to use cyclic splines. However, there is one wrinkle. In the
+original dataset the hours range from 0 to 23, so using a circular
+spline patsy would treat 0 and 23 are the same. Still, we want a
+circular spline regression so perform the following steps.</p>
+<ol class="simple">
+<li><p>Duplicate the 0 hour data label it as 24.</p></li>
+<li><p>Generate a circular design matrix and a non-circular design matrix
+with this modified dataset. Plot the results and compare.</p></li>
+<li><p>Refit the bike spline dataset.</p></li>
+<li><p>Explain what the effect of the circular spine regression was using
+plots, numerical summaries, and diagnostics.</p></li>
+</ol>
+<p><strong>5M13.</strong> For the rent bike example we use a Gaussian as
+likelihood, this can be seen as a reasonable approximation when the
+number of counts is large, but still brings some problems, like
+predicting negative number of rented bikes (for example, at night when
+the observed number of rented bikes is close to zero). To fix this issue
+and improve our models we can try with other likelihoods:</p>
+<ol class="simple">
+<li><p>use a Poisson likelihood (hint you may need to restrict the <span class="math notranslate nohighlight">\(\beta\)</span>
+coefficients to be positive, and you can not normalize the data as
+we did in the example). How the fit differs from the example in the
+book. is this a better fit? In what sense?</p></li>
+<li><p>use a NegativeBinomial likelihood, how the fit differs from the
+previous two? Could you explain the differences (hint, the
+NegativeBinomial can be considered as a mixture model of Poisson
+distributions, which often helps to model overdispersed data)</p></li>
+<li><p>Use LOO to compare the spline model with Poisson and
+NegativeBinomial likelihoods. Which one has the best predictive
+performance?</p></li>
+<li><p>Can you justify the values of <code class="docutils literal notranslate"><span class="pre">p_loo</span></code> and the values of
+<span class="math notranslate nohighlight">\(\hat \kappa\)</span>?</p></li>
+<li><p>Use LOO-PIT to compare Gaussian, NegativeBinomial and Poisson models</p></li>
+</ol>
+<p><strong>5M14.</strong> Using the model in Code Block
+<a class="reference internal" href="#splines"><span class="std std-ref">splines</span></a> as a guide and for <span class="math notranslate nohighlight">\(X \in [0, 1]\)</span>, set
+<span class="math notranslate nohighlight">\(\tau \sim \text{Laplace}(0, 1)\)</span>:</p>
+<ol class="simple">
+<li><p>Sample and plot realizations from the prior for <span class="math notranslate nohighlight">\(\mu\)</span>. Use different
+number and locations for the knots</p></li>
+<li><p>What is the prior expectation for <span class="math notranslate nohighlight">\(\mu(x_i)\)</span> and how does it depend
+on the knots and X?</p></li>
+<li><p>What is the prior expectation for the standard deviations of
+<span class="math notranslate nohighlight">\(\mu(x_i)\)</span> and how does it depend on the knots and X?</p></li>
+<li><p>Repeat the previous points for the prior predictive distribution</p></li>
+<li><p>Repeat the previous points using a <span class="math notranslate nohighlight">\(\mathcal{H}\text{C}(1)\)</span></p></li>
+</ol>
+<p><strong>5M15.</strong> Fit the following data. Notice that the response
+variable is binary so you will need to adjust the likelihood accordingly
+and use a link function.</p>
+<ol class="simple">
+<li><p>a logistic regression from a previous chapter. Visually compare the
+results between both models.</p></li>
+<li><p>Space Influenza is a disease which affects mostly young and old
+people, but not middle-age folks. Fortunately, Space Influenza is
+not a serious concern as it is completely made up. In this dataset
+we have a record of people that got tested for Space Influenza and
+whether they are sick (1) or healthy (0) and also their age. Could
+you have solved this problem using logistic regression?</p></li>
+</ol>
+<p><strong>5M16.</strong> Besides “hour” the bike dataset has other
+covariates, like “temperature”. Fit a splines using both covariates. The
+simplest way to do this is by defining a separated spline/design matrix
+for each covariate. Fit a model with a NegativeBinomial likelihood.</p>
+<ol class="simple">
+<li><p>Run diagnostics to check the sampling is correct and modify the
+model and or sample hyperparameters accordingly.</p></li>
+<li><p>How the rented bikes depend on the hours of the day and how on the
+temperature?</p></li>
+<li><p>Generate a model with only the hour covariate to the one with the
+“hour” and “temperature”. Compare both model using LOO, LOO-PIT and
+posterior predictive checks.</p></li>
+<li><p>Summarize all your findings</p></li>
+</ol>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="id24"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>
+<dd><p>See Runge’s phenomenon for details. This can also be seen from
+Taylor’s theorem, polynomials will be useful to approximate a
+function close to a single given point, but it will not be good over
+its whole domain. If you got lost try watching this video
+<a class="reference external" href="https://www.youtube.com/watch?v=3d6DsjIBzJ4">https://www.youtube.com/watch?v=3d6DsjIBzJ4</a>.</p>
+</dd>
+<dt class="label" id="id25"><span class="brackets"><a class="fn-backref" href="#id3">2</a></span></dt>
+<dd><p>A piecewise function is a function that is defined using
+sub-functions, where each sub-function applies to a different
+interval in the domain.</p>
+</dd>
+<dt class="label" id="id26"><span class="brackets"><a class="fn-backref" href="#id4">3</a></span></dt>
+<dd><p>In Chapter <a class="reference internal" href="chp_07.html#chap6"><span class="std std-ref">7</span></a> we explore how step-functions have a
+central role in Bayesian Additive Regression Trees.</p>
+</dd>
+<dt class="label" id="id27"><span class="brackets"><a class="fn-backref" href="#id5">4</a></span></dt>
+<dd><p>This can also be justified numerically as this reduces the number
+of coefficients we need to find to compute a solution.</p>
+</dd>
+<dt class="label" id="id28"><span class="brackets"><a class="fn-backref" href="#id6">5</a></span></dt>
+<dd><p>As usual the identity function is a valid choice.</p>
+</dd>
+<dt class="label" id="id29"><span class="brackets"><a class="fn-backref" href="#id8">6</a></span></dt>
+<dd><p>Other basis functions could be wavelets or Fourier series as we
+will see in Chapter <a class="reference internal" href="chp_06.html#chap4"><span class="std std-ref">6</span></a>.</p>
+</dd>
+<dt class="label" id="id30"><span class="brackets"><a class="fn-backref" href="#id10">7</a></span></dt>
+<dd><p>Also known as break points, which is arguably a more memorable
+name, but still knots is widely used in the literature.</p>
+</dd>
+<dt class="label" id="id31"><span class="brackets"><a class="fn-backref" href="#id11">8</a></span></dt>
+<dd><p>In the limit of infinite degree a B-spline will span the entire
+real line and not only that, it will converge to a Gaussian
+<a class="reference external" href="https://www.youtube.com/watch/9CS7j5I6aOc">https://www.youtube.com/watch/9CS7j5I6aOc</a>.</p>
+</dd>
+<dt class="label" id="id32"><span class="brackets"><a class="fn-backref" href="#id12">9</a></span></dt>
+<dd><p>Check
+<a class="reference external" href="https://pclambert.net/interactivegraphs/spline_continuity/spline_continuity">https://pclambert.net/interactivegraphs/spline_continuity/spline_continuity</a>
+for further intuition</p>
+</dd>
+<dt class="label" id="id33"><span class="brackets"><a class="fn-backref" href="#id14">10</a></span></dt>
+<dd><p>If interested you can check
+<a class="reference external" href="https://en.wikipedia.org/wiki/De_Boor%27s_algorithm">https://en.wikipedia.org/wiki/De_Boor%27s_algorithm</a>.</p>
+</dd>
+<dt class="label" id="id34"><span class="brackets"><a class="fn-backref" href="#id15">11</a></span></dt>
+<dd><p><a class="reference external" href="https://patsy.readthedocs.io">https://patsy.readthedocs.io</a></p>
+</dd>
+<dt class="label" id="id35"><span class="brackets"><a class="fn-backref" href="#id17">12</a></span></dt>
+<dd><p><a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/bike+sharing+dataset">https://archive.ics.uci.edu/ml/datasets/bike+sharing+dataset</a></p>
+</dd>
+<dt class="label" id="id36"><span class="brackets"><a class="fn-backref" href="#id23">13</a></span></dt>
+<dd><p>Yes, this is also known as a mixed-effect model, you might recall
+the related concept we discussed in Chapter <a class="reference internal" href="chp_04.html#chap3"><span class="std std-ref">4</span></a>.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./markdown"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="chp_04.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Chapter 4: Extending Linear Models</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="chp_06.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Chapter 6: Time Series</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Martin, Kumar, Lao<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

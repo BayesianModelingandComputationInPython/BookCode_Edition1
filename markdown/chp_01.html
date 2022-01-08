@@ -1,0 +1,1891 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chapter 1: Bayesian Inference &#8212; Bayesian Modeling and Computation in Python</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-codeautolink.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Chapter 2: Exploratory Analysis of Bayesian Models" href="chp_02.html" />
+    <link rel="prev" title="Symbols" href="symbollist.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-702QMHG8ST"></script>
+<script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', 'G-702QMHG8ST');
+                </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Bayesian Modeling and Computation in Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="dedication.html">
+   Dedication
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="foreword.html">
+   Foreword
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="preface.html">
+   Preface
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="symbollist.html">
+   Symbols
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Chapter 1: Bayesian Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_02.html">
+   Chapter 2: Exploratory Analysis of Bayesian Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_03.html">
+   Chapter 3: Linear Models and Probabilistic Programming Languages
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_04.html">
+   Chapter 4: Extending Linear Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_05.html">
+   Chapter 5: Splines
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_06.html">
+   Chapter 6: Time Series
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_07.html">
+   Chapter 7: Bayesian Additive Regression Trees
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_08.html">
+   Chapter 8: Approximate Bayesian Computation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_09.html">
+   Chapter 9: End to End Bayesian Workflows
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_10.html">
+   Chapter 10: Probabilistic Programming Languages
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_11.html">
+   Chapter 11: Appendiceal Topics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="glossary.html">
+   Glossary
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="references.html">
+   References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_01.html">
+   Code 1: Bayesian Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_02.html">
+   Code 2: Exploratory Analysis of Bayesian Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_03.html">
+   Code 3: Linear Models and Probabilistic Programming Languages
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_04.html">
+   Code 4: Extending Linear Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_05.html">
+   Code 5: Splines
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_06.html">
+   Code 6: Time Series
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_07.html">
+   Code 7: Bayesian Additive Regression Trees
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_08.html">
+   Code 8: Approximate Bayesian Computation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_09.html">
+   Code 9: End to End Bayesian Workflows
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_10.html">
+   Code 10: Probabilistic Programming Languages
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_11.html">
+   Code 11: Appendiceal Topics
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_01.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bayesian-modeling">
+   Bayesian Modeling
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bayesian-models">
+     Bayesian Models
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bayesian-inference">
+     Bayesian Inference
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-diy-sampler-do-not-try-this-at-home">
+   A DIY Sampler, Do Not Try This at Home
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#say-yes-to-automating-inference-say-no-to-automated-model-building">
+   Say Yes to Automating Inference, Say No to Automated Model Building
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-few-options-to-quantify-your-prior-information">
+   A Few Options to Quantify Your Prior Information
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#conjugate-priors">
+     Conjugate Priors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#objective-priors">
+     Objective Priors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#maximum-entropy-priors">
+     Maximum Entropy Priors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#weakly-informative-priors-and-regularization-priors">
+     Weakly Informative Priors and Regularization Priors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-prior-predictive-distributions-to-assess-priors">
+     Using Prior Predictive Distributions to Assess Priors
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="chapter-1-bayesian-inference">
+<span id="chap1"></span><h1>Chapter 1: Bayesian Inference<a class="headerlink" href="#chapter-1-bayesian-inference" title="Permalink to this headline">¶</a></h1>
+<p>Modern Bayesian statistics is mostly performed using computer code. This
+has dramatically changed how Bayesian statistics was performed from even
+a few decades ago. The complexity of models we can build has increased,
+and the barrier of necessary mathematical and computational skills has
+been lowered. Additionally, the iterative modeling process has become,
+in many aspects, much easier to perform and more relevant than ever. The
+popularization of very powerful computer methods is really great but
+also demands an increased level of responsibility. Even if expressing
+statistical methods is easier than ever, statistics is a field full of
+subtleties that do not magically disappear by using powerful
+computational methods. Therefore having a good background about
+theoretical aspects, especially those relevant in practice, is extremely
+useful to effectively apply statistical methods. In this first chapter,
+we introduce these concepts and methods, many, which will be further
+explored and expanded throughout the rest of the book.</p>
+<div class="section" id="bayesian-modeling">
+<span id="id1"></span><h2>Bayesian Modeling<a class="headerlink" href="#bayesian-modeling" title="Permalink to this headline">¶</a></h2>
+<p>A conceptual model is a representation of a system, made of the
+composition of concepts that are used to help people know, understand,
+or simulate the object or process the model represents
+<span id="id2">[<a class="reference internal" href="references.html#id25">6</a>]</span>. Additionally, models are human-designed
+representations with very specific goals in mind. As such, it is
+generally more convenient to talk about the adequacy of the model to a
+given problem than its intrinsic correctness. Models exist solely as an
+aid to a further goal.</p>
+<p>When designing a new car, a car company makes a physical model to help
+others understand how the product will look when it is built. In this
+case, a sculptor with prior knowledge of cars, and a good estimate of
+how the model will be used, takes a supply of raw material such as clay,
+uses hand tools to sculpt a physical model. This physical model can help
+inform others about various aspects of the design, such as whether the
+appearance is aesthetically pleasing, or if the shape of the car is
+aerodynamic. It takes a combination of domain expertise and sculpting
+expertise to achieve a useful result. The modeling process often
+requires building more than one model, either to explore different
+options or because the models are iteratively improved and expanded as a
+result of the interaction with other members of the car development
+team. These days it is also common that in addition to a physical car
+model, there is a digital model built-in Computer-Aided Design software.
+This computer model has some advantages over a physical one. It is
+simpler and cheaper to use for digital for crash simulations versus
+testing on physical cars. It is also easier to share this model with
+colleagues in different offices.</p>
+<p>These same ideas are relevant in Bayesian modeling. Building a model
+requires a combination of domain expertise and statistical skill to
+incorporate knowledge into some computable objectives and determine the
+usefulness of the result. Data is the raw material, and statistical
+distributions are the main mathematical tools to shape the statistical
+model. It takes a combination of domain expertise and statistical
+expertise to achieve a useful result. Bayesian practitioners also build
+more than one model in an iterative fashion, the first of which is
+primarily useful for the practitioner themselves to identify gaps in
+their thinking, or shortcomings in their models. These first sets of
+models are then used to build subsequent improved and expanded models.
+Additionally, the use of one inference mechanism does not obviate the
+utility for all others, just as a physical model of a car does not
+obviate the utility of a digital model. In the same way, the modern
+Bayesian practitioner has many ways to express their ideas, generate
+results, and share the outputs, allowing a much wider distribution of
+positive outcomes for the practitioner and their peers.</p>
+<div class="section" id="bayesian-models">
+<span id="id3"></span><h3>Bayesian Models<a class="headerlink" href="#bayesian-models" title="Permalink to this headline">¶</a></h3>
+<p>Bayesian models, computational or otherwise, have two defining
+characteristics:</p>
+<ul class="simple">
+<li><p>Unknown quantities are described using probability distributions
+<a class="footnote-reference brackets" href="#id39" id="id4">1</a>. We call these quantities parameters <a class="footnote-reference brackets" href="#id40" id="id5">2</a>.</p></li>
+<li><p>Bayes’ theorem is used to update the values of the parameters
+conditioned on the data. We can also see this process as a
+reallocation of probabilities.</p></li>
+</ul>
+<p>At a high-level we can describe the process of constructing Bayesian
+modeling in 3 steps.</p>
+<ol class="simple">
+<li><p>Given some data and some assumptions on how this data could have
+been generated, we design a model by combining and transforming
+random variables.</p></li>
+<li><p>We use Bayes’ theorem to condition our models to the available data.
+We call this process <strong>inference</strong>, and as a result we obtain a
+posterior distribution. We hope the data reduces the uncertainty for
+possible parameter values, though this is not a guaranteed of any
+Bayesian model.</p></li>
+<li><p>We criticize the model by checking whether the model makes sense
+according to different criteria, including the data and our
+expertise on the domain-knowledge. Because we generally are
+uncertain about the models themselves, we sometimes compare several
+models.</p></li>
+</ol>
+<p>If you are familiar with other forms of modeling, you will recognize the
+importance of criticizing models and the necessity of performing these 3
+steps iteratively. For example, we may need to retrace our steps at any
+given point. Perhaps we introduced a, silly, coding mistake, or after
+some challenges we found a way to improve the model, or we find that the
+data is not useful as we originally thought, and we need to collect more
+data or even a different kind of data.</p>
+<p>Throughout this book we will discuss different ways to perform each of
+these 3 steps and we will learn about ways to expand them into a more
+complex <strong>Bayesian workflow</strong>. We consider this topic so important that
+we dedicated an entire Chapter <a class="reference internal" href="chp_09.html#chap9"><span class="std std-ref">9</span></a> to revisit and
+rediscuss these ideas.</p>
+</div>
+<div class="section" id="bayesian-inference">
+<span id="id6"></span><h3>Bayesian Inference<a class="headerlink" href="#bayesian-inference" title="Permalink to this headline">¶</a></h3>
+<p>In colloquial terms, inference is associated with obtaining conclusions
+based on evidence and reasoning. Bayesian inference is a particular form
+of statistical inference based on combining probability distributions in
+order to obtain other probability distributions. Bayes’ theorem provides
+us with a general recipe to estimate the value of the parameter
+<span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> given that we have observed some data
+<span class="math notranslate nohighlight">\(\boldsymbol{Y}\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-posterior-dist">
+<span class="eqno">(1)<a class="headerlink" href="#equation-eq-posterior-dist" title="Permalink to this equation">¶</a></span>\[\underbrace{p(\boldsymbol{\theta} \mid \boldsymbol{Y})}_{\text{posterior}} = \frac{\overbrace{p(\boldsymbol{Y} \mid \boldsymbol{\theta})}^{\text{likelihood}}\; \overbrace{p(\boldsymbol{\theta})}^{\text{prior}}}{\underbrace{{p(\boldsymbol{Y})}}_{\text{marginal likelihood}}}\]</div>
+<p>The likelihood function links the observed data with the unknown
+parameters while the prior distribution represents the uncertainty <a class="footnote-reference brackets" href="#id41" id="id7">3</a>
+about the parameters before observing the data <span class="math notranslate nohighlight">\(\boldsymbol{Y}\)</span>. By
+multiplying them we obtain the posterior distribution, that is the joint
+distribution over all the parameters in the model (conditioned on the
+observed data). <a class="reference internal" href="#fig-bayesian-triad"><span class="std std-numref">Fig. 1</span></a> shows an example of an
+arbitrary prior, likelihood and the resulting posterior <a class="footnote-reference brackets" href="#id42" id="id8">4</a>.</p>
+<div class="figure align-default" id="fig-bayesian-triad">
+<a class="reference internal image-reference" href="../_images/bayesian_triad.png"><img alt="../_images/bayesian_triad.png" src="../_images/bayesian_triad.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">Left panel. A hypothetical prior indicating that the value
+<span class="math notranslate nohighlight">\(\theta = 0.5\)</span> is more likely and the plausibility of the rest of the
+values decreases linearly and symmetrically (black). A likelihood
+showing that the value <span class="math notranslate nohighlight">\(\theta = 0.2\)</span> is the one that better agrees with
+the hypothetical data (gray) and the resulting posterior (blue), a
+compromise between prior and likelihood. We have omitted the values of
+the y-axis to emphasize that we only care about relative values. Right
+panel, the same functions as in the left panel but the y-axis is in the
+log-scale. Notice that the information about relative values is
+preserved, for example, the location of the maxima and minima is the
+same in both panels. The log scale is preferred to perform calculations
+as computations are numerically more stable.</span><a class="headerlink" href="#fig-bayesian-triad" title="Permalink to this image">¶</a></p>
+</div>
+<p>Notice that while <span class="math notranslate nohighlight">\(\boldsymbol{Y}\)</span> is the observed data, it also is a
+random vector as its values depend on the results of a particular
+experiment <a class="footnote-reference brackets" href="#id43" id="id9">5</a>. In order to obtain a posterior distribution, we regard
+the data as fixed at the actual observed values. For this reason a
+common alternative notation is to use <span class="math notranslate nohighlight">\(y_{obs}\)</span>, instead of
+<span class="math notranslate nohighlight">\(\boldsymbol{Y}\)</span>.</p>
+<p>As you can see evaluating the posterior at each specific <em>point</em> is
+conceptually simple, we just need to multiply a prior times a
+likelihood. However, that is not enough to inform us about the
+posterior, as we not only need the posterior probability at that
+specific <em>point</em>, but also in relation to the surrounding <em>points</em>. This
+<em>global</em> information of the posterior distribution is represented by the
+normalizing constant. Unfortunately, difficulties arise from the need to
+compute the normalizing constant <span class="math notranslate nohighlight">\(p(\boldsymbol{Y})\)</span>. This is easier to
+see if we write the marginal likelihood as:</p>
+<div class="math notranslate nohighlight" id="equation-eq-marginal-likelihood">
+<span class="eqno">(2)<a class="headerlink" href="#equation-eq-marginal-likelihood" title="Permalink to this equation">¶</a></span>\[{p(\boldsymbol{Y}) = \int_{\boldsymbol{\Theta}} p(\boldsymbol{Y} \mid \boldsymbol{\theta})p(\boldsymbol{\theta}) d\boldsymbol{\theta}}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Theta\)</span> means we are integrating over all the possible values of
+<span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<p>Computing integrals like this can be much harder than would first appear
+(see Section <a class="reference internal" href="chp_11.html#marginal-likelihood"><span class="std std-ref">Marginal Likelihood</span></a> and a funny XKCD
+comic <a class="footnote-reference brackets" href="#id44" id="id10">6</a>). Especially when we realize that for most problems a
+closed-form expression is not even available. Fortunately, there are
+numerical methods that can help us with this challenge if used properly.
+As the marginal likelihood is not generally computed, it is very common
+to see Bayes’ theorem expressed as a proportionality:</p>
+<div class="math notranslate nohighlight" id="equation-eq-proportional-bayes">
+<span class="eqno">(3)<a class="headerlink" href="#equation-eq-proportional-bayes" title="Permalink to this equation">¶</a></span>\[\underbrace{p(\boldsymbol{\theta} \mid \boldsymbol{Y})}_{\text{posterior}} \propto \overbrace{p(\boldsymbol{Y} \mid \boldsymbol{\theta})}^{\text{likelihood}}\; \overbrace{p(\boldsymbol{\theta})}^{\text{prior}}\]</div>
+<div class="admonition-a-note-on-notation admonition">
+<p class="admonition-title">A note on notation</p>
+<p>In this book we use the same notation <span class="math notranslate nohighlight">\(p(\cdot)\)</span> to
+represent different quantities, like a likelihood function and a prior
+probability distribution. This is a slightly abuse of notation but one
+we find useful. This notation provides the same epistemological status
+to all quantities. Additionally it reflects that even when the
+likelihood is not strictly a probability density function, we just do
+not care as we only think about the likelihood in the context of a prior
+and vice versa. In other words, we think of both quantities as equally
+necessary elements of models in order to compute a posterior
+distribution.</p>
+</div>
+<p>One nice feature of Bayesian statistics is that the posterior is
+(always) a distribution. This fact allows us to make probabilistic
+statements about the parameters, like the probability of a parameter
+<span class="math notranslate nohighlight">\(\boldsymbol{\tau}\)</span> being positive is 0.35. Or the most likely value of
+<span class="math notranslate nohighlight">\(\boldsymbol{\phi}\)</span> is 12 with a 50% chance of being between 10 and 15.
+Moreover, we can think of the posterior distribution as the logical
+consequence of combining a model with the data, and thus the
+probabilistic statements derived from them are guaranteed to be
+mathematically consistent. We just need to remember that all these nice
+mathematical properties are only valid in the <em>platonic world of ideas</em>
+where mathematical objects such as spheres, Gaussians and Markov chains
+exist. As we move from mathematical purity into the applied math
+messiness of the <em>real world</em> we must always keep in mind that our
+results are conditioned not only on the data but also on the models.
+Consequently, bad data and/or bad models could lead to nonsensical
+statements, even if they are mathematically consistent. We must always
+have a healthy quota of skepticism about our data, models, and results.
+To make this more explicit, we may want to express Bayes’ theorem in a
+more nuanced way:</p>
+<div class="math notranslate nohighlight">
+\[p(\boldsymbol{\theta} \mid  \boldsymbol{Y}, M) \propto  p(\boldsymbol{Y} \mid \boldsymbol{\theta}, M) \; p(\boldsymbol{\theta}, M)\]</div>
+<p>Emphasizing that our inferences are always dependent on the assumptions
+made by model <span class="math notranslate nohighlight">\(M\)</span>.</p>
+<p>Having said that, once we have a posterior distribution we can use it to
+derive other quantities of interest. This is generally done by computing
+expectations, for example:</p>
+<div class="math notranslate nohighlight" id="equation-eq-posterior-expectation">
+<span class="eqno">(4)<a class="headerlink" href="#equation-eq-posterior-expectation" title="Permalink to this equation">¶</a></span>\[J = \int f(\boldsymbol{\theta}) \; p(\boldsymbol{\theta} \mid \boldsymbol{Y}) \; d\boldsymbol{\theta}\]</div>
+<p>If <span class="math notranslate nohighlight">\(f\)</span> is the identity function <span class="math notranslate nohighlight">\(J\)</span> will turn out be the mean <a class="footnote-reference brackets" href="#id45" id="id11">7</a> of
+<span class="math notranslate nohighlight">\(\boldsymbol{\theta}.\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\bar{\boldsymbol{\theta}} = \int_{\boldsymbol{\Theta}} \boldsymbol{\theta}  p(\boldsymbol{\theta} \mid \boldsymbol{Y})  d\boldsymbol{\theta}\]</div>
+<p>The posterior distribution is the central object in Bayesian statistics,
+but it is not the only one. Besides making inferences about parameter
+values, we may want to make inferences about data. This can be done by
+computing the <strong>prior predictive distribution</strong>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-prior-pred-dist">
+<span class="eqno">(5)<a class="headerlink" href="#equation-eq-prior-pred-dist" title="Permalink to this equation">¶</a></span>\[p(\boldsymbol{Y}^\ast) =  \int_{\boldsymbol{\Theta}} p(\boldsymbol{Y^\ast} \mid \boldsymbol{\theta}) \; p(\boldsymbol{\theta}) \; d\boldsymbol{\theta}\]</div>
+<p>This is the expected distribution of the data according to the model
+(prior and likelihood). That is the data we expect, given the model,
+before actually seeing any observed data <span class="math notranslate nohighlight">\(\boldsymbol{Y}^\ast\)</span>. Notice
+that Equations <a class="reference internal" href="#equation-eq-marginal-likelihood">(2)</a> (marginal likelihood) and
+Equation <a class="reference internal" href="#equation-eq-prior-pred-dist">(5)</a> (prior predictive distribution) look
+really similar. The difference is in the former case, we are
+conditioning on our observed data <span class="math notranslate nohighlight">\(Y\)</span> while in the latter, we are not
+conditioning on the observed data. As a result the marginal likelihood
+is a number and the prior predictive distribution is a probability
+distribution.</p>
+<p>We can use samples from the prior predictive distribution as a way to
+evaluate and calibrate our models using domain-knowledge. For example,
+we may ask questions such as “Is it OK for a model of human heights to
+predict that a human is -1.5 meters tall?”. Even before measuring a
+single person, we can recognize the absurdness of this query. Later in
+the book we will see many concrete examples of model evaluation using
+prior predictive distributions in practice, and how the prior predictive
+distributions inform the validity, or lack thereof, in subsequent
+modeling choices.</p>
+<div class="admonition-bayesian-models-as-generative-models admonition">
+<p class="admonition-title">Bayesian models as generative models</p>
+<p>Adopting a probabilistic perspective for modeling leads to the mantra <em>models generate data</em>
+<span id="id12">[<a class="reference internal" href="references.html#id28">4</a>]</span>. We consider this
+concept to be of central importance. Once you internalize it, all
+statistical models become much more clear, even non-Bayesian ones. This
+mantra can help to create new models; if models generate data, we can
+create suitable models for our data <em>just</em> by thinking of how the data
+could have been generated! Additionally, this mantra is not just an
+abstract concept. We can adopt a concrete representation in the form of
+the prior predictive distribution. If we revisit the 3 steps of Bayesian
+modeling, we can re-frame them as, write a prior predictive
+distribution, add data to constrain it, check if the result makes sense.
+Iterate if necessary.</p>
+</div>
+<p>Another useful quantity to compute is the <strong>posterior predictive distribution</strong>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-post-pred-dist">
+<span class="eqno">(6)<a class="headerlink" href="#equation-eq-post-pred-dist" title="Permalink to this equation">¶</a></span>\[p(\tilde{\boldsymbol{Y}} \mid \boldsymbol{Y}) = \int_{\boldsymbol{\Theta}} p(\tilde{\boldsymbol{Y}} \mid \boldsymbol{\theta}) \, p(\boldsymbol{\theta} \mid \boldsymbol{Y}) \, d\boldsymbol{\theta}\]</div>
+<p>This is the distribution of expected, future, data
+<span class="math notranslate nohighlight">\(\tilde{\boldsymbol{Y}}\)</span> according to the posterior
+<span class="math notranslate nohighlight">\(p(\boldsymbol{\theta} \mid \boldsymbol{Y})\)</span>, which in turn is a
+consequence of the model (prior and likelihood) and observed data. In
+more common terms, this is the data the model is expecting to see after
+seeing the dataset <span class="math notranslate nohighlight">\(\boldsymbol{Y}\)</span>, i.e. these are the model’s
+predictions. From Equation <a class="reference internal" href="#equation-eq-post-pred-dist">(6)</a>, we can see that
+predictions are computed by integrating out (or marginalizing) over the
+posterior distribution of parameters. As a consequence predictions
+computed this way will incorporate the uncertainty about our estimates.</p>
+<div class="admonition-bayesian-posteriors-in-a-frequentist-light admonition">
+<p class="admonition-title">Bayesian posteriors in a Frequentist light</p>
+<p>Because posteriors are derived from the model and the observed data only, we are not making
+statements based on non-observed, but potentially observed realizations
+of the underlying data-generating process. Inferring on non-observed is
+generally done by the so called frequentists methods. Nevertheless, if
+we use posterior predictive samples to check our models we are
+(partially) embracing the frequentist idea of thinking about
+non-observed but potentially observable data. We are not only
+comfortable with this idea, we will see many examples of this procedure
+in this book. We think it is one honking great idea — let us do more
+of these!</p>
+</div>
+</div>
+</div>
+<div class="section" id="a-diy-sampler-do-not-try-this-at-home">
+<span id="sampling-methods-intro"></span><h2>A DIY Sampler, Do Not Try This at Home<a class="headerlink" href="#a-diy-sampler-do-not-try-this-at-home" title="Permalink to this headline">¶</a></h2>
+<p>Closed form expressions for the integral in Equation
+<a class="reference internal" href="#equation-eq-marginal-likelihood">(2)</a> are not always possible and thus much of
+modern Bayesian inference is done using numerical methods that we call
+<strong>Universal Inference Engines</strong> (see Section <a class="reference internal" href="chp_11.html#inference-methods"><span class="std std-ref">Inference Methods</span></a>) just to compensate for the
+fact we live in the <span class="math notranslate nohighlight">\(21^\text{st}\)</span> century and we still do not have flying cars.
+Anyway, there are many well-tested Python libraries providing such
+numerical methods so in general it is very unlikely that a Bayesian
+practitioner will need to code their own Universal Inference Engine.</p>
+<p>As of today there are generally only two good reasons to code your own
+engine, you are either designing a new engine that improves on the old
+ones, or you are learning how the current engines work. Since we are
+learning in this chapter we will code one, but for the rest of the book
+we are going to use engines available in Python libraries.</p>
+<p>There are many algorithms that can be used as <em>Universal Inference
+Engines</em>. Probably the most widely adopted and powerful is the family of
+Markov chain Monte Carlo methods (MCMC). At a very high level, all MCMC
+methods approximate the posterior distribution using samples. The
+samples from the posterior distribution are generated by accepting or
+rejecting samples from a different distribution called the proposal
+distribution. By following certain rules <a class="footnote-reference brackets" href="#id46" id="id13">8</a> and under certain
+assumptions, we have theoretical guarantees that we will get samples
+that are a good approximation of the posterior distribution. Thus, MCMC
+methods are also known as samplers. All these methods require to be able
+to evaluate the prior and likelihood at a given parameter value. That
+is, even when we do not know what the entire posterior looks like, we
+can ask for its density point-wise.</p>
+<p>One such algorithm is Metropolis-Hastings
+<span id="id14">[<a class="reference internal" href="references.html#id106">7</a>, <a class="reference internal" href="references.html#id107">8</a>, <a class="reference internal" href="references.html#id108">9</a>]</span>. This is not a very
+modern or particularly efficient algorithm, but Metropolis-Hastings is
+simple to understand and also provides a foundation to understand more
+sophisticated and powerful methods. <a class="footnote-reference brackets" href="#id47" id="id15">9</a></p>
+<p>The Metropolis-Hasting algorithm is defined as follows:</p>
+<ol>
+<li><p>Initialize the value of the parameter <span class="math notranslate nohighlight">\(\boldsymbol{X}\)</span> at <span class="math notranslate nohighlight">\(x_i\)</span></p></li>
+<li><p>Use a proposal distribution <a class="footnote-reference brackets" href="#id48" id="id16">10</a> <span class="math notranslate nohighlight">\(q(x_{i + 1} \mid x_i)\)</span> to
+generate a new value <span class="math notranslate nohighlight">\(x_{i + 1}\)</span> from the old one <span class="math notranslate nohighlight">\(x_i\)</span>.</p></li>
+<li><p>Compute the probability of accepting the new value as:</p>
+<div class="math notranslate nohighlight" id="equation-acceptance-prob">
+<span class="eqno">(7)<a class="headerlink" href="#equation-acceptance-prob" title="Permalink to this equation">¶</a></span>\[p_a (x_{i + 1} \mid x_i) = \min \left (1, \frac{p(x_{i + 1}) \;
+q(x_i \mid x_{i + 1})} {p(x_i) \; q (x_{i + 1} \mid x_i)} \right)\]</div>
+</li>
+<li><p>If <span class="math notranslate nohighlight">\(p_a &gt; R\)</span> where <span class="math notranslate nohighlight">\(R \sim \mathcal{U}(0, 1)\)</span>, save the new value,
+otherwise save the old one.</p></li>
+<li><p>Iterate 2 to 4 until a <em>sufficiently large</em> sample of values has
+been generated</p></li>
+</ol>
+<p>The Metropolis algorithm is very general and can be used in non-Bayesian
+applications but for what we care in this book, <span class="math notranslate nohighlight">\(p(x_i)\)</span> is the
+posterior’s density evaluated at the parameter value <span class="math notranslate nohighlight">\(x_i\)</span>. Notice that
+if <span class="math notranslate nohighlight">\(q\)</span> is a symmetric distribution the terms <span class="math notranslate nohighlight">\(q(x_i \mid x_{i + 1})\)</span> and
+<span class="math notranslate nohighlight">\(q(x_{i + 1} \mid x_i)\)</span> will cancel out (conceptually it means it is
+equally likely are we are to go from <span class="math notranslate nohighlight">\(x_{i+1}\)</span> to <span class="math notranslate nohighlight">\(x_i\)</span> or to go from
+<span class="math notranslate nohighlight">\(x_{i}\)</span> to <span class="math notranslate nohighlight">\(x_{i+1}\)</span>), leaving just the ratio of the posterior evaluated
+at two points. From Equation <a class="reference internal" href="#equation-acceptance-prob">(7)</a> we can see this
+algorithm will always accept moving from a low probability region to a
+higher one and will probabilistically accept moving from a high to low
+probability region.</p>
+<p>Another important remark is that the Metropolis-Hastings algorithm is
+not an optimization method! We do not care about finding the parameter
+value with the maximum probability, we want to <em>explore</em> the <span class="math notranslate nohighlight">\(p\)</span>
+distribution (the posterior). This can be seen if we take note that once
+at a maximum, the method can still move to a region of lower
+probabilities in subsequent steps.</p>
+<p>To make things more concrete let us try to solve the Beta-Binomial
+model. This is probably the most common example in Bayesian statistics
+and it is used to model binary, mutually-exclusive outcomes such as 0 or
+1, positive or negative, head or tails, spam or ham, hotdog or not
+hotdog, healthy or unhealthy, etc. More often than not Beta-Binomial
+model is used as the first example to introduce the basics of Bayesian
+statistics, because it is a simple model that we can solve and compute
+with ease. In statistical notation we can write the Beta-Binomial models
+as:</p>
+<div class="math notranslate nohighlight" id="equation-eq-beta-binomial">
+<span class="eqno">(8)<a class="headerlink" href="#equation-eq-beta-binomial" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\begin{split}\begin{split}
+    \theta \sim &amp;\; \text{Beta}(\alpha, \beta) \\
+    Y \sim &amp;\; \text{Bin}(n=1, p=\theta)\end{split}\\\end{split}\end{aligned}\end{align} \]</div>
+<p>In Equation <a class="reference internal" href="#equation-eq-beta-binomial">(8)</a> we are saying the parameter <span class="math notranslate nohighlight">\(\theta\)</span>
+has <span class="math notranslate nohighlight">\(\text{Beta}(\alpha, \beta)\)</span> as its prior distribution. And we
+assume the data is distributed following a Binomial distribution
+<span class="math notranslate nohighlight">\(\text{Bin}(n=1, p=\theta)\)</span>, which represents our likelihood
+distribution. In this model the number of successes <span class="math notranslate nohighlight">\(\theta\)</span> can
+represent quantities like the proportion of heads or the proportion of
+dying patients, sometimes statistics can be a very dark place. This
+model has an analytical solution (see <a class="reference internal" href="#conjugate-priors"><span class="std std-ref">Conjugate Priors</span></a>) for the
+details. For the sake of the example, let us assume we do not know how
+to compute the posterior, and thus we will implement the
+Metropolis-Hastings algorithm into Python code in order to get an
+approximate answer. We will do it with the help of SciPy statistical
+functions:</p>
+<div class="literal-block-wrapper docutils container" id="metropolis-hastings-sampler">
+<div class="code-block-caption"><span class="caption-number">Listing 1 </span><span class="caption-text">metropolis_hastings_sampler</span><a class="headerlink" href="#metropolis-hastings-sampler" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">α</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">β</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">θ</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">prior</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">α</span><span class="p">,</span> <span class="n">β</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">θ</span><span class="p">)</span>
+        <span class="n">like</span>  <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">bernoulli</span><span class="p">(</span><span class="n">θ</span><span class="p">)</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">prod</span><span class="p">()</span>
+        <span class="n">prob</span> <span class="o">=</span> <span class="n">like</span> <span class="o">*</span> <span class="n">prior</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">prob</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+    <span class="k">return</span> <span class="n">prob</span>
+</pre></div>
+</div>
+</div>
+<p>We also need data, so we will generate some random fake data for this
+purpose.</p>
+<div class="literal-block-wrapper docutils container" id="metropolis-hastings-sampler-rvs">
+<div class="code-block-caption"><span class="caption-number">Listing 2 </span><span class="caption-text">metropolis_hastings_sampler_rvs</span><a class="headerlink" href="#metropolis-hastings-sampler-rvs" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">bernoulli</span><span class="p">(</span><span class="mf">0.7</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>And finally we run our implementation of the Metropolis-Hastings
+algorithm:</p>
+<div class="literal-block-wrapper docutils container" id="metropolis-hastings">
+<div class="code-block-caption"><span class="caption-number">Listing 3 </span><span class="caption-text">metropolis_hastings</span><a class="headerlink" href="#metropolis-hastings" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">n_iters</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="linenos"> 2</span><span class="n">can_sd</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="linenos"> 3</span><span class="n">α</span> <span class="o">=</span> <span class="n">β</span> <span class="o">=</span>  <span class="mi">1</span>
+<span class="linenos"> 4</span><span class="n">θ</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="linenos"> 5</span><span class="n">trace</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;θ&quot;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_iters</span><span class="p">)}</span>
+<span class="linenos"> 6</span><span class="n">p2</span> <span class="o">=</span> <span class="n">post</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">α</span><span class="p">,</span> <span class="n">β</span><span class="p">)</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="k">for</span> <span class="nb">iter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_iters</span><span class="p">):</span>
+<span class="linenos"> 9</span>    <span class="n">θ_can</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">can_sd</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos">10</span>    <span class="n">p1</span> <span class="o">=</span> <span class="n">post</span><span class="p">(</span><span class="n">θ_can</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">α</span><span class="p">,</span> <span class="n">β</span><span class="p">)</span>
+<span class="linenos">11</span>    <span class="n">pa</span> <span class="o">=</span> <span class="n">p1</span> <span class="o">/</span> <span class="n">p2</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>    <span class="k">if</span> <span class="n">pa</span> <span class="o">&gt;</span> <span class="n">stats</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
+<span class="linenos">14</span>        <span class="n">θ</span> <span class="o">=</span> <span class="n">θ_can</span>
+<span class="linenos">15</span>        <span class="n">p2</span> <span class="o">=</span> <span class="n">p1</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span>    <span class="n">trace</span><span class="p">[</span><span class="s2">&quot;θ&quot;</span><span class="p">][</span><span class="nb">iter</span><span class="p">]</span> <span class="o">=</span> <span class="n">θ</span>
+</pre></div>
+</div>
+</div>
+<p>At line 9 of Code Block <a class="reference internal" href="#metropolis-hastings"><span class="std std-ref">metropolis_hastings</span></a> we generate a proposal
+distribution by sampling from a Normal distribution with standard
+deviation <code class="docutils literal notranslate"><span class="pre">can_sd</span></code>. At line 10 we evaluate the posterior at the new
+generated value <code class="docutils literal notranslate"><span class="pre">θ_can</span></code> and at line 11 we compute the probability of
+acceptance. At line 17 we save a value of <code class="docutils literal notranslate"><span class="pre">θ</span></code> in the <code class="docutils literal notranslate"><span class="pre">trace</span></code> array.
+Whether this value is a new one or we repeat the previous one, it will
+depends on the result of the comparison at line 13.</p>
+<div class="admonition-ambiguous-mcmc-jargon admonition">
+<p class="admonition-title">Ambiguous MCMC jargon</p>
+<p>When we use Markov chain Monte Carlo Methods to do Bayesian inference,
+we typically refer to them as MCMC samplers. At each iteration we draw a
+random sample from the sampler, so naturally we refer to the output from
+MCMC as <em>samples</em> or <em>draws</em>. Some people make the distinction that a
+sample is made up by a collection of draws, other treat samples and
+draws as interchangeably.</p>
+<p>Since MCMC draws samples sequentially we also say we get a <em>chain</em> of
+draws as result, or just MCMC chain for short. Usually it is desired to
+draw many chains for computational and diagnostic reasons (we discuss
+how to do this in Chapter <a class="reference internal" href="chp_02.html#chap1bis"><span class="std std-ref">2</span></a>). All the output
+chains, whether singular or plural, are typically referred to as a trace
+or simple the posterior. Unfortunately spoken language is imprecise so
+if precision is needed the best approach is to review the code to
+understand exactly what is happening.</p>
+</div>
+<p>Note that the code implemented in Code Block <a class="reference internal" href="#metropolis-hastings"><span class="std std-ref">metropolis_hastings</span></a> is
+not intended to be efficient, in fact there are many changes that would
+be present in production-grade code, like computing the probabilities on
+the log scale to avoid under/overflow issues (see Section <a class="reference internal" href="chp_10.html#log-probabilities"><span class="std std-ref">Log Probabilities</span></a>), or pre-computing the
+proposal and the Uniform values. This is where the purity of math needs
+to be adjusted to meet the reality of computers, and why building these
+engines is best left to experts. Similarly, the value of <code class="docutils literal notranslate"><span class="pre">can_sd</span></code>, is a
+parameter of the Metropolis-Hastings algorithm, not a parameter from the
+Bayesian model. In theory this parameter should not affect the correct
+behavior of the algorithm, but in practice it is very important as the
+efficiency of the method will certainly be affected by its value (see Section
+<a class="reference internal" href="chp_11.html#inference-methods"><span class="std std-ref">Inference Methods</span></a> for an in-depth discussion).</p>
+<p>Returning to our example, now that we have our MCMC samples we want to
+understand <em>what it looks like</em>. A common way to inspect the results of
+a Bayesian inference is to plot the sampled values per iteration
+together with a histogram, or other visual tool, to represent
+distributions. For example, we can use the code in Code Block
+<a class="reference internal" href="#diy-trace-plot"><span class="std std-ref">diy_trace_plot</span></a> to plot
+<a class="reference internal" href="#fig-traceplot"><span class="std std-numref">Fig. 2</span></a> <a class="footnote-reference brackets" href="#id49" id="id17">11</a>:</p>
+<div class="literal-block-wrapper docutils container" id="diy-trace-plot">
+<div class="code-block-caption"><span class="caption-number">Listing 4 </span><span class="caption-text">diy_trace_plot</span><a class="headerlink" href="#diy-trace-plot" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">trace</span><span class="p">[</span><span class="s2">&quot;θ&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;0.5&quot;</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="figure align-default" id="fig-traceplot">
+<a class="reference internal image-reference" href="../_images/traceplot.png"><img alt="../_images/traceplot.png" src="../_images/traceplot.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">On the left, we have the sampled values of the parameter <span class="math notranslate nohighlight">\(\theta\)</span> at
+each iteration. On the right, we have the histogram of the sampled
+values of <span class="math notranslate nohighlight">\(\theta\)</span>. The histogram is rotated, to make it easier to see
+that both plots are closely related. The plot on the left shows the
+<em>sequence</em> of sampled values. This sequence is our Markov Chain. The
+plot on the right shows the distribution of the sampled values.</span><a class="headerlink" href="#fig-traceplot" title="Permalink to this image">¶</a></p>
+</div>
+<p>Generally it is also useful to compute some numerical summaries. Here we
+will use the Python package ArviZ <span id="id18">[<a class="reference internal" href="references.html#id11">3</a>]</span> to compute these
+statistics:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;stats&quot;</span><span class="p">,</span> <span class="n">round_to</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="table" id="tab-posterior-summary">
+<caption><span class="caption-number">Table 1 </span><span class="caption-text">Posterior summary</span><a class="headerlink" href="#tab-posterior-summary" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td></td>
+<td><p><strong>mean</strong></p></td>
+<td><p><strong>sd</strong></p></td>
+<td><p><strong>hdi_3%</strong></p></td>
+<td><p><strong>hdi_97%</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\theta\)</span></p></td>
+<td><p>0.69</p></td>
+<td><p>0.01</p></td>
+<td><p>0.52</p></td>
+<td><p>0.87</p></td>
+</tr>
+</tbody>
+</table>
+<p>ArviZ’s function <code class="docutils literal notranslate"><span class="pre">summary</span></code> computes the mean, standard deviation and the
+highest density interval (HDI) 94% of our parameter <span class="math notranslate nohighlight">\(\theta\)</span>. The HDI is
+the shortest interval containing a given probability density, 94% for
+this particular example <a class="footnote-reference brackets" href="#id50" id="id19">12</a>. <a class="reference internal" href="#fig-plot-posterior"><span class="std std-numref">Fig. 3</span></a>, generated
+with <code class="docutils literal notranslate"><span class="pre">az.plot_posterior(trace)</span></code> is a close visual equivalent of the
+above summary in <a class="reference internal" href="#tab-posterior-summary"><span class="std std-numref">Table 1</span></a>. We
+can see the mean and the HDI, on top of a curve representing the entire
+posterior distribution. The curve is computed using a <strong>kernel density
+estimator (KDE)</strong>, which is like the smooth version of a histogram.
+ArviZ uses KDEs in many of its plots, and even internally for a few
+computations.</p>
+<div class="figure align-default" id="fig-plot-posterior">
+<a class="reference internal image-reference" href="../_images/plot_posterior.png"><img alt="../_images/plot_posterior.png" src="../_images/plot_posterior.png" style="width: 4in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">Posterior plot visualizing the samples generated from Code Block
+<a class="reference internal" href="#metropolis-hastings"><span class="std std-ref">metropolis_hastings</span></a>. The posterior distribution is represented using
+a KDE, the mean and the limits of the HDI 94% are represented in the
+figure.</span><a class="headerlink" href="#fig-plot-posterior" title="Permalink to this image">¶</a></p>
+</div>
+<p>The HDI is a common choice in Bayesian statistics and <em>round</em> values
+like 50% or 95% are commonplace. But ArviZ uses 94% (or 0.94) as the
+default value as seen in both the summary
+<a class="reference internal" href="#tab-posterior-summary"><span class="std std-numref">Table 1</span></a> and
+<a class="reference internal" href="#fig-plot-posterior"><span class="std std-numref">Fig. 3</span></a>. The reason for this choice is that 94 is
+close to the <em>widely used</em> 95 but is different enough to serve as a
+friendly reminder that there is nothing special about these <em>round</em>
+values <span id="id20">[<a class="reference internal" href="references.html#id33">10</a>]</span>. Ideally you should choose a value that fits
+your needs <span id="id21">[<a class="reference internal" href="references.html#id99">11</a>]</span>, or at least acknowledge that you are using a
+default.</p>
+</div>
+<div class="section" id="say-yes-to-automating-inference-say-no-to-automated-model-building">
+<span id="automating-inference"></span><h2>Say Yes to Automating Inference, Say No to Automated Model Building<a class="headerlink" href="#say-yes-to-automating-inference-say-no-to-automated-model-building" title="Permalink to this headline">¶</a></h2>
+<p>Instead of writing our own sampler and having to define our models using
+<code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> method we can leverage the aid of <strong>Probabilistic
+Programming Languages</strong> (PPL). These tools allow users to express
+Bayesian models using code and then perform Bayesian inference in a
+fairly automated fashion thanks to Universal Inference Engines. In short
+PPLs help practitioners focus more on model building and less on the
+mathematical and computational details. The availability of such tools
+has helped increase the popularity and usefulness of Bayesian methods in
+the last few decades. Unfortunately, these Universal Inference Engines
+methods are not really that universal, as they will not be able to
+efficiently solve every Bayesian model (but we still like the cool
+name!). Part of the job of the modern Bayesian practitioner is being
+able to understand and work around these limitations.</p>
+<p>In this book we will use PyMC3 <span id="id22">[<a class="reference internal" href="references.html#id124">1</a>]</span> and TensorFlow
+Probability <span id="id23">[<a class="reference internal" href="references.html#id141">2</a>]</span>. Let us write the model from
+Equation <a class="reference internal" href="#equation-eq-beta-binomial">(8)</a> using PyMC3:</p>
+<div class="literal-block-wrapper docutils container" id="beta-binom">
+<div class="code-block-caption"><span class="caption-number">Listing 5 </span><span class="caption-text">beta_binom</span><a class="headerlink" href="#beta-binom" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Declare a model in PyMC3</span>
+<span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
+    <span class="c1"># Specify the prior distribution of unknown parameter</span>
+    <span class="n">θ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Beta</span><span class="p">(</span><span class="s2">&quot;θ&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Specify the likelihood distribution and condition on the observed data</span>
+    <span class="n">y_obs</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Binomial</span><span class="p">(</span><span class="s2">&quot;y_obs&quot;</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">θ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">Y</span><span class="p">)</span>
+
+    <span class="c1"># Sample from the posterior distribution</span>
+    <span class="n">idata</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">return_inferencedata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>You should check by yourself that this piece of code provides
+essentially the same answer as our DIY sampler we used before, but with
+much less effort. If you are not familiar with the syntax of PyMC3, just
+focus on the intent of each line as shown in the code comments for now.
+Since we have defined our model in PyMC3 syntax we can also utilize
+<code class="docutils literal notranslate"><span class="pre">pm.model_to_graphviz(model)</span></code> to generate a graphical representation of
+the model in Code Block <a class="reference internal" href="#beta-binom"><span class="std std-ref">beta_binom</span></a> (see
+<a class="reference internal" href="#fig-betabinommodelgraphviz"><span class="std std-numref">Fig. 4</span></a>).</p>
+<div class="figure align-default" id="fig-betabinommodelgraphviz">
+<a class="reference internal image-reference" href="../_images/BetaBinomModelGraphViz.png"><img alt="../_images/BetaBinomModelGraphViz.png" src="../_images/BetaBinomModelGraphViz.png" style="width: 2in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">A graphical representation of the model defined in Equation
+<a class="reference internal" href="#equation-eq-beta-binomial">(8)</a> and Code Block
+<a class="reference internal" href="#beta-binom"><span class="std std-ref">beta_binom</span></a>. The ovals represent our prior
+and likelihood, whereas the 20 in this case indicates the number of
+observations.
+[fig:BetaBinomModelGraphViz]{#fig:BetaBinomModelGraphViz
+label=”fig:BetaBinomModelGraphViz”}</span><a class="headerlink" href="#fig-betabinommodelgraphviz" title="Permalink to this image">¶</a></p>
+</div>
+<p>A Probabilistic Programming Language can not only evaluate the
+log-probability of the random variables to get the posterior
+distribution, but also simulate from various distributions as well. For
+example, Code Block
+<a class="reference internal" href="#predictive-distributions"><span class="std std-ref">predictive_distributions</span></a> shows
+how to use PyMC3 to generate 1000 samples from the prior predictive
+distribution and 1000 samples from the posterior predictive
+distribution. Notice how for the first one, we have a function taking
+the <code class="docutils literal notranslate"><span class="pre">model</span></code> as argument while for the second function we have to pass
+both <code class="docutils literal notranslate"><span class="pre">model</span></code> and <code class="docutils literal notranslate"><span class="pre">trace</span></code>, reflecting the fact that the prior predictive
+distribution can be computed just from the model while the posterior
+predictive distribution we need a model and posterior. The generated
+samples from the prior and posterior predictive distributions are
+represented in the top and bottom panel, respectively, from
+<a class="reference internal" href="#fig-quartet"><span class="std std-numref">Fig. 5</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="predictive-distributions">
+<div class="code-block-caption"><span class="caption-number">Listing 6 </span><span class="caption-text">predictive_distributions</span><a class="headerlink" href="#predictive-distributions" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pred_dists</span> <span class="o">=</span> <span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">sample_prior_predictive</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">model</span><span class="p">)[</span><span class="s2">&quot;y_obs&quot;</span><span class="p">],</span>
+              <span class="n">pm</span><span class="o">.</span><span class="n">sample_posterior_predictive</span><span class="p">(</span><span class="n">idata</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">model</span><span class="p">)[</span><span class="s2">&quot;y_obs&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<p>Equations <a class="reference internal" href="#equation-eq-posterior-dist">(1)</a>, <a class="reference internal" href="#equation-eq-prior-pred-dist">(5)</a>, and
+<a class="reference internal" href="#equation-eq-post-pred-dist">(6)</a> clearly define the posterior, the prior
+predictive, and the posterior predictive distributions as different
+mathematical objects. The two later are distributions over data and the
+first one is a distribution over the parameters in a model.
+<a class="reference internal" href="#fig-quartet"><span class="std std-numref">Fig. 5</span></a> helps us visualize this difference and also
+includes the prior distribution for completeness.</p>
+<div class="admonition-expressing-models-in-multiple-ways admonition">
+<p class="admonition-title">Expressing models in multiple ways</p>
+<p>There are numerous methods to communicate the architecture of statistical models. These can be, in no
+particular order:</p>
+<ul class="simple">
+<li><p>Spoken and written language</p></li>
+<li><p>Conceptual diagrams: <a class="reference internal" href="#fig-betabinommodelgraphviz"><span class="std std-numref">Fig. 4</span></a>.</p></li>
+<li><p>Mathematical notation: Equation <a class="reference internal" href="#equation-eq-beta-binomial">(8)</a></p></li>
+<li><p>Computer Code: Code Block <a class="reference internal" href="#beta-binom"><span class="std std-ref">beta_binom</span></a></p></li>
+</ul>
+<p>For a modern Bayesian practitioner it is useful to be literate across
+all these mediums. They are formats you see presented in talks,
+scientific papers, hand sketches when discussing with colleagues, code
+examples on the internet, etc. With fluency across these mediums you
+will be better able to understand concepts presented one way, and then
+apply them in another way. For example, read paper and then implement a
+model, or hear about a technique in a talk and then be able to write a
+blog post on it. For you personally fluency will likely speed up your
+learning and increase your ability to communicate with others.
+Ultimately this helps achieve what general statistics community always
+strives for a better shared understanding of the world.</p>
+</div>
+<div class="figure align-default" id="fig-quartet">
+<a class="reference internal image-reference" href="../_images/Bayesian_quartet_distributions.png"><img alt="../_images/Bayesian_quartet_distributions.png" src="../_images/Bayesian_quartet_distributions.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">From top plot to bottom plot we show: (1) samples from the prior
+distribution of the parameter <span class="math notranslate nohighlight">\(\theta\)</span>; (2) samples from the prior
+predictive distribution, where we are plotting the probability
+distribution of the total number of successes; (3) posterior samples of
+the parameter <span class="math notranslate nohighlight">\(\theta\)</span>; (4) posterior predictive distribution of the
+total number of successes. The x-axis and y-axis scales are shared
+between the first and third plots and then between the second and fourth
+plots.</span><a class="headerlink" href="#fig-quartet" title="Permalink to this image">¶</a></p>
+</div>
+<p>As we already mentioned, posterior predictive distributions take into
+account the uncertainty about our estimates.
+<a class="reference internal" href="#fig-predictions-distributions"><span class="std std-numref">Fig. 6</span></a> shows that the predictions using
+the mean are less spread than predictions from the posterior predictive
+distribution. This result is not only valid for the mean, we would get a
+similar picture if we change the mean to any other point-estimate.</p>
+<div class="figure align-default" id="fig-predictions-distributions">
+<a class="reference internal image-reference" href="../_images/predictions_distributions.png"><img alt="../_images/predictions_distributions.png" src="../_images/predictions_distributions.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">Predictions for the Beta-Binomial model, using the posterior mean (gray
+histogram) vs predictions using the entire posterior, i.e. the posterior
+predictive distribution (blue histogram).</span><a class="headerlink" href="#fig-predictions-distributions" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="a-few-options-to-quantify-your-prior-information">
+<span id="make-prior-count"></span><h2>A Few Options to Quantify Your Prior Information<a class="headerlink" href="#a-few-options-to-quantify-your-prior-information" title="Permalink to this headline">¶</a></h2>
+<p>Having to choose a prior distribution is portrayed both as a burden and
+as a blessing. We choose to affirm that is a necessity, if you are not
+choosing your priors someone else is doing it for you. Letting others
+decide for you is not always a bad thing. Many of these non-Bayesian
+methods can be very useful and efficient if applied in the correct
+context, and with awareness of their limitations. However, we firmly
+believe there is an advantage for the practitioner in knowing the model
+assumptions and have the flexibility to alter them. Priors are just one
+form of assumption.</p>
+<p>We also understand that prior elicitation can be a source of doubts,
+anxiety, and even frustration for many practitioners, especially for,
+but not necessarily only for, newcomers. Asking what is the best-ever
+prior for a given problem, is a common and totally valid question. But
+it is difficult to give a straight satisfying answer other than, there
+is no such thing. At best there are some useful defaults that we can use
+as starting points in an iterative modeling workflow.</p>
+<p>In this section we discuss a few general approaches for selecting prior
+distributions. This discussion follows more or less an <em>informativeness
+gradient</em> from “blank slates” which include no information, to highly
+informative, which put as much information as possible into the priors.
+As with the other sections in this chapter, this discussion is more on
+the theoretical side. In the following chapters we will discuss how to
+choose priors in more practical settings.</p>
+<div class="section" id="conjugate-priors">
+<span id="id24"></span><h3>Conjugate Priors<a class="headerlink" href="#conjugate-priors" title="Permalink to this headline">¶</a></h3>
+<p>A prior is conjugate to a likelihood if the posterior belongs to the
+same family of distributions as the prior. For example, if the
+likelihood is Poisson and the prior Gamma, then the posterior will also
+be a Gamma distribution <a class="footnote-reference brackets" href="#id51" id="id25">13</a>.</p>
+<p>From a purely mathematical perspective, <strong>conjugate priors</strong> are the
+most convenient choice as they allow us to calculate the posterior
+distribution analytically with “pen and paper”, no complex computation
+required <a class="footnote-reference brackets" href="#id52" id="id26">14</a>. From a modern computational perspective, conjugate
+priors are generally not better than alternatives, the main reason being
+that modern computational methods allow us to perform inference with
+virtually any choice of priors and not just those that are
+mathematically convenient. Nevertheless, conjugate priors can be useful
+when learning Bayesian inference and also under some situations when
+there is a need to use analytical expressions for the posterior (see Section
+<a class="reference internal" href="chp_10.html#conjugate-case-study"><span class="std std-ref">Example: Near Real Time Inference</span></a> for an example). As is
+such, we will briefly discuss analytical priors using the Beta Binomial
+model.</p>
+<p>As the name suggests, the conjugate prior for the binomial distribution
+is the Beta distribution:</p>
+<div class="math notranslate nohighlight">
+\[p(\theta \mid Y) \propto \overbrace{\frac{N!}{y!(N-y)!} \theta^y (1 - \theta)^{N-y}}^{\text{binomial-likelihood}} \: \overbrace{\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\, \theta^{\alpha-1}(1-\theta)^{\beta-1}}^{\text{beta.prior}}\]</div>
+<p>Because all the terms not depending on <span class="math notranslate nohighlight">\(\theta\)</span> are constant we can drop
+them and we get:</p>
+<div class="math notranslate nohighlight">
+\[p(\theta \mid Y) \propto \overbrace{\theta^y (1 - \theta)^{N-y}}^{\text{binomial-likelihood}} \: \overbrace{ \theta^{\alpha-1}(1-\theta)^{\beta-1}}^{\text{beta.prior}}\]</div>
+<p>Reordering:</p>
+<div class="math notranslate nohighlight" id="equation-eq-kernel-beta">
+<span class="eqno">(9)<a class="headerlink" href="#equation-eq-kernel-beta" title="Permalink to this equation">¶</a></span>\[p(\theta \mid Y) \propto \theta^{\alpha-1+y}(1-\theta)^{\beta-1+N-y}\]</div>
+<p>If we want to ensure that the posterior is a proper probability
+distribution function, we need to add a normalization constant ensuring
+that the integral of the PDF is 1 (see Section <a class="reference internal" href="chp_11.html#cont-rvs"><span class="std std-ref">Continuous Random Variables and Distributions</span></a>). Notice
+that expression <a class="reference internal" href="#equation-eq-kernel-beta">(9)</a> looks like the kernel of a Beta
+distribution, thus by adding the normalization constant of a Beta
+distribution we arrive to the conclusion that the posterior distribution
+for a Beta-Binomial model is:</p>
+<div class="math notranslate nohighlight" id="equation-eq-beta-posterior">
+<span class="eqno">(10)<a class="headerlink" href="#equation-eq-beta-posterior" title="Permalink to this equation">¶</a></span>\[p(\theta \mid Y) \propto \frac{\Gamma(\alpha_{post}+\beta_{post})}{\Gamma(\alpha_{post})\Gamma(\beta_{post})} \theta^{\alpha_{post}-1}(1-\theta)^{\beta_{post}-1} = \text{Beta}(\alpha_{post}, \beta_{post})\]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha_{post} = \alpha+y\)</span> and <span class="math notranslate nohighlight">\(\beta_{post} = \beta+N-y\)</span>.</p>
+<p>As the posterior of a Beta-Binomial model is a Beta distribution we can
+use a Beta-posterior as the prior for a future analysis. This means that
+we will get the same result if we update the prior one data-point at a
+time or if we use the entire dataset at once. For example, the first
+four panels of <a class="reference internal" href="#fig-beta-binomial-update"><span class="std std-numref">Fig. 7</span></a> show how different
+priors get updated as we move from 0 to 1, 2, and 3 trials. The result
+is the same if we follow this succession or if we <em>jump</em> from 0 to 3
+trials (or, in fact, <span class="math notranslate nohighlight">\(n\)</span> trials).</p>
+<p>There are a lot of other interesting things to see from
+<a class="reference internal" href="#fig-beta-binomial-update"><span class="std std-numref">Fig. 7</span></a>. For instance, as the number of
+trials increases, the width of the posterior gets lower and lower, i.e.
+the uncertainty gets lower and lower. Panels 3 and 5 show the results
+for 2 trials with 1 success and 12 trials with 6 success, for these
+cases, the sampling proportion estimator <span class="math notranslate nohighlight">\(\hat \theta = \frac{y}{n}\)</span>
+(black dot) is the same 0.5 for both cases (the posterior mode is also
+0.5), although the width of the posteriors are concentrated in panel 5
+reflecting that the number of observations is larger and thus
+uncertainty lower. Finally, we can see how different priors converge to
+the same posterior distribution as the number of observations increase.
+In the limit of infinite data, the posteriors (irrespective of priors
+used to compute those posteriors) will have all its density at
+<span class="math notranslate nohighlight">\(\hat \theta = \frac{y}{n}\)</span>.</p>
+<div class="literal-block-wrapper docutils container" id="binomial-update">
+<div class="code-block-caption"><span class="caption-number">Listing 7 </span><span class="caption-text">binomial_update</span><a class="headerlink" href="#binomial-update" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">axes</span><span class="p">)</span>
+
+<span class="n">n_trials</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">180</span><span class="p">]</span>
+<span class="n">success</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">59</span><span class="p">]</span>
+<span class="n">data</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">n_trials</span><span class="p">,</span> <span class="n">success</span><span class="p">)</span>
+
+<span class="n">beta_params</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span>
+<span class="n">θ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1500</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="n">s_n</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;s&quot;</span> <span class="k">if</span> <span class="p">(</span><span class="n">N</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">jdx</span><span class="p">,</span> <span class="p">(</span><span class="n">a_prior</span><span class="p">,</span> <span class="n">b_prior</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">beta_params</span><span class="p">):</span>
+        <span class="n">p_theta_given_y</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">a_prior</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="n">b_prior</span> <span class="o">+</span> <span class="n">N</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span>
+
+        <span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">p_theta_given_y</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">viridish</span><span class="p">[</span><span class="n">jdx</span><span class="p">])</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">N</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">N</span><span class="si">:</span><span class="s2">4d</span><span class="si">}</span><span class="s2"> trial</span><span class="si">{</span><span class="n">s_n</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">y</span><span class="si">:</span><span class="s2">4d</span><span class="si">}</span><span class="s2"> success&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="figure align-default" id="fig-beta-binomial-update">
+<a class="reference internal image-reference" href="../_images/beta_binomial_update.png"><img alt="../_images/beta_binomial_update.png" src="../_images/beta_binomial_update.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text">Successive prior updating starting from 3 different priors and
+increasing the number of trials (and possible the number of successes
+too). The black dot represents the sampling proportion estimator
+<span class="math notranslate nohighlight">\(\hat \theta = \frac{y}{n}\)</span>.</span><a class="headerlink" href="#fig-beta-binomial-update" title="Permalink to this image">¶</a></p>
+</div>
+<p>The mean of the Beta distribution is <span class="math notranslate nohighlight">\(\frac{\alpha}{\alpha + \beta}\)</span>,
+thus the prior mean is:</p>
+<div class="math notranslate nohighlight">
+\[\mathbb{E}[\theta]  = \frac{\alpha}{\alpha + \beta}\]</div>
+<p>and the posterior mean is:</p>
+<div class="math notranslate nohighlight" id="equation-eq-beta-binom-mean">
+<span class="eqno">(11)<a class="headerlink" href="#equation-eq-beta-binom-mean" title="Permalink to this equation">¶</a></span>\[\mathbb{E}[\theta \mid Y]  = \frac{\alpha + y}{\alpha + \beta + n}\]</div>
+<p>We can see that if the value of <span class="math notranslate nohighlight">\(n\)</span> is small in relation with the values
+of <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> then the posterior mean will be closer to the
+prior mean. That is, the prior contributes more to the result than the
+data. If we have the opposite situation the posterior mean will be
+closer to the sampling proportion estimator <span class="math notranslate nohighlight">\(\hat \theta = \frac{y}{n}\)</span>,
+in fact in the limit of <span class="math notranslate nohighlight">\(n \rightarrow \infty\)</span> the posterior mean will
+exactly match the sample proportion no matter which prior values we
+choose for <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>.</p>
+<p>For the Beta Binomial model the posterior mode is:</p>
+<div class="math notranslate nohighlight" id="equation-eq-beta-binom-mode">
+<span class="eqno">(12)<a class="headerlink" href="#equation-eq-beta-binom-mode" title="Permalink to this equation">¶</a></span>\[\operatorname*{argmax}_{\theta}{[\theta \mid Y]}  = \frac{\alpha + y - 1}{\alpha + \beta + n - 2}\]</div>
+<p>We can see that when the prior is Beta<span class="math notranslate nohighlight">\((\alpha\!=\!1, \beta\!=\!1)\)</span>
+(Uniform) the posterior mode is numerically equivalent to the sampling
+proportion estimator <span class="math notranslate nohighlight">\(\hat \theta = \frac{y}{n}\)</span>. The posterior mode is
+often called the <strong>maximum a posteriori</strong> (MAP) value. This result is
+not exclusive for the Beta-Binomial model. In fact the results from many
+non-Bayesian methods can be understood as the MAP from Bayesian methods
+under some particular priors <a class="footnote-reference brackets" href="#id53" id="id27">15</a>.</p>
+<p>Compare Equation <a class="reference internal" href="#equation-eq-beta-binom-mean">(11)</a> to the sampling proportion
+<span class="math notranslate nohighlight">\(\frac{y}{n}\)</span>. The Bayesian estimator is adding <span class="math notranslate nohighlight">\(\alpha\)</span> to the number
+of successes and <span class="math notranslate nohighlight">\(\alpha + \beta\)</span> to the number of trials. Which makes
+<span class="math notranslate nohighlight">\(\beta\)</span> the number of failures. In this sense we can think of the prior
+parameters as <em>pseudo counts</em> or if you want prior data. A prior
+<span class="math notranslate nohighlight">\(\text{Beta}(1, 1)\)</span> is equivalent to having two trials with 1 success
+and 1 failure. Conceptually, the shape of the Beta distribution is
+controlled by parameter <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>, the observed data updates
+the prior so that it shifts the shape of the Beta distribution closer
+and more narrowly to the majority of observations. For values of
+<span class="math notranslate nohighlight">\(\alpha &lt; 1\)</span> and/or <span class="math notranslate nohighlight">\(\beta &lt; 1\)</span> the prior interpretations becomes a
+little bit weird as a literal interpretation would say that the prior
+<span class="math notranslate nohighlight">\(\text{Beta}(0.5, 0.5)\)</span> corresponds to 1 trial with half failure and
+half success or maybe one trial with undetermined outcome. Spooky!</p>
+</div>
+<div class="section" id="objective-priors">
+<span id="id28"></span><h3>Objective Priors<a class="headerlink" href="#objective-priors" title="Permalink to this headline">¶</a></h3>
+<p>In the absence of prior information, it sounds reasonable to follow the
+<em>principle of indifference</em> also known as the <em>principle of insufficient
+reason</em>. This principle basically says that if you do not have
+information about a problem then you do not have any reason to believe
+one outcome is more likely than any other. In the context of Bayesian
+statistics this principle has motivated the study and use of <strong>objective
+priors</strong>. These are systematic ways of generating priors that have the
+least possible influence on a given analysis. The champions of ascetic
+statistics favor objective priors as these priors eliminate the
+<em>subjectivity</em> from prior elicitation. Of course this does not remove
+other sources of subjectivity such as the choice of the likelihood, the
+data selection process, the choice of the problem being modeled or
+investigated, and a long <em>et cetera</em>.</p>
+<p>One procedure to obtain objective priors is known as Jeffreys’ prior
+(JP). These type of priors are often referred as <em>non-informative</em> even
+when priors are always informative in some way. A better description is
+to say that JPs have the property of being invariant under
+<strong>reparametrization</strong>, i.e. writing an expression in a different but
+mathematically equivalent way. Let us explain what this exactly means
+with an example. Suppose Alice has a binomial likelihood with unknown
+parameter <span class="math notranslate nohighlight">\(\theta\)</span>, she chooses a prior and computes a posterior.
+Alice’s friend Bob is interested on the same problem but instead of the
+number of success <span class="math notranslate nohighlight">\(\theta\)</span>, Bob is interested on the <strong>odds</strong> of the
+success, i.e. <span class="math notranslate nohighlight">\(\kappa\)</span>, with <span class="math notranslate nohighlight">\(\kappa = \frac{\theta}{1-\theta}\)</span>. Bob has
+two choices: uses Alice’s posterior over <span class="math notranslate nohighlight">\(\theta\)</span> to compute <span class="math notranslate nohighlight">\(\kappa\)</span>
+<a class="footnote-reference brackets" href="#id54" id="id29">16</a> or choose a prior over <span class="math notranslate nohighlight">\(\kappa\)</span> to compute the posterior by
+himself. JPs guarantee that if both Alice and Bob use JPs then no matter
+which of the two choices Bob takes in order to compute the posteriors,
+he will get the same result. In this sense we say the results are
+invariant to the chosen parameterization. A corollary of this
+explanation could be, that unless we use JPs there is no guarantee that
+two (or more) parameterization of a model will necessarily lead to
+posteriors that are coherent.</p>
+<p>For the one-dimensional case JP for <span class="math notranslate nohighlight">\(\theta\)</span> is</p>
+<div class="math notranslate nohighlight" id="equation-eq-jeffreys-prior0">
+<span class="eqno">(13)<a class="headerlink" href="#equation-eq-jeffreys-prior0" title="Permalink to this equation">¶</a></span>\[p(\theta) \propto \sqrt{I(\theta)}\]</div>
+<p>where <span class="math notranslate nohighlight">\(I(\theta)\)</span> is the expected Fisher information:</p>
+<div class="math notranslate nohighlight" id="equation-eq-jeffreys-prior">
+<span class="eqno">(14)<a class="headerlink" href="#equation-eq-jeffreys-prior" title="Permalink to this equation">¶</a></span>\[I(\theta) = - \mathbb{E_{Y}}\left[\frac{d^2}{d\theta^2} \log p(Y \mid \theta)\right]\]</div>
+<p>Once the likelihood function <span class="math notranslate nohighlight">\(p(Y \mid \theta)\)</span> has been decided by the
+practitioner, then the JP gets automatically determined, eliminating any
+discussion over prior choices, until that annoying person at the back of
+the conference room objects your choice of a JP in the first place.</p>
+<p>For a detailed derivation of the JPs for both Alice and Bob problem see
+Section <a class="reference internal" href="chp_11.html#jeffreys-prior-derivation"><span class="std std-ref">Jeffreys’ Prior Derivation</span></a>. If you
+want to skip those details here we have the JP for Alice:</p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
+p(\theta) \propto \theta^{-0.5} (1-\theta)^{-0.5}\end{aligned}\]</div>
+<p>This turns to be the kernel of the <span class="math notranslate nohighlight">\(\text{Beta}(0.5, 0.5)\)</span> distribution.
+Which is a u-shaped distribution as shown in the left-top panel of
+<a class="reference internal" href="#fig-jeffrey-priors"><span class="std std-numref">Fig. 8</span></a>.</p>
+<p>For Bob the JP is:</p>
+<div class="math notranslate nohighlight" id="equation-fig-bob-prior">
+<span class="eqno">(15)<a class="headerlink" href="#equation-fig-bob-prior" title="Permalink to this equation">¶</a></span>\[p(\kappa) \propto \kappa^{-0.5} (1 + \kappa)^{-1}\]</div>
+<p>This is a half-u-shaped distribution, defined in the <span class="math notranslate nohighlight">\([0, \infty)\)</span>
+interval, see top-right panel in <a class="reference internal" href="#fig-jeffrey-priors"><span class="std std-numref">Fig. 8</span></a>. Saying
+this is a half-u-shaped may sound a little bit weird. Actually it is not
+that weird when we find that this is the kernel of a close cousin of the
+Beta distribution, the Beta-prime distribution with parameters
+<span class="math notranslate nohighlight">\(\alpha=\beta=0.5\)</span>.</p>
+<div class="figure align-default" id="fig-jeffrey-priors">
+<a class="reference internal image-reference" href="../_images/Jeffrey_priors.png"><img alt="../_images/Jeffrey_priors.png" src="../_images/Jeffrey_priors.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text">Top: Jeffreys’ prior (unnormalized) for the binomial likelihood
+parameterized in term of the number of success <span class="math notranslate nohighlight">\(\theta\)</span> (left) or in
+term of the odds <span class="math notranslate nohighlight">\(\kappa\)</span> (right). Bottom: Jeffreys’ posteriors
+(unnormalized) for the binomial likelihood parameterized in term of the
+number of success <span class="math notranslate nohighlight">\(\theta\)</span> (left) or in term of the odds <span class="math notranslate nohighlight">\(\kappa\)</span>
+(right). The arrows between the posteriors indicate that the posterior
+are inter-convertible by applying the change of variable rule (see Section
+<a class="reference internal" href="chp_11.html#transformations"><span class="std std-ref">Transformations</span></a> for details).</span><a class="headerlink" href="#fig-jeffrey-priors" title="Permalink to this image">¶</a></p>
+</div>
+<p>Notice that as the expectation in Equation <a class="reference internal" href="#equation-eq-jeffreys-prior">(14)</a> is
+with respect to <span class="math notranslate nohighlight">\(Y \mid \theta\)</span>, that is an expectation over the sample
+space. This means that in order to obtain a JP we need to average over
+all possible experimental outcomes. This is a violation of the
+likelihood principle <a class="footnote-reference brackets" href="#id55" id="id30">17</a> as the inferences about <span class="math notranslate nohighlight">\(\theta\)</span> depends not
+just on the data at hand, but also on the set of potentially (but not
+yet) observed data.</p>
+<p>A JP can be improper prior, meaning that it does not integrate to 1. For
+example, the JP for the mean of a Gaussian distribution of known
+variance is uniform over the entire real line. Improper priors are fine
+as long as we verify that the combination of them with a likelihood
+produces a proper posterior distribution, that is one integrating to 1.
+Also notice that we can not draw random samples from improper priors
+(i.e., they are non-generative) this can invalidate many useful tools
+that allow us to reason about our model.</p>
+<p>JPs are not the only way to obtain an objective prior. Another possible
+route is to obtain a prior by maximizing the expected Kullback-Leibler
+divergence (see Section <a class="reference internal" href="chp_11.html#dkl"><span class="std std-ref">Kullback-Leibler Divergence</span></a>) between the prior and posterior. These
+kind of priors are known as Bernardo reference priors. They are
+objective as these are the priors that <em>allow the data to bring</em> the
+maximal amount of information into the posterior distribution. Bernardo
+reference priors and Jeffreys’ prior do not necessarily agree.
+Additionally, objective priors may not exist or be difficult to derive
+for complicated models.</p>
+</div>
+<div class="section" id="maximum-entropy-priors">
+<span id="id31"></span><h3>Maximum Entropy Priors<a class="headerlink" href="#maximum-entropy-priors" title="Permalink to this headline">¶</a></h3>
+<p>Yet another way to justify a choice of priors is to pick the prior with
+the highest entropy. If we are totally indifferent about the plausible
+values then such prior turns out to be the Uniform distribution over the
+range on plausible values <a class="footnote-reference brackets" href="#id56" id="id32">18</a>. But what about when we are not
+completely indifferent about the plausible values a parameter can take?
+For example, we may know our parameter is restricted to the
+<span class="math notranslate nohighlight">\([0, \infty)\)</span> interval. Can we obtain a prior that has maximum entropy
+while also satisfying a given constraint? Yes we can and that is exactly
+the idea behind maximum entropy priors. In the literature it is common
+to find the word MaxEnt when people talk about the maximum entropy
+principle.</p>
+<p>In order to obtain a maximum entropy prior we need to solve an
+optimization problem taking into account a set of constraints.
+Mathematically this can be done using what is known as Lagrangian
+multipliers. Instead of a formal proof we are going to use a couple code
+examples to gain some intuition.</p>
+<p><a class="reference internal" href="#fig-max-entropy"><span class="std std-numref">Fig. 9</span></a> shows 3 distributions obtained by entropy
+maximization. The purple distribution is obtained under no constraint,
+and we are happy to find that this is indeed the Uniform distribution as
+expected from the discussion about entropy in Section <a class="reference internal" href="chp_11.html#entropy"><span class="std std-ref">Entropy</span></a>. If
+we do not know anything about the problem all events are equally likely
+a priori. The second distribution, in cyan, is obtained under the
+constraint that we know the mean value of the distribution. In this
+example the mean value is 1.5). Under this constraint we get an
+Exponential-like distribution. The last one in yellow-green was obtained
+under the restriction that the value 3 and 4 are known to appear with a
+probability of 0.8. If you check Code Block <a class="reference internal" href="#max-ent-priors"><span class="std std-ref">max_ent_priors</span></a> you will see all
+distributions were computed under two constraints that probabilities can
+only take values in the interval <span class="math notranslate nohighlight">\([0, 1]\)</span> and that the total probability
+must be 1. As these are general constraints for valid probability
+distribution we can think of them as <em>intrinsic</em> or even <em>ontological</em>
+constraints. For that reason we say that the purple distribution in
+<a class="reference internal" href="#fig-max-entropy"><span class="std std-numref">Fig. 9</span></a> was obtained under no-constraint.</p>
+<div class="literal-block-wrapper docutils container" id="max-ent-priors">
+<div class="code-block-caption"><span class="caption-number">Listing 8 </span><span class="caption-text">max_ent_priors</span><a class="headerlink" href="#max-ent-priors" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cons</span> <span class="o">=</span> <span class="p">[[{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;eq&quot;</span><span class="p">,</span> <span class="s2">&quot;fun&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">}],</span>
+        <span class="p">[{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;eq&quot;</span><span class="p">,</span> <span class="s2">&quot;fun&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">},</span>
+         <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;eq&quot;</span><span class="p">,</span> <span class="s2">&quot;fun&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">1.5</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">))}],</span>
+        <span class="p">[{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;eq&quot;</span><span class="p">,</span> <span class="s2">&quot;fun&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">},</span>
+         <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;eq&quot;</span><span class="p">,</span> <span class="s2">&quot;fun&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">[[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span> <span class="o">-</span> <span class="mf">0.8</span><span class="p">}]]</span>
+
+<span class="n">max_ent</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cons</span><span class="p">):</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">entropy</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x0</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="mi">6</span><span class="p">]</span><span class="o">*</span><span class="mi">6</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">[(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)]</span> <span class="o">*</span> <span class="mi">6</span><span class="p">,</span>
+                   <span class="n">constraints</span><span class="o">=</span><span class="n">c</span><span class="p">)[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span>
+    <span class="n">max_ent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entropy</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">val</span><span class="p">,</span> <span class="s1">&#39;o--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">viridish</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">lw</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$t$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$p(t)$&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="figure align-default" id="fig-max-entropy">
+<a class="reference internal image-reference" href="../_images/max_entropy.png"><img alt="../_images/max_entropy.png" src="../_images/max_entropy.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text">Discrete distributions obtained by maximizing the entropy under
+different constraints. We are using the function <code class="docutils literal notranslate"><span class="pre">entropy</span></code> from
+<code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> to estimate these distributions. Notice how adding
+constraints can drastically change the distribution.</span><a class="headerlink" href="#fig-max-entropy" title="Permalink to this image">¶</a></p>
+</div>
+<p>We can think of the maximum entropy principle as the procedure of
+choosing the flattest distribution, and by extension the flattest prior
+distribution, under a given constraint. In <a class="reference internal" href="#fig-max-entropy"><span class="std std-numref">Fig. 9</span></a> the
+Uniform distribution is the flattest distribution, but notice that the
+distribution in green is also the flattest distribution once we include
+the restriction that the values 3 and 4 have a 80% chance of arising.
+Notice how the values 3 and 4 have both a probability of 0.4, even when
+you have infinite other ways to combine their probabilities to obtain
+the target value of 0.8, like 0+0.8, 0.7+0.1, 0.312+0.488 and so on.
+Also notice something similar is true for the values 1, 2, 5 and 6, they
+have a total probability of 0.2 which is evenly distributed (0.05 for
+each value). Now take a look at the Exponential-like curve, which
+certainly does not look very flat, but once again notice that other
+choices will be less flat and more concentrated, for example, obtaining
+1 and 2 with 50% chance each (and thus zero change for the values 3 to
+6), which will also have 1.5 as the expected value.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ite</span> <span class="o">=</span> <span class="mi">100_000</span>
+<span class="n">entropies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="n">ite</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ite</span><span class="p">):</span>
+    <span class="n">rnds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">x_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x_</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="n">rnd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">total</span><span class="p">)</span>
+        <span class="n">rnds</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">rnd</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="n">rnds</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">rnds</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">rnds</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">entropy</span><span class="p">(</span><span class="n">rnds</span><span class="p">)</span>
+    <span class="n">entropies</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">H</span>
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="mf">1.5</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">rnds</span> <span class="o">*</span> <span class="n">x_</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">0.01</span><span class="p">:</span>
+        <span class="n">entropies</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">H</span>
+    <span class="n">prob_34</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">rnds</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">((</span><span class="n">x_</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">x_</span> <span class="o">==</span> <span class="mi">4</span><span class="p">))</span><span class="o">.</span><span class="n">ravel</span><span class="p">()])</span>
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="mf">0.8</span> <span class="o">-</span> <span class="n">prob_34</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.01</span><span class="p">:</span>
+        <span class="n">entropies</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">H</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="#fig-max-entropy-vs-random-dist"><span class="std std-numref">Fig. 10</span></a> shows the distribution of
+entropies computed for randomly generated samples under the exact same
+conditions as the 3 distributions in <a class="reference internal" href="#fig-max-entropy"><span class="std std-numref">Fig. 9</span></a>. The
+dotted vertical line represents the entropy of the curves in
+<a class="reference internal" href="#fig-max-entropy-vs-random-dist"><span class="std std-numref">Fig. 10</span></a>. While this is not a proof,
+this experiment seems to suggest that there is no distribution with
+higher entropy than the distributions in
+<a class="reference internal" href="#fig-max-entropy-vs-random-dist"><span class="std std-numref">Fig. 10</span></a>, which is in total agreement
+with what the theory tells us.</p>
+<div class="figure align-default" id="fig-max-entropy-vs-random-dist">
+<a class="reference internal image-reference" href="../_images/max_entropy_vs_random_dist.png"><img alt="../_images/max_entropy_vs_random_dist.png" src="../_images/max_entropy_vs_random_dist.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 10 </span><span class="caption-text">The distribution of entropy for a set of randomly generated
+distributions. The dotted vertical line indicates the value for the
+distributions with maximum entropy, computed with Code Block
+<a class="reference internal" href="#max-ent-priors"><span class="std std-ref">max_ent_priors</span></a>. We can see that none of
+the randomly generated distributions have an entropy larger that the
+distributions with maximum entropy, while this is no formal proof, this
+is certainly reassuring.</span><a class="headerlink" href="#fig-max-entropy-vs-random-dist" title="Permalink to this image">¶</a></p>
+</div>
+<p>The distributions with the largest entropy under the following
+constraints are <a class="footnote-reference brackets" href="#id57" id="id33">19</a>:</p>
+<ul class="simple">
+<li><p>No constraints: Uniform (continuous or discrete, according to the
+type of variable)</p></li>
+<li><p>A positive mean, with support <span class="math notranslate nohighlight">\([0, \infty)\)</span>: Exponential</p></li>
+<li><p>An absolute value mean, with support <span class="math notranslate nohighlight">\((-\infty, \infty)\)</span>: Laplace
+(also known as double Exponential)</p></li>
+<li><p>A given mean and variance, with support <span class="math notranslate nohighlight">\((-\infty, \infty)\)</span>: Normal
+distribution</p></li>
+<li><p>A given mean and variance, with support <span class="math notranslate nohighlight">\([-\pi, \pi]\)</span>: Von Mises</p></li>
+<li><p>Only two unordered outcomes and a constant mean: Binomial, or the
+Poisson if we have rare events (the Poisson can be seen as a special
+case of the binomial)</p></li>
+</ul>
+<p>It is interesting to note that many of the generalized linear models
+like the ones described in Chapter <a class="reference internal" href="chp_03.html#chap2"><span class="std std-ref">3</span></a> are traditionally
+defined using maximum entropy distributions, given the constraints of
+the models. Similar to objective priors, MaxEnt prior may not exist or
+are difficult to derive.</p>
+</div>
+<div class="section" id="weakly-informative-priors-and-regularization-priors">
+<span id="id34"></span><h3>Weakly Informative Priors and Regularization Priors<a class="headerlink" href="#weakly-informative-priors-and-regularization-priors" title="Permalink to this headline">¶</a></h3>
+<p>In previous sections we used general procedures to generate vague,
+non-informative priors designed to not put <em>too much</em> information into
+our analysis. These procedures to generate priors also provide a
+“somehow” automated way of generating priors. These two features may
+sound appealing, and in fact they are for a large number of Bayesian
+practitioners and theorists.</p>
+<p>But in this book we will not rely too much on these kinds of priors. We
+believe prior elicitation (as other modeling decisions) should be
+context dependent, meaning that details from specific problems and even
+idiosyncrasies of a given scientific field could inform our choice of
+priors. While MaxEnt priors can incorporate some of these restrictions
+it is possible to move a little bit closer to the informative end of the
+informativeness prior spectrum. We can do this with so called weakly
+informative priors.</p>
+<p>What constitutes a weakly informative priors is usually not
+mathematically well defined as JPs or MaxEnt are. Instead they are more
+<em>empirical</em> and <em>model-driven</em>, that is they are defined through a
+combination of relevant domain expertise and the model itself. For many
+problems, we often have information about the values a parameter can
+take. This information can be derived from the physical meaning of the
+parameter. We know heights have to be positive. We may even know the
+plausible range a parameter can take from previous experiments or
+observations. We may have strong reasons to justify a value should be
+close to zero or above some predefined lower-bound. We can use this
+information to weakly inform our analysis while keeping a good dose of
+ignorance to us from <em>to pushing too much</em>.</p>
+<p>Using the Beta-Binomial example again,
+<a class="reference internal" href="#fig-prior-informativeness-spectrum"><span class="std std-numref">Fig. 11</span></a> shows four alternative
+priors. Two of them are the JP and maximum entropy prior from previous
+sections. One is what could called a weakly informative prior that gives
+preference to a value of <span class="math notranslate nohighlight">\(\theta=0.5\)</span> while still being broad or
+relatively vague about other values. The last is an informative prior,
+narrowly centered around <span class="math notranslate nohighlight">\(\theta=0.8\)</span> <a class="footnote-reference brackets" href="#id58" id="id35">20</a>. Using informative priors is
+a valid option if we have good-quality information from theory, previous
+experiments, observational data, etc. As informative priors are very
+strong priors conveying a lot of information they generally require a
+stronger justification than other priors. As Carl Sagan used to say
+“Extraordinary claims require extraordinary evidence” <span id="id36">[<a class="reference internal" href="references.html#id100">12</a>]</span>. It
+is important to remember that informativeness of the prior depends on
+model and model context. An uninformative prior in one context can
+become highly informative in another <span id="id37">[<a class="reference internal" href="references.html#id63">13</a>]</span>. For instance
+if modeling the mean height of adult humans in meters, a prior of
+<span class="math notranslate nohighlight">\(\mathcal{N}(2,1)\)</span> can be considered uninformative, but if estimating
+the height of giraffes that same prior becomes highly informative as in
+reality giraffe heights differ greatly than human heights.</p>
+<div class="figure align-default" id="fig-prior-informativeness-spectrum">
+<a class="reference internal image-reference" href="../_images/prior_informativeness_spectrum.png"><img alt="../_images/prior_informativeness_spectrum.png" src="../_images/prior_informativeness_spectrum.png" style="width: 8.00in;" /></a>
+<p class="caption"><span class="caption-number">Fig. 11 </span><span class="caption-text">Prior informativeness spectrum: While Jeffreys and MaxEnt priors are
+uniquely defined for a binomial likelihood, weakly informative and
+informative priors are not and instead depend on previous information
+and practitioner’s modeling decisions.</span><a class="headerlink" href="#fig-prior-informativeness-spectrum" title="Permalink to this image">¶</a></p>
+</div>
+<p>Because weakly-informative priors work to keep the posterior
+distribution within certain reasonable bounds, they are also known as
+regularizing priors. Regularization is a procedure of adding information
+with the aim of solving an ill-posed problem or to reduce the chance of
+overfitting and priors offer a principled way of performing
+regularization.</p>
+<p>In this book, more often than not, we will use weakly-informative
+priors. Sometimes the prior will be used in a model without too much
+justification, simply because the focus of the example may be related to
+other aspects of the Bayesian modeling workflow. But we will also show
+some examples of using prior predictive checks to help us calibrate our
+priors.</p>
+<div class="admonition-overfitting admonition">
+<p class="admonition-title">Overfitting</p>
+<p>Overfitting occurs when a model generates predictions very
+close to the limited dataset used to fit it, but it fails to fit
+additional data and/or predict future observations reasonably well. That
+is it fails to generalize its predictions to a wider set of possible
+observations. The counterpart of overfitting is underfitting, which is
+when a model fails to adequately capture the underlying structure of the
+data. We will discuss more about there topics in Sections
+<a class="reference internal" href="chp_02.html#model-cmp"><span class="std std-ref">Model Comparison</span></a> and <a class="reference internal" href="chp_11.html#information-criterion"><span class="std std-ref">Information Criterion</span></a>.</p>
+</div>
+</div>
+<div class="section" id="using-prior-predictive-distributions-to-assess-priors">
+<span id="id38"></span><h3>Using Prior Predictive Distributions to Assess Priors<a class="headerlink" href="#using-prior-predictive-distributions-to-assess-priors" title="Permalink to this headline">¶</a></h3>
+<p>When evaluating the choice of priors, the prior predictive distribution
+shown in <a class="reference internal" href="#automating-inference"><span class="std std-ref">Say Yes to Automating Inference, Say No to Automated Model Building</span></a> is a handy tool. By sampling from
+the prior predictive distribution, the computer does the work of
+translating choices made in the parameter space into samples in the
+observed variable space. Thinking in terms of observed values is
+generally easier than thinking in terms of the model’s parameters which
+makes model evaluation easier. Following a Beta Binomial model, instead
+of judging whether a particular value of <span class="math notranslate nohighlight">\(\theta\)</span> is plausible, prior
+predictive distributions allow us to judge whether a particular number
+of successes is plausible. This becomes even more useful for complex
+models where parameters get transformed through many mathematical
+operations or multiple priors interact with each other. Lastly,
+computing the prior predictive could help us ensure our model has been
+properly written and is able to run in our probabilistic programming
+language and can even help us to debug our model. In the following
+chapters, we will see more concrete examples of how to reason about
+prior predictive samples and use them to choose reasonable priors.</p>
+</div>
+</div>
+<div class="section" id="exercises">
+<span id="exercises1"></span><h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<p>Problems are labeled Easy (E), Medium (M), and Hard (H).</p>
+<p><strong>1E1.</strong> As we discussed, models are artificial
+representations used to help define and understand an object or process.
+However, no model is able to perfectly replicate what it represents and
+thus is deficient in some way. In this book we focus on a particular
+type of models, statistical models. What are other types of models you
+can think of? How do they aid understanding of the thing that is being
+modeled? How are they deficient?</p>
+<p><strong>1E2.</strong> Match each of these verbal descriptions to their
+corresponding mathematical expression:</p>
+<ol class="simple">
+<li><p>The probability of a parameter given the observed data</p></li>
+<li><p>The distribution of parameters before seeing any data</p></li>
+<li><p>The plausibility of the observed data given a parameter value</p></li>
+<li><p>The probability of an unseen observation given the observed data</p></li>
+<li><p>The probability of an unseen observation before seeing any data</p></li>
+</ol>
+<p><strong>1E3.</strong> From the following expressions, which one
+corresponds to the sentence, The probability of being sunny given that
+it is July 9th of 1816?</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(p(\text{sunny})\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(p(\text{sunny} \mid \text{July})\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(p(\text{sunny} \mid \text{July 9th of 1816})\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(p(\text{July 9th of 1816} \mid \text{sunny})\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(p(\text{sunny}, \text{July 9th of 1816}) / p(\text{July 9th of 1816})\)</span></p></li>
+</ol>
+<p><strong>1E4.</strong> Show that the probability of choosing a human at
+random and picking the Pope is not the same as the probability of the
+Pope being human. In the animated series Futurama, the (Space) Pope is a
+reptile. How does this change your previous calculations?</p>
+<p><strong>1E5.</strong> Sketch what the distribution of possible observed
+values could be for the following cases:</p>
+<ol class="simple">
+<li><p>The number of people visiting your local cafe assuming Poisson
+distribution</p></li>
+<li><p>The weight of adult dogs in kilograms assuming a Uniform
+distribution</p></li>
+<li><p>The weight of adult elephants in kilograms assuming Normal
+distribution</p></li>
+<li><p>The weight of adult humans in pounds assuming skew Normal
+distribution</p></li>
+</ol>
+<p><strong>1E6.</strong> For each example in the previous exercise, use SciPy
+to specify the distribution in Python. Pick parameters that you believe
+are reasonable, take a random sample of size 1000, and plot the
+resulting distribution. Does this distribution look reasonable given
+your domain knowledge? If not adjust the parameters and repeat the
+process until they seem reasonable.</p>
+<p><strong>1E7.</strong> Compare priors <span class="math notranslate nohighlight">\(\text{Beta}(0.5, 0.5)\)</span>,
+<span class="math notranslate nohighlight">\(\text{Beta}(1, 1)\)</span>, <span class="math notranslate nohighlight">\(\text{Beta}(1, 4)\)</span>. How do the priors differ in
+terms of shape?</p>
+<p><strong>1E8</strong>. Rerun Code Block
+<a class="reference internal" href="#binomial-update"><span class="std std-ref">binomial_update</span></a> but using two
+Beta-priors of your choice. Hint: you may what to try priors with
+<span class="math notranslate nohighlight">\(\alpha \neq \beta\)</span> like <span class="math notranslate nohighlight">\(\text{Beta}(2, 5)\)</span>.</p>
+<p><strong>1E9.</strong> Try to come up with new constraints in order to
+obtain new Max-Ent distributions (Code Block
+<a class="reference internal" href="#max-ent-priors"><span class="std std-ref">max_ent_priors</span></a>)</p>
+<p><strong>1E10.</strong> In Code Block <a class="reference internal" href="#metropolis-hastings"><span class="std std-ref">metropolis_hastings</span></a>, change the
+value of <code class="docutils literal notranslate"><span class="pre">can_sd</span></code> and run the Metropolis-Hastings sampler. Try values
+like 0.001 and 1.</p>
+<ol class="simple">
+<li><p>Compute the mean, SD, and HDI and compare the values with those in
+the book (computed using <code class="docutils literal notranslate"><span class="pre">can_sd=0.05</span></code>). How different are the
+estimates?</p></li>
+<li><p>Use the function <code class="docutils literal notranslate"><span class="pre">az.plot_posterior</span></code>.</p></li>
+</ol>
+<p><strong>1E11.</strong> You need to estimate the weights of blue whales,
+humans, and mice. You assume they are normally distributed, and you set
+the same prior <span class="math notranslate nohighlight">\(\mathcal{HN}(200\text{kg})\)</span> for the variance. What type
+of prior is this for adult blue whales? Strongly informative, weakly
+informative, or non-informative? What about for mice and for humans? How
+does informativeness of the prior correspond to our real world
+intuitions about these animals?</p>
+<p><strong>1E12.</strong> Use the following function to explore different
+combinations of priors (change the parameters <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code>) and data
+(change heads and trials). Summarize your observations.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">posterior_grid</span><span class="p">(</span><span class="n">grid</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">heads</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">trials</span><span class="o">=</span><span class="mi">9</span><span class="p">):</span>
+    <span class="n">grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">grid</span><span class="p">)</span>
+    <span class="n">prior</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+    <span class="n">likelihood</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">heads</span><span class="p">,</span> <span class="n">trials</span><span class="p">,</span> <span class="n">grid</span><span class="p">)</span>
+    <span class="n">posterior</span> <span class="o">=</span> <span class="n">likelihood</span> <span class="o">*</span> <span class="n">prior</span>
+    <span class="n">posterior</span> <span class="o">/=</span> <span class="n">posterior</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;heads = </span><span class="si">{</span><span class="n">heads</span><span class="si">}</span><span class="se">\n</span><span class="s2">trials = </span><span class="si">{</span><span class="n">trials</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">e_n</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">prior</span><span class="p">,</span> <span class="n">likelihood</span><span class="p">,</span> <span class="n">posterior</span><span class="p">],</span>
+            <span class="p">[</span><span class="s2">&quot;prior&quot;</span><span class="p">,</span> <span class="s2">&quot;likelihood&quot;</span><span class="p">,</span> <span class="s2">&quot;posterior&quot;</span><span class="p">])):</span>
+        <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+        <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="s2">&quot;o-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">e_n</span><span class="p">)</span>
+        <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+
+
+<span class="n">interact</span><span class="p">(</span><span class="n">posterior_grid</span><span class="p">,</span>
+    <span class="n">grid</span><span class="o">=</span><span class="n">ipyw</span><span class="o">.</span><span class="n">IntSlider</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">15</span><span class="p">),</span>
+    <span class="n">a</span><span class="o">=</span><span class="n">ipyw</span><span class="o">.</span><span class="n">FloatSlider</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+    <span class="n">b</span><span class="o">=</span><span class="n">ipyw</span><span class="o">.</span><span class="n">FloatSlider</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+    <span class="n">heads</span><span class="o">=</span><span class="n">ipyw</span><span class="o">.</span><span class="n">IntSlider</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">6</span><span class="p">),</span>
+    <span class="n">trials</span><span class="o">=</span><span class="n">ipyw</span><span class="o">.</span><span class="n">IntSlider</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">9</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><strong>1E13.</strong> Between the prior, prior predictive, posterior, and
+posterior predictive distributions which distribution would help answer
+each of these questions. Some items may have multiple answers.</p>
+<ol class="simple">
+<li><p>How do we think is the distribution of parameters values before
+seeing any data?</p></li>
+<li><p>What observed values do we think we could see before seeing any
+data?</p></li>
+<li><p>After estimating parameters using a model what do we predict we will
+observe next?</p></li>
+<li><p>What parameter values explain the observed data after conditioning
+on that data?</p></li>
+<li><p>Which can be used to calculate numerical summaries, such as the
+mean, of the parameters?</p></li>
+<li><p>Which can can be used to to visualize a Highest Density Interval?</p></li>
+</ol>
+<p><strong>1M14.</strong> Equation <a class="reference internal" href="#equation-eq-posterior-dist">(1)</a> contains the
+marginal likelihood in the denominator, which is difficult to calculate.
+In Equation <a class="reference internal" href="#equation-eq-proportional-bayes">(3)</a> we show that knowing the
+posterior up to a proportional constant is sufficient for inference.
+Show why the marginal likelihood is not needed for the
+Metropolis-Hasting method to work. Hint: this is a pen and paper
+exercise, try by expanding Equation <a class="reference internal" href="#equation-acceptance-prob">(7)</a>.</p>
+<p><strong>1M15.</strong> In the following definition of a probabilistic
+model, identify the prior, the likelihood, and the posterior:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{split}
+Y \sim \mathcal{N}(\mu, \sigma)\\
+\mu \sim \mathcal{N}(0, 1)\\
+\sigma \sim \mathcal{HN}(1)\\
+\end{split}\end{split}\]</div>
+<p><strong>1M16.</strong> In the previous model, how many parameters will the
+posterior have? Compare your answer with that from the model in the
+coin-flipping problem in Equation <a class="reference internal" href="#equation-eq-beta-binomial">(8)</a>.</p>
+<p><strong>1M17.</strong> Suppose that we have two coins; when we toss the
+first coin, half of the time it lands tails and half of the time on
+heads. The other coin is a loaded coin that always lands on heads. If we
+choose one of the coins at random and observe a head, what is the
+probability that this coin is the loaded one?</p>
+<p><strong>1M18.</strong> Modify Code Block
+<a class="reference internal" href="#metropolis-hastings-sampler-rvs"><span class="std std-ref">metropolis_hastings_sampler_rvs</span></a> to generate random
+samples from a Poisson distribution with parameters of your choosing.
+Then modify Code Blocks <a class="reference internal" href="#metropolis-hastings-sampler"><span class="std std-ref">metropolis_hastings_sampler</span></a> and
+<a class="reference internal" href="#metropolis-hastings"><span class="std std-ref">metropolis_hastings</span></a> to generate MCMC samples estimating your chosen
+parameters. Test how the number of samples, MCMC iterations, and initial
+starting point affect convergence to your true chosen parameter.</p>
+<p><strong>1M19.</strong> Assume we are building a model to estimate the mean
+and standard deviation of adult human heights in centimeters. Build a
+model that will make these estimation. Start with Code Block
+<a class="reference internal" href="#beta-binom"><span class="std std-ref">beta_binom</span></a> and change the likelihood and
+priors as needed. After doing so then</p>
+<ol class="simple">
+<li><p>Sample from the prior predictive. Generate a visualization and
+numerical summary of the prior predictive distribution</p></li>
+<li><p>Using the outputs from (a) to justify your choices of priors and
+likelihoods</p></li>
+</ol>
+<p><strong>1M20.</strong> From domain knowledge you have that a given
+parameter can not be negative, and has a mean that is roughly between 3
+and 10 units, and a standard deviation of around 2. Determine two prior
+distribution that satisfy these constraints using Python. This may
+require trial and error by drawing samples and verifying these criteria
+have been met using both plots and numerical summaries.</p>
+<p><strong>1M21.</strong> A store is visited by <span class="math notranslate nohighlight">\(n\)</span> customers on a given day.
+The number of customers that make a purchase <span class="math notranslate nohighlight">\(Y\)</span> is distributed as
+<span class="math notranslate nohighlight">\(\text{Bin}(n, \theta)\)</span>, where <span class="math notranslate nohighlight">\(\theta\)</span> is the probability that a
+customer makes a purchase. Assume we know <span class="math notranslate nohighlight">\(\theta\)</span> and the prior for <span class="math notranslate nohighlight">\(n\)</span>
+is <span class="math notranslate nohighlight">\(\text{Pois}(4.5)\)</span>.</p>
+<ol class="simple">
+<li><p>Use PyMC3 to compute the posterior distribution of <span class="math notranslate nohighlight">\(n\)</span> for all
+combinations of <span class="math notranslate nohighlight">\(Y \in {0, 5, 10}\)</span> and <span class="math notranslate nohighlight">\(\theta \in {0.2, 0.5}\)</span>. Use
+<code class="docutils literal notranslate"><span class="pre">az.plot_posterior</span></code> to plot the results in a single plot.</p></li>
+<li><p>Summarize the effect of <span class="math notranslate nohighlight">\(Y\)</span> and <span class="math notranslate nohighlight">\(\theta\)</span> on the posterior</p></li>
+</ol>
+<p><strong>1H22.</strong> Modify Code Block
+<a class="reference internal" href="#metropolis-hastings-sampler-rvs"><span class="std std-ref">metropolis_hastings_sampler_rvs</span></a> to generate samples from
+a Normal Distribution, noting your choice of parameters for the mean and
+standard deviation. Then modify Code Blocks
+<a class="reference internal" href="#metropolis-hastings-sampler"><span class="std std-ref">metropolis_hastings_sampler</span></a> and <a class="reference internal" href="#metropolis-hastings"><span class="std std-ref">metropolis_hastings</span></a> to
+sample from a Normal model and see if you can recover your chosen
+parameters.</p>
+<p><strong>1H23.</strong> Make a model that estimates the proportion of the
+number of sunny versus cloudy days in your area. Use the past 5 days of
+data from your personal observations. Think through the data collection
+process. How hard is it to remember the past 5 days. What if needed the
+past 30 days of data? Past year? Justify your choice of priors. Obtain a
+posterior distribution that estimates the proportion of sunny versus
+cloudy days. Generate predictions for the next 10 days of weather.
+Communicate your answer using both numerical summaries and
+visualizations.</p>
+<p><strong>1H24.</strong> You planted 12 seedlings and 3 germinate. Let us
+call <span class="math notranslate nohighlight">\(\theta\)</span> the probability that a seedling germinates. Assuming
+<span class="math notranslate nohighlight">\(\text{Beta}(1, 1)\)</span> prior distribution for <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<ol class="simple">
+<li><p>Use pen and paper to compute the posterior mean and standard
+deviation. Verify your calculations using SciPy.</p></li>
+<li><p>Use SciPy to compute the equal-tailed and highest density 94%
+posterior intervals.</p></li>
+<li><p>Use SciPy to compute the posterior predictive probability that at
+least one seedling will germinate if you plant another 12 seedlings.</p></li>
+</ol>
+<p>After obtaining your results with SciPy repeat this exercise using PyMC3
+and ArviZ</p>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="id39"><span class="brackets"><a class="fn-backref" href="#id4">1</a></span></dt>
+<dd><p>If you want to be more general you can even say that everything is
+a probability distribution as a quantity you assume to know with
+arbitrary precision that can be described by a Dirac delta function.</p>
+</dd>
+<dt class="label" id="id40"><span class="brackets"><a class="fn-backref" href="#id5">2</a></span></dt>
+<dd><p>Some authors call these quantities latent variables and reserve
+the name parameter to identify fixed, but unknown, quantities.</p>
+</dd>
+<dt class="label" id="id41"><span class="brackets"><a class="fn-backref" href="#id7">3</a></span></dt>
+<dd><p>Alternatively you can think of this in terms of certainty or
+information, depending if you are a glass half empty or glass half
+full person.</p>
+</dd>
+<dt class="label" id="id42"><span class="brackets"><a class="fn-backref" href="#id8">4</a></span></dt>
+<dd><p>Sometimes the word <em>distribution</em> will be implicit, this commonly
+occurs when discussing these topics.</p>
+</dd>
+<dt class="label" id="id43"><span class="brackets"><a class="fn-backref" href="#id9">5</a></span></dt>
+<dd><p>Here we are using experiment in the broad sense of any procedure
+to collect or generate data.</p>
+</dd>
+<dt class="label" id="id44"><span class="brackets"><a class="fn-backref" href="#id10">6</a></span></dt>
+<dd><p><a class="reference external" href="https://xkcd.com/2117/">https://xkcd.com/2117/</a></p>
+</dd>
+<dt class="label" id="id45"><span class="brackets"><a class="fn-backref" href="#id11">7</a></span></dt>
+<dd><p>Technically we should talk about the expectation of a random
+variable. See Section <a class="reference internal" href="chp_11.html#expectations"><span class="std std-ref">Expectations</span></a> for details.</p>
+</dd>
+<dt class="label" id="id46"><span class="brackets"><a class="fn-backref" href="#id13">8</a></span></dt>
+<dd><p>See detailed balance at Sections <a class="reference internal" href="chp_11.html#markov-chains"><span class="std std-ref">Markov Chains</span></a> and <a class="reference internal" href="chp_11.html#sec-metropolis-hastings"><span class="std std-ref">Metropolis-Hastings</span></a>.</p>
+</dd>
+<dt class="label" id="id47"><span class="brackets"><a class="fn-backref" href="#id15">9</a></span></dt>
+<dd><p>For a more extensive discussion about inference methods you should
+read Section [<a class="reference internal" href="chp_11.html#inference-methods"><span class="std std-ref">Inference Methods</span></a> and references
+therein.</p>
+</dd>
+<dt class="label" id="id48"><span class="brackets"><a class="fn-backref" href="#id16">10</a></span></dt>
+<dd><p>This is sometimes referred to as a kernel in other Universal
+Inference Engines.</p>
+</dd>
+<dt class="label" id="id49"><span class="brackets"><a class="fn-backref" href="#id17">11</a></span></dt>
+<dd><p>You can use ArviZ <code class="docutils literal notranslate"><span class="pre">plot_trace</span></code> function to get a similar plot.
+This is how we will do in the rest of the book.</p>
+</dd>
+<dt class="label" id="id50"><span class="brackets"><a class="fn-backref" href="#id19">12</a></span></dt>
+<dd><p>Notice that in principle the number of possible intervals
+containing a given proportion of the total density is infinite.</p>
+</dd>
+<dt class="label" id="id51"><span class="brackets"><a class="fn-backref" href="#id25">13</a></span></dt>
+<dd><p>For more examples check
+<a class="reference external" href="https://en.wikipedia.org/wiki/Conjugate_prior#Table_of_conjugate_distributions">https://en.wikipedia.org/wiki/Conjugate_prior#Table_of_conjugate_distributions</a></p>
+</dd>
+<dt class="label" id="id52"><span class="brackets"><a class="fn-backref" href="#id26">14</a></span></dt>
+<dd><p>Except, the ones happening in your brain.</p>
+</dd>
+<dt class="label" id="id53"><span class="brackets"><a class="fn-backref" href="#id27">15</a></span></dt>
+<dd><p>For example, a regularized linear regression with a L2
+regularization is the same as using a Gaussian prior on the
+coefficient.</p>
+</dd>
+<dt class="label" id="id54"><span class="brackets"><a class="fn-backref" href="#id29">16</a></span></dt>
+<dd><p>For example, if we have samples from the posterior, then we can
+plug those samples of <span class="math notranslate nohighlight">\(\theta\)</span> into
+<span class="math notranslate nohighlight">\(\kappa = \frac{\theta}{1-\theta}\)</span>.</p>
+</dd>
+<dt class="label" id="id55"><span class="brackets"><a class="fn-backref" href="#id30">17</a></span></dt>
+<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Likelihood_principle">https://en.wikipedia.org/wiki/Likelihood_principle</a></p>
+</dd>
+<dt class="label" id="id56"><span class="brackets"><a class="fn-backref" href="#id32">18</a></span></dt>
+<dd><p>See Section <a class="reference internal" href="chp_11.html#entropy"><span class="std std-ref">Entropy</span></a> for more details.</p>
+</dd>
+<dt class="label" id="id57"><span class="brackets"><a class="fn-backref" href="#id33">19</a></span></dt>
+<dd><p>Wikipedia has a longer list at
+<a class="reference external" href="https://en.wikipedia.org/wiki/Maximum_entropy_probability_distribution#Other_examples">https://en.wikipedia.org/wiki/Maximum_entropy_probability_distribution#Other_examples</a></p>
+</dd>
+<dt class="label" id="id58"><span class="brackets"><a class="fn-backref" href="#id35">20</a></span></dt>
+<dd><p>Even when the definition of such priors will require more context
+than the one provided, we still think the example conveys a useful
+intuition, that will be refined as we progress through this book.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./markdown"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="symbollist.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Symbols</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="chp_02.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Chapter 2: Exploratory Analysis of Bayesian Models</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Martin, Kumar, Lao<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
