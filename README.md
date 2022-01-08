@@ -27,4 +27,4 @@ conda activate bmcp
 The book code can also be run using Google Colab.
 https://colab.research.google.com
 
-More instructions to come soon
+More instructions to come soon 
