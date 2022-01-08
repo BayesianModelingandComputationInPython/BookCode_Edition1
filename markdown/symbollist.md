@@ -39,7 +39,7 @@ $\hat \theta$ Point estimate of $\boldsymbol{\theta}$
 
 $\mathbb{E}_{X}[X]$ Expectation of $X$ with respect to $X$, most often than not this is abbreviated as $\mathbb{E}[X]$
 
-$\mathbb{V}_{X}[X]$ Variance of $X$ with respect to $X$, most often than not this is abbreviated as $\mathbb{V}[X]$}
+$\mathbb{V}_{X}[X]$ Variance of $X$ with respect to $X$, most often than not this is abbreviated as $\mathbb{V}[X]$
 
 $X \sim p$ Random variable $X$ is distributed as p
 
@@ -49,7 +49,7 @@ $p(y \mid \boldsymbol{x})$ Probability (density) of $y$ given $\boldsymbol{x}$. 
 
 $f(x)$ An arbitrary function of x
 
-$f(\boldsymbol{X}; \theta, \gamma)$ $f$ is a function of $\boldsymbol{X}$ with parameters $\theta$ and $\gamma$. We use this notation to highlight that $\boldsymbol{X}$ is the data we pass to a function or model and $\theta$ and $\gamma$ are parameters}
+$f(\boldsymbol{X}; \theta, \gamma)$ $f$ is a function of $\boldsymbol{X}$ with parameters $\theta$ and $\gamma$. We use this notation to highlight that $\boldsymbol{X}$ is the data we pass to a function or model and $\theta$ and $\gamma$ are parameters
 
 $\mathcal{N}(\mu, \sigma)$ A Gaussian (or normal) distribution with mean $\mu$ and standard deviation $\sigma$
 
