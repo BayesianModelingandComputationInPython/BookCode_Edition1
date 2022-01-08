@@ -19,7 +19,7 @@ $a \propto b$ a is proportional to b
 
 $a \underset{\sim}{\propto}  b$ a is approximately proportional to b 
 
-$a \approx b$ a is approximately equal to b }
+$a \approx b$ a is approximately equal to b 
 %\symbolentry{$\forall x$ for all $x$} not used\ 
 $a, c, \alpha, \gamma$ Scalars are lowercase
 
