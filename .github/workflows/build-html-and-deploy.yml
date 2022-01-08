@@ -30,9 +30,13 @@ jobs:
         shell: bash -l {0}
         run: pip install -r requirements-docs.txt
 
+      - name: Clean Website
+        shell: bash -l {0}
+        run: jupyter-book clean . --all
+
       - name: Build Website
         shell: bash -l {0}
-        run: jb build --all .
+        run: jb build .
 
 
       # Add nojekyll to deployment so underscore 
