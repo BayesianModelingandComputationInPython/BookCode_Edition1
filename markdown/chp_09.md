@@ -247,7 +247,7 @@ but running experiments typically comes at a high cost.
 ### Observational Studies
 
 Farming your own ingredients can be expensive, so a cheaper alternative
-could be foraging for ingredients are growing by themselves. The
+could be foraging for ingredients that are growing by themselves. The
 statistician's version of this is observational studies. In
 observational studies the statistician has little to no control over the
 treatments or the data collection. This makes inference challenging as
