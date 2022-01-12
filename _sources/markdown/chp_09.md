@@ -1537,7 +1537,7 @@ results were recorded in pound-force [^10]. Customary to mechanical
 engineering the force is divided by area to quantify force per unit
 area, in this case pound force per square inch. For example, the first
 bidirectional specimen failed at 3774 lbf (1532 kg) at a cross section
-area of .504 inches (12.8mm) by .057 inches (1.27), yielding an ultimate
+area of .504 inches (12.8 mm) by .057 inches (1.27 mm), yielding an ultimate
 strength of 131.393 ksi (kilopound per square inch). For reference this
 means a coupon with a cross sectional area of 1/3 a USB A connector is
 theoretically capable of lifting the weight of a small car [^11].
