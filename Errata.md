@@ -10,6 +10,8 @@
 
 * pg. 26 "1E8. Rerun Code block" should be "1E8. Rerun Code Block"
 
+* pg. 42 "Plotting the ESS for specifics quantiles `az.plot_ess(., kind="quantiles"` " should be "Plotting the ESS for specifics quantiles `az.plot_ess(., kind="quantiles"`)" (Thanks Juan Orduz)
+
 * pg. 75 "... is the intercept only regression model **from**" should be "is the intercept only regression model in **Code Block**"
 
 * pg. 262 In Figure 9.1. "Model **Compasion**" should be "Model **Comparison**" (Thanks Ben Vincent)
