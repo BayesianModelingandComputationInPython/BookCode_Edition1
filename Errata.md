@@ -6,8 +6,7 @@
 * pg. xvi bit "and may require a couple **read troughs**" should be "bit rapid, and may require a couple **read-throughs**" (Thanks John M. Shea)
 
 * pg. xvi "For a reference on Python, or how to setup the computation environment needed for this book, go to README.md in Github to understand how to setup a code environment" 
-  on the online version should be: "For a reference on how to setup the computation environment needed for this book, read environment installation."
-  on the printed version should be: "For a reference on how to setup the computation environment needed for this book, go to README.md in GitHhub"
+  should be: "For a reference on how to setup the computation environment needed for this book, go to README.md in GitHhub"
 
 * pg. 26 "1E8. Rerun Code block" should be "1E8. Rerun Code Block"
 
