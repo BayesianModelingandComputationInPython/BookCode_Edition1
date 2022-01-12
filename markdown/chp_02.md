@@ -568,7 +568,7 @@ you can ask ArviZ for those specific values using
 As the ESS values vary across the parameter space, we may find it useful
 to visualize this variation in a single plot. We have at least two ways
 to do it. Plotting the ESS for specifics quantiles
-`az.plot_ess(., kind="quantiles"` or for small intervals defined between
+`az.plot_ess(., kind="quantiles")` or for small intervals defined between
 two quantiles `az.plot_ess(., kind="local")` as shown in
 {numref}`fig:plot_ess`.
 

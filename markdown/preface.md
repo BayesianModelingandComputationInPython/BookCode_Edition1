@@ -107,7 +107,7 @@ scientific computer programming. Using the Python language we will also
 use a number of specialized packages, in particular Probabilistic
 Programming Languages. It will help, but is not necessary, to have fit
 at least one model in a Probabilistic Programming language prior to
-reading this book. For a reference how to setup the
+reading this book. For a reference on how to setup the
 computation environment needed for this book, read [environment](https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1#environment-installation) installation.
 
 (how-to-read-this-book)=
