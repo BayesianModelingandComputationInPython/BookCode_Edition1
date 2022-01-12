@@ -2,51 +2,67 @@
 <!DOCTYPE html>
 
 <html>
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Chapter 2: Exploratory Analysis of Bayesian Models — Bayesian Modeling and Computation in Python</title>
-<link href="../_static/css/theme.css" rel="stylesheet"/>
-<link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet"/>
-<link href="../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
-<link as="font" crossorigin="" href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
-<link as="font" crossorigin="" href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
-<link href="../_static/pygments.css" rel="stylesheet" type="text/css">
-<link href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" rel="stylesheet" type="text/css">
-<link href="../_static/togglebutton.css" rel="stylesheet" type="text/css">
-<link href="../_static/copybutton.css" rel="stylesheet" type="text/css">
-<link href="../_static/mystnb.css" rel="stylesheet" type="text/css">
-<link href="../_static/sphinx-thebe.css" rel="stylesheet" type="text/css"/>
-<link href="../_static/sphinx-codeautolink.css" rel="stylesheet" type="text/css"/>
-<link href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" rel="stylesheet" type="text/css"/>
-<link href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" rel="stylesheet" type="text/css"/>
-<link as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js" rel="preload"/>
-<script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-<script src="../_static/jquery.js"></script>
-<script src="../_static/underscore.js"></script>
-<script src="../_static/doctools.js"></script>
-<script src="../_static/togglebutton.js"></script>
-<script src="../_static/clipboard.min.js"></script>
-<script src="../_static/copybutton.js"></script>
-<script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-<script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-<script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-<script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-<script>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chapter 2: Exploratory Analysis of Bayesian Models &#8212; Bayesian Modeling and Computation in Python</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-codeautolink.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
         const thebe_selector_output = ".output"
     </script>
-<script async="async" src="../_static/sphinx-thebe.js"></script>
-<link href="../_static/favicon.ico" rel="shortcut icon">
-<link href="../genindex.html" rel="index" title="Index"/>
-<link href="../search.html" rel="search" title="Search"/>
-<link href="chp_03.html" rel="next" title="Chapter 3: Linear Models and Probabilistic Programming Languages"/>
-<link href="chp_01.html" rel="prev" title="Chapter 1: Bayesian Inference"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="None" name="docsearch:language"/>
-<!-- Google Analytics -->
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Chapter 3: Linear Models and Probabilistic Programming Languages" href="chp_03.html" />
+    <link rel="prev" title="Chapter 1: Bayesian Inference" href="chp_01.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-702QMHG8ST"></script>
 <script>
                     window.dataLayer = window.dataLayer || [];
@@ -54,318 +70,366 @@
                     gtag('js', new Date());
                     gtag('config', 'G-702QMHG8ST');
                 </script>
-</link></link></link></link></link></link></head>
-<body data-offset="80" data-spy="scroll" data-target="#bd-toc-nav">
-<div class="container-fluid" id="banner"></div>
-<div class="container-xl">
-<div class="row">
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-<div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="../index.html">
-<h1 class="site-logo" id="site-title">Bayesian Modeling and Computation in Python</h1>
-</a>
-</div><form action="../search.html" class="bd-search d-flex align-items-center" method="get">
-<i class="icon fas fa-search"></i>
-<input aria-label="Search this book..." autocomplete="off" class="form-control" id="search-input" name="q" placeholder="Search this book..." type="search"/>
-</form><nav aria-label="Main" class="bd-links" id="bd-docs-nav">
-<div class="bd-toc-item active">
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1">
-<a class="reference internal" href="dedication.html">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Bayesian Modeling and Computation in Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="dedication.html">
    Dedication
   </a>
-</li>
-<li class="toctree-l1">
-<a class="reference internal" href="foreword.html">
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="foreword.html">
    Foreword
   </a>
-</li>
-<li class="toctree-l1">
-<a class="reference internal" href="preface.html">
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="preface.html">
    Preface
   </a>
-</li>
-<li class="toctree-l1">
-<a class="reference internal" href="symbollist.html">
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="symbollist.html">
    Symbols
   </a>
-</li>
-<li class="toctree-l1">
-<a class="reference internal" href="chp_01.html">
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_01.html">
    Chapter 1: Bayesian Inference
   </a>
-</li>
-<li class="toctree-l1 current active">
-<a class="current reference internal" href="#">
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Chapter 2: Exploratory Analysis of Bayesian Models
   </a>
-</li>
-<li class="toctree-l1">
-<a class="reference internal" href="chp_03.html">
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_03.html">
    Chapter 3: Linear Models and Probabilistic Programming Languages
   </a>
-</li>
-<li class="toctree-l1">
-<a class="reference internal" href="chp_04.html">
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_04.html">
    Chapter 4: Extending Linear Models
   </a>
-</li>
-<li class="toctree-l1">
-<a class="reference internal" href="chp_05.html">
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_05.html">
    Chapter 5: Splines
   </a>
-</li>
-<li class="toctree-l1">
-<a class="reference internal" href="chp_06.html">
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_06.html">
    Chapter 6: Time Series
   </a>
-</li>
-<li class="toctree-l1">
-<a class="reference internal" href="chp_07.html">
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_07.html">
    Chapter 7: Bayesian Additive Regression Trees
   </a>
-</li>
-<li class="toctree-l1">
-<a class="reference internal" href="chp_08.html">
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_08.html">
    Chapter 8: Approximate Bayesian Computation
   </a>
-</li>
-<li class="toctree-l1">
-<a class="reference internal" href="chp_09.html">
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_09.html">
    Chapter 9: End to End Bayesian Workflows
   </a>
-</li>
-<li class="toctree-l1">
-<a class="reference internal" href="chp_10.html">
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_10.html">
    Chapter 10: Probabilistic Programming Languages
   </a>
-</li>
-<li class="toctree-l1">
-<a class="reference internal" href="chp_11.html">
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chp_11.html">
    Chapter 11: Appendiceal Topics
   </a>
-</li>
-<li class="toctree-l1">
-<a class="reference internal" href="glossary.html">
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="glossary.html">
    Glossary
   </a>
-</li>
-<li class="toctree-l1">
-<a class="reference internal" href="references.html">
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="references.html">
    References
   </a>
-</li>
-<li class="toctree-l1">
-<a class="reference internal" href="../notebooks/chp_01.html">
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_01.html">
    Code 1: Bayesian Inference
   </a>
-</li>
-<li class="toctree-l1">
-<a class="reference internal" href="../notebooks/chp_02.html">
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_02.html">
    Code 2: Exploratory Analysis of Bayesian Models
   </a>
-</li>
-<li class="toctree-l1">
-<a class="reference internal" href="../notebooks/chp_03.html">
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_03.html">
    Code 3: Linear Models and Probabilistic Programming Languages
   </a>
-</li>
-<li class="toctree-l1">
-<a class="reference internal" href="../notebooks/chp_04.html">
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_04.html">
    Code 4: Extending Linear Models
   </a>
-</li>
-<li class="toctree-l1">
-<a class="reference internal" href="../notebooks/chp_05.html">
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_05.html">
    Code 5: Splines
   </a>
-</li>
-<li class="toctree-l1">
-<a class="reference internal" href="../notebooks/chp_06.html">
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_06.html">
    Code 6: Time Series
   </a>
-</li>
-<li class="toctree-l1">
-<a class="reference internal" href="../notebooks/chp_07.html">
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_07.html">
    Code 7: Bayesian Additive Regression Trees
   </a>
-</li>
-<li class="toctree-l1">
-<a class="reference internal" href="../notebooks/chp_08.html">
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_08.html">
    Code 8: Approximate Bayesian Computation
   </a>
-</li>
-<li class="toctree-l1">
-<a class="reference internal" href="../notebooks/chp_09.html">
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_09.html">
    Code 9: End to End Bayesian Workflows
   </a>
-</li>
-<li class="toctree-l1">
-<a class="reference internal" href="../notebooks/chp_10.html">
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_10.html">
    Code 10: Probabilistic Programming Languages
   </a>
-</li>
-<li class="toctree-l1">
-<a class="reference internal" href="../notebooks/chp_11.html">
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/chp_11.html">
    Code 11: Appendiceal Topics
   </a>
-</li>
+ </li>
 </ul>
-</div>
+
+    </div>
 </nav> <!-- To handle the deprecated key -->
+
 <div class="navbar_extra_footer">
   Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
 </div>
+
 </div>
+
+
+          
+
+
+          
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-<div class="topbar container-xl fixed-top">
-<div class="topbar-contents row">
-<div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-<div class="col pl-md-4 topbar-main">
-<button aria-controls="site-navigation" aria-expanded="true" aria-label="Toggle navigation" class="navbar-toggler ml-0" data-placement="left" data-target=".site-navigation" data-toggle="tooltip" id="navbar-toggler" title="Toggle navigation" type="button">
-<i class="fas fa-bars"></i>
-<i class="fas fa-arrow-left"></i>
-<i class="fas fa-arrow-up"></i>
-</button>
-<!-- Source interaction buttons -->
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+            <!-- Source interaction buttons -->
+
 <div class="dropdown-buttons-trigger">
-<button aria-label="Connect with source repository" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fab fa-github"></i></button>
-<div class="dropdown-buttons sourcebuttons">
-<a class="repository-button" href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Source repository" type="button"><i class="fab fa-github"></i>repository</button></a>
-<a class="issues-button" href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_02.html&amp;body=Your%20issue%20content%20here."><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Open an issue" type="button"><i class="fas fa-lightbulb"></i>open issue</button></a>
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_02.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
 </div>
-</div>
-<!-- Full screen (wrap in <a> to have style consistency -->
-<a class="full-screen-button"><button aria-label="Fullscreen mode" class="btn btn-secondary topbarbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode" type="button"><i class="fas fa-expand"></i></button></a>
-<!-- Launch buttons -->
-</div>
-<!-- Table of contents -->
-<div class="d-none d-md-block col-md-2 bd-toc show">
-<div class="tocsection onthispage pt-5 pb-3">
-<i class="fas fa-list"></i> Contents
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
             </div>
-<nav aria-label="Page" id="bd-toc-nav">
-<ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#there-is-life-after-inference-and-before-too">
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#there-is-life-after-inference-and-before-too">
    There is Life After Inference, and Before Too!
   </a>
-</li>
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#understanding-your-assumptions">
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#understanding-your-assumptions">
    Understanding Your Assumptions
   </a>
-</li>
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#understanding-your-predictions">
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#understanding-your-predictions">
    Understanding Your Predictions
   </a>
-</li>
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#diagnosing-numerical-inference">
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#diagnosing-numerical-inference">
    Diagnosing Numerical Inference
   </a>
-<ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#effective-sample-size">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#effective-sample-size">
      Effective Sample Size
     </a>
-</li>
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#potential-scale-reduction-factor-hat-r">
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#potential-scale-reduction-factor-hat-r">
      Potential Scale Reduction Factor
      <span class="math notranslate nohighlight">
       \(\hat R\)
      </span>
-</a>
-</li>
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#monte-carlo-standard-error">
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#monte-carlo-standard-error">
      Monte Carlo Standard Error
     </a>
-</li>
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#trace-plots">
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#trace-plots">
      Trace Plots
     </a>
-</li>
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#autocorrelation-plots">
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#autocorrelation-plots">
      Autocorrelation Plots
     </a>
-</li>
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#rank-plots">
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rank-plots">
      Rank Plots
     </a>
-</li>
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#divergences">
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#divergences">
      Divergences
     </a>
-</li>
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#sampler-parameters-and-other-diagnostics">
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sampler-parameters-and-other-diagnostics">
      Sampler Parameters and Other Diagnostics
     </a>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#model-comparison">
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-comparison">
    Model Comparison
   </a>
-<ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#cross-validation-and-loo">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cross-validation-and-loo">
      Cross-validation and LOO
     </a>
-</li>
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#expected-log-predictive-density">
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#expected-log-predictive-density">
      Expected Log Predictive Density
     </a>
-</li>
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#pareto-shape-parameter">
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pareto-shape-parameter">
      Pareto Shape Parameter
     </a>
-</li>
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#interpreting-p-loo-when-pareto-hat-kappa-is-large">
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#interpreting-p-loo-when-pareto-hat-kappa-is-large">
      Interpreting p_loo When Pareto
      <span class="math notranslate nohighlight">
       \(\hat \kappa\)
      </span>
      is Large
     </a>
-</li>
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#loo-pit">
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#loo-pit">
      LOO-PIT
     </a>
-</li>
-<li class="toc-h3 nav-item toc-entry">
-<a class="reference internal nav-link" href="#model-averaging">
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-averaging">
      Model Averaging
     </a>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#exercises">
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
    Exercises
   </a>
-</li>
+ </li>
 </ul>
-</nav>
+
+            </nav>
+        </div>
+    </div>
 </div>
-</div>
-</div>
-<div class="row" id="main-content">
-<div class="col-12 col-md-9 pl-md-3 pr-md-0">
-<div>
-<div class="tex2jax_ignore mathjax_ignore section" id="chapter-2-exploratory-analysis-of-bayesian-models">
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="chapter-2-exploratory-analysis-of-bayesian-models">
 <span id="chap1bis"></span><h1>Chapter 2: Exploratory Analysis of Bayesian Models<a class="headerlink" href="#chapter-2-exploratory-analysis-of-bayesian-models" title="Permalink to this headline">¶</a></h1>
 <p>As we saw in Chapter <a class="reference internal" href="chp_01.html#chap1"><span class="std std-ref">1</span></a>, Bayesian inference is about
 conditioning models to the available data and obtaining posterior
@@ -467,7 +531,7 @@ the player is trying to kick the ball straight, i.e at a zero angle, but
 then there are other factors that result in a trajectory with a
 deviation <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
 <div class="figure align-default" id="fig-football-sketch">
-<a class="reference internal image-reference" href="../_images/football_sketch.png"><img alt="../_images/football_sketch.png" src="../_images/football_sketch.png" style="width: 4in;"/></a>
+<a class="reference internal image-reference" href="../_images/football_sketch.png"><img alt="../_images/football_sketch.png" src="../_images/football_sketch.png" style="width: 4in;" /></a>
 <p class="caption"><span class="caption-number">Fig. 12 </span><span class="caption-text">Sketch of a penalty shot. The dashed lines represent the angle <span class="math notranslate nohighlight">\(\alpha\)</span>
 within which the ball must be kicked to score a goal. <span class="math notranslate nohighlight">\(x\)</span> represents the
 reglementary distance for a penalty shot (11 meters) and <span class="math notranslate nohighlight">\(L\)</span> half the
@@ -497,7 +561,7 @@ the gray area. Interestingly enough for large values of
 <span class="math notranslate nohighlight">\(\sigma_{\sigma}\)</span> the model thinks that kicking in the opposite
 direction is not that bad idea.</p>
 <div class="figure align-default" id="fig-prior-predictive-check-00">
-<a class="reference internal image-reference" href="../_images/prior_predictive_distributions_00.png"><img alt="../_images/prior_predictive_distributions_00.png" src="../_images/prior_predictive_distributions_00.png" style="width: 8.00in;"/></a>
+<a class="reference internal image-reference" href="../_images/prior_predictive_distributions_00.png"><img alt="../_images/prior_predictive_distributions_00.png" src="../_images/prior_predictive_distributions_00.png" style="width: 8.00in;" /></a>
 <p class="caption"><span class="caption-number">Fig. 13 </span><span class="caption-text">Prior predictive checks for the model in Equation
 <a class="reference internal" href="#equation-eq-geometric-model">(17)</a>. Each subplot corresponds to a different value
 of the prior for <span class="math notranslate nohighlight">\(\sigma\)</span>. The black dot at the center of each circular
@@ -523,7 +587,7 @@ predictive distribution puts more mass on extreme values. Thus we need a
 <em>stronger regularizing prior</em> (e.g., Laplace distribution) in order to
 keep the model away from those extreme values.</p>
 <div class="figure align-default" id="fig-prior-predictive-check-01">
-<a class="reference internal image-reference" href="../_images/prior_predictive_distributions_01.png"><img alt="../_images/prior_predictive_distributions_01.png" src="../_images/prior_predictive_distributions_01.png" style="width: 8.00in;"/></a>
+<a class="reference internal image-reference" href="../_images/prior_predictive_distributions_01.png"><img alt="../_images/prior_predictive_distributions_01.png" src="../_images/prior_predictive_distributions_01.png" style="width: 8.00in;" /></a>
 <p class="caption"><span class="caption-number">Fig. 14 </span><span class="caption-text">Prior predictive distribution for a logistic regression models with 2,
 5, or 15 binary predictors and with 100 data points. The KDE represents
 the distributions of the mean of the simulated data over 10000
@@ -579,7 +643,7 @@ chapters we will see examples when posterior predictive checks provide
 less obvious and thus more valuable information about our model’s fit to
 the data.</p>
 <div class="figure align-default" id="fig-posterior-predictive-check">
-<a class="reference internal image-reference" href="../_images/posterior_predictive_check.png"><img alt="../_images/posterior_predictive_check.png" src="../_images/posterior_predictive_check.png" style="width: 8.00in;"/></a>
+<a class="reference internal image-reference" href="../_images/posterior_predictive_check.png"><img alt="../_images/posterior_predictive_check.png" src="../_images/posterior_predictive_check.png" style="width: 8.00in;" /></a>
 <p class="caption"><span class="caption-number">Fig. 15 </span><span class="caption-text">Posterior predictive check for a Beta-Binomial model. On the left panel
 we have the number of predicted success (gray histogram), the dashed
 black line represents the mean predicted success. The blue line is the
@@ -610,7 +674,7 @@ The first panel of <a class="reference internal" href="#fig-posterior-predictive
 shows the distribution of Bayesian p-values in black solid line, the
 dashed line represents the expected distribution for a dataset of the
 same size. We can obtain such a plot with ArviZ
-<code class="docutils literal notranslate"><span class="pre">az.plot_bpv(.,</span> <span class="pre">kind="p_value")</span></code>. The second panel is conceptually
+<code class="docutils literal notranslate"><span class="pre">az.plot_bpv(.,</span> <span class="pre">kind=&quot;p_value&quot;)</span></code>. The second panel is conceptually
 similar, the twist is that we evaluate how many of the simulations are
 below (or above) the observed data “per observation”. For a
 well-calibrated model, all observations should be equally well
@@ -631,7 +695,7 @@ hypothesis. Neither are we using any predefined threshold to declare
 statistical significance or to perform hypothesis testing.</p>
 </div>
 <div class="figure align-default" id="fig-posterior-predictive-check-pu-values">
-<a class="reference internal image-reference" href="../_images/posterior_predictive_check_pu_values.png"><img alt="../_images/posterior_predictive_check_pu_values.png" src="../_images/posterior_predictive_check_pu_values.png" style="width: 8.00in;"/></a>
+<a class="reference internal image-reference" href="../_images/posterior_predictive_check_pu_values.png"><img alt="../_images/posterior_predictive_check_pu_values.png" src="../_images/posterior_predictive_check_pu_values.png" style="width: 8.00in;" /></a>
 <p class="caption"><span class="caption-number">Fig. 16 </span><span class="caption-text">Posterior predictive distribution for a Beta-Binomial model. In the
 first panel, the curve with the solid line is the KDE of the proportion
 of predicted values that are less or equal than the observed data. The
@@ -651,7 +715,7 @@ standard deviation. The curves are KDEs representing the distribution of
 the <span class="math notranslate nohighlight">\(T\)</span> statistics from the posterior predictive distribution and the
 dot is the value for the observed data.</p>
 <div class="figure align-default" id="fig-posterior-predictive-check-tstat">
-<a class="reference internal image-reference" href="../_images/posterior_predictive_check_tstat.png"><img alt="../_images/posterior_predictive_check_tstat.png" src="../_images/posterior_predictive_check_tstat.png" style="width: 8.00in;"/></a>
+<a class="reference internal image-reference" href="../_images/posterior_predictive_check_tstat.png"><img alt="../_images/posterior_predictive_check_tstat.png" src="../_images/posterior_predictive_check_tstat.png" style="width: 8.00in;" /></a>
 <p class="caption"><span class="caption-number">Fig. 17 </span><span class="caption-text">Posterior predictive distribution for a Beta-Binomial model. In the
 first panel, the curve with the solid line is the KDE of the proportion
 of simulations of predicted values with mean values less or equal than
@@ -707,7 +771,7 @@ in a platonic world.</p></li>
 accompanying discussion provide you with enough intuition to better
 perform model checking in real scenarios.</p>
 <div class="figure align-default" id="fig-posterior-predictive-many-examples">
-<a class="reference internal image-reference" href="../_images/posterior_predictive_many_examples.png"><img alt="../_images/posterior_predictive_many_examples.png" src="../_images/posterior_predictive_many_examples.png" style="width: 8.00in;"/></a>
+<a class="reference internal image-reference" href="../_images/posterior_predictive_many_examples.png"><img alt="../_images/posterior_predictive_many_examples.png" src="../_images/posterior_predictive_many_examples.png" style="width: 8.00in;" /></a>
 <p class="caption"><span class="caption-number">Fig. 18 </span><span class="caption-text">Posterior predictive checks for a set of simple hypothetical models. On
 the first column, the blue solid line represents the observed data and
 the light-gray ones predictions from an hypothetical model. On the
@@ -720,7 +784,7 @@ each observation. The white lines represent the expected Uniform
 distribution and the gray band the expected deviations from uniformity
 for a dataset of the same size as the one used. This figure was made
 using the ArviZ’s functions <code class="docutils literal notranslate"><span class="pre">az.plot_ppc(.)</span></code>,
-<code class="docutils literal notranslate"><span class="pre">az.plot_bpv(.,</span> <span class="pre">kind="p_values")</span></code> and <code class="docutils literal notranslate"><span class="pre">az.plot_bpv(.,</span> <span class="pre">kind="u_values")</span></code>.</span><a class="headerlink" href="#fig-posterior-predictive-many-examples" title="Permalink to this image">¶</a></p>
+<code class="docutils literal notranslate"><span class="pre">az.plot_bpv(.,</span> <span class="pre">kind=&quot;p_values&quot;)</span></code> and <code class="docutils literal notranslate"><span class="pre">az.plot_bpv(.,</span> <span class="pre">kind=&quot;u_values&quot;)</span></code>.</span><a class="headerlink" href="#fig-posterior-predictive-many-examples" title="Permalink to this image">¶</a></p>
 </div>
 <p>Posterior predictive checks, either using plots or numerical summaries,
 or even a combination of both, is a very flexible idea. This concept is
@@ -765,16 +829,16 @@ represents a very common scenario, a sampler can resolve a region of the
 parameter space very well, but one or more regions are difficult to
 sample.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">good_chains</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2000</span><span class="p">))</span>
-<span class="n">bad_chains0</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.normal.html#numpy.random.normal" title="numpy.random.normal"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span></a><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.sort.html#numpy.sort" title="numpy.sort"><span class="n">np</span><span class="o">.</span><span class="n">sort</span></a><span class="p">(</span><span class="n">good_chains</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span> <span class="mf">0.05</span><span class="p">,</span>
+<span class="n">bad_chains0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">good_chains</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span> <span class="mf">0.05</span><span class="p">,</span>
                                <span class="n">size</span><span class="o">=</span><span class="mi">4000</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">bad_chains1</span> <span class="o">=</span> <span class="n">good_chains</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.randint.html#numpy.random.randint" title="numpy.random.randint"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span></a><span class="p">(</span><span class="mi">1900</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
-    <span class="n">bad_chains1</span><span class="p">[</span><span class="n">i</span><span class="o">%</span><span class="mi">2</span><span class="p">:,</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">100</span><span class="p">]</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.beta.html#numpy.random.beta" title="numpy.random.beta"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">beta</span></a><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">950</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1900</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">bad_chains1</span><span class="p">[</span><span class="n">i</span><span class="o">%</span><span class="mi">2</span><span class="p">:,</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">100</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">950</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 
-<span class="n">chains</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"good_chains"</span><span class="p">:</span><span class="n">good_chains</span><span class="p">,</span>
-          <span class="s2">"bad_chains0"</span><span class="p">:</span><span class="n">bad_chains0</span><span class="p">,</span>
-          <span class="s2">"bad_chains1"</span><span class="p">:</span><span class="n">bad_chains1</span><span class="p">}</span>
+<span class="n">chains</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;good_chains&quot;</span><span class="p">:</span><span class="n">good_chains</span><span class="p">,</span>
+          <span class="s2">&quot;bad_chains0&quot;</span><span class="p">:</span><span class="n">bad_chains0</span><span class="p">,</span>
+          <span class="s2">&quot;bad_chains1&quot;</span><span class="p">:</span><span class="n">bad_chains1</span><span class="p">}</span>
 </pre></div>
 </div>
 <p>Notice that the 3 synthetic posteriors are samples from a scalar (single
@@ -804,7 +868,7 @@ appealing, but we have to be careful about not over-interpreting it as
 we will see next.</p>
 <p>Using ArviZ we can compute the effective sample size for the mean with
 <code class="docutils literal notranslate"><span class="pre">az.ess()</span></code></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><a class="sphinx-codeautolink-a" href="https://arviz-devs.github.io/arviz/api/generated/arviz.ess.html#arviz.ess" title="arviz.ess"><span class="n">az</span><span class="o">.</span><span class="n">ess</span></a><span class="p">(</span><span class="n">chains</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">ess</span><span class="p">(</span><span class="n">chains</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.Dataset&gt;
@@ -852,16 +916,16 @@ you can ask ArviZ for those specific values using
 <p>As the ESS values vary across the parameter space, we may find it useful
 to visualize this variation in a single plot. We have at least two ways
 to do it. Plotting the ESS for specifics quantiles
-<code class="docutils literal notranslate"><span class="pre">az.plot_ess(.,</span> <span class="pre">kind="quantiles")</span></code> or for small intervals defined between
-two quantiles <code class="docutils literal notranslate"><span class="pre">az.plot_ess(.,</span> <span class="pre">kind="local")</span></code> as shown in
+<code class="docutils literal notranslate"><span class="pre">az.plot_ess(.,</span> <span class="pre">kind=&quot;quantiles&quot;)</span></code> or for small intervals defined between
+two quantiles <code class="docutils literal notranslate"><span class="pre">az.plot_ess(.,</span> <span class="pre">kind=&quot;local&quot;)</span></code> as shown in
 <a class="reference internal" href="#fig-plot-ess"><span class="std std-numref">Fig. 19</span></a>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html#matplotlib.pyplot.subplots" title="matplotlib.pyplot.subplots"><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span></a><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<a class="sphinx-codeautolink-a" href="https://arviz-devs.github.io/arviz/api/generated/arviz.plot_ess.html#arviz.plot_ess" title="arviz.plot_ess"><span class="n">az</span><span class="o">.</span><span class="n">plot_ess</span></a><span class="p">(</span><span class="n">chains</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"local"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
-<a class="sphinx-codeautolink-a" href="https://arviz-devs.github.io/arviz/api/generated/arviz.plot_ess.html#arviz.plot_ess" title="arviz.plot_ess"><span class="n">az</span><span class="o">.</span><span class="n">plot_ess</span></a><span class="p">(</span><span class="n">chains</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"quantile"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">az</span><span class="o">.</span><span class="n">plot_ess</span><span class="p">(</span><span class="n">chains</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;local&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="n">az</span><span class="o">.</span><span class="n">plot_ess</span><span class="p">(</span><span class="n">chains</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;quantile&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
 </pre></div>
 </div>
 <div class="figure align-default" id="fig-plot-ess">
-<a class="reference internal image-reference" href="../_images/plot_ess.png"><img alt="../_images/plot_ess.png" src="../_images/plot_ess.png" style="width: 8.00in;"/></a>
+<a class="reference internal image-reference" href="../_images/plot_ess.png"><img alt="../_images/plot_ess.png" src="../_images/plot_ess.png" style="width: 8.00in;" /></a>
 <p class="caption"><span class="caption-number">Fig. 19 </span><span class="caption-text">Top: Local ESS of small interval probability estimates. Bottom: Quantile
 ESS estimates. The dashed lines represent the minimum suggested value of
 400 at which we would consider the effective sample size to be
@@ -908,7 +972,7 @@ same as the variance within-chain. From a practical point of view values
 of <span class="math notranslate nohighlight">\(\hat R \lessapprox 1.01\)</span> are considered safe.</p>
 <p>Using ArviZ we can compute the <span class="math notranslate nohighlight">\(\hat R\)</span> diagnostics with the <code class="docutils literal notranslate"><span class="pre">az.rhat()</span></code>
 function</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><a class="sphinx-codeautolink-a" href="https://arviz-devs.github.io/arviz/api/generated/arviz.rhat.html#arviz.rhat" title="arviz.rhat"><span class="n">az</span><span class="o">.</span><span class="n">rhat</span></a><span class="p">(</span><span class="n">chains</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">rhat</span><span class="p">(</span><span class="n">chains</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.Dataset&gt;
@@ -942,7 +1006,7 @@ otherwise, we will be, wrongly, reporting a higher precision than we
 really have. We should check the MCSE only once we are sure ESS is high
 enough and <span class="math notranslate nohighlight">\(\hat R\)</span> is low enough; otherwise, MCSE is of no use.</p>
 <p>Using ArviZ we can compute the MCSE with the function <code class="docutils literal notranslate"><span class="pre">az.mcse()</span></code></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><a class="sphinx-codeautolink-a" href="https://arviz-devs.github.io/arviz/api/generated/arviz.mcse.html#arviz.mcse" title="arviz.mcse"><span class="n">az</span><span class="o">.</span><span class="n">mcse</span></a><span class="p">(</span><span class="n">chains</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">mcse</span><span class="p">(</span><span class="n">chains</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.Dataset&gt;
@@ -957,11 +1021,11 @@ Data variables:
 may also want to evaluate it for different regions, like specific
 quantiles. Additionally, we may also want to visualize several values at
 once as in <a class="reference internal" href="#fig-plot-mcse"><span class="std std-numref">Fig. 20</span></a>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><a class="sphinx-codeautolink-a" href="https://arviz-devs.github.io/arviz/api/generated/arviz.plot_mcse.html#arviz.plot_mcse" title="arviz.plot_mcse"><span class="n">az</span><span class="o">.</span><span class="n">plot_mcse</span></a><span class="p">(</span><span class="n">chains</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_mcse</span><span class="p">(</span><span class="n">chains</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="figure align-default" id="fig-plot-mcse">
-<a class="reference internal image-reference" href="../_images/plot_mcse.png"><img alt="../_images/plot_mcse.png" src="../_images/plot_mcse.png" style="width: 8.00in;"/></a>
+<a class="reference internal image-reference" href="../_images/plot_mcse.png"><img alt="../_images/plot_mcse.png" src="../_images/plot_mcse.png" style="width: 8.00in;" /></a>
 <p class="caption"><span class="caption-number">Fig. 20 </span><span class="caption-text">Local MCSE for quantiles. Subplots y-axis share the same scale to ease
 comparison between them. Ideally, we want the MCSE to be small across
 all regions of the parameter space. Note how the MCSE values for
@@ -970,17 +1034,17 @@ both bad chains.</span><a class="headerlink" href="#fig-plot-mcse" title="Permal
 </div>
 <p>Finally, the ESS, <span class="math notranslate nohighlight">\(\hat R\)</span>, and MCSE can all be computed with a single
 call to the <code class="docutils literal notranslate"><span class="pre">az.summary(.)</span></code> function.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><a class="sphinx-codeautolink-a" href="https://arviz-devs.github.io/arviz/api/generated/arviz.summary.html#arviz.summary" title="arviz.summary"><span class="n">az</span><span class="o">.</span><span class="n">summary</span></a><span class="p">(</span><span class="n">chains</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"diagnostics"</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">chains</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;diagnostics&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <table class="table">
 <colgroup>
-<col style="width: 17%"/>
-<col style="width: 17%"/>
-<col style="width: 17%"/>
-<col style="width: 17%"/>
-<col style="width: 17%"/>
-<col style="width: 17%"/>
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
 </colgroup>
 <tbody>
 <tr class="row-odd"><td></td>
@@ -1029,11 +1093,11 @@ of the degree of autocorrelation, etc. In ArviZ by calling the function
 <code class="docutils literal notranslate"><span class="pre">az.plot_trace(.)</span></code> we get a trace plot on the right plus a
 representation of the distribution of the sample values, using a KDE for
 continuous variables and a histogram for discrete ones on the left.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><a class="sphinx-codeautolink-a" href="https://arviz-devs.github.io/arviz/api/generated/arviz.plot_trace.html#arviz.plot_trace" title="arviz.plot_trace"><span class="n">az</span><span class="o">.</span><span class="n">plot_trace</span></a><span class="p">(</span><span class="n">chains</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_trace</span><span class="p">(</span><span class="n">chains</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="figure align-default" id="fig-trace-plots">
-<a class="reference internal image-reference" href="../_images/trace_plots.png"><img alt="../_images/trace_plots.png" src="../_images/trace_plots.png" style="width: 8.00in;"/></a>
+<a class="reference internal image-reference" href="../_images/trace_plots.png"><img alt="../_images/trace_plots.png" src="../_images/trace_plots.png" style="width: 8.00in;" /></a>
 <p class="caption"><span class="caption-number">Fig. 21 </span><span class="caption-text">On the left column, we see one KDE per chain. On the right, column we
 see the values of the sampled values per chain per step. Note the
 differences in the KDE and trace plots between each of the example
@@ -1071,11 +1135,11 @@ parameter space with a curvature that is too different from the rest.</p>
 decreases the actual amount of information contained in a sample and
 thus something we want to keep at a minimum. We can directly inspect the
 autocorrelation with <code class="docutils literal notranslate"><span class="pre">az.plot_autocorr</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><a class="sphinx-codeautolink-a" href="https://arviz-devs.github.io/arviz/api/generated/arviz.plot_autocorr.html#arviz.plot_autocorr" title="arviz.plot_autocorr"><span class="n">az</span><span class="o">.</span><span class="n">plot_autocorr</span></a><span class="p">(</span><span class="n">chains</span><span class="p">,</span> <span class="n">combined</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_autocorr</span><span class="p">(</span><span class="n">chains</span><span class="p">,</span> <span class="n">combined</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="figure align-default" id="fig-autocorrelation-plot">
-<a class="reference internal image-reference" href="../_images/autocorrelation_plot.png"><img alt="../_images/autocorrelation_plot.png" src="../_images/autocorrelation_plot.png" style="width: 8.00in;"/></a>
+<a class="reference internal image-reference" href="../_images/autocorrelation_plot.png"><img alt="../_images/autocorrelation_plot.png" src="../_images/autocorrelation_plot.png" style="width: 8.00in;" /></a>
 <p class="caption"><span class="caption-number">Fig. 22 </span><span class="caption-text">Bar plot of the autocorrelation function over a 100 steps window. The
 height of the bars for <code class="docutils literal notranslate"><span class="pre">good_chains</span></code> is close to zero (and mostly inside
 the gray band) for the entire plot, which indicates very low
@@ -1099,22 +1163,22 @@ each chain. If all of the chains are targeting the same distribution, we
 expect the ranks to have a Uniform distribution. Additionally if rank
 plots of all chains look similar, this indicates good mixing of the
 chains <span id="id26">[<a class="reference internal" href="references.html#id13">19</a>]</span>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><a class="sphinx-codeautolink-a" href="https://arviz-devs.github.io/arviz/api/generated/arviz.plot_rank.html#arviz.plot_rank" title="arviz.plot_rank"><span class="n">az</span><span class="o">.</span><span class="n">plot_rank</span></a><span class="p">(</span><span class="n">chains</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"bars"</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_rank</span><span class="p">(</span><span class="n">chains</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;bars&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="figure align-default" id="fig-rank-plot-bars">
-<a class="reference internal image-reference" href="../_images/rank_plot_bars.png"><img alt="../_images/rank_plot_bars.png" src="../_images/rank_plot_bars.png" style="width: 8.00in;"/></a>
+<a class="reference internal image-reference" href="../_images/rank_plot_bars.png"><img alt="../_images/rank_plot_bars.png" src="../_images/rank_plot_bars.png" style="width: 8.00in;" /></a>
 <p class="caption"><span class="caption-number">Fig. 23 </span><span class="caption-text">Rank plots using the <code class="docutils literal notranslate"><span class="pre">bar</span></code> representation. In particular, compare the
 height of the bar to the dashed line representing a Uniform
 distribution. Ideally, the bars should follow a Uniform distribution.</span><a class="headerlink" href="#fig-rank-plot-bars" title="Permalink to this image">¶</a></p>
 </div>
 <p>One alternative to the “bars” representation is vertical lines,
 shortened to “vlines”.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><a class="sphinx-codeautolink-a" href="https://arviz-devs.github.io/arviz/api/generated/arviz.plot_rank.html#arviz.plot_rank" title="arviz.plot_rank"><span class="n">az</span><span class="o">.</span><span class="n">plot_rank</span></a><span class="p">(</span><span class="n">chains</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"vlines"</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_rank</span><span class="p">(</span><span class="n">chains</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;vlines&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="figure align-default" id="fig-rank-plot-vlines">
-<a class="reference internal image-reference" href="../_images/rank_plot_vlines.png"><img alt="../_images/rank_plot_vlines.png" src="../_images/rank_plot_vlines.png" style="width: 8.00in;"/></a>
+<a class="reference internal image-reference" href="../_images/rank_plot_vlines.png"><img alt="../_images/rank_plot_vlines.png" src="../_images/rank_plot_vlines.png" style="width: 8.00in;" /></a>
 <p class="caption"><span class="caption-number">Fig. 24 </span><span class="caption-text">Rank plots using the <code class="docutils literal notranslate"><span class="pre">vline</span></code> representation. The shorter the vertical
 lines the better. vertical lines above the dashed line indicate an
 excess sampled values for a particular rank, vertical lines below
@@ -1132,8 +1196,8 @@ Uniform but with a few large deviations here and there, reflecting that
 the problems are more <em>local</em> than those from <code class="docutils literal notranslate"><span class="pre">bad_chains0</span></code>.</p>
 <p>Rank plots can be more sensitive than trace plots, and thus we recommend
 them over the latter. We can obtain them using
-<code class="docutils literal notranslate"><span class="pre">az.plot_trace(.,</span> <span class="pre">kind="rank_bars")</span></code> or
-<code class="docutils literal notranslate"><span class="pre">az.plot_trace(.,</span> <span class="pre">kind="rank_vlines")</span></code>. These functions not only plot
+<code class="docutils literal notranslate"><span class="pre">az.plot_trace(.,</span> <span class="pre">kind=&quot;rank_bars&quot;)</span></code> or
+<code class="docutils literal notranslate"><span class="pre">az.plot_trace(.,</span> <span class="pre">kind=&quot;rank_vlines&quot;)</span></code>. These functions not only plot
 the ranks but also the marginal distributions of the posterior. This
 kind of plot can be useful to quickly get a sense of what the posterior
 <em>looks like</em>, which in many cases can help us to spot problems with
@@ -1165,8 +1229,8 @@ PyMC3 we can write this model as:</p>
 <div class="literal-block-wrapper docutils container" id="divm0">
 <div class="code-block-caption"><span class="caption-number">Listing 9 </span><span class="caption-text">divm0</span><a class="headerlink" href="#divm0" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_0</span><span class="p">:</span>
-    <span class="n">θ1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"θ1"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-    <span class="n">θ2</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">"θ2"</span><span class="p">,</span> <span class="o">-</span><span class="n">θ1</span><span class="p">,</span> <span class="n">θ1</span><span class="p">)</span>
+    <span class="n">θ1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;θ1&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+    <span class="n">θ2</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">&quot;θ2&quot;</span><span class="p">,</span> <span class="o">-</span><span class="n">θ1</span><span class="p">,</span> <span class="n">θ1</span><span class="p">)</span>
     <span class="n">idata_0</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">return_inferencedata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1205,7 +1269,7 @@ see something similar using other plots, like with
 <a class="reference internal" href="#fig-divergences-pair"><span class="std std-numref">Fig. 26</span></a>, here the divergences are the blue dots,
 which are everywhere!</p>
 <div class="figure align-default" id="fig-divergences-trace">
-<a class="reference internal image-reference" href="../_images/divergences_trace.png"><img alt="../_images/divergences_trace.png" src="../_images/divergences_trace.png" style="width: 8.00in;"/></a>
+<a class="reference internal image-reference" href="../_images/divergences_trace.png"><img alt="../_images/divergences_trace.png" src="../_images/divergences_trace.png" style="width: 8.00in;" /></a>
 <p class="caption"><span class="caption-number">Fig. 25 </span><span class="caption-text">KDEs and rank plots for Model 0 Code <a class="reference internal" href="#divm0"><span class="std std-ref">divm0</span></a>, Model
 1 <a class="reference internal" href="#divm1"><span class="std std-ref">divm1</span></a> and Model 1bis, which is the same as
 Model 1 <a class="reference internal" href="#divm1"><span class="std std-ref">divm1</span></a> but with
@@ -1213,7 +1277,7 @@ Model 1 <a class="reference internal" href="#divm1"><span class="std std-ref">di
 divergences.</span><a class="headerlink" href="#fig-divergences-trace" title="Permalink to this image">¶</a></p>
 </div>
 <div class="figure align-default" id="fig-divergences-pair">
-<a class="reference internal image-reference" href="../_images/divergences_pair.png"><img alt="../_images/divergences_pair.png" src="../_images/divergences_pair.png" style="width: 8.00in;"/></a>
+<a class="reference internal image-reference" href="../_images/divergences_pair.png"><img alt="../_images/divergences_pair.png" src="../_images/divergences_pair.png" style="width: 8.00in;" /></a>
 <p class="caption"><span class="caption-number">Fig. 26 </span><span class="caption-text">Scatter plot of the posterior samples from Model 0 from Code
 <a class="reference internal" href="#divm0"><span class="std std-ref">divm0</span></a>, Model 1 from Code Block
 <a class="reference internal" href="#divm1"><span class="std std-ref">divm1</span></a>, and Model 1bis, which is the same as Model
@@ -1232,8 +1296,8 @@ do:</p>
 <div class="literal-block-wrapper docutils container" id="divm1">
 <div class="code-block-caption"><span class="caption-number">Listing 10 </span><span class="caption-text">divm1</span><a class="headerlink" href="#divm1" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_1</span><span class="p">:</span>
-    <span class="n">θ1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">"θ1"</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="mi">2</span><span class="o">/</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/constants.html#numpy.pi" title="numpy.pi"><span class="n">np</span><span class="o">.</span><span class="n">pi</span></a><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span>
-    <span class="n">θ2</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">"θ2"</span><span class="p">,</span> <span class="o">-</span><span class="n">θ1</span><span class="p">,</span> <span class="n">θ1</span><span class="p">)</span>
+    <span class="n">θ1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;θ1&quot;</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="mi">2</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">θ2</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">&quot;θ2&quot;</span><span class="p">,</span> <span class="o">-</span><span class="n">θ1</span><span class="p">,</span> <span class="n">θ1</span><span class="p">)</span>
     <span class="n">idata_1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">return_inferencedata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1256,8 +1320,8 @@ maximum valid value is 1 (see Section <a class="reference internal" href="chp_11
 <div class="literal-block-wrapper docutils container" id="divm2">
 <div class="code-block-caption"><span class="caption-number">Listing 11 </span><span class="caption-text">divm2</span><a class="headerlink" href="#divm2" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_1bis</span><span class="p">:</span>
-    <span class="n">θ1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">"θ1"</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="mi">2</span><span class="o">/</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/constants.html#numpy.pi" title="numpy.pi"><span class="n">np</span><span class="o">.</span><span class="n">pi</span></a><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span>
-    <span class="n">θ2</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">"θ2"</span><span class="p">,</span> <span class="o">-</span><span class="n">θ1</span><span class="p">,</span> <span class="n">θ1</span><span class="p">)</span>
+    <span class="n">θ1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;θ1&quot;</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="mi">2</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">θ2</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">&quot;θ2&quot;</span><span class="p">,</span> <span class="o">-</span><span class="n">θ1</span><span class="p">,</span> <span class="n">θ1</span><span class="p">)</span>
     <span class="n">idata_1bis</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">target_accept</span><span class="o">=</span><span class="mf">.95</span><span class="p">,</span> <span class="n">return_inferencedata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1402,43 +1466,43 @@ to use 3 simple models. The models are defined in Code Block
 <a class="reference internal" href="#pymc3-models-for-loo"><span class="std std-ref">pymc3_models_for_loo</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="pymc3-models-for-loo">
 <div class="code-block-caption"><span class="caption-number">Listing 12 </span><span class="caption-text">pymc3_models_for_loo</span><a class="headerlink" href="#pymc3-models-for-loo" title="Permalink to this code">¶</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y_obs</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.normal.html#numpy.random.normal" title="numpy.random.normal"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y_obs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">idatas_cmp</span> <span class="o">=</span> <span class="p">{}</span>
 
 <span class="c1"># Generate data from Skewnormal likelihood model</span>
 <span class="c1"># with fixed mean and skewness and random standard deviation</span>
 <span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">mA</span><span class="p">:</span>
-    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">"σ"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">SkewNormal</span><span class="p">(</span><span class="s2">"y"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">y_obs</span><span class="p">)</span>
+    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">SkewNormal</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">y_obs</span><span class="p">)</span>
     <span class="n">idataA</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">return_inferencedata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># add_groups modifies an existing az.InferenceData</span>
-<span class="n">idataA</span><span class="o">.</span><span class="n">add_groups</span><span class="p">({</span><span class="s2">"posterior_predictive"</span><span class="p">:</span>
-                  <span class="p">{</span><span class="s2">"y"</span><span class="p">:</span><span class="n">pm</span><span class="o">.</span><span class="n">sample_posterior_predictive</span><span class="p">(</span><span class="n">idataA</span><span class="p">)[</span><span class="s2">"y"</span><span class="p">][</span><span class="kc">None</span><span class="p">,:]}})</span>
-<span class="n">idatas_cmp</span><span class="p">[</span><span class="s2">"mA"</span><span class="p">]</span> <span class="o">=</span> <span class="n">idataA</span>
+<span class="n">idataA</span><span class="o">.</span><span class="n">add_groups</span><span class="p">({</span><span class="s2">&quot;posterior_predictive&quot;</span><span class="p">:</span>
+                  <span class="p">{</span><span class="s2">&quot;y&quot;</span><span class="p">:</span><span class="n">pm</span><span class="o">.</span><span class="n">sample_posterior_predictive</span><span class="p">(</span><span class="n">idataA</span><span class="p">)[</span><span class="s2">&quot;y&quot;</span><span class="p">][</span><span class="kc">None</span><span class="p">,:]}})</span>
+<span class="n">idatas_cmp</span><span class="p">[</span><span class="s2">&quot;mA&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">idataA</span>
 
 <span class="c1"># Generate data from Normal likelihood model</span>
 <span class="c1"># with fixed mean with random standard deviation</span>
 <span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">mB</span><span class="p">:</span>
-    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">"σ"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"y"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">y_obs</span><span class="p">)</span>
+    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">y_obs</span><span class="p">)</span>
     <span class="n">idataB</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">return_inferencedata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">idataB</span><span class="o">.</span><span class="n">add_groups</span><span class="p">({</span><span class="s2">"posterior_predictive"</span><span class="p">:</span>
-                  <span class="p">{</span><span class="s2">"y"</span><span class="p">:</span><span class="n">pm</span><span class="o">.</span><span class="n">sample_posterior_predictive</span><span class="p">(</span><span class="n">idataB</span><span class="p">)[</span><span class="s2">"y"</span><span class="p">][</span><span class="kc">None</span><span class="p">,:]}})</span>
-<span class="n">idatas_cmp</span><span class="p">[</span><span class="s2">"mB"</span><span class="p">]</span> <span class="o">=</span> <span class="n">idataB</span>
+<span class="n">idataB</span><span class="o">.</span><span class="n">add_groups</span><span class="p">({</span><span class="s2">&quot;posterior_predictive&quot;</span><span class="p">:</span>
+                  <span class="p">{</span><span class="s2">&quot;y&quot;</span><span class="p">:</span><span class="n">pm</span><span class="o">.</span><span class="n">sample_posterior_predictive</span><span class="p">(</span><span class="n">idataB</span><span class="p">)[</span><span class="s2">&quot;y&quot;</span><span class="p">][</span><span class="kc">None</span><span class="p">,:]}})</span>
+<span class="n">idatas_cmp</span><span class="p">[</span><span class="s2">&quot;mB&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">idataB</span>
 
 <span class="c1"># Generate data from Normal likelihood model</span>
 <span class="c1"># with random mean and random standard deviation</span>
 <span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">mC</span><span class="p">:</span>
-    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"μ"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">"σ"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"y"</span><span class="p">,</span> <span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">y_obs</span><span class="p">)</span>
+    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;μ&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">y_obs</span><span class="p">)</span>
     <span class="n">idataC</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">return_inferencedata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">idataC</span><span class="o">.</span><span class="n">add_groups</span><span class="p">({</span><span class="s2">"posterior_predictive"</span><span class="p">:</span>
-                  <span class="p">{</span><span class="s2">"y"</span><span class="p">:</span><span class="n">pm</span><span class="o">.</span><span class="n">sample_posterior_predictive</span><span class="p">(</span><span class="n">idataC</span><span class="p">)[</span><span class="s2">"y"</span><span class="p">][</span><span class="kc">None</span><span class="p">,:]}})</span>
-<span class="n">idatas_cmp</span><span class="p">[</span><span class="s2">"mC"</span><span class="p">]</span> <span class="o">=</span> <span class="n">idataC</span>
+<span class="n">idataC</span><span class="o">.</span><span class="n">add_groups</span><span class="p">({</span><span class="s2">&quot;posterior_predictive&quot;</span><span class="p">:</span>
+                  <span class="p">{</span><span class="s2">&quot;y&quot;</span><span class="p">:</span><span class="n">pm</span><span class="o">.</span><span class="n">sample_posterior_predictive</span><span class="p">(</span><span class="n">idataC</span><span class="p">)[</span><span class="s2">&quot;y&quot;</span><span class="p">][</span><span class="kc">None</span><span class="p">,:]}})</span>
+<span class="n">idatas_cmp</span><span class="p">[</span><span class="s2">&quot;mC&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">idataC</span>
 </pre></div>
 </div>
 </div>
@@ -1450,16 +1514,16 @@ a commonly used function is <code class="docutils literal notranslate"><span cla
 <table class="table" id="table-compare-00">
 <caption><span class="caption-number">Table 2 </span><span class="caption-text">Summary of model comparison. Models are ranked from lowest to highest ELPD values (loo column).</span><a class="headerlink" href="#table-compare-00" title="Permalink to this table">¶</a></caption>
 <colgroup>
-<col style="width: 10%"/>
-<col style="width: 10%"/>
-<col style="width: 10%"/>
-<col style="width: 10%"/>
-<col style="width: 10%"/>
-<col style="width: 10%"/>
-<col style="width: 10%"/>
-<col style="width: 10%"/>
-<col style="width: 10%"/>
-<col style="width: 10%"/>
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
 </colgroup>
 <tbody>
 <tr class="row-odd"><td></td>
@@ -1573,7 +1637,7 @@ weights are expected to change (see Section <a class="reference internal" href="
 easily check this is true by changing the random seed and refitting the
 model a few times.</p>
 <div class="figure align-default" id="fig-compare-dummy">
-<a class="reference internal image-reference" href="../_images/compare_dummy.png"><img alt="../_images/compare_dummy.png" src="../_images/compare_dummy.png" style="width: 8.00in;"/></a>
+<a class="reference internal image-reference" href="../_images/compare_dummy.png"><img alt="../_images/compare_dummy.png" src="../_images/compare_dummy.png" style="width: 8.00in;" /></a>
 <p class="caption"><span class="caption-number">Fig. 27 </span><span class="caption-text">Model comparison using LOO. The open dots represent the values of <code class="docutils literal notranslate"><span class="pre">loo</span></code>,
 the black dots are the predictive accuracy without the <code class="docutils literal notranslate"><span class="pre">p_loo</span></code>
 penalization term. The black segments represent the standard error for
@@ -1604,7 +1668,7 @@ the reason is that model <code class="docutils literal notranslate"><span class=
 each other. <a class="reference internal" href="#fig-elpd-and-khat"><span class="std std-numref">Fig. 30</span></a> shows that observations 34, 49,
 72, 75 and 82 are in fact the five most <em>extreme</em> observations.</p>
 <div class="figure align-default" id="fig-elpd-dummy">
-<a class="reference internal image-reference" href="../_images/elpd_dummy.png"><img alt="../_images/elpd_dummy.png" src="../_images/elpd_dummy.png" style="width: 8.00in;"/></a>
+<a class="reference internal image-reference" href="../_images/elpd_dummy.png"><img alt="../_images/elpd_dummy.png" src="../_images/elpd_dummy.png" style="width: 8.00in;" /></a>
 <p class="caption"><span class="caption-number">Fig. 28 </span><span class="caption-text">Pointwise ELPD differences. Annotated points correspond to observations
 with an ELPD difference 2 times the standard deviation of the computed
 ELPD differences. Differences are small in all 3 examples, especially
@@ -1646,12 +1710,12 @@ you can try with other cutoff value if you want. Comparing
 that the highest values of <span class="math notranslate nohighlight">\(\hat \kappa\)</span> are not necessarily the ones
 with the highest values of ELPD or vice versa.</p>
 <div class="figure align-default" id="fig-loo-k-dummy">
-<a class="reference internal image-reference" href="../_images/loo_k_dummy.png"><img alt="../_images/loo_k_dummy.png" src="../_images/loo_k_dummy.png" style="width: 8.00in;"/></a>
+<a class="reference internal image-reference" href="../_images/loo_k_dummy.png"><img alt="../_images/loo_k_dummy.png" src="../_images/loo_k_dummy.png" style="width: 8.00in;" /></a>
 <p class="caption"><span class="caption-number">Fig. 29 </span><span class="caption-text"><span class="math notranslate nohighlight">\(\hat \kappa\)</span> values. Annotated points correspond to observations with
 <span class="math notranslate nohighlight">\(\hat \kappa &gt; 0.09\)</span>, a totally arbitrary threshold.</span><a class="headerlink" href="#fig-loo-k-dummy" title="Permalink to this image">¶</a></p>
 </div>
 <div class="figure align-default" id="fig-elpd-and-khat">
-<a class="reference internal image-reference" href="../_images/elpd_and_khat.png"><img alt="../_images/elpd_and_khat.png" src="../_images/elpd_and_khat.png" style="width: 4.5in;"/></a>
+<a class="reference internal image-reference" href="../_images/elpd_and_khat.png"><img alt="../_images/elpd_and_khat.png" src="../_images/elpd_and_khat.png" style="width: 4.5in;" /></a>
 <p class="caption"><span class="caption-number">Fig. 30 </span><span class="caption-text">Kernel density estimate of the observations fitted with <code class="docutils literal notranslate"><span class="pre">mA</span></code>, <code class="docutils literal notranslate"><span class="pre">mB</span></code> and
 <code class="docutils literal notranslate"><span class="pre">mC</span></code>. The black lines represent the values of each observation. The
 annotated observations are the same one highlighted in
@@ -1715,7 +1779,7 @@ distribution. If you are experiencing a Déjà vu, do not worry you do not
 have extrasensory powers nor is this a glitch in the matrix. This may
 sound familiar because this is in fact the very same idea we discussed
 in <a class="reference internal" href="#posterior-pd"><span class="std std-ref">Understanding Your Predictions</span></a> with the function
-<code class="docutils literal notranslate"><span class="pre">az.plot_bpv(idata,</span> <span class="pre">kind="u_value")</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">az.plot_bpv(idata,</span> <span class="pre">kind=&quot;u_value&quot;)</span></code>.</p>
 <p>LOO-PIT is obtained by comparing the observed data <span class="math notranslate nohighlight">\(y\)</span> to posterior
 predicted data <span class="math notranslate nohighlight">\(\tilde y\)</span>. The comparison is done point-wise. We have:</p>
 <div class="math notranslate nohighlight">
@@ -1723,7 +1787,7 @@ predicted data <span class="math notranslate nohighlight">\(\tilde y\)</span>. T
 <p>Intuitively, LOO-PIT is computing the probability that the posterior
 predicted data <span class="math notranslate nohighlight">\(\tilde y_i\)</span> has lower value than the observed data
 <span class="math notranslate nohighlight">\(y_i\)</span>, when we remove the <span class="math notranslate nohighlight">\(i\)</span> observation. Thus the difference between
-<code class="docutils literal notranslate"><span class="pre">az.plot_bpv(idata,</span> <span class="pre">kind="u_value")</span></code> and LOO-PIT is that with the latter
+<code class="docutils literal notranslate"><span class="pre">az.plot_bpv(idata,</span> <span class="pre">kind=&quot;u_value&quot;)</span></code> and LOO-PIT is that with the latter
 we are approximately avoiding using the data twice, but the overall
 interpretation of the plots is the same.</p>
 <p><a class="reference internal" href="#fig-loo-pit-dummy"><span class="std std-numref">Fig. 31</span></a> shows the LOO-PIT for models <code class="docutils literal notranslate"><span class="pre">mA</span></code>, <code class="docutils literal notranslate"><span class="pre">mB</span></code> and
@@ -1732,7 +1796,7 @@ more observed data than expected for low values and less data for high
 values, i.e. the model is biased. On the contrary, models <code class="docutils literal notranslate"><span class="pre">mB</span></code> and <code class="docutils literal notranslate"><span class="pre">mC</span></code>
 seem to be very well calibrated.</p>
 <div class="figure align-default" id="fig-loo-pit-dummy">
-<a class="reference internal image-reference" href="../_images/loo_pit_dummy.png"><img alt="../_images/loo_pit_dummy.png" src="../_images/loo_pit_dummy.png" style="width: 8.00in;"/></a>
+<a class="reference internal image-reference" href="../_images/loo_pit_dummy.png"><img alt="../_images/loo_pit_dummy.png" src="../_images/loo_pit_dummy.png" style="width: 8.00in;" /></a>
 <p class="caption"><span class="caption-number">Fig. 31 </span><span class="caption-text">The black lines are a KDE of LOO-PIT, i.e. the proportion of predicted
 values that are less or equal than the observed data, computed per each
 observation. The white lines represent the expected Uniform distribution
@@ -1801,7 +1865,7 @@ including it will be redundant.</p>
 <p>The function <code class="docutils literal notranslate"><span class="pre">pm.sample_posterior_predictive_w(.)</span></code> accepts a list of
 traces and a list of weights allowing us to easily generate weighted
 posterior predictive samples. The weights can be taken from anywhere,
-but using the weights computed with <code class="docutils literal notranslate"><span class="pre">az.compare(.,</span> <span class="pre">method="stacking")</span></code>,
+but using the weights computed with <code class="docutils literal notranslate"><span class="pre">az.compare(.,</span> <span class="pre">method=&quot;stacking&quot;)</span></code>,
 makes a lot of sense.</p>
 </div>
 </div>
@@ -1820,7 +1884,7 @@ for a few models. We are going to load an InferenceData object generated
 from a classical example in Bayesian statistic, the eight schools model
 <span id="id51">[<a class="reference internal" href="references.html#id115">27</a>]</span>. The InferenceData object includes prior samples, prior
 predictive samples and posterior samples. We can load the InferenceData
-object using the command <code class="docutils literal notranslate"><span class="pre">az.load_arviz_data("centered_eight")</span></code>. Use
+object using the command <code class="docutils literal notranslate"><span class="pre">az.load_arviz_data(&quot;centered_eight&quot;)</span></code>. Use
 ArviZ to:</p>
 <ol class="simple">
 <li><p>List all the groups available on the InferenceData object.</p></li>
@@ -1833,7 +1897,7 @@ Density Intervals.</p></li>
 </ol>
 <p>If necessary check the ArviZ documentation to help you do these tasks
 <a class="reference external" href="https://arviz-devs.github.io/arviz/">https://arviz-devs.github.io/arviz/</a></p>
-<p><strong>2E4.</strong> Load <code class="docutils literal notranslate"><span class="pre">az.load_arviz_data("non_centered_eight")</span></code>,
+<p><strong>2E4.</strong> Load <code class="docutils literal notranslate"><span class="pre">az.load_arviz_data(&quot;non_centered_eight&quot;)</span></code>,
 which is a reparametrized version of the “centered_eight” model in the
 previous exercise. Use ArviZ to assess the MCMC sampling convergence for
 both models by using:</p>
@@ -1844,7 +1908,7 @@ both models by using:</p>
 </ol>
 <p>Focus on the plots for the mu and tau parameters. What do these three
 different diagnostics show? Compare these to the InferenceData results
-loaded from <code class="docutils literal notranslate"><span class="pre">az.load_arviz_data("centered_eight")</span></code>. Do all three
+loaded from <code class="docutils literal notranslate"><span class="pre">az.load_arviz_data(&quot;centered_eight&quot;)</span></code>. Do all three
 diagnostics tend to agree on which model is preferred? Which one of the
 models has better convergence diagnostics?</p>
 <p><strong>2E5.</strong> InferenceData object can store statistics related
@@ -1911,8 +1975,8 @@ according to a scoring rate <span class="math notranslate nohighlight">\(\mu\)</
 <div class="literal-block-wrapper docutils container" id="poisson-football">
 <div class="code-block-caption"><span class="caption-number">Listing 13 </span><span class="caption-text">poisson_football</span><a class="headerlink" href="#poisson-football" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
-    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Gamma</span><span class="p">(</span><span class="s2">"μ"</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.00001</span><span class="p">)</span>
-    <span class="n">score</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Poisson</span><span class="p">(</span><span class="s2">"score"</span><span class="p">,</span> <span class="n">μ</span><span class="p">)</span>
+    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Gamma</span><span class="p">(</span><span class="s2">&quot;μ&quot;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.00001</span><span class="p">)</span>
+    <span class="n">score</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Poisson</span><span class="p">(</span><span class="s2">&quot;score&quot;</span><span class="p">,</span> <span class="n">μ</span><span class="p">)</span>
     <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample_prior_predictive</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -2001,7 +2065,7 @@ diagnostics, and model comparison, detail a specific step in the
 Bayesian workflow. In your own words explain what the purpose of each
 step is, and conversely what is lacking if the step is omitted. What
 does each tell us about our statistical models?</p>
-<hr class="footnotes docutils"/>
+<hr class="footnotes docutils" />
 <dl class="footnote brackets">
 <dt class="label" id="id52"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
 <dd><p><a class="reference external" href="https://www.countbayesie.com/blog/2015/2/18/bayes-theorem-with-lego">https://www.countbayesie.com/blog/2015/2/18/bayes-theorem-with-lego</a></p>
@@ -2096,7 +2160,8 @@ criteria</p>
 </dl>
 </div>
 </div>
-<script type="text/x-thebe-config">
+
+    <script type="text/x-thebe-config">
     {
         requestKernel: true,
         binderOptions: {
@@ -2114,40 +2179,48 @@ criteria</p>
         predefinedOutput: true
     }
     </script>
-<script>kernelName = 'python3'</script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="chp_01.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Chapter 1: Bayesian Inference</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="chp_03.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Chapter 3: Linear Models and Probabilistic Programming Languages</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
-<!-- Previous / next buttons -->
-<div class="prev-next-area">
-<a class="left-prev" href="chp_01.html" id="prev-link" title="previous page">
-<i class="fas fa-angle-left"></i>
-<div class="prev-next-info">
-<p class="prev-next-subtitle">previous</p>
-<p class="prev-next-title">Chapter 1: Bayesian Inference</p>
-</div>
-</a>
-<a class="right-next" href="chp_03.html" id="next-link" title="next page">
-<div class="prev-next-info">
-<p class="prev-next-subtitle">next</p>
-<p class="prev-next-title">Chapter 3: Linear Models and Probabilistic Programming Languages</p>
-</div>
-<i class="fas fa-angle-right"></i>
-</a>
-</div>
-</div>
-</div>
-<footer class="footer">
-<div class="container">
-<p>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
         
           By Martin, Kumar, Lao<br/>
         
-            © Copyright 2021.<br/>
-</p>
-</div>
-</footer>
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
 </main>
-</div>
-</div>
-<script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
-</body>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
 </html>
