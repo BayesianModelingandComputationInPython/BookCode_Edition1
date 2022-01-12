@@ -21,6 +21,8 @@
 
 * pg. 276 "We can also generate a visual check with **9.7which**" should be "We can also generate a visual check with **Code Block 9.7 which**"
 
+* pg. 276 "... a cross section area of .504 inches (**12.8mm**) by .057 inches (**1.27**)..." should be "... a cross section area of .504 inches (**12.8 mm**) by .057 inches (**1.27 mm**)..." (thanks Juan Orduz)
+
 * pg. 371 "...a simple Python implementation in **Code block**" should be "...simple Python implementation in **Code Block**"
 
 * pg. 387 "...more parameters than can be justified by the data.**[2]**" should be "... more parameters than can be justified by the data."
