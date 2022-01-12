@@ -88,7 +88,7 @@ If you have a good understanding of statistics, either by practice or
 formal training, but you have never being exposed to Bayesian
 statistics, you may still use this book as an introduction to the
 subject, the pace at the start (mostly the first two chapters) will be a
-bit rapid, and may require a couple read troughs.
+bit rapid, and may require a couple read-throughs.
 
 We expect you to be familiar with some mathematical concepts like
 integrals, derivatives, and properties of logarithms. The level of
