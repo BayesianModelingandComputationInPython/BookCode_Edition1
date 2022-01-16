@@ -1739,7 +1739,7 @@ in `lm_prior_sample`:
     `sigma`, and squeezing of the matrix multiplication result so that
     they are broadcast-able.
 
-As you can see, there is a lot of rooms for error and flexibility of how
+As you can see, there is a lot of room for error and flexibility of how
 you might go about to implementing a "shape-safe\" prior sample
 function. The complexity does not stop here, shape issues also pop up
 when computing model log probability and during inference (e.g., how
