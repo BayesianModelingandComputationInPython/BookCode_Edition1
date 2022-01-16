@@ -10,6 +10,7 @@
 | 26 | 1E8. Rerun Code block | 1E8. Rerun Code Block |  |
 | 42 | Plotting the ESS for specifics quantiles `az.plot_ess(., kind="quantiles"`  | Plotting the ESS for specifics quantiles `az.plot_ess(., kind="quantiles"`) | Thanks Juan Orduz |
 | 75 | ... is the intercept only regression model **from** | is the intercept only regression model in **Code Block** |  |
+| 191 | (footnote) The Stan implementation of SARIMA can be found in https://github.com/asael697/**varstan**. | 0The Stan implementation of SARIMA can be found in **e.g.,** https://github.com/asael697/**bayesforecast**. |  |
 | 262 | (In Figure 9.1.) Model **Compasion** | Model **Comparison** | Thanks Ben Vincent |
 | 265 | foraging for ingredients are growing by themselves. | foraging for ingredients **that** are growing by themselves. |  |
 | 267 | (In Code Block 9.1) `df = pd.read_csv("../data/948363589_T_ONTIME_MARKETING.zip",` | `df = pd.read_csv("../data/948363589_T_ONTIME_MARKETING.zip")` |  |
