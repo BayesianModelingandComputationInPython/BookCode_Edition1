@@ -19,5 +19,6 @@
 | 276 | We can also generate a visual check with **9.7which** | We can also generate a visual check with **Code Block 9.7 which** |  |
 | 276 | ... a cross section area of .504 inches (**12.8mm**) by .057 inches (**1.27**)... | ... a cross section area of .504 inches (**12.8 mm**) by .057 inches (**1.27 mm**)... | Thanks Juan Orduz |
 | 318 | As you can see, there is a lot of **rooms** for... | As you can see, there is a lot of **room** for... |  |
+| 344 | ...will make the **skweness** independent... | ...will make the **skewness** independent... | Thanks Alihan Zihna |
 | 371 | ...a simple Python implementation in **Code block** | ...simple Python implementation in **Code Block** |  |
 | 385 | ...more parameters than can be justified by the data.**[2]** | ... more parameters than can be justified by the data. |  |
