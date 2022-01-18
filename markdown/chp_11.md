@@ -1146,7 +1146,7 @@ The reason to compute the skew as a standardized quantity, i.e. to
 subtract the mean and divide by the standard deviation is to make the
 skew independent of the localization and scale of $X$, this is
 reasonable as we already have that information from the mean and
-variance and also it will make the skweness independent of the units of
+variance and also it will make the skewness independent of the units of
 $X$, so it becomes easier to compare skewness.
 
 For example, a $\text{Beta}(2, 2)$ has a 0 skew while for
