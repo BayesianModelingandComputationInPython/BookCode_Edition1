@@ -62,7 +62,7 @@ https://colab.research.google.com
 
 ### Donation
 
-This book is only possible because open source contributors working on the projects we used. If you like this book we encourage you to make a donation to [ArviZ](https://numfocus.org/donate-to-arviz).
+This book is only possible because open source contributors working on the projects we used. If you like this book we encourage you to make a donation to [ArviZ](https://numfocus.org/arviz-bayesian-book-form) or [PyMC](https://numfocus.org/pymc-bayesian-book-form).
 
 ### License
 
