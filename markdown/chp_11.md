@@ -411,7 +411,7 @@ similar to mathematical proof but they can be more intuitive. Stories
 are also very useful devices to create statistical models, you can think
 about how the data may have been generated, and then try to write that
 down in statistical notation and/or code. We do this, for example, in
-Chapter [9]](chap9) with our flight delay example.
+Chapter [9](chap9) with our flight delay example.
 
 (discrete-uniform-distribution)=
 
@@ -2713,7 +2713,7 @@ distributed farther and farther away from the mode of that Gaussian.
 
 There a a myriad of methods to compute the posterior. If we exclude the
 exact analytical solutions we already discussed in Chapter
-[1]](chap1) when we discussed conjugate priors, we can classify
+[1](chap1) when we discussed conjugate priors, we can classify
 inference methods into 3 large groups:
 
 1.  Deterministic integration methods, that we have not yet seen in the
@@ -3189,9 +3189,8 @@ distribution we are trying to explore.
 :name: fig:funnel_leapgrog
 :width: 8.00in
 Three HMC trajectories *around* a 2D Neal's funnel. This kind geometry
-turns up in centered hierarchical models. We can see that all these
-trajectories when wrong. We call this kind these divergences and we can
-used as diagnostics of the HMC samplers.
+turns up in centered hierarchical models. We can see that all these trajectories went wrong.
+We call this kind of trajectories divergences and can be used as a diagnostic of HMC samplers.
 ```
 
 Both Figures {numref}`fig:normal_leapgrog` and
@@ -3463,7 +3462,7 @@ community you want to work with and what language they use. One of the
 authors of this book lives in Southern California, so knowing English,
 and a bit of Spanish makes a lot of sense, because with those two he
 could communicate in common situations. It is the same with programming
-languages, if you future lab group uses R then learning R is a good
+languages, if your future lab group uses R then learning R is a good
 idea.
 
 Computational purists may exclaim that some languages are faster than
