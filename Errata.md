@@ -9,8 +9,7 @@
 | xvi | For a reference on Python, or how to setup the computation environment needed for this book, go to README.md in Github to understand how to setup a code environment | For a reference on how to setup the computation environment needed for this book, go to README.md in GitHhub. |  |
 | 26 | 1E8. Rerun Code block | 1E8. Rerun Code Block |  |
 | 42 | Plotting the ESS for specifics quantiles `az.plot_ess(., kind="quantiles"`  | Plotting the ESS for specifics quantiles `az.plot_ess(., kind="quantiles"`) | Thanks Juan Orduz |
-| 73 | ...the **thin** line is the interquartile range **from 25% to 75% of the posterior** and the
-**thick** line is the 94% Highest Density Interval | the **thick** line is the interquartile range and the **thin** line is the 94% Highest Density Interval | Thanks Jose Roberto Ayala Solares |
+| 73 | ...the **thin** line is the interquartile range **from 25% to 75% of the posterior** and the **thick** line is the 94% Highest Density Interval | the **thick** line is the interquartile range and the **thin** line is the 94% Highest Density Interval | Thanks Jose Roberto Ayala Solares |
 | 75 | ... is the intercept only regression model **from** | is the intercept only regression model in **Code Block** |  |
 | 183 | ...a backshift operator, also called Lag operator) | ...a backshift operator **(**also called Lag operator) |  |
 | 191 | (footnote) The Stan implementation of SARIMA can be found in https://github.com/asael697/**varstan**. | The Stan implementation of SARIMA can be found in **e.g.,** https://github.com/asael697/**bayesforecast**. |  |
