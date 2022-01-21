@@ -9,6 +9,8 @@
 | xvi | For a reference on Python, or how to setup the computation environment needed for this book, go to README.md in Github to understand how to setup a code environment | For a reference on how to setup the computation environment needed for this book, go to README.md in GitHhub. |  |
 | 26 | 1E8. Rerun Code block | 1E8. Rerun Code Block |  |
 | 42 | Plotting the ESS for specifics quantiles `az.plot_ess(., kind="quantiles"`  | Plotting the ESS for specifics quantiles `az.plot_ess(., kind="quantiles"`) | Thanks Juan Orduz |
+| 73 | ...the **thin** line is the interquartile range **from 25% to 75% of the posterior** and the
+**thick** line is the 94% Highest Density Interval | the **thick** line is the interquartile range and the **thin** line is the 94% Highest Density Interval | Thanks Jose Roberto Ayala Solares |
 | 75 | ... is the intercept only regression model **from** | is the intercept only regression model in **Code Block** |  |
 | 183 | ...a backshift operator, also called Lag operator) | ...a backshift operator **(**also called Lag operator) |  |
 | 191 | (footnote) The Stan implementation of SARIMA can be found in https://github.com/asael697/**varstan**. | The Stan implementation of SARIMA can be found in **e.g.,** https://github.com/asael697/**bayesforecast**. |  |
@@ -21,4 +23,6 @@
 | 318 | As you can see, there is a lot of **rooms** for... | As you can see, there is a lot of **room** for... |  |
 | 344 | ...will make the **skweness** independent... | ...will make the **skewness** independent... | Thanks Alihan Zihna |
 | 371 | ...a simple Python implementation in **Code block** | ...simple Python implementation in **Code Block** |  |
+| 376 |  We can see that all these trajectories **when** wrong. We call this kind **these divergences and we can used as diagnostics of the** HMC samplers. | We can see that all these trajectories went wrong. We call this kind **of trajectories divergences and can be used as a diagnostic of** HMC samplers | Thanks Alihan Zihna |
+| 380 | ... if **you** future lab... | ... if **your** future lab... | Thanks Alihan Zihna |
 | 385 | ...more parameters than can be justified by the data.**[2]** | ... more parameters than can be justified by the data. |  |

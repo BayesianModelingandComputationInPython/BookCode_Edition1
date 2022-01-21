@@ -309,10 +309,9 @@ az.plot_forest(inf_data_model_penguin_mass_all_species, var_names=["μ"])
 :name: fig:forest_plot_means
 :width: 7.00in
 Forest plot of the mean of mass of each species group in
-`model_penguin_mass_all_species`. Each line represents one chain in the
-sampler, the dot is a point estimate, in this case the mean, the thin
-line is the interquartile range from 25% to 75% of the posterior and the
-thick line is the 94% Highest Density Interval.
+`model_penguin_mass_all_species`.  Each line represents one chain in the sampler, the dot is the
+mean, the thick line is the interquartile range and the thin line is the 94\% Highest Density
+Interval.
 ```
 
 {numref}`fig:forest_plot_means` makes it easier to compare our estimates
