@@ -521,7 +521,7 @@ draws as result, or just MCMC chain for short. Usually it is desired to
 draw many chains for computational and diagnostic reasons (we discuss
 how to do this in Chapter [2](chap1bis)). All the output
 chains, whether singular or plural, are typically referred to as a trace
-or simple the posterior. Unfortunately spoken language is imprecise so
+or simply the posterior. Unfortunately spoken language is imprecise so
 if precision is needed the best approach is to review the code to
 understand exactly what is happening.
 :::
