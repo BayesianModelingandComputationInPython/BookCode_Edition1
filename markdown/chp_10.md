@@ -1,6 +1,6 @@
 (chap10)=
 
-# Chapter 10: Probabilistic Programming Languages
+# Probabilistic Programming Languages
 
 In Chapter [1](chap1) Section {ref}`bayesian_modeling`, we used cars as analogy to
 understand applied Bayesian concepts. We will revisit this analogy but

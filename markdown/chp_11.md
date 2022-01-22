@@ -1,6 +1,6 @@
 (app)=
 
-# Chapter 11: Appendiceal Topics
+# Appendiceal Topics
 
 This chapter is different from the rest because it is not about any
 specific topic. Instead it is a collection of different topics that

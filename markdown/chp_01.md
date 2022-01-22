@@ -1,6 +1,6 @@
 (chap1)=
 
-# Chapter 1: Bayesian Inference
+# Bayesian Inference
 
 Modern Bayesian statistics is mostly performed using computer code. This
 has dramatically changed how Bayesian statistics was performed from even
