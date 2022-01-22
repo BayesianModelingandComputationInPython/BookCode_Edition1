@@ -505,7 +505,7 @@ deviation `can_sd`. At line 10 we evaluate the posterior at the new
 generated value `θ_can` and at line 11 we compute the probability of
 acceptance. At line 17 we save a value of `θ` in the `trace` array.
 Whether this value is a new one or we repeat the previous one, it will
-depends on the result of the comparison at line 13.
+depend on the result of the comparison at line 13.
 
 ::: {admonition} Ambiguous MCMC jargon
 
