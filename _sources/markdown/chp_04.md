@@ -1,6 +1,6 @@
 (chap3)=
 
-# Chapter 4: Extending Linear Models
+# Extending Linear Models
 
 A common trope in a sales pitch is the phrase "But wait! There is
 more!\" In the lead up an audience is shown a product that incredibly

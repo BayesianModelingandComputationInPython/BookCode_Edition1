@@ -1,6 +1,6 @@
 (chap6)=
 
-# Chapter 7: Bayesian Additive Regression Trees
+# Bayesian Additive Regression Trees
 
 In Chapter [5](chap3_5) we saw how we can approximate a
 function by summing up a series of (simple) basis functions. We showed

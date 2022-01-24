@@ -1,6 +1,6 @@
 (chap2)=
 
-# Chapter 3: Linear Models and Probabilistic Programming Languages
+# Linear Models and Probabilistic Programming Languages
 
 With the advent of Probabilistic Programming Languages, modern Bayesian
 modeling can be as simple as coding a model and "pressing a button\".

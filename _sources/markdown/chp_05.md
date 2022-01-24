@@ -1,6 +1,6 @@
 (chap3_5)=
 
-# Chapter 5: Splines
+# Splines
 
 In this chapter we will discuss splines, which is an extension of
 concepts introduced into Chapter [3](chap2) with the aim of

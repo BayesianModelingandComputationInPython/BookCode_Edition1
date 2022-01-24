@@ -1,6 +1,6 @@
 (chap4)=
 
-# Chapter 6: Time Series
+# Time Series
 
 "It is difficult to make predictions, especially about the future\".
 This is true when dutch politician Karl Kristian Steincke allegedly said

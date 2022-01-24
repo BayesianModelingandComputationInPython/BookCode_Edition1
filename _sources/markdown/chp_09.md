@@ -1,6 +1,6 @@
 (chap9)=
 
-# Chapter 9: End to End Bayesian Workflows
+# End to End Bayesian Workflows
 
 Some restaurants offer a style of dining called menu *dégustation*, or
 in English a tasting menu. In this dining style, the guest is provided a
