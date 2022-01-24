@@ -1,6 +1,6 @@
 (chap8)=
 
-# Chapter 8: Approximate Bayesian Computation
+# Approximate Bayesian Computation
 
 In this chapter we discuss Approximate Bayesian Computation (ABC). The
 "approximate" in ABC refers to the lack of explicit likelihood, but not

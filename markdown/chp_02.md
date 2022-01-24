@@ -1,6 +1,6 @@
 (chap1bis)=
 
-# Chapter 2: Exploratory Analysis of Bayesian Models
+# Exploratory Analysis of Bayesian Models
 
 As we saw in Chapter [1](chap1), Bayesian inference is about
 conditioning models to the available data and obtaining posterior
