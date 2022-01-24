@@ -7,6 +7,8 @@
 |---|---|---|---|
 | xvi | ...and may require a couple **read troughs** | ...and may require a couple **read-throughs** | Thanks John M. Shea |
 | xvi | For a reference on Python, or how to setup the computation environment needed for this book, go to README.md in Github to understand how to setup a code environment | For a reference on how to setup the computation environment needed for this book, go to README.md in GitHhub. |  |
+| 8 | ...it will **depends** on the result... | ...it will **depend** on the result.. | Thanks Ero Carrera |
+| 9 | ...or simple the posterior. | ...or simply the posterior.  | Thanks Ero Carrera |
 | 26 | 1E8. Rerun Code block | 1E8. Rerun Code Block |  |
 | 42 | Plotting the ESS for specifics quantiles `az.plot_ess(., kind="quantiles"`  | Plotting the ESS for specifics quantiles `az.plot_ess(., kind="quantiles"`) | Thanks Juan Orduz |
 | 73 | ...the **thin** line is the interquartile range **from 25% to 75% of the posterior** and the **thick** line is the 94% Highest Density Interval | the **thick** line is the interquartile range and the **thin** line is the 94% Highest Density Interval | Thanks Jose Roberto Ayala Solares |
