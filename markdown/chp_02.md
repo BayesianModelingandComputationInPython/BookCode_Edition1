@@ -1066,7 +1066,7 @@ we may want to increase the number of iterations used to tune MCMC
 samplers. In PyMC3 we have `pm.sample(.,tune=1000)` by default. During
 the tuning phase sampler parameters get automatically adjusted. Some
 models are more complex and require more interactions for the sampler to
-learn better parameters. Thus increasing the turning steps can help to
+learn better parameters. Thus increasing the tuning steps can help to
 increase the ESS or lower the $\hat R$. Increasing the number of draws
 can also help with convergence but in general other routes are more
 productive. If a model is failing to converge with a few thousands of
@@ -1121,7 +1121,7 @@ setting the log scoring rule can be computed as.
 
 ```
 
-where $p_t(\tilde y_i)$ is distribution of the true data-generating
+where $p_t(\tilde y_i)$ is the distribution of the true data-generating
 process for $\tilde y_i$ and $p(\tilde y_i \mid y_i)$ is the posterior
 predictive distribution. The quantity defined in Equation {eq}`eq:elpd`
 is known as the **expected log pointwise predictive density** (ELPD).
