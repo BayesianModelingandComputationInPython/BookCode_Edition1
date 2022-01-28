@@ -279,11 +279,11 @@ directly compute the posterior parameters.
 ```{math} 
 :label: eq:conjugate_beta_fraud
 \begin{split}
-    \alpha_{post} &= \alpha_{prior} + fraud\_observations \\
-    \beta_{post} &=  \beta_{prior} + non\_fraud\_observations \\
-   % p(\theta)  &= Beta(fraud\_prior, non\_fraud\_prior) \\
-    p(\theta \mid y)  &= Beta(\alpha_{post}, \beta_{post}) \\
-    \mathop{\mathbb{E}}[p(\theta \mid y)] &= \frac{\alpha_{post}}{\alpha_{post} + \beta_{post}}
+    \alpha_\text{post} &= \alpha_\text{prior} + \text{\texttt{fraud\_observations}} \\
+    \beta_\text{post} &=  \beta_\text{prior} + \text{\texttt{non\_fraud\_observations}} \\
+   % p(\theta)  &= \text{Beta}(fraud\_prior, non\_fraud\_prior) \\
+    p(\theta \mid y)  &= \text{Beta}(\alpha_\text{post}, \beta_\text{post}) \\
+    \mathop{\mathbb{E}}[p(\theta \mid y)] &= \frac{\alpha_\text{post}}{\alpha_\text{post} + \beta_\text{post}}
 
 \end{split}
 ```
@@ -297,10 +297,10 @@ deploy.
 :name: fraud_detector
 :caption: fraud_detector
 
-def fraud_detector(obs_fraud, obs_non_fraud, fraud_prior=8, non_fraud_prior=6):
-    """Conjugate beta binomial model for fraud detection"""
-    expectation = (fraud_prior+observed_fraud) / (
-        fraud_prior+observed_fraud+non_fraud_prior+obs_non_fraud)
+def fraud_detector(fraud_observations, non_fraud_observations, fraud_prior=8, non_fraud_prior=6):
+    """Conjugate Beta Binomial model for fraud detection"""
+    expectation = (fraud_prior + fraud_observations) / (
+        fraud_prior + fraud_observations + non_fraud_prior + non_fraud_observations)
     
     if expectation > .5:
         return {"suspend_card":True}
