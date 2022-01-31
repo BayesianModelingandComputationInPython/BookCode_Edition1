@@ -281,7 +281,7 @@ After we run the model we once again inspect the KDE and rank plots, see
 {numref}`fig:all_penguins_rank_kde_plot`. Compared to
 {numref}`fig:single_penguins_rank_kde_plot` you will see 4 additional
 plots, 2 each for the additional parameters added. Take a moment to
-compare the estimate of the mean with the summary mean shows for each
+compare the estimate of the mean with the summary mean shown for each
 species in {numref}`tab:penguin_mass_parameters_point_estimates`. To
 better visualize the differences between the distributions for each
 species, we plot the posterior again in a forest plot using Code Block
@@ -607,8 +607,8 @@ Y \sim& \mathcal{N}(\mu, \sigma)
 \end{split}
 ```
 
-where the coefficients, also referred to as covariates, are represented
-by the parameter $\beta_i$. For example, $\beta_0$ is the intercept of
+where the coefficients, also referred as parameters, are represented with $\beta_i$.
+For example, $\beta_0$ is the intercept of
 the linear model. $X_i$ is referred to predictors or independent
 variables, and $Y$ is usually referred to as target, output, response,
 or dependent variable. It is important to notice that both
@@ -665,10 +665,10 @@ covariates that represent categorical predictors (i.e., there are only a
 few categories), a common way to turn those into a design matrix is
 called dummy coding or one-hot coding. For example, in our intercept per
 penguin model (Code Block
-[mass_forest_plot](mass_forest_plot)), instead of
+[nocovariate_mass](nocovariate_mass)), instead of
 `mu = μ[species.codes]` we can use `pandas.get_dummies` to parse the
-categorical information into a design matrix
-`mu = pd.get_dummies(penguins["species"]) @ μ`. where `@` is a Python
+categorical information into a design matrix, and then write
+`mu = pd.get_dummies(penguins["species"]) @ μ`, where `@` is a Python
 operator for performing matrix multiplication. There are also few other
 functions to perform one hot encoding in Python, for example,
 `sklearn.preprocessing.OneHotEncoder`, as this is a very common data
@@ -769,7 +769,7 @@ to have a larger flipper, but it could also make it just a fatter
 penguin. Now focusing on $\beta_0$ however, what does it represent? From
 our posterior estimate we can state that if we saw an Adelie penguin
 with a 0 mm flipper length we would expect the mass of this impossible
-penguin to somewhere between -4213 and -546 grams. According to our
+penguin to be somewhere between -4151 and -510 grams. According to our
 model this statement is true, but negative mass does not make sense.
 This is not necessarily an issue, there is no rule that every parameter
 in a model needs to be interpretable, nor that the model provide
@@ -892,7 +892,7 @@ mass, and in predicting the mass of penguins at a given flipper length.
 Unfortunately with the data and the model provided our estimate of
 $\beta_0$ was not particularly useful. However, we can use a
 transformation to make $\beta_0$ more interpretable. In this case we
-will opt for a centering transformation, which takes a set a value and
+will opt for a centering transformation, which takes a set of values and
 centers its mean value at zero as shown in Code Block
 [flipper_centering](flipper_centering).
 
@@ -1115,7 +1115,7 @@ az.plot_forest([inf_data_adelie_penguin_mass,
 :width: 7.00in
 By incorporating sex as a covariate in `model_penguin_mass_categorical`
 the estimated distribution of $\sigma$ from this model is centered
-around 300 grams, which lower value than estimated by our fixed mean
+around 300 grams, which is a lower value than the estimated by our fixed mean
 model and our single covariate model. This figure is generated from Code
 Block [forest_multiple_models](forest_multiple_models).
 ```
@@ -1197,7 +1197,7 @@ length at the observed mean of the dataset. This is done in Code Block
 with the result shown in {numref}`fig:LinearCounterfactual`. Again since
 we wrap the model generation in a Python function (a functional
 programming style approach), it is easy to condition on new predictors,
-which useful for counterfactual analyses.
+which is useful for counterfactual analyses.
 
 ```{code-block} python
 :name: tfp_flipper_bill_sex_counterfactuals
@@ -1293,7 +1293,7 @@ The specific purpose of the inverse link function is to map outputs from
 the range of real numbers $(-\infty, \infty)$ to a parameter range of
 the restricted interval. In other words the inverse link function is the
 specific "trick\" we need to take our linear models and generalize them
-to many more model architectures. We are still dealing a linear model
+to many more model architectures. We are still dealing with a linear model
 here in the sense that the expectation of the distribution that
 generates the observation still follows a linear function of the
 parameter and the covariates but now we can generalize the use and
@@ -1398,7 +1398,7 @@ In generalized linear models, the mapping from parameter prior to
 response can sometimes be more challenging to understand. We can utilize
 prior predictive samples to help us visualize the expected observations.
 In our classifying penguins example we find it reasonable to equally
-expect a Gentoo penguin, as we would an Adelie penguin, at all bill
+expect a Chinstrap penguin, as we would an Adelie penguin, at all bill
 lengths, prior to seeing any data. We can double-check our modeling
 intention has been represented correctly by our priors and model using
 the prior predictive distribution. The classes are roughly even in
@@ -1573,7 +1573,7 @@ separability as indicated by the slope of the line.
 To evaluate the model fit for logistic regressions we can use a
 separation plot {cite:p}`separation_plot`, as shown in Code Block
 [separability_plot](separability_plot) and
-{numref}`fig:Penguins_Separation_Plot`.A separation plot is a way to
+{numref}`fig:Penguins_Separation_Plot`. A separation plot is a way to
 assess the calibration of a model with binary observed data. It shows
 the sorted predictions per class, the idea being that with perfect
 separation there would be two distinct rectangles. In our case we see
@@ -1679,7 +1679,7 @@ In a logistic regression the slope is telling you the increase in log
 odds units when x is incremented one unit. Odds most simply are the
 ratio between the probability of occurrence and probability of no
 occurrence. For example, in our penguin example if we were to pick a
-random penguin from Adelie or Chinstrap penguinsthe probability that we
+random penguin from Adelie or Chinstrap penguins the probability that we
 pick an Adelie penguin would be 0.68 as seen in Code Block
 [adelie_prob](adelie_prob)
 
@@ -1828,10 +1828,10 @@ translates to setting the mean of the prior for intercept $\beta_0$ to
 be 50 and the prior mean for the coefficient $\beta_1$ to be 0. We also
 set a wide dispersion to express our lack of knowledge about both the
 intercept and the effect of attractiveness on sex ratio. This is not a
-fully *uninformative priors*, of which we covered in Section
+fully *uninformative prior*, of which we covered in Section
 {ref}`make_prior_count`, however, a very wide prior.
 Given these choices we can write our model in Code Block
-[uninformative_prior_sex_ratio](uninformative_prior_sex_ratio)),
+[uninformative_prior_sex_ratio](uninformative_prior_sex_ratio),
 run inference, and generate samples to estimate posterior distribution.
 From the data and model we estimate that the mean of $\beta_1$ to be
 1.4, meaning the least attractive group when compared to the most
@@ -1858,7 +1858,7 @@ shown in Code Block
 [informative_prior_sex_ratio](informative_prior_sex_ratio)
 that are consistent with this general knowledge. Plotting our posterior
 samples the concentration of coefficients is smaller and the plotted
-posterior lines fall into bounds that more reasonable when considering
+posterior lines fall into bounds that are more reasonable when considering
 possible ratios.
 
 ```{code-block} python
@@ -1985,7 +1985,7 @@ intercept, and assign more informative prior to the slope coefficients.
 Try modifying the `model_logistic_penguins_bill_length_mass` model in
 Code Block
 [model_logistic_penguins_bill_length_mass](model_logistic_penguins_bill_length_mass).
-Do you get better inference results? Note that there are divergence with
+Do you get better inference results? Note that there are divergences with
 the original parameterization.
 
 **E8.** In linear regression models we have two terms. The

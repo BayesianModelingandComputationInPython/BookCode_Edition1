@@ -12,8 +12,8 @@ than inference. While it would be nice if Bayesian modeling was as
 simple as specifying model and calculating a posterior, it is typically
 not. The reality is that other equally important tasks are needed for
 successful Bayesian data analysis. In this chapter we will discuss some
-of these tasks including, checking model assumptions, diagnosing
-inference results and model comparison.
+of these tasks, including checking model assumptions, diagnosing
+inference results, and model comparison.
 
 (there-is-life-after-inference-and-before-too)=
 
@@ -948,7 +948,7 @@ full technical specification and API.
 :::
 
 Notice how the model in Code Block [divm0](divm0) is not
-conditioned on any observations, which means `model_0` specified a
+conditioned on any observations, which means `model_0` specifies a
 posterior distribution parameterized by two unknowns (`θ1` and `θ2`).
 You may have also noticed that we have included the argument
 `testval=0.1`. We do this to instruct PyMC3 to start sampling from a
@@ -1143,7 +1143,7 @@ can instead compute:
 
 The quantity defined by Equation {eq}`eq:elpd_practice` (or that
 quantity multiplied by some constant) is usually known as the deviance,
-and it is use in both Bayesians and non-Bayesians contexts [^15]. When
+and it is used in both Bayesians and non-Bayesians contexts [^15]. When
 the likelihood is Gaussian, then Equation {eq}`eq:elpd_practice` will be
 proportional to the quadratic mean error.
 

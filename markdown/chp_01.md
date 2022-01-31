@@ -1287,7 +1287,7 @@ ignorance to us from *to pushing too much*.
 Using the Beta-Binomial example again,
 {numref}`fig:prior_informativeness_spectrum` shows four alternative
 priors. Two of them are the JP and maximum entropy prior from previous
-sections. One is what could called a weakly informative prior that gives
+sections. One is what could be called a weakly informative prior that gives
 preference to a value of $\theta=0.5$ while still being broad or
 relatively vague about other values. The last is an informative prior,
 narrowly centered around $\theta=0.8$ [^20]. Using informative priors is
