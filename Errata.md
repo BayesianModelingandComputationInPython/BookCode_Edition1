@@ -20,21 +20,20 @@
 | 71 | Take a moment to compare the estimate of the mean with the summary mean show**s**... | Take a moment to compare the estimate of the mean with the summary mean show**n**... | Thanks Sebastian |
 | 73 | ...the **thin** line is the interquartile range **from 25% to 75% of the posterior** and the **thick** line is the 94% Highest Density Interval | the **thick** line is the interquartile range and the **thin** line is the 94% Highest Density Interval | Thanks Jose Roberto Ayala Solares |
 | 75 | ... is the intercept only regression model **from** | is the intercept only regression model in **Code Block** |  |
-| 77 | | where the coefficients, **also referred as parameters, are represented** with $\beta_i$. | Thanks Sebastian |
+| 77 | ...where the coefficients, also referred to as covariates, are represented by the parameter $\beta_i$... | ...where the coefficients, **also referred as parameters, are represented** with $\beta_i$. | Thanks Sebastian |
 | 78 | to parse the categorical information into a design matrix `mu = pd.get_dummies(penguins["species"]) @ μ`**.** where  | ...to parse the categorical information into a design matrix, **and then write** `mu = pd.get_dummies(penguins["species"]) @ μ`**,** where... | Thanks Sebastian |
-| 81 | ...we would expect the mass of this impossible penguin to somewhere between -4213 and -546 grams. | ...we would expect the mass of this impossible penguin to **be** somewhere between -4151 and -510 grams. | Thanks Sebastian |
+| 81 | ...we would expect the mass of this impossible penguin to somewhere between **-4213** and **-546** grams. | ...we would expect the mass of this impossible penguin to **be** somewhere between **-4151** and **-510** grams. | Thanks Sebastian |
 | 83 | ...which takes a set **a value**... | ...which takes a set **of values**... | Thanks Sebastian |
 | 86 | ...has dropped a mean of 462 grams ... to a mean value 298 grams... | ...has dropped **from** a mean of 462 grams ... to a mean value **of** 298 grams... | Thanks Sebastian |
 | 88 | ...which lower value than estimated...  | ...which is a lower value than the estimated... | Thanks Sebastian |
 | 89 | ...which useful for counterfactual analyses. | ...which **is** useful for counterfactual analyses. | Thanks Sebastian |
-| 91 | We are still dealing a linear model here... | We are still dealing **with**a linear model here... | Thanks Sebastian |
+| 91 | We are still dealing a linear model here... | We are still dealing **with** a linear model here... | Thanks Sebastian |
 | 93 | ...we find it reasonable to equally expect a **Gentoo** penguin... | ...we find it reasonable to equally expect a **Chinstrap** penguin... | Thanks Sebastian |
 | 97 | ...and Fig. 3.22.A separation... | ...and Fig. 3.22. A separation... | Thanks Sebastian |
 | 98 | ...from Adelie or Chinstrap **penguinsthe**... | ...from Adelie or Chinstrap **penguins the**... | Thanks Sebastian |
-| 101 | Given these choices we can write our model in
-Code Block 3.30**)**... | Given these choices we can write our model in Code Block 3.30 | Thanks Sebastian |
-| 101 | This is not a fully uninformative prior**s**... | This is not a fully uninformative prior... | Thanks Sebastian |
-| 102 | ...fall into bounds that more reasonable... | ...fall into bounds that are more reasonable... | Thanks Sebastian |
+| 101 | Given these choices we can write our model in Code Block 3.30**)**... | Given these choices we can write our model in Code Block 3.30 | Thanks Sebastian |
+| 101 | This is not a fully uninformative **priors**... | This is not a fully uninformative **prior**... | Thanks Sebastian |
+| 102 | ...fall into bounds that more reasonable... | ...fall into bounds that **are** more reasonable... | Thanks Sebastian |
 | 183 | ...a backshift operator, also called Lag operator) | ...a backshift operator **(**also called Lag operator) |  |
 | 191 | (footnote) The Stan implementation of SARIMA can be found in https://github.com/asael697/**varstan**. | The Stan implementation of SARIMA can be found in **e.g.,** https://github.com/asael697/**bayesforecast**. |  |
 | 197 | we can apply the Kalman filter to **to** obtain**s** the posterior | we can apply the Kalman filter to obtain the posterior |  |
