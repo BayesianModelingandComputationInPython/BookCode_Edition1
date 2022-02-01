@@ -48,7 +48,7 @@ exploration and iteration over alternative models in order to achieve
 inference that we can trust. Even more, for complex problems we
 typically do not know ahead of time what models we want to fit and even
 if so, we would still want to understand the fitted model and its
-relation to the data. Some commons elements to all Bayesian analyses,
+relation to the data. Some common elements to all Bayesian analyses,
 that are reflected in {numref}`fig:BayesianWorkflow`, are the need of
 data and some prior (or domain) knowledge, some technique used to
 process the data, and an audience typically wanting a report of some
@@ -83,7 +83,7 @@ with our analysis, and is worth the time and effort to try to find an
 answer. It is important to differentiate this question from any others.
 During our analysis we will run into many other questions, such as data
 questions, modeling questions, inference questions, which answer "How
-should we conduct our analysis\"; but should not be confused with
+should we conduct our analysis\"; but should not be confused with the
 driving question, which is "why we are conducting our analysis\".
 
 So before starting any statistical analysis, the first and foremost task
