@@ -460,8 +460,8 @@ than inference. While it would be nice if Bayesian modeling was as
 simple as specifying model and calculating a posterior, it is typically
 not. The reality is that other equally important tasks are needed for
 successful Bayesian data analysis. In this chapter we will discuss some
-of these tasks including, checking model assumptions, diagnosing
-inference results and model comparison.</p>
+of these tasks, including checking model assumptions, diagnosing
+inference results, and model comparison.</p>
 <div class="section" id="there-is-life-after-inference-and-before-too">
 <span id="id2"></span><h2><span class="section-number">2.1. </span>There is Life After Inference, and Before Too!<a class="headerlink" href="#there-is-life-after-inference-and-before-too" title="Permalink to this headline">¶</a></h2>
 <p>A successful Bayesian modeling approach requires performing additional
@@ -1271,7 +1271,7 @@ and read and write from disk. Refer to the ArviZ documentation for a
 full technical specification and API.</p>
 </div>
 <p>Notice how the model in Code Block <a class="reference internal" href="#divm0"><span class="std std-ref">divm0</span></a> is not
-conditioned on any observations, which means <code class="docutils literal notranslate"><span class="pre">model_0</span></code> specified a
+conditioned on any observations, which means <code class="docutils literal notranslate"><span class="pre">model_0</span></code> specifies a
 posterior distribution parameterized by two unknowns (<code class="docutils literal notranslate"><span class="pre">θ1</span></code> and <code class="docutils literal notranslate"><span class="pre">θ2</span></code>).
 You may have also noticed that we have included the argument
 <code class="docutils literal notranslate"><span class="pre">testval=0.1</span></code>. We do this to instruct PyMC3 to start sampling from a
@@ -1377,7 +1377,7 @@ we may want to increase the number of iterations used to tune MCMC
 samplers. In PyMC3 we have <code class="docutils literal notranslate"><span class="pre">pm.sample(.,tune=1000)</span></code> by default. During
 the tuning phase sampler parameters get automatically adjusted. Some
 models are more complex and require more interactions for the sampler to
-learn better parameters. Thus increasing the turning steps can help to
+learn better parameters. Thus increasing the tuning steps can help to
 increase the ESS or lower the <span class="math notranslate nohighlight">\(\hat R\)</span>. Increasing the number of draws
 can also help with convergence but in general other routes are more
 productive. If a model is failing to converge with a few thousands of
@@ -1424,7 +1424,7 @@ properties <span id="id33">[<a class="reference internal" href="references.html#
 setting the log scoring rule can be computed as.</p>
 <div class="math notranslate nohighlight" id="equation-eq-elpd">
 <span class="eqno">(2.4)<a class="headerlink" href="#equation-eq-elpd" title="Permalink to this equation">¶</a></span>\[\text{ELPD} = \sum_{i=1}^{n} \int p_t(\tilde y_i) \; \log p(\tilde y_i \mid y_i) \; d\tilde y_i\]</div>
-<p>where <span class="math notranslate nohighlight">\(p_t(\tilde y_i)\)</span> is distribution of the true data-generating
+<p>where <span class="math notranslate nohighlight">\(p_t(\tilde y_i)\)</span> is the distribution of the true data-generating
 process for <span class="math notranslate nohighlight">\(\tilde y_i\)</span> and <span class="math notranslate nohighlight">\(p(\tilde y_i \mid y_i)\)</span> is the posterior
 predictive distribution. The quantity defined in Equation <a class="reference internal" href="#equation-eq-elpd">(2.4)</a>
 is known as the <strong>expected log pointwise predictive density</strong> (ELPD).
@@ -1440,7 +1440,7 @@ can instead compute:</p>
 <span class="eqno">(2.5)<a class="headerlink" href="#equation-eq-elpd-practice" title="Permalink to this equation">¶</a></span>\[\sum_{i=1}^{n} \log \int \ p(y_i \mid \boldsymbol{\theta}) \; p(\boldsymbol{\theta} \mid y) d\boldsymbol{\theta}\]</div>
 <p>The quantity defined by Equation <a class="reference internal" href="#equation-eq-elpd-practice">(2.5)</a> (or that
 quantity multiplied by some constant) is usually known as the deviance,
-and it is use in both Bayesians and non-Bayesians contexts <a class="footnote-reference brackets" href="#id67" id="id35">15</a>. When
+and it is used in both Bayesians and non-Bayesians contexts <a class="footnote-reference brackets" href="#id67" id="id35">15</a>. When
 the likelihood is Gaussian, then Equation <a class="reference internal" href="#equation-eq-elpd-practice">(2.5)</a> will be
 proportional to the quadratic mean error.</p>
 <p>To compute Equation <a class="reference internal" href="#equation-eq-elpd-practice">(2.5)</a> we used the same data used to

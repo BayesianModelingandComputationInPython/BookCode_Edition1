@@ -696,7 +696,7 @@ allow expressing models with ease and with less errors.</p>
 <a class="reference internal" href="#fig-all-penguins-rank-kde-plot"><span class="std std-numref">Fig. 3.4</span></a>. Compared to
 <a class="reference internal" href="#fig-single-penguins-rank-kde-plot"><span class="std std-numref">Fig. 3.2</span></a> you will see 4 additional
 plots, 2 each for the additional parameters added. Take a moment to
-compare the estimate of the mean with the summary mean shows for each
+compare the estimate of the mean with the summary mean shown for each
 species in <a class="reference internal" href="#tab-penguin-mass-parameters-point-estimates"><span class="std std-numref">Table 3.1</span></a>. To
 better visualize the differences between the distributions for each
 species, we plot the posterior again in a forest plot using Code Block
@@ -990,8 +990,8 @@ a linear combination of other variables</p>
     \mu =&amp; \beta_0 + \beta_1 X_1 + \dots + \beta_m X_m \\
 Y \sim&amp; \mathcal{N}(\mu, \sigma)
 \end{split}\end{split}\]</div>
-<p>where the coefficients, also referred to as covariates, are represented
-by the parameter <span class="math notranslate nohighlight">\(\beta_i\)</span>. For example, <span class="math notranslate nohighlight">\(\beta_0\)</span> is the intercept of
+<p>where the coefficients, also referred as parameters, are represented with <span class="math notranslate nohighlight">\(\beta_i\)</span>.
+For example, <span class="math notranslate nohighlight">\(\beta_0\)</span> is the intercept of
 the linear model. <span class="math notranslate nohighlight">\(X_i\)</span> is referred to predictors or independent
 variables, and <span class="math notranslate nohighlight">\(Y\)</span> is usually referred to as target, output, response,
 or dependent variable. It is important to notice that both
@@ -1033,10 +1033,10 @@ covariates that represent categorical predictors (i.e., there are only a
 few categories), a common way to turn those into a design matrix is
 called dummy coding or one-hot coding. For example, in our intercept per
 penguin model (Code Block
-<a class="reference internal" href="#mass-forest-plot"><span class="std std-ref">mass_forest_plot</span></a>), instead of
+<a class="reference internal" href="#nocovariate-mass"><span class="std std-ref">nocovariate_mass</span></a>), instead of
 <code class="docutils literal notranslate"><span class="pre">mu</span> <span class="pre">=</span> <span class="pre">μ[species.codes]</span></code> we can use <code class="docutils literal notranslate"><span class="pre">pandas.get_dummies</span></code> to parse the
-categorical information into a design matrix
-<code class="docutils literal notranslate"><span class="pre">mu</span> <span class="pre">=</span> <span class="pre">pd.get_dummies(penguins[&quot;species&quot;])</span> <span class="pre">&#64;</span> <span class="pre">μ</span></code>. where <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> is a Python
+categorical information into a design matrix, and then write
+<code class="docutils literal notranslate"><span class="pre">mu</span> <span class="pre">=</span> <span class="pre">pd.get_dummies(penguins[&quot;species&quot;])</span> <span class="pre">&#64;</span> <span class="pre">μ</span></code>, where <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> is a Python
 operator for performing matrix multiplication. There are also few other
 functions to perform one hot encoding in Python, for example,
 <code class="docutils literal notranslate"><span class="pre">sklearn.preprocessing.OneHotEncoder</span></code>, as this is a very common data
@@ -1125,7 +1125,7 @@ to have a larger flipper, but it could also make it just a fatter
 penguin. Now focusing on <span class="math notranslate nohighlight">\(\beta_0\)</span> however, what does it represent? From
 our posterior estimate we can state that if we saw an Adelie penguin
 with a 0 mm flipper length we would expect the mass of this impossible
-penguin to somewhere between -4213 and -546 grams. According to our
+penguin to be somewhere between -4151 and -510 grams. According to our
 model this statement is true, but negative mass does not make sense.
 This is not necessarily an issue, there is no rule that every parameter
 in a model needs to be interpretable, nor that the model provide
@@ -1232,7 +1232,7 @@ mass, and in predicting the mass of penguins at a given flipper length.
 Unfortunately with the data and the model provided our estimate of
 <span class="math notranslate nohighlight">\(\beta_0\)</span> was not particularly useful. However, we can use a
 transformation to make <span class="math notranslate nohighlight">\(\beta_0\)</span> more interpretable. In this case we
-will opt for a centering transformation, which takes a set a value and
+will opt for a centering transformation, which takes a set of values and
 centers its mean value at zero as shown in Code Block
 <a class="reference internal" href="#flipper-centering"><span class="std std-ref">flipper_centering</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="flipper-centering">
@@ -1433,7 +1433,7 @@ penguin’s mass.</p>
 <a class="reference internal image-reference" href="../_images/SingleSpecies_MultipleRegression_Forest_Sigma_Comparison.png"><img alt="../_images/SingleSpecies_MultipleRegression_Forest_Sigma_Comparison.png" src="../_images/SingleSpecies_MultipleRegression_Forest_Sigma_Comparison.png" style="width: 7.00in;" /></a>
 <p class="caption"><span class="caption-number">Fig. 3.15 </span><span class="caption-text">By incorporating sex as a covariate in <code class="docutils literal notranslate"><span class="pre">model_penguin_mass_categorical</span></code>
 the estimated distribution of <span class="math notranslate nohighlight">\(\sigma\)</span> from this model is centered
-around 300 grams, which lower value than estimated by our fixed mean
+around 300 grams, which is a lower value than the estimated by our fixed mean
 model and our single covariate model. This figure is generated from Code
 Block <a class="reference internal" href="#forest-multiple-models"><span class="std std-ref">forest_multiple_models</span></a>.</span><a class="headerlink" href="#fig-singlespecies-multipleregression-forest-sigma-comparison" title="Permalink to this image">¶</a></p>
 </div>
@@ -1509,7 +1509,7 @@ length at the observed mean of the dataset. This is done in Code Block
 with the result shown in <a class="reference internal" href="#fig-linearcounterfactual"><span class="std std-numref">Fig. 3.16</span></a>. Again since
 we wrap the model generation in a Python function (a functional
 programming style approach), it is easy to condition on new predictors,
-which useful for counterfactual analyses.</p>
+which is useful for counterfactual analyses.</p>
 <div class="literal-block-wrapper docutils container" id="tfp-flipper-bill-sex-counterfactuals">
 <div class="code-block-caption"><span class="caption-number">Listing 3.20 </span><span class="caption-text">tfp_flipper_bill_sex_counterfactuals</span><a class="headerlink" href="#tfp-flipper-bill-sex-counterfactuals" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mean_flipper_length</span> <span class="o">=</span> <span class="n">penguins</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">adelie_mask</span><span class="p">,</span> <span class="s2">&quot;flipper_length_mm&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
@@ -1592,7 +1592,7 @@ indicating the data likelihood.</p>
 the range of real numbers <span class="math notranslate nohighlight">\((-\infty, \infty)\)</span> to a parameter range of
 the restricted interval. In other words the inverse link function is the
 specific “trick” we need to take our linear models and generalize them
-to many more model architectures. We are still dealing a linear model
+to many more model architectures. We are still dealing with a linear model
 here in the sense that the expectation of the distribution that
 generates the observation still follows a linear function of the
 parameter and the covariates but now we can generalize the use and
@@ -1680,7 +1680,7 @@ covariate, bill length. We write this logistic model in Code Block
 response can sometimes be more challenging to understand. We can utilize
 prior predictive samples to help us visualize the expected observations.
 In our classifying penguins example we find it reasonable to equally
-expect a Gentoo penguin, as we would an Adelie penguin, at all bill
+expect a Chinstrap penguin, as we would an Adelie penguin, at all bill
 lengths, prior to seeing any data. We can double-check our modeling
 intention has been represented correctly by our priors and model using
 the prior predictive distribution. The classes are roughly even in
@@ -1859,7 +1859,7 @@ separability as indicated by the slope of the line.</span><a class="headerlink" 
 <p>To evaluate the model fit for logistic regressions we can use a
 separation plot <span id="id30">[<a class="reference internal" href="references.html#id172">39</a>]</span>, as shown in Code Block
 <a class="reference internal" href="#separability-plot"><span class="std std-ref">separability_plot</span></a> and
-<a class="reference internal" href="#fig-penguins-separation-plot"><span class="std std-numref">Fig. 3.22</span></a>.A separation plot is a way to
+<a class="reference internal" href="#fig-penguins-separation-plot"><span class="std std-numref">Fig. 3.22</span></a>. A separation plot is a way to
 assess the calibration of a model with binary observed data. It shows
 the sorted predictions per class, the idea being that with perfect
 separation there would be two distinct rectangles. In our case we see
@@ -1973,7 +1973,7 @@ and now we have a numerical confirmation as well.</p>
 odds units when x is incremented one unit. Odds most simply are the
 ratio between the probability of occurrence and probability of no
 occurrence. For example, in our penguin example if we were to pick a
-random penguin from Adelie or Chinstrap penguinsthe probability that we
+random penguin from Adelie or Chinstrap penguins the probability that we
 pick an Adelie penguin would be 0.68 as seen in Code Block
 <a class="reference internal" href="#adelie-prob"><span class="std std-ref">adelie_prob</span></a></p>
 <div class="literal-block-wrapper docutils container" id="adelie-prob">
@@ -2099,10 +2099,10 @@ translates to setting the mean of the prior for intercept <span class="math notr
 be 50 and the prior mean for the coefficient <span class="math notranslate nohighlight">\(\beta_1\)</span> to be 0. We also
 set a wide dispersion to express our lack of knowledge about both the
 intercept and the effect of attractiveness on sex ratio. This is not a
-fully <em>uninformative priors</em>, of which we covered in Section
+fully <em>uninformative prior</em>, of which we covered in Section
 <a class="reference internal" href="chp_01.html#make-prior-count"><span class="std std-ref">A Few Options to Quantify Your Prior Information</span></a>, however, a very wide prior.
 Given these choices we can write our model in Code Block
-<a class="reference internal" href="#uninformative-prior-sex-ratio"><span class="std std-ref">uninformative_prior_sex_ratio</span></a>),
+<a class="reference internal" href="#uninformative-prior-sex-ratio"><span class="std std-ref">uninformative_prior_sex_ratio</span></a>,
 run inference, and generate samples to estimate posterior distribution.
 From the data and model we estimate that the mean of <span class="math notranslate nohighlight">\(\beta_1\)</span> to be
 1.4, meaning the least attractive group when compared to the most
@@ -2127,7 +2127,7 @@ shown in Code Block
 <a class="reference internal" href="#informative-prior-sex-ratio"><span class="std std-ref">informative_prior_sex_ratio</span></a>
 that are consistent with this general knowledge. Plotting our posterior
 samples the concentration of coefficients is smaller and the plotted
-posterior lines fall into bounds that more reasonable when considering
+posterior lines fall into bounds that are more reasonable when considering
 possible ratios.</p>
 <div class="literal-block-wrapper docutils container" id="informative-prior-sex-ratio">
 <div class="code-block-caption"><span class="caption-number">Listing 3.30 </span><span class="caption-text">informative_prior_sex_ratio</span><a class="headerlink" href="#informative-prior-sex-ratio" title="Permalink to this code">¶</a></div>
@@ -2233,7 +2233,7 @@ intercept, and assign more informative prior to the slope coefficients.
 Try modifying the <code class="docutils literal notranslate"><span class="pre">model_logistic_penguins_bill_length_mass</span></code> model in
 Code Block
 <a class="reference internal" href="#model-logistic-penguins-bill-length-mass"><span class="std std-ref">model_logistic_penguins_bill_length_mass</span></a>.
-Do you get better inference results? Note that there are divergence with
+Do you get better inference results? Note that there are divergences with
 the original parameterization.</p>
 <p><strong>E8.</strong> In linear regression models we have two terms. The
 mean linear function and the noise term. Write down these two terms in
