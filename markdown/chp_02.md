@@ -1188,7 +1188,7 @@ single fit to the data by using a method known as Pareto smoothed
 importance sampling leave-one-out cross validation PSIS-LOO-CV (see Section
 {ref}`loo_depth` for details). For brevity, and for
 consistency with ArviZ, in this book we call this method LOO. It is
-important to remember we are are talking about PSIS-LOO-CV and unless we
+important to remember we are talking about PSIS-LOO-CV and unless we
 state it otherwise when we refer to ELPD we are talking about the ELPD
 as estimated by this method.
 
@@ -1297,17 +1297,17 @@ There are many columns in {numref}`table:compare_00`  so let us detail their mea
 1.  The first column is the index which lists the names of the models
     taken from the keys of the dictionary passed to `az.compare(.)`.
 
-2.  `rank`: The ranking on the models starting from 0 (the model with
+2.  `rank`: The ranking of the models starting from 0 (the model with
     the highest predictive accuracy) to the number of models.
 
 3.  `loo`: The list of ELPD values. The DataFrame is always sorted from
     best ELPD to worst.
 
-4.  `p_loo`: The list values for the penalization term. We can roughly
+4.  `p_loo`: The list of values for the penalization term. We can roughly
     think of this value as the estimated effective number of parameters
     (but do not take that too seriously). This value can be lower than
-    the actual number of parameters in model that *has more structure*
-    like hierarchical models or can be much higher than the actual
+    the actual number of parameters in a model that *has more structure*
+    like a hierarchical model or can be much higher than the actual
     number when the model has very weak predictive capability and may
     indicate a severe model misspecification.
 
@@ -1475,9 +1475,9 @@ boldface, which is only highlighted in {numref}`fig:loo_k_dummy`.
 
 As previously said p_loo can be loosely interpreted as the estimated
 effective number of parameters in a model. Nevertheless, for models with
-large values of $\hat \kappa$ we can obtain some additional additional
+large values of $\hat \kappa$ we can obtain some additional
 information. If $\hat \kappa > 0.7$ then comparing p_loo to the number
-of parameters $p$ can provides us with some additional information
+of parameters $p$ can provide us with some additional information
 {cite:p}`loo_glossary`:
 
 -   If $p\_loo << p$, then the model is likely to be misspecified. You
@@ -1521,7 +1521,7 @@ data twice, once to fit the model and once to criticize it. The LOO-PIT
 plot offers an answer to this concern. The main idea is that we can use
 LOO as a fast and reliable approximation to cross-validation in order to
 avoid using the data twice. The "PIT part\", stands for Probability
-Integral Transform[^19], which is transformation in 1D where we can get
+Integral Transform[^19], which is a transformation in 1D where we can get
 a $\mathcal{U}(0, 1)$ distribution from any continuous random variable
 if we transform that random variable using its own CDF (for details see Section
 {ref}`loo_depth`). In LOO-PIT we do not know the true CDF, but
