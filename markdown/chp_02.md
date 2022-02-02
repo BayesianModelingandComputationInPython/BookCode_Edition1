@@ -1609,7 +1609,7 @@ Yet another option for model averaging is stacking of predictive
 distributions {cite:p}`yao_stacking_2018`. The main idea is to combine several
 models in a meta-model in such a way that we minimize the divergence
 between the meta-model and the *true* generating model. When using a
-logarithmic scoring rule this is equivalently to compute:
+logarithmic scoring rule this is equivalent to computing:
 
 ```{math}
 :label: eq_stacking
@@ -1631,7 +1631,7 @@ computed for each model independently of the rest of the models. Instead
 in Equation {eq}`eq_stacking` the weights are computed by maximizing the
 combined log-score, i.e. even when the models have been fitted
 independently as in pseudo Bayesian model averaging, the computation of
-the weights take into account all models together. This helps to explain
+the weights takes into account all models together. This helps to explain
 why model `mB` gets a weight of 1 and `mC` a weight of 0 (see
 {numref}`table:compare_00` ), even if they are very similar models. Why are
 the weights not around 0.5 for each one of them? The reason is that
@@ -1642,7 +1642,7 @@ including it will be redundant.
 The function `pm.sample_posterior_predictive_w(.)` accepts a list of
 traces and a list of weights allowing us to easily generate weighted
 posterior predictive samples. The weights can be taken from anywhere,
-but using the weights computed with `az.compare(., method="stacking")`,
+but using the weights computed with `az.compare(., method="stacking")`
 makes a lot of sense.
 
 (exercises2)=
