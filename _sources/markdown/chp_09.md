@@ -48,7 +48,7 @@ exploration and iteration over alternative models in order to achieve
 inference that we can trust. Even more, for complex problems we
 typically do not know ahead of time what models we want to fit and even
 if so, we would still want to understand the fitted model and its
-relation to the data. Some commons elements to all Bayesian analyses,
+relation to the data. Some common elements to all Bayesian analyses,
 that are reflected in {numref}`fig:BayesianWorkflow`, are the need of
 data and some prior (or domain) knowledge, some technique used to
 process the data, and an audience typically wanting a report of some
@@ -61,8 +61,8 @@ A high level generic Bayesian workflow showing the main steps involved.
 The workflow has many junctures requiring decisions, and some steps may
 be omitted entirely. It is the responsibility of the practitioner to
 make this determination in each situation. For example, "pick a model\"
-could mean choosing a single model, averaging some of all of them, or
-even presenting all the models and discussing their strength and
+could mean choosing a single model, averaging some or all of them, or
+even presenting all the models and discussing their strengths and
 shortcomings. Also notice that all the "evaluate\" steps can be used for
 model comparison. We can compare models based on their posterior
 predictive distributions or pick a model with good convergence
@@ -71,7 +71,7 @@ our domain knowledge. Finally, we must notice that sometimes we,
 unfortunately, will need to give up. Even if we are not entirely happy
 with some model it may be the best model we can achieve given the
 available resources. A more detailed version of the Bayesian workflow
-can be see in a paper aptly titled Bayesian Workflow by Gelman et al
+can be seen in a paper aptly titled Bayesian Workflow by Gelman et al
 {cite:p}`Gelman2020` and the article Towards a Principled Bayesian Workflow by
 Betancourt {cite:p}`betancourt_2020_worfklow`.
 ```
@@ -83,7 +83,7 @@ with our analysis, and is worth the time and effort to try to find an
 answer. It is important to differentiate this question from any others.
 During our analysis we will run into many other questions, such as data
 questions, modeling questions, inference questions, which answer "How
-should we conduct our analysis\"; but should not be confused with
+should we conduct our analysis\"; but should not be confused with the
 driving question, which is "why we are conducting our analysis\".
 
 So before starting any statistical analysis, the first and foremost task

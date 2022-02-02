@@ -1475,7 +1475,7 @@ single fit to the data by using a method known as Pareto smoothed
 importance sampling leave-one-out cross validation PSIS-LOO-CV (see Section
 <a class="reference internal" href="chp_11.html#loo-depth"><span class="std std-ref">LOO in Depth</span></a> for details). For brevity, and for
 consistency with ArviZ, in this book we call this method LOO. It is
-important to remember we are are talking about PSIS-LOO-CV and unless we
+important to remember we are talking about PSIS-LOO-CV and unless we
 state it otherwise when we refer to ELPD we are talking about the ELPD
 as estimated by this method.</p>
 <p>ArviZ provides many LOO-related functions, using them is very simple but
@@ -1595,15 +1595,15 @@ a commonly used function is <code class="docutils literal notranslate"><span cla
 <ol class="simple">
 <li><p>The first column is the index which lists the names of the models
 taken from the keys of the dictionary passed to <code class="docutils literal notranslate"><span class="pre">az.compare(.)</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">rank</span></code>: The ranking on the models starting from 0 (the model with
+<li><p><code class="docutils literal notranslate"><span class="pre">rank</span></code>: The ranking of the models starting from 0 (the model with
 the highest predictive accuracy) to the number of models.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">loo</span></code>: The list of ELPD values. The DataFrame is always sorted from
 best ELPD to worst.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">p_loo</span></code>: The list values for the penalization term. We can roughly
+<li><p><code class="docutils literal notranslate"><span class="pre">p_loo</span></code>: The list of values for the penalization term. We can roughly
 think of this value as the estimated effective number of parameters
 (but do not take that too seriously). This value can be lower than
-the actual number of parameters in model that <em>has more structure</em>
-like hierarchical models or can be much higher than the actual
+the actual number of parameters in a model that <em>has more structure</em>
+like a hierarchical model or can be much higher than the actual
 number when the model has very weak predictive capability and may
 indicate a severe model misspecification.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">d_loo</span></code>: The list of relative differences between the value of LOO
@@ -1746,9 +1746,9 @@ boldface, which is only highlighted in <a class="reference internal" href="#fig-
 <span id="id41"></span><h3><span class="section-number">2.5.4. </span>Interpreting p_loo When Pareto <span class="math notranslate nohighlight">\(\hat \kappa\)</span> is Large<a class="headerlink" href="#interpreting-p-loo-when-pareto-hat-kappa-is-large" title="Permalink to this headline">¶</a></h3>
 <p>As previously said p_loo can be loosely interpreted as the estimated
 effective number of parameters in a model. Nevertheless, for models with
-large values of <span class="math notranslate nohighlight">\(\hat \kappa\)</span> we can obtain some additional additional
+large values of <span class="math notranslate nohighlight">\(\hat \kappa\)</span> we can obtain some additional
 information. If <span class="math notranslate nohighlight">\(\hat \kappa &gt; 0.7\)</span> then comparing p_loo to the number
-of parameters <span class="math notranslate nohighlight">\(p\)</span> can provides us with some additional information
+of parameters <span class="math notranslate nohighlight">\(p\)</span> can provide us with some additional information
 <span id="id42">[<a class="reference internal" href="references.html#id170">23</a>]</span>:</p>
 <ul class="simple">
 <li><p>If <span class="math notranslate nohighlight">\(p\_loo &lt;&lt; p\)</span>, then the model is likely to be misspecified. You
@@ -1787,7 +1787,7 @@ data twice, once to fit the model and once to criticize it. The LOO-PIT
 plot offers an answer to this concern. The main idea is that we can use
 LOO as a fast and reliable approximation to cross-validation in order to
 avoid using the data twice. The “PIT part”, stands for Probability
-Integral Transform<a class="footnote-reference brackets" href="#id71" id="id45">19</a>, which is transformation in 1D where we can get
+Integral Transform<a class="footnote-reference brackets" href="#id71" id="id45">19</a>, which is a transformation in 1D where we can get
 a <span class="math notranslate nohighlight">\(\mathcal{U}(0, 1)\)</span> distribution from any continuous random variable
 if we transform that random variable using its own CDF (for details see Section
 <a class="reference internal" href="chp_11.html#loo-depth"><span class="std std-ref">LOO in Depth</span></a>). In LOO-PIT we do not know the true CDF, but
@@ -1858,7 +1858,7 @@ like using Bayesian Bootstrapping.</p>
 distributions <span id="id50">[<a class="reference internal" href="references.html#id22">26</a>]</span>. The main idea is to combine several
 models in a meta-model in such a way that we minimize the divergence
 between the meta-model and the <em>true</em> generating model. When using a
-logarithmic scoring rule this is equivalently to compute:</p>
+logarithmic scoring rule this is equivalent to computing:</p>
 <div class="math notranslate nohighlight" id="equation-eq-stacking">
 <span class="eqno">(2.8)<a class="headerlink" href="#equation-eq-stacking" title="Permalink to this equation">¶</a></span>\[\max_{n} \frac{1}{n} \sum_{i=1}^{n}log\sum_{j=1}^{k} w_j p(y_i \mid y_{-i}, M_j)\]</div>
 <p>where <span class="math notranslate nohighlight">\(n\)</span> is the number of data points and <span class="math notranslate nohighlight">\(k\)</span> the number of models. To
@@ -1874,7 +1874,7 @@ computed for each model independently of the rest of the models. Instead
 in Equation <a class="reference internal" href="#equation-eq-stacking">(2.8)</a> the weights are computed by maximizing the
 combined log-score, i.e. even when the models have been fitted
 independently as in pseudo Bayesian model averaging, the computation of
-the weights take into account all models together. This helps to explain
+the weights takes into account all models together. This helps to explain
 why model <code class="docutils literal notranslate"><span class="pre">mB</span></code> gets a weight of 1 and <code class="docutils literal notranslate"><span class="pre">mC</span></code> a weight of 0 (see
 <a class="reference internal" href="#table-compare-00"><span class="std std-numref">Table 2.1</span></a> ), even if they are very similar models. Why are
 the weights not around 0.5 for each one of them? The reason is that
@@ -1884,7 +1884,7 @@ including it will be redundant.</p>
 <p>The function <code class="docutils literal notranslate"><span class="pre">pm.sample_posterior_predictive_w(.)</span></code> accepts a list of
 traces and a list of weights allowing us to easily generate weighted
 posterior predictive samples. The weights can be taken from anywhere,
-but using the weights computed with <code class="docutils literal notranslate"><span class="pre">az.compare(.,</span> <span class="pre">method=&quot;stacking&quot;)</span></code>,
+but using the weights computed with <code class="docutils literal notranslate"><span class="pre">az.compare(.,</span> <span class="pre">method=&quot;stacking&quot;)</span></code>
 makes a lot of sense.</p>
 </div>
 </div>
