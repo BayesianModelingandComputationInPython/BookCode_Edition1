@@ -389,8 +389,8 @@ is not typically the goal of the first model. The goal of the first
 model is to express the simplest reasonable and computable model. We
 then use this simple model to inform our understanding, tweak the model,
 and rerun as shown in {numref}`fig:BayesianWorkflow`. We do this using
-numerous tools, diagnostics, and visualizations that we have seen
-through out this book.
+the numerous tools, diagnostics, and visualizations that we have seen
+throughout this book.
 
 ::: {admonition} Types of Statistical Models
 
@@ -403,7 +403,7 @@ design based approach where "sampling existing populations and of
 experimental design there is a different approach in which the
 probability calculations are based on the randomization used by the
 investigator in the planning phases of the investigation\". The
-fundamentals of Bayes formula has no opinion on which approach is used
+fundamentals of Bayes formula have no opinion on which approach is used
 and Bayesian methods can be used in both approaches. Our airline example
 is a model based approach, whereas the experimental model at the end of
 the chapter is a design based approach. For example, it can be argued
@@ -418,7 +418,7 @@ different situations.
 
 For our flight delay dilemma we decide to start the modeling journey by
 picking a likelihood for the observed flight delays. We take a moment to
-collect our detail our existing domain knowledge. In our dataset, delays
+collect in detail our existing domain knowledge. In our dataset, delays
 can be negative or positive valued. Positive valued means flight is
 late, negative valued means flight is early. We could make choice here
 to only model delays and ignore all early arrivals. However, we will
