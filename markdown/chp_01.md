@@ -1508,7 +1508,7 @@ each of these questions. Some items may have multiple answers.
 5.  Which can be used to calculate numerical summaries, such as the
     mean, of the parameters?
 
-6.  Which can can be used to to visualize a Highest Density Interval?
+6.  Which can can be used to visualize a Highest Density Interval?
 
 **1M14.** Equation {eq}`eq:posterior_dist` contains the
 marginal likelihood in the denominator, which is difficult to calculate.
@@ -1549,7 +1549,7 @@ starting point affect convergence to your true chosen parameter.
 
 **1M19.** Assume we are building a model to estimate the mean
 and standard deviation of adult human heights in centimeters. Build a
-model that will make these estimation. Start with Code Block
+model that will make this estimation. Start with Code Block
 [beta_binom](beta_binom) and change the likelihood and
 priors as needed. After doing so then
 
@@ -1562,7 +1562,7 @@ priors as needed. After doing so then
 **1M20.** From domain knowledge you have that a given
 parameter can not be negative, and has a mean that is roughly between 3
 and 10 units, and a standard deviation of around 2. Determine two prior
-distribution that satisfy these constraints using Python. This may
+distributions that satisfy these constraints using Python. This may
 require trial and error by drawing samples and verifying these criteria
 have been met using both plots and numerical summaries.
 
