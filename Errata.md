@@ -11,6 +11,9 @@
 | 9 | ...or **simple** the posterior. | ...or **simply** the posterior.  | Thanks Ero Carrera |
 | 24 | One is what could called... | One is what could **be** called... | Thanks Sebastian |
 | 26 | 1E8. Rerun Code block | 1E8. Rerun Code Block |  |
+| 27 | Which can can be used **to to** visualize a Highest Density Interval? | Which can can be used **to** visualize a Highest Density Interval? |  |
+| 28 | Build a model that will make **these** estimation. | Build a model that will make **this** estimation. |  |
+| 28 | Determine two prior **distribution** that satisfy these constraints using Python. | Determine two prior **distributions** that satisfy these constraints using Python. |  |
 | 31 | In this chapter we will discuss some of these tasks including**,** checking ... results and model comparison | In this chapter we will discuss some of these tasks**,** including checking ... results**,** and model comparison  | Thanks Sebastian |
 | 42 | Plotting the ESS for specifics quantiles `az.plot_ess(., kind="quantiles"`  | Plotting the ESS for specifics quantiles `az.plot_ess(., kind="quantiles"`) | Thanks Juan Orduz |
 | 49 | ...which means `model_0` specified a posterior... | ...which means `model_0` specifies a posterior... | Thanks Sebastian |
