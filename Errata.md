@@ -55,10 +55,31 @@
 | 262 | ...averaging some **of** all of them, or even presenting all the models and discussing their **strength** and... | ...averaging some **or** all of them, or even presenting all the models and discussing their **strengths** and... | Thanks Ero Carrera |
 | 262 | A more detailed version of the Bayesian workflow can be **see** in a paper... | A more detailed version of the Bayesian workflow can be **seen** in a paper... | Thanks Ero Carrera |
 | 262 | ...but should not be confused with driving question... | ...but should not be confused with **the** driving question... | Thanks Ero Carrera |
+| 264 | ...report regarding the potential financial **affects**. | ...report regarding the potential financial **effects**. | Thanks Ero Carrera |
+| 264 | ...risk of making a poor decision far **outweights**... | ...risk of making a poor decision far **outweighs**... | Thanks Ero Carrera |
+| 264 | ...in the sub-sections with **title start** with *Applied Example*. | ...in the sub-sections with **titles starting** with *Applied Example*. | Thanks Ero Carrera |
+| 264 | Likewise inference is impossible without data. challenging with poor quality data, **and the** best statisticians... | Likewise, inference is impossible without data **and** challenging with poor quality data. **The** best statisticians... | Thanks Ero Carrera |
+| 264 | For statistician the equivalent is **Sample** surveys... | For statistician the equivalent is **sample** surveys... | Thanks Ero Carrera |
 | 265 | foraging for ingredients are growing by themselves. | foraging for ingredients **that** are growing by themselves. |  |
+| 265 | When collecting data be sure not only pay attention to what is present, but consider what may not be present. | When collecting data be sure **to** not only pay attention to what is present, but consider **also** what may not be present. | Thanks Ero Carrera |
+| 267 | We do this using numerous tools, diagnostics, and visualizations that we have seen **through out** this book. | We do this using **the** numerous tools, diagnostics, and visualizations that we have seen **throughout** this book. | Thanks Ero Carrera |
+| 267 | The fundamentals of Bayes formula **has** no opinion... | The fundamentals of Bayes formula **have** no opinion... | Thanks Ero Carrera |
+| 267 | We take a moment to collect **our** detail... | We take a moment to collect **in** detail... | Thanks Ero Carrera |
 | 267 | (In Code Block 9.1) `df = pd.read_csv("../data/948363589_T_ONTIME_MARKETING.zip",` | `df = pd.read_csv("../data/948363589_T_ONTIME_MARKETING.zip")` |  |
+| 269 | ...or likelihood distributions are preordained, What is printed in this book... | ...or likelihood distributions are preordained. What is printed in this book... | Thanks Ero Carrera |
 | 276 | We can also generate a visual check with **9.7which** | We can also generate a visual check with **Code Block 9.7 which** |  |
-| 276 | ... a cross section area of .504 inches (**12.8mm**) by .057 inches (**1.27**)... | ... a cross section area of .504 inches (**12.8 mm**) by .057 inches (**1.27 mm**)... | Thanks Juan Orduz |
+| 276 | Thus, there still room for improvement... | Thus, there **is** still room for improvement... | Thanks Ero Carrera |
+| 276 | What is important at this step is we are sufficiently... | What is important at this step is **that** we are sufficiently... | Thanks Ero Carrera |
+| 277 | ...maps how wet or dry a person’s clothes **is** to... | ...maps how wet or dry a person’s clothes **are** to... | Thanks Ero Carrera |
+| 277 | ...map those outcomes to expected **reward**... | ...map those outcomes to expected **rewards**... | Thanks Ero Carrera |
+| 280 | ...the airline, **If** a flight is between 0 and 10 minutes late, the fee is 1,000 dollars. **if** the flight is... | ...the airline, **if** a flight is between 0 and 10 minutes late, the fee is 1,000 dollars. **If** the flight is... | Thanks Ero Carrera |
+| 280 | ...more time than all the previous **one** combined. | ...more time than all the previous **ones** combined. | Thanks Ero Carrera |
+| 281 | ...and **legality** but is important to note this. | ...and **legal considerations** but is important to note this. | Thanks Ero Carrera |
+| 282 | When environments cannot be replicated one outcome is **code that was working**... | When environments cannot be replicated one **possible** outcome is **that code that used to work**... | Thanks Ero Carrera |
+| 282 | This can occur because the **library** may change, or the **algorithm itself**. | This can occur because the **libraries** may change, or the **algorithms themselves**. | Thanks Ero Carrera |
+| 282 | workflow should be robust that changing the seed | workflow should be robust **so** that changing the seed | Thanks Ero Carrera |
+| 282 | In short reproducible analyses both **helps** you and others build confidence in your prior results, and also **helps** future efforts extend the work. | In short reproducible analyses both **help** you and others build confidence in your prior results, and also **help** future efforts extend the work. | Thanks Ero Carrera |
+| 286 | ... a cross section area of .504 inches (**12.8mm**) by .057 inches (**1.27**)... | ... a cross section area of .504 inches (**12.8 mm**) by .057 inches (**1.27 mm**)... | Thanks Juan Orduz |
 | 318 | As you can see, there is a lot of **rooms** for... | As you can see, there is a lot of **room** for... |  |
 | 344 | ...will make the **skweness** independent... | ...will make the **skewness** independent... | Thanks Alihan Zihna |
 | 371 | ...a simple Python implementation in **Code block** | ...simple Python implementation in **Code Block** |  |
