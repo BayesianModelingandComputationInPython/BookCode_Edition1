@@ -177,17 +177,17 @@ money. The airport CEO asks you to use your data abilities to answer the
 question, "Should we accept the new late fee structure or keep the old
 one?\". The airline CEO mentions how expensive this decision could be if
 it was made incorrectly and asks you to prepare a report regarding the
-potential financial affects. As experienced statistician you decide to
+potential financial effects. As experienced statistician you decide to
 quantify the underlying distribution of delays and use decision analysis
 to aid with the infrastructure investment choice. We believe an
 integrated End to End Bayesian analysis will provide a more complete
 understanding of future outcomes. You are able to justify the cost and
 complexity of model development as the financial risk of making a poor
-decision far outweights the time and cost to make a Bayesian model. If
+decision far outweighs the time and cost to make a Bayesian model. If
 you are not sure how we reached this conclusion do not worry, we will
 walk through the thought process step by step in subsequent sections. We
-come back to this flight delay problem in the sub-sections with title
-start with *Applied Example*.
+come back to this flight delay problem in the sub-sections with titles
+starting with *Applied Example*.
 
 (getting-data)=
 
@@ -195,12 +195,12 @@ start with *Applied Example*.
 
 Cooking a good dish is impossible for a chef without ingredients and
 challenging with poor quality ingredients. Likewise inference is
-impossible without data. challenging with poor quality data, and the
+impossible without data and challenging with poor quality data. The
 best statisticians dedicate a fair amount of time understanding the
-nuance and detail of their information. Unfortunately there is no one
-size fits all strategy for what data is available or how to collect it
-for every driving question. Considerations span topics from required
-precision needed, to cost, to ethics, to speed of collection. There are
+nuance and detail of their information. Unfortunately there is no 
+one-size-fits-all strategy for what data is available or how to collect it
+for every driving question. Considerations span topics from the
+precision required, to cost, to ethics, to speed of collection. There are
 however, some broad categories of data collection that we can consider,
 each with its pros and cons.
 
@@ -210,7 +210,7 @@ each with its pros and cons.
 
 In American history there is this folk idea of \"asking for your
 neighbors for a cup of sugar\", convenient for the times when you run
-out. For statistician the equivalent is Sample surveys, also known as
+out. For statistician the equivalent is sample surveys, also known as
 polling. The typical motivation of polling is to estimate a population
 parameter, $Y$, using a finite number of observations. Sample surveys
 also can include covariates, for example age, gender, nationality, to
@@ -292,8 +292,8 @@ the parameters of the distribution inclusion vector.
 
 Even if missing data is not explicitly modeled it is prudent to remain
 aware that your observed data is biased just due to the fact that it has
-been observed! When collecting data be sure not only pay attention to
-what is present, but consider what may not be present.
+been observed! When collecting data be sure to not only pay attention to
+what is present, but consider also what may not be present.
 
 (applied-example-collecting-airline-flight-delays-data)=
 
