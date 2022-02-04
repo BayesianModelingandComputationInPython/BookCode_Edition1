@@ -177,17 +177,17 @@ money. The airport CEO asks you to use your data abilities to answer the
 question, "Should we accept the new late fee structure or keep the old
 one?\". The airline CEO mentions how expensive this decision could be if
 it was made incorrectly and asks you to prepare a report regarding the
-potential financial affects. As experienced statistician you decide to
+potential financial effects. As experienced statistician you decide to
 quantify the underlying distribution of delays and use decision analysis
 to aid with the infrastructure investment choice. We believe an
 integrated End to End Bayesian analysis will provide a more complete
 understanding of future outcomes. You are able to justify the cost and
 complexity of model development as the financial risk of making a poor
-decision far outweights the time and cost to make a Bayesian model. If
+decision far outweighs the time and cost to make a Bayesian model. If
 you are not sure how we reached this conclusion do not worry, we will
 walk through the thought process step by step in subsequent sections. We
-come back to this flight delay problem in the sub-sections with title
-start with *Applied Example*.
+come back to this flight delay problem in the sub-sections with titles
+starting with *Applied Example*.
 
 (getting-data)=
 
@@ -195,12 +195,12 @@ start with *Applied Example*.
 
 Cooking a good dish is impossible for a chef without ingredients and
 challenging with poor quality ingredients. Likewise inference is
-impossible without data. challenging with poor quality data, and the
+impossible without data and challenging with poor quality data. The
 best statisticians dedicate a fair amount of time understanding the
-nuance and detail of their information. Unfortunately there is no one
-size fits all strategy for what data is available or how to collect it
-for every driving question. Considerations span topics from required
-precision needed, to cost, to ethics, to speed of collection. There are
+nuance and detail of their information. Unfortunately there is no 
+one-size-fits-all strategy for what data is available or how to collect it
+for every driving question. Considerations span topics from the
+precision required, to cost, to ethics, to speed of collection. There are
 however, some broad categories of data collection that we can consider,
 each with its pros and cons.
 
@@ -210,7 +210,7 @@ each with its pros and cons.
 
 In American history there is this folk idea of \"asking for your
 neighbors for a cup of sugar\", convenient for the times when you run
-out. For statistician the equivalent is Sample surveys, also known as
+out. For statistician the equivalent is sample surveys, also known as
 polling. The typical motivation of polling is to estimate a population
 parameter, $Y$, using a finite number of observations. Sample surveys
 also can include covariates, for example age, gender, nationality, to
@@ -292,8 +292,8 @@ the parameters of the distribution inclusion vector.
 
 Even if missing data is not explicitly modeled it is prudent to remain
 aware that your observed data is biased just due to the fact that it has
-been observed! When collecting data be sure not only pay attention to
-what is present, but consider what may not be present.
+been observed! When collecting data be sure to not only pay attention to
+what is present, but consider also what may not be present.
 
 (applied-example-collecting-airline-flight-delays-data)=
 
@@ -389,8 +389,8 @@ is not typically the goal of the first model. The goal of the first
 model is to express the simplest reasonable and computable model. We
 then use this simple model to inform our understanding, tweak the model,
 and rerun as shown in {numref}`fig:BayesianWorkflow`. We do this using
-numerous tools, diagnostics, and visualizations that we have seen
-through out this book.
+the numerous tools, diagnostics, and visualizations that we have seen
+throughout this book.
 
 ::: {admonition} Types of Statistical Models
 
@@ -403,7 +403,7 @@ design based approach where "sampling existing populations and of
 experimental design there is a different approach in which the
 probability calculations are based on the randomization used by the
 investigator in the planning phases of the investigation\". The
-fundamentals of Bayes formula has no opinion on which approach is used
+fundamentals of Bayes formula have no opinion on which approach is used
 and Bayesian methods can be used in both approaches. Our airline example
 is a model based approach, whereas the experimental model at the end of
 the chapter is a design based approach. For example, it can be argued
@@ -418,7 +418,7 @@ different situations.
 
 For our flight delay dilemma we decide to start the modeling journey by
 picking a likelihood for the observed flight delays. We take a moment to
-collect our detail our existing domain knowledge. In our dataset, delays
+collect in detail our existing domain knowledge. In our dataset, delays
 can be negative or positive valued. Positive valued means flight is
 late, negative valued means flight is early. We could make choice here
 to only model delays and ignore all early arrivals. However, we will
@@ -569,7 +569,7 @@ priors, or the structure of our model, to understand its effects and
 ultimately the informativeness of the chosen specification.
 
 There should be no illusion that the prior distribution or likelihood
-distributions are preordained, What is printed in this book is the
+distributions are preordained. What is printed in this book is the
 result of numerous trials and tweaking to find parameters that provided
 a sensible prior predictive distribution. When writing your own models
 expect that you should also iterate on the priors and likelihood before
@@ -964,10 +964,10 @@ with the Gumbel model. This does not imply our Normal model was useless,
 in fact quite the opposite. Developing multiple models helps build
 confidence in our selection of one, or a subset of models. It also does
 not mean that the Gumbel model is the true or even the best possible
-model, in fact we have evidence of it shortcomings. Thus, there still
+model, in fact we have evidence of it shortcomings. Thus, there is still
 room for improvement if we explore different likelihoods, collect more
 data, or make some other modification. What is important at this step is
-we are sufficiently convinced that the Gumbel model is the most
+that we are sufficiently convinced that the Gumbel model is the most
 "adequate\" model from all the reasonable models we have evaluated.
 
 (reward_functions)=
@@ -989,13 +989,13 @@ per rental and sum the total counts, effectively converting counts to
 revenue. Another example is to estimate a person's level of happiness if
 they are rained on, versus if they are dry. If we have a model and an
 estimate of whether it will rain or not (based on weather data), and we
-have a function that maps how wet or dry a person's clothes is to a
+have a function that maps how wet or dry a person's clothes are to a
 happiness value, we can map our weather estimate to an expected
 happiness estimate.
 
 Where reward functions become particularly useful is in the presence of
 a decision. By being able to estimate all future outcomes, and map those
-outcomes to expected reward, you are able to make the choice that is
+outcomes to expected rewards, you are able to make the choice that is
 likely to yield the maximum reward. An intuitive example is deciding to
 pack an umbrella in the morning. Carrying an umbrella is annoying, which
 can be considered a negative reward, but being wet from rain is a worse
@@ -1098,8 +1098,8 @@ structure we expect each late flight to provide 3930 dollars of revenue
 on average. We can also plot the distribution of late flight revenue per
 flight in {numref}`fig:Late_fee_current_structure_hist`.
 
-Recalling the cost structure proposed by the airline, If a flight is
-between 0 and 10 minutes late, the fee is 1,000 dollars. if the flight
+Recalling the cost structure proposed by the airline, if a flight is
+between 0 and 10 minutes late, the fee is 1,000 dollars. If the flight
 is between 10 and 300 minutes late the fee is 5,000 dollars, and if more
 than 100 minutes late the fee is 30,000 dollars. Assuming that the cost
 structure has no effect on the on time or late arrival of planes, you
@@ -1152,7 +1152,7 @@ paper, or on screens, does nothing. The conclusion portion of inference
 only matters when it changes or informs a decision, whether indirectly
 or directly. This will require some preparation, the amount of effort
 required should not be underestimated. In some situations this step
-takes more time than all the previous one combined. There is no specific
+takes more time than all the previous ones combined. There is no specific
 formulation here, what needs to be done depends heavily on the specific
 situation and audience, but we will cover the concepts in a high level
 to survey the landscape.
@@ -1193,9 +1193,9 @@ Schools, over and over again. The data is well understood and commonly
 available which make it a simple reference for those looking to share
 methods. The specific methods in which specific data is tagged,
 recognized, stored, and accessed will differ per situation, size,
-organization, as well as ethical and legality but is important to note
-this. Some examples are including the data in code version control or
-referencing a link to a dataset stored on a server.
+organization, as well as ethical and legal considerations but is
+important to note this. Some examples are including the data in code
+version control or referencing a link to a dataset stored on a server.
 
 The next is the modeling and analysis code, such as all the code seen
 throughout this book. Ideally this code would be versioned with a
@@ -1214,12 +1214,12 @@ libraries that are used for computation change rapidly. As we have seen,
 modern Bayesian methods rely at least on a PPL but that is just the tip
 of the iceberg. The operating system version as well as the hundreds of
 other software libraries that are used in conjunction all play a part in
-providing a result. When environments cannot be replicated one outcome
-is code that was working, now throws exceptions or errors and fails.
+providing a result. When environments cannot be replicated one possible
+outcome is that code that used to work, now throws exceptions or errors and fails.
 This outcome, while frustrating, is at least helpful in that the failure
 state is obvious. An even more dangerous but subtle issue is that the
 code still runs but the results are different. This can occur because
-the library may change, or the algorithm itself. For example, TFP may
+the libraries may change, or the algorithms themselves. For example, TFP may
 change the number of tuning samples or PyMC3 may refactor the sampler
 between one version and the next. No matter what the reason, even if the
 data and analysis code is the same, the two alone are insufficient to
@@ -1235,7 +1235,7 @@ virtual machines or containerization.
 One challenge in creating
 reproducible Bayesian workflow is the stochastic-ness in the pseudo
 random number generator being used in the algorithm. In general, your
-workflow should be robust that changing the seed to the pseudo random
+workflow should be robust so that changing the seed to the pseudo random
 number generator does not change your conclusion, but there are
 situations where you might want to fix the seed to get fully
 reproducible results. This is tricky as fixing the seed alone does not
@@ -1265,8 +1265,8 @@ reproducibility is yourself. Few things are worse than being asked to
 extend an analysis, or discovering a bug, only to realize your code will
 not run anymore. The secondary beneficiaries are your peers. Their
 ability to reproduce your work is the most immersive way to share your
-workflow and results. In short reproducible analyses both helps you and
-others build confidence in your prior results, and also helps future
+workflow and results. In short reproducible analyses both help you and
+others build confidence in your prior results, and also help future
 efforts extend the work.
 
 (understanding-the-audience)=
