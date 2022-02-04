@@ -569,7 +569,7 @@ priors, or the structure of our model, to understand its effects and
 ultimately the informativeness of the chosen specification.
 
 There should be no illusion that the prior distribution or likelihood
-distributions are preordained, What is printed in this book is the
+distributions are preordained. What is printed in this book is the
 result of numerous trials and tweaking to find parameters that provided
 a sensible prior predictive distribution. When writing your own models
 expect that you should also iterate on the priors and likelihood before
@@ -964,10 +964,10 @@ with the Gumbel model. This does not imply our Normal model was useless,
 in fact quite the opposite. Developing multiple models helps build
 confidence in our selection of one, or a subset of models. It also does
 not mean that the Gumbel model is the true or even the best possible
-model, in fact we have evidence of it shortcomings. Thus, there still
+model, in fact we have evidence of it shortcomings. Thus, there is still
 room for improvement if we explore different likelihoods, collect more
 data, or make some other modification. What is important at this step is
-we are sufficiently convinced that the Gumbel model is the most
+that we are sufficiently convinced that the Gumbel model is the most
 "adequate\" model from all the reasonable models we have evaluated.
 
 (reward_functions)=
@@ -989,13 +989,13 @@ per rental and sum the total counts, effectively converting counts to
 revenue. Another example is to estimate a person's level of happiness if
 they are rained on, versus if they are dry. If we have a model and an
 estimate of whether it will rain or not (based on weather data), and we
-have a function that maps how wet or dry a person's clothes is to a
+have a function that maps how wet or dry a person's clothes are to a
 happiness value, we can map our weather estimate to an expected
 happiness estimate.
 
 Where reward functions become particularly useful is in the presence of
 a decision. By being able to estimate all future outcomes, and map those
-outcomes to expected reward, you are able to make the choice that is
+outcomes to expected rewards, you are able to make the choice that is
 likely to yield the maximum reward. An intuitive example is deciding to
 pack an umbrella in the morning. Carrying an umbrella is annoying, which
 can be considered a negative reward, but being wet from rain is a worse
