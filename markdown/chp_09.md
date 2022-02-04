@@ -194,7 +194,7 @@ starting with *Applied Example*.
 ## Getting Data
 
 Cooking a good dish is impossible for a chef without ingredients and
-challenging with poor quality ingredients. Likewise inference is
+challenging with poor quality ingredients. Likewise, inference is
 impossible without data and challenging with poor quality data. The
 best statisticians dedicate a fair amount of time understanding the
 nuance and detail of their information. Unfortunately there is no 
