@@ -1098,8 +1098,8 @@ structure we expect each late flight to provide 3930 dollars of revenue
 on average. We can also plot the distribution of late flight revenue per
 flight in {numref}`fig:Late_fee_current_structure_hist`.
 
-Recalling the cost structure proposed by the airline, If a flight is
-between 0 and 10 minutes late, the fee is 1,000 dollars. if the flight
+Recalling the cost structure proposed by the airline, if a flight is
+between 0 and 10 minutes late, the fee is 1,000 dollars. If the flight
 is between 10 and 300 minutes late the fee is 5,000 dollars, and if more
 than 100 minutes late the fee is 30,000 dollars. Assuming that the cost
 structure has no effect on the on time or late arrival of planes, you
@@ -1152,7 +1152,7 @@ paper, or on screens, does nothing. The conclusion portion of inference
 only matters when it changes or informs a decision, whether indirectly
 or directly. This will require some preparation, the amount of effort
 required should not be underestimated. In some situations this step
-takes more time than all the previous one combined. There is no specific
+takes more time than all the previous ones combined. There is no specific
 formulation here, what needs to be done depends heavily on the specific
 situation and audience, but we will cover the concepts in a high level
 to survey the landscape.
@@ -1193,9 +1193,9 @@ Schools, over and over again. The data is well understood and commonly
 available which make it a simple reference for those looking to share
 methods. The specific methods in which specific data is tagged,
 recognized, stored, and accessed will differ per situation, size,
-organization, as well as ethical and legality but is important to note
-this. Some examples are including the data in code version control or
-referencing a link to a dataset stored on a server.
+organization, as well as ethical and legal considerations but is
+important to note this. Some examples are including the data in code
+version control or referencing a link to a dataset stored on a server.
 
 The next is the modeling and analysis code, such as all the code seen
 throughout this book. Ideally this code would be versioned with a
@@ -1214,12 +1214,12 @@ libraries that are used for computation change rapidly. As we have seen,
 modern Bayesian methods rely at least on a PPL but that is just the tip
 of the iceberg. The operating system version as well as the hundreds of
 other software libraries that are used in conjunction all play a part in
-providing a result. When environments cannot be replicated one outcome
-is code that was working, now throws exceptions or errors and fails.
+providing a result. When environments cannot be replicated one possible
+outcome is that code that used to work, now throws exceptions or errors and fails.
 This outcome, while frustrating, is at least helpful in that the failure
 state is obvious. An even more dangerous but subtle issue is that the
 code still runs but the results are different. This can occur because
-the library may change, or the algorithm itself. For example, TFP may
+the libraries may change, or the algorithms themselves. For example, TFP may
 change the number of tuning samples or PyMC3 may refactor the sampler
 between one version and the next. No matter what the reason, even if the
 data and analysis code is the same, the two alone are insufficient to
@@ -1235,7 +1235,7 @@ virtual machines or containerization.
 One challenge in creating
 reproducible Bayesian workflow is the stochastic-ness in the pseudo
 random number generator being used in the algorithm. In general, your
-workflow should be robust that changing the seed to the pseudo random
+workflow should be robust so that changing the seed to the pseudo random
 number generator does not change your conclusion, but there are
 situations where you might want to fix the seed to get fully
 reproducible results. This is tricky as fixing the seed alone does not
@@ -1265,8 +1265,8 @@ reproducibility is yourself. Few things are worse than being asked to
 extend an analysis, or discovering a bug, only to realize your code will
 not run anymore. The secondary beneficiaries are your peers. Their
 ability to reproduce your work is the most immersive way to share your
-workflow and results. In short reproducible analyses both helps you and
-others build confidence in your prior results, and also helps future
+workflow and results. In short reproducible analyses both help you and
+others build confidence in your prior results, and also help future
 efforts extend the work.
 
 (understanding-the-audience)=
