@@ -81,7 +81,7 @@
 | 282 | In short reproducible analyses both **helps** you and others build confidence in your prior results, and also **helps** future efforts extend the work. | In short reproducible analyses both **help** you and others build confidence in your prior results, and also **help** future efforts extend the work. | Thanks Ero Carrera |
 | 286 | ... a cross section area of .504 inches (**12.8mm**) by .057 inches (**1.27**)... | ... a cross section area of .504 inches (**12.8 mm**) by .057 inches (**1.27 mm**)... | Thanks Juan Orduz |
 | 297 | | Equation 10.1 and Code 10.4 updated for readability | Thanks ST John |
-| 299 | The Zen of Python detai the philosophy behind this idea of pythonic design... | The Zen of Python details the philosophy behind the idea of pythonic design ... | |
+| 299 | The Zen of Python **detai** the philosophy behind **this** idea of pythonic design... | The Zen of Python **details** the philosophy behind **the** idea of pythonic design ... | |
 | 318 | As you can see, there is a lot of **rooms** for... | As you can see, there is a lot of **room** for... |  |
 | 344 | ...will make the **skweness** independent... | ...will make the **skewness** independent... | Thanks Alihan Zihna |
 | 371 | ...a simple Python implementation in **Code block** | ...simple Python implementation in **Code Block** |  |
