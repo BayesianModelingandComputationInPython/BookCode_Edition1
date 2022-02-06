@@ -79,6 +79,8 @@
 | 282 | This can occur because the **library** may change, or the **algorithm itself**. | This can occur because the **libraries** may change, or the **algorithms themselves**. | Thanks Ero Carrera |
 | 282 | workflow should be robust that changing the seed | workflow should be robust **so** that changing the seed | Thanks Ero Carrera |
 | 282 | In short reproducible analyses both **helps** you and others build confidence in your prior results, and also **helps** future efforts extend the work. | In short reproducible analyses both **help** you and others build confidence in your prior results, and also **help** future efforts extend the work. | Thanks Ero Carrera |
+| 284 | which used a shaking needle gauge to highlight. | highlight **the uncertainty in the estimation of which candidate would ultimately win.** | Thanks ST John |
+| 284 | or the randomness of the **plinko** drops in **Matthew** Kay's | or the randomness of the **Plinko** drops in **Matthew** Kay's | |
 | 286 | ... a cross section area of .504 inches (**12.8mm**) by .057 inches (**1.27**)... | ... a cross section area of .504 inches (**12.8 mm**) by .057 inches (**1.27 mm**)... | Thanks Juan Orduz |
 | 297 | | Equation 10.1 and Code 10.4 updated for readability | Thanks ST John |
 | 299 | The Zen of Python **detai** the philosophy behind **this** idea of pythonic design... | The Zen of Python **details** the philosophy behind **the** idea of pythonic design ... | |
