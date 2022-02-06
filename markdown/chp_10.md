@@ -1965,8 +1965,8 @@ NumPyro already provides this functionality with
 
 [^6]: In terms of effective samples per second.
 
-[^7]: The Zen of Python detai the philosophy behind this idea of
-    pythonic design<https://www.python.org/dev/peps/pep-0020/>
+[^7]: The Zen of Python details the philosophy behind the idea of
+    pythonic design <https://www.python.org/dev/peps/pep-0020/>
 
 [^8]: <https://pymc-devs.medium.com/the-future-of-pymc3-or-theano-is-dead-long-live-theano-d8005f8a0e9b.>
     contains more details about the decision and future road map of

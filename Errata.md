@@ -30,6 +30,7 @@
 | 61 | When using a logarithmic scoring rule this is **equivalently** to **compute**: | When using a logarithmic scoring rule this is **equivalent** to **computing**: | Thanks Ero Carrera |
 | 61 | ...the computation of the weights **take** into account all models together. | ...the computation of the weights **takes** into account all models together. | Thanks Ero Carrera |
 | 61 | ...the weights computed with `az.compare(., method="stacking")`~~**,**~~ makes a lot of sense. | ...the weights computed with `az.compare(., method="stacking")` makes a lot of sense. | Thanks Ero Carrera |
+| 70 |  | Figure 3.3 updated to include vertical lines of empirical estimate | |
 | 71 | Take a moment to compare the estimate of the mean with the summary mean show**s**... | Take a moment to compare the estimate of the mean with the summary mean show**n**... | Thanks Sebastian |
 | 73 | ...the **thin** line is the interquartile range **from 25% to 75% of the posterior** and the **thick** line is the 94% Highest Density Interval | the **thick** line is the interquartile range and the **thin** line is the 94% Highest Density Interval | Thanks Jose Roberto Ayala Solares |
 | 75 | ... is the intercept only regression model **from** | is the intercept only regression model in **Code Block** |  |
@@ -79,8 +80,12 @@
 | 282 | This can occur because the **library** may change, or the **algorithm itself**. | This can occur because the **libraries** may change, or the **algorithms themselves**. | Thanks Ero Carrera |
 | 282 | workflow should be robust that changing the seed | workflow should be robust **so** that changing the seed | Thanks Ero Carrera |
 | 282 | In short reproducible analyses both **helps** you and others build confidence in your prior results, and also **helps** future efforts extend the work. | In short reproducible analyses both **help** you and others build confidence in your prior results, and also **help** future efforts extend the work. | Thanks Ero Carrera |
+| 284 | which used a shaking needle gauge to highlight. | highlight **the uncertainty in the estimation of which candidate would ultimately win.** | Thanks ST John |
+| 284 | or the randomness of the **plinko** drops in **Matthew** Kay's | or the randomness of the **Plinko** drops in **Matthew** Kay's | |
 | 286 | ... a cross section area of .504 inches (**12.8mm**) by .057 inches (**1.27**)... | ... a cross section area of .504 inches (**12.8 mm**) by .057 inches (**1.27 mm**)... | Thanks Juan Orduz |
+| 289 | ... In both the plots a value of 0 **seems** is relatively unlikely ... | ... In both the plots a value of 0 is relatively unlikely ... | |
 | 297 | | Equation 10.1 and Code 10.4 updated for readability | Thanks ST John |
+| 299 | The Zen of Python **detai** the philosophy behind **this** idea of pythonic design... | The Zen of Python **details** the philosophy behind **the** idea of pythonic design ... | |
 | 318 | As you can see, there is a lot of **rooms** for... | As you can see, there is a lot of **room** for... |  |
 | 344 | ...will make the **skweness** independent... | ...will make the **skewness** independent... | Thanks Alihan Zihna |
 | 371 | ...a simple Python implementation in **Code block** | ...simple Python implementation in **Code Block** |  |
