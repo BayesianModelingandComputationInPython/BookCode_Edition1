@@ -1689,7 +1689,7 @@ az.plot_posterior(trace,
 :name: fig:composite_difference_of_means
 :width: 8.00in
 Posterior Plot of difference of means and effect size including
-reference value at 0. In both the plots a value of 0 seems is relatively
+reference value at 0. In both the plots a value of 0 is relatively
 unlikely indicating there is both an effect and a difference.
 ```
 
