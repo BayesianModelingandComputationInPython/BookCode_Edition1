@@ -82,6 +82,7 @@
 | 284 | which used a shaking needle gauge to highlight. | highlight **the uncertainty in the estimation of which candidate would ultimately win.** | Thanks ST John |
 | 284 | or the randomness of the **plinko** drops in **Matthew** Kay's | or the randomness of the **Plinko** drops in **Matthew** Kay's | |
 | 286 | ... a cross section area of .504 inches (**12.8mm**) by .057 inches (**1.27**)... | ... a cross section area of .504 inches (**12.8 mm**) by .057 inches (**1.27 mm**)... | Thanks Juan Orduz |
+| 289 | ... In both the plots a value of 0 **seems** is relatively unlikely ... | In both the plots a value of 0 is relatively unlikely | |
 | 297 | | Equation 10.1 and Code 10.4 updated for readability | Thanks ST John |
 | 299 | The Zen of Python **detai** the philosophy behind **this** idea of pythonic design... | The Zen of Python **details** the philosophy behind **the** idea of pythonic design ... | |
 | 318 | As you can see, there is a lot of **rooms** for... | As you can see, there is a lot of **room** for... |  |
