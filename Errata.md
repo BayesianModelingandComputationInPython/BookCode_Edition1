@@ -33,6 +33,7 @@
 | 70 |  | Figure 3.3 updated to include vertical lines of empirical estimate | |
 | 71 | Take a moment to compare the estimate of the mean with the summary mean show**s**... | Take a moment to compare the estimate of the mean with the summary mean show**n**... | Thanks Sebastian |
 | 73 | ...the **thin** line is the interquartile range **from 25% to 75% of the posterior** and the **thick** line is the 94% Highest Density Interval | the **thick** line is the interquartile range and the **thin** line is the 94% Highest Density Interval | Thanks Jose Roberto Ayala Solares |
+| 73 | ... more **compostable** modeling and inference. | ... more **composable** modeling and inference. | |
 | 75 | ... is the intercept only regression model **from** | is the intercept only regression model in **Code Block** |  |
 | 77 | ...where the coefficients, also referred to as covariates, are represented by the parameter $\beta_i$... | ...where the coefficients, **also referred as parameters, are represented** with $\beta_i$. | Thanks Sebastian |
 | 78 | to parse the categorical information into a design matrix `mu = pd.get_dummies(penguins["species"]) @ μ`**.** where  | ...to parse the categorical information into a design matrix, **and then write** `mu = pd.get_dummies(penguins["species"]) @ μ`**,** where... | Thanks Sebastian |
