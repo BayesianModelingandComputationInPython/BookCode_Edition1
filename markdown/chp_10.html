@@ -696,21 +696,21 @@ transactions directly. As transactions are observed they are used fairly
 directly compute the posterior parameters.</p>
 <div class="math notranslate nohighlight" id="equation-eq-conjugate-beta-fraud">
 <span class="eqno">(10.1)<a class="headerlink" href="#equation-eq-conjugate-beta-fraud" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\begin{split}\begin{split}
-    \alpha_{post} &amp;= \alpha_{prior} + fraud\_observations \\
-    \beta_{post} &amp;=  \beta_{prior} + non\_fraud\_observations \\
-   % p(\theta)  &amp;= Beta(fraud\_prior, non\_fraud\_prior) \\
-    p(\theta \mid y)  &amp;= Beta(\alpha_{post}, \beta_{post}) \\
-    \mathop{\mathbb{E}}[p(\theta \mid y)] &amp;= \frac{\alpha_{post}}{\alpha_{post} + \beta_{post}}\end{split}\\\end{split}\end{aligned}\end{align} \]</div>
+    \alpha_\text{post} &amp;= \alpha_\text{prior} + \text{\texttt{fraud\_observations}} \\
+    \beta_\text{post} &amp;=  \beta_\text{prior} + \text{\texttt{non\_fraud\_observations}} \\
+   % p(\theta)  &amp;= \text{Beta}(fraud\_prior, non\_fraud\_prior) \\
+    p(\theta \mid y)  &amp;= \text{Beta}(\alpha_\text{post}, \beta_\text{post}) \\
+    \mathop{\mathbb{E}}[p(\theta \mid y)] &amp;= \frac{\alpha_\text{post}}{\alpha_\text{post} + \beta_\text{post}}\end{split}\\\end{split}\end{aligned}\end{align} \]</div>
 <p>She can then fairly trivially express these calculations in Python as
 shown in Code Block <a class="reference internal" href="#fraud-detector"><span class="std std-ref">fraud_detector</span></a>. No
 external libraries needed either, making this function quite easy to
 deploy.</p>
 <div class="literal-block-wrapper docutils container" id="fraud-detector">
 <div class="code-block-caption"><span class="caption-number">Listing 10.4 </span><span class="caption-text">fraud_detector</span><a class="headerlink" href="#fraud-detector" title="Permalink to this code">¶</a></div>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fraud_detector</span><span class="p">(</span><span class="n">obs_fraud</span><span class="p">,</span> <span class="n">obs_non_fraud</span><span class="p">,</span> <span class="n">fraud_prior</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">non_fraud_prior</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Conjugate beta binomial model for fraud detection&quot;&quot;&quot;</span>
-    <span class="n">expectation</span> <span class="o">=</span> <span class="p">(</span><span class="n">fraud_prior</span><span class="o">+</span><span class="n">observed_fraud</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span>
-        <span class="n">fraud_prior</span><span class="o">+</span><span class="n">observed_fraud</span><span class="o">+</span><span class="n">non_fraud_prior</span><span class="o">+</span><span class="n">obs_non_fraud</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fraud_detector</span><span class="p">(</span><span class="n">fraud_observations</span><span class="p">,</span> <span class="n">non_fraud_observations</span><span class="p">,</span> <span class="n">fraud_prior</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">non_fraud_prior</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Conjugate Beta Binomial model for fraud detection&quot;&quot;&quot;</span>
+    <span class="n">expectation</span> <span class="o">=</span> <span class="p">(</span><span class="n">fraud_prior</span> <span class="o">+</span> <span class="n">fraud_observations</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span>
+        <span class="n">fraud_prior</span> <span class="o">+</span> <span class="n">fraud_observations</span> <span class="o">+</span> <span class="n">non_fraud_prior</span> <span class="o">+</span> <span class="n">non_fraud_observations</span><span class="p">)</span>
     
     <span class="k">if</span> <span class="n">expectation</span> <span class="o">&gt;</span> <span class="mf">.5</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;suspend_card&quot;</span><span class="p">:</span><span class="kc">True</span><span class="p">}</span>
@@ -2179,8 +2179,8 @@ some of more prevalent posterior computation methods.</p>
 <dd><p>In terms of effective samples per second.</p>
 </dd>
 <dt class="label" id="id71"><span class="brackets"><a class="fn-backref" href="#id12">7</a></span></dt>
-<dd><p>The Zen of Python detai the philosophy behind this idea of
-pythonic design<a class="reference external" href="https://www.python.org/dev/peps/pep-0020/">https://www.python.org/dev/peps/pep-0020/</a></p>
+<dd><p>The Zen of Python details the philosophy behind the idea of
+pythonic design <a class="reference external" href="https://www.python.org/dev/peps/pep-0020/">https://www.python.org/dev/peps/pep-0020/</a></p>
 </dd>
 <dt class="label" id="id72"><span class="brackets"><a class="fn-backref" href="#id20">8</a></span></dt>
 <dd><p><a class="reference external" href="https://pymc-devs.medium.com/the-future-of-pymc3-or-theano-is-dead-long-live-theano-d8005f8a0e9b.">https://pymc-devs.medium.com/the-future-of-pymc3-or-theano-is-dead-long-live-theano-d8005f8a0e9b.</a>

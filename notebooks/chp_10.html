@@ -672,12 +672,10 @@ grad: 2.4000000953674316
 <h3>Code 10.4<a class="headerlink" href="#code-10-4" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fraud_detector</span><span class="p">(</span><span class="n">obs_fraud</span><span class="p">,</span> <span class="n">obs_non_fraud</span><span class="p">,</span> <span class="n">fraud_prior</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">non_fraud_prior</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Conjugate beta binomial model for fraud detection&quot;&quot;&quot;</span>
-    
-    <span class="n">alpha_post</span> <span class="o">=</span> <span class="n">fraud_prior</span> <span class="o">+</span> <span class="n">obs_fraud</span>
-    <span class="n">beta_post</span> <span class="o">=</span> <span class="n">fraud_prior</span> <span class="o">+</span> <span class="n">obs_fraud</span> <span class="o">+</span> <span class="n">non_fraud_prior</span> <span class="o">+</span> <span class="n">obs_non_fraud</span>
-    <span class="n">expectation</span> <span class="o">=</span> <span class="n">alpha_post</span> <span class="o">/</span> <span class="p">(</span><span class="n">alpha_post</span> <span class="o">+</span> <span class="n">beta_post</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fraud_detector</span><span class="p">(</span><span class="n">fraud_observations</span><span class="p">,</span> <span class="n">non_fraud_observations</span><span class="p">,</span> <span class="n">fraud_prior</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">non_fraud_prior</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Conjugate Beta Binomial model for fraud detection&quot;&quot;&quot;</span>
+    <span class="n">expectation</span> <span class="o">=</span> <span class="p">(</span><span class="n">fraud_prior</span> <span class="o">+</span> <span class="n">fraud_observations</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span>
+        <span class="n">fraud_prior</span> <span class="o">+</span> <span class="n">fraud_observations</span> <span class="o">+</span> <span class="n">non_fraud_prior</span> <span class="o">+</span> <span class="n">non_fraud_observations</span><span class="p">)</span>
     
     <span class="k">if</span> <span class="n">expectation</span> <span class="o">&gt;</span> <span class="mf">.5</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;suspend_card&quot;</span><span class="p">:</span><span class="kc">True</span><span class="p">}</span>

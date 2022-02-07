@@ -194,7 +194,7 @@ starting with *Applied Example*.
 ## Getting Data
 
 Cooking a good dish is impossible for a chef without ingredients and
-challenging with poor quality ingredients. Likewise inference is
+challenging with poor quality ingredients. Likewise, inference is
 impossible without data and challenging with poor quality data. The
 best statisticians dedicate a fair amount of time understanding the
 nuance and detail of their information. Unfortunately there is no 
@@ -1367,12 +1367,13 @@ generated in many visualization packages, including Matplotlib, which
 ArviZ utilizes for animated Posterior Predictive Checks. Notable
 examples of animation used in uncertainty communication are the New York
 Times Election Needle [^5], which used a shaking needle gauge to
-highlight . Another election example is Matthew Kay's Presidential
+highlight the uncertainty in the estimation of which candidate would ultimately win.
+Another election example is Matthew Kay's Presidential
 Plinko [^6]. Both of these visualizations used motion to show the
 estimated outcome of various United States election results and how it
 was generated. Most importantly both used animation give a sense of the
 uncertainty, from the shaking needle in the New York Times
-visualization, or the randomness of the plinko drops in Matthey Kay's
+visualization, or the randomness of the Plinko drops in Matthew Kay's
 example.
 
 Animations are able to display many images to show a changing state, and
@@ -1688,7 +1689,7 @@ az.plot_posterior(trace,
 :name: fig:composite_difference_of_means
 :width: 8.00in
 Posterior Plot of difference of means and effect size including
-reference value at 0. In both the plots a value of 0 seems is relatively
+reference value at 0. In both the plots a value of 0 is relatively
 unlikely indicating there is both an effect and a difference.
 ```
 
