@@ -1899,7 +1899,8 @@ Compare this to the TFP example, in particular noting the difference in
 primitives and syntax. What is similar? What is different?
 
 **10E7.** Specify the following computation in Theano
-```{math} 
+```{math}
+:label: eq:theano_comp
 \sin(\frac{1}{2}\pi x) + \exp(\log(x)) + \frac{(x-2)^2}{(x^2-4x+4)}
 ```
 

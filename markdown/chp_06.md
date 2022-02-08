@@ -2349,7 +2349,8 @@ explicit $\mathbf{B}$ constructed in NumPy or TensorFlow.
 rely on a key regression coefficient $\delta$. Rewrite the definition so
 that it has a similar form compare to other linear regression:
 
-```{math} 
+```{math}
+:label: eq:step_linear
 g(t) = \mathbf{A}^\prime \delta^\prime
 ```
 

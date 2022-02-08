@@ -1339,6 +1339,7 @@ boundary set at a probability of 0.5. For a model with an intercept and
 one covariate we have:
 
 ```{math}
+:label: decision_boundary
 \begin{split}
 0.5 &= logistic(\beta_{0} + \beta_{1}*x) \\
 logit(0.5) &= \beta_{0} + \beta_{1}*x \\
