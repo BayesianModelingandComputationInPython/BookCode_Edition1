@@ -232,6 +232,7 @@ To make this more explicit, we may want to express Bayes' theorem in a
 more nuanced way:
 
 ```{math}
+:label: eq:posterior_cond_model
 p(\boldsymbol{\theta} \mid  \boldsymbol{Y}, M) \propto  p(\boldsymbol{Y} \mid \boldsymbol{\theta}, M) \; p(\boldsymbol{\theta}, M)
 ```
 
@@ -252,6 +253,7 @@ If $f$ is the identity function $J$ will turn out be the mean [^7] of
 $\boldsymbol{\theta}.$:
 
 ```{math}
+:label: eq:posterior_expectation_mean
 \bar{\boldsymbol{\theta}} = \int_{\boldsymbol{\Theta}} \boldsymbol{\theta}  p(\boldsymbol{\theta} \mid \boldsymbol{Y})  d\boldsymbol{\theta}
 ```
 
@@ -820,6 +822,7 @@ As the name suggests, the conjugate prior for the binomial distribution
 is the Beta distribution:
 
 ```{math}
+:label: eq:beta_distribution
 p(\theta \mid Y) \propto \overbrace{\frac{N!}{y!(N-y)!} \theta^y (1 - \theta)^{N-y}}^{\text{binomial-likelihood}} \: \overbrace{\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\, \theta^{\alpha-1}(1-\theta)^{\beta-1}}^{\text{beta.prior}}
 ```
 
@@ -827,6 +830,7 @@ Because all the terms not depending on $\theta$ are constant we can drop
 them and we get:
 
 ```{math}
+:label: eq:beta_distribution_no_normalization
 p(\theta \mid Y) \propto \overbrace{\theta^y (1 - \theta)^{N-y}}^{\text{binomial-likelihood}} \: \overbrace{ \theta^{\alpha-1}(1-\theta)^{\beta-1}}^{\text{beta.prior}}
 ```
 
@@ -916,12 +920,14 @@ The mean of the Beta distribution is $\frac{\alpha}{\alpha + \beta}$,
 thus the prior mean is:
 
 ```{math}
+:label: beta_prior_mean
 \mathbb{E}[\theta]  = \frac{\alpha}{\alpha + \beta}
 ```
 
 and the posterior mean is:
 
 ```{math}
+:label: beta_posterior_mean
 :label: eq:beta_binom_mean
 \mathbb{E}[\theta \mid Y]  = \frac{\alpha + y}{\alpha + \beta + n}
 
@@ -1032,8 +1038,8 @@ Section {ref}`Jeffreys_prior_derivation`. If you
 want to skip those details here we have the JP for Alice:
 
 ```{math}
-\begin{aligned}
-p(\theta) \propto \theta^{-0.5} (1-\theta)^{-0.5}\end{aligned}
+:label: fig:alice_prior
+p(\theta) \propto \theta^{-0.5} (1-\theta)^{-0.5}
 ```
 
 This turns to be the kernel of the $\text{Beta}(0.5, 0.5)$ distribution.
@@ -1522,6 +1528,7 @@ exercise, try by expanding Equation {eq}`acceptance_prob`.
 model, identify the prior, the likelihood, and the posterior:
 
 ```{math}
+:label: eq:probabilistic_model
 \begin{split}
 Y \sim \mathcal{N}(\mu, \sigma)\\
 \mu \sim \mathcal{N}(0, 1)\\

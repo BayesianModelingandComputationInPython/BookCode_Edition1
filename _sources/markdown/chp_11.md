@@ -201,7 +201,8 @@ two worlds.
 Given two events $A$ and $B$ with $P(B) > 0$, the probability of $A$
 given $B$, which we write as $P(A \mid B)$ is defined as :
 
-```{math} 
+```{math}
+:label: eq:conditional_probability
 P(A \mid B) = \frac{P(A, B)}{P(B)}
 ```
 
@@ -320,7 +321,7 @@ We could also define another random variable $C$ with sample space
 $\{\text{red}, \text{green}, \text{blue}\}$. We could map the sample
 space to $\mathbb{R}$ in the following way:
 
-```{math} 
+```{math}
 \begin{aligned}
 C(\text{red})\; = 0 \\
 C(\text{green}) = 1 \\
@@ -505,7 +506,8 @@ $p \in [0, 1]$. Using statistical notation we can write
 $X \sim Bin(n, p)$ to mean that $X$ has the Binomial distribution with
 parameters $n$ and $p$, with the PMF being:
 
-```{math} 
+```{math}
+:label: eq:binomial_pmf
 P(X = x) = \frac{n!}{x!(n-x)!}p^x(1-p)^{n-x}
 ```
 
@@ -621,7 +623,8 @@ larger than 1, as is not the probability value but a probability
 density. To obtain a probability from a PDF instead we must integrate
 over some interval:
 
-```{math} 
+```{math}
+:label: eq:pdf_to_prob
 P(a < X < b) =  \int_a^b pdf(x) dx
 ```
 
@@ -686,7 +689,8 @@ example of continuous random variables with their PDF and CDF.
 A continuous random variable is said to have a Uniform distribution on
 the interval $(a, b)$ if its PDF is:
 
-```{math} 
+```{math}
+:label: eq:uniform_pdf
 p(x \mid a,b)=\begin{cases} \frac{1}{b-a} & if a \le x \le b \\ 0 &  \text{otherwise} \end{cases}
 ```
 
@@ -751,7 +755,8 @@ distributed population when the sample size is small [^12]. In Bayesian
 statistics, a common use case is to generate models that are robust
 against aberrant data as we discussed in Section {ref}`robust_regression`.
 
-```{math} 
+```{math}
+:label: eq:student_t_pdf
 p (x \mid \nu, \mu, \sigma) = \frac {\Gamma (\frac {\nu + 1} {2})} {\Gamma (\frac{\nu} {2}) \sqrt {\pi \nu} \sigma} \left (1+ \frac{1}{\nu} \left (\frac {x- \mu} {\sigma} \right)^2 \right)^{-\frac{\nu + 1}{2}}
 ```
 
@@ -799,7 +804,8 @@ The Beta distribution is defined in the interval $[0, 1]$. It can be
 used to model the behavior of random variables limited to a finite
 interval, for example, modeling proportions or percentages.
 
-```{math} 
+```{math}
+:label: eq:beta_pdf
 p (x \mid \alpha, \beta) = \frac {\Gamma (\alpha + \beta)} {\Gamma(\alpha) \Gamma (\beta)} \, x^{\alpha-1} (1 -x)^{\beta-1}
 ```
 
@@ -847,7 +853,8 @@ the model after we have conditioned the model on observed data.
 
 The joint PMF is given by
 
-```{math} 
+```{math}
+:label: eq:joint_pmf
 p_{X,Y}(x, y) = P(X = x, Y = y)
 ```
 
@@ -856,14 +863,15 @@ to include $n$ terms. Similarly to univariate PMFs valid joint PMFs must
 be nonnegative and sum to 1, where the sum is taken over all possible
 values.
 
-```{math} 
+```{math}
+:label: eq:joint_pmf_sum1
 \sum_x \sum_y P(X=x, Y=y) = 1
 ```
 
 In a similar way the joint CDF of $X$ and $Y$ is
 
 ```{math} 
-:label: eq:join_cdf
+:label: eq:joint_cdf
 F_{X,Y}(x, y) = P(X \le x, Y \le y)
 
 ```
@@ -871,7 +879,8 @@ F_{X,Y}(x, y) = P(X \le x, Y \le y)
 Given the joint distribution of $X$ and $Y$, we can get the distribution
 of $X$ by summing over all the possible values of $Y$:
 
-```{math} 
+```{math}
+:label: eq:joint_to_marginal
 P(X=x) = \sum_y P(X=x, Y=y)
 ```
 
@@ -923,7 +932,7 @@ as many conditional PMF of $x$ as values of $y$ and vice versa. We are
 just highlighting one possibility.
 ```
 
-We define continuous joint CDFs as in Equation {eq}`eq:join_cdf` the
+We define continuous joint CDFs as in Equation {eq}`eq:joint_cdf` the
 same as with discrete variables and the joint PDFs as the derivative of
 the CDFs with respect to $x$ and $y$. We require valid joint PDFs to be
 nonnegative and integrate to 1. For continuous variables we can
@@ -931,7 +940,8 @@ marginalize variables out in a similar fashion we did for discrete ones,
 with the difference that instead of a sum we need to compute an
 integral.
 
-```{math} 
+```{math}
+:label: eq:marginal_pdf
 pdf_X(x) = \int pdf_{X,Y} (x, y)dy
 ```
 
@@ -991,30 +1001,35 @@ Y = F_X (X)
 
 We can see this is true as follows, by the definition of the CDF of $Y$
 
-```{math} 
+```{math}
+:label: eq:pit1
 F_Y (y) = P(Y \leq y)
 ```
 
 Replacing Equation {eq}`eq:pit` in the previous one
 
-```{math} 
+```{math}
+:label: eq:pit2
 P(F_X (X) \leq y) \\
 ```
 
 Taking the inverse of $F_X$ to both sides of the inequality
-```{math} 
+```{math}
+:label: eq:pit3
 P(X \leq F^{-1}_X (y)) \\
 ```
 
 By the definition of CDF
-```{math} 
+```{math}
+:label: eq:pit4
 F_X (F^{-1}_X (y))
 ```
 
 Simplifying, we get the CDF of a standard Uniform distribution
 $\mathcal{U}$(0, 1).
 
-```{math} 
+```{math}
+:label: eq:pit5
 F_Y(y) = y
 ```
 
@@ -1078,7 +1093,8 @@ The expectation is a single number summarizing the center of mass of a
 distribution. For example, if $X$ is a discrete random variable, then we
 can compute its expectation as:
 
-```{math} 
+```{math}
+:label: eq:expectation
 \mathbb{E}(X) = \sum_x x P(X = x)
 ```
 
@@ -1087,7 +1103,8 @@ or dispersion, of a distribution, for example, to represent uncertainty
 around a point estimate like the mean. We can do this with the variance,
 which itself is also an expectation:
 
-```{math} 
+```{math}
+:label: eq:var_as_expectation
 \mathbb{V}(X) = \mathbb{E}(X - \mathbb{E}X)^2 = \mathbb{E}(X^2 ) - (\mathbb{E}X)^2
 ```
 
@@ -1106,26 +1123,30 @@ theoretical mathematical objects.
 
 Expectation is linear, meaning that:
 
-```{math} 
+```{math}
+:label: eq:expectation_linear
 \mathbb{E}(cX) = c\mathbb{E}(X)
 ```
 
 where $c$ is a constant and
 
-```{math} 
+```{math}
+:label: eq:expectation_sums
 \mathbb{E}(X + Y) = \mathbb{E}(X) + \mathbb{E}(Y)
 ```
 
 which are true even in the case that $X$ and $Y$ are dependent. Instead,
 the variance is not linear:
 
-```{math} 
+```{math}
+:label: eq:expectation_varc
 \mathbb{V}(cX) = c^2\mathbb{V}(X)
 ```
 
 and in general:
 
-```{math} 
+```{math}
+:label: eq:expectation_ineq
 \mathbb{V}(X + Y) \neq \mathbb{V}(X) + \mathbb{V}(Y)
 ```
 
@@ -1138,7 +1159,8 @@ moment, the skew, tells us about the asymmetry of a distribution. The
 skewness of a random variable $X$ with mean $\mu$ and variance
 $\sigma^2$ is the third (standardized moment) of $X$:
 
-```{math} 
+```{math}
+:label: eq:skewness
 \text{skew}(X) = \mathbb{E}\left(\frac{X -\mu}{\sigma}\right)^3
 ```
 
@@ -1220,7 +1242,8 @@ p_Y(y) = p_X(x) \left| \frac{dx}{dy} \right|
 We can see this is true as follows. Let $g$ be strictly increasing, then
 the CDF of $Y$ is:
 
-```{math} 
+```{math}
+:label: eq:changeofvariable_proof0
 \begin{split}
    F_Y(y) =& P(Y \le y) \\
           =& P(g(X) \le y) \\
@@ -1233,7 +1256,8 @@ the CDF of $Y$ is:
 and then by the chain rule, the PDF of $Y$ can be computed from the PDF
 of $X$ as:
 
-```{math} 
+```{math}
+:label: eq:changeofvariable_proof1
 p_Y(y) = p_X(x) \frac{dx}{dy}
 ```
 
@@ -1254,7 +1278,8 @@ need to properly take into account these deformations when computing $Y$
 from the known PDF of $X$. Slightly rewriting Equation
 {eq}`eq:changeofvariable` like below also helps:
 
-```{math} 
+```{math}
+:label: eq:changeofvariable2
 p_Y(y)dy = p_X(x)dx
 ```
 
@@ -1433,7 +1458,7 @@ and, for example, the transition matrix of example B in
 ```
 -->
 
-```{math} 
+```{math}
 \begin{bmatrix}
 0 & 0 & 1 & 0 & 0 & 0 & 0 \\
 1 & 0 & 0 & 1 & 0 & 0 & 0 \\
@@ -1609,7 +1634,8 @@ of $S$ and set $k=1$. Notice that the multiplicity $W$ from Boltzmann's
 version is the total number of ways in which different outcomes can
 possibly occur:
 
-```{math} 
+```{math}
+:label: eq:degeneracy
 W = \frac{N!}{n_1!n_2! \cdots n_t!}
 ```
 
@@ -1617,19 +1643,22 @@ You can think of this as rolling a t-sided die $N$ times, where $n_i$ is
 the number of times we obtain side $i$. As $N$ is large we can use
 Stirling's approximation $x! \approx (\frac{x}{e})^x$.
 
-```{math} 
+```{math}
+:label: eq:Stirling0
 W =  \frac{N^N}{n_1^{n_1} n_2^{n_2} \cdots n_t^{n_t}} e^{(n_1 n_2 \cdots n_t-N)}
 ```
 
 noticing that $p_i = \frac{n_i}{N}$ we can write:
 
-```{math} 
+```{math}
+:label: eq:p_as_frac
 W = \frac{1}{p_1^{n_1} p_2^{n_2} \cdots p_t^{n_t}}
 ```
 
 And finally by taking the logarithm we obtain
 
-```{math} 
+```{math}
+:label: eq:entropy_W
 \log W = -\sum_{i}^n p_i \log{p_i}
 ```
 
@@ -1730,27 +1759,31 @@ log probabilities when using $q$ to approximate $p$. Because the events
 appears to us according to $p$ we need to compute the expectation with
 respect to $p$. For discrete distributions we have:
 
-```{math} 
+```{math}
+:label: eq:kl_divergence_discrete
 \mathbb{KL}(p \parallel q) = \sum_{i}^n p_i (\log{p_i} - \log{q_i})
 ```
 
 Using logarithmic properties we can write this into probably the most
 common way to represent KL divergence:
 
-```{math} 
+```{math}
+:label: eq:kl_divergence_log
 \mathbb{KL}(p \parallel q)  = \sum_{i}^n p_i \log{\frac{p_i}{q_i}}
 ```
 
 We can also arrange the term and write the $\mathbb{KL}(p \parallel q)$
 as:
 
-```{math} 
+```{math}
+:label: eq:kl_divergence_log_dif
 \mathbb{KL}(p \parallel q) = - \sum_{i}^n p_i (\log{q_i} - \log{p_i})
 ```
 
 and when we expand the above rearrangement we find that:
 
-```{math} 
+```{math}
+:label: eq:kl_divergence_cross_entropy
 \mathbb{KL}(p \parallel q) =  \overbrace{-\sum_{i}^n p_i \log{q_i}}^{H(p, q)} -  \overbrace{\left(-\sum_{i}^n p_i \log{p_i}\right)}^{H(p)}
 ```
 
@@ -1760,7 +1793,8 @@ evaluated according to the values of $p$.
 
 Reordering above we obtain:
 
-```{math} 
+```{math}
+:label: eq:cross_entropy
 H(p, q) = H(p) + D_\text{KL}(p \parallel q)
 ```
 
@@ -1796,7 +1830,8 @@ necessarily the same as $\mathbb{KL}(q \parallel p)$. Second, we have
 many white cells. They represent $\infty$ values. The definition of the
 KL divergence uses the following conventions {cite:p}`Cover_Thomas`:
 
-```{math} 
+```{math}
+:label: eq:kl_divergence_conventions
 0 \log \frac{0}{0} = 0, \quad
 0 \log \frac{0}{q(\boldsymbol{x})} = 0, \quad
 p(\boldsymbol{x}) \log \frac{p(\boldsymbol{x})}{0} = \infty
@@ -1818,7 +1853,8 @@ Let us assume we have $k$ models posteriors
 $\{q_{M_1}, q_{M_2}, \cdots q_{M_k}\}$, let further assume we know the
 *true* model $M_0$ then we can compute:
 
-```{math} 
+```{math}
+:label: eq:kl_divergence_log_score
 \begin{split}
         \mathbb{KL}(p_{M_0} \parallel q_{M_1}) =&\; \mathbb{E}[\log{p_{M_0}}] - \mathbb{E}[\log{q_{M_1}}] \\
         \mathbb{KL}(p_{M_0} \parallel q_{M_2}) =&\; \mathbb{E}[\log{p_{M_0}}] - \mathbb{E}[\log{q_{M_2}}] \\
@@ -1847,7 +1883,8 @@ the model fits the data and the penalization term $p_{AIC}$ to account
 for the fact that we use the same data to fit the model and to evaluate
 the model.
 
-```{math} 
+```{math}
+:label: eq:aic
 AIC = -2 \sum_{i}^{n} \log p(y_i \mid \hat{\theta}_{mle}) + 2 p_{AIC}
 ```
 
@@ -1935,7 +1972,7 @@ computation {cite:p}`vehtari_practical_2017, gabry_visualization_2017`.
 Under LOO-CV the expected log pointwise predictive density for a new
 dataset is:
 
-```{math} 
+```{math}
 \text{ELPD}_\text{LOO-CV} = \sum_{i=1}^{n} \log
     \int \ p(y_i \mid \boldsymbol{\theta}) \; p(\boldsymbol{\theta} \mid y_{-i}) d\boldsymbol{\theta}
     \tag{\ref{eq:elpd_loo_cv}}
@@ -2021,7 +2058,8 @@ posterior distribution. In order to evaluate the model we want samples
 from the leave-one-out posterior distribution, thus the importance
 weights we want to compute are:
 
-```{math} 
+```{math}
+:label: eq:loocv_weights
 w_i^j = \frac{p(\theta^j \mid y{-i} )}{p(\theta^j \mid y)} \propto \frac{1}{p(y_i \mid \theta^j)}
 ```
 
@@ -2054,7 +2092,7 @@ Recall from Chapter [1](chap1), for the one-dimensional case JP
 for $\theta$ is defined as:
 
 ```{math}
-p(\theta) \propto \sqrt{I(\theta)}   
+p(\theta) \propto \sqrt{I(\theta)}
 ```
 
 where $I(\theta)$ is the Fisher information:
@@ -2083,13 +2121,15 @@ depend on $\theta$.
 To compute the Fisher information we need to take the logarithm of the
 likelihood:
 
-```{math} 
+```{math}
+:label: eq:JP_0
 \ell = \log(p(Y \mid \theta)) \propto y \log(\theta) + (n-y) \log(1-\theta)
 ```
 
 And then compute the second derivative:
 
-```{math} 
+```{math}
+:label: eq:JP_1
 \begin{aligned}
 \begin{split}
 \frac{d \ell}{d\theta} &= \frac{y}{\theta} - \frac{n-y}{1-\theta} \\
@@ -2100,37 +2140,42 @@ And then compute the second derivative:
 The Fisher information is the expected value of the second derivative of
 the likelihood, then:
 
-```{math} 
+```{math}
+:label: eq:JP_2
 I(\theta) = - \mathbb{E}_{Y}\left[-\frac{y}{\theta^{2}} + \frac{n-y}{ (1-\theta)^{2}} \right]
 ```
 
 As $\mathbb{E}[y] = n\theta$, we can write:
 
-```{math} 
+```{math}
+:label: eq:JP_3
 I(\theta)= \frac{n\theta}{\theta^{2}} - \frac{n - n \theta}{(1-\theta)^{2}}
 ```
 
 which we can rewrite as:
 
-```{math} 
+```{math}
+:label: eq:JP_4
 I(\theta)= \frac{n}{\theta} - \frac{n (1 -\theta)}{(1-\theta)^{2}} = \frac{n}{\theta} - \frac{n}{(1-\theta)}
 ```
 
 We can express these fractions in terms of a common denominator,
 
-```{math} 
+```{math}
+:label: eq:JP_5
 I(\theta)= n \left[ \frac{1 - \theta}{\theta (1 - \theta)} - \frac{\theta}{\theta (1-\theta)}\right]
 ```
 
 By regrouping:
 
-```{math} 
+```{math}
+:label: eq:JP_6
 I(\theta) = n \frac{1}{\theta (1-\theta)}
 ```
 
 If we omit $n$ then we can write:
 
-```{math} 
+```{math}
 :label: eq:fisher_info
 I(\theta) \propto \frac{1}{\theta (1-\theta)} = \theta^{-1} (1-\theta)^{-1}
 
@@ -2156,13 +2201,15 @@ likelihood in terms the odds $\kappa$. We begin by replacing
 $\theta = \frac{\kappa}{\kappa + 1}$ in expression
 {eq}`eq:binomial_kernel`:
 
-```{math} 
+```{math}
+:label: eq:JP_7
 p(Y \mid \kappa) \propto \left({\frac{\kappa}{\kappa + 1}}\right)^{y} \left(1-{\frac{\kappa}{\kappa +1}}\right)^{n-y}
 ```
 
 Which can also be written as:
 
-```{math} 
+```{math}
+:label: eq:JP_8
 p(Y \mid \kappa) \propto \kappa^y (\kappa + 1)^{-y} (\kappa +1)^{-n + y}
 ```
 
@@ -2176,13 +2223,15 @@ p(Y \mid \kappa) \propto \kappa^y (\kappa + 1)^{-n}
 
 Now we need to take the logarithm:
 
-```{math} 
+```{math}
+:label: eq:JP_9
 \ell = \log(p(Y \mid \kappa)) \propto y \log{\kappa} -n \log{(\kappa + 1)}
 ```
 
 we then compute the second derivative:
 
-```{math} 
+```{math}
+:label: eq:JP_10
 \begin{aligned}
 \begin{split}
 \frac{d \ell}{d{\kappa}} &= \frac{y}{\kappa} - \frac{n}{\kappa + 1} \\
@@ -2193,32 +2242,37 @@ we then compute the second derivative:
 The Fisher information is the expected value of the second derivative of
 the likelihood, then:
 
-```{math} 
+```{math}
+:label: eq:JP_11
 I(\kappa) = - \mathbb{E}_Y\left[-\frac{y}{\kappa^2} + \frac{n}{ (\kappa+1)^2} \right]
 ```
 
 As $\mathbb{E}[y] = n \theta = n \frac{\kappa}{\kappa + 1}$, we can
 write:
 
-```{math} 
+```{math}
+:label: eq:JP_12
 I(\kappa) = \frac{n}{\kappa (\kappa + 1)} - \frac{n}{(\kappa + 1)^2}
 ```
 
 We can express these fractions in terms of a common denominator,
 
-```{math} 
+```{math}
+:label: eq:JP_13
 I(\kappa) = \frac{n (\kappa + 1)}{\kappa (\kappa + 1)^2} - \frac{n \kappa}{\kappa (\kappa + 1)^2}
 ```
 
 Then we combine into a single fraction
 
-```{math} 
+```{math}
+:label: eq:JP_14
 I(\kappa) = \frac{n (\kappa + 1) - n \kappa}{\kappa (\kappa + 1)^2}
 ```
 
 We then distribute $n$ over $(\kappa + 1)$ and we simplify:
 
-```{math} 
+```{math}
+:label: eq:JP_15
 I(\kappa) = \frac{n}{\kappa (\kappa + 1)^2}
 ```
 
@@ -2312,13 +2366,15 @@ to indicate we are doing something right by being very Bayesian.
 
 If we expand the posterior term we can write:
 
-```{math} 
+```{math}
+:label: eq:harmonic_mean_approx1
 \mathbb{E} \left[\frac{1}{p(Y \mid \boldsymbol{\theta})}\right] = \int_{\boldsymbol{\Theta}} \frac{1}{p(Y \mid \boldsymbol{\theta})} \frac{{p(Y \mid \boldsymbol{\theta})} p(\theta)}{p(Y)} d\boldsymbol{\theta}
 ```
 
 which we can simplify into:
 
-```{math} 
+```{math}
+:label: eq:harmonic_mean_approx2
 \mathbb{E} \left[\frac{1}{p(Y \mid \boldsymbol{\theta})}\right] =  \frac{1}{p(Y)} \underbrace{\int_{\boldsymbol{\Theta}} p(\boldsymbol{\theta}) d\boldsymbol{\boldsymbol{\theta}}}_{=1} = \frac{1}{p(Y)}
 ```
 
@@ -2395,7 +2451,8 @@ crucial during model comparison {cite:p}`Gronau2017, Navarro2020, Schad2021`.
 To better understand why let us write Bayes' theorem in a way that
 explicitly shows that our inferences are model dependent:
 
-```{math} 
+```{math}
+:label: eq:bayes_theorem_M
 p(\boldsymbol{\theta} \mid Y, M) = {\frac {p(Y \mid \boldsymbol{\theta}, M)\; p(\boldsymbol{\theta} \mid M)}{p(Y \mid M)}}
 ```
 
@@ -2409,7 +2466,7 @@ marginal likelihood is perfectly justified from Bayes theorem under the
 assumption of a discrete Uniform prior distribution for the $k$ models
 under comparison.
 
-```{math} 
+```{math}
 :label: eq:posterior_model
 p(M \mid Y) \propto p(Y \mid M)\; p(M)
 
@@ -2425,7 +2482,8 @@ As the value of $p(Y \mid M_k)$ does not tell us anything by-itself, in
 practice people usually compute the ratio of two marginal likelihoods.
 This ratio is called Bayes factor:
 
-```{math} 
+```{math}
+:label: eq:bayes_factor
 BF = \frac{p(Y \mid M_0)}{p(Y \mid M_1)}
 ```
 
@@ -2591,13 +2649,15 @@ points inside the circle and the total points. If the square has side
 $2R$, it area will be $(2R)^2$ and the circle inscribe it inside of the
 square will have area $\pi R^2$. The we have that:
 
-```{math} 
+```{math}
+:label: eq:circ_mc
 \frac{\text{inside}}{N} \propto \frac{\pi R^2}{(2R)^2}
 ```
 
 By simplifying and rearranging we get that we can approximate $\pi$ as:
 
-```{math} 
+```{math}
+:label: eq:pi_mc
 \hat \pi = 4 \frac{\text{Count}_{inside}}{N}
 ```
 
@@ -2808,14 +2868,14 @@ and reject the others. As we saw in Chapter [1](chap1). The
 probability of accepting a new proposal is:
 
 ```{math}
-:label: eq:acceptance_prob
 p_a (x_{i + 1} \mid x_i) = \min \left (1, \frac{p(x_{i + 1}) \; 
 q(x_i \mid x_{i + 1})} {p(x_i) \; q (x_{i + 1} \mid x_i)} \right)
 ```
 
 Let us rewrite this in a shorter form, for easier manipulation.
 
-```{math} 
+```{math}
+:label: eq:acceptance_prob1
 a_{ij} = \min \left (1, \frac{p_j q_{ji}}{{p_i q_{ij}}} \right)
 ```
 
@@ -2856,38 +2916,44 @@ a_{ij} = \frac{p_j q_{ji}}{p_i q_{ij}}
 
 and also
 
-```{math} 
+```{math}
+:label: eq:acceptance_ji
 a_{ji} = 1
 ```
 
 Using Equation {eq}`eq:transition`, we have
 
-```{math} 
+```{math}
+:label: eq:transition2
 p_i t_{ij} = p_i q_{ij} a_{ij}
 ```
 
 replacing $a_{ij}$ in Equation {eq}`eq:acceptance_ij`
 
-```{math} 
+```{math}
+:label: eq:transition3
 p_i t_{ij} = p_i q_{ij} \frac{p_j q_{ji}}{p_i q_{ij}}
 ```
 
 simplifying above we get:
 
-```{math} 
+```{math}
+:label: eq:transition4
 p_i t_{ij} = p_j q_{ji}
 ```
 
 Because $a_{ji} = 1$ we can include it without changing the validity of
 the equation.
 
-```{math} 
+```{math}
+:label: eq:transition5
 p_i t_{ij} = p_j q_{ji} a_{ji}
 ```
 
 which finally we get that
 
-```{math} 
+```{math}
+:label: eq:transition6
 p_i t_{ij} = p_j t_{ji}
 ```
 
@@ -2955,7 +3021,8 @@ We will assume the total energy preserves, meaning that if the system
 gains kinetic energy then is because it has lost the same amount of
 potential energy. We can write the Hamiltonian of such a systems as:
 
-```{math} 
+```{math}
+:label: eq:hamiltonian
 H(\mathbf{q}, \mathbf{p})  = K(\mathbf{p}, \mathbf{q}) + V(\mathbf{q})
 ```
 
@@ -2973,7 +3040,8 @@ p(\mathbf{q}, \mathbf{p}) = e^{-H(\mathbf{q}, \mathbf{p})}
 To simulate such a systems we need to solve the so called Hamiltonian
 equations:
 
-```{math} 
+```{math}
+:label: eq:hamiltonian_equations
 \begin{aligned}
 \frac{d \mathbf{q}}{dt} =& \quad \frac{\partial H}{\partial \mathbf{p}} = \frac{\partial K}{\partial \mathbf{p}} + \frac{\partial V}{\partial \mathbf{p}} \\
 \frac{d \mathbf{p}}{dt} =& -\frac{\partial H}{\partial \mathbf{q}}= -\frac{\partial K}{\partial \mathbf{q}} - \frac{\partial V}{\partial \mathbf{q}}\end{aligned}
@@ -3002,7 +3070,8 @@ auxiliary variable and go back to our problem, sampling the posterior.
 If we replace Equation {eq}`eq:auxiliary` in Equation {eq}`eq:canonical`
 we got:
 
-```{math} 
+```{math}
+:label: eq:hamiltonian_KV
 H(\mathbf{q}, \mathbf{p}) = \overbrace{-\log p(\mathbf{p} \mid \mathbf{q})}^{K(\mathbf{p}, \mathbf{q})} \overbrace{- \log p(\mathbf{q})}^{ + V(\mathbf{q})}
 ```
 
@@ -3011,7 +3080,8 @@ by the $p(\mathbf{q})$ the density function of the target posterior
 distribution, and we are free to choose the kinetic energy. If we choose
 it to be Gaussian, and drop the normalization constant, we have:
 
-```{math} 
+```{math}
+:label: eq:kinetic_energy
 K(\mathbf{p}, \mathbf{q}) = \frac{1}{2}\mathbf{p}^T M^{-1}\mathbf{p} + \log |M|
 ```
 
@@ -3021,25 +3091,29 @@ Carlo literature). And if we choose $M = I$, i.e. the identity matrix
 which is $n \times n$ square matrix with ones on the main diagonal and
 zeros elsewhere, we have:
 
-```{math} 
+```{math}
+:label: eq:kinetic_energy2
 K(\mathbf{p}, \mathbf{q}) = \frac{1}{2}\mathbf{p}^T \mathbf{p}
 ```
 
 This makes calculations easier as now
 
-```{math} 
+```{math}
+:label: eq:kinetic_momentum
 \frac{\partial K}{\partial \mathbf{p}} = \mathbf{p}
 ```
 
 and
 
-```{math} 
+```{math}
+:label: eq:kinetic_position
 \frac{\partial K}{\partial \mathbf{q}} = \mathbf{0}
 ```
 
 We can then simplify Hamilton's equations to:
 
-```{math} 
+```{math}
+:label: eq:hamiltonian_equations2
 \begin{aligned}
 \frac{d \mathbf{q}}{dt} =& \mathbf{p} \\
 \frac{d \mathbf{p}}{dt} =& - \frac{\partial V}{\partial \mathbf{q}}\end{aligned}
@@ -3249,7 +3323,8 @@ Sequential Monte Carlo {cite:p}`Chopin2020`.
 
 First note that we can write the posterior in the following way:
 
-```{math} 
+```{math}
+:label: eq:powered_posterior
 p(\boldsymbol{\theta} \mid Y)_{\beta}  \propto 
     p(Y \mid \boldsymbol{\theta})^{\beta} \; p(\boldsymbol{\theta})
 ```
@@ -3352,7 +3427,8 @@ However, this objective is hard to compute because it requires the
 marginal likelihood of $p(Y)$. To see that let us expand Equation
 {eq}`eq:kl_divergence2`:
 
-```{math} 
+```{math}
+:label: eq:kl_divergence2_expanded
 \begin{split}
     \mathbb{KL}(q(\boldsymbol{\theta}) \parallel p(\boldsymbol{\theta} \mid Y)) &= \mathbb{E}[\log{q(\boldsymbol{\theta})}] - \mathbb{E}[\log{p(\boldsymbol{\theta} \mid Y)}] \\
    &= \mathbb{E}[\log{q(\boldsymbol{\theta})}] - \mathbb{E}[\log{p(\boldsymbol{\theta},  Y)}] + \log{p(Y)}

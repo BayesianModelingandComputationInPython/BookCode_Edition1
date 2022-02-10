@@ -1538,6 +1538,7 @@ LOO-PIT is obtained by comparing the observed data $y$ to posterior
 predicted data $\tilde y$. The comparison is done point-wise. We have:
 
 ```{math}
+:label: loo_pit
 p_i = P(\tilde y_i \leq y_i \mid y_{-i})
 ```
 

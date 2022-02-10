@@ -527,7 +527,7 @@ The choices we made in the parameter space may induce something
 unexpected in the observable data space. A very helpful tool to better
 understand our assumptions is the prior predictive distribution, which
 we presented in Section <a class="reference internal" href="chp_01.html#id6"><span class="std std-ref">Bayesian Inference</span></a> and
-Equation <a class="reference internal" href="chp_01.html#equation-eq-prior-pred-dist">(1.5)</a>. In practice we
+Equation <a class="reference internal" href="chp_01.html#equation-eq-prior-pred-dist">(1.7)</a>. In practice we
 can compute a prior predictive distribution by sampling from the model,
 but without conditioning on the observed data. By sampling from the
 prior predictive distribution, the computer does the work of translating
@@ -639,7 +639,7 @@ environment.</p>
 predictive distribution to help us inspect our model, we can perform a
 similar analysis with the posterior predictive distribution, introduced
 in Section <a class="reference internal" href="chp_01.html#id6"><span class="std std-ref">Bayesian Inference</span></a> and Equation
-<a class="reference internal" href="chp_01.html#equation-eq-post-pred-dist">(1.6)</a>. This procedure is generally
+<a class="reference internal" href="chp_01.html#equation-eq-post-pred-dist">(1.8)</a>. This procedure is generally
 referred as <strong>posterior predictive checks</strong>. The basic idea is to
 evaluate how close the synthetic observations are to the actual
 observations. Ideally the way we assess closeness should be
@@ -1801,8 +1801,8 @@ in <a class="reference internal" href="#posterior-pd"><span class="std std-ref">
 <code class="docutils literal notranslate"><span class="pre">az.plot_bpv(idata,</span> <span class="pre">kind=&quot;u_value&quot;)</span></code>.</p>
 <p>LOO-PIT is obtained by comparing the observed data <span class="math notranslate nohighlight">\(y\)</span> to posterior
 predicted data <span class="math notranslate nohighlight">\(\tilde y\)</span>. The comparison is done point-wise. We have:</p>
-<div class="math notranslate nohighlight">
-\[p_i = P(\tilde y_i \leq y_i \mid y_{-i})\]</div>
+<div class="math notranslate nohighlight" id="equation-loo-pit">
+<span class="eqno">(2.7)<a class="headerlink" href="#equation-loo-pit" title="Permalink to this equation">¶</a></span>\[p_i = P(\tilde y_i \leq y_i \mid y_{-i})\]</div>
 <p>Intuitively, LOO-PIT is computing the probability that the posterior
 predicted data <span class="math notranslate nohighlight">\(\tilde y_i\)</span> has lower value than the observed data
 <span class="math notranslate nohighlight">\(y_i\)</span>, when we remove the <span class="math notranslate nohighlight">\(i\)</span> observation. Thus the difference between
@@ -1839,7 +1839,7 @@ problematic in practice (see Section <a class="reference internal" href="chp_11.
 alternative is to use the values of LOO to estimate weights for each
 model. We can do this by using the following formula:</p>
 <div class="math notranslate nohighlight" id="equation-eq-pseudo-avg">
-<span class="eqno">(2.7)<a class="headerlink" href="#equation-eq-pseudo-avg" title="Permalink to this equation">¶</a></span>\[w_i = \frac {e^{-\Delta_i }} {\sum_j^k e^{-\Delta_j }}\]</div>
+<span class="eqno">(2.8)<a class="headerlink" href="#equation-eq-pseudo-avg" title="Permalink to this equation">¶</a></span>\[w_i = \frac {e^{-\Delta_i }} {\sum_j^k e^{-\Delta_j }}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\Delta_i\)</span> is the difference between the <span class="math notranslate nohighlight">\(i\)</span> value of LOO and the
 highest one, assuming we are using the log- scale, which is the default
 in ArviZ.</p>
@@ -1848,11 +1848,11 @@ in ArviZ.</p>
 probability of each model (given a fixed set of models) from LOO<a class="footnote-reference brackets" href="#id73" id="id49">21</a>.
 See how the denominator is just a normalization term ensuring that the
 weights sum up to one. The solution offered by Equation
-<a class="reference internal" href="#equation-eq-pseudo-avg">(2.7)</a> for computing weights is a very nice and simple
+<a class="reference internal" href="#equation-eq-pseudo-avg">(2.8)</a> for computing weights is a very nice and simple
 approach. One major caveat is that it does not take into account the
 uncertainty in the computation of the values of LOO. We could compute
 the standard error assuming a Gaussian approximation and modify Equation
-<a class="reference internal" href="#equation-eq-pseudo-avg">(2.7)</a> accordingly. Or we can do something more robust,
+<a class="reference internal" href="#equation-eq-pseudo-avg">(2.8)</a> accordingly. Or we can do something more robust,
 like using Bayesian Bootstrapping.</p>
 <p>Yet another option for model averaging is stacking of predictive
 distributions <span id="id50">[<a class="reference internal" href="references.html#id22">26</a>]</span>. The main idea is to combine several
@@ -1860,7 +1860,7 @@ models in a meta-model in such a way that we minimize the divergence
 between the meta-model and the <em>true</em> generating model. When using a
 logarithmic scoring rule this is equivalent to computing:</p>
 <div class="math notranslate nohighlight" id="equation-eq-stacking">
-<span class="eqno">(2.8)<a class="headerlink" href="#equation-eq-stacking" title="Permalink to this equation">¶</a></span>\[\max_{n} \frac{1}{n} \sum_{i=1}^{n}log\sum_{j=1}^{k} w_j p(y_i \mid y_{-i}, M_j)\]</div>
+<span class="eqno">(2.9)<a class="headerlink" href="#equation-eq-stacking" title="Permalink to this equation">¶</a></span>\[\max_{n} \frac{1}{n} \sum_{i=1}^{n}log\sum_{j=1}^{k} w_j p(y_i \mid y_{-i}, M_j)\]</div>
 <p>where <span class="math notranslate nohighlight">\(n\)</span> is the number of data points and <span class="math notranslate nohighlight">\(k\)</span> the number of models. To
 enforce a solution we constrain <span class="math notranslate nohighlight">\(w\)</span> to be <span class="math notranslate nohighlight">\(w_j \ge 0\)</span> and
 <span class="math notranslate nohighlight">\(\sum_{j=1}^{k} w_j = 1\)</span>. The quantity <span class="math notranslate nohighlight">\(p(y_i \mid y_{-i}, M_j)\)</span> is the
@@ -1869,9 +1869,9 @@ said computing it can bee too costly and thus in practice we can use LOO
 to approximate it.</p>
 <p>Stacking has more interesting properties than pseudo Bayesian model
 averaging. We can see this from their definitions, Equation
-<a class="reference internal" href="#equation-eq-pseudo-avg">(2.7)</a> is just a normalization of weights that have been
+<a class="reference internal" href="#equation-eq-pseudo-avg">(2.8)</a> is just a normalization of weights that have been
 computed for each model independently of the rest of the models. Instead
-in Equation <a class="reference internal" href="#equation-eq-stacking">(2.8)</a> the weights are computed by maximizing the
+in Equation <a class="reference internal" href="#equation-eq-stacking">(2.9)</a> the weights are computed by maximizing the
 combined log-score, i.e. even when the models have been fitted
 independently as in pseudo Bayesian model averaging, the computation of
 the weights takes into account all models together. This helps to explain
@@ -1893,8 +1893,8 @@ makes a lot of sense.</p>
 <p><strong>2E1.</strong> Using your own words, what are the main
 differences between prior predictive checks and posterior predictive
 checks? How are these empirical evaluations related to Equations
-<a class="reference internal" href="chp_01.html#equation-eq-prior-pred-dist">(1.5)</a> and
-<a class="reference internal" href="chp_01.html#equation-eq-post-pred-dist">(1.6)</a>.</p>
+<a class="reference internal" href="chp_01.html#equation-eq-prior-pred-dist">(1.7)</a> and
+<a class="reference internal" href="chp_01.html#equation-eq-post-pred-dist">(1.8)</a>.</p>
 <p><strong>2E2.</strong> Using your own words explain: ESS, <span class="math notranslate nohighlight">\(\hat R\)</span> and
 MCSE. Focus your explanation on what these quantities are measuring and
 what potential issue with MCMC they are identifying.</p>

@@ -597,30 +597,30 @@ statements, even if they are mathematically consistent. We must always
 have a healthy quota of skepticism about our data, models, and results.
 To make this more explicit, we may want to express Bayes’ theorem in a
 more nuanced way:</p>
-<div class="math notranslate nohighlight">
-\[p(\boldsymbol{\theta} \mid  \boldsymbol{Y}, M) \propto  p(\boldsymbol{Y} \mid \boldsymbol{\theta}, M) \; p(\boldsymbol{\theta}, M)\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-posterior-cond-model">
+<span class="eqno">(1.4)<a class="headerlink" href="#equation-eq-posterior-cond-model" title="Permalink to this equation">¶</a></span>\[p(\boldsymbol{\theta} \mid  \boldsymbol{Y}, M) \propto  p(\boldsymbol{Y} \mid \boldsymbol{\theta}, M) \; p(\boldsymbol{\theta}, M)\]</div>
 <p>Emphasizing that our inferences are always dependent on the assumptions
 made by model <span class="math notranslate nohighlight">\(M\)</span>.</p>
 <p>Having said that, once we have a posterior distribution we can use it to
 derive other quantities of interest. This is generally done by computing
 expectations, for example:</p>
 <div class="math notranslate nohighlight" id="equation-eq-posterior-expectation">
-<span class="eqno">(1.4)<a class="headerlink" href="#equation-eq-posterior-expectation" title="Permalink to this equation">¶</a></span>\[J = \int f(\boldsymbol{\theta}) \; p(\boldsymbol{\theta} \mid \boldsymbol{Y}) \; d\boldsymbol{\theta}\]</div>
+<span class="eqno">(1.5)<a class="headerlink" href="#equation-eq-posterior-expectation" title="Permalink to this equation">¶</a></span>\[J = \int f(\boldsymbol{\theta}) \; p(\boldsymbol{\theta} \mid \boldsymbol{Y}) \; d\boldsymbol{\theta}\]</div>
 <p>If <span class="math notranslate nohighlight">\(f\)</span> is the identity function <span class="math notranslate nohighlight">\(J\)</span> will turn out be the mean <a class="footnote-reference brackets" href="#id46" id="id12">7</a> of
 <span class="math notranslate nohighlight">\(\boldsymbol{\theta}.\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[\bar{\boldsymbol{\theta}} = \int_{\boldsymbol{\Theta}} \boldsymbol{\theta}  p(\boldsymbol{\theta} \mid \boldsymbol{Y})  d\boldsymbol{\theta}\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-posterior-expectation-mean">
+<span class="eqno">(1.6)<a class="headerlink" href="#equation-eq-posterior-expectation-mean" title="Permalink to this equation">¶</a></span>\[\bar{\boldsymbol{\theta}} = \int_{\boldsymbol{\Theta}} \boldsymbol{\theta}  p(\boldsymbol{\theta} \mid \boldsymbol{Y})  d\boldsymbol{\theta}\]</div>
 <p>The posterior distribution is the central object in Bayesian statistics,
 but it is not the only one. Besides making inferences about parameter
 values, we may want to make inferences about data. This can be done by
 computing the <strong>prior predictive distribution</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-prior-pred-dist">
-<span class="eqno">(1.5)<a class="headerlink" href="#equation-eq-prior-pred-dist" title="Permalink to this equation">¶</a></span>\[p(\boldsymbol{Y}^\ast) =  \int_{\boldsymbol{\Theta}} p(\boldsymbol{Y^\ast} \mid \boldsymbol{\theta}) \; p(\boldsymbol{\theta}) \; d\boldsymbol{\theta}\]</div>
+<span class="eqno">(1.7)<a class="headerlink" href="#equation-eq-prior-pred-dist" title="Permalink to this equation">¶</a></span>\[p(\boldsymbol{Y}^\ast) =  \int_{\boldsymbol{\Theta}} p(\boldsymbol{Y^\ast} \mid \boldsymbol{\theta}) \; p(\boldsymbol{\theta}) \; d\boldsymbol{\theta}\]</div>
 <p>This is the expected distribution of the data according to the model
 (prior and likelihood). That is the data we expect, given the model,
 before actually seeing any observed data <span class="math notranslate nohighlight">\(\boldsymbol{Y}^\ast\)</span>. Notice
 that Equations <a class="reference internal" href="#equation-eq-marginal-likelihood">(1.2)</a> (marginal likelihood) and
-Equation <a class="reference internal" href="#equation-eq-prior-pred-dist">(1.5)</a> (prior predictive distribution) look
+Equation <a class="reference internal" href="#equation-eq-prior-pred-dist">(1.7)</a> (prior predictive distribution) look
 really similar. The difference is in the former case, we are
 conditioning on our observed data <span class="math notranslate nohighlight">\(Y\)</span> while in the latter, we are not
 conditioning on the observed data. As a result the marginal likelihood
@@ -652,14 +652,14 @@ Iterate if necessary.</p>
 </div>
 <p>Another useful quantity to compute is the <strong>posterior predictive distribution</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-post-pred-dist">
-<span class="eqno">(1.6)<a class="headerlink" href="#equation-eq-post-pred-dist" title="Permalink to this equation">¶</a></span>\[p(\tilde{\boldsymbol{Y}} \mid \boldsymbol{Y}) = \int_{\boldsymbol{\Theta}} p(\tilde{\boldsymbol{Y}} \mid \boldsymbol{\theta}) \, p(\boldsymbol{\theta} \mid \boldsymbol{Y}) \, d\boldsymbol{\theta}\]</div>
+<span class="eqno">(1.8)<a class="headerlink" href="#equation-eq-post-pred-dist" title="Permalink to this equation">¶</a></span>\[p(\tilde{\boldsymbol{Y}} \mid \boldsymbol{Y}) = \int_{\boldsymbol{\Theta}} p(\tilde{\boldsymbol{Y}} \mid \boldsymbol{\theta}) \, p(\boldsymbol{\theta} \mid \boldsymbol{Y}) \, d\boldsymbol{\theta}\]</div>
 <p>This is the distribution of expected, future, data
 <span class="math notranslate nohighlight">\(\tilde{\boldsymbol{Y}}\)</span> according to the posterior
 <span class="math notranslate nohighlight">\(p(\boldsymbol{\theta} \mid \boldsymbol{Y})\)</span>, which in turn is a
 consequence of the model (prior and likelihood) and observed data. In
 more common terms, this is the data the model is expecting to see after
 seeing the dataset <span class="math notranslate nohighlight">\(\boldsymbol{Y}\)</span>, i.e. these are the model’s
-predictions. From Equation <a class="reference internal" href="#equation-eq-post-pred-dist">(1.6)</a>, we can see that
+predictions. From Equation <a class="reference internal" href="#equation-eq-post-pred-dist">(1.8)</a>, we can see that
 predictions are computed by integrating out (or marginalizing) over the
 posterior distribution of parameters. As a consequence predictions
 computed this way will incorporate the uncertainty about our estimates.</p>
@@ -718,7 +718,7 @@ sophisticated and powerful methods. <a class="footnote-reference brackets" href=
 generate a new value <span class="math notranslate nohighlight">\(x_{i + 1}\)</span> from the old one <span class="math notranslate nohighlight">\(x_i\)</span>.</p></li>
 <li><p>Compute the probability of accepting the new value as:</p>
 <div class="math notranslate nohighlight" id="equation-acceptance-prob">
-<span class="eqno">(1.7)<a class="headerlink" href="#equation-acceptance-prob" title="Permalink to this equation">¶</a></span>\[p_a (x_{i + 1} \mid x_i) = \min \left (1, \frac{p(x_{i + 1}) \;
+<span class="eqno">(1.9)<a class="headerlink" href="#equation-acceptance-prob" title="Permalink to this equation">¶</a></span>\[p_a (x_{i + 1} \mid x_i) = \min \left (1, \frac{p(x_{i + 1}) \;
 q(x_i \mid x_{i + 1})} {p(x_i) \; q (x_{i + 1} \mid x_i)} \right)\]</div>
 </li>
 <li><p>If <span class="math notranslate nohighlight">\(p_a &gt; R\)</span> where <span class="math notranslate nohighlight">\(R \sim \mathcal{U}(0, 1)\)</span>, save the new value,
@@ -733,7 +733,7 @@ if <span class="math notranslate nohighlight">\(q\)</span> is a symmetric distri
 <span class="math notranslate nohighlight">\(q(x_{i + 1} \mid x_i)\)</span> will cancel out (conceptually it means it is
 equally likely are we are to go from <span class="math notranslate nohighlight">\(x_{i+1}\)</span> to <span class="math notranslate nohighlight">\(x_i\)</span> or to go from
 <span class="math notranslate nohighlight">\(x_{i}\)</span> to <span class="math notranslate nohighlight">\(x_{i+1}\)</span>), leaving just the ratio of the posterior evaluated
-at two points. From Equation <a class="reference internal" href="#equation-acceptance-prob">(1.7)</a> we can see this
+at two points. From Equation <a class="reference internal" href="#equation-acceptance-prob">(1.9)</a> we can see this
 algorithm will always accept moving from a low probability region to a
 higher one and will probabilistically accept moving from a high to low
 probability region.</p>
@@ -753,10 +753,10 @@ statistics, because it is a simple model that we can solve and compute
 with ease. In statistical notation we can write the Beta-Binomial models
 as:</p>
 <div class="math notranslate nohighlight" id="equation-eq-beta-binomial">
-<span class="eqno">(1.8)<a class="headerlink" href="#equation-eq-beta-binomial" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\begin{split}\begin{split}
+<span class="eqno">(1.10)<a class="headerlink" href="#equation-eq-beta-binomial" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\begin{split}\begin{split}
     \theta \sim &amp;\; \text{Beta}(\alpha, \beta) \\
     Y \sim &amp;\; \text{Bin}(n=1, p=\theta)\end{split}\\\end{split}\end{aligned}\end{align} \]</div>
-<p>In Equation <a class="reference internal" href="#equation-eq-beta-binomial">(1.8)</a> we are saying the parameter <span class="math notranslate nohighlight">\(\theta\)</span>
+<p>In Equation <a class="reference internal" href="#equation-eq-beta-binomial">(1.10)</a> we are saying the parameter <span class="math notranslate nohighlight">\(\theta\)</span>
 has <span class="math notranslate nohighlight">\(\text{Beta}(\alpha, \beta)\)</span> as its prior distribution. And we
 assume the data is distributed following a Binomial distribution
 <span class="math notranslate nohighlight">\(\text{Bin}(n=1, p=\theta)\)</span>, which represents our likelihood
@@ -949,7 +949,7 @@ name!). Part of the job of the modern Bayesian practitioner is being
 able to understand and work around these limitations.</p>
 <p>In this book we will use PyMC3 <span id="id23">[<a class="reference internal" href="references.html#id124">1</a>]</span> and TensorFlow
 Probability <span id="id24">[<a class="reference internal" href="references.html#id141">2</a>]</span>. Let us write the model from
-Equation <a class="reference internal" href="#equation-eq-beta-binomial">(1.8)</a> using PyMC3:</p>
+Equation <a class="reference internal" href="#equation-eq-beta-binomial">(1.10)</a> using PyMC3:</p>
 <div class="literal-block-wrapper docutils container" id="beta-binom">
 <div class="code-block-caption"><span class="caption-number">Listing 1.5 </span><span class="caption-text">beta_binom</span><a class="headerlink" href="#beta-binom" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Declare a model in PyMC3</span>
@@ -976,7 +976,7 @@ the model in Code Block <a class="reference internal" href="#beta-binom"><span c
 <div class="figure align-default" id="fig-betabinommodelgraphviz">
 <a class="reference internal image-reference" href="../_images/BetaBinomModelGraphViz.png"><img alt="../_images/BetaBinomModelGraphViz.png" src="../_images/BetaBinomModelGraphViz.png" style="width: 2in;" /></a>
 <p class="caption"><span class="caption-number">Fig. 1.4 </span><span class="caption-text">A graphical representation of the model defined in Equation
-<a class="reference internal" href="#equation-eq-beta-binomial">(1.8)</a> and Code Block
+<a class="reference internal" href="#equation-eq-beta-binomial">(1.10)</a> and Code Block
 <a class="reference internal" href="#beta-binom"><span class="std std-ref">beta_binom</span></a>. The ovals represent our prior
 and likelihood, whereas the 20 in this case indicates the number of
 observations.
@@ -1005,8 +1005,8 @@ represented in the top and bottom panel, respectively, from
 </pre></div>
 </div>
 </div>
-<p>Equations <a class="reference internal" href="#equation-eq-posterior-dist">(1.1)</a>, <a class="reference internal" href="#equation-eq-prior-pred-dist">(1.5)</a>, and
-<a class="reference internal" href="#equation-eq-post-pred-dist">(1.6)</a> clearly define the posterior, the prior
+<p>Equations <a class="reference internal" href="#equation-eq-posterior-dist">(1.1)</a>, <a class="reference internal" href="#equation-eq-prior-pred-dist">(1.7)</a>, and
+<a class="reference internal" href="#equation-eq-post-pred-dist">(1.8)</a> clearly define the posterior, the prior
 predictive, and the posterior predictive distributions as different
 mathematical objects. The two later are distributions over data and the
 first one is a distribution over the parameters in a model.
@@ -1019,7 +1019,7 @@ particular order:</p>
 <ul class="simple">
 <li><p>Spoken and written language</p></li>
 <li><p>Conceptual diagrams: <a class="reference internal" href="#fig-betabinommodelgraphviz"><span class="std std-numref">Fig. 1.4</span></a>.</p></li>
-<li><p>Mathematical notation: Equation <a class="reference internal" href="#equation-eq-beta-binomial">(1.8)</a></p></li>
+<li><p>Mathematical notation: Equation <a class="reference internal" href="#equation-eq-beta-binomial">(1.10)</a></p></li>
 <li><p>Computer Code: Code Block <a class="reference internal" href="#beta-binom"><span class="std std-ref">beta_binom</span></a></p></li>
 </ul>
 <p>For a modern Bayesian practitioner it is useful to be literate across
@@ -1104,24 +1104,24 @@ such, we will briefly discuss analytical priors using the Beta Binomial
 model.</p>
 <p>As the name suggests, the conjugate prior for the binomial distribution
 is the Beta distribution:</p>
-<div class="math notranslate nohighlight">
-\[p(\theta \mid Y) \propto \overbrace{\frac{N!}{y!(N-y)!} \theta^y (1 - \theta)^{N-y}}^{\text{binomial-likelihood}} \: \overbrace{\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\, \theta^{\alpha-1}(1-\theta)^{\beta-1}}^{\text{beta.prior}}\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-beta-distribution">
+<span class="eqno">(1.11)<a class="headerlink" href="#equation-eq-beta-distribution" title="Permalink to this equation">¶</a></span>\[p(\theta \mid Y) \propto \overbrace{\frac{N!}{y!(N-y)!} \theta^y (1 - \theta)^{N-y}}^{\text{binomial-likelihood}} \: \overbrace{\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\, \theta^{\alpha-1}(1-\theta)^{\beta-1}}^{\text{beta.prior}}\]</div>
 <p>Because all the terms not depending on <span class="math notranslate nohighlight">\(\theta\)</span> are constant we can drop
 them and we get:</p>
-<div class="math notranslate nohighlight">
-\[p(\theta \mid Y) \propto \overbrace{\theta^y (1 - \theta)^{N-y}}^{\text{binomial-likelihood}} \: \overbrace{ \theta^{\alpha-1}(1-\theta)^{\beta-1}}^{\text{beta.prior}}\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-beta-distribution-no-normalization">
+<span class="eqno">(1.12)<a class="headerlink" href="#equation-eq-beta-distribution-no-normalization" title="Permalink to this equation">¶</a></span>\[p(\theta \mid Y) \propto \overbrace{\theta^y (1 - \theta)^{N-y}}^{\text{binomial-likelihood}} \: \overbrace{ \theta^{\alpha-1}(1-\theta)^{\beta-1}}^{\text{beta.prior}}\]</div>
 <p>Reordering:</p>
 <div class="math notranslate nohighlight" id="equation-eq-kernel-beta">
-<span class="eqno">(1.9)<a class="headerlink" href="#equation-eq-kernel-beta" title="Permalink to this equation">¶</a></span>\[p(\theta \mid Y) \propto \theta^{\alpha-1+y}(1-\theta)^{\beta-1+N-y}\]</div>
+<span class="eqno">(1.13)<a class="headerlink" href="#equation-eq-kernel-beta" title="Permalink to this equation">¶</a></span>\[p(\theta \mid Y) \propto \theta^{\alpha-1+y}(1-\theta)^{\beta-1+N-y}\]</div>
 <p>If we want to ensure that the posterior is a proper probability
 distribution function, we need to add a normalization constant ensuring
 that the integral of the PDF is 1 (see Section <a class="reference internal" href="chp_11.html#cont-rvs"><span class="std std-ref">Continuous Random Variables and Distributions</span></a>). Notice
-that expression <a class="reference internal" href="#equation-eq-kernel-beta">(1.9)</a> looks like the kernel of a Beta
+that expression <a class="reference internal" href="#equation-eq-kernel-beta">(1.13)</a> looks like the kernel of a Beta
 distribution, thus by adding the normalization constant of a Beta
 distribution we arrive to the conclusion that the posterior distribution
 for a Beta-Binomial model is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-beta-posterior">
-<span class="eqno">(1.10)<a class="headerlink" href="#equation-eq-beta-posterior" title="Permalink to this equation">¶</a></span>\[p(\theta \mid Y) \propto \frac{\Gamma(\alpha_{post}+\beta_{post})}{\Gamma(\alpha_{post})\Gamma(\beta_{post})} \theta^{\alpha_{post}-1}(1-\theta)^{\beta_{post}-1} = \text{Beta}(\alpha_{post}, \beta_{post})\]</div>
+<span class="eqno">(1.14)<a class="headerlink" href="#equation-eq-beta-posterior" title="Permalink to this equation">¶</a></span>\[p(\theta \mid Y) \propto \frac{\Gamma(\alpha_{post}+\beta_{post})}{\Gamma(\alpha_{post})\Gamma(\beta_{post})} \theta^{\alpha_{post}-1}(1-\theta)^{\beta_{post}-1} = \text{Beta}(\alpha_{post}, \beta_{post})\]</div>
 <p>where <span class="math notranslate nohighlight">\(\alpha_{post} = \alpha+y\)</span> and <span class="math notranslate nohighlight">\(\beta_{post} = \beta+N-y\)</span>.</p>
 <p>As the posterior of a Beta-Binomial model is a Beta distribution we can
 use a Beta-posterior as the prior for a future analysis. This means that
@@ -1178,11 +1178,11 @@ too). The black dot represents the sampling proportion estimator
 </div>
 <p>The mean of the Beta distribution is <span class="math notranslate nohighlight">\(\frac{\alpha}{\alpha + \beta}\)</span>,
 thus the prior mean is:</p>
-<div class="math notranslate nohighlight">
-\[\mathbb{E}[\theta]  = \frac{\alpha}{\alpha + \beta}\]</div>
+<div class="math notranslate nohighlight" id="equation-beta-prior-mean">
+<span class="eqno">(1.15)<a class="headerlink" href="#equation-beta-prior-mean" title="Permalink to this equation">¶</a></span>\[\mathbb{E}[\theta]  = \frac{\alpha}{\alpha + \beta}\]</div>
 <p>and the posterior mean is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-beta-binom-mean">
-<span class="eqno">(1.11)<a class="headerlink" href="#equation-eq-beta-binom-mean" title="Permalink to this equation">¶</a></span>\[\mathbb{E}[\theta \mid Y]  = \frac{\alpha + y}{\alpha + \beta + n}\]</div>
+<span class="eqno">(1.16)<a class="headerlink" href="#equation-eq-beta-binom-mean" title="Permalink to this equation">¶</a></span>\[\mathbb{E}[\theta \mid Y]  = \frac{\alpha + y}{\alpha + \beta + n}\]</div>
 <p>We can see that if the value of <span class="math notranslate nohighlight">\(n\)</span> is small in relation with the values
 of <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> then the posterior mean will be closer to the
 prior mean. That is, the prior contributes more to the result than the
@@ -1193,7 +1193,7 @@ exactly match the sample proportion no matter which prior values we
 choose for <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>.</p>
 <p>For the Beta Binomial model the posterior mode is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-beta-binom-mode">
-<span class="eqno">(1.12)<a class="headerlink" href="#equation-eq-beta-binom-mode" title="Permalink to this equation">¶</a></span>\[\operatorname*{argmax}_{\theta}{[\theta \mid Y]}  = \frac{\alpha + y - 1}{\alpha + \beta + n - 2}\]</div>
+<span class="eqno">(1.17)<a class="headerlink" href="#equation-eq-beta-binom-mode" title="Permalink to this equation">¶</a></span>\[\operatorname*{argmax}_{\theta}{[\theta \mid Y]}  = \frac{\alpha + y - 1}{\alpha + \beta + n - 2}\]</div>
 <p>We can see that when the prior is Beta<span class="math notranslate nohighlight">\((\alpha\!=\!1, \beta\!=\!1)\)</span>
 (Uniform) the posterior mode is numerically equivalent to the sampling
 proportion estimator <span class="math notranslate nohighlight">\(\hat \theta = \frac{y}{n}\)</span>. The posterior mode is
@@ -1201,7 +1201,7 @@ often called the <strong>maximum a posteriori</strong> (MAP) value. This result 
 not exclusive for the Beta-Binomial model. In fact the results from many
 non-Bayesian methods can be understood as the MAP from Bayesian methods
 under some particular priors <a class="footnote-reference brackets" href="#id54" id="id28">15</a>.</p>
-<p>Compare Equation <a class="reference internal" href="#equation-eq-beta-binom-mean">(1.11)</a> to the sampling proportion
+<p>Compare Equation <a class="reference internal" href="#equation-eq-beta-binom-mean">(1.16)</a> to the sampling proportion
 <span class="math notranslate nohighlight">\(\frac{y}{n}\)</span>. The Bayesian estimator is adding <span class="math notranslate nohighlight">\(\alpha\)</span> to the number
 of successes and <span class="math notranslate nohighlight">\(\alpha + \beta\)</span> to the number of trials. Which makes
 <span class="math notranslate nohighlight">\(\beta\)</span> the number of failures. In this sense we can think of the prior
@@ -1253,10 +1253,10 @@ two (or more) parameterization of a model will necessarily lead to
 posteriors that are coherent.</p>
 <p>For the one-dimensional case JP for <span class="math notranslate nohighlight">\(\theta\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-eq-jeffreys-prior0">
-<span class="eqno">(1.13)<a class="headerlink" href="#equation-eq-jeffreys-prior0" title="Permalink to this equation">¶</a></span>\[p(\theta) \propto \sqrt{I(\theta)}\]</div>
+<span class="eqno">(1.18)<a class="headerlink" href="#equation-eq-jeffreys-prior0" title="Permalink to this equation">¶</a></span>\[p(\theta) \propto \sqrt{I(\theta)}\]</div>
 <p>where <span class="math notranslate nohighlight">\(I(\theta)\)</span> is the expected Fisher information:</p>
 <div class="math notranslate nohighlight" id="equation-eq-jeffreys-prior">
-<span class="eqno">(1.14)<a class="headerlink" href="#equation-eq-jeffreys-prior" title="Permalink to this equation">¶</a></span>\[I(\theta) = - \mathbb{E_{Y}}\left[\frac{d^2}{d\theta^2} \log p(Y \mid \theta)\right]\]</div>
+<span class="eqno">(1.19)<a class="headerlink" href="#equation-eq-jeffreys-prior" title="Permalink to this equation">¶</a></span>\[I(\theta) = - \mathbb{E_{Y}}\left[\frac{d^2}{d\theta^2} \log p(Y \mid \theta)\right]\]</div>
 <p>Once the likelihood function <span class="math notranslate nohighlight">\(p(Y \mid \theta)\)</span> has been decided by the
 practitioner, then the JP gets automatically determined, eliminating any
 discussion over prior choices, until that annoying person at the back of
@@ -1264,15 +1264,14 @@ the conference room objects your choice of a JP in the first place.</p>
 <p>For a detailed derivation of the JPs for both Alice and Bob problem see
 Section <a class="reference internal" href="chp_11.html#jeffreys-prior-derivation"><span class="std std-ref">Jeffreys’ Prior Derivation</span></a>. If you
 want to skip those details here we have the JP for Alice:</p>
-<div class="math notranslate nohighlight">
-\[\begin{aligned}
-p(\theta) \propto \theta^{-0.5} (1-\theta)^{-0.5}\end{aligned}\]</div>
+<div class="math notranslate nohighlight" id="equation-fig-alice-prior">
+<span class="eqno">(1.20)<a class="headerlink" href="#equation-fig-alice-prior" title="Permalink to this equation">¶</a></span>\[p(\theta) \propto \theta^{-0.5} (1-\theta)^{-0.5}\]</div>
 <p>This turns to be the kernel of the <span class="math notranslate nohighlight">\(\text{Beta}(0.5, 0.5)\)</span> distribution.
 Which is a u-shaped distribution as shown in the left-top panel of
 <a class="reference internal" href="#fig-jeffrey-priors"><span class="std std-numref">Fig. 1.8</span></a>.</p>
 <p>For Bob the JP is:</p>
 <div class="math notranslate nohighlight" id="equation-fig-bob-prior">
-<span class="eqno">(1.15)<a class="headerlink" href="#equation-fig-bob-prior" title="Permalink to this equation">¶</a></span>\[p(\kappa) \propto \kappa^{-0.5} (1 + \kappa)^{-1}\]</div>
+<span class="eqno">(1.21)<a class="headerlink" href="#equation-fig-bob-prior" title="Permalink to this equation">¶</a></span>\[p(\kappa) \propto \kappa^{-0.5} (1 + \kappa)^{-1}\]</div>
 <p>This is a half-u-shaped distribution, defined in the <span class="math notranslate nohighlight">\([0, \infty)\)</span>
 interval, see top-right panel in <a class="reference internal" href="#fig-jeffrey-priors"><span class="std std-numref">Fig. 1.8</span></a>. Saying
 this is a half-u-shaped may sound a little bit weird. Actually it is not
@@ -1290,7 +1289,7 @@ number of success <span class="math notranslate nohighlight">\(\theta\)</span> (
 are inter-convertible by applying the change of variable rule (see Section
 <a class="reference internal" href="chp_11.html#transformations"><span class="std std-ref">Transformations</span></a> for details).</span><a class="headerlink" href="#fig-jeffrey-priors" title="Permalink to this image">¶</a></p>
 </div>
-<p>Notice that as the expectation in Equation <a class="reference internal" href="#equation-eq-jeffreys-prior">(1.14)</a> is
+<p>Notice that as the expectation in Equation <a class="reference internal" href="#equation-eq-jeffreys-prior">(1.19)</a> is
 with respect to <span class="math notranslate nohighlight">\(Y \mid \theta\)</span>, that is an expectation over the sample
 space. This means that in order to obtain a JP we need to average over
 all possible experimental outcomes. This is a violation of the
@@ -1677,18 +1676,18 @@ In Equation <a class="reference internal" href="#equation-eq-proportional-bayes"
 posterior up to a proportional constant is sufficient for inference.
 Show why the marginal likelihood is not needed for the
 Metropolis-Hasting method to work. Hint: this is a pen and paper
-exercise, try by expanding Equation <a class="reference internal" href="#equation-acceptance-prob">(1.7)</a>.</p>
+exercise, try by expanding Equation <a class="reference internal" href="#equation-acceptance-prob">(1.9)</a>.</p>
 <p><strong>1M15.</strong> In the following definition of a probabilistic
 model, identify the prior, the likelihood, and the posterior:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{split}
+<div class="math notranslate nohighlight" id="equation-eq-probabilistic-model">
+<span class="eqno">(1.22)<a class="headerlink" href="#equation-eq-probabilistic-model" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
 Y \sim \mathcal{N}(\mu, \sigma)\\
 \mu \sim \mathcal{N}(0, 1)\\
 \sigma \sim \mathcal{HN}(1)\\
 \end{split}\end{split}\]</div>
 <p><strong>1M16.</strong> In the previous model, how many parameters will the
 posterior have? Compare your answer with that from the model in the
-coin-flipping problem in Equation <a class="reference internal" href="#equation-eq-beta-binomial">(1.8)</a>.</p>
+coin-flipping problem in Equation <a class="reference internal" href="#equation-eq-beta-binomial">(1.10)</a>.</p>
 <p><strong>1M17.</strong> Suppose that we have two coins; when we toss the
 first coin, half of the time it lands tails and half of the time on
 heads. The other coin is a loaded coin that always lands on heads. If we

@@ -250,7 +250,8 @@ sum of trees.
 
 For example we could set $\phi$ as a Gaussian and then we will have:
 
-```{math} 
+```{math}
+:label: eq:bart_gaussian
 Y = \mathcal{N}\left(\mu = \sum_{j=0}^m g_j(\boldsymbol{X}; \mathcal{T}_j, \mathcal{M}_j), \sigma \right)
 ```
 
@@ -258,13 +259,15 @@ Or we can do as we did for Generalized Linear Models in Chapter
 [3](chap2) and try other distributions. For example if $\phi$ is
 a Poisson distribution we get
 
-```{math} 
+```{math}
+:label: eq:bart_poisson
 Y = \text{Pois}\left(\lambda = \sum_{j}^m g_j(\boldsymbol{X}; \mathcal{T}_j, \mathcal{M}_j)\right)
 ```
 
 Or maybe $\phi$ is the Student's t-distribution, then:
 
-```{math} 
+```{math}
+:label: eq:bart_student
 Y = \text{T}\left(\mu = \sum_{j}^m g_j(\boldsymbol{X}; \mathcal{T}_j, \mathcal{M}_j), \sigma, \nu \right)
 ```
 
@@ -389,7 +392,8 @@ samplers like NUTS to those variables.
 Let us see how BART fits the bikes dataset which we previously studied
 in [5](chap3_5). The model will be:
 
-```{math} 
+```{math}
+:label: eq:bart_bikes_model
 \begin{aligned}
 \begin{split}
     \mu \sim& \; \text{BART}(m=50) \\

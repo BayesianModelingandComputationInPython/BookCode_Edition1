@@ -649,16 +649,16 @@ arbitrary probability distribution that will be used as the likelihood
 in our model and <span class="math notranslate nohighlight">\(\theta\)</span> other parameters from <span class="math notranslate nohighlight">\(\phi\)</span> not modeled as a
 sum of trees.</p>
 <p>For example we could set <span class="math notranslate nohighlight">\(\phi\)</span> as a Gaussian and then we will have:</p>
-<div class="math notranslate nohighlight">
-\[Y = \mathcal{N}\left(\mu = \sum_{j=0}^m g_j(\boldsymbol{X}; \mathcal{T}_j, \mathcal{M}_j), \sigma \right)\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-bart-gaussian">
+<span class="eqno">(7.2)<a class="headerlink" href="#equation-eq-bart-gaussian" title="Permalink to this equation">¶</a></span>\[Y = \mathcal{N}\left(\mu = \sum_{j=0}^m g_j(\boldsymbol{X}; \mathcal{T}_j, \mathcal{M}_j), \sigma \right)\]</div>
 <p>Or we can do as we did for Generalized Linear Models in Chapter
 <a class="reference internal" href="chp_03.html#chap2"><span class="std std-ref">3</span></a> and try other distributions. For example if <span class="math notranslate nohighlight">\(\phi\)</span> is
 a Poisson distribution we get</p>
-<div class="math notranslate nohighlight">
-\[Y = \text{Pois}\left(\lambda = \sum_{j}^m g_j(\boldsymbol{X}; \mathcal{T}_j, \mathcal{M}_j)\right)\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-bart-poisson">
+<span class="eqno">(7.3)<a class="headerlink" href="#equation-eq-bart-poisson" title="Permalink to this equation">¶</a></span>\[Y = \text{Pois}\left(\lambda = \sum_{j}^m g_j(\boldsymbol{X}; \mathcal{T}_j, \mathcal{M}_j)\right)\]</div>
 <p>Or maybe <span class="math notranslate nohighlight">\(\phi\)</span> is the Student’s t-distribution, then:</p>
-<div class="math notranslate nohighlight">
-\[Y = \text{T}\left(\mu = \sum_{j}^m g_j(\boldsymbol{X}; \mathcal{T}_j, \mathcal{M}_j), \sigma, \nu \right)\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-bart-student">
+<span class="eqno">(7.4)<a class="headerlink" href="#equation-eq-bart-student" title="Permalink to this equation">¶</a></span>\[Y = \text{T}\left(\mu = \sum_{j}^m g_j(\boldsymbol{X}; \mathcal{T}_j, \mathcal{M}_j), \sigma, \nu \right)\]</div>
 <p>As usual to fully specify a BART model we need to choose priors. We are
 already familiar to prior specifications for <span class="math notranslate nohighlight">\(\sigma\)</span> for the Gaussian
 likelihood or over <span class="math notranslate nohighlight">\(\sigma\)</span> and <span class="math notranslate nohighlight">\(\nu\)</span> for the Student’s t-distribution
@@ -760,8 +760,8 @@ samplers like NUTS to those variables.</p>
 <span id="bart-bike"></span><h2><span class="section-number">7.5. </span>BART Bikes<a class="headerlink" href="#bart-bikes" title="Permalink to this headline">¶</a></h2>
 <p>Let us see how BART fits the bikes dataset which we previously studied
 in <a class="reference internal" href="chp_05.html#chap3-5"><span class="std std-ref">5</span></a>. The model will be:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{aligned}
+<div class="math notranslate nohighlight" id="equation-eq-bart-bikes-model">
+<span class="eqno">(7.5)<a class="headerlink" href="#equation-eq-bart-bikes-model" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
 \begin{split}
     \mu \sim&amp; \; \text{BART}(m=50) \\
     \sigma \sim&amp; \; \mathcal{HN}(1) \\
@@ -923,13 +923,13 @@ predicted variable changes when we change a covariate while averaging
 over the marginal distribution of the rest of the covariates. That is,
 we compute and then plot:</p>
 <div class="math notranslate nohighlight" id="equation-eq-partial-dependence">
-<span class="eqno">(7.2)<a class="headerlink" href="#equation-eq-partial-dependence" title="Permalink to this equation">¶</a></span>\[\tilde{Y}_{\boldsymbol{X}_i}= \mathbb{E}_{\boldsymbol{X}_{-i}}[\tilde{Y}(\boldsymbol{X}_i, \boldsymbol{X}_{-i})] \approx \frac{1}{n}\sum_{j=1}^{n} \tilde{Y}(\boldsymbol{X}_i, \boldsymbol{X}_{-ij})\]</div>
+<span class="eqno">(7.6)<a class="headerlink" href="#equation-eq-partial-dependence" title="Permalink to this equation">¶</a></span>\[\tilde{Y}_{\boldsymbol{X}_i}= \mathbb{E}_{\boldsymbol{X}_{-i}}[\tilde{Y}(\boldsymbol{X}_i, \boldsymbol{X}_{-i})] \approx \frac{1}{n}\sum_{j=1}^{n} \tilde{Y}(\boldsymbol{X}_i, \boldsymbol{X}_{-ij})\]</div>
 <p>where <span class="math notranslate nohighlight">\(\tilde{Y}_{\boldsymbol{X}_i}\)</span> is the value of the predicted
 variable as a function of <span class="math notranslate nohighlight">\(\boldsymbol{X}_i\)</span> while all the variables
 except <span class="math notranslate nohighlight">\(i\)</span> (<span class="math notranslate nohighlight">\(\boldsymbol{X}_{-i}\)</span>) have been marginalized. In general
 <span class="math notranslate nohighlight">\(X_i\)</span> will be a subset of 1 or 2 variables, the reason being that
 plotting in higher dimensions is generally difficult.</p>
-<p>As shown in Equation <a class="reference internal" href="#equation-eq-partial-dependence">(7.2)</a> the expectation can be
+<p>As shown in Equation <a class="reference internal" href="#equation-eq-partial-dependence">(7.6)</a> the expectation can be
 approximated numerically by averaging over the predicted values
 conditioned on the observed <span class="math notranslate nohighlight">\(\boldsymbol{X}_{-i}\)</span>. Notice however, this
 implies that some of the combinations in
