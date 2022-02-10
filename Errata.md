@@ -30,6 +30,7 @@
 | 61 | When using a logarithmic scoring rule this is **equivalently** to **compute**: | When using a logarithmic scoring rule this is **equivalent** to **computing**: | Thanks Ero Carrera |
 | 61 | ...the computation of the weights **take** into account all models together. | ...the computation of the weights **takes** into account all models together. | Thanks Ero Carrera |
 | 61 | ...the weights computed with `az.compare(., method="stacking")`~~**,**~~ makes a lot of sense. | ...the weights computed with `az.compare(., method="stacking")` makes a lot of sense. | Thanks Ero Carrera |
+| 62 | ...Reproduce Figure 2.7, but using **az.plot_loo(ecdf=True)**... | ...Reproduce Figure 2.7, but using **az.plot_loo_pit(ecdf=True)**... | Thanks Alihan Zihna |
 | 70 |  | Figure 3.3 updated to include vertical lines of empirical estimate | |
 | 71 | Take a moment to compare the estimate of the mean with the summary mean show**s**... | Take a moment to compare the estimate of the mean with the summary mean show**n**... | Thanks Sebastian |
 | 73 | ...the **thin** line is the interquartile range **from 25% to 75% of the posterior** and the **thick** line is the 94% Highest Density Interval | the **thick** line is the interquartile range and the **thin** line is the 94% Highest Density Interval | Thanks Jose Roberto Ayala Solares |
