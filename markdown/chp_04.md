@@ -1755,7 +1755,8 @@ available in the Github repository in the file
 `gravity_measurements.csv` You know that from Newton's Laws of physics
 if the acceleration is $g$ and the time $t$ then
 
-```{math} 
+```{math}
+:label: eq:physics_experiment
 \begin{split}
 \text{velocity} &= gt \\
 \text{position} &= \frac{1}{2}gt^2 \\

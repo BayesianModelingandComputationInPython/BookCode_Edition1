@@ -542,7 +542,8 @@ B = dmatrix(
 
 The proposed statistical model is:
 
-```{math} 
+```{math}
+:label: eq:spline_model
 \begin{aligned}
 \begin{split}
     \tau \sim& \; \mathcal{HC}(1) \\
@@ -754,7 +755,8 @@ line by choosing a prior for the $\boldsymbol{\beta}$ coefficients in
 such a way that the value of $\beta_{i+1}$ is correlated with the value
 of $\beta_{i}$:
 
-```{math} 
+```{math}
+:label: eq:spline_regularized_prior
 \begin{aligned}
 \begin{split}
 \beta_i \sim& \mathcal{N}(0, 1) \\
@@ -766,7 +768,8 @@ of $\beta_{i}$:
 Using PyMC3 we can write an equivalent version using a Gaussian Random
 Walk prior distribution:
 
-```{math} 
+```{math}
+:label: eq:spline_regularized_GW_prior
 \begin{aligned}
 \begin{split}
 \tau\sim& \mathcal{N}(0, 1) \\
