@@ -1860,7 +1860,7 @@ likelihood at 1.
     distribution $\mathcal{N}(0,20)$
 
 3.  A random sample of size 200 from a $\mathcal{N}(0,1)$ and prior
-    distribution $\mathcal{N}(20 1)$
+    distribution $\mathcal{N}(20, 1)$
 
 4.  A random sample of size 200 from a $\mathcal{U}(0,1)$ and prior
     distribution $\mathcal{N}(10, 20)$
