@@ -15,7 +15,7 @@ subtleties that do not magically disappear by using powerful
 computational methods. Therefore having a good background about
 theoretical aspects, especially those relevant in practice, is extremely
 useful to effectively apply statistical methods. In this first chapter,
-we introduce these concepts and methods, many, which will be further
+we introduce these concepts and methods, many of which will be further
 explored and expanded throughout the rest of the book.
 
 (bayesian_modeling)=
