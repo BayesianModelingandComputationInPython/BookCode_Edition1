@@ -563,9 +563,9 @@ prior to it and then try to build a Bayesian model, for example, we
 could write:</p>
 <div class="math notranslate nohighlight" id="equation-eq-geometric-model">
 <span class="eqno">(2.2)<a class="headerlink" href="#equation-eq-geometric-model" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\begin{split}\begin{split}
-\sigma &amp;= \mathcal{HN}(\sigma_{\sigma}) \\
+\sigma &amp;\sim \mathcal{HN}(\sigma_{\sigma}) \\
 \text{p_goal} &amp;= 2\Phi\left(\frac{\tan^{-1}\left(\frac{L}{x}\right)}{\sigma}\right) - 1 \\
-Y &amp;= \text{Bin}(n=1, p=\text{p_goal})\end{split}\\\end{split}\end{aligned}\end{align} \]</div>
+Y &amp;\sim \text{Bin}(n=1, p=\text{p_goal})\end{split}\\\end{split}\end{aligned}\end{align} \]</div>
 <p>At this point we are not entirely certain how well our model encodes our
 domain knowledge about football, so we decide to first sample from the
 prior predictive to gain some intuition.
@@ -1961,7 +1961,7 @@ be concerned about the accuracy of LOO for this particular case?</p></li>
 </ol>
 <p><strong>2E7.</strong> Reproduce
 <a class="reference internal" href="#fig-posterior-predictive-many-examples"><span class="std std-numref">Fig. 2.7</span></a>, but using
-<code class="docutils literal notranslate"><span class="pre">az.plot_loo(ecdf=True)</span></code> in place of <code class="docutils literal notranslate"><span class="pre">az.plot_bpv(.)</span></code>. Interpret the
+<code class="docutils literal notranslate"><span class="pre">az.plot_loo_pit(ecdf=True)</span></code> in place of <code class="docutils literal notranslate"><span class="pre">az.plot_bpv(.)</span></code>. Interpret the
 results. Hint: when using the option <code class="docutils literal notranslate"><span class="pre">ecdf=True</span></code>, instead of the LOO-PIT
 KDE you will get a plot of the difference between the LOO-PIT Empirical
 Cumulative Distribution Function (ECDF) and the Uniform CDF. The ideal
@@ -2069,7 +2069,7 @@ distribution <span class="math notranslate nohighlight">\(\mathcal{N}(0,20)\)</s
 <li><p>A random sample of size 2 from a <span class="math notranslate nohighlight">\(\mathcal{N}(0,1)\)</span> and prior
 distribution <span class="math notranslate nohighlight">\(\mathcal{N}(0,20)\)</span></p></li>
 <li><p>A random sample of size 200 from a <span class="math notranslate nohighlight">\(\mathcal{N}(0,1)\)</span> and prior
-distribution <span class="math notranslate nohighlight">\(\mathcal{N}(20 1)\)</span></p></li>
+distribution <span class="math notranslate nohighlight">\(\mathcal{N}(20, 1)\)</span></p></li>
 <li><p>A random sample of size 200 from a <span class="math notranslate nohighlight">\(\mathcal{U}(0,1)\)</span> and prior
 distribution <span class="math notranslate nohighlight">\(\mathcal{N}(10, 20)\)</span></p></li>
 <li><p>A random sample of size 200 from a <span class="math notranslate nohighlight">\(\mathcal{HN}(0,1)\)</span> and a prior

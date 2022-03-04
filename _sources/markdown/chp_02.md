@@ -138,9 +138,9 @@ could write:
 ```{math}
 :label: eq:geometric_model
 \begin{split}
-\sigma &= \mathcal{HN}(\sigma_{\sigma}) \\
+\sigma &\sim \mathcal{HN}(\sigma_{\sigma}) \\
 \text{p_goal} &= 2\Phi\left(\frac{\tan^{-1}\left(\frac{L}{x}\right)}{\sigma}\right) - 1 \\
-Y &= \text{Bin}(n=1, p=\text{p_goal})
+Y &\sim \text{Bin}(n=1, p=\text{p_goal})
 
 \end{split}
 ```
@@ -1735,7 +1735,7 @@ answer the following questions:
 
 **2E7.** Reproduce
 {numref}`fig:posterior_predictive_many_examples`, but using
-`az.plot_loo(ecdf=True)` in place of `az.plot_bpv(.)`. Interpret the
+`az.plot_loo_pit(ecdf=True)` in place of `az.plot_bpv(.)`. Interpret the
 results. Hint: when using the option `ecdf=True`, instead of the LOO-PIT
 KDE you will get a plot of the difference between the LOO-PIT Empirical
 Cumulative Distribution Function (ECDF) and the Uniform CDF. The ideal
@@ -1860,7 +1860,7 @@ likelihood at 1.
     distribution $\mathcal{N}(0,20)$
 
 3.  A random sample of size 200 from a $\mathcal{N}(0,1)$ and prior
-    distribution $\mathcal{N}(20 1)$
+    distribution $\mathcal{N}(20, 1)$
 
 4.  A random sample of size 200 from a $\mathcal{U}(0,1)$ and prior
     distribution $\mathcal{N}(10, 20)$
