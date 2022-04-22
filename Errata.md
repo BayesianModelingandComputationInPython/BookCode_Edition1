@@ -10,6 +10,7 @@
 | 1 | ...we introduce these concepts and methods, many, which... | ...we introduce these concepts and methods, many **of** which... | Thanks  Thomas Ogden |
 | 8 | ...it will **depends** on the result... | ...it will **depend** on the result.. | Thanks Ero Carrera |
 | 9 | ...or **simple** the posterior. | ...or **simply** the posterior.  | Thanks Ero Carrera |
+| 23 | An absolute value mean... | An absolute deviation to the mean... | Thanks Zhengchen Cai|
 | 24 | One is what could called... | One is what could **be** called... | Thanks Sebastian |
 | 26 | 1E8. Rerun Code block | 1E8. Rerun Code Block |  |
 | 27 | Which can can be used **to to** visualize a Highest Density Interval? | Which can can be used **to** visualize a Highest Density Interval? |  |
