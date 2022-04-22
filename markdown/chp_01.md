@@ -1239,7 +1239,7 @@ constraints are [^19]:
 
 -   A positive mean, with support $[0, \infty)$: Exponential
 
--   An absolute value mean, with support $(-\infty, \infty)$: Laplace
+-   An absolute deviation to the mean, with support $(-\infty, \infty)$: Laplace
     (also known as double Exponential)
 
 -   A given mean and variance, with support $(-\infty, \infty)$: Normal
