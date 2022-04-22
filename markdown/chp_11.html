@@ -38,20 +38,22 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -319,7 +321,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -591,7 +593,282 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Appendiceal Topics</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#probability-background">
+   11.1. Probability Background
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#probability">
+     11.1.1. Probability
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#conditional-probability">
+     11.1.2. Conditional Probability
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#probability-distribution">
+     11.1.3. Probability Distribution
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#discrete-random-variables-and-distributions">
+     11.1.4. Discrete Random Variables and Distributions
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#discrete-uniform-distribution">
+       11.1.4.1. Discrete Uniform Distribution
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#binomial-distribution">
+       11.1.4.2. Binomial Distribution
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#poisson-distribution">
+       11.1.4.3. Poisson Distribution
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#continuous-random-variables-and-distributions">
+     11.1.5. Continuous Random Variables and Distributions
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#continuous-uniform-distribution">
+       11.1.5.1. Continuous Uniform Distribution
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#gaussian-or-normal-distribution">
+       11.1.5.2. Gaussian or Normal Distribution
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#student-s-t-distribution">
+       11.1.5.3. Student’s t-distribution
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#beta-distribution">
+       11.1.5.4. Beta Distribution
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#joint-conditional-and-marginal-distributions">
+     11.1.6. Joint, Conditional and Marginal Distributions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#probability-integral-transform-pit">
+     11.1.7. Probability Integral Transform (PIT)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#expectations">
+     11.1.8. Expectations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transformations">
+     11.1.9. Transformations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#limits">
+     11.1.10. Limits
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-law-of-large-numbers">
+       11.1.10.1. The Law of Large Numbers
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-central-limit-theorem">
+       11.1.10.2. The Central Limit Theorem
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#markov-chains">
+     11.1.11. Markov Chains
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#entropy">
+   11.2. Entropy
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#kullback-leibler-divergence">
+   11.3. Kullback-Leibler Divergence
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#information-criterion">
+   11.4. Information Criterion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loo-in-depth">
+   11.5. LOO in Depth
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#jeffreys-prior-derivation">
+   11.6. Jeffreys’ Prior Derivation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#jeffreys-prior-for-the-binomial-likelihood-in-terms-of-theta">
+     11.6.1. Jeffreys’ Prior for the Binomial Likelihood in Terms of
+     <span class="math notranslate nohighlight">
+      \(\theta\)
+     </span>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#jeffreys-prior-for-the-binomial-likelihood-in-terms-of-kappa">
+     11.6.2. Jeffreys’ Prior for the Binomial Likelihood in Terms of
+     <span class="math notranslate nohighlight">
+      \(\kappa\)
+     </span>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#jeffreys-posterior-for-the-binomial-likelihood">
+     11.6.3. Jeffreys’ Posterior for the Binomial Likelihood
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#marginal-likelihood">
+   11.7. Marginal Likelihood
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-harmonic-mean-estimator">
+     11.7.1. The Harmonic Mean Estimator
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#marginal-likelihood-and-model-comparison">
+     11.7.2. Marginal Likelihood and Model Comparison
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bayes-factor-vs-waic-and-loo">
+     11.7.3. Bayes Factor vs WAIC and LOO
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#moving-out-of-flatland">
+   11.8. Moving out of Flatland
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inference-methods">
+   11.9. Inference Methods
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#grid-method">
+     11.9.1. Grid Method
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#metropolis-hastings">
+     11.9.2. Metropolis-Hastings
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hamiltonian-monte-carlo">
+     11.9.3. Hamiltonian Monte Carlo
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sequential-monte-carlo">
+     11.9.4. Sequential Monte Carlo
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#variational-inference">
+     11.9.5. Variational Inference
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#programming-references">
+   11.10. Programming References
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#which-programming-language">
+     11.10.1. Which Programming Language?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#version-control">
+     11.10.2. Version Control
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dependency-management-and-package-repositories">
+     11.10.3. Dependency Management and Package Repositories
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#environment-management">
+     11.10.4. Environment Management
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#text-editor-vs-integrated-development-environment-vs-notebook">
+     11.10.5. Text Editor vs Integrated Development Environment vs Notebook
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-specific-tools-used-for-this-book">
+     11.10.6. The Specific Tools Used for this Book
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="appendiceal-topics">
@@ -797,7 +1074,7 @@ have restricted the sample space to agree with the evidence <span class="math no
 sample <span class="math notranslate nohighlight">\(\mathcal{X}\)</span>, each circle represent a possible outcome. We have
 two events, <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>. On the right we have represented <span class="math notranslate nohighlight">\(P(A \mid B)\)</span>,
 once we know <span class="math notranslate nohighlight">\(B\)</span> we can rule out all events not in <span class="math notranslate nohighlight">\(B\)</span>. This figure was
-adapted from Introduction to Probability <span id="id7">[<a class="reference internal" href="references.html#id10">5</a>]</span>.</span><a class="headerlink" href="#fig-cond" title="Permalink to this image">¶</a></p>
+adapted from Introduction to Probability <span id="id7">[<a class="reference internal" href="references.html#id10" title="J.K. Blitzstein and J. Hwang. Introduction to Probability, Second Edition. Chapman &amp; Hall/CRC Texts in Statistical Science. CRC Press, 2019. ISBN 9780429766732.">5</a>]</span>.</span><a class="headerlink" href="#fig-cond" title="Permalink to this image">¶</a></p>
 </div>
 <p>The concept of conditional probability is at the heart of statistics and
 is central to thinking about how we should update our knowledge of an
@@ -946,7 +1223,7 @@ with the same distribution as <span class="math notranslate nohighlight">\(X\)</
 they are useful anyway. Stories have helped humans to make sense of
 their surrounding for millennia and they continue to be useful today,
 even in statistics. In the book Introduction to Probability
-<span id="id13">[<a class="reference internal" href="references.html#id10">5</a>]</span> Joseph K. Blitzstein and Jessica Hwang make extensive
+<span id="id13">[<a class="reference internal" href="references.html#id10" title="J.K. Blitzstein and J. Hwang. Introduction to Probability, Second Edition. Chapman &amp; Hall/CRC Texts in Statistical Science. CRC Press, 2019. ISBN 9780429766732.">5</a>]</span> Joseph K. Blitzstein and Jessica Hwang make extensive
 use of this device. They even use story proofs extensively, these are
 similar to mathematical proof but they can be more intuitive. Stories
 are also very useful devices to create statistical models, you can think
@@ -1169,7 +1446,7 @@ transform only works for continuous variables.</p>
 <div class="figure align-default" id="fig-cmf-pdf-pmf">
 <a class="reference internal image-reference" href="../_images/cmf_pdf_pmf.png"><img alt="../_images/cmf_pdf_pmf.png" src="../_images/cmf_pdf_pmf.png" style="width: 5.5in;" /></a>
 <p class="caption"><span class="caption-number">Fig. 11.7 </span><span class="caption-text">Relationship between the CDF, PDF and PMF. Adapted from the book Think
-Stats <span id="id21">[<a class="reference internal" href="references.html#id92">132</a>]</span>.</span><a class="headerlink" href="#fig-cmf-pdf-pmf" title="Permalink to this image">¶</a></p>
+Stats <span id="id21">[<a class="reference internal" href="references.html#id92" title="Allen B. Downey. Think Stats: Exploratory Data Analysis. O'Reilly Media;, 2014.">132</a>]</span>.</span><a class="headerlink" href="#fig-cmf-pdf-pmf" title="Permalink to this image">¶</a></p>
 </div>
 <p>As we did with the discrete random variables, now we will see a few
 example of continuous random variables with their PDF and CDF.</p>
@@ -1533,7 +1810,7 @@ This is not always the case, the reason is that a 0 skew means that the
 balance the mass by having one long thin tail an another short and fat
 tail.</p>
 <p>The fourth moment, known as kurtosis, tells us about the behavior of the
-tails or the <em>extreme values</em> <span id="id32">[<a class="reference internal" href="references.html#id94">133</a>]</span>. It is defined as</p>
+tails or the <em>extreme values</em> <span id="id32">[<a class="reference internal" href="references.html#id94" title="Peter H Westfall. Kurtosis as peakedness, 1905–2014. rip. The American Statistician, 68(3):191–195, 2014.">133</a>]</span>. It is defined as</p>
 <div class="math notranslate nohighlight" id="equation-kurtosis">
 <span class="eqno">(11.29)<a class="headerlink" href="#equation-kurtosis" title="Permalink to this equation">¶</a></span>\[\text{Kurtosis}(X) = \mathbb{E}\left(\frac{X -\mu}{\sigma}\right)^4 - 3 \]</div>
 <p>The reason to subtract 3 is to make the Gaussian have 0 kurtosis, as it
@@ -2040,7 +2317,7 @@ is shown in <a class="reference internal" href="#fig-kl-heatmap"><span class="st
 not symmetric, the reason is that <span class="math notranslate nohighlight">\(\mathbb{KL}(p \parallel q)\)</span> is not
 necessarily the same as <span class="math notranslate nohighlight">\(\mathbb{KL}(q \parallel p)\)</span>. Second, we have
 many white cells. They represent <span class="math notranslate nohighlight">\(\infty\)</span> values. The definition of the
-KL divergence uses the following conventions <span id="id43">[<a class="reference internal" href="references.html#id17">134</a>]</span>:</p>
+KL divergence uses the following conventions <span id="id43">[<a class="reference internal" href="references.html#id17" title="T.M. Cover and J.A. Thomas. Elements of Information Theory. Wiley, 2012. ISBN 9781118585771.">134</a>]</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-kl-divergence-conventions">
 <span class="eqno">(11.47)<a class="headerlink" href="#equation-eq-kl-divergence-conventions" title="Permalink to this equation">¶</a></span>\[0 \log \frac{0}{0} = 0, \quad
 0 \log \frac{0}{q(\boldsymbol{x})} = 0, \quad
@@ -2077,7 +2354,7 @@ statistical model. It takes into account how well the model fits the
 data and penalizes the complexity of the model. There are many different
 information criterion based on how they compute these two terms. The
 most famous family member, especially for non-Bayesians, is the Akaike
-Information Criterion (AIC) <span id="id45">[<a class="reference internal" href="references.html#id23">135</a>]</span>. It is defined as the sum of
+Information Criterion (AIC) <span id="id45">[<a class="reference internal" href="references.html#id23" title="Hirotogu Akaike. Information theory and an extension of the maximum likelihood principle. In Selected papers of hirotugu akaike, pages 199–213. Springer, 1998.">135</a>]</span>. It is defined as the sum of
 two terms. The <span class="math notranslate nohighlight">\(\log p(y_i \mid \hat{\theta}_{mle})\)</span> measures how well
 the model fits the data and the penalization term <span class="math notranslate nohighlight">\(p_{AIC}\)</span> to account
 for the fact that we use the same data to fit the model and to evaluate
@@ -2098,7 +2375,7 @@ a Gaussian distribution, but this is not true for a number of models,
 including hierarchical models, mixture models, neural networks, etc. In
 summary we want to use some better alternatives.</p>
 <p>The Widely applicable Information Crieria (WAIC <a class="footnote-reference brackets" href="#id119" id="id46">20</a>)
-<span id="id47">[<a class="reference internal" href="references.html#id14">136</a>]</span> can be regarded as a fully Bayesian extension
+<span id="id47">[<a class="reference internal" href="references.html#id14" title="Sumio Watanabe and Manfred Opper. Asymptotic equivalence of bayes cross validation and widely applicable information criterion in singular learning theory. Journal of machine learning research, 2010.">136</a>]</span> can be regarded as a fully Bayesian extension
 of AIC. It also contains two terms, roughly with the same interpretation
 as the Akaike criterion. The most important difference is that the terms
 are computed using the full posterior distribution.</p>
@@ -2149,10 +2426,10 @@ Leave Once Out Cross Validation (PSIS-LOO-CV). In this section we are
 going to discuss a few details of this method.</p>
 <p>LOO is an alternative to WAIC, in fact it can be shown that
 asymptotically they converge to the same numerical value
-<span id="id48">[<a class="reference internal" href="references.html#id14">136</a>, <a class="reference internal" href="references.html#id21">137</a>]</span>. Nevertheless, LOO
+<span id="id48">[<a class="reference internal" href="references.html#id14" title="Sumio Watanabe and Manfred Opper. Asymptotic equivalence of bayes cross validation and widely applicable information criterion in singular learning theory. Journal of machine learning research, 2010.">136</a>, <a class="reference internal" href="references.html#id21" title="Aki Vehtari, Andrew Gelman, and Jonah Gabry. Practical bayesian model evaluation using leave-one-out cross-validation and waic. Statistics and computing, 27(5):1413–1432, 2017.">137</a>]</span>. Nevertheless, LOO
 presents two importance advantages for practitioners. It is more robust
 in finite samples settings, and it provides useful diagnostics during
-computation <span id="id49">[<a class="reference internal" href="references.html#id20">16</a>, <a class="reference internal" href="references.html#id21">137</a>]</span>.</p>
+computation <span id="id49">[<a class="reference internal" href="references.html#id20" title="Jonah Gabry, Daniel Simpson, Aki Vehtari, Michael Betancourt, and Andrew Gelman. Visualization in bayesian workflow. Journal of the Royal Statistical Society: Series A (Statistics in Society), 182(2):389–402, 2019.">16</a>, <a class="reference internal" href="references.html#id21" title="Aki Vehtari, Andrew Gelman, and Jonah Gabry. Practical bayesian model evaluation using leave-one-out cross-validation and waic. Statistics and computing, 27(5):1413–1432, 2017.">137</a>]</span>.</p>
 <p>Under LOO-CV the expected log pointwise predictive density for a new
 dataset is:</p>
 <div class="math notranslate nohighlight">
@@ -2174,7 +2451,7 @@ need to add a penalization term. Computing <span class="math notranslate nohighl
 in <a class="reference internal" href="#equation-eq-loo-cv-naive">(11.51)</a> is very costly as we need to compute <span class="math notranslate nohighlight">\(n\)</span>
 posteriors. Fortunately if the <span class="math notranslate nohighlight">\(n\)</span> observations are conditionally
 independent we can approximate Equation <a class="reference internal" href="#equation-eq-loo-cv-naive">(11.51)</a> with
-Equation <a class="reference internal" href="#equation-eq-loo">(11.52)</a> <span id="id50">[<a class="reference internal" href="references.html#id21">137</a>, <a class="reference internal" href="references.html#id24">138</a>]</span>:</p>
+Equation <a class="reference internal" href="#equation-eq-loo">(11.52)</a> <span id="id50">[<a class="reference internal" href="references.html#id21" title="Aki Vehtari, Andrew Gelman, and Jonah Gabry. Practical bayesian model evaluation using leave-one-out cross-validation and waic. Statistics and computing, 27(5):1413–1432, 2017.">137</a>, <a class="reference internal" href="references.html#id24" title="W.R. Gilks, S. Richardson, and D. Spiegelhalter. Markov Chain Monte Carlo in Practice. Chapman &amp; Hall/CRC Interdisciplinary Statistics. CRC Press, 1995. ISBN 9781482214970.">138</a>]</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-loo">
 <span class="eqno">(11.52)<a class="headerlink" href="#equation-eq-loo" title="Permalink to this equation">¶</a></span>\[\text{ELPD}_{psis-loo} = \sum_i^n \log \sum_j^s w_i^j p(y_i \mid \boldsymbol{\theta}^j)
     \]</div>
@@ -2226,13 +2503,13 @@ Mathematically the problem is that the importance weights can have high
 or even infinite variance. In order to keep the variance in check, LOO
 applies a smoothing procedure that involves replacing the largest
 importance weights with values from an estimated Pareto distribution.
-This help to make LOO much more robust <span id="id51">[<a class="reference internal" href="references.html#id21">137</a>]</span>.
+This help to make LOO much more robust <span id="id51">[<a class="reference internal" href="references.html#id21" title="Aki Vehtari, Andrew Gelman, and Jonah Gabry. Practical bayesian model evaluation using leave-one-out cross-validation and waic. Statistics and computing, 27(5):1413–1432, 2017.">137</a>]</span>.
 Moreover, the estimated <span class="math notranslate nohighlight">\(\hat \kappa\)</span> parameter of the Pareto
 distribution can be used to detect highly influential observations, i.e.
 observations that have a large effect on the predictive distribution
 when they are left out. In general, higher values of <span class="math notranslate nohighlight">\(\hat \kappa\)</span> can
 indicate problems with the data or model, especially when
-<span class="math notranslate nohighlight">\(\hat \kappa &gt; 0.7\)</span> <span id="id52">[<a class="reference internal" href="references.html#id20">16</a>, <a class="reference internal" href="references.html#id19">22</a>]</span>.</p>
+<span class="math notranslate nohighlight">\(\hat \kappa &gt; 0.7\)</span> <span id="id52">[<a class="reference internal" href="references.html#id20" title="Jonah Gabry, Daniel Simpson, Aki Vehtari, Michael Betancourt, and Andrew Gelman. Visualization in bayesian workflow. Journal of the Royal Statistical Society: Series A (Statistics in Society), 182(2):389–402, 2019.">16</a>, <a class="reference internal" href="references.html#id19" title="Aki Vehtari, Daniel Simpson, Andrew Gelman, Yuling Yao, and Jonah Gabry. Pareto smoothed importance sampling. arXiv preprint arXiv:1507.02646, 2021.">22</a>]</span>.</p>
 </div>
 <div class="section" id="jeffreys-prior-derivation">
 <span id="id53"></span><h2><span class="section-number">11.6. </span>Jeffreys’ Prior Derivation<a class="headerlink" href="#jeffreys-prior-derivation" title="Permalink to this headline">¶</a></h2>
@@ -2360,7 +2637,7 @@ in terms of <span class="math notranslate nohighlight">\(\kappa\)</span> we can 
 likelihood is analytically tractable. For the rest, numerically
 computing this integral is notoriously difficult, since this involves a
 high-dimensional integration over a usually complicated and highly
-variable function <span id="id58">[<a class="reference internal" href="references.html#id30">139</a>]</span>. In this section we will try to gain
+variable function <span id="id58">[<a class="reference internal" href="references.html#id30" title="Nial Friel and Jason Wyse. Estimating the evidence–a review. Statistica Neerlandica, 66(3):288–308, 2012.">139</a>]</span>. In this section we will try to gain
 intuition into why this is generally a hard task.</p>
 <p>Numerically, and in low dimensions, we can compute the marginal
 likelihood by evaluating the product of the prior and the likelihood,
@@ -2372,13 +2649,13 @@ Thus grid-based methods becomes impractical for problems with more than
 a few variables. Monte Carlo integration can also be problematic, at
 least in the most naive implementations (see Section <a class="reference internal" href="#high-dimensions"><span class="std std-ref">Moving out of Flatland</span></a>).
 For that reason many dedicated methods have been proposed to compute the
-marginal likelihood <span id="id59">[<a class="reference internal" href="references.html#id30">139</a>]</span>. Here we will only discuss one of
+marginal likelihood <span id="id59">[<a class="reference internal" href="references.html#id30" title="Nial Friel and Jason Wyse. Estimating the evidence–a review. Statistica Neerlandica, 66(3):288–308, 2012.">139</a>]</span>. Here we will only discuss one of
 them. Our main concern is not learning how to compute the marginal
 likelihood in practice, but instead to illustrate why is hard to do it.</p>
 <div class="section" id="the-harmonic-mean-estimator">
 <span id="harmonic-mean"></span><h3><span class="section-number">11.7.1. </span>The Harmonic Mean Estimator<a class="headerlink" href="#the-harmonic-mean-estimator" title="Permalink to this headline">¶</a></h3>
 <p>A rather infamous estimator of the marginal likelihood is the harmonic
-mean estimator <span id="id60">[<a class="reference internal" href="references.html#id29">140</a>]</span>. A very appealing feature of this estimator
+mean estimator <span id="id60">[<a class="reference internal" href="references.html#id29" title="Radford M Neal. Contribution to the discussion of “approximate bayesian inference with the weighted likelihood bootstrap” by michael a. newton and adrian e. raftery. Journal of the Royal Statistical Society. Series B (Methodological), 56:41–42, 1994.">140</a>]</span>. A very appealing feature of this estimator
 is that it only requires <span class="math notranslate nohighlight">\(s\)</span> samples from the posterior:</p>
 <div class="math notranslate nohighlight" id="equation-eq-harmonic-mean-approx">
 <span class="eqno">(11.78)<a class="headerlink" href="#equation-eq-harmonic-mean-approx" title="Permalink to this equation">¶</a></span>\[p(Y) \approx \left(\frac{1}{s} \sum_{i=1}^{s} \frac{1}{p(Y \mid \boldsymbol{\theta}_i)} \right)^{-1}\]</div>
@@ -2405,7 +2682,7 @@ approximation of the marginal likelihood.</p>
 samples <span class="math notranslate nohighlight">\(s\)</span> needed to feed into Equation <a class="reference internal" href="#equation-eq-harmonic-mean-approx">(11.78)</a>
 in order to get close to the right answer is generally very large, to
 the point that the harmonic mean estimator is not very useful in
-practice <span id="id61">[<a class="reference internal" href="references.html#id30">139</a>, <a class="reference internal" href="references.html#id29">140</a>]</span>. Intuitively we can see that the sum
+practice <span id="id61">[<a class="reference internal" href="references.html#id30" title="Nial Friel and Jason Wyse. Estimating the evidence–a review. Statistica Neerlandica, 66(3):288–308, 2012.">139</a>, <a class="reference internal" href="references.html#id29" title="Radford M Neal. Contribution to the discussion of “approximate bayesian inference with the weighted likelihood bootstrap” by michael a. newton and adrian e. raftery. Journal of the Royal Statistical Society. Series B (Methodological), 56:41–42, 1994.">140</a>]</span>. Intuitively we can see that the sum
 will be dominated by samples with very low likelihood. Even worse, the
 harmonic mean estimator can have infinite variance. Infinite variance
 means that even if we increase <span class="math notranslate nohighlight">\(s\)</span> we will not get a better answer, thus
@@ -2458,7 +2735,7 @@ concentrated posterior.</p>
 <p>When performing inference the marginal likelihood is generally regarded
 as a normalization constant and often could be omitted or canceled out
 during computation. Instead, the marginal likelihood is often seen as
-crucial during model comparison <span id="id62">[<a class="reference internal" href="references.html#id156">141</a>, <a class="reference internal" href="references.html#id158">142</a>, <a class="reference internal" href="references.html#id157">143</a>]</span>.
+crucial during model comparison <span id="id62">[<a class="reference internal" href="references.html#id156" title="Quentin F Gronau, Alexandra Sarafoglou, Dora Matzke, Alexander Ly, Udo Boehm, Maarten Marsman, David S Leslie, Jonathan J Forster, Eric-Jan Wagenmakers, and Helen Steingroever. A tutorial on bridge sampling. Journal of mathematical psychology, 81:80–97, 2017.">141</a>, <a class="reference internal" href="references.html#id158" title="Danielle Navarro. A personal essay on bayes factors. PsyArXiv, 2020.">142</a>, <a class="reference internal" href="references.html#id157" title="Daniel J Schad, Bruno Nicenboim, Paul-Christian Bürkner, Michael Betancourt, and Shravan Vasishth. Workflow techniques for the robust use of bayes factors. arXiv preprint arXiv:2103.08744, 2021.">143</a>]</span>.
 To better understand why let us write Bayes’ theorem in a way that
 explicitly shows that our inferences are model dependent:</p>
 <div class="math notranslate nohighlight" id="equation-eq-bayes-theorem-m">
@@ -2601,7 +2878,7 @@ have good diagnostics.</p>
 <div class="section" id="moving-out-of-flatland">
 <span id="high-dimensions"></span><h2><span class="section-number">11.8. </span>Moving out of Flatland<a class="headerlink" href="#moving-out-of-flatland" title="Permalink to this headline">¶</a></h2>
 <p>In Flatland: A Romance of Many Dimensions by Edwin Abbott
-<span id="id66">[<a class="reference internal" href="references.html#id154">144</a>]</span> it tells the story of a square living in flatland, a
+<span id="id66">[<a class="reference internal" href="references.html#id154" title="E.A. Abbott and R. Jann. Flatland: A Romance of Many Dimensions. Oxford World's Classics. OUP Oxford, 2008. ISBN 9780199537501.">144</a>]</span> it tells the story of a square living in flatland, a
 two dimensional world inhabited by n-side polygons and where status is
 defined by the number of sides; with women being simple line-segments,
 and priests insisting they are circles even when then are just
@@ -2737,7 +3014,7 @@ think it is useful as to order the plethora of available methods.</p>
 <p>For a good chronological tour of Bayesian computation methods over the
 past two and a half centuries, with an special emphasis on those that
 transformed Bayesian inference we recommend you read Computing Bayes:
-Bayesian Computation from 1763 to the 21st Century <span id="id70">[<a class="reference internal" href="references.html#id116">145</a>]</span></p>
+Bayesian Computation from 1763 to the 21st Century <span id="id70">[<a class="reference internal" href="references.html#id116" title="Gael M Martin, David T Frazier, and Christian P Robert. Computing bayes: bayesian computation from 1763 to the 21st century. arXiv preprint arXiv:2004.06425, 2020.">145</a>]</span></p>
 <div class="section" id="grid-method">
 <span id="id71"></span><h3><span class="section-number">11.9.1. </span>Grid Method<a class="headerlink" href="#grid-method" title="Permalink to this headline">¶</a></h3>
 <p>The grid method is a simple brute-force approach. We want to know the
@@ -2785,7 +3062,7 @@ poorly with the number of parameters as explained in
 <div class="section" id="metropolis-hastings">
 <span id="sec-metropolis-hastings"></span><h3><span class="section-number">11.9.2. </span>Metropolis-Hastings<a class="headerlink" href="#metropolis-hastings" title="Permalink to this headline">¶</a></h3>
 <p>We introduced Metropolis-Hastings algorithm
-<span id="id73">[<a class="reference internal" href="references.html#id106">7</a>, <a class="reference internal" href="references.html#id107">8</a>, <a class="reference internal" href="references.html#id108">9</a>]</span> very early in Section <a class="reference internal" href="chp_01.html#sampling-methods-intro"><span class="std std-ref">A DIY Sampler, Do Not Try This at Home</span></a>
+<span id="id73">[<a class="reference internal" href="references.html#id106" title="Nicholas Metropolis, Arianna W Rosenbluth, Marshall N Rosenbluth, Augusta H Teller, and Edward Teller. Equation of state calculations by fast computing machines. The journal of chemical physics, 21(6):1087–1092, 1953.">7</a>, <a class="reference internal" href="references.html#id107" title="WK HASTINGS. Monte carlo sampling methods using markov chains and their applications. Biometrika, 57(1):97–109, 1970.">8</a>, <a class="reference internal" href="references.html#id108" title="Marshall N Rosenbluth. Genesis of the monte carlo algorithm for statistical mechanics. In AIP Conference Proceedings, volume 690, 22–30. American Institute of Physics, 2003.">9</a>]</span> very early in Section <a class="reference internal" href="chp_01.html#sampling-methods-intro"><span class="std std-ref">A DIY Sampler, Do Not Try This at Home</span></a>
 and show a simple Python implementation in Code Block
 <a class="reference internal" href="chp_01.html#metropolis-hastings"><span class="std std-ref">metropolis_hastings</span></a>. We will now provide more detail about why this
 method works. We will do it using the language of Markov Chains
@@ -2866,19 +3143,19 @@ old state with high acceptance rate. This is generally difficult to do
 if we do not know the geometry of the posterior distribution, but that
 is precisely what we want to find out. In practice useful
 Metropolis-Hastings methods are those that are adaptive
-<span id="id74">[<a class="reference internal" href="references.html#id101">146</a>, <a class="reference internal" href="references.html#id104">147</a>, <a class="reference internal" href="references.html#id103">148</a>, <a class="reference internal" href="references.html#id102">149</a>]</span>. For example,
+<span id="id74">[<a class="reference internal" href="references.html#id101" title="Heikki Haario, Eero Saksman, and Johanna Tamminen. An adaptive metropolis algorithm. Bernoulli, pages 223–242, 2001.">146</a>, <a class="reference internal" href="references.html#id104" title="Christophe Andrieu and Johannes Thoms. A tutorial on adaptive mcmc. Statistics and computing, 18(4):343–373, 2008.">147</a>, <a class="reference internal" href="references.html#id103" title="Gareth O Roberts and Jeffrey S Rosenthal. Examples of adaptive mcmc. Journal of computational and graphical statistics, 18(2):349–367, 2009.">148</a>, <a class="reference internal" href="references.html#id102" title="Dino Sejdinovic, Heiko Strathmann, Maria Lomeli Garcia, Christophe Andrieu, and Arthur Gretton. Kernel adaptive metropolis-hastings. In International conference on machine learning, 1665–1673. PMLR, 2014.">149</a>]</span>. For example,
 we can use a Multivariate Gaussian distribution as proposal
 distribution. During tuning we can compute the empirical covariance from
 the posterior samples and use it as the covariance matrix of the
 proposal distribution. We can also scale the covariance matrix so that
 the average acceptance rate approach a predefined acceptance rate
-<span id="id75">[<a class="reference internal" href="references.html#id105">150</a>, <a class="reference internal" href="references.html#id109">151</a>, <a class="reference internal" href="references.html#id110">152</a>]</span>. In fact there is evidence
+<span id="id75">[<a class="reference internal" href="references.html#id105" title="Andrew Gelman, Walter R Gilks, and Gareth O Roberts. Weak convergence and optimal scaling of random walk metropolis algorithms. The annals of applied probability, 7(1):110–120, 1997.">150</a>, <a class="reference internal" href="references.html#id109" title="Gareth O Roberts and Jeffrey S Rosenthal. Optimal scaling for various metropolis-hastings algorithms. Statistical science, 16(4):351–367, 2001.">151</a>, <a class="reference internal" href="references.html#id110" title="Mylene Bedard. Optimal acceptance rates for metropolis algorithms: moving beyond 0.234. Stochastic Processes and their Applications, 118(12):2198–2222, 2008.">152</a>]</span>. In fact there is evidence
 that under certain circumstances and when the dimensionality of the
 posterior increases the optimal acceptance rate converges to the magic
-number 0.234 <span id="id76">[<a class="reference internal" href="references.html#id105">150</a>]</span>. In practice it seems that an acceptance
+number 0.234 <span id="id76">[<a class="reference internal" href="references.html#id105" title="Andrew Gelman, Walter R Gilks, and Gareth O Roberts. Weak convergence and optimal scaling of random walk metropolis algorithms. The annals of applied probability, 7(1):110–120, 1997.">150</a>]</span>. In practice it seems that an acceptance
 rate around 0.234 or a little bit higher gives more or less the same
 performance but the general validity and useful of this result has also
-been disputed <span id="id77">[<a class="reference internal" href="references.html#id111">153</a>, <a class="reference internal" href="references.html#id112">154</a>]</span>.</p>
+been disputed <span id="id77">[<a class="reference internal" href="references.html#id111" title="Chris Sherlock. Optimal scaling of the random walk metropolis: general criteria for the 0.234 acceptance rule. Journal of Applied Probability, 50(1):1–15, 2013.">153</a>, <a class="reference internal" href="references.html#id112" title="Christopher CJ Potter and Robert H Swendsen. 0.234: the myth of a universal acceptance ratio for monte carlo simulations. Physics Procedia, 68:120–124, 2015.">154</a>]</span>.</p>
 <p>In the next section we will discuss a clever way to generate proposals
 that help to correct most of the problems with basic
 Metropolis-Hastings.</p>
@@ -2886,7 +3163,7 @@ Metropolis-Hastings.</p>
 <div class="section" id="hamiltonian-monte-carlo">
 <span id="hmc"></span><h3><span class="section-number">11.9.3. </span>Hamiltonian Monte Carlo<a class="headerlink" href="#hamiltonian-monte-carlo" title="Permalink to this headline">¶</a></h3>
 <p>Hamiltonian Monte Carlo (HMC) <a class="footnote-reference brackets" href="#id124" id="id78">25</a>
-<span id="id79">[<a class="reference internal" href="references.html#id95">155</a>, <a class="reference internal" href="references.html#id96">156</a>, <a class="reference internal" href="references.html#id97">157</a>]</span> is a type of MCMC method that
+<span id="id79">[<a class="reference internal" href="references.html#id95" title="Simon Duane, Anthony D Kennedy, Brian J Pendleton, and Duncan Roweth. Hybrid monte carlo. Physics letters B, 195(2):216–222, 1987.">155</a>, <a class="reference internal" href="references.html#id96" title="S. Brooks, A. Gelman, G. Jones, and X.L. Meng. Handbook of Markov Chain Monte Carlo. Chapman &amp; Hall/CRC Handbooks of Modern Statistical Methods. CRC Press, 2011. ISBN 9781420079425.">156</a>, <a class="reference internal" href="references.html#id97" title="Michael Betancourt. A conceptual introduction to hamiltonian monte carlo. arXiv preprint arXiv:1701.02434, 2017.">157</a>]</span> is a type of MCMC method that
 makes use of gradients to generate new proposed states. The gradients of
 the log-probability of the posterior evaluated at some state provides
 information of the geometry of the posterior density function. HMC
@@ -2987,7 +3264,7 @@ integrator implemented in Python <a class="footnote-reference brackets" href="#i
 the initial position and momentum respectively. <code class="docutils literal notranslate"><span class="pre">dVdq</span></code> is a Python
 function that returns the gradient of the position of some target
 density function at position <code class="docutils literal notranslate"><span class="pre">q</span></code>
-<span class="math notranslate nohighlight">\(\frac{\partial V}{\partial \mathbf{q}}\)</span>. We used JAX <span id="id81">[<a class="reference internal" href="references.html#id155">116</a>]</span>
+<span class="math notranslate nohighlight">\(\frac{\partial V}{\partial \mathbf{q}}\)</span>. We used JAX <span id="id81">[<a class="reference internal" href="references.html#id155" title="James Bradbury, Roy Frostig, Peter Hawkins, Matthew James Johnson, Chris Leary, Dougal Maclaurin, George Necula, Adam Paszke, Jake VanderPlas, Skye Wanderman-Milne, and Qiao Zhang. JAX: composable transformations of Python+NumPy programs. 2018. URL: http://github.com/google/jax.">116</a>]</span>
 auto-differentiation ability to generate this function. <code class="docutils literal notranslate"><span class="pre">path_len</span></code>
 indicates how long to integrate for and <code class="docutils literal notranslate"><span class="pre">step_size</span></code> how large each
 integration step should be. As a result we obtain a new position and
@@ -3120,7 +3397,7 @@ acceptance-rate target. For example, in PyMC3 you set the argument
 <code class="docutils literal notranslate"><span class="pre">target_accept</span></code> <a class="footnote-reference brackets" href="#id126" id="id82">27</a> The precision matrix <span class="math notranslate nohighlight">\(M\)</span> or its inverse can be
 estimated from the samples during warm-up phase and the number of steps
 can be dynamically adapted at each MCMC step using the NUTS algorithm
-<span id="id83">[<a class="reference internal" href="references.html#id98">158</a>]</span>. In order to avoid too long trajectory that could go near
+<span id="id83">[<a class="reference internal" href="references.html#id98" title="Matthew D Hoffman and Andrew Gelman. The no-u-turn sampler: adaptively setting path lengths in hamiltonian monte carlo. Journal of Machine Learning Research, 15(47):1593–1623, 2014.">158</a>]</span>. In order to avoid too long trajectory that could go near
 the initialization point, NUTS extends the trajectory backward and
 forwards until a U-turn criterion is met. Additionally, NUTS applies a
 multinomial sampling to choose from all the generated points from the
@@ -3134,13 +3411,13 @@ with fixed integration time HMC as well).</p>
 particle filters. It has wide application to Bayesian inference for
 static models and dynamic models such as sequential time series
 inference and signal processing
-<span id="id84">[<a class="reference internal" href="references.html#id38">63</a>, <a class="reference internal" href="references.html#id37">159</a>, <a class="reference internal" href="references.html#id36">160</a>, <a class="reference internal" href="references.html#id35">161</a>]</span>. There are many
+<span id="id84">[<a class="reference internal" href="references.html#id38" title="N. Chopin and O. Papaspiliopoulos. An Introduction to Sequential Monte Carlo. Springer Series in Statistics. Springer International Publishing, 2020. ISBN 9783030478445.">63</a>, <a class="reference internal" href="references.html#id37" title="Pierre Del Moral, Arnaud Doucet, and Ajay Jasra. Sequential monte carlo samplers. Journal of the Royal Statistical Society: Series B (Statistical Methodology), 68(3):411–436, 2006.">159</a>, <a class="reference internal" href="references.html#id36" title="Jianye Ching and Yi-Chu Chen. Transitional markov chain monte carlo method for bayesian model updating, model class selection, and model averaging. Journal of engineering mechanics, 133(7):816–832, 2007.">160</a>, <a class="reference internal" href="references.html#id35" title="Christian A Naesseth, Fredrik Lindsten, and Thomas B Schön. Elements of sequential monte carlo. arXiv preprint arXiv:1903.04797, 2019.">161</a>]</span>. There are many
 variations and implementation under the same or similar name, with
 different application. Thus you might at times find the literature a bit
 confusing. We will give a brief description of the SMC/SMC-ABC method as
 implemented in PyMC3 and TFP. For a detailed discussion of SMC methods
 under a unified framework we recommend the book An Introduction to
-Sequential Monte Carlo <span id="id85">[<a class="reference internal" href="references.html#id38">63</a>]</span>.</p>
+Sequential Monte Carlo <span id="id85">[<a class="reference internal" href="references.html#id38" title="N. Chopin and O. Papaspiliopoulos. An Introduction to Sequential Monte Carlo. Springer Series in Statistics. Springer International Publishing, 2020. ISBN 9783030478445.">63</a>]</span>.</p>
 <p>First note that we can write the posterior in the following way:</p>
 <div class="math notranslate nohighlight" id="equation-eq-powered-posterior">
 <span class="eqno">(11.107)<a class="headerlink" href="#equation-eq-powered-posterior" title="Permalink to this equation">¶</a></span>\[p(\boldsymbol{\theta} \mid Y)_{\beta}  \propto 
@@ -3206,12 +3483,12 @@ across all chains.</p>
 <p>While we do not use variational inference in this book, it is a useful
 approach to know about. Compared to MCMC, VI tends to be easier to scale
 to large data and is faster to run computationally, but with less
-theoretical guarantees of convergence <span id="id90">[<a class="reference internal" href="references.html#id162">162</a>]</span>.</p>
+theoretical guarantees of convergence <span id="id90">[<a class="reference internal" href="references.html#id162" title="Yuling Yao, Aki Vehtari, Daniel Simpson, and Andrew Gelman. Yes, but did it work?: evaluating variational inference. In International Conference on Machine Learning, 5581–5590. PMLR, 2018.">162</a>]</span>.</p>
 <p>As we previously mentioned in Section <a class="reference internal" href="#dkl"><span class="std std-ref">Kullback-Leibler Divergence</span></a>, we can use one distribution to
 approximate another and then use the Kullback-Leibler (KL) divergence to
 measure how good the approximation is. Turns out we can use this
 approach to do Bayesian inference as well! Such approach is called
-variational inference (VI) <span id="id91">[<a class="reference internal" href="references.html#id159">163</a>]</span>. The goal of VI is to
+variational inference (VI) <span id="id91">[<a class="reference internal" href="references.html#id159" title="David M. Blei, Alp Kucukelbir, and Jon D. McAuliffe. Variational inference: a review for statisticians. Journal of the American statistical Association, 112(518):859–877, 2017.">163</a>]</span>. The goal of VI is to
 approximate the target probability density, in our case the posterior
 distribution <span class="math notranslate nohighlight">\(p(\boldsymbol{\theta} \mid Y)\)</span>, with a surrogate
 distribution <span class="math notranslate nohighlight">\(q(\boldsymbol{\theta})\)</span>. In practice we usually choose
@@ -3288,7 +3565,7 @@ lines. Two types of surrogate posterior distributions are used for the
 approximation: on the left panel a mean-field Gaussian (one univariate
 Gaussian for each dimension with trainable location and scale) and on
 the right panel a full-rank Gaussian (a 2D multivariate Gaussian with
-trainable mean and covariance matrix) <span id="id92">[<a class="reference internal" href="references.html#id163">164</a>]</span>.
+trainable mean and covariance matrix) <span id="id92">[<a class="reference internal" href="references.html#id163" title="Alp Kucukelbir, Dustin Tran, Rajesh Ranganath, Andrew Gelman, and David M. Blei. Automatic differentiation variational inference. The Journal of Machine Learning Research, 18(1):430–474, 2017.">164</a>]</span>.
 Samples from the approximation after optimization are plotted as dots
 overlay on top of the true density. Comparing the two, you can see that
 while both approximations does not fully capture the shape of the target
@@ -3448,12 +3725,12 @@ and also in the genetic makeup.</p>
 <dt class="label" id="id99"><span class="brackets"><a class="fn-backref" href="#id3">2</a></span></dt>
 <dd><p>For those who are interested in delving further into the subject,
 we recommend reading the book Introduction to Probability by Joseph
-K. Blitzstein and Jessica Hwang <span id="id100">[<a class="reference internal" href="references.html#id10">5</a>]</span>.</p>
+K. Blitzstein and Jessica Hwang <span id="id100">[<a class="reference internal" href="references.html#id10" title="J.K. Blitzstein and J. Hwang. Introduction to Probability, Second Edition. Chapman &amp; Hall/CRC Texts in Statistical Science. CRC Press, 2019. ISBN 9780429766732.">5</a>]</span>.</p>
 </dd>
 <dt class="label" id="id101"><span class="brackets"><a class="fn-backref" href="#id5">3</a></span></dt>
 <dd><p>From this definition John K. Kruschke wonderfully states that
 Bayesian inference is reallocation of credibility (probability)
-across possibilities <span id="id102">[<a class="reference internal" href="references.html#id93">165</a>]</span>.</p>
+across possibilities <span id="id102">[<a class="reference internal" href="references.html#id93" title="J.K. Kruschke. Doing Bayesian Data Analysis: A Tutorial with R, JAGS, and Stan. Academic Press. Academic Press, 2015. ISBN 9780124058880.">165</a>]</span>.</p>
 </dd>
 <dt class="label" id="id103"><span class="brackets"><a class="fn-backref" href="#id9">4</a></span></dt>
 <dd><p>If we need to locate the circumference relative to other objects
@@ -3604,8 +3881,8 @@ of the samples.</p>
 
               </div>
               
-        
-            <!-- Previous / next buttons -->
+            
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="chp_10.html" title="previous page">
         <i class="fas fa-angle-left"></i>
@@ -3622,19 +3899,17 @@ of the samples.</p>
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By Martin, Kumar, Lao<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By Martin, Kumar, Lao<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 

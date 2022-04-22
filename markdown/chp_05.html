@@ -38,20 +38,22 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -319,7 +321,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -381,7 +383,72 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Splines</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#polynomial-regression">
+   5.1. Polynomial Regression
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#expanding-the-feature-space">
+   5.2. Expanding the Feature Space
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introducing-splines">
+   5.3. Introducing Splines
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#building-the-design-matrix-using-patsy">
+   5.4. Building the Design Matrix using Patsy
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fitting-splines-in-pymc3">
+   5.5. Fitting Splines in PyMC3
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#choosing-knots-and-prior-for-splines">
+   5.6. Choosing Knots and Prior for Splines
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#regularizing-prior-for-splines">
+     5.6.1. Regularizing Prior for Splines
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#modeling-co2-uptake-with-splines">
+   5.7. Modeling CO₂ Uptake with Splines
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   5.8. Exercises
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="splines">
@@ -528,7 +595,7 @@ data.</p>
 can be extended to more than one predictor <span class="math notranslate nohighlight">\(X_0, X_1, \cdots, X_p\)</span>. And
 we can even add an inverse link function <span class="math notranslate nohighlight">\(\phi\)</span> <a class="footnote-reference brackets" href="#id29" id="id6">5</a> models of this form
 are known as Generalized Additive Models (GAM):
-<span id="id7">[<a class="reference internal" href="references.html#id3">18</a>, <a class="reference internal" href="references.html#id4">49</a>]</span>.</p>
+<span id="id7">[<a class="reference internal" href="references.html#id3" title="A. Gelman, J.B. Carlin, H.S. Stern, D.B. Dunson, A. Vehtari, and D.B. Rubin. Bayesian Data Analysis, Third Edition. Chapman &amp; Hall/CRC Texts in Statistical Science. Taylor &amp; Francis, 2013. ISBN 9781439840955.">18</a>, <a class="reference internal" href="references.html#id4" title="S.N. Wood. Generalized Additive Models: An Introduction with R, Second Edition. Chapman &amp; Hall/CRC Texts in Statistical Science. CRC Press, 2017. ISBN 9781498728379.">49</a>]</span>.</p>
 <div class="math notranslate nohighlight" id="equation-eq-gam">
 <span class="eqno">(5.5)<a class="headerlink" href="#equation-eq-gam" title="Permalink to this equation">¶</a></span>\[\mathbb{E}[Y]= \phi \left(\sum_i^p f(X_i)\right)\]</div>
 <p>Recapitulating what we learn in this section, the <span class="math notranslate nohighlight">\(B_i\)</span> functions in
@@ -1094,7 +1161,7 @@ black line corresponds to the mean spline function computed from
 <div class="section" id="modeling-co2-uptake-with-splines">
 <span id="id21"></span><h2><span class="section-number">5.7. </span>Modeling CO₂ Uptake with Splines<a class="headerlink" href="#modeling-co2-uptake-with-splines" title="Permalink to this headline">¶</a></h2>
 <p>For a final example of splines we are going to use data from an
-experimental study <span id="id22">[<a class="reference internal" href="references.html#id120">50</a>, <a class="reference internal" href="references.html#id121">51</a>]</span>. The experiment consists
+experimental study <span id="id22">[<a class="reference internal" href="references.html#id120" title="Catherine Potvin, Martin J Lechowicz, and Serge Tardif. The statistical analysis of ecophysiological response curves obtained from experiments involving repeated measures. Ecology, 71(4):1389–1400, 1990.">50</a>, <a class="reference internal" href="references.html#id121" title="Eric J Pedersen, David L Miller, Gavin L Simpson, and Noam Ross. Hierarchical generalized additive models in ecology: an introduction with mgcv. PeerJ, 7:e6876, 2019.">51</a>]</span>. The experiment consists
 of measuring the CO₂ uptake in 12 different plants under varying
 conditions. Here we will only explore the effect of the external CO₂
 concentration, i.e. how the CO₂ concentration in the environment
@@ -1140,7 +1207,7 @@ sections and thus we can start by applying the same model. Using a model
 that we have already applied in some previous problem or the ones we
 learned from the literature is a good way to start an analysis. This
 model-template approach can be viewed as a shortcut to the otherwise
-longer process of model design <span id="id23">[<a class="reference internal" href="references.html#id78">17</a>]</span>. In addition to the obvious
+longer process of model design <span id="id23">[<a class="reference internal" href="references.html#id78" title="Andrew Gelman, Aki Vehtari, Daniel Simpson, Charles C Margossian, Bob Carpenter, Yuling Yao, Lauren Kennedy, Jonah Gabry, Paul-Christian Bürkner, and Martin Modrák. Bayesian workflow. arXiv preprint arXiv:2011.01808, 2020.">17</a>]</span>. In addition to the obvious
 advantage of not having to think of a model from scratch, we have other
 advantages such as having better intuition of how to perform exploratory
 analysis of the model and then possible routes for making changes into
@@ -1525,8 +1592,8 @@ the related concept we discussed in Chapter <a class="reference internal" href="
 
               </div>
               
-        
-            <!-- Previous / next buttons -->
+            
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="chp_04.html" title="previous page">
         <i class="fas fa-angle-left"></i>
@@ -1543,19 +1610,17 @@ the related concept we discussed in Chapter <a class="reference internal" href="
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By Martin, Kumar, Lao<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By Martin, Kumar, Lao<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 

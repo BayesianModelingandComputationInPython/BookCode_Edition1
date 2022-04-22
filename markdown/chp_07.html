@@ -38,20 +38,22 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -319,7 +321,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -430,7 +432,121 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Bayesian Additive Regression Trees</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#decision-trees">
+   7.1. Decision Trees
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ensembles-of-decision-trees">
+     7.1.1. Ensembles of Decision Trees
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-bart-model">
+   7.2. The BART Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#priors-for-bart">
+   7.3. Priors for BART
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#prior-independence">
+     7.3.1. Prior Independence
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#prior-for-the-tree-structure-mathcal-t-j">
+     7.3.2. Prior for the Tree Structure
+     <span class="math notranslate nohighlight">
+      \(\mathcal{T}_j\)
+     </span>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#prior-for-the-leaf-values-mu-ij-and-number-of-trees-m">
+     7.3.3. Prior for the Leaf Values
+     <span class="math notranslate nohighlight">
+      \(\mu_{ij}\)
+     </span>
+     and Number of Trees
+     <span class="math notranslate nohighlight">
+      \(m\)
+     </span>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fitting-bayesian-additive-regression-trees">
+   7.4. Fitting Bayesian Additive Regression Trees
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bart-bikes">
+   7.5. BART Bikes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generalized-bart-models">
+   7.6. Generalized BART Models
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interpretability-of-barts">
+   7.7. Interpretability of BARTs
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#partial-dependence-plots">
+     7.7.1. Partial Dependence Plots
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#individual-conditional-expectation">
+     7.7.2. Individual Conditional Expectation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#variable-selection">
+   7.8. Variable Selection
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#priors-for-bart-in-pymc3">
+   7.9. Priors for BART in PyMC3
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   7.10. Exercises
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="bayesian-additive-regression-trees">
@@ -446,7 +562,7 @@ particular we will focus on Bayesian Additive Regression Trees (BART). A
 Bayesian non-parametric model that uses a sum of decision trees to
 obtain a flexible model <a class="footnote-reference brackets" href="#id38" id="id1">1</a>. They are often discussed in terms closer
 to the machine learning verbiage than to the statistical ones
-<span id="id2">[<a class="reference internal" href="references.html#id148">69</a>]</span>. In a sense BART is more of a <em>fire and forget model</em>
+<span id="id2">[<a class="reference internal" href="references.html#id148" title="Leo Breiman. Statistical modeling: the two cultures (with comments and a rejoinder by the author). Statistical science, 16(3):199–231, 2001.">69</a>]</span>. In a sense BART is more of a <em>fire and forget model</em>
 than the carefully hand crafted models we discuss in other chapters.</p>
 <p>In the BART literature people generally do not write about basis
 functions, instead they talk about <em>learners</em>, but the overall idea is
@@ -461,7 +577,7 @@ combining multiple <em>weak learners</em> is generally a better idea than
 trying to use a single very <em>strong learner</em>. To get good results in
 terms of accuracy and generalization, it is generally believed that base
 learners should be as accurate as possible, and also as diverse as
-possible <span id="id3">[<a class="reference internal" href="references.html#id6">70</a>]</span>. The main Bayesian idea used by
+possible <span id="id3">[<a class="reference internal" href="references.html#id6" title="Z.H. Zhou. Ensemble Methods: Foundations and Algorithms. Chapman &amp; Hall/CRC data mining and knowledge discovery series. CRC Press, 2012. ISBN 9781439830055.">70</a>]</span>. The main Bayesian idea used by
 BARTs is that as decision trees can easily overfit we add a regularizing
 prior (or shrinkage prior) to make each tree behave as a <em>weak learner</em>.</p>
 <p>To turn this overall description into something we can better understand
@@ -666,7 +782,7 @@ so now we will focus on those priors particular to the BART model.</p>
 </div>
 <div class="section" id="priors-for-bart">
 <span id="id7"></span><h2><span class="section-number">7.3. </span>Priors for BART<a class="headerlink" href="#priors-for-bart" title="Permalink to this headline">¶</a></h2>
-<p>The original BART paper <span id="id8">[<a class="reference internal" href="references.html#id5">71</a>]</span>, and most
+<p>The original BART paper <span id="id8">[<a class="reference internal" href="references.html#id5" title="Hugh A. Chipman, Edward I. George, and Robert E. McCulloch. Bart: bayesian additive regression trees. The Annals of Applied Statistics, 4(1):266–298, 2010.">71</a>]</span>, and most
 subsequent modifications and implementations rely on conjugate priors.
 The BART implementation in PyMC3 does not use conjugate priors and also
 deviates in other ways. Instead of discussing the differences we will
@@ -689,7 +805,7 @@ aspects:</p>
 <ul class="simple">
 <li><p>The probability that a node at depth <span class="math notranslate nohighlight">\(d=(0, 1, 2, \dots)\)</span> is
 non-terminal, given by <span class="math notranslate nohighlight">\(\alpha^{d}\)</span>. <span class="math notranslate nohighlight">\(\alpha\)</span> it is recommended to
-be <span class="math notranslate nohighlight">\(\in [0, 0.5)\)</span> <span id="id11">[<a class="reference internal" href="references.html#id67">72</a>]</span> <a class="footnote-reference brackets" href="#id42" id="id12">3</a></p></li>
+be <span class="math notranslate nohighlight">\(\in [0, 0.5)\)</span> <span id="id11">[<a class="reference internal" href="references.html#id67" title="Veronika Ročková and Enakshi Saha. On theory for bart. In The 22nd International Conference on Artificial Intelligence and Statistics, 2839–2848. PMLR, 2019.">72</a>]</span> <a class="footnote-reference brackets" href="#id42" id="id12">3</a></p></li>
 <li><p>The distribution over the splitting variable. That is which
 covariate is included in the tree (<span class="math notranslate nohighlight">\(X_i\)</span> in
 <a class="reference internal" href="#fig-decision-tree"><span class="std std-numref">Fig. 7.1</span></a>). Most commonly this is Uniform over the
@@ -750,7 +866,7 @@ they <em>collapse</em> into shallower trees.</p>
 <p>In the literature, specific BART models are generally tailored to
 specific samplers as they rely on conjugacy, thus a BART model with a
 Gaussian likelihood is different than a one with a Poisson one. PyMC3
-uses a sampler based on the Particle Gibbs sampler <span id="id15">[<a class="reference internal" href="references.html#id9">73</a>]</span>
+uses a sampler based on the Particle Gibbs sampler <span id="id15">[<a class="reference internal" href="references.html#id9" title="Balaji Lakshminarayanan, Daniel Roy, and Yee Whye Teh. Particle gibbs for bayesian additive regression trees. In Artificial Intelligence and Statistics, 553–561. PMLR, 2015.">73</a>]</span>
 that is specifically tailored to work with trees. PyMC3 will
 automatically assign this sampler to a <code class="docutils literal notranslate"><span class="pre">pm.BART</span></code> distribution and if
 other random variables are present in the model, PyMC3 will assign other
@@ -909,15 +1025,15 @@ interpretation.</p>
 trees (see Section <a class="reference internal" href="#sec-variable-selection"><span class="std std-ref">Variable Selection</span></a>, but not as
 transparent or useful as with a simpler individual tree. Thus to help us
 interpret results from BART models we generally rely on model
-diagnostics tools <span id="id20">[<a class="reference internal" href="references.html#id75">74</a>, <a class="reference internal" href="references.html#id74">75</a>]</span>, e.g. tools also used for
+diagnostics tools <span id="id20">[<a class="reference internal" href="references.html#id75" title="C. Molnar. Interpretable Machine Learning. Lulu.com, 2020. ISBN 9780244768522.">74</a>, <a class="reference internal" href="references.html#id74" title="Christoph Molnar, Giuseppe Casalicchio, and Bernd Bischl. Interpretable machine learning–a brief history, state-of-the-art and challenges. In Joint European Conference on Machine Learning and Knowledge Discovery in Databases, 417–431. Springer, 2020.">75</a>]</span>, e.g. tools also used for
 multivariate linear regression and other non-parametric methods. We will
 discuss two related tools below: <strong>Partial Dependence Plots</strong> (PDP)
-<span id="id21">[<a class="reference internal" href="references.html#id72">76</a>]</span> and <strong>Individual Conditional Expectation</strong> (ICE) plots
-<span id="id22">[<a class="reference internal" href="references.html#id73">77</a>]</span>.</p>
+<span id="id21">[<a class="reference internal" href="references.html#id72" title="Jerome H Friedman. Greedy function approximation: a gradient boosting machine. Annals of statistics, pages 1189–1232, 2001.">76</a>]</span> and <strong>Individual Conditional Expectation</strong> (ICE) plots
+<span id="id22">[<a class="reference internal" href="references.html#id73" title="Alex Goldstein, Adam Kapelner, Justin Bleich, and Emil Pitkin. Peeking inside the black box: visualizing statistical learning with plots of individual conditional expectation. journal of Computational and Graphical Statistics, 24(1):44–65, 2015.">77</a>]</span>.</p>
 <div class="section" id="partial-dependence-plots">
 <span id="id23"></span><h3><span class="section-number">7.7.1. </span>Partial Dependence Plots<a class="headerlink" href="#partial-dependence-plots" title="Permalink to this headline">¶</a></h3>
 <p>A very common method that appears in the BART literature is the so
-called Partial Dependence Plot (PDP) <span id="id24">[<a class="reference internal" href="references.html#id72">76</a>]</span> (see
+called Partial Dependence Plot (PDP) <span id="id24">[<a class="reference internal" href="references.html#id72" title="Jerome H Friedman. Greedy function approximation: a gradient boosting machine. Annals of statistics, pages 1189–1232, 2001.">76</a>]</span> (see
 <a class="reference internal" href="#fig-pdp-fake-example"><span class="std std-numref">Fig. 7.8</span></a>). A PDP shows how the value of the
 predicted variable changes when we change a covariate while averaging
 over the marginal distribution of the rest of the covariates. That is,
@@ -993,7 +1109,7 @@ across the marginals. In most real problem this is hardly the case, and
 then partial dependence plot can hide relationships in the data.
 Nevertheless if the dependence between the subset of chosen variables is
 not too strong then partial dependence plots can be useful summaries
-<span id="id25">[<a class="reference internal" href="references.html#id72">76</a>]</span>.</p>
+<span id="id25">[<a class="reference internal" href="references.html#id72" title="Jerome H Friedman. Greedy function approximation: a gradient boosting machine. Annals of statistics, pages 1189–1232, 2001.">76</a>]</span>.</p>
 <div class="admonition-computational-cost-of-partial-dependence admonition">
 <p class="admonition-title">Computational cost of partial dependence</p>
 <p>Computing partial dependence plots is computationally demanding.
@@ -1099,7 +1215,7 @@ each value is in the interval <span class="math notranslate nohighlight">\([0, 1
 is tempting to interpret these numbers as posterior probabilities, but
 we should keep in mind that this is just a simple heuristic without a
 very strong theoretical support, or to put it in more nuanced terms, it
-is not yet well understood <span id="id29">[<a class="reference internal" href="references.html#id66">78</a>]</span>.</p>
+is not yet well understood <span id="id29">[<a class="reference internal" href="references.html#id66" title="Yi Liu, Veronika Ročková, and Yuexi Wang. Variable selection with abc bayesian forests. Journal of the Royal Statistical Society: Series B (Statistical Methodology), 2019.">78</a>]</span>.</p>
 <p><a class="reference internal" href="#fig-bart-vi-toy"><span class="std std-numref">Fig. 7.12</span></a> shows the relative variable importance for 3
 different datasets from known generative processes.</p>
 <ul class="simple">
@@ -1111,7 +1227,7 @@ is more related than the second.</p></li>
 <li><p><span class="math notranslate nohighlight">\(Y = 10 \sin(\pi X_0 X_1 ) + 20(X_2 - 0.5)^2 + 10X_3 + 5X_4 + \epsilon\)</span>
 Where <span class="math notranslate nohighlight">\(\epsilon \sim \mathcal{N}(0, 1)\)</span> and
 <span class="math notranslate nohighlight">\(\boldsymbol{X}_{0:9} \sim \mathcal{U}(0, 1)\)</span> This is usually called
-the Friedman’s five dimensional test function <span id="id30">[<a class="reference internal" href="references.html#id72">76</a>]</span>.
+the Friedman’s five dimensional test function <span id="id30">[<a class="reference internal" href="references.html#id72" title="Jerome H Friedman. Greedy function approximation: a gradient boosting machine. Annals of statistics, pages 1189–1232, 2001.">76</a>]</span>.
 Notice that while the first five random variables are related to <span class="math notranslate nohighlight">\(Y\)</span>
 (to different extend) the last 5 are not.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\boldsymbol{X}_{0:9} \sim \mathcal{N}(0, 1)\)</span> and
@@ -1140,7 +1256,7 @@ consequence only the <em>really important</em> variables will be included in
 the final trees.</p>
 <p>Plots like <a class="reference internal" href="#fig-bart-vi-toy"><span class="std std-numref">Fig. 7.12</span></a> can be used to help separate the
 more important variables from the less important ones
-<span id="id31">[<a class="reference internal" href="references.html#id5">71</a>, <a class="reference internal" href="references.html#id71">79</a>]</span>. This can be done by
+<span id="id31">[<a class="reference internal" href="references.html#id5" title="Hugh A. Chipman, Edward I. George, and Robert E. McCulloch. Bart: bayesian additive regression trees. The Annals of Applied Statistics, 4(1):266–298, 2010.">71</a>, <a class="reference internal" href="references.html#id71" title="Colin J. Carlson. Embarcadero: species distribution modelling with bayesian additive regression trees in r. Methods in Ecology and Evolution, 11(7):850–858, 2020.">79</a>]</span>. This can be done by
 looking at what happens when we move from low values of <span class="math notranslate nohighlight">\(m\)</span> to higher
 ones. If the relative importance decreases the variable is <em>more
 important</em> and if the variable importance increases then the variable is
@@ -1155,7 +1271,7 @@ the variable importance and not just point estimates. We can do this by
 running BART many times, with the same parameters and data.
 Nevertheless, the lack of a clear threshold separating the important
 from the unimportant variables can be seen as problematic. Some
-alternative methods have been proposed <span id="id32">[<a class="reference internal" href="references.html#id71">79</a>, <a class="reference internal" href="references.html#id76">80</a>]</span>. One
+alternative methods have been proposed <span id="id32">[<a class="reference internal" href="references.html#id71" title="Colin J. Carlson. Embarcadero: species distribution modelling with bayesian additive regression trees in r. Methods in Ecology and Evolution, 11(7):850–858, 2020.">79</a>, <a class="reference internal" href="references.html#id76" title="Justin Bleich, Adam Kapelner, Edward I George, and Shane T Jensen. Variable selection for bart: an application to gene regulation. The Annals of Applied Statistics, pages 1750–1781, 2014.">80</a>]</span>. One
 of such methods can be summarized as follow:</p>
 <ol class="simple">
 <li><p>Fit a model many times (around 50) using a small value of <span class="math notranslate nohighlight">\(m\)</span>, like
@@ -1167,7 +1283,7 @@ necessarily 1).</p></li>
 <li><p>Finally, select the model with the lowest average root mean square
 error.</p></li>
 </ol>
-<p>According to Carlson <span id="id34">[<a class="reference internal" href="references.html#id71">79</a>]</span> this procedure seems to almost
+<p>According to Carlson <span id="id34">[<a class="reference internal" href="references.html#id71" title="Colin J. Carlson. Embarcadero: species distribution modelling with bayesian additive regression trees in r. Methods in Ecology and Evolution, 11(7):850–858, 2020.">79</a>]</span> this procedure seems to almost
 always return the same result as just creating a figure like
 <a class="reference internal" href="#fig-bart-vi-toy"><span class="std std-numref">Fig. 7.12</span></a>. Nevertheless one can argue that is more
 automatic (with all the pros and cons of automatic decisions). Also
@@ -1207,7 +1323,7 @@ this number can be beneficial. We also saw that by scanning <span class="math no
 relative low values like in the range 25-100 we can evaluate the
 variable importance. We did not bother to change the default value of
 <span class="math notranslate nohighlight">\(\alpha=0.25\)</span> as this change seems to have even less impact, although
-research is still needed to better understand this prior <span id="id36">[<a class="reference internal" href="references.html#id67">72</a>]</span>.
+research is still needed to better understand this prior <span id="id36">[<a class="reference internal" href="references.html#id67" title="Veronika Ročková and Enakshi Saha. On theory for bart. In The 22nd International Conference on Artificial Intelligence and Statistics, 2839–2848. PMLR, 2019.">72</a>]</span>.
 As with <span class="math notranslate nohighlight">\(m\)</span> cross-validation can also be used to tune it for better
 efficiency. Finally PyMC3 provides the option to pass a vector of
 weights so different variables have different prior probabilities of
@@ -1316,11 +1432,11 @@ exercise.</p>
 <dl class="footnote brackets">
 <dt class="label" id="id38"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
 <dd><p>Maybe you have heard about its non-Bayesian cousin: Random Forest
-<span id="id39">[<a class="reference internal" href="references.html#id149">81</a>]</span></p>
+<span id="id39">[<a class="reference internal" href="references.html#id149" title="Leo Breiman. Random forests. Machine learning, 45(1):5–32, 2001.">81</a>]</span></p>
 </dd>
 <dt class="label" id="id40"><span class="brackets"><a class="fn-backref" href="#id10">2</a></span></dt>
 <dd><p>for alternatives see
-<span id="id41">[<a class="reference internal" href="references.html#id8">82</a>, <a class="reference internal" href="references.html#id7">83</a>]</span></p>
+<span id="id41">[<a class="reference internal" href="references.html#id8" title="Matej Balog and Yee Whye Teh. The mondrian process for machine learning. arXiv preprint arXiv:1507.05181, 2015.">82</a>, <a class="reference internal" href="references.html#id7" title="Daniel M Roy and Yee Whye Teh. The mondrian process. In Proceedings of the 21st International Conference on Neural Information Processing Systems, 1377–1384. 2008.">83</a>]</span></p>
 </dd>
 <dt class="label" id="id42"><span class="brackets"><a class="fn-backref" href="#id12">3</a></span></dt>
 <dd><p>Node depth is defined as distance from the root. Thus, the root
@@ -1390,8 +1506,8 @@ could be problematic.</p>
 
               </div>
               
-        
-            <!-- Previous / next buttons -->
+            
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="chp_06.html" title="previous page">
         <i class="fas fa-angle-left"></i>
@@ -1408,19 +1524,17 @@ could be problematic.</p>
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By Martin, Kumar, Lao<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By Martin, Kumar, Lao<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 

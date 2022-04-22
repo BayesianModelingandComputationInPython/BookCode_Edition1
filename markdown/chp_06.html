@@ -38,20 +38,22 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -319,7 +321,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -417,7 +419,108 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Time Series</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#an-overview-of-time-series-problems">
+   6.1. An Overview of Time Series Problems
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#time-series-analysis-as-a-regression-problem">
+   6.2. Time Series Analysis as a Regression Problem
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#design-matrices-for-time-series">
+     6.2.1. Design Matrices for Time Series
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#basis-functions-and-generalized-additive-model">
+     6.2.2. Basis Functions and Generalized Additive Model
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#autoregressive-models">
+   6.3. Autoregressive Models
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#latent-ar-process-and-smoothing">
+     6.3.1. Latent AR Process and Smoothing
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#s-ar-i-ma-x">
+     6.3.2. (S)AR(I)MA(X)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#state-space-models">
+   6.4. State Space Models
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linear-gaussian-state-space-models-and-kalman-filter">
+     6.4.1. Linear Gaussian State Space Models and Kalman filter
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#arima-expressed-as-a-state-space-model">
+     6.4.2. ARIMA, Expressed as a State Space Model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bayesian-structural-time-series">
+     6.4.3. Bayesian Structural Time Series
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#other-time-series-models">
+   6.5. Other Time Series Models
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-criticism-and-choosing-priors">
+   6.6. Model Criticism and Choosing Priors
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#priors-for-time-series-models">
+     6.6.1. Priors for Time Series Models
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   6.7. Exercises
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="time-series">
@@ -479,7 +582,7 @@ less-regular patterns (e.g., residuals correlated in time).</p>
 on a widely used demo data set that appears in many tutorials (e.g.,
 PyMC3, TensorFlow Probability) and it was used as an example in the
 Gaussian Processes for Machine Learning book by
-<span id="id6">Rasmussen and Williams [<a class="reference internal" href="references.html#id91">52</a>]</span>. Atmospheric CO₂ measurements have been taken
+<span id="id6">Rasmussen and Williams [<a class="reference internal" href="references.html#id91" title="Carl Edward Rasmussen and Christopher K. I. Williams. Gaussian Processes for Machine Learning. The MIT Press, Cambridge, Mass, 2005. ISBN 978-0-262-18253-9.">52</a>]</span>. Atmospheric CO₂ measurements have been taken
 regularly at the Mauna Loa observatory in Hawaii since the late 1950s at
 hourly intervals. In many examples the observations are aggregated into
 monthly average as shown in <a class="reference internal" href="#fig-fig1-co2-by-month"><span class="std std-numref">Fig. 6.1</span></a>. We load the
@@ -734,7 +837,7 @@ process for the trend component. Basically, it is a smooth trend that is
 linear within some range, with an intercept and coefficient that
 changes, or drifts, slowly over the observed time span. A prime example
 of such an application is Facebook Prophet <a class="footnote-reference brackets" href="#id57" id="id10">6</a>, where a semi-smooth
-step linear function is used to model the trend <span id="id11">[<a class="reference internal" href="references.html#id125">53</a>]</span>. By
+step linear function is used to model the trend <span id="id11">[<a class="reference internal" href="references.html#id125" title="Sean J Taylor and Benjamin Letham. Forecasting at scale. The American Statistician, 72(1):37–45, 2018.">53</a>]</span>. By
 allowing the slope to change at some specific breakpoints, we can
 generate a trend line that could capture the long-term trend much better
 than a straight line. This is similar to the idea of indicator functions
@@ -789,7 +892,7 @@ are so <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> can be g
 to specify more change points than you believe the time series actually
 displays, and place a more sparse prior on <span class="math notranslate nohighlight">\(\delta\)</span> to regulate the
 posterior towards 0. Automatic change point detection is also possible
-<span id="id12">[<a class="reference internal" href="references.html#id126">54</a>]</span>.</p>
+<span id="id12">[<a class="reference internal" href="references.html#id126" title="Ryan Prescott Adams and David JC MacKay. Bayesian online changepoint detection. arXiv preprint arXiv:0710.3742, 2007.">54</a>]</span>.</p>
 </div>
 <div class="section" id="basis-functions-and-generalized-additive-model">
 <span id="chp4-gam"></span><h3><span class="section-number">6.2.2. </span>Basis Functions and Generalized Additive Model<a class="headerlink" href="#basis-functions-and-generalized-additive-model" title="Permalink to this headline">¶</a></h3>
@@ -801,10 +904,10 @@ alternative is to use basis functions like B-spline (see Chapter
 Prophet model. Basis function as a design matrix might provide some nice
 properties like orthogonality (see Box <strong>Mathematical properties of
 design matrix</strong>), which makes numerically solving the linear equation
-more stable <span id="id13">[<a class="reference internal" href="references.html#id160">55</a>]</span>.</p>
+more stable <span id="id13">[<a class="reference internal" href="references.html#id160" title="G. Strang. Introduction to Linear Algebra. Wellesley-Cambridge Press, 2009. ISBN 9780980232714.">55</a>]</span>.</p>
 <p>Fourier basis functions are a collection of sine and cosine functions
 that can be used for approximating arbitrary smooth seasonal effects
-<span id="id14">[<a class="reference internal" href="references.html#id127">56</a>]</span>:</p>
+<span id="id14">[<a class="reference internal" href="references.html#id127" title="Andrew C Harvey and Neil Shephard. Structural time series models. Handbook of Statistics,(edited by GS Maddala, CR Rao and HD Vinod), 11:261–302, 1993.">56</a>]</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-fourier-basis-functions">
 <span class="eqno">(6.4)<a class="headerlink" href="#equation-eq-fourier-basis-functions" title="Permalink to this equation">¶</a></span>\[    s(t) = \sum^N_{n=1} \left[a_n \text{cos}\left(\frac{2 \pi nt}{P} \right) + b_n \text{sin}\left(\frac{2 \pi nt}{P}\right) \right]\]</div>
 <p>where <span class="math notranslate nohighlight">\(P\)</span> is the regular period the time series has (e.g. <span class="math notranslate nohighlight">\(P = 365.25\)</span>
@@ -917,7 +1020,7 @@ observed, particularly when comparing this figure to
 <p>After inference, we can generate posterior predictive samples. As you
 can see in <a class="reference internal" href="#fig-fig9-posterior-predictive2"><span class="std std-numref">Fig. 6.9</span></a>, the forecast
 performance is better than the simple regression model in
-<a class="reference internal" href="#fig-fig5-posterior-predictive1"><span class="std std-numref">Fig. 6.5</span></a>. Note that in <span id="id16">Taylor and Letham [<a class="reference internal" href="references.html#id125">53</a>]</span>,
+<a class="reference internal" href="#fig-fig5-posterior-predictive1"><span class="std std-numref">Fig. 6.5</span></a>. Note that in <span id="id16">Taylor and Letham [<a class="reference internal" href="references.html#id125" title="Sean J Taylor and Benjamin Letham. Forecasting at scale. The American Statistician, 72(1):37–45, 2018.">53</a>]</span>,
 the generative process for forecast is not
 identical to the generative model, as the step linear function is evenly
 spaced with the change point predetermined. It is recommended that for
@@ -1282,7 +1385,7 @@ Gaussian Random Walk. The gray semi-transparent region is the posterior
 posterior mean plot in dash blue line.</span><a class="headerlink" href="#fig-fig14-smoothing-with-gw" title="Permalink to this image">¶</a></p>
 </div>
 <p>There are a few other interesting properties of the AR process, with
-connection to the Gaussian Process <span id="id19">[<a class="reference internal" href="references.html#id91">52</a>]</span>. For example, you
+connection to the Gaussian Process <span id="id19">[<a class="reference internal" href="references.html#id91" title="Carl Edward Rasmussen and Christopher K. I. Williams. Gaussian Processes for Machine Learning. The MIT Press, Cambridge, Mass, 2005. ISBN 978-0-262-18253-9.">52</a>]</span>. For example, you
 might find that the Autoregressive model <em>alone</em> is useless to capture
 the long-term trend. Even though the model seems to fit well the
 observation, during forecast you will observe the forecast value regress
@@ -1330,7 +1433,7 @@ y_t = \alpha + \sum_{i=1}^{p}\phi_i y_{t-period-i} + \sum_{j=1}^{q}\theta_j \eps
 <p>The integrated part of an ARIMA model refers to the summary statistics
 of a time series: order of integration. Denoted as <span class="math notranslate nohighlight">\(I(d)\)</span>, a time series
 is integrated to order <span class="math notranslate nohighlight">\(d\)</span> if taking repeated differences <span class="math notranslate nohighlight">\(d\)</span> times
-yields a stationary series. Following <span id="id21">Box <em>et al.</em> [<a class="reference internal" href="references.html#id130">57</a>]</span>,
+yields a stationary series. Following <span id="id21">Box <em>et al.</em> [<a class="reference internal" href="references.html#id130" title="G.E.P. Box, G.M. Jenkins, and G.C. Reinsel. Time Series Analysis: Forecasting and Control. Wiley Series in Probability and Statistics. Wiley, 2008. ISBN 9780470272848.">57</a>]</span>,
 we repeatedly take difference of the observed time series as a
 preprocessing step to account for the <span class="math notranslate nohighlight">\(I(d)\)</span> part of an ARIMA(p,d,q)
 model, and model the resulting differenced series as a stationary
@@ -1359,7 +1462,7 @@ exogenous regressors, we write <span class="math notranslate nohighlight">\(\tex
 </div>
 <p>As the second example in this chapter, we will use different ARIMA to
 model the time series of the monthly live births in the United States
-from 1948 to 1979 <span id="id22">[<a class="reference internal" href="references.html#id132">58</a>]</span>. The data is shown in
+from 1948 to 1979 <span id="id22">[<a class="reference internal" href="references.html#id132" title="R. Shumway and D. Stoffer. Time Series: A Data Analysis Approach Using R. Chapman &amp; Hall/CRC Texts in Statistical Science. CRC Press, 2019. ISBN 9781000001563.">58</a>]</span>. The data is shown in
 <a class="reference internal" href="#fig-fig15-birth-by-month"><span class="std std-numref">Fig. 6.15</span></a>.</p>
 <div class="figure align-default" id="fig-fig15-birth-by-month">
 <a class="reference internal image-reference" href="../_images/fig15_birth_by_month.png"><img alt="../_images/fig15_birth_by_month.png" src="../_images/fig15_birth_by_month.png" style="width: 8.00in;" /></a>
@@ -1391,7 +1494,7 @@ we load and pre-process the observed time series in Code Block
 <p>At time of writing TFP does not have a dedicated implementation of an
 ARMA distribution. To run inference of our SARIMA model, TFP requires a
 Python <code class="docutils literal notranslate"><span class="pre">callable</span></code> representing the log posterior density function (up to
-some constant <span id="id23">[<a class="reference internal" href="references.html#id133">30</a>]</span>. In this case, we can archive that by
+some constant <span id="id23">[<a class="reference internal" href="references.html#id133" title="Junpeng Lao, Christopher Suter, Ian Langmore, Cyril Chimisov, Ashish Saxena, Pavel Sountsov, Dave Moore, Rif A Saurous, Matthew D Hoffman, and Joshua V. Dillon. Tfp.mcmc: modern markov chain monte carlo tools built for modern hardware. arXiv preprint arXiv:2002.01184, 2020.">30</a>]</span>. In this case, we can archive that by
 implementing the likelihood function of <span class="math notranslate nohighlight">\(\text{SARMA}(1, 1)(1, 1)_{12}\)</span>
 (since the <span class="math notranslate nohighlight">\(\text{I}\)</span> part is already dealt with via differencing). We
 do that in Code Block
@@ -1698,7 +1801,7 @@ the joint multivariate Gaussian distribution. In practice, there are
 some tricks in implementation to make sure the computation is
 numerically stable (e.g., avoid inverting matrix <span class="math notranslate nohighlight">\(\mathbf{S}_t\)</span>, using a
 Jordan form update in computing <span class="math notranslate nohighlight">\(\mathbf{P}_{t \mid t}\)</span> to ensure the
-result is a positive definite matrix <span id="id28">[<a class="reference internal" href="references.html#id134">59</a>]</span>. In TFP, the
+result is a positive definite matrix <span id="id28">[<a class="reference internal" href="references.html#id134" title="M. West and J. Harrison. Bayesian Forecasting and Dynamic Models. Springer Series in Statistics. Springer New York, 2013. ISBN 9781475793659.">59</a>]</span>. In TFP, the
 linear Gaussian state space model and related Kalman filter is
 conveniently implemented as a distribution
 <code class="docutils literal notranslate"><span class="pre">tfd.LinearGaussianStateSpaceModel</span></code>.</p>
@@ -1706,7 +1809,7 @@ conveniently implemented as a distribution
 Model for time series modeling is expressing the unknown parameters as
 Gaussian latent state. We will demonstrate with a simple linear growth
 time series as the first example (see Chapter 3 of Bayesian Filtering
-and Smoothing <span id="id29">[<a class="reference internal" href="references.html#id129">60</a>]</span>:</p>
+and Smoothing <span id="id29">[<a class="reference internal" href="references.html#id129" title="S. Särkkä. Bayesian Filtering and Smoothing. Bayesian Filtering and Smoothing. Cambridge University Press, 2013. ISBN 9781107030657.">60</a>]</span>:</p>
 <div class="literal-block-wrapper docutils container" id="linear-growth-model">
 <div class="code-block-caption"><span class="caption-number">Listing 6.19 </span><span class="caption-text">linear_growth_model</span><a class="headerlink" href="#linear-growth-model" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">theta0</span><span class="p">,</span> <span class="n">theta1</span> <span class="o">=</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">2.6</span>
@@ -2018,7 +2121,7 @@ initial state <span class="math notranslate nohighlight">\(X_0\)</span>, as the 
 non-stationary. In practice, we can assign an informative prior around
 the initial value of the time series after centering (subtracting the
 mean). More discussion around this topic and an in depth introduction to
-state space models for time series problems could be found in <span id="id33">Durbin and Koopman [<a class="reference internal" href="references.html#id131">61</a>]</span>.</p>
+state space models for time series problems could be found in <span id="id33">Durbin and Koopman [<a class="reference internal" href="references.html#id131" title="James Durbin and Siem Jan Koopman. Time series analysis by state space methods. Oxford university press, 2012.">61</a>]</span>.</p>
 </div>
 <div class="section" id="bayesian-structural-time-series">
 <span id="id34"></span><h3><span class="section-number">6.4.3. </span>Bayesian Structural Time Series<a class="headerlink" href="#bayesian-structural-time-series" title="Permalink to this headline">¶</a></h3>
@@ -2223,10 +2326,10 @@ not cover all our needs. For example, some interesting extensions
 include nonlinear Gaussian state space models, where the transition
 function and measurement function are differentiable nonlinear
 functions. Extended Kalman filter could be used for inference of <span class="math notranslate nohighlight">\(X_t\)</span>
-for these models <span id="id36">[<a class="reference internal" href="references.html#id161">62</a>]</span>. There is the Unscented Kalman
+for these models <span id="id36">[<a class="reference internal" href="references.html#id161" title="Mohinder S Grewal and Angus P Andrews. Kalman filtering: Theory and Practice with MATLAB. John Wiley &amp; Sons, 2014.">62</a>]</span>. There is the Unscented Kalman
 filter for inference of non-Gaussian nonlinear models
-<span id="id37">[<a class="reference internal" href="references.html#id161">62</a>]</span>, and Particle filter as a general filtering approach
-for state space models <span id="id38">[<a class="reference internal" href="references.html#id38">63</a>]</span>.</p>
+<span id="id37">[<a class="reference internal" href="references.html#id161" title="Mohinder S Grewal and Angus P Andrews. Kalman filtering: Theory and Practice with MATLAB. John Wiley &amp; Sons, 2014.">62</a>]</span>, and Particle filter as a general filtering approach
+for state space models <span id="id38">[<a class="reference internal" href="references.html#id38" title="N. Chopin and O. Papaspiliopoulos. An Introduction to Sequential Monte Carlo. Springer Series in Statistics. Springer International Publishing, 2020. ISBN 9783030478445.">63</a>]</span>.</p>
 <p>Another class of widely used time series models is the Hidden Markov
 model, which is a state space model with discrete state space. There are
 also specialized algorithms for doing inference of these models, for
@@ -2264,7 +2367,7 @@ implementations in the Python computing ecosystem.</p>
 </div>
 <div class="section" id="model-criticism-and-choosing-priors">
 <span id="id39"></span><h2><span class="section-number">6.6. </span>Model Criticism and Choosing Priors<a class="headerlink" href="#model-criticism-and-choosing-priors" title="Permalink to this headline">¶</a></h2>
-<p>In the seminal time series book by  <span id="id40">Box <em>et al.</em> [<a class="reference internal" href="references.html#id130">57</a>]</span>
+<p>In the seminal time series book by  <span id="id40">Box <em>et al.</em> [<a class="reference internal" href="references.html#id130" title="G.E.P. Box, G.M. Jenkins, and G.C. Reinsel. Time Series Analysis: Forecasting and Control. Wiley Series in Probability and Statistics. Wiley, 2008. ISBN 9780470272848.">57</a>]</span>
 <a class="footnote-reference brackets" href="#id66" id="id41">15</a>, they outlined five important practical problems for time series
 modeling:</p>
 <ul class="simple">
@@ -2280,7 +2383,7 @@ forecasting (or nowcasting where you try to infer at instantaneous time
 getting the measurements), which sets up a natural model criticism
 criteria in time series analysis problems. While we do not have specific
 treatment around Bayesian decision theory in this chapter, It is worth
-quoting from <span id="id42">West and Harrison [<a class="reference internal" href="references.html#id134">59</a>]</span>:</p>
+quoting from <span id="id42">West and Harrison [<a class="reference internal" href="references.html#id134" title="M. West and J. Harrison. Bayesian Forecasting and Dynamic Models. Springer Series in Statistics. Springer New York, 2013. ISBN 9781475793659.">59</a>]</span>:</p>
 <blockquote>
 <div><p>Good modeling demands hard thinking, and good forecasting requires an integrated view of the role of forecasting within decision systems.</p>
 </div></blockquote>
@@ -2311,7 +2414,7 @@ some point) inform future ones, but you will be also using points
 the past. Thus, we can compute LOO, but the interpretation of the number
 will get will be nonsensical and thus misleading. Instead of leaving one
 (or some) time points out, we need some form of leave-future-out
-cross-validation (LFO-CV, see e.g. <span id="id43">Bürkner <em>et al.</em> [<a class="reference internal" href="references.html#id123">64</a>]</span>. As a rough sketch,
+cross-validation (LFO-CV, see e.g. <span id="id43">Bürkner <em>et al.</em> [<a class="reference internal" href="references.html#id123" title="Paul-Christian Bürkner, Jonah Gabry, and Aki Vehtari. Approximate leave-future-out cross-validation for bayesian time series models. Journal of Statistical Computation and Simulation, 90(14):2499–2523, 2020.">64</a>]</span>. As a rough sketch,
 after initial model inference, to approximate 1-step-ahead predictions
 we would iterate over the hold out time series or future observations
 and evaluate on the log predictive density, and refit the model
@@ -2331,7 +2434,7 @@ modeling holiday or special days effect. Usually each holiday has its
 own coefficients, and we want to express a prior that indicates some
 holidays could have huge effect on the time series, but most holidays
 are just like any other ordinary day. We can formalize this intuition
-with a horseshoe prior <span id="id46">[<a class="reference internal" href="references.html#id166">65</a>, <a class="reference internal" href="references.html#id168">66</a>]</span>
+with a horseshoe prior <span id="id46">[<a class="reference internal" href="references.html#id166" title="Carlos M. Carvalho, Nicholas G. Polson, and James G. Scott. The horseshoe estimator for sparse signals. Biometrika, 97(2):465–480, 2010.">65</a>, <a class="reference internal" href="references.html#id168" title="Juho Piironen, Aki Vehtari, and others. Sparsity information and regularization in the horseshoe and other shrinkage priors. Electronic Journal of Statistics, 11(2):5018–5051, 2017.">66</a>]</span>
 as shown in Equation <a class="reference internal" href="#equation-eq-horse-shoe">(6.25)</a>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-horse-shoe">
 <span class="eqno">(6.25)<a class="headerlink" href="#equation-eq-horse-shoe" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
@@ -2344,9 +2447,9 @@ heavy tail from the local scales <span class="math notranslate nohighlight">\(\l
 from the shrinkage. We can accommodate different levels of sparsity by
 changing the value of <span class="math notranslate nohighlight">\(\tau\)</span>: the closer <span class="math notranslate nohighlight">\(\tau\)</span> is to zero the more
 shrinkage of the holiday effect <span class="math notranslate nohighlight">\(\beta_t\)</span> to tends to zero, whereas with
-a larger <span class="math notranslate nohighlight">\(\tau\)</span> we have a more diffuse prior <span id="id47">[<a class="reference internal" href="references.html#id167">67</a>]</span>
+a larger <span class="math notranslate nohighlight">\(\tau\)</span> we have a more diffuse prior <span id="id47">[<a class="reference internal" href="references.html#id167" title="Juho Piironen and Aki Vehtari. On the hyperprior choice for the global shrinkage parameter in the horseshoe prior. In Artificial Intelligence and Statistics, 905–913. PMLR, 2017.">67</a>]</span>
 <a class="footnote-reference brackets" href="#id68" id="id48">17</a>. For example, in Case Study 2 of
-<span id="id49">Riutort-Mayol <em>et al.</em> [<a class="reference internal" href="references.html#id169">68</a>]</span> they included a special day effect for each
+<span id="id49">Riutort-Mayol <em>et al.</em> [<a class="reference internal" href="references.html#id169" title="Gabriel Riutort-Mayol, Paul-Christian Bürkner, Michael R Andersen, Arno Solin, and Aki Vehtari. Practical hilbert space approximate bayesian gaussian processes for probabilistic programming. arXiv preprint arXiv:2004.11408, 2020.">68</a>]</span> they included a special day effect for each
 individual day of a year (366 as the Leap Day is included) and use a
 horseshoe prior to regularize it.</p>
 <p>Another important consideration of prior for time series model is the
@@ -2533,7 +2636,7 @@ generated from a Fourier basis functions with <span class="math notranslate nohi
 <p><strong>6H17.</strong> Derive the Kalman filter equations. Hint: first
 work out the joint distribution of <span class="math notranslate nohighlight">\(X_t\)</span> and <span class="math notranslate nohighlight">\(X_{t-1}\)</span>, and then follow
 with the joint distribution of <span class="math notranslate nohighlight">\(Y_t\)</span> and <span class="math notranslate nohighlight">\(X_t\)</span>. If you are still stuck
-take at look at Chapter 4 in Särkkä’s book <span id="id51">[<a class="reference internal" href="references.html#id129">60</a>]</span>.</p>
+take at look at Chapter 4 in Särkkä’s book <span id="id51">[<a class="reference internal" href="references.html#id129" title="S. Särkkä. Bayesian Filtering and Smoothing. Bayesian Filtering and Smoothing. Cambridge University Press, 2013. ISBN 9781107030657.">60</a>]</span>.</p>
 <p><strong>6M18.</strong> Inspect the output of
 <code class="docutils literal notranslate"><span class="pre">linear_growth_model.forward_filter</span></code> by indexing to a given time step:</p>
 <ul class="simple">
@@ -2662,8 +2765,8 @@ through his seminal book and working on forecasting problems.</p>
 
               </div>
               
-        
-            <!-- Previous / next buttons -->
+            
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="chp_05.html" title="previous page">
         <i class="fas fa-angle-left"></i>
@@ -2680,19 +2783,17 @@ through his seminal book and working on forecasting problems.</p>
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By Martin, Kumar, Lao<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By Martin, Kumar, Lao<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 

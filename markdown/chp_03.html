@@ -38,20 +38,22 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -319,7 +321,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -412,7 +414,103 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Linear Models and Probabilistic Programming Languages</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#comparing-two-or-more-groups">
+   3.1. Comparing Two (or More) Groups
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#comparing-two-ppls">
+     3.1.1. Comparing Two PPLs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linear-regression">
+   3.2. Linear Regression
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linear-penguins">
+     3.2.1. Linear Penguins
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#predictions">
+     3.2.2. Predictions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#centering">
+     3.2.3. Centering
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multiple-linear-regression">
+   3.3. Multiple Linear Regression
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#counterfactuals">
+     3.3.1. Counterfactuals
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generalized-linear-models">
+   3.4. Generalized Linear Models
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#logistic-regression">
+     3.4.1. Logistic Regression
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#classifying-penguins">
+     3.4.2. Classifying Penguins
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#interpreting-log-odds">
+     3.4.3. Interpreting Log Odds
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#picking-priors-in-regression-models">
+   3.5. Picking Priors in Regression Models
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   3.6. Exercises
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="linear-models-and-probabilistic-programming-languages">
@@ -450,7 +548,7 @@ statistics parlance “What is the dispersion of the average?” Luckily
 Kristen Gorman also likes studying penguins, so much so that she visited
 3 Antarctic islands and collected data about Adelie, Gentoo and
 Chinstrap species, which is compiled into the Palmer Penguins
-dataset <span id="id1">[<a class="reference internal" href="references.html#id58">28</a>]</span>. The observations consist of physical
+dataset <span id="id1">[<a class="reference internal" href="references.html#id58" title="Allison Marie Horst, Alison Presmanes Hill, and Kristen B Gorman. palmerpenguins: Palmer Archipelago (Antarctica) penguin data. 2020. R package version 0.1.0. URL: https://allisonhorst.github.io/palmerpenguins/, doi:10.5281/zenodo.3960218.">28</a>]</span>. The observations consist of physical
 characteristics of the penguin mass, flipper length, and sex, as well as
 geographic characteristics such as the island they reside on.</p>
 <p>We start by loading the data and filtering out any rows where data is
@@ -783,7 +881,7 @@ distribution, respectively.</p>
 <p>Similarly, TFP provides primitives for user to specify distributions and
 model in <code class="docutils literal notranslate"><span class="pre">tfp.distributions</span></code>, running MCMC (<code class="docutils literal notranslate"><span class="pre">tfp.mcmc</span></code>), and more. For
 example, to construct a Bayesian model, TensorFlow provides multiple
-primitives under the name <code class="docutils literal notranslate"><span class="pre">tfd.JointDistribution</span></code> <span id="id3">[<a class="reference internal" href="references.html#id128">29</a>]</span>
+primitives under the name <code class="docutils literal notranslate"><span class="pre">tfd.JointDistribution</span></code> <span id="id3">[<a class="reference internal" href="references.html#id128" title="Dan Piponi, Dave Moore, and Joshua V. Dillon. Joint distributions for tensorflow probability. arXiv preprint arXiv:2001.11819, 2020.">29</a>]</span>
 API. In this chapter and the remaining of the book we mostly use
 <code class="docutils literal notranslate"><span class="pre">tfd.JointDistributionCoroutine</span></code>, but there are other variants of
 <code class="docutils literal notranslate"><span class="pre">tfd.JointDistribution</span></code> which may better suit your use case <a class="footnote-reference brackets" href="#id35" id="id4">1</a>. Since
@@ -898,7 +996,7 @@ using the <code class="docutils literal notranslate"><span class="pre">.experime
 <p>Inference is done using <code class="docutils literal notranslate"><span class="pre">target_density_function</span></code>, for example, we can
 find the maximum of the function, which gives the <strong>maximum a posteriori
 probability</strong> (MAP) estimate. We can also use methods in <code class="docutils literal notranslate"><span class="pre">tfp.mcmc</span></code>
-<span id="id6">[<a class="reference internal" href="references.html#id133">30</a>]</span> to sample from the posterior. Or more conveniently,
+<span id="id6">[<a class="reference internal" href="references.html#id133" title="Junpeng Lao, Christopher Suter, Ian Langmore, Cyril Chimisov, Ashish Saxena, Pavel Sountsov, Dave Moore, Rif A Saurous, Matthew D Hoffman, and Joshua V. Dillon. Tfp.mcmc: modern markov chain monte carlo tools built for modern hardware. arXiv preprint arXiv:2002.01184, 2020.">30</a>]</span> to sample from the posterior. Or more conveniently,
 using a standard sampling routine similar to what is currently used in
 PyMC3 <a class="footnote-reference brackets" href="#id37" id="id7">3</a> as shown in Code Block
 <a class="reference internal" href="#tfp-posterior-inference"><span class="std std-ref">tfp_posterior_inference</span></a>:</p>
@@ -1319,7 +1417,7 @@ out the minimum flipper length and fit our model. In this transformation
 this would change the interpretation <span class="math notranslate nohighlight">\(\beta_0\)</span> to the distribution of
 means for the smallest observed flipper length. For a greater discussion
 of transformations in linear regression we recommend Applied Regression
-Analysis and Generalized Linear Models <span id="id10">[<a class="reference internal" href="references.html#id60">31</a>]</span>.</p>
+Analysis and Generalized Linear Models <span id="id10">[<a class="reference internal" href="references.html#id60" title="J. Fox. Applied Regression Analysis and Generalized Linear Models. SAGE Publications, 2015. ISBN 9781483321318.">31</a>]</span>.</p>
 </div>
 </div>
 <div class="section" id="multiple-linear-regression">
@@ -1327,7 +1425,7 @@ Analysis and Generalized Linear Models <span id="id10">[<a class="reference inte
 <p>In many species there is a dimorphism, or difference, between different
 sexes. The study of sexual dimorphism in penguins actually was the
 motivating factor for collecting the Palmer Penguin dataset
-<span id="id12">[<a class="reference internal" href="references.html#id65">32</a>]</span>. To study penguin dimorphism more closely
+<span id="id12">[<a class="reference internal" href="references.html#id65" title="Kristen B Gorman, Tony D Williams, and William R Fraser. Ecological sexual dimorphism and environmental variability within a community of antarctic penguins (genus pygoscelis). PloS one, 9(3):e90081, 2014.">32</a>]</span>. To study penguin dimorphism more closely
 let us add a second covariate, this time sex, encoding it as a
 categorical variable and seeing if we can estimate a penguins mass more
 precisely.</p>
@@ -1369,10 +1467,10 @@ with the same flipper length.</span><a class="headerlink" href="#fig-adelie-sex-
 <p>Linear models are so widely used that specialized
 syntax, methods, and libraries have been written just for regression.
 One such library is Bambi (BAyesian Model-Building
-Interface<span id="id13">[<a class="reference internal" href="references.html#id118">33</a>]</span>). Bambi is a Python package for fitting
+Interface<span id="id13">[<a class="reference internal" href="references.html#id118" title="Tomás Capretto, Camen Piho, Ravin Kumar, Jacob Westfall, Tal Yarkoni, and Osvaldo A Martin. Bambi: a simple interface for fitting bayesian linear models in python. arXiv preprint arXiv:2012.10754, 2020.">33</a>]</span>). Bambi is a Python package for fitting
 generalized linear hierarchical models using a formula-based syntax,
-similar to what one might find in R packages, like lme4 <span id="id14">[<a class="reference internal" href="references.html#id82">34</a>]</span>, nlme
-<span id="id15">[<a class="reference internal" href="references.html#id81">35</a>]</span>, rstanarm <span id="id16">[<a class="reference internal" href="references.html#id83">36</a>]</span> or brms <span id="id17">[<a class="reference internal" href="references.html#id84">37</a>]</span>). Bambi uses
+similar to what one might find in R packages, like lme4 <span id="id14">[<a class="reference internal" href="references.html#id82" title="Douglas Bates, Martin Mächler, Ben Bolker, and Steve Walker. Fitting linear mixed-effects models using lme4. arXiv preprint arXiv:1406.5823, 2014.">34</a>]</span>, nlme
+<span id="id15">[<a class="reference internal" href="references.html#id81" title="Jose Pinheiro, Douglas Bates, Saikat DebRoy, Deepayan Sarkar, and R Core Team. nlme: Linear and Nonlinear Mixed Effects Models. 2020. R package version 3.1-151. URL: https://CRAN.R-project.org/package=nlme.">35</a>]</span>, rstanarm <span id="id16">[<a class="reference internal" href="references.html#id83" title="Jonah Gabry and Ben Goodrich. Estimating generalized (non-)linear models with group-specific terms with rstanarm. 6 2020. URL: https://mc-stan.org/rstanarm/articles/glmer.html.">36</a>]</span> or brms <span id="id17">[<a class="reference internal" href="references.html#id84" title="Paul-Christian Bürkner. Brms: an r package for bayesian multilevel models using stan. Journal of statistical software, 80(1):1–28, 2017.">37</a>]</span>). Bambi uses
 PyMC3 underneath and provides a higher level API. To write the same
 model, if disregarding the priors<a class="footnote-reference brackets" href="#id38" id="id18">4</a> as the one in Code Block
 <a class="reference internal" href="#penguin-mass-multi"><span class="std std-ref">penguin_mass_multi</span></a> in Bambi we would
@@ -1444,7 +1542,7 @@ overfitting and it describes a condition where the algorithm can quite
 handily map covariates to outcomes in seen cases, but fails to
 generalize to new observations. In linear regressions we can show this
 by generating 100 random covariates, and fitting them to a random
-simulated dataset <span id="id20">[<a class="reference internal" href="references.html#id33">10</a>]</span>. Even though there is no relation,
+simulated dataset <span id="id20">[<a class="reference internal" href="references.html#id33" title="R. McElreath. Statistical Rethinking: A Bayesian Course with Examples in R and Stan. Chapman &amp; Hall/CRC Texts in Statistical Science. CRC Press, 2020. ISBN 9781482253481.">10</a>]</span>. Even though there is no relation,
 we would be led to believe our linear model is doing quite well.</p>
 </div>
 <div class="section" id="counterfactuals">
@@ -1533,7 +1631,7 @@ which is useful for counterfactual analyses.</p>
 <a class="reference internal" href="#tfp-flipper-bill-sex-counterfactuals"><span class="std std-ref">tfp_flipper_bill_sex_counterfactuals</span></a>
 where flipper length is varied holding all other covariates constant.</span><a class="headerlink" href="#fig-linearcounterfactual" title="Permalink to this image">¶</a></p>
 </div>
-<p>Following McElreath<span id="id21">[<a class="reference internal" href="references.html#id33">10</a>]</span> <a class="reference internal" href="#fig-linearcounterfactual"><span class="std std-numref">Fig. 3.16</span></a>
+<p>Following McElreath<span id="id21">[<a class="reference internal" href="references.html#id33" title="R. McElreath. Statistical Rethinking: A Bayesian Course with Examples in R and Stan. Chapman &amp; Hall/CRC Texts in Statistical Science. CRC Press, 2020. ISBN 9781482253481.">10</a>]</span> <a class="reference internal" href="#fig-linearcounterfactual"><span class="std std-numref">Fig. 3.16</span></a>
 is called a counterfactual plot. As the word counterfactual implies, we
 are evaluating a situation counter to the observed data, or facts. In
 other words, we are evaluating situations that have not happened. The
@@ -1605,7 +1703,7 @@ only two possible outcomes, we observed either one thing or another
 thing. The probability of a head or tails outcome in a coin flip is the
 usual textbook example. More “real world” examples includes the chance
 of a defect in manufacturing, a negative or positive cancer test, or the
-failure of a rocket launch <span id="id28">[<a class="reference internal" href="references.html#id79">38</a>]</span>. In a logistic
+failure of a rocket launch <span id="id28">[<a class="reference internal" href="references.html#id79" title="C. Davidson-Pilon. Bayesian Methods for Hackers: Probabilistic Programming and Bayesian Inference. Addison-Wesley Data &amp; Analytics Series. Pearson Education, 2015. ISBN 9780133902921.">38</a>]</span>. In a logistic
 regression the inverse link function is called, unsurprisingly, the
 logistic function, which maps <span class="math notranslate nohighlight">\((-\infty, \infty)\)</span> to the <span class="math notranslate nohighlight">\((0,1)\)</span>
 interval. This is handy because now we can map linear functions to the
@@ -1857,7 +1955,7 @@ although mass now adds some extra information in regards to class
 separability as indicated by the slope of the line.</span><a class="headerlink" href="#fig-decision-boundary-logistic-mass-bill-length" title="Permalink to this image">¶</a></p>
 </div>
 <p>To evaluate the model fit for logistic regressions we can use a
-separation plot <span id="id30">[<a class="reference internal" href="references.html#id172">39</a>]</span>, as shown in Code Block
+separation plot <span id="id30">[<a class="reference internal" href="references.html#id172" title="Brian Greenhill, Michael D Ward, and Audrey Sacks. The separation plot: a new visual method for evaluating the fit of binary models. American Journal of Political Science, 55(4):991–1002, 2011.">39</a>]</span>, as shown in Code Block
 <a class="reference internal" href="#separability-plot"><span class="std std-ref">separability_plot</span></a> and
 <a class="reference internal" href="#fig-penguins-separation-plot"><span class="std std-numref">Fig. 3.22</span></a>. A separation plot is a way to
 assess the calibration of a model with binary observed data. It shows
@@ -2043,8 +2141,8 @@ will discuss more deeply in <a class="reference internal" href="chp_09.html#sect
 <span id="id31"></span><h2><span class="section-number">3.5. </span>Picking Priors in Regression Models<a class="headerlink" href="#picking-priors-in-regression-models" title="Permalink to this headline">¶</a></h2>
 <p>Now that we are familiar with generalized linear models let us focus on
 the prior and its effect on posterior estimation. We will be borrowing
-an example from Regression and Other Stories <span id="id32">[<a class="reference internal" href="references.html#id62">40</a>]</span>, in particular a
-study<span id="id33">[<a class="reference internal" href="references.html#id63">13</a>]</span> where the relationship between the
+an example from Regression and Other Stories <span id="id32">[<a class="reference internal" href="references.html#id62" title="A. Gelman, J. Hill, and A. Vehtari. Regression and Other Stories. Analytical Methods for Social Research. Cambridge University Press, 2020. ISBN 9781107023987.">40</a>]</span>, in particular a
+study<span id="id33">[<a class="reference internal" href="references.html#id63" title="Andrew Gelman, Daniel Simpson, and Michael Betancourt. The prior can often only be understood in the context of the likelihood. Entropy, 19(10):555, 2017.">13</a>]</span> where the relationship between the
 attractiveness of parents and the percentage of girl births of those
 parents is explored. In this study researchers estimated the
 attractiveness of American teenagers on a five-point scale. Eventually
@@ -2386,8 +2484,8 @@ value.</p>
 
               </div>
               
-        
-            <!-- Previous / next buttons -->
+            
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="chp_02.html" title="previous page">
         <i class="fas fa-angle-left"></i>
@@ -2404,19 +2502,17 @@ value.</p>
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By Martin, Kumar, Lao<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By Martin, Kumar, Lao<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 

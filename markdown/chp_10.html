@@ -38,20 +38,22 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -319,7 +321,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -446,7 +448,137 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Probabilistic Programming Languages</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-systems-engineering-perspective-of-a-ppl">
+   10.1. A Systems Engineering Perspective of a PPL
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-rainier">
+     10.1.1. Example: Rainier
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#posterior-computation">
+   10.2. Posterior Computation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#getting-the-gradient">
+     10.2.1. Getting the Gradient
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-near-real-time-inference">
+     10.2.2. Example: Near Real Time Inference
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#application-programming-interfaces">
+   10.3. Application Programming Interfaces
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-stan-and-slicstan">
+     10.3.1. Example: Stan and Slicstan
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-pymc3-and-pymc4">
+     10.3.2. Example: PyMC3 and PyMC4
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ppl-driven-transformations">
+   10.4. PPL Driven Transformations
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#log-probabilities">
+     10.4.1. Log Probabilities
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#random-variables-and-distributions-transformations">
+     10.4.2. Random Variables and Distributions Transformations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-sampling-comparison-between-bounded-and-unbounded-random-variables">
+     10.4.3. Example: Sampling Comparison between Bounded and Unbounded Random Variables
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#operation-graphs-and-automatic-reparameterization">
+   10.5. Operation Graphs and Automatic Reparameterization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#effect-handling">
+   10.6. Effect handling
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-effect-handling-in-tfp-and-numpyro">
+     10.6.1. Example: Effect Handling in TFP and Numpyro
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#base-language-code-ecosystem-modularity-and-everything-else">
+   10.7. Base Language, Code Ecosystem, Modularity and Everything Else
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#designing-a-ppl">
+   10.8. Designing a PPL
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#shape-handling-in-ppls">
+     10.8.1. Shape Handling in PPLs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#takeaways-for-the-applied-bayesian-practitioner">
+   10.9. Takeaways for the Applied Bayesian Practitioner
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   10.10. Exercises
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="probabilistic-programming-languages">
@@ -602,7 +734,7 @@ as part of “Deep Learning” libraries mostly intended for
 backpropagation computation to train Neural Networks. These include
 Theano, TensorFlow and PyTorch. Bayesians however, learned to use them
 as computational backends for Bayesian Inference. An example of
-computational gradient evaluation using JAX <span id="id10">[<a class="reference internal" href="references.html#id155">116</a>]</span>, a
+computational gradient evaluation using JAX <span id="id10">[<a class="reference internal" href="references.html#id155" title="James Bradbury, Roy Frostig, Peter Hawkins, Matthew James Johnson, Chris Leary, Dougal Maclaurin, George Necula, Adam Paszke, Jake VanderPlas, Skye Wanderman-Milne, and Qiao Zhang. JAX: composable transformations of Python+NumPy programs. 2018. URL: http://github.com/google/jax.">116</a>]</span>, a
 dedicated autograd library, shown in Code Block
 <a class="reference internal" href="#jax-grad-small"><span class="std std-ref">jax_grad_small</span></a>. In this Code Block the
 gradient of <span class="math notranslate nohighlight">\(x^2\)</span> is computed at a value of <span class="math notranslate nohighlight">\(4\)</span>. We can solve this
@@ -809,8 +941,8 @@ functionality of the base language. For example, there is a notion of
 notion of pythonic API is what informs the PyMC3 API, the goal is to
 explicitly have users feel like they are writing their models in Python.
 In contrast Stan models are written in a domain specific language
-informed by other PPLs such as BUGS <span id="id13">[<a class="reference internal" href="references.html#id113">117</a>]</span>
-and languages such as C++ <span id="id14">[<a class="reference internal" href="references.html#id114">118</a>]</span>. The Stan language includes
+informed by other PPLs such as BUGS <span id="id13">[<a class="reference internal" href="references.html#id113" title="Wally R Gilks, Andrew Thomas, and David J Spiegelhalter. A language and program for complex bayesian modelling. Journal of the Royal Statistical Society: Series D (The Statistician), 43(1):169–177, 1994.">117</a>]</span>
+and languages such as C++ <span id="id14">[<a class="reference internal" href="references.html#id114" title="Bob Carpenter, Andrew Gelman, Matthew D Hoffman, Daniel Lee, Ben Goodrich, Michael Betancourt, Marcus Brubaker, Jiqiang Guo, Peter Li, and Allen Riddell. Stan: a probabilistic programming language. Journal of statistical software, 76(1):1–32, 2017.">118</a>]</span>. The Stan language includes
 notable API primitives such as curly braces and uses a block syntax as
 shown in Code Block <a class="reference internal" href="#code-stan"><span class="std std-ref">code_stan</span></a>. Writing a Stan model
 distinctly <em>does not</em> feel like writing Python, but this is not a knock
@@ -846,7 +978,7 @@ model {
 </pre></div>
 </div>
 </div>
-<p>An alternative syntax for Stan models is Slicstan <span id="id16">[<a class="reference internal" href="references.html#id87">119</a>]</span>, the
+<p>An alternative syntax for Stan models is Slicstan <span id="id16">[<a class="reference internal" href="references.html#id87" title="Maria I Gorinova, Andrew D Gordon, and Charles Sutton. Probabilistic programming with densities in slicstan: efficient, flexible, and deterministic. Proceedings of the ACM on Programming Languages, 3(POPL):1–30, 2019.">119</a>]</span>, the
 same model of which is shown in Code Block
 <a class="reference internal" href="#slicstan"><span class="std std-ref">slicstan</span></a>. Slicstan provides a compositional
 interface to Stan, letting users define functions which can be named and
@@ -890,12 +1022,12 @@ syntax and shows the level of detail goes into API design.</p>
 <p>Our second API is a case study of an API design change that was required
 because of a computational backend change, in this case from Theano in
 PyMC3 to TensorFlow in PyMC4 a PPL that was initially intended to
-replace PyMC3 <span id="id18">[<a class="reference internal" href="references.html#id165">120</a>]</span>. In the design of PyMC4 the designers of
+replace PyMC3 <span id="id18">[<a class="reference internal" href="references.html#id165" title="Max Kochurov, Colin Carroll, Thomas Wiecki, and Junpeng Lao. Pymc4: exploiting coroutines for implementing a probabilistic programming framework. Program Transformations for ML Workshop at NeurIPS, 2019. URL: https://openreview.net/forum?id=rkgzj5Za8H.">120</a>]</span>. In the design of PyMC4 the designers of
 the language desired to keep the syntax <em>as close as possible</em> to the
 PyMC3 syntax. While the inference algorithms remained the same, the
 fundamental way in which TensorFlow and Python works meant the PyMC4 API
 forced into a particular design due to the change in computational
-backend. Consider the Eight Schools model <span id="id19">[<a class="reference internal" href="references.html#id115">27</a>]</span> implemented in
+backend. Consider the Eight Schools model <span id="id19">[<a class="reference internal" href="references.html#id115" title="Donald B Rubin. Estimation in parallel randomized experiments. Journal of Educational Statistics, 6(4):377–401, 1981.">27</a>]</span> implemented in
 PyMC3 syntax in Code Block <a class="reference internal" href="#pymc3-schools"><span class="std std-ref">pymc3_schools</span></a>
 and the now, defunct <a class="footnote-reference brackets" href="#id72" id="id20">8</a> PyMC4 syntax in Code Block
 <a class="reference internal" href="#pymc4-schools"><span class="std std-ref">pymc4_schools</span></a>.</p>
@@ -1131,14 +1263,14 @@ usability of the PPL across a wide variety of models.</p>
 <p>There are other more explicit transformations users can perform directly
 on the distribution itself to construct new distribution. User can then
 create random variables distributed as these new distributions in a
-model. For example, the bijectors module <span id="id26">[<a class="reference internal" href="references.html#id141">2</a>]</span> in TFP
+model. For example, the bijectors module <span id="id26">[<a class="reference internal" href="references.html#id141" title="Joshua V. Dillon, Ian Langmore, Dustin Tran, Eugene Brevdo, Srinivas Vasudevan, Dave Moore, Brian Patton, Alex Alemi, Matt Hoffman, and Rif A Saurous. Tensorflow distributions. arXiv preprint arXiv:1711.10604, 2017.">2</a>]</span> in TFP
 can be used to transform a base distribution into more complicated
 distributions. Code Block
 <a class="reference internal" href="#bijector-lognormal"><span class="std std-ref">bijector_lognormal</span></a> demonstrates how
 to construct a <span class="math notranslate nohighlight">\(LogNormal(0, 1)\)</span> distribution by transforming the base
 distribution <span class="math notranslate nohighlight">\(\mathcal{N}(0, 1)\)</span> <a class="footnote-reference brackets" href="#id75" id="id27">11</a>. This expressive API design even
 allows users to define complicated transformation using trainable
-bijectors (e.g., a neural network <span id="id28">[<a class="reference internal" href="references.html#id142">121</a>]</span>) like
+bijectors (e.g., a neural network <span id="id28">[<a class="reference internal" href="references.html#id142" title="George Papamakarios, Eric Nalisnick, Danilo Jimenez Rezende, Shakir Mohamed, and Balaji Lakshminarayanan. Normalizing flows for probabilistic modeling and inference. arXiv preprint arXiv:1912.02762, 2019.">121</a>]</span>) like
 <code class="docutils literal notranslate"><span class="pre">tfb.MaskedAutoregressiveFlow</span></code>.</p>
 <div class="literal-block-wrapper docutils container" id="bijector-lognormal">
 <div class="code-block-caption"><span class="caption-number">Listing 10.16 </span><span class="caption-text">bijector_lognormal</span><a class="headerlink" href="#bijector-lognormal" title="Permalink to this code">¶</a></div>
@@ -1384,7 +1516,7 @@ level.</p>
 </pre></div>
 </div>
 <p>Just like algebraic optimization this graph can then be optimized in
-ways that benefit the Bayesian user <span id="id32">[<a class="reference internal" href="references.html#id89">122</a>]</span>. Recall the
+ways that benefit the Bayesian user <span id="id32">[<a class="reference internal" href="references.html#id89" title="Brandon T Willard. Minikanren as a tool for symbolic computation in python. arXiv preprint arXiv:2005.11644, 2020.">122</a>]</span>. Recall the
 discussion in Section <a class="reference internal" href="chp_04.html#model-geometry"><span class="std std-ref">Posterior Geometry Matters</span></a>, certain
 models benefit from non-centered parameterizations, as this helps
 eliminate challenging geometry such as Neal’s funnel. Without automatic
@@ -1398,7 +1530,7 @@ computational optimizations.</p>
 </div>
 <div class="section" id="effect-handling">
 <span id="id34"></span><h2><span class="section-number">10.6. </span>Effect handling<a class="headerlink" href="#effect-handling" title="Permalink to this headline">¶</a></h2>
-<p>Effect handlers <span id="id35">[<a class="reference internal" href="references.html#id136">123</a>]</span> are an abstraction in programming
+<p>Effect handlers <span id="id35">[<a class="reference internal" href="references.html#id136" title="Ohad Kammar, Sam Lindley, and Nicolas Oury. Handlers in action. ACM SIGPLAN Notices, 48(9):145–158, 2013.">123</a>]</span> are an abstraction in programming
 languages that gives different interpretations, or side effects, to the
 standard behavior of statements in a program. A common example is
 exception handling in Python with <code class="docutils literal notranslate"><span class="pre">try</span></code> and <code class="docutils literal notranslate"><span class="pre">except</span></code>. When some specific
@@ -1847,10 +1979,10 @@ Turing-complete. However, research and implementation dedicated to
 universal PPLs usually focus on areas slightly different from what we
 discussed here. For example, an area of focus in a universal PPL is to
 express dynamic models, where the model contains complex control flow
-that dependent on random variable <span id="id48">[<a class="reference internal" href="references.html#id144">124</a>]</span>. As a result, the
+that dependent on random variable <span id="id48">[<a class="reference internal" href="references.html#id144" title="Frank Wood, Jan Willem Meent, and Vikash Mansinghka. A new approach to probabilistic programming inference. In Artificial Intelligence and Statistics, 1024–1032. PMLR, 2014.">124</a>]</span>. As a result, the
 number of random variables or the shape of a random variable could
 change during the execution of a dynamic probabilistic model. A good
-example of universal PPLs is Anglican <span id="id49">[<a class="reference internal" href="references.html#id146">125</a>]</span>. Dynamic
+example of universal PPLs is Anglican <span id="id49">[<a class="reference internal" href="references.html#id146" title="David Tolpin, Jan-Willem van de Meent, Hongseok Yang, and Frank Wood. Design and implementation of probabilistic programming language anglican. In Proceedings of the 28th Symposium on the Implementation and Application of Functional programming Languages, 1–12. 2016.">125</a>]</span>. Dynamic
 models might be valid or possible to write down, but there might not be
 an efficient and robust method to inference them. In this book, we
 discuss mainly PPLs focusing on static models (and their inference),
@@ -1886,9 +2018,9 @@ behavior of how the function is executed depending on the context
 (whether we are trying to obtain prior samples or evaluate the log
 probability). This approach of writing a Bayesian model as function and
 apply effect handler has gained significant popularity in recent years
-with Pyro <span id="id52">[<a class="reference internal" href="references.html#id137">126</a>]</span> (and NumPyro <span id="id53">[<a class="reference internal" href="references.html#id138">127</a>]</span>),
-Edward2 <span id="id54">[<a class="reference internal" href="references.html#id139">128</a>, <a class="reference internal" href="references.html#id140">129</a>]</span>, and JointDistribution in
-TensorFlow Probability <span id="id55">[<a class="reference internal" href="references.html#id128">29</a>]</span> <a class="footnote-reference brackets" href="#id90" id="id56">26</a> <a class="footnote-reference brackets" href="#id91" id="id57">27</a>.</p>
+with Pyro <span id="id52">[<a class="reference internal" href="references.html#id137" title="Eli Bingham, Jonathan P Chen, Martin Jankowiak, Fritz Obermeyer, Neeraj Pradhan, Theofanis Karaletsos, Rohit Singh, Paul Szerlip, Paul Horsfall, and Noah D Goodman. Pyro: deep universal probabilistic programming. The Journal of Machine Learning Research, 20(1):973–978, 2019.">126</a>]</span> (and NumPyro <span id="id53">[<a class="reference internal" href="references.html#id138" title="Du Phan, Neeraj Pradhan, and Martin Jankowiak. Composable effects for flexible and accelerated probabilistic programming in numpyro. arXiv preprint arXiv:1912.11554, 2019.">127</a>]</span>),
+Edward2 <span id="id54">[<a class="reference internal" href="references.html#id139" title="Dustin Tran, Matthew Hoffman, Dave Moore, Christopher Suter, Srinivas Vasudevan, Alexey Radul, Matthew Johnson, and Rif A Saurous. Simple, distributed, and accelerated probabilistic programming. arXiv preprint arXiv:1811.02091, 2018.">128</a>, <a class="reference internal" href="references.html#id140" title="Dave Moore and Maria I Gorinova. Effect handling for composable program transformations in edward2. arXiv preprint arXiv:1811.06150, 2018.">129</a>]</span>, and JointDistribution in
+TensorFlow Probability <span id="id55">[<a class="reference internal" href="references.html#id128" title="Dan Piponi, Dave Moore, and Joshua V. Dillon. Joint distributions for tensorflow probability. arXiv preprint arXiv:2001.11819, 2020.">29</a>]</span> <a class="footnote-reference brackets" href="#id90" id="id56">26</a> <a class="footnote-reference brackets" href="#id91" id="id57">27</a>.</p>
 <div class="section" id="shape-handling-in-ppls">
 <span id="shape-ppl"></span><h3><span class="section-number">10.8.1. </span>Shape Handling in PPLs<a class="headerlink" href="#shape-handling-in-ppls" title="Permalink to this headline">¶</a></h3>
 <p>Something that all PPLs must deal with, and subsquently PPL designers
@@ -1985,7 +2117,7 @@ in JAX, but they are often not a silver bullet solution to fixing the
 all issues. For example, it requires additional user input if the
 vectorization is across multiple axes.</p>
 <p>An example of a well defined shape handling logic is the shape semantic
-in TensorFlow Probability <span id="id58">[<a class="reference internal" href="references.html#id141">2</a>]</span> <a class="footnote-reference brackets" href="#id92" id="id59">28</a>, which
+in TensorFlow Probability <span id="id58">[<a class="reference internal" href="references.html#id141" title="Joshua V. Dillon, Ian Langmore, Dustin Tran, Eugene Brevdo, Srinivas Vasudevan, Dave Moore, Brian Patton, Alex Alemi, Matt Hoffman, and Rif A Saurous. Tensorflow distributions. arXiv preprint arXiv:1711.10604, 2017.">2</a>]</span> <a class="footnote-reference brackets" href="#id92" id="id59">28</a>, which
 conceptually partitions a Tensor’s shape into three groups:</p>
 <ul class="simple">
 <li><p><em>Sample shape</em> that describes iid draws from the distribution.</p></li>
@@ -2146,7 +2278,7 @@ the entire workflow.</p>
 chapter, for example, center and non-center parameterization for linear
 model in Section <a class="reference internal" href="chp_04.html#model-geometry"><span class="std std-ref">Posterior Geometry Matters</span></a>. One of the use case
 for effect handling is to perform automatic reparameterization
-<span id="id63">[<a class="reference internal" href="references.html#id176">130</a>]</span>. Try to write a effect handler in NumPyro to
+<span id="id63">[<a class="reference internal" href="references.html#id176" title="Maria Gorinova, Dave Moore, and Matthew Hoffman. Automatic reparameterisation of probabilistic programs. In International Conference on Machine Learning, 3648–3657. PMLR, 2020.">130</a>]</span>. Try to write a effect handler in NumPyro to
 perform automatic non-centering of a random variable in a model. Hint:
 NumPyro already provides this functionality with
 <code class="docutils literal notranslate"><span class="pre">numpyro.handlers.reparam</span></code>.</p>
@@ -2163,7 +2295,7 @@ transformations are already implemented.</p>
 </dd>
 <dt class="label" id="id66"><span class="brackets"><a class="fn-backref" href="#id4">3</a></span></dt>
 <dd><p><em>An Introduction to Probabilistic Programming</em> by van de Meent et
-al <span id="id67">[<a class="reference internal" href="references.html#id145">131</a>]</span> is a good starting point if you are
+al <span id="id67">[<a class="reference internal" href="references.html#id145" title="Jan-Willem van de Meent, Brooks Paige, Hongseok Yang, and Frank Wood. An introduction to probabilistic programming. arXiv preprint arXiv:1809.10756, 2018.">131</a>]</span> is a good starting point if you are
 interested in both PPL development and usage.</p>
 </dd>
 <dt class="label" id="id68"><span class="brackets"><a class="fn-backref" href="#id6">4</a></span></dt>
@@ -2299,8 +2431,8 @@ in PPLs in <em>PyMC3 shape handling</em>
 
               </div>
               
-        
-            <!-- Previous / next buttons -->
+            
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="chp_09.html" title="previous page">
         <i class="fas fa-angle-left"></i>
@@ -2317,19 +2449,17 @@ in PPLs in <em>PyMC3 shape handling</em>
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By Martin, Kumar, Lao<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By Martin, Kumar, Lao<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 

@@ -38,20 +38,22 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -319,7 +321,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -420,7 +422,111 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Approximate Bayesian Computation</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#life-beyond-likelihood">
+   8.1. Life Beyond Likelihood
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#approximating-the-approximated-posterior">
+   8.2. Approximating the Approximated Posterior
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fitting-a-gaussian-the-abc-way">
+   8.3. Fitting a Gaussian the ABC-way
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#choosing-the-distance-function-epsilon-and-the-summary-statistics">
+   8.4. Choosing the Distance Function,
+   <span class="math notranslate nohighlight">
+    \(\epsilon\)
+   </span>
+   and the Summary Statistics
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#choosing-the-distance">
+     8.4.1. Choosing the Distance
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#choosing-epsilon">
+     8.4.2. Choosing
+     <span class="math notranslate nohighlight">
+      \(\epsilon\)
+     </span>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#choosing-summary-statistics">
+     8.4.3. Choosing Summary Statistics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#g-and-k-distribution">
+   8.5. g-and-k Distribution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#approximating-moving-averages">
+   8.6. Approximating Moving Averages
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-comparison-in-the-abc-context">
+   8.7. Model Comparison in the ABC Context
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#marginal-likelihood-and-loo">
+     8.7.1. Marginal Likelihood and LOO
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-choice-via-random-forest">
+     8.7.2. Model Choice via Random Forest
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-choice-for-ma-model">
+     8.7.3. Model Choice for MA Model
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#choosing-priors-for-abc">
+   8.8. Choosing Priors for ABC
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   8.9. Exercises
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="approximate-bayesian-computation">
@@ -440,10 +546,10 @@ synthetic data <em>close enough</em> to the observed data. To this extent we
 will compute a posterior distribution of those parameters.</p>
 <p>ABC methods are becoming increasingly common in the biological sciences,
 in particular in sub-fields like systems biology, epidemiology, ecology
-and population genetics <span id="id1">[<a class="reference internal" href="references.html#id77">84</a>]</span>. But they are also used in other
+and population genetics <span id="id1">[<a class="reference internal" href="references.html#id77" title="Mikael Sunnåker, Alberto Giovanni Busetto, Elina Numminen, Jukka Corander, Matthieu Foll, and Christophe Dessimoz. Approximate bayesian computation. PLoS computational biology, 9(1):e1002803, 2013.">84</a>]</span>. But they are also used in other
 domains as they provide a flexible way to solve many practical problems.
 This diversity is also reflected in the Python packages available for
-ABC <span id="id2">[<a class="reference internal" href="references.html#id56">85</a>, <a class="reference internal" href="references.html#id55">86</a>, <a class="reference internal" href="references.html#id57">87</a>]</span>. Nevertheless, the extra
+ABC <span id="id2">[<a class="reference internal" href="references.html#id56" title="Ritabrata Dutta, Marcel Schoengens, Jukka-Pekka Onnela, and Antonietta Mira. Abcpy: a user-friendly, extensible, and parallel library for approximate bayesian computation. In Proceedings of the platform for advanced scientific computing conference, 1–9. 2017.">85</a>, <a class="reference internal" href="references.html#id55" title="Jarno Lintusaari, Henri Vuollekoski, Antti Kangasraasio, Kusti Skytén, Marko Jarvenpaa, Pekka Marttinen, Michael U Gutmann, Aki Vehtari, Jukka Corander, and Samuel Kaski. Elfi: engine for likelihood-free inference. Journal of Machine Learning Research, 19(16):1–7, 2018.">86</a>, <a class="reference internal" href="references.html#id57" title="Emmanuel Klinger, Dennis Rickert, and Jan Hasenauer. Pyabc: distributed, likelihood-free inference. Bioinformatics, 34(20):3591–3593, 2018.">87</a>]</span>. Nevertheless, the extra
 layer of approximation comes with its own set of difficulties. Mainly
 defining what <em>close enough</em> means in the absence of a likelihood and
 then being able to actually compute an approximated posterior.</p>
@@ -522,7 +628,7 @@ mean says nothing about the dispersion, thus it is only sufficient with
 respect to the parameter <span class="math notranslate nohighlight">\(\mu\)</span>. It is known that for iid data the only
 distributions with a sufficient statistic with dimension equal to the
 dimension of <span class="math notranslate nohighlight">\(\theta\)</span> are the distributions from the Exponential family
-<span id="id6">[<a class="reference internal" href="references.html#id153">88</a>, <a class="reference internal" href="references.html#id152">89</a>, <a class="reference internal" href="references.html#id151">90</a>, <a class="reference internal" href="references.html#id150">91</a>]</span>. For other
+<span id="id6">[<a class="reference internal" href="references.html#id153" title="Georges Darmois. Sur les lois de probabilitéa estimation exhaustive. CR Acad. Sci. Paris, 260(1265):85, 1935.">88</a>, <a class="reference internal" href="references.html#id152" title="Bernard Osgood Koopman. On distributions admitting a sufficient statistic. Transactions of the American Mathematical society, 39(3):399–409, 1936.">89</a>, <a class="reference internal" href="references.html#id151" title="Edwin James George Pitman. Sufficient statistics and intrinsic accuracy. In Mathematical Proceedings of the cambridge Philosophical society, volume 32, 567–579. Cambridge University Press, 1936.">90</a>, <a class="reference internal" href="references.html#id150" title="Erling Bernhard Andersen. Sufficiency and exponential families for discrete sample spaces. Journal of the American Statistical Association, 65(331):1248–1255, 1970.">91</a>]</span>. For other
 distribution, the dimension of the sufficient statistic increases with
 the sample size.</p>
 </div>
@@ -705,7 +811,7 @@ Mahalanobis distance: <span class="math notranslate nohighlight">\(\sqrt{(xo - x
 data or, as we already mentioned, to summary statistics. There are also
 some distance functions that have been introduced specifically to avoid
 the need of summary statistics and still provide good results
-<span id="id14">[<a class="reference internal" href="references.html#id48">92</a>, <a class="reference internal" href="references.html#id47">93</a>, <a class="reference internal" href="references.html#id46">94</a>]</span>. We are going to discuss two of
+<span id="id14">[<a class="reference internal" href="references.html#id48" title="Fernando Pérez-Cruz. Kullback-leibler divergence estimation of continuous distributions. In 2008 IEEE international symposium on information theory, 1666–1670. IEEE, 2008.">92</a>, <a class="reference internal" href="references.html#id47" title="Bai Jiang. Approximate bayesian computation with kullback-leibler divergence as data discrepancy. In International conference on artificial intelligence and statistics, 1711–1721. PMLR, 2018.">93</a>, <a class="reference internal" href="references.html#id46" title="Espen Bernton, Pierre E Jacob, Mathieu Gerber, and Christian P Robert. Approximate bayesian computation with the wasserstein distance. Journal of the Royal Statistical Society: Series B (Statistical Methodology), 81(2):235–269, 2019.">94</a>]</span>. We are going to discuss two of
 them, the Wasserstein distances and the KL divergence.</p>
 <p>In Code Block <a class="reference internal" href="#gauss-abc"><span class="std std-ref">gauss_abc</span></a> we use
 <code class="docutils literal notranslate"><span class="pre">sum_stat=&quot;sort&quot;</span></code> <a class="footnote-reference brackets" href="#id59" id="id15">6</a>, this tells PyMC3 to sort the data before
@@ -713,7 +819,7 @@ computing Equation <a class="reference internal" href="#equation-eq-euclidean-ab
 computing the 1D 2-Wasserstein distance and if we do the same but we use
 the L1 norm we get the 1D 1-Wasserstein distance. It is possible to
 define Wasserstein distances for dimensions larger than 1
-<span id="id16">[<a class="reference internal" href="references.html#id46">94</a>]</span>.</p>
+<span id="id16">[<a class="reference internal" href="references.html#id46" title="Espen Bernton, Pierre E Jacob, Mathieu Gerber, and Christian P Robert. Approximate bayesian computation with the wasserstein distance. Journal of the Royal Statistical Society: Series B (Statistical Methodology), 81(2):235–269, 2019.">94</a>]</span>.</p>
 <p>Sorting the data before computing the distance makes the comparison
 between distributions much more fair. To see this imagine we have two
 samples that are exactly equal, but out of pure luck one is ordered from
@@ -729,7 +835,7 @@ with a time series, see Chapter <a class="reference internal" href="chp_06.html#
 <p>Another distance introduced to avoid the need to define a summary
 statistic is the use of the KL divergence (see Section <a class="reference internal" href="chp_11.html#dkl"><span class="std std-ref">Kullback-Leibler Divergence</span></a>). The KL
 divergence is approximated using the following expression
-<span id="id17">[<a class="reference internal" href="references.html#id48">92</a>, <a class="reference internal" href="references.html#id47">93</a>]</span>:</p>
+<span id="id17">[<a class="reference internal" href="references.html#id48" title="Fernando Pérez-Cruz. Kullback-leibler divergence estimation of continuous distributions. In 2008 IEEE international symposium on information theory, 1666–1670. IEEE, 2008.">92</a>, <a class="reference internal" href="references.html#id47" title="Bai Jiang. Approximate bayesian computation with kullback-leibler divergence as data discrepancy. In International conference on artificial intelligence and statistics, 1711–1721. PMLR, 2018.">93</a>]</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-kl-abc">
 <span class="eqno">(8.7)<a class="headerlink" href="#equation-eq-kl-abc" title="Permalink to this equation">¶</a></span>\[\frac{d}{n}  \sum \left(- \frac{\log(\frac{\nu_d}{\rho_d})}{\epsilon} \right) + \log\left(\frac{n}{n-1}\right)\]</div>
 <p>Where <span class="math notranslate nohighlight">\(d\)</span> is the dimension of the dataset (number of variables or
@@ -739,7 +845,7 @@ the 1-nearest neighbor distances of the observed to simulated data and
 (notice that if you compare a dataset with itself the 1-nearest neighbor
 distances will always be zero). As this method involves 2n operations of
 nearest neighbor search, it is generally implemented using k-d trees
-<span id="id18">[<a class="reference internal" href="references.html#id49">95</a>]</span>.</p>
+<span id="id18">[<a class="reference internal" href="references.html#id49" title="Jon Louis Bentley. Multidimensional binary search trees used for associative searching. Communications of the ACM, 18(9):509–517, 1975.">95</a>]</span>.</p>
 </div>
 <div class="section" id="choosing-epsilon">
 <span id="id19"></span><h3><span class="section-number">8.4.2. </span>Choosing <span class="math notranslate nohighlight">\(\epsilon\)</span><a class="headerlink" href="#choosing-epsilon" title="Permalink to this headline">¶</a></h3>
@@ -842,20 +948,20 @@ samples that look reasonable (i.e. not <span class="math notranslate nohighlight
 have a larger effect than the choice of the distance function. For that
 reason a lot of research has been focused on the subject from the use of
 distance that does not require summary statistics
-<span id="id22">[<a class="reference internal" href="references.html#id47">93</a>, <a class="reference internal" href="references.html#id46">94</a>]</span> to strategies for choosing summary
-statistics <span id="id23">[<a class="reference internal" href="references.html#id50">96</a>]</span>.</p>
+<span id="id22">[<a class="reference internal" href="references.html#id47" title="Bai Jiang. Approximate bayesian computation with kullback-leibler divergence as data discrepancy. In International conference on artificial intelligence and statistics, 1711–1721. PMLR, 2018.">93</a>, <a class="reference internal" href="references.html#id46" title="Espen Bernton, Pierre E Jacob, Mathieu Gerber, and Christian P Robert. Approximate bayesian computation with the wasserstein distance. Journal of the Royal Statistical Society: Series B (Statistical Methodology), 81(2):235–269, 2019.">94</a>]</span> to strategies for choosing summary
+statistics <span id="id23">[<a class="reference internal" href="references.html#id50" title="S.A. Sisson, Y. Fan, and M. Beaumont. Handbook of Approximate Bayesian Computation. Chapman &amp; Hall/CRC Handbooks of Modern Statistical Methods. CRC Press, 2018. ISBN 9781439881514.">96</a>]</span>.</p>
 <p>A good summary statistic provides a balance between low dimension and
 informativeness. When we do not have a sufficient summary statistic it
 is tempting to overcompensate by adding a lot of summary statistics. The
 intuition is that the more information the better. However, increasing
 the number of summary statistics can actually reduce the quality of the
-approximated posterior <span id="id24">[<a class="reference internal" href="references.html#id50">96</a>]</span>. One explanation for this is that
+approximated posterior <span id="id24">[<a class="reference internal" href="references.html#id50" title="S.A. Sisson, Y. Fan, and M. Beaumont. Handbook of Approximate Bayesian Computation. Chapman &amp; Hall/CRC Handbooks of Modern Statistical Methods. CRC Press, 2018. ISBN 9781439881514.">96</a>]</span>. One explanation for this is that
 we move from computing distances over data to distances over summaries
 to reduce the dimensionality, by increasing the number of summaries
 statistics we are defeating that purpose.</p>
 <p>In some fields like population genetics, where ABC methods are very
 common, people have developed a large collection of useful summary
-statistics <span id="id25">[<a class="reference internal" href="references.html#id53">97</a>, <a class="reference internal" href="references.html#id54">98</a>, <a class="reference internal" href="references.html#id51">99</a>]</span>. In general it is
+statistics <span id="id25">[<a class="reference internal" href="references.html#id53" title="Mark A. Beaumont, Wenyang Zhang, and David J Balding. Approximate bayesian computation in population genetics. Genetics, 162(4):2025–2035, 2002.">97</a>, <a class="reference internal" href="references.html#id54" title="Mark A. Beaumont. Approximate bayesian computation in evolution and ecology. Annual review of ecology, evolution, and systematics, 41:379–406, 2010.">98</a>, <a class="reference internal" href="references.html#id51" title="Pierre Pudlo, Jean-Michel Marin, Arnaud Estoup, Jean-Marie Cornuet, Mathieu Gautier, and Christian P Robert. Reliable abc model choice via random forests. Bioinformatics, 32(6):859–866, 2016.">99</a>]</span>. In general it is
 a good idea to check the literature from the applied field you are
 working on to see what others are doing, as chances are high they have
 already tried and tested many alternatives.</p>
@@ -888,7 +994,7 @@ bottom one omits values larger than 3.</span><a class="headerlink" href="#fig-co
 </div>
 <p>To fit this data we are going to introduce the univariate g-and-k
 distribution. This is a 4 parameter distribution able to describe data
-with high skewness and/or kurtosis <span id="id27">[<a class="reference internal" href="references.html#id40">100</a>, <a class="reference internal" href="references.html#id41">101</a>]</span>. Its
+with high skewness and/or kurtosis <span id="id27">[<a class="reference internal" href="references.html#id40" title="John W. Tukey. Modern Techniques in Data Analysis. In proceesings of the Sponsored Regional Research Conference. 1977.">100</a>, <a class="reference internal" href="references.html#id41" title="Glen D Rayner and Helen L MacGillivray. Numerical maximum likelihood estimation for the g-and-k and generalized g-and-h distributions. Statistics and Computing, 12(1):57–75, 2002.">101</a>]</span>. Its
 density function in unavailable in closed form and the g-and-k
 distribution are defined through its quantile function, i.e. the inverse
 of the cumulative distribution function:</p>
@@ -906,16 +1012,16 @@ can take any real value. It is common to restrict <span class="math notranslate 
 <span class="math notranslate nohighlight">\(k \geqslant -0.5\)</span> or sometimes <span class="math notranslate nohighlight">\(k \geqslant 0\)</span> i.e. tails as heavy or
 heavier than those from a Gaussian distribution. Additionally it is
 common to fix <span class="math notranslate nohighlight">\(c=0.8\)</span>. With all these restrictions we are guaranteed to
-get a strictly increasing quantile function <span id="id28">[<a class="reference internal" href="references.html#id41">101</a>]</span> which is a
+get a strictly increasing quantile function <span id="id28">[<a class="reference internal" href="references.html#id41" title="Glen D Rayner and Helen L MacGillivray. Numerical maximum likelihood estimation for the g-and-k and generalized g-and-h distributions. Statistics and Computing, 12(1):57–75, 2002.">101</a>]</span> which is a
 hallmark of well-defined continuous distribution functions.</p>
 <p>Code Block <a class="reference internal" href="#gk-quantile"><span class="std std-ref">gk_quantile</span></a> defines a g-and-k
 quantile distribution. We have omitted the calculation of the cdf and
 pdf because they are a little bit more involved, but most importantly
 because we are not going to use them for our examples <a class="footnote-reference brackets" href="#id61" id="id29">8</a>. While the
 probability density function of the g-and-k distribution can be
-evaluated numerically <span id="id30">[<a class="reference internal" href="references.html#id41">101</a>, <a class="reference internal" href="references.html#id45">102</a>]</span>, simulating from the
+evaluated numerically <span id="id30">[<a class="reference internal" href="references.html#id41" title="Glen D Rayner and Helen L MacGillivray. Numerical maximum likelihood estimation for the g-and-k and generalized g-and-h distributions. Statistics and Computing, 12(1):57–75, 2002.">101</a>, <a class="reference internal" href="references.html#id45" title="Dennis Prangle. Gk: an r package for the g-and-k and generalised g-and-h distributions. arXiv preprint arXiv:1706.06889, 2017.">102</a>]</span>, simulating from the
 g-and-k model using the inversion method is more straightforward and
-fast <span id="id31">[<a class="reference internal" href="references.html#id45">102</a>, <a class="reference internal" href="references.html#id42">103</a>]</span>. To implement the inversion method we
+fast <span id="id31">[<a class="reference internal" href="references.html#id45" title="Dennis Prangle. Gk: an r package for the g-and-k and generalised g-and-h distributions. arXiv preprint arXiv:1706.06889, 2017.">102</a>, <a class="reference internal" href="references.html#id42" title="Christopher C Drovandi and Anthony N Pettitt. Likelihood-free bayesian estimation of multivariate quantile distributions. Computational Statistics &amp; Data Analysis, 55(9):2541–2556, 2011.">103</a>]</span>. To implement the inversion method we
 sample <span class="math notranslate nohighlight">\(x \sim \mathcal{U}(0, 1)\)</span> and replace in Equation
 <a class="reference internal" href="#equation-eq-g-and-k">(8.8)</a>. Code Block <a class="reference internal" href="#gk-quantile"><span class="std std-ref">gk_quantile</span></a>
 shows how to do this in Python and <a class="reference internal" href="#fig-gk-quantile"><span class="std std-numref">Fig. 8.10</span></a> shows
@@ -953,7 +1059,7 @@ Alternative, we can also think of a summary statistic tailored for this
 problem. As we know, the parameters <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(b\)</span>, <span class="math notranslate nohighlight">\(g\)</span> and <span class="math notranslate nohighlight">\(k\)</span> are associated
 with location, scale, skewness and kurtosis respectively. Thus, we can
 think of a summary statistic based on robust estimates for these
-quantities <span id="id32">[<a class="reference internal" href="references.html#id42">103</a>]</span>:</p>
+quantities <span id="id32">[<a class="reference internal" href="references.html#id42" title="Christopher C Drovandi and Anthony N Pettitt. Likelihood-free bayesian estimation of multivariate quantile distributions. Computational Statistics &amp; Data Analysis, 55(9):2541–2556, 2011.">103</a>]</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-octiles">
 <span class="eqno">(8.9)<a class="headerlink" href="#equation-eq-octiles" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
 sa &amp;= e4 \\
@@ -966,8 +1072,8 @@ into eight subsets.</p>
 <p>If we pay attention we can see that <span class="math notranslate nohighlight">\(sa\)</span> is the median and <span class="math notranslate nohighlight">\(sb\)</span> the
 interquartile range, which are robust estimators of location and
 dispersion. Even when <span class="math notranslate nohighlight">\(sg\)</span> and <span class="math notranslate nohighlight">\(sk\)</span> may look a little bit more obscure,
-they are also robust estimators of skewness <span id="id33">[<a class="reference internal" href="references.html#id43">104</a>]</span> and kurtosis
-<span id="id34">[<a class="reference internal" href="references.html#id44">105</a>]</span>, respectively. Let us make this more clear. For a symmetric
+they are also robust estimators of skewness <span id="id33">[<a class="reference internal" href="references.html#id43" title="A.L. Bowley. Elements of Statistics. Number v. 2 in Elements of Statistics. P.S. King, 1920.">104</a>]</span> and kurtosis
+<span id="id34">[<a class="reference internal" href="references.html#id44" title="JJA Moors. A quantile alternative for kurtosis. Journal of the Royal Statistical Society: Series D (The Statistician), 37(1):25–32, 1988.">105</a>]</span>, respectively. Let us make this more clear. For a symmetric
 distribution <span class="math notranslate nohighlight">\(e6-e4\)</span> and <span class="math notranslate nohighlight">\(e2-e4\)</span> will have the same magnitude but
 opposite signs so in such a case <span class="math notranslate nohighlight">\(sg\)</span> will be zero, and for skewed
 distributions either <span class="math notranslate nohighlight">\(e6-e4\)</span> will be larger than <span class="math notranslate nohighlight">\(e2-e4\)</span> or vice versa.
@@ -1041,7 +1147,7 @@ the order of the MA model.</p>
 <div class="math notranslate nohighlight" id="equation-eq-ma-model">
 <span class="eqno">(8.10)<a class="headerlink" href="#equation-eq-ma-model" title="Permalink to this equation">¶</a></span>\[y_t = \mu + \lambda_t + \theta_1 \lambda_{t-1} + \cdots + \theta_q \lambda_{t-q}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\lambda\)</span> are white Gaussian noise error terms <a class="footnote-reference brackets" href="#id63" id="id35">9</a>.</p>
-<p>We are going to use a toy-model taken from <span id="id36">Marin <em>et al.</em> [<a class="reference internal" href="references.html#id39">106</a>]</span>. For
+<p>We are going to use a toy-model taken from <span id="id36">Marin <em>et al.</em> [<a class="reference internal" href="references.html#id39" title="Jean-Michel Marin, Pierre Pudlo, Christian P Robert, and Robin J Ryder. Approximate bayesian computational methods. Statistics and Computing, 22(6):1167–1180, 2012.">106</a>]</span>. For
 this example we are going to use the MA(2) model with mean value 0 (i.e.
 <span class="math notranslate nohighlight">\(\mu =0\)</span>), thus our model looks like:</p>
 <div class="math notranslate nohighlight" id="equation-eq-ma2-model">
@@ -1127,9 +1233,9 @@ mean is indicated with a black dot.</span><a class="headerlink" href="#fig-ma2-t
 <div class="section" id="model-comparison-in-the-abc-context">
 <span id="id37"></span><h2><span class="section-number">8.7. </span>Model Comparison in the ABC Context<a class="headerlink" href="#model-comparison-in-the-abc-context" title="Permalink to this headline">¶</a></h2>
 <p>ABC methods are frequently used for model choice. While many methods
-have been proposed <span id="id38">[<a class="reference internal" href="references.html#id50">96</a>, <a class="reference internal" href="references.html#id52">107</a>]</span>, here we will discuss
+have been proposed <span id="id38">[<a class="reference internal" href="references.html#id50" title="S.A. Sisson, Y. Fan, and M. Beaumont. Handbook of Approximate Bayesian Computation. Chapman &amp; Hall/CRC Handbooks of Modern Statistical Methods. CRC Press, 2018. ISBN 9781439881514.">96</a>, <a class="reference internal" href="references.html#id52" title="Mark A. Beaumont. Approximate bayesian computation. Annual review of statistics and its application, 6:379–403, 2019.">107</a>]</span>, here we will discuss
 two approaches; Bayes factors, including a comparison with LOO, and
-random forest <span id="id39">[<a class="reference internal" href="references.html#id51">99</a>]</span>.</p>
+random forest <span id="id39">[<a class="reference internal" href="references.html#id51" title="Pierre Pudlo, Jean-Michel Marin, Arnaud Estoup, Jean-Marie Cornuet, Mathieu Gautier, and Christian P Robert. Reliable abc model choice via random forests. Bioinformatics, 32(6):859–866, 2016.">99</a>]</span>.</p>
 <p>As with parameter inference, the choice of summaries is of crucial
 importance for model comparison. If we evaluate two or more models using
 their predictions, we can not favour one model over the other if they
@@ -1159,10 +1265,10 @@ log scale, to compute a Bayes factor we can do:</p>
 </div>
 <p>When using summary statistics the marginal likelihood computed from ABC
 methods cannot be generally trusted to discriminate between competing
-models <span id="id41">[<a class="reference internal" href="references.html#id61">108</a>]</span>, unless the summary statistics are sufficient for
+models <span id="id41">[<a class="reference internal" href="references.html#id61" title="Christian P Robert, Jean-Marie Cornuet, Jean-Michel Marin, and Natesh S Pillai. Lack of confidence in approximate bayesian computation model choice. Proceedings of the National Academy of Sciences, 108(37):15112–15117, 2011.">108</a>]</span>, unless the summary statistics are sufficient for
 model comparison. This is worrisome as, outside a few formal examples or
 particular models, there is no general guide to ensure sufficiency
-across models <span id="id42">[<a class="reference internal" href="references.html#id61">108</a>]</span>. This is not a problem if we use all the
+across models <span id="id42">[<a class="reference internal" href="references.html#id61" title="Christian P Robert, Jean-Marie Cornuet, Jean-Michel Marin, and Natesh S Pillai. Lack of confidence in approximate bayesian computation model choice. Proceedings of the National Academy of Sciences, 108(37):15112–15117, 2011.">108</a>]</span>. This is not a problem if we use all the
 data i.e. we do not rely on summary statistics <a class="footnote-reference brackets" href="#id64" id="id43">10</a>. This resembles our
 discussion (see Section <a class="reference internal" href="chp_11.html#bayes-factors"><span class="std std-ref">Marginal Likelihood and Model Comparison</span></a>) about how computing
 the marginal likelihood is generally a much more difficult problem that
@@ -1333,7 +1439,7 @@ are clearly a bad fit.</p>
 <p>The caveats we discussed in the previous section has motivated the
 research of new methods for model choice under the ABC framework. One
 such alternative method reframes the model selection problem as random
-forest classification problem <span id="id45">[<a class="reference internal" href="references.html#id51">99</a>]</span> <a class="footnote-reference brackets" href="#id65" id="id46">11</a>. A random forest is a
+forest classification problem <span id="id45">[<a class="reference internal" href="references.html#id51" title="Pierre Pudlo, Jean-Michel Marin, Arnaud Estoup, Jean-Marie Cornuet, Mathieu Gautier, and Christian P Robert. Reliable abc model choice via random forests. Bioinformatics, 32(6):859–866, 2016.">99</a>]</span> <a class="footnote-reference brackets" href="#id65" id="id46">11</a>. A random forest is a
 method for classification and regression based on the combination of
 many decision trees and it is closely related to BARTs from Chapter
 <a class="reference internal" href="chp_07.html#chap6"><span class="std std-ref">7</span></a>.</p>
@@ -1414,7 +1520,7 @@ for the <em>best</em> model, relative to the rest of the models. Once again,
 this can be done using a random forest, but this time we use a
 regression, with the misclassification error rate as response variable
 and the summary statistics in the reference table as independent
-variables <span id="id47">[<a class="reference internal" href="references.html#id51">99</a>]</span>.</p>
+variables <span id="id47">[<a class="reference internal" href="references.html#id51" title="Pierre Pudlo, Jean-Michel Marin, Arnaud Estoup, Jean-Marie Cornuet, Mathieu Gautier, and Christian P Robert. Reliable abc model choice via random forests. Bioinformatics, 32(6):859–866, 2016.">99</a>]</span>.</p>
 </div>
 <div class="section" id="model-choice-for-ma-model">
 <span id="id48"></span><h3><span class="section-number">8.7.3. </span>Model Choice for MA Model<a class="headerlink" href="#model-choice-for-ma-model" title="Permalink to this headline">¶</a></h3>
@@ -1514,7 +1620,7 @@ statistics (the first two auto-correlations), with not very useful ones
 (the rest). Remember that theory says that for a MA(q) processes there
 are at most q auto-correlations. For complex problems, like those from
 population genetics it is not uncommon to use several hundreds or even
-tens of thousands of summary statistics <span id="id50">[<a class="reference internal" href="references.html#id64">109</a>]</span>.</p>
+tens of thousands of summary statistics <span id="id50">[<a class="reference internal" href="references.html#id64" title="François-David Collin, Arnaud Estoup, Jean-Michel Marin, and Louis Raynal. Bringing abc inference to the machine learning realm: abcranger, an optimized random forests library for abc. In JOBIM 2020, volume 2020. 2020.">109</a>]</span>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
 <span class="n">select_model</span><span class="p">([(</span><span class="n">m_ma1</span><span class="p">,</span> <span class="n">trace_ma1</span><span class="p">),</span> <span class="p">(</span><span class="n">m_ma2</span><span class="p">,</span> <span class="n">trace_ma2</span><span class="p">)],</span>
              <span class="n">statistics</span><span class="o">=</span><span class="p">[</span><span class="n">partial</span><span class="p">(</span><span class="n">autocov</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">6</span><span class="p">)],</span>
@@ -1553,7 +1659,7 @@ all but few samples from the prior would have extremely small weights
 when evaluated on the tempered posteriors. This leads to the SMC
 particles to become singular after just a few steps (as only few samples
 with large weight are selected). This phenomenon is called weight
-collapse, a well known issue for particle methods <span id="id52">[<a class="reference internal" href="references.html#id143">110</a>]</span>.
+collapse, a well known issue for particle methods <span id="id52">[<a class="reference internal" href="references.html#id143" title="Peter Bickel, Bo Li, Thomas Bengtsson, and others. Sharp failure rates for the bootstrap particle filter in high dimensions. In Pushing the limits of contemporary statistics: Contributions in honor of Jayanta K. Ghosh, pages 318–329. Institute of Mathematical Statistics, 2008.">110</a>]</span>.
 Good priors can help to reduce the computational cost and thus to some
 extent allow us to fit more complex models when we are using SMC and
 SMC-ABC. Beyond the general advice of more informative prior and what we
@@ -1614,7 +1720,7 @@ find a suitable value for <code class="docutils literal notranslate"><span class
 and results provides a suitable fit.</p>
 <p><strong>8M10.</strong> The Lotka-Volterra is well-know biological model
 describing how the number of individuals of two species change when
-there is a predator-prey interaction <span id="id53">[<a class="reference internal" href="references.html#id174">111</a>]</span>. Basically, as the
+there is a predator-prey interaction <span id="id53">[<a class="reference internal" href="references.html#id174" title="S.P. Otto and T. Day. A Biologist's Guide to Mathematical Modeling in Ecology and Evolution. Princeton University Press, 2011. ISBN 9781400840915.">111</a>]</span>. Basically, as the
 population of prey increase there is more food for the predator which
 leads to an increase in the predator population. But a large number of
 predators produce a decline in the number of pray which in turn produce
@@ -1671,7 +1777,7 @@ sorting is not a true summary as we are still using the whole data</p>
 of the SMC/SMC-ABC algorithm explained before</p>
 </dd>
 <dt class="label" id="id61"><span class="brackets"><a class="fn-backref" href="#id29">8</a></span></dt>
-<dd><p>In Prangle <span id="id62">[<a class="reference internal" href="references.html#id45">102</a>]</span> you will find a description of an R
+<dd><p>In Prangle <span id="id62">[<a class="reference internal" href="references.html#id45" title="Dennis Prangle. Gk: an r package for the g-and-k and generalised g-and-h distributions. arXiv preprint arXiv:1706.06889, 2017.">102</a>]</span> you will find a description of an R
 package with a lot of functions to work with g-and-k distributions.</p>
 </dd>
 <dt class="label" id="id63"><span class="brackets"><a class="fn-backref" href="#id35">9</a></span></dt>
@@ -1717,8 +1823,8 @@ InferenceData object with the proper groups.</p>
 
               </div>
               
-        
-            <!-- Previous / next buttons -->
+            
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="chp_07.html" title="previous page">
         <i class="fas fa-angle-left"></i>
@@ -1735,19 +1841,17 @@ InferenceData object with the proper groups.</p>
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By Martin, Kumar, Lao<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By Martin, Kumar, Lao<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 

@@ -38,20 +38,22 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -319,7 +321,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -398,7 +400,89 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Bayesian Inference</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bayesian-modeling">
+   1.1. Bayesian Modeling
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bayesian-models">
+     1.1.1. Bayesian Models
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     1.1.2. Bayesian Inference
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-diy-sampler-do-not-try-this-at-home">
+   1.2. A DIY Sampler, Do Not Try This at Home
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#say-yes-to-automating-inference-say-no-to-automated-model-building">
+   1.3. Say Yes to Automating Inference, Say No to Automated Model Building
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-few-options-to-quantify-your-prior-information">
+   1.4. A Few Options to Quantify Your Prior Information
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#conjugate-priors">
+     1.4.1. Conjugate Priors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#objective-priors">
+     1.4.2. Objective Priors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#maximum-entropy-priors">
+     1.4.3. Maximum Entropy Priors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#weakly-informative-priors-and-regularization-priors">
+     1.4.4. Weakly Informative Priors and Regularization Priors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-prior-predictive-distributions-to-assess-priors">
+     1.4.5. Using Prior Predictive Distributions to Assess Priors
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   1.5. Exercises
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="bayesian-inference">
@@ -423,7 +507,7 @@ explored and expanded throughout the rest of the book.</p>
 <p>A conceptual model is a representation of a system, made of the
 composition of concepts that are used to help people know, understand,
 or simulate the object or process the model represents
-<span id="id2">[<a class="reference internal" href="references.html#id25">6</a>]</span>. Additionally, models are human-designed
+<span id="id2">[<a class="reference internal" href="references.html#id25" title="Wikipedia contributors. Conceptual model — Wikipedia, the free encyclopedia. Page Version ID: 952394363. URL: https://en.wikipedia.org/w/index.php?title=Conceptual_model&amp;oldid=952394363.">6</a>]</span>. Additionally, models are human-designed
 representations with very specific goals in mind. As such, it is
 generally more convenient to talk about the adequacy of the model to a
 given problem than its intrinsic correctness. Models exist solely as an
@@ -638,7 +722,7 @@ modeling choices.</p>
 <div class="admonition-bayesian-models-as-generative-models admonition">
 <p class="admonition-title">Bayesian models as generative models</p>
 <p>Adopting a probabilistic perspective for modeling leads to the mantra <em>models generate data</em>
-<span id="id13">[<a class="reference internal" href="references.html#id28">4</a>]</span>. We consider this
+<span id="id13">[<a class="reference internal" href="references.html#id28" title="P. Westfall and K.S.S. Henning. Understanding Advanced Statistical Methods. Chapman &amp; Hall/CRC Texts in Statistical Science. Taylor &amp; Francis, 2013. ISBN 9781466512108.">4</a>]</span>. We consider this
 concept to be of central importance. Once you internalize it, all
 statistical models become much more clear, even non-Bayesian ones. This
 mantra can help to create new models; if models generate data, we can
@@ -707,7 +791,7 @@ to evaluate the prior and likelihood at a given parameter value. That
 is, even when we do not know what the entire posterior looks like, we
 can ask for its density point-wise.</p>
 <p>One such algorithm is Metropolis-Hastings
-<span id="id15">[<a class="reference internal" href="references.html#id106">7</a>, <a class="reference internal" href="references.html#id107">8</a>, <a class="reference internal" href="references.html#id108">9</a>]</span>. This is not a very
+<span id="id15">[<a class="reference internal" href="references.html#id106" title="Nicholas Metropolis, Arianna W Rosenbluth, Marshall N Rosenbluth, Augusta H Teller, and Edward Teller. Equation of state calculations by fast computing machines. The journal of chemical physics, 21(6):1087–1092, 1953.">7</a>, <a class="reference internal" href="references.html#id107" title="WK HASTINGS. Monte carlo sampling methods using markov chains and their applications. Biometrika, 57(1):97–109, 1970.">8</a>, <a class="reference internal" href="references.html#id108" title="Marshall N Rosenbluth. Genesis of the monte carlo algorithm for statistical mechanics. In AIP Conference Proceedings, volume 690, 22–30. American Institute of Physics, 2003.">9</a>]</span>. This is not a very
 modern or particularly efficient algorithm, but Metropolis-Hastings is
 simple to understand and also provides a foundation to understand more
 sophisticated and powerful methods. <a class="footnote-reference brackets" href="#id48" id="id16">9</a></p>
@@ -874,7 +958,7 @@ that both plots are closely related. The plot on the left shows the
 plot on the right shows the distribution of the sampled values.</span><a class="headerlink" href="#fig-traceplot" title="Permalink to this image">¶</a></p>
 </div>
 <p>Generally it is also useful to compute some numerical summaries. Here we
-will use the Python package ArviZ <span id="id19">[<a class="reference internal" href="references.html#id11">3</a>]</span> to compute these
+will use the Python package ArviZ <span id="id19">[<a class="reference internal" href="references.html#id11" title="Ravin Kumar, Colin Carroll, Ari Hartikainen, and Osvaldo Martin. Arviz a unified library for exploratory analysis of bayesian models in python. Journal of Open Source Software, 4(33):1143, 2019.">3</a>]</span> to compute these
 statistics:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;stats&quot;</span><span class="p">,</span> <span class="n">round_to</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
@@ -928,8 +1012,8 @@ default value as seen in both the summary
 <a class="reference internal" href="#fig-plot-posterior"><span class="std std-numref">Fig. 1.3</span></a>. The reason for this choice is that 94 is
 close to the <em>widely used</em> 95 but is different enough to serve as a
 friendly reminder that there is nothing special about these <em>round</em>
-values <span id="id21">[<a class="reference internal" href="references.html#id33">10</a>]</span>. Ideally you should choose a value that fits
-your needs <span id="id22">[<a class="reference internal" href="references.html#id99">11</a>]</span>, or at least acknowledge that you are using a
+values <span id="id21">[<a class="reference internal" href="references.html#id33" title="R. McElreath. Statistical Rethinking: A Bayesian Course with Examples in R and Stan. Chapman &amp; Hall/CRC Texts in Statistical Science. CRC Press, 2020. ISBN 9781482253481.">10</a>]</span>. Ideally you should choose a value that fits
+your needs <span id="id22">[<a class="reference internal" href="references.html#id99" title="Daniel Lakens, Federico G. Adolfi, Casper J. Albers, Farid Anvari, Matthew A. J. Apps, Shlomo E. Argamon, Thom Baguley, Raymond B. Becker, Stephen D. Benning, Daniel E. Bradford, Erin M. Buchanan, Aaron R. Caldwell, Ben Van Calster, Rickard Carlsson, Sau-Chin Chen, Bryan Chung, Lincoln J. Colling, Gary S. Collins, Zander Crook, Emily S. Cross, Sameera Daniels, Henrik Danielsson, Lisa DeBruine, Daniel J. Dunleavy, Brian D. Earp, Michele I. Feist, Jason D. Ferrell, James G. Field, Nicholas W. Fox, Amanda Friesen, Caio Gomes, Monica Gonzalez-Marquez, James A. Grange, Andrew P. Grieve, Robert Guggenberger, James Grist, Anne-Laura van Harmelen, Fred Hasselman, Kevin D. Hochard, Mark R. Hoffarth, Nicholas P. Holmes, Michael Ingre, Peder M. Isager, Hanna K. Isotalus, Christer Johansson, Konrad Juszczyk, David A. Kenny, Ahmed A. Khalil, Barbara Konat, Junpeng Lao, Erik Gahner Larsen, Gerine M. A. Lodder, Jiří Lukavský, Christopher R. Madan, David Manheim, Stephen R. Martin, Andrea E. Martin, Deborah G. Mayo, Randy J. McCarthy, Kevin McConway, Colin McFarland, Amanda Q. X. Nio, Gustav Nilsonne, Cilene Lino de Oliveira, Jean-Jacques Orban de Xivry, Sam Parsons, Gerit Pfuhl, Kimberly A. Quinn, John J. Sakon, S. Adil Saribay, Iris K. Schneider, Manojkumar Selvaraju, Zsuzsika Sjoerds, Samuel G. Smith, Tim Smits, Jeffrey R. Spies, Vishnu Sreekumar, Crystal N. Steltenpohl, Neil Stenhouse, Wojciech Swiatkowski, Miguel A. Vadillo, Marcel A. L. M. Van Assen, Matt N. Williams, Samantha E. Williams, Donald R. Williams, Tal Yarkoni, Ignazio Ziano, and Rolf A. Zwaan. Justify your alpha. Nature Human Behaviour, 2(3):168–171, 2018.">11</a>]</span>, or at least acknowledge that you are using a
 default.</p>
 </div>
 <div class="section" id="say-yes-to-automating-inference-say-no-to-automated-model-building">
@@ -947,8 +1031,8 @@ methods are not really that universal, as they will not be able to
 efficiently solve every Bayesian model (but we still like the cool
 name!). Part of the job of the modern Bayesian practitioner is being
 able to understand and work around these limitations.</p>
-<p>In this book we will use PyMC3 <span id="id23">[<a class="reference internal" href="references.html#id124">1</a>]</span> and TensorFlow
-Probability <span id="id24">[<a class="reference internal" href="references.html#id141">2</a>]</span>. Let us write the model from
+<p>In this book we will use PyMC3 <span id="id23">[<a class="reference internal" href="references.html#id124" title="John Salvatier, Thomas V Wiecki, and Christopher Fonnesbeck. Probabilistic programming in python using pymc3. PeerJ Computer Science, 2:e55, 2016.">1</a>]</span> and TensorFlow
+Probability <span id="id24">[<a class="reference internal" href="references.html#id141" title="Joshua V. Dillon, Ian Langmore, Dustin Tran, Eugene Brevdo, Srinivas Vasudevan, Dave Moore, Brian Patton, Alex Alemi, Matt Hoffman, and Rif A Saurous. Tensorflow distributions. arXiv preprint arXiv:1711.10604, 2017.">2</a>]</span>. Let us write the model from
 Equation <a class="reference internal" href="#equation-eq-beta-binomial">(1.10)</a> using PyMC3:</p>
 <div class="literal-block-wrapper docutils container" id="beta-binom">
 <div class="code-block-caption"><span class="caption-number">Listing 1.5 </span><span class="caption-text">beta_binom</span><a class="headerlink" href="#beta-binom" title="Permalink to this code">¶</a></div>
@@ -1436,7 +1520,7 @@ constraints are <a class="footnote-reference brackets" href="#id58" id="id34">19
 <li><p>No constraints: Uniform (continuous or discrete, according to the
 type of variable)</p></li>
 <li><p>A positive mean, with support <span class="math notranslate nohighlight">\([0, \infty)\)</span>: Exponential</p></li>
-<li><p>An absolute value mean, with support <span class="math notranslate nohighlight">\((-\infty, \infty)\)</span>: Laplace
+<li><p>An absolute deviation to the mean, with support <span class="math notranslate nohighlight">\((-\infty, \infty)\)</span>: Laplace
 (also known as double Exponential)</p></li>
 <li><p>A given mean and variance, with support <span class="math notranslate nohighlight">\((-\infty, \infty)\)</span>: Normal
 distribution</p></li>
@@ -1490,10 +1574,10 @@ a valid option if we have good-quality information from theory, previous
 experiments, observational data, etc. As informative priors are very
 strong priors conveying a lot of information they generally require a
 stronger justification than other priors. As Carl Sagan used to say
-“Extraordinary claims require extraordinary evidence” <span id="id37">[<a class="reference internal" href="references.html#id100">12</a>]</span>. It
+“Extraordinary claims require extraordinary evidence” <span id="id37">[<a class="reference internal" href="references.html#id100" title="David Deming. Do extraordinary claims require extraordinary evidence? Philosophia, 44(4):1319–1331, 2016.">12</a>]</span>. It
 is important to remember that informativeness of the prior depends on
 model and model context. An uninformative prior in one context can
-become highly informative in another <span id="id38">[<a class="reference internal" href="references.html#id63">13</a>]</span>. For instance
+become highly informative in another <span id="id38">[<a class="reference internal" href="references.html#id63" title="Andrew Gelman, Daniel Simpson, and Michael Betancourt. The prior can often only be understood in the context of the likelihood. Entropy, 19(10):555, 2017.">13</a>]</span>. For instance
 if modeling the mean height of adult humans in meters, a prior of
 <span class="math notranslate nohighlight">\(\mathcal{N}(2,1)\)</span> can be considered uninformative, but if estimating
 the height of giraffes that same prior becomes highly informative as in
@@ -1866,8 +1950,8 @@ intuition, that will be refined as we progress through this book.</p>
 
               </div>
               
-        
-            <!-- Previous / next buttons -->
+            
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="symbollist.html" title="previous page">
         <i class="fas fa-angle-left"></i>
@@ -1884,19 +1968,17 @@ intuition, that will be refined as we progress through this book.</p>
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By Martin, Kumar, Lao<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By Martin, Kumar, Lao<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 

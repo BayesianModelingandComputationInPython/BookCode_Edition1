@@ -38,20 +38,22 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -319,7 +321,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -403,7 +405,94 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Extending Linear Models</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#transforming-covariates">
+   4.1. Transforming Covariates
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#varying-uncertainty">
+   4.2. Varying Uncertainty
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interaction-effects">
+   4.3. Interaction Effects
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#robust-regression">
+   4.4. Robust Regression
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pooling-multilevel-models-and-mixed-effects">
+   4.5. Pooling, Multilevel Models, and Mixed Effects
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#unpooled-parameters">
+     4.5.1. Unpooled Parameters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pooled-parameters">
+     4.5.2. Pooled Parameters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mixing-group-and-common-parameters">
+     4.5.3. Mixing Group and Common Parameters
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hierarchical-models">
+   4.6. Hierarchical Models
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#posterior-geometry-matters">
+     4.6.1. Posterior Geometry Matters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#predictions-at-multiple-levels">
+     4.6.2. Predictions at Multiple Levels
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#priors-for-multilevel-models">
+     4.6.3. Priors for Multilevel Models
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   4.7. Exercises
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="extending-linear-models">
@@ -445,7 +534,7 @@ transformation. In a couple of the previous examples we centered the
 covariates to make the coefficient easier to interpret and the centering
 operation is one type of covariate transformation. However, <span class="math notranslate nohighlight">\(f(.)\)</span> can
 be any arbitrary transformation. To illustrate, let us borrow an example
-from Bayesian Analysis with Python <span id="id2">[<a class="reference internal" href="references.html#id68">41</a>]</span> and create a model for
+from Bayesian Analysis with Python <span id="id2">[<a class="reference internal" href="references.html#id68" title="O. Martin. Bayesian Analysis with Python: Introduction to Statistical Modeling and Probabilistic Programming Using PyMC3 and ArviZ, 2nd Edition. Packt Publishing, 2018. ISBN 9781789341652.">41</a>]</span> and create a model for
 the length of babies. First we will load the data and plot in Code Block
 <a class="reference internal" href="#babies-data"><span class="std std-ref">babies_data</span></a> and plot the age and month in
 <a class="reference internal" href="#fig-baby-length-scatter"><span class="std std-numref">Fig. 4.1</span></a>.</p>
@@ -731,7 +820,7 @@ that arise from modeling all the data together.</p>
 range “reasonable expectation”. Outliers are undesirable, as one, or
 few, of these data points could change the parameter estimation of a
 model significantly. There are a variety of suggested formal methods
-<span id="id8">[<a class="reference internal" href="references.html#id119">42</a>]</span> of handling outliers, but in practice how outliers are
+<span id="id8">[<a class="reference internal" href="references.html#id119" title="Frank E Grubbs. Procedures for detecting outlying observations in samples. Technometrics, 11(1):1–21, 1969.">42</a>]</span> of handling outliers, but in practice how outliers are
 handled is a choice a statistician has to make (as even the choice of a
 formal method is subjective). In general though there are at least two
 ways to address outliers. One is removing data using some predefined
@@ -945,7 +1034,7 @@ model or a multilevel model.</p>
 <p>Changing the likelihood to accommodate for robustness is just one example of a modification we can
 make to the model to better suit the observed data. For example, in
 detecting radioactive particle emission a zero count can arise because
-of a faulty sensor<span id="id12">[<a class="reference internal" href="references.html#id135">43</a>]</span> (or some other measuring
+of a faulty sensor<span id="id12">[<a class="reference internal" href="references.html#id135" title="Michael Betancourt. Towards a principled bayesian workflow. \url https://betanalpha.github.io/assets/case_studies/principled_bayesian_workflow.html, 4 2020.">43</a>]</span> (or some other measuring
 problem), or because there was actually no event to register. This
 unknown source of variation has the effect of <em>inflating</em> the count of
 zeros. A useful aid for this kind of problem is the class of models
@@ -1192,9 +1281,9 @@ Y \sim&amp; \mathcal{N}(\mu_{j}, \sigma)
 across levels get different names, including random or varying effect,
 or fixed or constant effect, respectively. To add to the confusion
 different people may assign different meanings to these terms especially
-when talking about fixed and random effects <span id="id16">[<a class="reference internal" href="references.html#id80">44</a>]</span>. If we have to
+when talking about fixed and random effects <span id="id16">[<a class="reference internal" href="references.html#id80" title="Andrew Gelman. Analysis of variance—why it is more important than ever. The annals of statistics, 33(1):1–53, 2005.">44</a>]</span>. If we have to
 label these terms we suggest <em>common</em> and <em>group-specific</em>
-<span id="id17">[<a class="reference internal" href="references.html#id118">33</a>, <a class="reference internal" href="references.html#id83">36</a>]</span>. However, as all these different
+<span id="id17">[<a class="reference internal" href="references.html#id118" title="Tomás Capretto, Camen Piho, Ravin Kumar, Jacob Westfall, Tal Yarkoni, and Osvaldo A Martin. Bambi: a simple interface for fitting bayesian linear models in python. arXiv preprint arXiv:2012.10754, 2020.">33</a>, <a class="reference internal" href="references.html#id83" title="Jonah Gabry and Ben Goodrich. Estimating generalized (non-)linear models with group-specific terms with rstanarm. 6 2020. URL: https://mc-stan.org/rstanarm/articles/glmer.html.">36</a>]</span>. However, as all these different
 terms are widely used we recommend that you always verify the details of
 the model so to avoid confusions and misunderstandings.</p>
 </div>
@@ -1478,7 +1567,7 @@ model, and assumed our sampler would be able to provide us an
 this is largely true, the newest versions of Universal Inference Engines
 mostly “just work”, but an important point is that they do not <em>always</em>
 work. Certain posterior geometries are challenging for samplers, a
-common example is Neal’s Funnel<span id="id19">[<a class="reference internal" href="references.html#id86">45</a>]</span> shown in
+common example is Neal’s Funnel<span id="id19">[<a class="reference internal" href="references.html#id86" title="Radford M Neal. Slice sampling. The annals of statistics, 31(3):705–767, 2003.">45</a>]</span> shown in
 <a class="reference internal" href="#fig-neals-funnel"><span class="std std-numref">Fig. 4.25</span></a>. As the name funnel connotes, the shape at
 one end is quite wide, before narrowing into a small neck. Recalling Section
 <a class="reference internal" href="chp_01.html#sampling-methods-intro"><span class="std std-ref">A DIY Sampler, Do Not Try This at Home</span></a> samplers function
@@ -1688,7 +1777,7 @@ do quite well, it is not guaranteed! Be sure to pay heed to the
 diagnostics and investigate more deeply if warnings arise.</p>
 <p>It is worth noting that there is no one size fits all solution when it
 comes to centered or non-centered parameterization
-<span id="id20">[<a class="reference internal" href="references.html#id173">46</a>]</span>. It is a complex interaction among the
+<span id="id20">[<a class="reference internal" href="references.html#id173" title="Omiros Papaspiliopoulos, Gareth O Roberts, and Martin Sköld. A general framework for the parametrization of hierarchical models. Statistical Science, pages 59–73, 2007.">46</a>]</span>. It is a complex interaction among the
 informativeness of the individual likelihood at group level (usually the
 more data you have for a specific group, the more informative the
 likelihood function will be), the informativeness of the group level
@@ -1700,7 +1789,7 @@ different prior specifications. You might even find cases where you need
 <em>both</em> centered and non-centered parameterization in a single model. We
 recommend you to read Michael Betancourt’s case study Hierarchical
 Modeling on this topic if you suspect model parameterization is causing
-you sampling issues <span id="id21">[<a class="reference internal" href="references.html#id164">47</a>]</span>.</p>
+you sampling issues <span id="id21">[<a class="reference internal" href="references.html#id164" title="Michael Betancourt. Hierarchical modeling. \url https://betanalpha.github.io/assets/case_studies/hierarchical_modeling.html, 11 2020.">47</a>]</span>.</p>
 <div class="figure align-default" id="fig-salad-sales-hierarchical-comparison">
 <a class="reference internal image-reference" href="../_images/Salad_Sales_Hierarchical_Comparison.png"><img alt="../_images/Salad_Sales_Hierarchical_Comparison.png" src="../_images/Salad_Sales_Hierarchical_Comparison.png" style="width: 7.00in;" /></a>
 <p class="caption"><span class="caption-number">Fig. 4.29 </span><span class="caption-text">KDE of the distributions of <span class="math notranslate nohighlight">\(\beta_{\sigma h}\)</span> in both centered and
@@ -1841,7 +1930,7 @@ same model on similar dataset but with fewer groups.</p>
 <p>As is such besides empirical experience (e.g., general recommendations
 published in articles) or general advice <a class="footnote-reference brackets" href="#id33" id="id25">7</a>, we can also perform
 sensitivity studies to better inform our prior choice. For instance
-Lemoine <span id="id26">[<a class="reference internal" href="references.html#id122">48</a>]</span> showed that when modeling ecology data with a
+Lemoine <span id="id26">[<a class="reference internal" href="references.html#id122" title="Nathan P Lemoine. Moving beyond noninformative priors: why and how to choose weakly informative priors in bayesian analyses. Oikos, 128(7):912–928, 2019.">48</a>]</span> showed that when modeling ecology data with a
 model structure of</p>
 <div class="math notranslate nohighlight" id="equation-eq-ecology-regression">
 <span class="eqno">(4.10)<a class="headerlink" href="#equation-eq-ecology-regression" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
@@ -2045,8 +2134,8 @@ Argentine independence day respectively.</p>
 
               </div>
               
-        
-            <!-- Previous / next buttons -->
+            
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="chp_03.html" title="previous page">
         <i class="fas fa-angle-left"></i>
@@ -2063,19 +2152,17 @@ Argentine independence day respectively.</p>
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By Martin, Kumar, Lao<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By Martin, Kumar, Lao<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 

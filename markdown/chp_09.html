@@ -38,20 +38,22 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -319,7 +321,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -528,7 +530,219 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>End to End Bayesian Workflows</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#workflows-contexts-and-questions">
+   9.1. Workflows, Contexts, and Questions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#applied-example-airlines-flight-delays-problem">
+     9.1.1. Applied Example: Airlines Flight Delays Problem
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#getting-data">
+   9.2. Getting Data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sample-surveys">
+     9.2.1. Sample Surveys
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#experimental-design">
+     9.2.2. Experimental Design
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#observational-studies">
+     9.2.3. Observational Studies
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#missing-data">
+     9.2.4. Missing Data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#applied-example-collecting-airline-flight-delays-data">
+     9.2.5. Applied Example: Collecting Airline Flight Delays Data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#making-a-model-and-probably-more-than-one">
+   9.3. Making a Model and Probably More Than One
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#questions-to-ask-before-building-a-bayesian-model">
+     9.3.1. Questions to Ask Before Building a Bayesian Model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#applied-example-picking-flight-delay-likelihoods">
+     9.3.2. Applied Example: Picking Flight Delay Likelihoods
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#choosing-priors-and-predictive-priors">
+   9.4. Choosing Priors and Predictive Priors
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#applied-example-picking-priors-for-flight-delays-model">
+     9.4.1. Applied Example: Picking Priors for Flight Delays Model
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inference-and-inference-diagnostics">
+   9.5. Inference and Inference Diagnostics
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#applied-example-running-inference-on-flight-delays-models">
+     9.5.1. Applied Example: Running Inference on Flight Delays Models
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#posterior-plots">
+   9.6. Posterior Plots
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#applied-example-posterior-of-flight-delays-models">
+     9.6.1. Applied Example: Posterior of Flight Delays Models
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#evaluating-posterior-predictive-distributions">
+   9.7. Evaluating Posterior Predictive Distributions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#applied-example-posterior-predictive-distributions-of-flight-delays">
+     9.7.1. Applied Example: Posterior Predictive Distributions of Flight Delays
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-comparison">
+   9.8. Model Comparison
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#applied-example-model-comparison-with-loo-of-flight-delays">
+     9.8.1. Applied Example: Model Comparison with LOO of Flight Delays
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reward-functions-and-decisions">
+   9.9. Reward Functions and Decisions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#applied-example-making-decisions-based-on-flight-delays-modeling-result">
+     9.9.1. Applied Example: Making Decisions Based on Flight Delays Modeling Result
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sharing-the-results-with-a-particular-audience">
+   9.10. Sharing the Results With a Particular Audience
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#reproducibility-of-analysis-workflow">
+     9.10.1. Reproducibility of Analysis Workflow
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#understanding-the-audience">
+     9.10.2. Understanding the Audience
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#numerical-summaries">
+       9.10.2.1. Numerical Summaries
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#static-visual-aids">
+     9.10.3. Static Visual Aids
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#animation">
+       9.10.3.1. Animation
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#interactive-aids">
+       9.10.3.2. Interactive Aids
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#reproducible-computing-environments">
+     9.10.4. Reproducible Computing Environments
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#applied-example-presenting-the-flight-delay-model-and-conclusions">
+     9.10.5. Applied Example: Presenting the Flight Delay Model and Conclusions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#experimental-example-comparing-between-two-groups">
+   9.11. Experimental Example: Comparing Between Two Groups
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   9.12. Exercises
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="end-to-end-bayesian-workflows">
@@ -562,7 +776,7 @@ with a cooking recipe, but the resemblance is only superficial. The
 Bayesian data analysis process is generally very iterative, with the
 steps performed in a non-linear fashion. Moreover, the exact necessary
 steps needed to obtain good results are more difficult to anticipate.
-This process is called Bayesian workflow <span id="id1">[<a class="reference internal" href="references.html#id78">17</a>]</span> and a simplified
+This process is called Bayesian workflow <span id="id1">[<a class="reference internal" href="references.html#id78" title="Andrew Gelman, Aki Vehtari, Daniel Simpson, Charles C Margossian, Bob Carpenter, Yuling Yao, Lauren Kennedy, Jonah Gabry, Paul-Christian Bürkner, and Martin Modrák. Bayesian workflow. arXiv preprint arXiv:2011.01808, 2020.">17</a>]</span> and a simplified
 version of it is shown in <a class="reference internal" href="#fig-bayesianworkflow"><span class="std std-numref">Fig. 9.1</span></a>. The Bayesian
 workflow includes the three steps of model building: inference, model
 checking/improvement, and model comparison. In this context the purpose
@@ -596,8 +810,8 @@ unfortunately, will need to give up. Even if we are not entirely happy
 with some model it may be the best model we can achieve given the
 available resources. A more detailed version of the Bayesian workflow
 can be seen in a paper aptly titled Bayesian Workflow by Gelman et al
-<span id="id2">[<a class="reference internal" href="references.html#id78">17</a>]</span> and the article Towards a Principled Bayesian Workflow by
-Betancourt <span id="id3">[<a class="reference internal" href="references.html#id135">43</a>]</span>.</span><a class="headerlink" href="#fig-bayesianworkflow" title="Permalink to this image">¶</a></p>
+<span id="id2">[<a class="reference internal" href="references.html#id78" title="Andrew Gelman, Aki Vehtari, Daniel Simpson, Charles C Margossian, Bob Carpenter, Yuling Yao, Lauren Kennedy, Jonah Gabry, Paul-Christian Bürkner, and Martin Modrák. Bayesian workflow. arXiv preprint arXiv:2011.01808, 2020.">17</a>]</span> and the article Towards a Principled Bayesian Workflow by
+Betancourt <span id="id3">[<a class="reference internal" href="references.html#id135" title="Michael Betancourt. Towards a principled bayesian workflow. \url https://betanalpha.github.io/assets/case_studies/principled_bayesian_workflow.html, 4 2020.">43</a>]</span>.</span><a class="headerlink" href="#fig-bayesianworkflow" title="Permalink to this image">¶</a></p>
 </div>
 <p>The most influential factor in the specific techniques used is what we
 will refer to as the <em>driving question</em>. This is the question that is of
@@ -773,7 +987,7 @@ part of the data is missing. For example, failing to record digits after
 a decimal points leading e.g. missing precision.</p>
 <p>To account for this we can extend our formulation of Bayes’ theorem to
 account for missingness by adding a terms as shown in Equation
-<a class="reference internal" href="#equation-eq-missing-data">(9.1)</a> <span id="id10">[<a class="reference internal" href="references.html#id3">18</a>]</span>. In this
+<a class="reference internal" href="#equation-eq-missing-data">(9.1)</a> <span id="id10">[<a class="reference internal" href="references.html#id3" title="A. Gelman, J.B. Carlin, H.S. Stern, D.B. Dunson, A. Vehtari, and D.B. Rubin. Bayesian Data Analysis, Third Edition. Chapman &amp; Hall/CRC Texts in Statistical Science. Taylor &amp; Francis, 2013. ISBN 9781439840955.">18</a>]</span>. In this
 formulation <span class="math notranslate nohighlight">\(\boldsymbol{I}\)</span> is the inclusion vector that denotes which
 data points are missing or included, and <span class="math notranslate nohighlight">\(\boldsymbol{\phi}\)</span> represents
 the parameters of the distribution inclusion vector.</p>
@@ -872,7 +1086,7 @@ the numerous tools, diagnostics, and visualizations that we have seen
 throughout this book.</p>
 <div class="admonition-types-of-statistical-models admonition">
 <p class="admonition-title">Types of Statistical Models</p>
-<p>If we refer to D. R. Cox <span id="id14">[<a class="reference internal" href="references.html#id12">112</a>]</span> there
+<p>If we refer to D. R. Cox <span id="id14">[<a class="reference internal" href="references.html#id12" title="D. R. Cox. Principles of statistical inference. Cambridge University Press, 2006. ISBN 978-0521685672.">112</a>]</span> there
 are two general ways to think about building statistical models, a model
 based approach where “The parameters of interest are intended to capture
 important and interpretable features of that generating process,
@@ -1090,7 +1304,7 @@ first tweaking sampler parameters, or running extra long chains, when
 really it is the choice of priors or likelihood that is the root cause
 of the issue. The folk theorem of statistical computing says: “when you
 have computational problems, often there is a problem with your
-model <span id="id19">[<a class="reference internal" href="references.html#id175">113</a>]</span>.</p>
+model <span id="id19">[<a class="reference internal" href="references.html#id175" title="Andrew Gelman. The folk theorem of statistical computing. \url https://statmodeling.stat.columbia.edu/2008/05/13/the_folk_theore/, 5 2008.">113</a>]</span>.</p>
 <p>That being said we have a strong prior that if you made it this far you
 are a diligent reader and understand all our choices thus far so let us
 dive into inference.</p>
@@ -1986,7 +2200,7 @@ strength between unidirectional and bidirectional composites. While we
 could run another model for the bidirectional specimens and compare
 estimates, a more convenient option would be to compare both in a single
 model., We can leverage John Kruschke’s model framework as defined in
-“Bayesian estimation supersedes the t-test” <span id="id46">[<a class="reference internal" href="references.html#id15">114</a>]</span> to obtain
+“Bayesian estimation supersedes the t-test” <span id="id46">[<a class="reference internal" href="references.html#id15" title="John K Kruschke. Bayesian estimation supersedes the t test. Journal of Experimental Psychology: General, 142(2):573, 2013.">114</a>]</span> to obtain
 this “one and done” comparison as shown in Code Block
 <a class="reference internal" href="#comparison-model"><span class="std std-ref">comparison_model</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="comparison-model">
@@ -2198,7 +2412,7 @@ that minute delay that is odd costs 1 dollar a minute of delay. What
 will the average revenue per late flight be the airport be with this fee
 model?</p>
 <p><strong>9M8.</strong> Read the workflow article and paper from
-Betancourt<span id="id47">[<a class="reference internal" href="references.html#id135">43</a>]</span> and Gelman<span id="id48">[<a class="reference internal" href="references.html#id78">17</a>]</span>. From each
+Betancourt<span id="id47">[<a class="reference internal" href="references.html#id135" title="Michael Betancourt. Towards a principled bayesian workflow. \url https://betanalpha.github.io/assets/case_studies/principled_bayesian_workflow.html, 4 2020.">43</a>]</span> and Gelman<span id="id48">[<a class="reference internal" href="references.html#id78" title="Andrew Gelman, Aki Vehtari, Daniel Simpson, Charles C Margossian, Bob Carpenter, Yuling Yao, Lauren Kennedy, Jonah Gabry, Paul-Christian Bürkner, and Martin Modrák. Bayesian workflow. arXiv preprint arXiv:2011.01808, 2020.">17</a>]</span>. From each
 list a step which is the same? Which steps are different? Explain why
 these examples workflows may be different. Do all practitioners follow
 the same workflow? Why would they differ if not?</p>
@@ -2230,7 +2444,7 @@ is, or is not, a reasonable choice for the airline flight delay problem.
 After refitting make the same assessment. In particular justify if the
 Skew Normal is “better” than the Gumbel model for the airline delays
 problem.</p>
-<p><strong>9H11.</strong> Clark and Westerberg<span id="id49">[<a class="reference internal" href="references.html#id32">115</a>]</span> ran an
+<p><strong>9H11.</strong> Clark and Westerberg<span id="id49">[<a class="reference internal" href="references.html#id32" title="Matthew PA. Clark and Brian D. Westerberg. How random is the toss of a coin? Cmaj, 181(12):E306–E308, 2009.">115</a>]</span> ran an
 experiment with their students to see if coin flips can be biased
 through tosser skill. The data from this experiment is in the repository
 under <code class="docutils literal notranslate"><span class="pre">CoinFlips.csv</span></code>. Fit a model that estimates the proportion of coin
@@ -2324,8 +2538,8 @@ situations.</p>
 
               </div>
               
-        
-            <!-- Previous / next buttons -->
+            
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="chp_08.html" title="previous page">
         <i class="fas fa-angle-left"></i>
@@ -2342,19 +2556,17 @@ situations.</p>
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By Martin, Kumar, Lao<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By Martin, Kumar, Lao<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 
