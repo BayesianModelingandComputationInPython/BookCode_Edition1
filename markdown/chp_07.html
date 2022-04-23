@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>7. Bayesian Additive Regression Trees &#8212; Bayesian Modeling and Computation in Python</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
@@ -52,8 +53,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -549,7 +550,7 @@ const thebe_selector_output = ".output, .cell_output"
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="bayesian-additive-regression-trees">
+  <section class="tex2jax_ignore mathjax_ignore" id="bayesian-additive-regression-trees">
 <span id="chap6"></span><h1><span class="section-number">7. </span>Bayesian Additive Regression Trees<a class="headerlink" href="#bayesian-additive-regression-trees" title="Permalink to this headline">¶</a></h1>
 <p>In Chapter <a class="reference internal" href="chp_05.html#chap3-5"><span class="std std-ref">5</span></a> we saw how we can approximate a
 function by summing up a series of (simple) basis functions. We showed
@@ -583,7 +584,7 @@ prior (or shrinkage prior) to make each tree behave as a <em>weak learner</em>.<
 <p>To turn this overall description into something we can better understand
 and apply, we should first discuss decisions trees. In case you are
 already familiar with them, feel free to skip the next section.</p>
-<div class="section" id="decision-trees">
+<section id="decision-trees">
 <span id="id4"></span><h2><span class="section-number">7.1. </span>Decision Trees<a class="headerlink" href="#decision-trees" title="Permalink to this headline">¶</a></h2>
 <p>Let us assume we have two variables <span class="math notranslate nohighlight">\(X_1\)</span> and <span class="math notranslate nohighlight">\(X_2\)</span> and we want to use
 those variables to classify objects into two classes:  ⬤ or ▲. To achieve
@@ -628,9 +629,10 @@ than <span class="math notranslate nohighlight">\(c_2\)</span>.</p>
 <p>This abstract definition of a tree as a tuple of two sets
 <span class="math notranslate nohighlight">\(g(\mathcal{T}, \mathcal{M})\)</span>, will become very useful in a moment when
 we discuss priors over trees.</p>
-<div class="figure align-default" id="fig-decision-tree">
+<figure class="align-default" id="fig-decision-tree">
 <a class="reference internal image-reference" href="../_images/decision_tree.png"><img alt="../_images/decision_tree.png" src="../_images/decision_tree.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 7.1 </span><span class="caption-text">A binary tree (left) and the corresponding partition space (right). The
+<figcaption>
+<p><span class="caption-number">Fig. 7.1 </span><span class="caption-text">A binary tree (left) and the corresponding partition space (right). The
 internal nodes of the tree are those having children. They have a link
 to a node below them. Internal nodes have splitting rules associated
 with them. Terminal nodes, or leaves, are those without children and
@@ -638,7 +640,8 @@ they contain the values to return, in this example ⬤ or ▲. A decision tree
 generates a partition of the sample space into blocks delimited by
 axis-perpendicular splitting lines. This means that every split of the
 sample space will be aligned with one of the covariate axes.</span><a class="headerlink" href="#fig-decision-tree" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>While <a class="reference internal" href="#fig-decision-tree"><span class="std std-numref">Fig. 7.1</span></a> shows how to use a decision tree for a
 classification problem, where <span class="math notranslate nohighlight">\(\mathcal{M}_j\)</span> contains classes or
 label-values, we can also use trees for regression. In such cases
@@ -653,16 +656,18 @@ number. Compare the tree to the sinusoidal like data on the right, in
 particular noting how instead of a continuous function approximation the
 data been split into three blocks, and the average is approximating each
 one of those blocks.</p>
-<div class="figure align-default" id="fig-decision-tree-reg">
+<figure class="align-default" id="fig-decision-tree-reg">
 <a class="reference internal image-reference" href="../_images/decision_tree_reg.png"><img alt="../_images/decision_tree_reg.png" src="../_images/decision_tree_reg.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 7.2 </span><span class="caption-text">A binary tree (left) and the corresponding partition space (right). The
+<figcaption>
+<p><span class="caption-number">Fig. 7.2 </span><span class="caption-text">A binary tree (left) and the corresponding partition space (right). The
 internal nodes of the tree are those having children (they have a link
 to a node below them), internal nodes have splitting rules associated
 with them. Terminal nodes (or leafs) are those without children and they
 contain the values to return (in this example 1.1, 1.9 and 0.1). We can
 see how a tree is a way to represent piecewise function, like the ones
 discussed in Chapter <a class="reference internal" href="chp_05.html#chap3-5"><span class="std std-ref">5</span></a>.</span><a class="headerlink" href="#fig-decision-tree-reg" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>Regression trees are not limited to returning the mean of the data
 points inside a block, there are alternatives. For example, it is
 possible to associate the leaf nodes with the median of the data points,
@@ -689,9 +694,10 @@ easy to see for yourself by grabbing a piece of paper, drawing a few
 data points, and then creating a partition that isolates each of them
 individually. While doing this exercise you may also notice that in fact
 there is more than one tree that can fit the data equally well.</p>
-<div class="figure align-default" id="fig-decision-tree-overfitting">
+<figure class="align-default" id="fig-decision-tree-overfitting">
 <a class="reference internal image-reference" href="../_images/decision_tree_overfitting.png"><img alt="../_images/decision_tree_overfitting.png" src="../_images/decision_tree_overfitting.png" style="width: 4.5in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 7.3 </span><span class="caption-text">An overly complex partition of the sample space. Each data point is
+<figcaption>
+<p><span class="caption-number">Fig. 7.3 </span><span class="caption-text">An overly complex partition of the sample space. Each data point is
 assigned to a separate block. We say this is an <em>overcomplex</em> partition
 because we can explain and predict the data at the same level of
 accuracy using a much simpler partition like the one used in
@@ -700,7 +706,8 @@ generalize than the more complex one, i.e. it is most likely to predict,
 and explain new data.
 [fig:decision_tree_overfitting]{#fig:decision_tree_overfitting
 label=”fig:decision_tree_overfitting”}.</span><a class="headerlink" href="#fig-decision-tree-overfitting" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>One interesting property of trees arises when we think about them in
 terms of main effects and interactions as we did for linear models (see
 Chapter <a class="reference internal" href="chp_04.html#chap3"><span class="std std-ref">4</span></a>). Notice that the term
@@ -723,7 +730,7 @@ for more variables to entry the tree increases and then also the
 potential to represent higher order interactions. Additionally, because
 we use an ensemble of trees we can build virtually any combination of
 main and interaction effects.</p>
-<div class="section" id="ensembles-of-decision-trees">
+<section id="ensembles-of-decision-trees">
 <span id="id5"></span><h3><span class="section-number">7.1.1. </span>Ensembles of Decision Trees<a class="headerlink" href="#ensembles-of-decision-trees" title="Permalink to this headline">¶</a></h3>
 <p>Considering that over-complex trees will likely not be very good at
 predicting new data, it is common to introduce devices to reduce the
@@ -747,9 +754,9 @@ interpretability of a single decision tree. Now to obtain an answer we
 can not just follow a single tree but many, which generally obfuscates
 any simple interpretation. We have traded interpretability for
 flexibility and generalization.</p>
-</div>
-</div>
-<div class="section" id="the-bart-model">
+</section>
+</section>
+<section id="the-bart-model">
 <span id="id6"></span><h2><span class="section-number">7.2. </span>The BART Model<a class="headerlink" href="#the-bart-model" title="Permalink to this headline">¶</a></h2>
 <p>If we assume that the <span class="math notranslate nohighlight">\(B_i\)</span> functions in equation <a class="reference internal" href="chp_05.html#equation-eq-bfr">(5.3)</a>
 are decision trees we can write:</p>
@@ -779,8 +786,8 @@ a Poisson distribution we get</p>
 already familiar to prior specifications for <span class="math notranslate nohighlight">\(\sigma\)</span> for the Gaussian
 likelihood or over <span class="math notranslate nohighlight">\(\sigma\)</span> and <span class="math notranslate nohighlight">\(\nu\)</span> for the Student’s t-distribution
 so now we will focus on those priors particular to the BART model.</p>
-</div>
-<div class="section" id="priors-for-bart">
+</section>
+<section id="priors-for-bart">
 <span id="id7"></span><h2><span class="section-number">7.3. </span>Priors for BART<a class="headerlink" href="#priors-for-bart" title="Permalink to this headline">¶</a></h2>
 <p>The original BART paper <span id="id8">[<a class="reference internal" href="references.html#id5" title="Hugh A. Chipman, Edward I. George, and Robert E. McCulloch. Bart: bayesian additive regression trees. The Annals of Applied Statistics, 4(1):266–298, 2010.">71</a>]</span>, and most
 subsequent modifications and implementations rely on conjugate priors.
@@ -788,7 +795,7 @@ The BART implementation in PyMC3 does not use conjugate priors and also
 deviates in other ways. Instead of discussing the differences we will
 focus on the PyMC3 implementation, which is the one we are going to use
 for the examples.</p>
-<div class="section" id="prior-independence">
+<section id="prior-independence">
 <span id="id9"></span><h3><span class="section-number">7.3.1. </span>Prior Independence<a class="headerlink" href="#prior-independence" title="Permalink to this headline">¶</a></h3>
 <p>In order to simplify the specification of the prior we assume that the
 structure of the tree <span class="math notranslate nohighlight">\(\mathcal{T}_j\)</span> and the leaf values
@@ -797,8 +804,8 @@ independent from the rest of the parameters, <span class="math notranslate nohig
 <a class="reference internal" href="#equation-eq-bart">(7.1)</a>. By assuming independence we are allowed to split the
 prior specification into parts. Otherwise we should devise a way to
 specify a single prior over the space of trees <a class="footnote-reference brackets" href="#id40" id="id10">2</a>.</p>
-</div>
-<div class="section" id="prior-for-the-tree-structure-mathcal-t-j">
+</section>
+<section id="prior-for-the-tree-structure-mathcal-t-j">
 <span id="prior-for-the-tree-structure-mathcalt-j"></span><h3><span class="section-number">7.3.2. </span>Prior for the Tree Structure <span class="math notranslate nohighlight">\(\mathcal{T}_j\)</span><a class="headerlink" href="#prior-for-the-tree-structure-mathcal-t-j" title="Permalink to this headline">¶</a></h3>
 <p>The prior for the tree structure <span class="math notranslate nohighlight">\(\mathcal{T}_j\)</span> is specified by three
 aspects:</p>
@@ -815,8 +822,8 @@ splitting variable which value we use to make a decision (<span class="math notr
 <a class="reference internal" href="#fig-decision-tree"><span class="std std-numref">Fig. 7.1</span></a>). This is usually Uniform over the
 available values.</p></li>
 </ul>
-</div>
-<div class="section" id="prior-for-the-leaf-values-mu-ij-and-number-of-trees-m">
+</section>
+<section id="prior-for-the-leaf-values-mu-ij-and-number-of-trees-m">
 <span id="bart-mu-m-priors"></span><h3><span class="section-number">7.3.3. </span>Prior for the Leaf Values <span class="math notranslate nohighlight">\(\mu_{ij}\)</span> and Number of Trees <span class="math notranslate nohighlight">\(m\)</span><a class="headerlink" href="#prior-for-the-leaf-values-mu-ij-and-number-of-trees-m" title="Permalink to this headline">¶</a></h3>
 <p>By default PyMC3 does not set a prior value for the leaf values, instead
 at each iteration of the sampling algorithm it returns the mean of the
@@ -828,9 +835,9 @@ even as low as <span class="math notranslate nohighlight">\(m=10\)</span>. Addit
 could be very robust to the exact value of <span class="math notranslate nohighlight">\(m\)</span>. So a general rule of
 thumb is to try a few values of <span class="math notranslate nohighlight">\(m\)</span> and perform cross-validation to pick
 the most adequate value for a particular problem <a class="footnote-reference brackets" href="#id43" id="id13">4</a>.</p>
-</div>
-</div>
-<div class="section" id="fitting-bayesian-additive-regression-trees">
+</section>
+</section>
+<section id="fitting-bayesian-additive-regression-trees">
 <span id="id14"></span><h2><span class="section-number">7.4. </span>Fitting Bayesian Additive Regression Trees<a class="headerlink" href="#fitting-bayesian-additive-regression-trees" title="Permalink to this headline">¶</a></h2>
 <p>So far we have discussed how decision trees can be used to encode
 piecewise functions that we can use to model regression or
@@ -871,8 +878,8 @@ that is specifically tailored to work with trees. PyMC3 will
 automatically assign this sampler to a <code class="docutils literal notranslate"><span class="pre">pm.BART</span></code> distribution and if
 other random variables are present in the model, PyMC3 will assign other
 samplers like NUTS to those variables.</p>
-</div>
-<div class="section" id="bart-bikes">
+</section>
+<section id="bart-bikes">
 <span id="bart-bike"></span><h2><span class="section-number">7.5. </span>BART Bikes<a class="headerlink" href="#bart-bikes" title="Permalink to this headline">¶</a></h2>
 <p>Let us see how BART fits the bikes dataset which we previously studied
 in <a class="reference internal" href="chp_05.html#chap3-5"><span class="std std-ref">5</span></a>. The model will be:</p>
@@ -917,14 +924,16 @@ learners</em>. Given that we used a Gaussian likelihood, negative count
 values are allowed by the model.</p>
 <p>On the bottom panel we have samples from the posterior, each one is a
 sum over <span class="math notranslate nohighlight">\(m\)</span> trees.</p>
-<div class="figure align-default" id="fig-bart-bikes-samples">
+<figure class="align-default" id="fig-bart-bikes-samples">
 <a class="reference internal image-reference" href="../_images/BART_bikes_samples.png"><img alt="../_images/BART_bikes_samples.png" src="../_images/BART_bikes_samples.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 7.4 </span><span class="caption-text">Posterior tree realizations. Top panel, three individuals trees sampled
+<figcaption>
+<p><span class="caption-number">Fig. 7.4 </span><span class="caption-text">Posterior tree realizations. Top panel, three individuals trees sampled
 from the posterior. Bottom panel, three posterior samples, each one is a
 sum over <span class="math notranslate nohighlight">\(m\)</span> trees. Actual BART sampled values are represented by
 circles while the dashed lines are a visual aid. Small dots (only in
 bottom panel) represent the observed number of rented bikes.</span><a class="headerlink" href="#fig-bart-bikes-samples" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p><a class="reference internal" href="#fig-bart-bikes"><span class="std std-numref">Fig. 7.5</span></a> shows the result of fitting BART to the bike
 dataset (number of rented bikes vs hour of the day). The figure provides
 a similar fit compared to <a class="reference internal" href="chp_05.html#fig-bikes-data2"><span class="std std-numref">Fig. 5.9</span></a>,
@@ -932,21 +941,23 @@ created using splines. The more clear difference is the more jagged
 aspect of the BART’s fit compared to the one obtained using splines.
 This is not to say there are not other differences like the width of the
 HDI.</p>
-<div class="figure align-default" id="fig-bart-bikes">
+<figure class="align-default" id="fig-bart-bikes">
 <a class="reference internal image-reference" href="../_images/BART_bikes.png"><img alt="../_images/BART_bikes.png" src="../_images/BART_bikes.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 7.5 </span><span class="caption-text">Bikes data (black dots) fitted using BARTs (specifically <code class="docutils literal notranslate"><span class="pre">bart_model</span></code>).
+<figcaption>
+<p><span class="caption-number">Fig. 7.5 </span><span class="caption-text">Bikes data (black dots) fitted using BARTs (specifically <code class="docutils literal notranslate"><span class="pre">bart_model</span></code>).
 The shaded curve represents the 94% HDI interval (of the mean) and the
 blue curve represents the mean trend. Compare with
 <a class="reference internal" href="chp_05.html#fig-bikes-data2"><span class="std std-numref">Fig. 5.9</span></a>.</span><a class="headerlink" href="#fig-bart-bikes" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>The literature around BART tends to highlight its ability to, generally,
 provide competitive answers without tuning <a class="footnote-reference brackets" href="#id44" id="id16">5</a>. For example, compared
 with fitting splines we do not need to worry about manually setting the
 knots or choose a prior to regularize knots. Of course someone may argue
 that for some problems being able to adjust the knots could be
 beneficial for the problem at hand, and that is fine.</p>
-</div>
-<div class="section" id="generalized-bart-models">
+</section>
+<section id="generalized-bart-models">
 <span id="id17"></span><h2><span class="section-number">7.6. </span>Generalized BART Models<a class="headerlink" href="#generalized-bart-models" title="Permalink to this headline">¶</a></h2>
 <p>The PyMC3 implementation of BART attempts to make it easy to use
 different likelihoods <a class="footnote-reference brackets" href="#id45" id="id18">6</a> similar to how the Generalized Linear Model
@@ -988,18 +999,22 @@ but the difference between the in-sample and out-of-sample ELPD is not
 that large) and <span class="math notranslate nohighlight">\(m=50\)</span> seems to be overfitting (the value of the ELPD is
 low and the difference between the in-sample and out-of-sample ELPD is
 large).</p>
-<div class="figure align-default" id="fig-bart-space-flu-comp">
+<figure class="align-default" id="fig-bart-space-flu-comp">
 <a class="reference internal image-reference" href="../_images/BART_space_flu_comp.png"><img alt="../_images/BART_space_flu_comp.png" src="../_images/BART_space_flu_comp.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 7.6 </span><span class="caption-text">LOO comparison of the model in Code Block
+<figcaption>
+<p><span class="caption-number">Fig. 7.6 </span><span class="caption-text">LOO comparison of the model in Code Block
 <a class="reference internal" href="#bart-model-bern"><span class="std std-ref">bart_model_bern</span></a> with <span class="math notranslate nohighlight">\(m\)</span> values (2, 10,
 20, 50). According to LOO, <span class="math notranslate nohighlight">\(m=10\)</span> provides the best fit.</span><a class="headerlink" href="#fig-bart-space-flu-comp" title="Permalink to this image">¶</a></p>
-</div>
-<div class="figure align-default" id="fig-bart-space-flu-fit">
+</figcaption>
+</figure>
+<figure class="align-default" id="fig-bart-space-flu-fit">
 <a class="reference internal image-reference" href="../_images/BART_space_flu_fit.png"><img alt="../_images/BART_space_flu_fit.png" src="../_images/BART_space_flu_fit.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 7.7 </span><span class="caption-text">BART fit to the Space Influenza dataset with 4 values for <span class="math notranslate nohighlight">\(m\)</span> (2, 10,
+<figcaption>
+<p><span class="caption-number">Fig. 7.7 </span><span class="caption-text">BART fit to the Space Influenza dataset with 4 values for <span class="math notranslate nohighlight">\(m\)</span> (2, 10,
 20, 50). In line with LOO, the model with <span class="math notranslate nohighlight">\(m\)</span> is underfitting and with
 the one with <span class="math notranslate nohighlight">\(m=50\)</span> is overfitting.</span><a class="headerlink" href="#fig-bart-space-flu-fit" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>So far we have discussed regressions with a single covariate, we do this
 for simplicity. However it is possible to fit datasets with more
 covariates. This is trivial from the implementation perspective in
@@ -1008,8 +1023,8 @@ covariate. But it raises some interesting statistical questions, like
 how to easily interpret a BART model with many covariates or how to find
 out how much each covariate is contributing to the outcome. In the next
 sections we will show how this is done.</p>
-</div>
-<div class="section" id="interpretability-of-barts">
+</section>
+<section id="interpretability-of-barts">
 <span id="id19"></span><h2><span class="section-number">7.7. </span>Interpretability of BARTs<a class="headerlink" href="#interpretability-of-barts" title="Permalink to this headline">¶</a></h2>
 <p>Individual decision trees are generally easy to interpret, but this is
 no longer true when we add a bunch of trees together. One may think that
@@ -1030,7 +1045,7 @@ multivariate linear regression and other non-parametric methods. We will
 discuss two related tools below: <strong>Partial Dependence Plots</strong> (PDP)
 <span id="id21">[<a class="reference internal" href="references.html#id72" title="Jerome H Friedman. Greedy function approximation: a gradient boosting machine. Annals of statistics, pages 1189–1232, 2001.">76</a>]</span> and <strong>Individual Conditional Expectation</strong> (ICE) plots
 <span id="id22">[<a class="reference internal" href="references.html#id73" title="Alex Goldstein, Adam Kapelner, Justin Bleich, and Emil Pitkin. Peeking inside the black box: visualizing statistical learning with plots of individual conditional expectation. journal of Computational and Graphical Statistics, 24(1):44–65, 2015.">77</a>]</span>.</p>
-<div class="section" id="partial-dependence-plots">
+<section id="partial-dependence-plots">
 <span id="id23"></span><h3><span class="section-number">7.7.1. </span>Partial Dependence Plots<a class="headerlink" href="#partial-dependence-plots" title="Permalink to this headline">¶</a></h3>
 <p>A very common method that appears in the BART literature is the so
 called Partial Dependence Plot (PDP) <span id="id24">[<a class="reference internal" href="references.html#id72" title="Jerome H Friedman. Greedy function approximation: a gradient boosting machine. Annals of statistics, pages 1189–1232, 2001.">76</a>]</span> (see
@@ -1055,15 +1070,17 @@ the combinations are not possible to observe. This is similar to what we
 already discussed regarding counterfactuals plots introduced in Chapter
 <a class="reference internal" href="chp_03.html#chap2"><span class="std std-ref">3</span></a>. In fact partial dependence plots are one kind of
 counterfactual device.</p>
-<div class="figure align-default" id="fig-pdp-fake-example">
+<figure class="align-default" id="fig-pdp-fake-example">
 <a class="reference internal image-reference" href="../_images/partial_dependence_plot.png"><img alt="../_images/partial_dependence_plot.png" src="../_images/partial_dependence_plot.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 7.8 </span><span class="caption-text">Partial dependence plot. Partial contribution to <span class="math notranslate nohighlight">\(Y\)</span> from each variable
+<figcaption>
+<p><span class="caption-number">Fig. 7.8 </span><span class="caption-text">Partial dependence plot. Partial contribution to <span class="math notranslate nohighlight">\(Y\)</span> from each variable
 <span class="math notranslate nohighlight">\(X_i\)</span> while marginalizing the contributions from the rest of the
 variables (<span class="math notranslate nohighlight">\(X_{-i}\)</span>). The gray bands represent the HDI 94%. Both the
 mean and HDI bands has been smoothed (see <code class="docutils literal notranslate"><span class="pre">plot_ppd</span></code> function). The
 rugplot, the black bars at the bottom of each subplot, shows the
 observed values for each covariate.</span><a class="headerlink" href="#fig-pdp-fake-example" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p><a class="reference internal" href="#fig-pdp-fake-example"><span class="std std-numref">Fig. 7.8</span></a> shows a PDP after fitting a BART model to
 synthetic data: <span class="math notranslate nohighlight">\(Y \sim \mathcal{N}(0, 1)\)</span>
 <span class="math notranslate nohighlight">\(X_{0} \sim \mathcal{N}(Y, 0.1)\)</span> and <span class="math notranslate nohighlight">\(X_{1} \sim \mathcal{N}(Y, 0.2)\)</span>
@@ -1093,16 +1110,18 @@ humidity reduces people’s motivation to ride a bike. The wind speed
 shows an even flatter contribution, but still we see an effect, as it
 seems that less people are prone to rent a bike under windier
 conditions.</p>
-<div class="figure align-default" id="fig-partial-dependence-plot-bikes">
+<figure class="align-default" id="fig-partial-dependence-plot-bikes">
 <a class="reference internal image-reference" href="../_images/partial_dependence_plot_bikes.png"><img alt="../_images/partial_dependence_plot_bikes.png" src="../_images/partial_dependence_plot_bikes.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 7.9 </span><span class="caption-text">Partial dependence plot. Partial contribution to the number of rented
+<figcaption>
+<p><span class="caption-number">Fig. 7.9 </span><span class="caption-text">Partial dependence plot. Partial contribution to the number of rented
 bikes from the variables, hour, temperature, humidity and windspeed
 while marginalizing the contributions from the rest of the variables
 (<span class="math notranslate nohighlight">\(X_{-i}\)</span>). The gray bands represent the HDI 94%. Both the mean and HDI
 bands have been smoothed (see <code class="docutils literal notranslate"><span class="pre">plot_ppd</span></code> function). The rugplot, the
 black bars at the bottom of each subplot, shows the observed values for
 each covariate.</span><a class="headerlink" href="#fig-partial-dependence-plot-bikes" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>One assumption when computing partial dependence plots is that variables
 <span class="math notranslate nohighlight">\(X_i\)</span> and <span class="math notranslate nohighlight">\(X_{-i}\)</span> are uncorrelated, and thus we perform the average
 across the marginals. In most real problem this is hardly the case, and
@@ -1128,8 +1147,8 @@ information and it may happen that the mean value is not actually very
 representative of the underlying distribution. Another option, specially
 useful for large datasets, is to subsample <span class="math notranslate nohighlight">\(\boldsymbol{X}_{-ij}\)</span>.</p>
 </div>
-</div>
-<div class="section" id="individual-conditional-expectation">
+</section>
+<section id="individual-conditional-expectation">
 <span id="id26"></span><h3><span class="section-number">7.7.2. </span>Individual Conditional Expectation<a class="headerlink" href="#individual-conditional-expectation" title="Permalink to this headline">¶</a></h3>
 <p>Individual Conditional Expectation (ICE) plots are closely related to
 PDPs. The difference is that instead of plotting the target covariates’
@@ -1142,16 +1161,18 @@ example. If we average all the gray curves at each <span class="math notranslate
 value we get the blue curve, which is the same curve that we should have
 obtained if we have computed the mean partial dependence in
 <a class="reference internal" href="#fig-partial-dependence-plot-bikes"><span class="std std-numref">Fig. 7.9</span></a>.</p>
-<div class="figure align-default" id="fig-individual-conditional-expectation-plot-bikes">
+<figure class="align-default" id="fig-individual-conditional-expectation-plot-bikes">
 <a class="reference internal image-reference" href="../_images/individual_conditional_expectation_plot_bikes.png"><img alt="../_images/individual_conditional_expectation_plot_bikes.png" src="../_images/individual_conditional_expectation_plot_bikes.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 7.10 </span><span class="caption-text">Individual conditional expectation plot. Partial contribution to the
+<figcaption>
+<p><span class="caption-number">Fig. 7.10 </span><span class="caption-text">Individual conditional expectation plot. Partial contribution to the
 number of rented bikes from the variables; hour, temperature, humidity
 and wind speed while fixing the rest (<span class="math notranslate nohighlight">\(X_{-i}\)</span>) at one observed value.
 The blue curve corresponds to the average of the gray curves. All curves
 have been smoothed (see <code class="docutils literal notranslate"><span class="pre">plot_ice</span></code> function). The rugplot, the black
 bars at the bottom of each subplot, shows the observed values for each
 covariate.</span><a class="headerlink" href="#fig-individual-conditional-expectation-plot-bikes" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>Individual conditional expectation plots are best suited to problems
 where variable have strong interactions, when this is not the case
 partial dependence plots and individual conditional expectations plots
@@ -1162,12 +1183,14 @@ better. The plot was generated by fitting a BART model to the synthetic
 data: <span class="math notranslate nohighlight">\(Y = 0.2X_0 - 5X_1 + 10X_1 \unicode{x1D7D9}_{X_2 \geq 0} + \epsilon\)</span>
 where <span class="math notranslate nohighlight">\(X \sim \mathcal{U}(-1, 1)\)</span> <span class="math notranslate nohighlight">\(\epsilon \sim \mathcal{N}(0, 0.5)\)</span>.
 Notice how the value of <span class="math notranslate nohighlight">\(X_1\)</span> depends on the value of <span class="math notranslate nohighlight">\(X_2\)</span>.</p>
-<div class="figure align-default" id="fig-pdp-vs-ice-toy">
+<figure class="align-default" id="fig-pdp-vs-ice-toy">
 <a class="reference internal image-reference" href="../_images/pdp_vs_ice_toy.png"><img alt="../_images/pdp_vs_ice_toy.png" src="../_images/pdp_vs_ice_toy.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 7.11 </span><span class="caption-text">Partial dependence plot vs individual conditional expectation plot.
+<figcaption>
+<p><span class="caption-number">Fig. 7.11 </span><span class="caption-text">Partial dependence plot vs individual conditional expectation plot.
 First panel, scatter plot between <span class="math notranslate nohighlight">\(X_1\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>, middle panel partial
 dependence plot, last panel individual conditional expectation plot.</span><a class="headerlink" href="#fig-pdp-vs-ice-toy" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>In the first panel of <a class="reference internal" href="#fig-pdp-vs-ice-toy"><span class="std std-numref">Fig. 7.11</span></a> we plot <span class="math notranslate nohighlight">\(X_1\)</span> versus
 <span class="math notranslate nohighlight">\(Y\)</span>. Given that there is an interaction effect that the value of <span class="math notranslate nohighlight">\(Y\)</span> can
 linearly increase or decrease with <span class="math notranslate nohighlight">\(X_1\)</span> conditional on the values of
@@ -1180,9 +1203,9 @@ reason is that each gray curve represents one value of <span class="math notrans
 The blue curve is the average of the gray curves and while is not
 exactly the same as the partial dependence mean curve it shows the same
 information <a class="footnote-reference brackets" href="#id47" id="id28">8</a>.</p>
-</div>
-</div>
-<div class="section" id="variable-selection">
+</section>
+</section>
+<section id="variable-selection">
 <span id="sec-variable-selection"></span><h2><span class="section-number">7.8. </span>Variable Selection<a class="headerlink" href="#variable-selection" title="Permalink to this headline">¶</a></h2>
 <p>When fitting regressions with more than one predictor it is often of
 interest to learn which predictors are most important. Under some
@@ -1234,15 +1257,17 @@ Notice that while the first five random variables are related to <span class="ma
 <span class="math notranslate nohighlight">\(Y \sim \mathcal{N}(0, 1)\)</span>. All variables are unrelated to the
 response variable.</p></li>
 </ul>
-<div class="figure align-default" id="fig-bart-vi-toy">
+<figure class="align-default" id="fig-bart-vi-toy">
 <a class="reference internal image-reference" href="../_images/bart_vi_toy.png"><img alt="../_images/bart_vi_toy.png" src="../_images/bart_vi_toy.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 7.12 </span><span class="caption-text">Relative variable importance. Left panel, the first 2 input variables
+<figcaption>
+<p><span class="caption-number">Fig. 7.12 </span><span class="caption-text">Relative variable importance. Left panel, the first 2 input variables
 contribute to the predictor variable and the rest are noise. Middle
 panel, the first 5 variable are related to the output variable. Finally
 on the right panel the 10 input variables are completely unrelated to
 the predictor variable. The black dashed line represents the value of
 the variable importance if all variables were equally important.</span><a class="headerlink" href="#fig-bart-vi-toy" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>One thing we can see from <a class="reference internal" href="#fig-bart-vi-toy"><span class="std std-numref">Fig. 7.12</span></a> is the effect of
 increasing the number of trees <span class="math notranslate nohighlight">\(m\)</span>. In general, as we increase <span class="math notranslate nohighlight">\(m\)</span>, the
 distribution of the relative importance tends to become <em>flatter</em>. This
@@ -1298,14 +1323,16 @@ results from partial dependence plots (Figure
 <a class="reference internal" href="#fig-partial-dependence-plot-bikes"><span class="std std-numref">Fig. 7.9</span></a>) and individual conditional
 expectation plots (Figure
 <a class="reference internal" href="#fig-individual-conditional-expectation-plot-bikes"><span class="std std-numref">Fig. 7.10</span></a>).</p>
-<div class="figure align-default" id="fig-bart-vi-bikes">
+<figure class="align-default" id="fig-bart-vi-bikes">
 <a class="reference internal image-reference" href="../_images/bart_vi_bikes.png"><img alt="../_images/bart_vi_bikes.png" src="../_images/bart_vi_bikes.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 7.13 </span><span class="caption-text">Relative variable importance from fitted BARTs with different number of
+<figcaption>
+<p><span class="caption-number">Fig. 7.13 </span><span class="caption-text">Relative variable importance from fitted BARTs with different number of
 trees. Hour is the most important covariate followed by the temperature.
 The humidity and windspeed appear as less relevant covariates.</span><a class="headerlink" href="#fig-bart-vi-bikes" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-<div class="section" id="priors-for-bart-in-pymc3">
+</figcaption>
+</figure>
+</section>
+<section id="priors-for-bart-in-pymc3">
 <span id="id35"></span><h2><span class="section-number">7.9. </span>Priors for BART in PyMC3<a class="headerlink" href="#priors-for-bart-in-pymc3" title="Permalink to this headline">¶</a></h2>
 <p>Compared to other models in this book, BARTs are the most <em>blackboxsy</em>.
 We are not able to set whatever priors we want to generate a BART model.
@@ -1354,8 +1381,8 @@ partly because of our interest in exploring more flexible
 implementations of BART that could allow users to build flexible and
 problem-tailored models as is usually the case with probabilistic
 programming languages.</p>
-</div>
-<div class="section" id="exercises">
+</section>
+<section id="exercises">
 <span id="exercises7"></span><h2><span class="section-number">7.10. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
 <p><strong>7E1.</strong> Explain each of the following</p>
 <ol class="simple">
@@ -1481,8 +1508,8 @@ could be problematic.</p>
 <dd><p>This is likely to be added in the future versions of PyMC3.</p>
 </dd>
 </dl>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>5. Splines &#8212; Bayesian Modeling and Computation in Python</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
@@ -52,8 +53,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -451,7 +452,7 @@ const thebe_selector_output = ".output, .cell_output"
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="splines">
+  <section class="tex2jax_ignore mathjax_ignore" id="splines">
 <span id="chap3-5"></span><h1><span class="section-number">5. </span>Splines<a class="headerlink" href="#splines" title="Permalink to this headline">¶</a></h1>
 <p>In this chapter we will discuss splines, which is an extension of
 concepts introduced into Chapter <a class="reference internal" href="chp_03.html#chap2"><span class="std std-ref">3</span></a> with the aim of
@@ -460,7 +461,7 @@ adding more flexibility. In the models introduced in Chapter
 independent variables was the same for their entire domain. Splines, in
 contrast, can split a problem into multiple local solutions, which can
 all be combined to produce a useful global solution. Let us see how.</p>
-<div class="section" id="polynomial-regression">
+<section id="polynomial-regression">
 <span id="id1"></span><h2><span class="section-number">5.1. </span>Polynomial Regression<a class="headerlink" href="#polynomial-regression" title="Permalink to this headline">¶</a></h2>
 <p>As we already saw in Chapter <a class="reference internal" href="chp_03.html#chap2"><span class="std std-ref">3</span></a>, we can write a linear
 model as:</p>
@@ -488,15 +489,17 @@ variance example in Section
 <p><a class="reference internal" href="#fig-polynomial-regression"><span class="std std-numref">Fig. 5.1</span></a> shows 3 examples of such polynomial
 regression using degrees 2, 10, and 15. As we increase the order of the
 polynomial, we get a more flexible curve.</p>
-<div class="figure align-default" id="fig-polynomial-regression">
+<figure class="align-default" id="fig-polynomial-regression">
 <a class="reference internal image-reference" href="../_images/polynomial_regression.png"><img alt="../_images/polynomial_regression.png" src="../_images/polynomial_regression.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 5.1 </span><span class="caption-text">An example of polynomial regression with degrees 2, 10 and 15. As the
+<figcaption>
+<p><span class="caption-number">Fig. 5.1 </span><span class="caption-text">An example of polynomial regression with degrees 2, 10 and 15. As the
 degree increases the fit gets more <em>wiggly</em>. The dashed lines are the
 fit when removing the observation indicated with a blue cross. The
 removal of a data point has a small effect when the degree of polynomial
 is 2 or 10, but larger when the degree is 15. The fit was calculated
 using the least squares method.</span><a class="headerlink" href="#fig-polynomial-regression" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>One problem with polynomials is that they act <em>globally</em>, when we apply
 a polynomial of degree <span class="math notranslate nohighlight">\(m\)</span> we are saying that the relationship between
 the independent and dependent variables is of degree <span class="math notranslate nohighlight">\(m\)</span> for the entire
@@ -516,8 +519,8 @@ the fit when we remove one data point, indicated with a cross in the
 figure. We can see, especially in the last panel, that removing even a
 single data point changes the model fit with effects even far away from
 the location of the point.</p>
-</div>
-<div class="section" id="expanding-the-feature-space">
+</section>
+<section id="expanding-the-feature-space">
 <span id="expanding-feature-space"></span><h2><span class="section-number">5.2. </span>Expanding the Feature Space<a class="headerlink" href="#expanding-the-feature-space" title="Permalink to this headline">¶</a></h2>
 <p>At a conceptual level we can think of polynomial regression as a recipe
 for creating new predictors, or in more formal terms to <strong>expanding the
@@ -555,13 +558,15 @@ predictor into (non-overlapping) subsets. And then fit polynomial
 <em>locally</em>, i.e., only inside these subsets. This procedure leads to
 fitting <strong>piecewise polynomials</strong> <a class="footnote-reference brackets" href="#id26" id="id3">2</a> as shown in
 <a class="reference internal" href="#fig-piecewise"><span class="std std-numref">Fig. 5.2</span></a>.</p>
-<div class="figure align-default" id="fig-piecewise">
+<figure class="align-default" id="fig-piecewise">
 <a class="reference internal image-reference" href="../_images/piecewise.png"><img alt="../_images/piecewise.png" src="../_images/piecewise.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 5.2 </span><span class="caption-text">The blue line is the <em>true</em> function we are trying to approximate. The
+<figcaption>
+<p><span class="caption-number">Fig. 5.2 </span><span class="caption-text">The blue line is the <em>true</em> function we are trying to approximate. The
 black-solid lines are piecewise polynomials of increasing order (1, 2,
 3, and 4). The dashed vertical gray lines are marking the limits of each
 subdomain on the x-axis.</span><a class="headerlink" href="#fig-piecewise" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>In the four panels in <a class="reference internal" href="#fig-piecewise"><span class="std std-numref">Fig. 5.2</span></a> the goal is the same, to
 approximate the blue function. We proceed by first splitting the
 function into 3 subdomains, delimited by the gray dashed lines, and then
@@ -608,8 +613,8 @@ properties, it would be nice to have access to some <em>default</em> functions
 with good general properties over a wider range of datasets. Starting in
 the next section and for the remainder of this chapter we will restrict
 the discussion to a family of basis functions known as B-splines <a class="footnote-reference brackets" href="#id30" id="id8">6</a>.</p>
-</div>
-<div class="section" id="introducing-splines">
+</section>
+<section id="introducing-splines">
 <span id="id9"></span><h2><span class="section-number">5.3. </span>Introducing Splines<a class="headerlink" href="#introducing-splines" title="Permalink to this headline">¶</a></h2>
 <p>Splines can be seen as an attempt to use the flexibility of polynomials
 but keeping them under control and thus obtaining a model with overall
@@ -640,14 +645,16 @@ all B-splines are equally important. In fact, each subplots in
 <a class="reference internal" href="#fig-splines-basis"><span class="std std-numref">Fig. 5.3</span></a> is showing all the B-splines as defined by
 the given knots. In other words B-splines are completely defined by a
 set of knots and a degree.</p>
-<div class="figure align-default" id="fig-splines-basis">
+<figure class="align-default" id="fig-splines-basis">
 <a class="reference internal image-reference" href="../_images/splines_basis.png"><img alt="../_images/splines_basis.png" src="../_images/splines_basis.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 5.3 </span><span class="caption-text">B-splines of increasing degree, from 0 to 3. On the top subplot we have
+<figcaption>
+<p><span class="caption-number">Fig. 5.3 </span><span class="caption-text">B-splines of increasing degree, from 0 to 3. On the top subplot we have
 a step function, on second a triangular function and then increasingly
 Gaussian-like functions. The <em>stacked</em> knots at the boundary (smaller
 black dots) are added in order to be able to define the splines close to
 the borders.</span><a class="headerlink" href="#fig-splines-basis" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>From <a class="reference internal" href="#fig-splines-basis"><span class="std std-numref">Fig. 5.3</span></a> we can see that as we increase the
 degree of the B-spline, the domain of the B-spline spans more and more
 <a class="footnote-reference brackets" href="#id32" id="id11">8</a>. Thus, for higher degree spline to make sense we need to define
@@ -690,9 +697,10 @@ see the same basis functions from the first row scaled by a set of
 <span class="math notranslate nohighlight">\(\beta_i\)</span> coefficients. The thicker continuous black line represents the
 spline that is obtained by a weighted sum of the B-splines with the
 weights given by the <span class="math notranslate nohighlight">\(\beta\)</span> coefficients.</p>
-<div class="figure align-default" id="fig-splines-weighted">
+<figure class="align-default" id="fig-splines-weighted">
 <a class="reference internal image-reference" href="../_images/splines_weighted.png"><img alt="../_images/splines_weighted.png" src="../_images/splines_weighted.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 5.4 </span><span class="caption-text">B-splines defined using Patsy. On the first row we can see splines of
+<figcaption>
+<p><span class="caption-number">Fig. 5.4 </span><span class="caption-text">B-splines defined using Patsy. On the first row we can see splines of
 increasing order 1 (piecewise constant), 2 (piecewise linear) and 4
 (cubic) represented with gray dashed lines. For clarity each basis
 function is represented with a different color. On the second row we
@@ -701,7 +709,8 @@ coefficients. The thick black line represents the sum of these basis
 functions. Because the value of the coefficients was randomly chosen we
 can see each sub-panel in the second row as a random sample from a prior
 distribution over the <em>spline space</em>.</span><a class="headerlink" href="#fig-splines-weighted" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>In this example we generated the <span class="math notranslate nohighlight">\(\beta_i\)</span> coefficients by sampling from
 a Half Normal distribution (Line 17 in Code Block
 <a class="reference internal" href="#splines-patsy-plot"><span class="std std-ref">splines_patsy_plot</span></a>). Thus, each
@@ -713,11 +722,13 @@ time you will see a different spline. Additionally, you may also try
 replacing the Half Normal distribution, with another one like the
 Normal, Exponential, etc. <a class="reference internal" href="#fig-splines-realizations"><span class="std std-numref">Fig. 5.5</span></a> shows four
 realization of cubic splines.</p>
-<div class="figure align-default" id="fig-splines-realizations">
+<figure class="align-default" id="fig-splines-realizations">
 <a class="reference internal image-reference" href="../_images/splines_realizations.png"><img alt="../_images/splines_realizations.png" src="../_images/splines_realizations.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 5.5 </span><span class="caption-text">Four realizations of cubic splines with <span class="math notranslate nohighlight">\(\beta_i\)</span> coefficients sampled
+<figcaption>
+<p><span class="caption-number">Fig. 5.5 </span><span class="caption-text">Four realizations of cubic splines with <span class="math notranslate nohighlight">\(\beta_i\)</span> coefficients sampled
 from a Half Normal distribution.</span><a class="headerlink" href="#fig-splines-realizations" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <div class="admonition-four-is-a-crowd-for-splines admonition">
 <p class="admonition-title">Four is a crowd for splines</p>
 <p>Of all possible splines, probably cubic splines are the most commonly used.
@@ -738,8 +749,8 @@ Having said all that, splines of lower or higher order can still be
 useful for some problems, it is just that cubic splines are good
 defaults.</p>
 </div>
-</div>
-<div class="section" id="building-the-design-matrix-using-patsy">
+</section>
+<section id="building-the-design-matrix-using-patsy">
 <span id="id13"></span><h2><span class="section-number">5.4. </span>Building the Design Matrix using Patsy<a class="headerlink" href="#building-the-design-matrix-using-patsy" title="Permalink to this headline">¶</a></h2>
 <p>In Figures <a class="reference internal" href="#fig-splines-basis"><span class="std std-numref">Fig. 5.3</span></a> and
 <a class="reference internal" href="#fig-splines-weighted"><span class="std std-numref">Fig. 5.4</span></a> we plot the B-splines, but so far we have
@@ -782,13 +793,15 @@ matrices, one with degree 0 (piecewise constant), another with degree 1
 with Code Block <a class="reference internal" href="#splines-patsy"><span class="std std-ref">splines_patsy</span></a>. To better
 grasp what Patsy is doing we also recommend you use Jupyter notebook/lab
 or your favorite IDE to inspect the objects <code class="docutils literal notranslate"><span class="pre">B0</span></code>, <code class="docutils literal notranslate"><span class="pre">B1</span></code> and <code class="docutils literal notranslate"><span class="pre">B2</span></code>.</p>
-<div class="figure align-default" id="fig-design-matrices">
+<figure class="align-default" id="fig-design-matrices">
 <a class="reference internal image-reference" href="../_images/design_matrices.png"><img alt="../_images/design_matrices.png" src="../_images/design_matrices.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 5.6 </span><span class="caption-text">Design matrices generated with Patsy in Code Block
+<figcaption>
+<p><span class="caption-number">Fig. 5.6 </span><span class="caption-text">Design matrices generated with Patsy in Code Block
 <a class="reference internal" href="#splines-patsy"><span class="std std-ref">splines_patsy</span></a>. The color goes from black
 (1) to light-gray (0), the number of columns is the number of B-splines
 and the number of rows the number of datapoints.</span><a class="headerlink" href="#fig-design-matrices" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>The first subplot of <a class="reference internal" href="#fig-design-matrices"><span class="std std-numref">Fig. 5.6</span></a> corresponds to <code class="docutils literal notranslate"><span class="pre">B0</span></code>,
 a spline of degree 0. We can see that the design matrix is a matrix with
 only zeros (light-gray) and ones (black). The first B-spline (column 0)
@@ -843,8 +856,8 @@ easier to understand.</p>
 splines are and how to automate their creation with the help of Patsy.
 We can now move forward into computing the weights. Let us see how we
 can do that in a Bayesian model with PyMC3.</p>
-</div>
-<div class="section" id="fitting-splines-in-pymc3">
+</section>
+<section id="fitting-splines-in-pymc3">
 <span id="id16"></span><h2><span class="section-number">5.5. </span>Fitting Splines in PyMC3<a class="headerlink" href="#fitting-splines-in-pymc3" title="Permalink to this headline">¶</a></h2>
 <p>In this section we are going to use PyMC3 to obtain the values of the
 regression coefficients <span class="math notranslate nohighlight">\(\beta\)</span> by fitting a set of B-splines to the
@@ -868,13 +881,15 @@ a 24 hour period. Let us load and plot the data:</p>
 <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[::</span><span class="mi">50</span><span class="p">]</span>
 </pre></div>
 </div>
-<div class="figure align-default" id="fig-bikes-data">
+<figure class="align-default" id="fig-bikes-data">
 <a class="reference internal image-reference" href="../_images/bikes_data.png"><img alt="../_images/bikes_data.png" src="../_images/bikes_data.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 5.7 </span><span class="caption-text">A visualization of the bikes data. Each point is the normalized number
+<figcaption>
+<p><span class="caption-number">Fig. 5.7 </span><span class="caption-text">A visualization of the bikes data. Each point is the normalized number
 of bikes rented per hour of the day (on the interval 0, 23). The
 points are semi-transparent to avoid excessive overlapping of points and
 thus help see the distribution of the data.</span><a class="headerlink" href="#fig-bikes-data" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>A quick look at <a class="reference internal" href="#fig-bikes-data"><span class="std std-numref">Fig. 5.7</span></a> shows that the relationship
 between the hour of the day and the number of rental bikes is not going
 to be very well captured by fitting a single line. So, let us try to use
@@ -939,9 +954,10 @@ one-to-one fashion.</p>
 prediction as a solid black line and each weighted B-spline as a dashed
 line. It is a nice representation as we can see how the B-splines are
 contributing to the final result.</p>
-<div class="figure align-default" id="fig-bikes-spline-raw-data">
+<figure class="align-default" id="fig-bikes-spline-raw-data">
 <a class="reference internal image-reference" href="../_images/bikes_spline_raw_data.png"><img alt="../_images/bikes_spline_raw_data.png" src="../_images/bikes_spline_raw_data.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 5.8 </span><span class="caption-text">Bikes data fitted using splines. The B-splines are represented with
+<figcaption>
+<p><span class="caption-number">Fig. 5.8 </span><span class="caption-text">Bikes data fitted using splines. The B-splines are represented with
 dashed lines. The sum of them generates the thicker solid black line.
 The plotted values correspond to mean values from the posterior. The
 black dots represent the knots. The splines in this figure look very
@@ -949,7 +965,8 @@ black dots represent the knots. The splines in this figure look very
 <a class="reference internal" href="#fig-splines-weighted"><span class="std std-numref">Fig. 5.4</span></a>. The reason is that we are evaluating the
 function in fewer points. 24 points here because the data is binned per
 hour compared to 500 in <a class="reference internal" href="#fig-splines-weighted"><span class="std std-numref">Fig. 5.4</span></a>.</span><a class="headerlink" href="#fig-bikes-spline-raw-data" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>A more useful plot when we want to display the results of the model is
 to plot the data with the overlaid splines and its uncertainty as in
 <a class="reference internal" href="#fig-bikes-data2"><span class="std std-numref">Fig. 5.9</span></a>. From this figure we can easily see that the
@@ -958,12 +975,14 @@ then an increase, probably as people wake up and go to work. We have a
 first peak at around hour 10, which levels-off, or perhaps slightly
 declines, then followed by a second peak as people commute back home at
 around hour 18, after which there a steady decline.</p>
-<div class="figure align-default" id="fig-bikes-data2">
+<figure class="align-default" id="fig-bikes-data2">
 <a class="reference internal image-reference" href="../_images/bikes_spline_data.png"><img alt="../_images/bikes_spline_data.png" src="../_images/bikes_spline_data.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 5.9 </span><span class="caption-text">Bikes data (black dots) fitted using splines. The shaded curve
+<figcaption>
+<p><span class="caption-number">Fig. 5.9 </span><span class="caption-text">Bikes data (black dots) fitted using splines. The shaded curve
 represents the 94% HDI interval (of the mean) and the blue curve
 represents the mean trend.</span><a class="headerlink" href="#fig-bikes-data2" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>In this bike rental example we are dealing with a circular variable,
 meaning that hour 0 is equal to the hour 24. This may be more or less
 obvious to us, but it is definitely not obvious to our model. Patsy
@@ -972,8 +991,8 @@ circular. Instead of defining the design matrix using <code class="docutils lite
 <code class="docutils literal notranslate"><span class="pre">cc</span></code>, this is a cubic spline that is <em>circular-aware</em>. We recommend you
 check the Patsy documentation for more details and explore using <code class="docutils literal notranslate"><span class="pre">cc</span></code> in
 the previous model and compare results.</p>
-</div>
-<div class="section" id="choosing-knots-and-prior-for-splines">
+</section>
+<section id="choosing-knots-and-prior-for-splines">
 <span id="id19"></span><h2><span class="section-number">5.6. </span>Choosing Knots and Prior for Splines<a class="headerlink" href="#choosing-knots-and-prior-for-splines" title="Permalink to this headline">¶</a></h2>
 <p>One modeling decision we have to make when working with splines is to
 choose the number and location of the knots. This can be a little bit
@@ -1081,15 +1100,17 @@ these models.</p>
 </tr>
 </tbody>
 </table>
-<div class="figure align-default" id="fig-bikes-spline-loo-knots">
+<figure class="align-default" id="fig-bikes-spline-loo-knots">
 <a class="reference internal image-reference" href="../_images/bikes_spline_loo_knots.png"><img alt="../_images/bikes_spline_loo_knots.png" src="../_images/bikes_spline_loo_knots.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 5.10 </span><span class="caption-text">Mean posterior spline for the model described in Code Block
+<figcaption>
+<p><span class="caption-number">Fig. 5.10 </span><span class="caption-text">Mean posterior spline for the model described in Code Block
 <a class="reference internal" href="#id18"><span class="std std-ref">splines</span></a> with different number of knots (3, 6,
 9, 12, 18) . Model <code class="docutils literal notranslate"><span class="pre">m_12k</span></code> is highlighted in blue as the top ranked
 model according to LOO. Model <code class="docutils literal notranslate"><span class="pre">m_3k</span></code> is highlighted in black, while the
 rest of the models are in grayed-out as they have being assigned a
 weight of zero (see <a class="reference internal" href="#tab-loo-splines"><span class="std std-numref">Table 5.1</span></a>).</span><a class="headerlink" href="#fig-bikes-spline-loo-knots" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>One piece of advice that may help decide the locations of knots is to
 place them based on quantiles, instead of uniformly. In Code Block
 <a class="reference internal" href="#knot-list"><span class="std std-ref">knot_list</span></a> we could have defined the
@@ -1098,7 +1119,7 @@ place them based on quantiles, instead of uniformly. In Code Block
 this way we will be putting more knots where we have more data and less
 knots where less data. This translates into a more flexible
 approximation for data-richer portions.</p>
-<div class="section" id="regularizing-prior-for-splines">
+<section id="regularizing-prior-for-splines">
 <span id="id20"></span><h3><span class="section-number">5.6.1. </span>Regularizing Prior for Splines<a class="headerlink" href="#regularizing-prior-for-splines" title="Permalink to this headline">¶</a></h3>
 <p>As choosing too few knots could lead to under-fitting and too many to
 overfitting, we may want to use a <em>rather large</em> number of knots and
@@ -1148,17 +1169,19 @@ data using <code class="docutils literal notranslate"><span class="pre">splines<
 function for the model <code class="docutils literal notranslate"><span class="pre">splines_rw</span></code> (black line) is less wiggly than the
 spline mean function without smoothing prior (gray thick line), although
 we admit that the difference seems to be rather small.</p>
-<div class="figure align-default" id="fig-bikes-spline-data-grw">
+<figure class="align-default" id="fig-bikes-spline-data-grw">
 <a class="reference internal image-reference" href="../_images/bikes_spline_data_grw.png"><img alt="../_images/bikes_spline_data_grw.png" src="../_images/bikes_spline_data_grw.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 5.11 </span><span class="caption-text">Bikes data fitted with either a Gaussian prior (black) or a regularizing
+<figcaption>
+<p><span class="caption-number">Fig. 5.11 </span><span class="caption-text">Bikes data fitted with either a Gaussian prior (black) or a regularizing
 Gaussian Random Walk Prior (blue). We use 22 knots for both cases. The
 black line corresponds to the mean spline function computed from
 <code class="docutils literal notranslate"><span class="pre">splines</span></code> model. The blue line is the mean function for the model
 <code class="docutils literal notranslate"><span class="pre">splines_rw</span></code>.</span><a class="headerlink" href="#fig-bikes-spline-data-grw" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-</div>
-<div class="section" id="modeling-co2-uptake-with-splines">
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="modeling-co2-uptake-with-splines">
 <span id="id21"></span><h2><span class="section-number">5.7. </span>Modeling CO₂ Uptake with Splines<a class="headerlink" href="#modeling-co2-uptake-with-splines" title="Permalink to this headline">¶</a></h2>
 <p>For a final example of splines we are going to use data from an
 experimental study <span id="id22">[<a class="reference internal" href="references.html#id120" title="Catherine Potvin, Martin J Lechowicz, and Serge Tardif. The statistical analysis of ecophysiological response curves obtained from experiments involving repeated measures. Ecology, 71(4):1389–1400, 1990.">50</a>, <a class="reference internal" href="references.html#id121" title="Eric J Pedersen, David L Miller, Gavin L Simpson, and Noam Ross. Hierarchical generalized additive models in ecology: an introduction with mgcv. PeerJ, 7:e6876, 2019.">51</a>]</span>. The experiment consists
@@ -1228,14 +1251,16 @@ the model either to simplify it or to make it more complex.</p>
 providing a good fit for some of the plants. The model is good on
 average, i.e. if we pool all the species together, but not very good for
 specific plants.</p>
-<div class="figure align-default" id="fig-sp-global">
+<figure class="align-default" id="fig-sp-global">
 <a class="reference internal image-reference" href="../_images/sp_global.png"><img alt="../_images/sp_global.png" src="../_images/sp_global.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 5.12 </span><span class="caption-text">The black dots represents the CO₂ uptake measured at seven CO₂
+<figcaption>
+<p><span class="caption-number">Fig. 5.12 </span><span class="caption-text">The black dots represents the CO₂ uptake measured at seven CO₂
 concentrations for each one of 12 plants (Qn1, Qn2, Qn3, Qc1, Qc2, Qc3,
 Mn1, Mn2, Mn3, Mc1, Mc2, Mc3). The black line is the mean spline fit
 from the model in Code Block <a class="reference internal" href="#sp-global"><span class="std std-ref">sp_global</span></a> and
 the gray shaded curve represents the 94% HDI interval for that fit.</span><a class="headerlink" href="#fig-sp-global" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>Let us try now with a model with a different response per plant, in
 order to do this we define the design matrix <code class="docutils literal notranslate"><span class="pre">Bi</span></code> in Code Block
 <a class="reference internal" href="#bi-matrix"><span class="std std-ref">Bi_matrix</span></a>. To define <code class="docutils literal notranslate"><span class="pre">Bi</span></code> we use the list
@@ -1267,13 +1292,15 @@ we reshape <code class="docutils literal notranslate"><span class="pre">μi[:,in
 </div>
 <p>From <a class="reference internal" href="#fig-sp-individual"><span class="std std-numref">Fig. 5.13</span></a> we can now see that we have a much
 better fit for each one of the 12 plants.</p>
-<div class="figure align-default" id="fig-sp-individual">
+<figure class="align-default" id="fig-sp-individual">
 <a class="reference internal image-reference" href="../_images/sp_individual.png"><img alt="../_images/sp_individual.png" src="../_images/sp_individual.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 5.13 </span><span class="caption-text">CO₂ uptake measured at seven CO₂ concentrations for 12 plants. The
+<figcaption>
+<p><span class="caption-number">Fig. 5.13 </span><span class="caption-text">CO₂ uptake measured at seven CO₂ concentrations for 12 plants. The
 black line is the mean spline fit from the model in Code Block
 <a class="reference internal" href="#sp-individual"><span class="std std-ref">sp_individual</span></a> and the gray shaded curve
 represents the 94% HDI interval for that fit.</span><a class="headerlink" href="#fig-sp-individual" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>We can also mix both previous models <a class="footnote-reference brackets" href="#id37" id="id24">13</a>. This may be interesting if
 we want to estimate a global trend for the 12 plants plus individual
 fits. Model <code class="docutils literal notranslate"><span class="pre">sp_mix</span></code> in Code Block <a class="reference internal" href="#sp-mix"><span class="std std-ref">sp_mix</span></a> use
@@ -1300,9 +1327,10 @@ black, is repeated in each subplot. We can see that the deviations are
 different not only in the average uptake, i.e. they are not flat
 straight lines, but they are also different, to various extents, in the
 shape of their functional responses.</p>
-<div class="figure align-default" id="fig-sp-mix-decomposed">
+<figure class="align-default" id="fig-sp-mix-decomposed">
 <a class="reference internal image-reference" href="../_images/sp_mix_decomposed.png"><img alt="../_images/sp_mix_decomposed.png" src="../_images/sp_mix_decomposed.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 5.14 </span><span class="caption-text">CO₂ uptake measured at seven CO₂ concentrations for 12 plants. The
+<figcaption>
+<p><span class="caption-number">Fig. 5.14 </span><span class="caption-text">CO₂ uptake measured at seven CO₂ concentrations for 12 plants. The
 blue line is the mean spline fit from model in Code Block
 <a class="reference internal" href="#sp-mix"><span class="std std-ref">sp_mix</span></a> and the gray shaded curve represents the
 94% HDI interval for that fit. This fit is decomposed into two terms. In
@@ -1310,7 +1338,8 @@ black, and a dark gray band, the global contribution and in gray, and a
 light gray band, the deviations from that global contribution. The blue
 line, and blue band, is the sum of the global trend and deviations from
 it.</span><a class="headerlink" href="#fig-sp-mix-decomposed" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p><a class="reference internal" href="#fig-sp-compare"><span class="std std-numref">Fig. 5.15</span></a> shows that according to LOO <code class="docutils literal notranslate"><span class="pre">sp_mix</span></code> is a
 better model than the other two. We can see there is still some
 uncertainty about this statement as the standard errors for models
@@ -1327,9 +1356,10 @@ follow some of the actions described in Section <a class="reference internal" hr
                   <span class="s2">&quot;mix&quot;</span><span class="p">:</span><span class="n">idata_sp_mix</span><span class="p">})</span>
 </pre></div>
 </div>
-<div class="figure align-default" id="fig-sp-compare">
+<figure class="align-default" id="fig-sp-compare">
 <a class="reference internal image-reference" href="../_images/sp_compare.png"><img alt="../_images/sp_compare.png" src="../_images/sp_compare.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 5.15 </span><span class="caption-text">Model comparison using LOO for the 3 different CO₂ uptake models
+<figcaption>
+<p><span class="caption-number">Fig. 5.15 </span><span class="caption-text">Model comparison using LOO for the 3 different CO₂ uptake models
 discussed in this chapter (<code class="docutils literal notranslate"><span class="pre">sp_global</span></code>, <code class="docutils literal notranslate"><span class="pre">sp_individual</span></code>, <code class="docutils literal notranslate"><span class="pre">sp_mix</span></code>).
 Models are ranked from higher predictive accuracy to lower. The open
 dots represent the values of LOO, the black dots are the in-sample
@@ -1337,9 +1367,10 @@ predictive accuracy. The black segments represent the standard error for
 the LOO computations. The gray segments, centered at the triangles,
 represent the standard errors of the difference between the values of
 LOO for each model and the best ranked model.</span><a class="headerlink" href="#fig-sp-compare" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-<div class="section" id="exercises">
+</figcaption>
+</figure>
+</section>
+<section id="exercises">
 <span id="exercises5"></span><h2><span class="section-number">5.8. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
 <p><strong>5E1.</strong>. Splines are quite powerful so its good to know
 when and where to use them. To reinforce this explain each of the
@@ -1567,8 +1598,8 @@ for further intuition</p>
 the related concept we discussed in Chapter <a class="reference internal" href="chp_04.html#chap3"><span class="std std-ref">4</span></a>.</p>
 </dd>
 </dl>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

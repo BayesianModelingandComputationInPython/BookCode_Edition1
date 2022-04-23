@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>6. Time Series &#8212; Bayesian Modeling and Computation in Python</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
@@ -52,8 +53,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -523,7 +524,7 @@ const thebe_selector_output = ".output, .cell_output"
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="time-series">
+  <section class="tex2jax_ignore mathjax_ignore" id="time-series">
 <span id="chap4"></span><h1><span class="section-number">6. </span>Time Series<a class="headerlink" href="#time-series" title="Permalink to this headline">¶</a></h1>
 <p>“It is difficult to make predictions, especially about the future”.
 This is true when dutch politician Karl Kristian Steincke allegedly said
@@ -542,7 +543,7 @@ specialized inference method in the linear Gaussian cases: Kalman
 Filter. The remainder of the chapter will give a brief summary of model
 comparison as well as considerations to be made when choosing prior
 distributions for time series models.</p>
-<div class="section" id="an-overview-of-time-series-problems">
+<section id="an-overview-of-time-series-problems">
 <span id="id2"></span><h2><span class="section-number">6.1. </span>An Overview of Time Series Problems<a class="headerlink" href="#an-overview-of-time-series-problems" title="Permalink to this headline">¶</a></h2>
 <p>In many real life applications we observe data sequentially in time,
 generating timestamps along the way each time we make an observation. In
@@ -575,8 +576,8 @@ decomposition. In this chapter, we will discuss modeling approaches on
 time series that display some level of temporal trend and seasonality,
 and explore methods to capture these regular patterns, as well as the
 less-regular patterns (e.g., residuals correlated in time).</p>
-</div>
-<div class="section" id="time-series-analysis-as-a-regression-problem">
+</section>
+<section id="time-series-analysis-as-a-regression-problem">
 <span id="id5"></span><h2><span class="section-number">6.2. </span>Time Series Analysis as a Regression Problem<a class="headerlink" href="#time-series-analysis-as-a-regression-problem" title="Permalink to this headline">¶</a></h2>
 <p>We will start with modeling a time series with a linear regression model
 on a widely used demo data set that appears in many tutorials (e.g.,
@@ -590,13 +591,15 @@ data into Python with Code Block
 <a class="reference internal" href="#load-co2-data"><span class="std std-ref">load_co2_data</span></a>, and also split the data
 set into training and testing set. We will fit the model using the
 training set only, and evaluate the forecast against the testing set.</p>
-<div class="figure align-default" id="fig-fig1-co2-by-month">
+<figure class="align-default" id="fig-fig1-co2-by-month">
 <a class="reference internal image-reference" href="../_images/fig1_co2_by_month.png"><img alt="../_images/fig1_co2_by_month.png" src="../_images/fig1_co2_by_month.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 6.1 </span><span class="caption-text">Monthly CO₂ measurements in Mauna Loa from 1966 January to 2019
+<figcaption>
+<p><span class="caption-number">Fig. 6.1 </span><span class="caption-text">Monthly CO₂ measurements in Mauna Loa from 1966 January to 2019
 February, split into training (shown in black) and testing (shown in
 blue) set. We can see a strong upward trend and seasonality pattern in
 the data.</span><a class="headerlink" href="#fig-fig1-co2-by-month" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <div class="literal-block-wrapper docutils container" id="load-co2-data">
 <div class="code-block-caption"><span class="caption-number">Listing 6.1 </span><span class="caption-text">load_co2_data</span><a class="headerlink" href="#load-co2-data" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">co2_by_month</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/monthly_mauna_loa_co2.csv&quot;</span><span class="p">)</span>
@@ -626,16 +629,18 @@ a linear predictor to the design matrix to capture the upward increasing
 trend we see in the data, we get the design matrix for the time series.
 You can see a subset of the design matrix in
 <a class="reference internal" href="#fig-fig2-sparse-design-matrix"><span class="std std-numref">Fig. 6.2</span></a>.</p>
-<div class="figure align-default" id="fig-fig2-sparse-design-matrix">
+<figure class="align-default" id="fig-fig2-sparse-design-matrix">
 <a class="reference internal image-reference" href="../_images/fig2_sparse_design_matrix.png"><img alt="../_images/fig2_sparse_design_matrix.png" src="../_images/fig2_sparse_design_matrix.png" style="width: 5.2in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 6.2 </span><span class="caption-text">Design matrix with a linear component and month of the year component
+<figcaption>
+<p><span class="caption-number">Fig. 6.2 </span><span class="caption-text">Design matrix with a linear component and month of the year component
 for a simple regression model for time series. The design matrix is
 transposed into <span class="math notranslate nohighlight">\(feature * timestamps\)</span> so it is easier to visualize. In
 the figure, the first row (index 0) contains continuous values between 0
 and 1 representing the time and the linear growth. The rest of the rows
 (index 1 - 12) are dummy coding of month information. The color coding
 goes from black for 1 to light gray for 0.</span><a class="headerlink" href="#fig-fig2-sparse-design-matrix" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <div class="literal-block-wrapper docutils container" id="generate-design-matrix">
 <div class="code-block-caption"><span class="caption-number">Listing 6.2 </span><span class="caption-text">generate_design_matrix</span><a class="headerlink" href="#generate-design-matrix" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">trend_all</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">co2_by_month</span><span class="p">))[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
@@ -734,13 +739,15 @@ shown in <a class="reference internal" href="#fig-fig3-prior-predictive1"><span 
 </pre></div>
 </div>
 </div>
-<div class="figure align-default" id="fig-fig3-prior-predictive1">
+<figure class="align-default" id="fig-fig3-prior-predictive1">
 <a class="reference internal image-reference" href="../_images/fig3_prior_predictive1.png"><img alt="../_images/fig3_prior_predictive1.png" src="../_images/fig3_prior_predictive1.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 6.3 </span><span class="caption-text">Prior predictive samples from a simple regression model for modeling the
+<figcaption>
+<p><span class="caption-number">Fig. 6.3 </span><span class="caption-text">Prior predictive samples from a simple regression model for modeling the
 Monthly CO₂ measurements in Mauna Loa time series. Each line plot is
 one simulated time series. Since we use an uninformative prior the prior
 prediction has a pretty wide range.</span><a class="headerlink" href="#fig-fig3-prior-predictive1" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>We can now run inference of the regression model and format the result
 into an <code class="docutils literal notranslate"><span class="pre">az.InferenceData</span></code> object in Code Block
 <a class="reference internal" href="#inference-of-regression-model"><span class="std std-ref">inference_of_regression_model</span></a>.</p>
@@ -797,19 +804,23 @@ for the overall model fit and forecast.</p>
 </pre></div>
 </div>
 </div>
-<div class="figure align-default" id="fig-fig4-posterior-predictive-components1">
+<figure class="align-default" id="fig-fig4-posterior-predictive-components1">
 <a class="reference internal image-reference" href="../_images/fig4_posterior_predictive_components1.png"><img alt="../_images/fig4_posterior_predictive_components1.png" src="../_images/fig4_posterior_predictive_components1.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 6.4 </span><span class="caption-text">Posterior predictive samples of the trend component and seasonality
+<figcaption>
+<p><span class="caption-number">Fig. 6.4 </span><span class="caption-text">Posterior predictive samples of the trend component and seasonality
 component of a regression model for time series.</span><a class="headerlink" href="#fig-fig4-posterior-predictive-components1" title="Permalink to this image">¶</a></p>
-</div>
-<div class="figure align-default" id="fig-fig5-posterior-predictive1">
+</figcaption>
+</figure>
+<figure class="align-default" id="fig-fig5-posterior-predictive1">
 <a class="reference internal image-reference" href="../_images/fig5_posterior_predictive1.png"><img alt="../_images/fig5_posterior_predictive1.png" src="../_images/fig5_posterior_predictive1.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 6.5 </span><span class="caption-text">Posterior predictive samples from a simple regression model for time
+<figcaption>
+<p><span class="caption-number">Fig. 6.5 </span><span class="caption-text">Posterior predictive samples from a simple regression model for time
 series in gray, with the actual data plotted in black and blue. While
 the overall fit is reasonable for the training set (plotted in black),
 the forecast (out of sample prediction) is poor as the underlying trend
 is accelerating more than linearly.</span><a class="headerlink" href="#fig-fig5-posterior-predictive1" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>Looking at the out of sample prediction in
 <a class="reference internal" href="#fig-fig5-posterior-predictive1"><span class="std std-numref">Fig. 6.5</span></a>, we notice that:</p>
 <ol class="simple">
@@ -821,7 +832,7 @@ linearly with a constant slope over the years <a class="footnote-reference brack
 to as the forecast cone), where intuitively we expect the
 uncertainty to increase when we forecast farther into the future.</p></li>
 </ol>
-<div class="section" id="design-matrices-for-time-series">
+<section id="design-matrices-for-time-series">
 <span id="id8"></span><h3><span class="section-number">6.2.1. </span>Design Matrices for Time Series<a class="headerlink" href="#design-matrices-for-time-series" title="Permalink to this headline">¶</a></h3>
 <p>In the regression model above, a rather simplistic design matrix was
 used. We can get a better model to capture our knowledge of the observed
@@ -874,9 +885,10 @@ breakdown in <a class="reference internal" href="#fig-fig6-step-linear-function"
 </pre></div>
 </div>
 </div>
-<div class="figure align-default" id="fig-fig6-step-linear-function">
+<figure class="align-default" id="fig-fig6-step-linear-function">
 <a class="reference internal image-reference" href="../_images/fig6_step_linear_function.png"><img alt="../_images/fig6_step_linear_function.png" src="../_images/fig6_step_linear_function.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 6.6 </span><span class="caption-text">A step linear function as trend component for a time series model,
+<figcaption>
+<p><span class="caption-number">Fig. 6.6 </span><span class="caption-text">A step linear function as trend component for a time series model,
 generated with Code Block
 <a class="reference internal" href="#step-linear-function-for-trend"><span class="std std-ref">step_linear_function_for_trend</span></a>.
 The first panel is the design matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>, with the same color
@@ -886,15 +898,16 @@ we could use as trend in a time series model. The two middle panels are
 the breakdown of the two components in Equation
 <a class="reference internal" href="#equation-eq-step-linear-function">(6.3)</a>. Note how combining the two makes the
 resulting trend continuous.</span><a class="headerlink" href="#fig-fig6-step-linear-function" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>In practice, we usually specify a priori how many change points there
 are so <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> can be generated statically. One common approach is
 to specify more change points than you believe the time series actually
 displays, and place a more sparse prior on <span class="math notranslate nohighlight">\(\delta\)</span> to regulate the
 posterior towards 0. Automatic change point detection is also possible
 <span id="id12">[<a class="reference internal" href="references.html#id126" title="Ryan Prescott Adams and David JC MacKay. Bayesian online changepoint detection. arXiv preprint arXiv:0710.3742, 2007.">54</a>]</span>.</p>
-</div>
-<div class="section" id="basis-functions-and-generalized-additive-model">
+</section>
+<section id="basis-functions-and-generalized-additive-model">
 <span id="chp4-gam"></span><h3><span class="section-number">6.2.2. </span>Basis Functions and Generalized Additive Model<a class="headerlink" href="#basis-functions-and-generalized-additive-model" title="Permalink to this headline">¶</a></h3>
 <p>In our regression model defined in Code Block
 <a class="reference internal" href="#regression-model-for-timeseries"><span class="std std-ref">regression_model_for_timeseries</span></a>,
@@ -930,11 +943,13 @@ and visualize it in <a class="reference internal" href="#fig-fig7-fourier-basis"
 </pre></div>
 </div>
 </div>
-<div class="figure align-default" id="fig-fig7-fourier-basis">
+<figure class="align-default" id="fig-fig7-fourier-basis">
 <a class="reference internal image-reference" href="../_images/fig7_fourier_basis.png"><img alt="../_images/fig7_fourier_basis.png" src="../_images/fig7_fourier_basis.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 6.7 </span><span class="caption-text">Fourier basis function with n=3. There are in total 6 predictors, where
+<figcaption>
+<p><span class="caption-number">Fig. 6.7 </span><span class="caption-text">Fourier basis function with n=3. There are in total 6 predictors, where
 we highlighted the first one by setting the rest semi-transparent.</span><a class="headerlink" href="#fig-fig7-fourier-basis" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>Fitting the seasonality using a design matrix generated from Fourier
 basis function as above requires estimating 2N parameters
 <span class="math notranslate nohighlight">\(\beta = [a_1, b_1, \dots , a_N , b_N]\)</span>.</p>
@@ -1008,15 +1023,17 @@ samples in a similar range of what is actually being observed (see
 </pre></div>
 </div>
 </div>
-<div class="figure align-default" id="fig-fig8-prior-predictive2">
+<figure class="align-default" id="fig-fig8-prior-predictive2">
 <a class="reference internal image-reference" href="../_images/fig8_prior_predictive2.png"><img alt="../_images/fig8_prior_predictive2.png" src="../_images/fig8_prior_predictive2.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 6.8 </span><span class="caption-text">Prior predictive samples from a Facebook Prophet-like GAM with a weakly
+<figcaption>
+<p><span class="caption-number">Fig. 6.8 </span><span class="caption-text">Prior predictive samples from a Facebook Prophet-like GAM with a weakly
 informative prior on trend related parameters generated from Code Block
 <a class="reference internal" href="#gam"><span class="std std-ref">gam</span></a>. Each line plot is one simulated time series.
 The predictive samples are now in a similar range to what actually being
 observed, particularly when comparing this figure to
 <a class="reference internal" href="#fig-fig3-prior-predictive1"><span class="std std-numref">Fig. 6.3</span></a>.</span><a class="headerlink" href="#fig-fig8-prior-predictive2" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>After inference, we can generate posterior predictive samples. As you
 can see in <a class="reference internal" href="#fig-fig9-posterior-predictive2"><span class="std std-numref">Fig. 6.9</span></a>, the forecast
 performance is better than the simple regression model in
@@ -1031,15 +1048,17 @@ observations, and then generate a new delta from the posterior
 distribution <span class="math notranslate nohighlight">\(\delta_{new} \sim \text{Laplace}(0, \tau)\)</span>. Here however,
 to simplify the generative process we simply use the linear trend from
 the last period.</p>
-<div class="figure align-default" id="fig-fig9-posterior-predictive2">
+<figure class="align-default" id="fig-fig9-posterior-predictive2">
 <a class="reference internal image-reference" href="../_images/fig9_posterior_predictive2.png"><img alt="../_images/fig9_posterior_predictive2.png" src="../_images/fig9_posterior_predictive2.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 6.9 </span><span class="caption-text">Posterior predictive samples from a Facebook Prophet-like from Code
+<figcaption>
+<p><span class="caption-number">Fig. 6.9 </span><span class="caption-text">Posterior predictive samples from a Facebook Prophet-like from Code
 Block <a class="reference internal" href="#gam"><span class="std std-ref">gam</span></a> in gray, with the actual data plotted in
 black and blue.</span><a class="headerlink" href="#fig-fig9-posterior-predictive2" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-</div>
-<div class="section" id="autoregressive-models">
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="autoregressive-models">
 <span id="chap4-ar"></span><h2><span class="section-number">6.3. </span>Autoregressive Models<a class="headerlink" href="#autoregressive-models" title="Permalink to this headline">¶</a></h2>
 <p>One characteristic of time series is the sequential dependency of the
 observations. This usually introduces structured errors that are
@@ -1084,12 +1103,14 @@ values of <span class="math notranslate nohighlight">\(\rho\)</span>. The result
 </pre></div>
 </div>
 </div>
-<div class="figure align-default" id="fig-fig10-ar1-process">
+<figure class="align-default" id="fig-fig10-ar1-process">
 <a class="reference internal image-reference" href="../_images/fig10_ar1_process.png"><img alt="../_images/fig10_ar1_process.png" src="../_images/fig10_ar1_process.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 6.10 </span><span class="caption-text">Random sample of an AR(1) process with <span class="math notranslate nohighlight">\(\sigma = 1\)</span> and different
+<figcaption>
+<p><span class="caption-number">Fig. 6.10 </span><span class="caption-text">Random sample of an AR(1) process with <span class="math notranslate nohighlight">\(\sigma = 1\)</span> and different
 <span class="math notranslate nohighlight">\(\rho\)</span>. Note that the AR(1) process is not stationary when
 <span class="math notranslate nohighlight">\(\mid \rho \mid &gt; 1\)</span>.</span><a class="headerlink" href="#fig-fig10-ar1-process" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>Using a for-loop to generate the time series random variable is pretty
 straightforward, but now each time point is a random variable, which
 makes working with it quite difficult (e.g., it does not scale well with
@@ -1240,16 +1261,18 @@ linear contribution of the previous observation to the expectation of
 the current observation <a class="footnote-reference brackets" href="#id59" id="id17">8</a>. In this model, we found that the effect is
 almost negligible by inspecting the posterior distribution of <span class="math notranslate nohighlight">\(\rho\)</span>
 (see <a class="reference internal" href="#fig-fig11-ar1-likelihood-rho"><span class="std std-numref">Fig. 6.11</span></a>):</p>
-<div class="figure align-default" id="fig-fig11-ar1-likelihood-rho">
+<figure class="align-default" id="fig-fig11-ar1-likelihood-rho">
 <a class="reference internal image-reference" href="../_images/fig11_ar1_likelihood_rho.png"><img alt="../_images/fig11_ar1_likelihood_rho.png" src="../_images/fig11_ar1_likelihood_rho.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 6.11 </span><span class="caption-text">Posterior distribution of the parameters in the likelihood for the
+<figcaption>
+<p><span class="caption-number">Fig. 6.11 </span><span class="caption-text">Posterior distribution of the parameters in the likelihood for the
 Facebook Prophet -like GAM defined in Code Block
 <a class="reference internal" href="#gam-with-ar-likelihood"><span class="std std-ref">gam_with_ar_likelihood</span></a>. Leftmost
 panel is the <span class="math notranslate nohighlight">\(\sigma\)</span> in the model with a Normal likelihood, middle and
 rightmost panels are <span class="math notranslate nohighlight">\(\sigma\)</span> and <span class="math notranslate nohighlight">\(\rho\)</span> in the model with an AR(1)
 likelihood. Both models return a similar estimation of <span class="math notranslate nohighlight">\(\sigma\)</span>, with
 the <span class="math notranslate nohighlight">\(\rho\)</span> estimated centered around 0.</span><a class="headerlink" href="#fig-fig11-ar1-likelihood-rho" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>Instead of using an AR(k) likelihood, we can also include AR in a time
 series model by adding a latent AR component to the linear prediction.
 This is the <code class="docutils literal notranslate"><span class="pre">gam_with_latent_ar</span></code> model in Code Block
@@ -1302,13 +1325,15 @@ interpret the AR process to be complementary to, or even part of, the
 trend component. We can visualize the latent AR component after
 inference similar to the trend and seasonality components of a time
 series model (see <a class="reference internal" href="#fig-fig12-posterior-predictive-ar1"><span class="std std-numref">Fig. 6.12</span></a>).</p>
-<div class="figure align-default" id="fig-fig12-posterior-predictive-ar1">
+<figure class="align-default" id="fig-fig12-posterior-predictive-ar1">
 <a class="reference internal image-reference" href="../_images/fig12_posterior_predictive_ar1.png"><img alt="../_images/fig12_posterior_predictive_ar1.png" src="../_images/fig12_posterior_predictive_ar1.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 6.12 </span><span class="caption-text">Posterior predictive samples of the trend, seasonality, and AR(1)
+<figcaption>
+<p><span class="caption-number">Fig. 6.12 </span><span class="caption-text">Posterior predictive samples of the trend, seasonality, and AR(1)
 components of the GAM based time series model <code class="docutils literal notranslate"><span class="pre">gam_with_latent_ar</span></code>
 specified in Code Block
 <a class="reference internal" href="#gam-with-latent-ar"><span class="std std-ref">gam_with_latent_ar</span></a>.</span><a class="headerlink" href="#fig-fig12-posterior-predictive-ar1" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>Another way to interpret the explicit latent AR process is that it
 captures the temporally correlated <em>residuals</em>, so we expect the
 posterior estimation of the <span class="math notranslate nohighlight">\(\sigma_{noise}\)</span> will be smaller compared to
@@ -1318,15 +1343,17 @@ distribution of <span class="math notranslate nohighlight">\(\sigma_{noise}\)</s
 <code class="docutils literal notranslate"><span class="pre">gam_with_latent_ar</span></code>. In comparison to model <code class="docutils literal notranslate"><span class="pre">gam_with_ar_likelihood</span></code>,
 we indeed get a lower estimation of <span class="math notranslate nohighlight">\(\sigma_{noise}\)</span>, with a much higher
 estimation of <span class="math notranslate nohighlight">\(\rho\)</span>.</p>
-<div class="figure align-default" id="fig-fig13-ar1-likelihood-rho2">
+<figure class="align-default" id="fig-fig13-ar1-likelihood-rho2">
 <a class="reference internal image-reference" href="../_images/fig13_ar1_likelihood_rho2.png"><img alt="../_images/fig13_ar1_likelihood_rho2.png" src="../_images/fig13_ar1_likelihood_rho2.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 6.13 </span><span class="caption-text">Posterior distribution of <span class="math notranslate nohighlight">\(\sigma_{noise}\)</span>, <span class="math notranslate nohighlight">\(\sigma_{AR}\)</span>, and <span class="math notranslate nohighlight">\(\rho\)</span> of
+<figcaption>
+<p><span class="caption-number">Fig. 6.13 </span><span class="caption-text">Posterior distribution of <span class="math notranslate nohighlight">\(\sigma_{noise}\)</span>, <span class="math notranslate nohighlight">\(\sigma_{AR}\)</span>, and <span class="math notranslate nohighlight">\(\rho\)</span> of
 the AR(1) latent component for <code class="docutils literal notranslate"><span class="pre">gam_with_latent_ar</span></code> specified in Code
 Block <a class="reference internal" href="#gam-with-latent-ar"><span class="std std-ref">gam_with_latent_ar</span></a>. Note not
 to be confused with <a class="reference internal" href="#fig-fig11-ar1-likelihood-rho"><span class="std std-numref">Fig. 6.11</span></a> where we
 displays posterior distribution of parameters from 2 different GAMs.</span><a class="headerlink" href="#fig-fig13-ar1-likelihood-rho2" title="Permalink to this image">¶</a></p>
-</div>
-<div class="section" id="latent-ar-process-and-smoothing">
+</figcaption>
+</figure>
+<section id="latent-ar-process-and-smoothing">
 <span id="id18"></span><h3><span class="section-number">6.3.1. </span>Latent AR Process and Smoothing<a class="headerlink" href="#latent-ar-process-and-smoothing" title="Permalink to this headline">¶</a></h3>
 <p>A latent process is quite powerful at capturing the subtle trends in the
 observed time series. It can even approximate some arbitrary functions.
@@ -1376,14 +1403,16 @@ we can approximate the underlying function pretty well.</p>
 </pre></div>
 </div>
 </div>
-<div class="figure align-default" id="fig-fig14-smoothing-with-gw">
+<figure class="align-default" id="fig-fig14-smoothing-with-gw">
 <a class="reference internal image-reference" href="../_images/fig14_smoothing_with_gw.png"><img alt="../_images/fig14_smoothing_with_gw.png" src="../_images/fig14_smoothing_with_gw.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 6.14 </span><span class="caption-text">Simulated observations from <span class="math notranslate nohighlight">\(y \sim \text{Normal}(f(x), 1)\)</span> with
+<figcaption>
+<p><span class="caption-number">Fig. 6.14 </span><span class="caption-text">Simulated observations from <span class="math notranslate nohighlight">\(y \sim \text{Normal}(f(x), 1)\)</span> with
 <span class="math notranslate nohighlight">\(f(x) = e^{1 + x^{0.5} - e^{\frac{x}{15}}}\)</span>, and the inferred latent
 Gaussian Random Walk. The gray semi-transparent region is the posterior
 94% HDI interval of the latent Gaussian Random Walk <span class="math notranslate nohighlight">\(z\)</span>, with the
 posterior mean plot in dash blue line.</span><a class="headerlink" href="#fig-fig14-smoothing-with-gw" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>There are a few other interesting properties of the AR process, with
 connection to the Gaussian Process <span id="id19">[<a class="reference internal" href="references.html#id91" title="Carl Edward Rasmussen and Christopher K. I. Williams. Gaussian Processes for Machine Learning. The MIT Press, Cambridge, Mass, 2005. ISBN 978-0-262-18253-9.">52</a>]</span>. For example, you
 might find that the Autoregressive model <em>alone</em> is useless to capture
@@ -1399,8 +1428,8 @@ observed time series. We might have an unidentifiable model when both
 the trend component and the AR process are flexible, as the AR process
 alone already has the ability to approximate the underlying trend, a
 smoothed function, of the observed data as we have seen here.</p>
-</div>
-<div class="section" id="s-ar-i-ma-x">
+</section>
+<section id="s-ar-i-ma-x">
 <span id="sarimax"></span><h3><span class="section-number">6.3.2. </span>(S)AR(I)MA(X)<a class="headerlink" href="#s-ar-i-ma-x" title="Permalink to this headline">¶</a></h3>
 <p>Many classical time series models share a similar autoregressive like
 pattern, where you have some latent parameter at time <span class="math notranslate nohighlight">\(t\)</span> that is
@@ -1464,11 +1493,13 @@ exogenous regressors, we write <span class="math notranslate nohighlight">\(\tex
 model the time series of the monthly live births in the United States
 from 1948 to 1979 <span id="id22">[<a class="reference internal" href="references.html#id132" title="R. Shumway and D. Stoffer. Time Series: A Data Analysis Approach Using R. Chapman &amp; Hall/CRC Texts in Statistical Science. CRC Press, 2019. ISBN 9781000001563.">58</a>]</span>. The data is shown in
 <a class="reference internal" href="#fig-fig15-birth-by-month"><span class="std std-numref">Fig. 6.15</span></a>.</p>
-<div class="figure align-default" id="fig-fig15-birth-by-month">
+<figure class="align-default" id="fig-fig15-birth-by-month">
 <a class="reference internal image-reference" href="../_images/fig15_birth_by_month.png"><img alt="../_images/fig15_birth_by_month.png" src="../_images/fig15_birth_by_month.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 6.15 </span><span class="caption-text">Monthly live births in the United States (1948-1979). Y-axis shows the
+<figcaption>
+<p><span class="caption-number">Fig. 6.15 </span><span class="caption-text">Monthly live births in the United States (1948-1979). Y-axis shows the
 number of births in thousands.</span><a class="headerlink" href="#fig-fig15-birth-by-month" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>We will start with a <span class="math notranslate nohighlight">\(\text{SARIMA}(1, 1, 1)(1, 1, 1)_{12}\)</span> model. First
 we load and pre-process the observed time series in Code Block
 <a class="reference internal" href="#sarima-preprocess"><span class="std std-ref">sarima_preprocess</span></a>.</p>
@@ -1623,9 +1654,9 @@ similar <span class="math notranslate nohighlight">\(\text{SARIMA}(0,1,2)(1,1,1)
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-<div class="section" id="state-space-models">
+</section>
+</section>
+<section id="state-space-models">
 <span id="id26"></span><h2><span class="section-number">6.4. </span>State Space Models<a class="headerlink" href="#state-space-models" title="Permalink to this headline">¶</a></h2>
 <p>In the implementation of the ARMA log-likelihood function above (Code
 Block <a class="reference internal" href="#sarima-likelihood"><span class="std std-ref">sarima_likelihood</span></a>), we iterate
@@ -1708,7 +1739,7 @@ problems from a filtering and smoothing perspective. For example, the
 way we compute log likelihood of an ARMA process above could be seen as
 a filtering problem where the observed data is deconstructed into some
 latent unobserved states.</p>
-<div class="section" id="linear-gaussian-state-space-models-and-kalman-filter">
+<section id="linear-gaussian-state-space-models-and-kalman-filter">
 <span id="lgssm-time-series"></span><h3><span class="section-number">6.4.1. </span>Linear Gaussian State Space Models and Kalman filter<a class="headerlink" href="#linear-gaussian-state-space-models-and-kalman-filter" title="Permalink to this headline">¶</a></h3>
 <p>Perhaps one of the most notable State Space models is Linear Gaussian
 State Space Model, where we have latent states <span class="math notranslate nohighlight">\(X_t\)</span> and the observation
@@ -1891,18 +1922,20 @@ measurement space, which is a matrix form of the linear function <a class="footn
 <p>We can compare the result from the Kalman filter (i.e., iteratively
 observing each time steps) with the analytic result (i.e., observing the
 full time series) in <a class="reference internal" href="#fig-fig16-linear-growth-lgssm"><span class="std std-numref">Fig. 6.16</span></a>.</p>
-<div class="figure align-default" id="fig-fig16-linear-growth-lgssm">
+<figure class="align-default" id="fig-fig16-linear-growth-lgssm">
 <a class="reference internal image-reference" href="../_images/fig16_linear_growth_lgssm.png"><img alt="../_images/fig16_linear_growth_lgssm.png" src="../_images/fig16_linear_growth_lgssm.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 6.16 </span><span class="caption-text">Linear Growth time series model, inference using a Kalman filter. In the
+<figcaption>
+<p><span class="caption-number">Fig. 6.16 </span><span class="caption-text">Linear Growth time series model, inference using a Kalman filter. In the
 first panel we show the observed data (gray dot connected by dash line)
 and the one-step prediction from the Kalman filter (<span class="math notranslate nohighlight">\(H_t m_{t \mid t-1}\)</span>
 in solid black line). The posterior distribution of the latent state
 <span class="math notranslate nohighlight">\(X_t\)</span> after observing each time step is compared with the closed form
 solution using all data (black solid line) in the middle and rightmost
 panel.</span><a class="headerlink" href="#fig-fig16-linear-growth-lgssm" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-<div class="section" id="arima-expressed-as-a-state-space-model">
+</figcaption>
+</figure>
+</section>
+<section id="arima-expressed-as-a-state-space-model">
 <span id="id31"></span><h3><span class="section-number">6.4.2. </span>ARIMA, Expressed as a State Space Model<a class="headerlink" href="#arima-expressed-as-a-state-space-model" title="Permalink to this headline">¶</a></h3>
 <p>State space models are a unified methodology that generalized many
 classical time series models. However, it might not always be obvious
@@ -2070,16 +2103,18 @@ We show the resulting trace plot of the posterior samples in
 </pre></div>
 </div>
 </div>
-<div class="figure align-default" id="fig-fig17-arma-lgssm-inference-result">
+<figure class="align-default" id="fig-fig17-arma-lgssm-inference-result">
 <a class="reference internal image-reference" href="../_images/fig17_arma_lgssm_inference_result.png"><img alt="../_images/fig17_arma_lgssm_inference_result.png" src="../_images/fig17_arma_lgssm_inference_result.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 6.17 </span><span class="caption-text">MCMC sampling result from the ARMA(2,1) model <code class="docutils literal notranslate"><span class="pre">arma_lgssm</span></code> defined in
+<figcaption>
+<p><span class="caption-number">Fig. 6.17 </span><span class="caption-text">MCMC sampling result from the ARMA(2,1) model <code class="docutils literal notranslate"><span class="pre">arma_lgssm</span></code> defined in
 Code Block
 <a class="reference internal" href="#tfd-lgssm-arma-with-prior"><span class="std std-ref">tfd_lgssm_arma_with_prior</span></a>,
 conditioned on the simulated data <code class="docutils literal notranslate"><span class="pre">sim_ts</span></code> generated in Code Block
 <a class="reference internal" href="#tfd-lgssm-arma-simulate"><span class="std std-ref">tfd_lgssm_arma_simulate</span></a>. The
 true values of the parameters are plotted as vertical lines in the
 posterior density plot and horizontal lines in the trace plot.</span><a class="headerlink" href="#fig-fig17-arma-lgssm-inference-result" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>We can already use this formulation for ARIMA modeling with <span class="math notranslate nohighlight">\(d&gt;0\)</span> by
 preprocessing the observed time series to account for the integrated
 part. However, state space model representation gives us an advantage
@@ -2122,8 +2157,8 @@ non-stationary. In practice, we can assign an informative prior around
 the initial value of the time series after centering (subtracting the
 mean). More discussion around this topic and an in depth introduction to
 state space models for time series problems could be found in <span id="id33">Durbin and Koopman [<a class="reference internal" href="references.html#id131" title="James Durbin and Siem Jan Koopman. Time series analysis by state space methods. Oxford university press, 2012.">61</a>]</span>.</p>
-</div>
-<div class="section" id="bayesian-structural-time-series">
+</section>
+<section id="bayesian-structural-time-series">
 <span id="id34"></span><h3><span class="section-number">6.4.3. </span>Bayesian Structural Time Series<a class="headerlink" href="#bayesian-structural-time-series" title="Permalink to this headline">¶</a></h3>
 <p>A linear Gaussian state space representation of a time series model has
 another advantage that it is easily extendable, especially with other
@@ -2236,13 +2271,15 @@ nonetheless recover them after inference by running the Kalman filter
 conditioned on the posterior distribution (represented as Monte Carlo
 Samples). A conceptual description of the parameterization could be
 found in the <a class="reference internal" href="#fig-fig18-bsts-lgssm"><span class="std std-numref">Fig. 6.18</span></a>:</p>
-<div class="figure align-default" id="fig-fig18-bsts-lgssm">
+<figure class="align-default" id="fig-fig18-bsts-lgssm">
 <a class="reference internal image-reference" href="../_images/fig18_bsts_lgssm.png"><img alt="../_images/fig18_bsts_lgssm.png" src="../_images/fig18_bsts_lgssm.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 6.18 </span><span class="caption-text">Relationship between Bayesian Structural Time Series (blue box) and
+<figcaption>
+<p><span class="caption-number">Fig. 6.18 </span><span class="caption-text">Relationship between Bayesian Structural Time Series (blue box) and
 Linear Gaussian State Space Model (red box). The Linear Gaussian State
 Space Model shown here is an example containing a local linear trend
 component, a seasonal component, and an Autoregressive component.</span><a class="headerlink" href="#fig-fig18-bsts-lgssm" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>Thus running inference on a structural time series model could
 conceptually be understood as generating a linear Gaussian state space
 model from the parameters to be inferred, running the Kalman filter to
@@ -2308,17 +2345,19 @@ result is shown in <a class="reference internal" href="#fig-fig19-bsts-lgssm-res
 </pre></div>
 </div>
 </div>
-<div class="figure align-default" id="fig-fig19-bsts-lgssm-result">
+<figure class="align-default" id="fig-fig19-bsts-lgssm-result">
 <a class="reference internal image-reference" href="../_images/fig19_bsts_lgssm_result.png"><img alt="../_images/fig19_bsts_lgssm_result.png" src="../_images/fig19_bsts_lgssm_result.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 6.19 </span><span class="caption-text">Inference result and forecast of monthly live births in the United
+<figcaption>
+<p><span class="caption-number">Fig. 6.19 </span><span class="caption-text">Inference result and forecast of monthly live births in the United
 States (1948-1979) using the <code class="docutils literal notranslate"><span class="pre">tfp.sts</span></code> API with Code Block
 <a class="reference internal" href="#tfp-sts-example2-result"><span class="std std-ref">tfp_sts_example2_result</span></a>. Top
 panel: 36 months forecast; bottom 2 panels: decomposition of the
 structural time series.</span><a class="headerlink" href="#fig-fig19-bsts-lgssm-result" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-</div>
-<div class="section" id="other-time-series-models">
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="other-time-series-models">
 <span id="id35"></span><h2><span class="section-number">6.5. </span>Other Time Series Models<a class="headerlink" href="#other-time-series-models" title="Permalink to this headline">¶</a></h2>
 <p>While structural time series and linear Gaussian state space models are
 powerful and expressive classes of time series models, they certainly do
@@ -2364,8 +2403,8 @@ implementations in the Python computing ecosystem.</p>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="model-criticism-and-choosing-priors">
+</section>
+<section id="model-criticism-and-choosing-priors">
 <span id="id39"></span><h2><span class="section-number">6.6. </span>Model Criticism and Choosing Priors<a class="headerlink" href="#model-criticism-and-choosing-priors" title="Permalink to this headline">¶</a></h2>
 <p>In the seminal time series book by  <span id="id40">Box <em>et al.</em> [<a class="reference internal" href="references.html#id130" title="G.E.P. Box, G.M. Jenkins, and G.C. Reinsel. Time Series Analysis: Forecasting and Control. Wiley Series in Probability and Statistics. Wiley, 2008. ISBN 9780470272848.">57</a>]</span>
 <a class="footnote-reference brackets" href="#id66" id="id41">15</a>, they outlined five important practical problems for time series
@@ -2423,7 +2462,7 @@ some threshold <a class="footnote-reference brackets" href="#id67" id="id44">16<
 prediction task but rather to various possible cross validation
 approaches that all involve some form of prediction of future time
 points.</p>
-<div class="section" id="priors-for-time-series-models">
+<section id="priors-for-time-series-models">
 <span id="id45"></span><h3><span class="section-number">6.6.1. </span>Priors for Time Series Models<a class="headerlink" href="#priors-for-time-series-models" title="Permalink to this headline">¶</a></h3>
 <p>In Section <a class="reference internal" href="#chp4-gam"><span class="std std-ref">Basis Functions and Generalized Additive Model</span></a> we used a regularizing prior, the Laplace prior, for
 the slope of the step linear function. As we mentioned this is to
@@ -2469,9 +2508,9 @@ overconfident about the underlying trend, which will likely result in a
 poor forecast in the long run. In a real world application where time
 series are most likely non-stationary, we should be ready to adjust the
 prior accordingly.</p>
-</div>
-</div>
-<div class="section" id="exercises">
+</section>
+</section>
+<section id="exercises">
 <span id="exercises6"></span><h2><span class="section-number">6.7. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
 <p><strong>6E1.</strong> As we explained in Box <em>Parsing timestamp to design
 matrix</em> above, date information could be formatted into a design matrix
@@ -2740,8 +2779,8 @@ through his seminal book and working on forecasting problems.</p>
 <dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Federal_holidays_in_the_United_States#List_of_federal_holidays">https://en.wikipedia.org/wiki/Federal_holidays_in_the_United_States#List_of_federal_holidays</a></p>
 </dd>
 </dl>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

@@ -553,7 +553,10 @@ distributions. For example, we can use the code in Code Block
 :name: diy_trace_plot
 :caption: diy_trace_plot
 _, axes = plt.subplots(1,2, sharey=True)
-axes[1].hist(trace["θ"], color="0.5", orientation="horizontal", density=True)
+axes[0].plot(trace['θ'], '0.5')
+axes[0].set_ylabel('θ', rotation=0, labelpad=15)
+axes[1].hist(trace['θ'], color='0.5', orientation="horizontal", density=True)
+axes[1].set_xticks([])
 ```
 
 ```{figure} figures/traceplot.png

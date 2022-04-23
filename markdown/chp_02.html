@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>2. Exploratory Analysis of Bayesian Models &#8212; Bayesian Modeling and Computation in Python</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
@@ -52,8 +53,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -579,7 +580,7 @@ const thebe_selector_output = ".output, .cell_output"
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="exploratory-analysis-of-bayesian-models">
+  <section class="tex2jax_ignore mathjax_ignore" id="exploratory-analysis-of-bayesian-models">
 <span id="chap1bis"></span><h1><span class="section-number">2. </span>Exploratory Analysis of Bayesian Models<a class="headerlink" href="#exploratory-analysis-of-bayesian-models" title="Permalink to this headline">¶</a></h1>
 <p>As we saw in Chapter <a class="reference internal" href="chp_01.html#chap1"><span class="std std-ref">1</span></a>, Bayesian inference is about
 conditioning models to the available data and obtaining posterior
@@ -593,7 +594,7 @@ not. The reality is that other equally important tasks are needed for
 successful Bayesian data analysis. In this chapter we will discuss some
 of these tasks, including checking model assumptions, diagnosing
 inference results, and model comparison.</p>
-<div class="section" id="there-is-life-after-inference-and-before-too">
+<section id="there-is-life-after-inference-and-before-too">
 <span id="id2"></span><h2><span class="section-number">2.1. </span>There is Life After Inference, and Before Too!<a class="headerlink" href="#there-is-life-after-inference-and-before-too" title="Permalink to this headline">¶</a></h2>
 <p>A successful Bayesian modeling approach requires performing additional
 tasks beyond inference <a class="footnote-reference brackets" href="#id53" id="id3">2</a>. Such as:</p>
@@ -638,8 +639,8 @@ not important. On the contrary during writing this book we have
 performed many iterations “behind the scenes”. However, we omit them in
 certain areas so focus on other relevant aspects such as model details,
 computational features, or fundamental mathematics.</p>
-</div>
-<div class="section" id="understanding-your-assumptions">
+</section>
+<section id="understanding-your-assumptions">
 <span id="prior-predictive-checks"></span><h2><span class="section-number">2.2. </span>Understanding Your Assumptions<a class="headerlink" href="#understanding-your-assumptions" title="Permalink to this headline">¶</a></h2>
 <p>As we discussed in Section <a class="reference internal" href="chp_01.html#make-prior-count"><span class="std std-ref">A Few Options to Quantify Your Prior Information</span></a>, “what is
 the best-ever prior?” is a tempting question to ask. However, it is
@@ -680,13 +681,15 @@ value of the angle <span class="math notranslate nohighlight">\(\alpha\)</span> 
 the player is trying to kick the ball straight, i.e at a zero angle, but
 then there are other factors that result in a trajectory with a
 deviation <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
-<div class="figure align-default" id="fig-football-sketch">
+<figure class="align-default" id="fig-football-sketch">
 <a class="reference internal image-reference" href="../_images/football_sketch.png"><img alt="../_images/football_sketch.png" src="../_images/football_sketch.png" style="width: 4in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.1 </span><span class="caption-text">Sketch of a penalty shot. The dashed lines represent the angle <span class="math notranslate nohighlight">\(\alpha\)</span>
+<figcaption>
+<p><span class="caption-number">Fig. 2.1 </span><span class="caption-text">Sketch of a penalty shot. The dashed lines represent the angle <span class="math notranslate nohighlight">\(\alpha\)</span>
 within which the ball must be kicked to score a goal. <span class="math notranslate nohighlight">\(x\)</span> represents the
 reglementary distance for a penalty shot (11 meters) and <span class="math notranslate nohighlight">\(L\)</span> half the
 length of a reglementary goal mouth (3.66 meters).</span><a class="headerlink" href="#fig-football-sketch" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>The only unknown quantity in Equation <a class="reference internal" href="#equation-eq-geometric-football">(2.1)</a> is
 <span class="math notranslate nohighlight">\(\sigma\)</span>. We can get the values of <span class="math notranslate nohighlight">\(L\)</span> and <span class="math notranslate nohighlight">\(x\)</span> from the rules of
 football. As good Bayesians, when we do not know a quantity, we assign a
@@ -710,16 +713,18 @@ score goals even if the player kicks the ball with a greater angle than
 the gray area. Interestingly enough for large values of
 <span class="math notranslate nohighlight">\(\sigma_{\sigma}\)</span> the model thinks that kicking in the opposite
 direction is not that bad idea.</p>
-<div class="figure align-default" id="fig-prior-predictive-check-00">
+<figure class="align-default" id="fig-prior-predictive-check-00">
 <a class="reference internal image-reference" href="../_images/prior_predictive_distributions_00.png"><img alt="../_images/prior_predictive_distributions_00.png" src="../_images/prior_predictive_distributions_00.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.2 </span><span class="caption-text">Prior predictive checks for the model in Equation
+<figcaption>
+<p><span class="caption-number">Fig. 2.2 </span><span class="caption-text">Prior predictive checks for the model in Equation
 <a class="reference internal" href="#equation-eq-geometric-model">(2.2)</a>. Each subplot corresponds to a different value
 of the prior for <span class="math notranslate nohighlight">\(\sigma\)</span>. The black dot at the center of each circular
 plot represents the penalty point. The dots at the edges represent
 shots, the position is the value of the angle <span class="math notranslate nohighlight">\(\alpha\)</span> (see
 <a class="reference internal" href="#fig-football-sketch"><span class="std std-numref">Fig. 2.1</span></a>), and the color represents the probability
 of scoring a goal.</span><a class="headerlink" href="#fig-prior-predictive-check-00" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>At this point we have a few alternatives: we can rethink our model to
 incorporate further geometric insights. Alternatively we can use a prior
 that reduces the chance of nonsensical results even if we do not exclude
@@ -736,16 +741,18 @@ shows us that as the number of predictors increase, the induced prior
 predictive distribution puts more mass on extreme values. Thus we need a
 <em>stronger regularizing prior</em> (e.g., Laplace distribution) in order to
 keep the model away from those extreme values.</p>
-<div class="figure align-default" id="fig-prior-predictive-check-01">
+<figure class="align-default" id="fig-prior-predictive-check-01">
 <a class="reference internal image-reference" href="../_images/prior_predictive_distributions_01.png"><img alt="../_images/prior_predictive_distributions_01.png" src="../_images/prior_predictive_distributions_01.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.3 </span><span class="caption-text">Prior predictive distribution for a logistic regression models with 2,
+<figcaption>
+<p><span class="caption-number">Fig. 2.3 </span><span class="caption-text">Prior predictive distribution for a logistic regression models with 2,
 5, or 15 binary predictors and with 100 data points. The KDE represents
 the distributions of the mean of the simulated data over 10000
 simulations. Even when the prior for each coefficient,
 <span class="math notranslate nohighlight">\(\mathcal{N}(0, 1)\)</span>, is the same for all 3 panels, increasing the
 numbers of the predictor is effectively equivalent to using a prior
 favoring extreme values.</span><a class="headerlink" href="#fig-prior-predictive-check-01" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>Both previous examples show that priors can not be understood in
 isolation, we need to put them in the context of a particular model. As
 thinking in terms of observed values is generally easier than thinking
@@ -763,8 +770,8 @@ your domain partner and yourself. And again computing the prior
 predictive has other advantages, such as helping us debug models,
 ensuring they are properly written and able to run in our computational
 environment.</p>
-</div>
-<div class="section" id="understanding-your-predictions">
+</section>
+<section id="understanding-your-predictions">
 <span id="posterior-pd"></span><h2><span class="section-number">2.3. </span>Understanding Your Predictions<a class="headerlink" href="#understanding-your-predictions" title="Permalink to this headline">¶</a></h2>
 <p>As we can use synthetic data, that is generated data, from the prior
 predictive distribution to help us inspect our model, we can perform a
@@ -792,9 +799,10 @@ directly modeling the mean of the binomial distribution. In the next
 chapters we will see examples when posterior predictive checks provide
 less obvious and thus more valuable information about our model’s fit to
 the data.</p>
-<div class="figure align-default" id="fig-posterior-predictive-check">
+<figure class="align-default" id="fig-posterior-predictive-check">
 <a class="reference internal image-reference" href="../_images/posterior_predictive_check.png"><img alt="../_images/posterior_predictive_check.png" src="../_images/posterior_predictive_check.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.4 </span><span class="caption-text">Posterior predictive check for a Beta-Binomial model. On the left panel
+<figcaption>
+<p><span class="caption-number">Fig. 2.4 </span><span class="caption-text">Posterior predictive check for a Beta-Binomial model. On the left panel
 we have the number of predicted success (gray histogram), the dashed
 black line represents the mean predicted success. The blue line is the
 mean computed from the data. On the right panel we have the same
@@ -803,7 +811,8 @@ of success we are plotting the probability of getting 0’s or 1’s. We are
 using a line to represent that the probability of <span class="math notranslate nohighlight">\(p(y=0) = 1-p(y=1)\)</span>.
 the dashed black line is the mean predicted probability, and the blue
 line is the mean computed from the data.</span><a class="headerlink" href="#fig-posterior-predictive-check" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>Posterior predictive checks are not restricted to plots. We can also
 perform numerical tests <span id="id12">[<a class="reference internal" href="references.html#id3" title="A. Gelman, J.B. Carlin, H.S. Stern, D.B. Dunson, A. Vehtari, and D.B. Rubin. Bayesian Data Analysis, Third Edition. Chapman &amp; Hall/CRC Texts in Statistical Science. Taylor &amp; Francis, 2013. ISBN 9781439840955.">18</a>]</span>. One way of
 doing this is by computing:</p>
@@ -844,9 +853,10 @@ distribution. Notice that we are not conditioning on any null
 hypothesis. Neither are we using any predefined threshold to declare
 statistical significance or to perform hypothesis testing.</p>
 </div>
-<div class="figure align-default" id="fig-posterior-predictive-check-pu-values">
+<figure class="align-default" id="fig-posterior-predictive-check-pu-values">
 <a class="reference internal image-reference" href="../_images/posterior_predictive_check_pu_values.png"><img alt="../_images/posterior_predictive_check_pu_values.png" src="../_images/posterior_predictive_check_pu_values.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.5 </span><span class="caption-text">Posterior predictive distribution for a Beta-Binomial model. In the
+<figcaption>
+<p><span class="caption-number">Fig. 2.5 </span><span class="caption-text">Posterior predictive distribution for a Beta-Binomial model. In the
 first panel, the curve with the solid line is the KDE of the proportion
 of predicted values that are less or equal than the observed data. The
 dashed lines represent the expected distribution for a dataset of the
@@ -856,7 +866,8 @@ the observed computed per observation instead of over each simulation as
 in the first panel. The white line represents the ideal case, a standard
 Uniform distribution, and the gray band deviations of that Uniform
 distribution that we expect to see for a dataset of the same size.</span><a class="headerlink" href="#fig-posterior-predictive-check-pu-values" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>As we said before we can choose from many <span class="math notranslate nohighlight">\(T\)</span> statistics to summarize
 observations and predictions.
 <a class="reference internal" href="#fig-posterior-predictive-check-tstat"><span class="std std-numref">Fig. 2.6</span></a> shows two examples, in
@@ -864,15 +875,17 @@ the first panel <span class="math notranslate nohighlight">\(T\)</span> is the m
 standard deviation. The curves are KDEs representing the distribution of
 the <span class="math notranslate nohighlight">\(T\)</span> statistics from the posterior predictive distribution and the
 dot is the value for the observed data.</p>
-<div class="figure align-default" id="fig-posterior-predictive-check-tstat">
+<figure class="align-default" id="fig-posterior-predictive-check-tstat">
 <a class="reference internal image-reference" href="../_images/posterior_predictive_check_tstat.png"><img alt="../_images/posterior_predictive_check_tstat.png" src="../_images/posterior_predictive_check_tstat.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.6 </span><span class="caption-text">Posterior predictive distribution for a Beta-Binomial model. In the
+<figcaption>
+<p><span class="caption-number">Fig. 2.6 </span><span class="caption-text">Posterior predictive distribution for a Beta-Binomial model. In the
 first panel, the curve with the solid line is the KDE of the proportion
 of simulations of predicted values with mean values less or equal than
 the observed data. On the second panel, the same but for the standard
 deviation. The black dot represented the mean (first panel) or standard
 deviation (second panel) computed from the observed data.</span><a class="headerlink" href="#fig-posterior-predictive-check-tstat" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>Before continue reading you should take a moment to carefully inspect
 <a class="reference internal" href="#fig-posterior-predictive-many-examples"><span class="std std-numref">Fig. 2.7</span></a> and try to understand
 why the plots look like they do. In this figure we have a series of
@@ -920,9 +933,10 @@ in a platonic world.</p></li>
 <p>We hope <a class="reference internal" href="#fig-posterior-predictive-many-examples"><span class="std std-numref">Fig. 2.7</span></a> and the
 accompanying discussion provide you with enough intuition to better
 perform model checking in real scenarios.</p>
-<div class="figure align-default" id="fig-posterior-predictive-many-examples">
+<figure class="align-default" id="fig-posterior-predictive-many-examples">
 <a class="reference internal image-reference" href="../_images/posterior_predictive_many_examples.png"><img alt="../_images/posterior_predictive_many_examples.png" src="../_images/posterior_predictive_many_examples.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.7 </span><span class="caption-text">Posterior predictive checks for a set of simple hypothetical models. On
+<figcaption>
+<p><span class="caption-number">Fig. 2.7 </span><span class="caption-text">Posterior predictive checks for a set of simple hypothetical models. On
 the first column, the blue solid line represents the observed data and
 the light-gray ones predictions from an hypothetical model. On the
 second column, the solid line is the KDE of the proportion of predicted
@@ -935,15 +949,16 @@ distribution and the gray band the expected deviations from uniformity
 for a dataset of the same size as the one used. This figure was made
 using the ArviZ’s functions <code class="docutils literal notranslate"><span class="pre">az.plot_ppc(.)</span></code>,
 <code class="docutils literal notranslate"><span class="pre">az.plot_bpv(.,</span> <span class="pre">kind=&quot;p_values&quot;)</span></code> and <code class="docutils literal notranslate"><span class="pre">az.plot_bpv(.,</span> <span class="pre">kind=&quot;u_values&quot;)</span></code>.</span><a class="headerlink" href="#fig-posterior-predictive-many-examples" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>Posterior predictive checks, either using plots or numerical summaries,
 or even a combination of both, is a very flexible idea. This concept is
 general enough to let the practitioner use their imagination to come up
 with different ways to explore, evaluate, and better understand model
 through their predictions and how well a model (or models) work for a
 particular problem.</p>
-</div>
-<div class="section" id="diagnosing-numerical-inference">
+</section>
+<section id="diagnosing-numerical-inference">
 <span id="diagnosing-inference"></span><h2><span class="section-number">2.4. </span>Diagnosing Numerical Inference<a class="headerlink" href="#diagnosing-numerical-inference" title="Permalink to this headline">¶</a></h2>
 <p>Using numerical methods to approximate the posterior distribution allows
 us to solve Bayesian models that could be tedious to solve with pen and
@@ -995,7 +1010,7 @@ sample.</p>
 parameter) posterior distribution. This is enough for our current
 discussion as all the diagnostics we will see are computed per parameter
 in the model.</p>
-<div class="section" id="effective-sample-size">
+<section id="effective-sample-size">
 <span id="ess"></span><h3><span class="section-number">2.4.1. </span>Effective Sample Size<a class="headerlink" href="#effective-sample-size" title="Permalink to this headline">¶</a></h3>
 <p>When using MCMC sampling methods, it is reasonable to wonder if a
 particular sample is large enough to confidently compute the quantities
@@ -1074,14 +1089,16 @@ two quantiles <code class="docutils literal notranslate"><span class="pre">az.pl
 <span class="n">az</span><span class="o">.</span><span class="n">plot_ess</span><span class="p">(</span><span class="n">chains</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;quantile&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
 </pre></div>
 </div>
-<div class="figure align-default" id="fig-plot-ess">
+<figure class="align-default" id="fig-plot-ess">
 <a class="reference internal image-reference" href="../_images/plot_ess.png"><img alt="../_images/plot_ess.png" src="../_images/plot_ess.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.8 </span><span class="caption-text">Top: Local ESS of small interval probability estimates. Bottom: Quantile
+<figcaption>
+<p><span class="caption-number">Fig. 2.8 </span><span class="caption-text">Top: Local ESS of small interval probability estimates. Bottom: Quantile
 ESS estimates. The dashed lines represent the minimum suggested value of
 400 at which we would consider the effective sample size to be
 sufficient. Ideally, we want the local and quantile ESS to be high
 across all regions of the parameter space.</span><a class="headerlink" href="#fig-plot-ess" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>As a general rule of thumb we recommend a value of ESS greater than 400,
 otherwise, the estimation of the ESS itself and the estimation of other
 quantities, like <span class="math notranslate nohighlight">\(\hat R\)</span> that we will see next, will be basically
@@ -1091,8 +1108,8 @@ Nevertheless, we have to be careful with this interpretation as the
 actual value of ESS will not be the same for different regions of the
 parameter space. Taking that detail into account, the intuition still
 seems useful.</p>
-</div>
-<div class="section" id="potential-scale-reduction-factor-hat-r">
+</section>
+<section id="potential-scale-reduction-factor-hat-r">
 <span id="id18"></span><h3><span class="section-number">2.4.2. </span>Potential Scale Reduction Factor <span class="math notranslate nohighlight">\(\hat R\)</span><a class="headerlink" href="#potential-scale-reduction-factor-hat-r" title="Permalink to this headline">¶</a></h3>
 <p>Under very general conditions Markov chain Monte Carlo methods have
 theoretical guarantees that they will get the right answer irrespective
@@ -1138,8 +1155,8 @@ Data variables:
 samples with different degree of problems. While <code class="docutils literal notranslate"><span class="pre">bad_chains0</span></code> is a
 total disaster, <code class="docutils literal notranslate"><span class="pre">bad_chains1</span></code> seems to be closer to reaching the
 <em>ok-chain status</em>, but still off.</p>
-</div>
-<div class="section" id="monte-carlo-standard-error">
+</section>
+<section id="monte-carlo-standard-error">
 <span id="id21"></span><h3><span class="section-number">2.4.3. </span>Monte Carlo Standard Error<a class="headerlink" href="#monte-carlo-standard-error" title="Permalink to this headline">¶</a></h3>
 <p>When using MCMC methods we introduce an additional layer of uncertainty
 as we are approximating the posterior with a finite number of samples.
@@ -1174,14 +1191,16 @@ once as in <a class="reference internal" href="#fig-plot-mcse"><span class="std 
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_mcse</span><span class="p">(</span><span class="n">chains</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="figure align-default" id="fig-plot-mcse">
+<figure class="align-default" id="fig-plot-mcse">
 <a class="reference internal image-reference" href="../_images/plot_mcse.png"><img alt="../_images/plot_mcse.png" src="../_images/plot_mcse.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.9 </span><span class="caption-text">Local MCSE for quantiles. Subplots y-axis share the same scale to ease
+<figcaption>
+<p><span class="caption-number">Fig. 2.9 </span><span class="caption-text">Local MCSE for quantiles. Subplots y-axis share the same scale to ease
 comparison between them. Ideally, we want the MCSE to be small across
 all regions of the parameter space. Note how the MCSE values for
 <code class="docutils literal notranslate"><span class="pre">good_chains</span></code> is relatively low across all values compared to MCSE of
 both bad chains.</span><a class="headerlink" href="#fig-plot-mcse" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>Finally, the ESS, <span class="math notranslate nohighlight">\(\hat R\)</span>, and MCSE can all be computed with a single
 call to the <code class="docutils literal notranslate"><span class="pre">az.summary(.)</span></code> function.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">chains</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;diagnostics&quot;</span><span class="p">)</span>
@@ -1231,8 +1250,8 @@ call to the <code class="docutils literal notranslate"><span class="pre">az.summ
 (expectation), the second one is the Monte Carlo standard error for the
 standard deviation <a class="footnote-reference brackets" href="#id62" id="id23">10</a>. Then we have the bulk and tail effective
 sample size and finally the <span class="math notranslate nohighlight">\(\hat R\)</span> diagnostic.</p>
-</div>
-<div class="section" id="trace-plots">
+</section>
+<section id="trace-plots">
 <span id="id24"></span><h3><span class="section-number">2.4.4. </span>Trace Plots<a class="headerlink" href="#trace-plots" title="Permalink to this headline">¶</a></h3>
 <p>Trace plots are probably the most popular plots in Bayesian literature.
 They are often the first plot we make after inference, to visually check
@@ -1246,14 +1265,16 @@ continuous variables and a histogram for discrete ones on the left.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_trace</span><span class="p">(</span><span class="n">chains</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="figure align-default" id="fig-trace-plots">
+<figure class="align-default" id="fig-trace-plots">
 <a class="reference internal image-reference" href="../_images/trace_plots.png"><img alt="../_images/trace_plots.png" src="../_images/trace_plots.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.10 </span><span class="caption-text">On the left column, we see one KDE per chain. On the right, column we
+<figcaption>
+<p><span class="caption-number">Fig. 2.10 </span><span class="caption-text">On the left column, we see one KDE per chain. On the right, column we
 see the values of the sampled values per chain per step. Note the
 differences in the KDE and trace plots between each of the example
 chains, particularly the <em>fuzzy caterpillar</em> appearance in <code class="docutils literal notranslate"><span class="pre">good_chains</span></code>
 versus the irregularities in the other two.</span><a class="headerlink" href="#fig-trace-plots" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p><a class="reference internal" href="#fig-trace-plots"><span class="std std-numref">Fig. 2.10</span></a> shows the trace plots for <code class="docutils literal notranslate"><span class="pre">chains</span></code>. From it,
 we can see that the draws in <code class="docutils literal notranslate"><span class="pre">good_chains</span></code> belong to the same
 distribution as there are only small (random) differences between both
@@ -1278,8 +1299,8 @@ sampler is getting stuck in some regions of the parameter space, maybe
 because we have a multimodal posterior with barrier between modes of
 very low probability or perhaps because we have some regions of the
 parameter space with a curvature that is too different from the rest.</p>
-</div>
-<div class="section" id="autocorrelation-plots">
+</section>
+<section id="autocorrelation-plots">
 <span id="autocorr-plot"></span><h3><span class="section-number">2.4.5. </span>Autocorrelation Plots<a class="headerlink" href="#autocorrelation-plots" title="Permalink to this headline">¶</a></h3>
 <p>As we saw when we discussed the effective sample size, autocorrelation
 decreases the actual amount of information contained in a sample and
@@ -1288,22 +1309,24 @@ autocorrelation with <code class="docutils literal notranslate"><span class="pre
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_autocorr</span><span class="p">(</span><span class="n">chains</span><span class="p">,</span> <span class="n">combined</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="figure align-default" id="fig-autocorrelation-plot">
+<figure class="align-default" id="fig-autocorrelation-plot">
 <a class="reference internal image-reference" href="../_images/autocorrelation_plot.png"><img alt="../_images/autocorrelation_plot.png" src="../_images/autocorrelation_plot.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.11 </span><span class="caption-text">Bar plot of the autocorrelation function over a 100 steps window. The
+<figcaption>
+<p><span class="caption-number">Fig. 2.11 </span><span class="caption-text">Bar plot of the autocorrelation function over a 100 steps window. The
 height of the bars for <code class="docutils literal notranslate"><span class="pre">good_chains</span></code> is close to zero (and mostly inside
 the gray band) for the entire plot, which indicates very low
 autocorrelation. The tall bars in <code class="docutils literal notranslate"><span class="pre">bad_chains0</span></code> and <code class="docutils literal notranslate"><span class="pre">bad_chains1</span></code>
 indicate large values of autocorrelation, which is undesirable. The gray
 band represents the 95% confidence interval.</span><a class="headerlink" href="#fig-autocorrelation-plot" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>What we see in <a class="reference internal" href="#fig-autocorrelation-plot"><span class="std std-numref">Fig. 2.11</span></a> is at least
 qualitatively expected after seeing the results from <code class="docutils literal notranslate"><span class="pre">az.ess</span></code>.
 <code class="docutils literal notranslate"><span class="pre">good_chains</span></code> shows essentially zero autocorrelation, <code class="docutils literal notranslate"><span class="pre">bad_chains0</span></code> is
 highly correlated and <code class="docutils literal notranslate"><span class="pre">bad_chains1</span></code> is not that bad, but autocorrelation
 is still noticeable and is long-range, i.e. it does not drop quickly.</p>
-</div>
-<div class="section" id="rank-plots">
+</section>
+<section id="rank-plots">
 <span id="id25"></span><h3><span class="section-number">2.4.6. </span>Rank Plots<a class="headerlink" href="#rank-plots" title="Permalink to this headline">¶</a></h3>
 <p>Rank plots are another visual diagnostic we can use to compare the
 sampling behavior both within and between chains. Rank plots, simply
@@ -1316,24 +1339,28 @@ chains <span id="id26">[<a class="reference internal" href="references.html#id13
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_rank</span><span class="p">(</span><span class="n">chains</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;bars&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="figure align-default" id="fig-rank-plot-bars">
+<figure class="align-default" id="fig-rank-plot-bars">
 <a class="reference internal image-reference" href="../_images/rank_plot_bars.png"><img alt="../_images/rank_plot_bars.png" src="../_images/rank_plot_bars.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.12 </span><span class="caption-text">Rank plots using the <code class="docutils literal notranslate"><span class="pre">bar</span></code> representation. In particular, compare the
+<figcaption>
+<p><span class="caption-number">Fig. 2.12 </span><span class="caption-text">Rank plots using the <code class="docutils literal notranslate"><span class="pre">bar</span></code> representation. In particular, compare the
 height of the bar to the dashed line representing a Uniform
 distribution. Ideally, the bars should follow a Uniform distribution.</span><a class="headerlink" href="#fig-rank-plot-bars" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>One alternative to the “bars” representation is vertical lines,
 shortened to “vlines”.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_rank</span><span class="p">(</span><span class="n">chains</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;vlines&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="figure align-default" id="fig-rank-plot-vlines">
+<figure class="align-default" id="fig-rank-plot-vlines">
 <a class="reference internal image-reference" href="../_images/rank_plot_vlines.png"><img alt="../_images/rank_plot_vlines.png" src="../_images/rank_plot_vlines.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.13 </span><span class="caption-text">Rank plots using the <code class="docutils literal notranslate"><span class="pre">vline</span></code> representation. The shorter the vertical
+<figcaption>
+<p><span class="caption-number">Fig. 2.13 </span><span class="caption-text">Rank plots using the <code class="docutils literal notranslate"><span class="pre">vline</span></code> representation. The shorter the vertical
 lines the better. vertical lines above the dashed line indicate an
 excess sampled values for a particular rank, vertical lines below
 indicate a lack of sampled values.</span><a class="headerlink" href="#fig-rank-plot-vlines" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>We can see in Figures <a class="reference internal" href="#fig-rank-plot-bars"><span class="std std-numref">Fig. 2.12</span></a> and
 <a class="reference internal" href="#fig-rank-plot-vlines"><span class="std std-numref">Fig. 2.13</span></a> that for <code class="docutils literal notranslate"><span class="pre">good_chains</span></code> the ranks are very
 close to Uniform and that both chains look similar to each other with
@@ -1357,8 +1384,8 @@ do and as a result, we need to explore many different alternatives. As
 we progress and the model or models start to make more sense we can then
 check that the ESS, <span class="math notranslate nohighlight">\(\hat R\)</span>, and MCSE are okay and if not okay know
 that our model needs further refinements.</p>
-</div>
-<div class="section" id="divergences">
+</section>
+<section id="divergences">
 <span id="id27"></span><h3><span class="section-number">2.4.7. </span>Divergences<a class="headerlink" href="#divergences" title="Permalink to this headline">¶</a></h3>
 <p>So far we have been diagnosing how well a sampler works by studying the
 generated samples. Another way to perform a diagnostic is by monitoring
@@ -1418,22 +1445,26 @@ see something similar using other plots, like with
 <code class="docutils literal notranslate"><span class="pre">az.plot_pair(.,</span> <span class="pre">divergences=True)</span></code> as shown in
 <a class="reference internal" href="#fig-divergences-pair"><span class="std std-numref">Fig. 2.15</span></a>, here the divergences are the blue dots,
 which are everywhere!</p>
-<div class="figure align-default" id="fig-divergences-trace">
+<figure class="align-default" id="fig-divergences-trace">
 <a class="reference internal image-reference" href="../_images/divergences_trace.png"><img alt="../_images/divergences_trace.png" src="../_images/divergences_trace.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.14 </span><span class="caption-text">KDEs and rank plots for Model 0 Code <a class="reference internal" href="#divm0"><span class="std std-ref">divm0</span></a>, Model
+<figcaption>
+<p><span class="caption-number">Fig. 2.14 </span><span class="caption-text">KDEs and rank plots for Model 0 Code <a class="reference internal" href="#divm0"><span class="std std-ref">divm0</span></a>, Model
 1 <a class="reference internal" href="#divm1"><span class="std std-ref">divm1</span></a> and Model 1bis, which is the same as
 Model 1 <a class="reference internal" href="#divm1"><span class="std std-ref">divm1</span></a> but with
 <code class="docutils literal notranslate"><span class="pre">pm.sample(.,</span> <span class="pre">target_accept=0.95)</span></code>. The black vertical bars represent
 divergences.</span><a class="headerlink" href="#fig-divergences-trace" title="Permalink to this image">¶</a></p>
-</div>
-<div class="figure align-default" id="fig-divergences-pair">
+</figcaption>
+</figure>
+<figure class="align-default" id="fig-divergences-pair">
 <a class="reference internal image-reference" href="../_images/divergences_pair.png"><img alt="../_images/divergences_pair.png" src="../_images/divergences_pair.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.15 </span><span class="caption-text">Scatter plot of the posterior samples from Model 0 from Code
+<figcaption>
+<p><span class="caption-number">Fig. 2.15 </span><span class="caption-text">Scatter plot of the posterior samples from Model 0 from Code
 <a class="reference internal" href="#divm0"><span class="std std-ref">divm0</span></a>, Model 1 from Code Block
 <a class="reference internal" href="#divm1"><span class="std std-ref">divm1</span></a>, and Model 1bis, which is the same as Model
 1 in Code Block <a class="reference internal" href="#divm1"><span class="std std-ref">divm1</span></a> but with
 <code class="docutils literal notranslate"><span class="pre">pm.sample(.,</span> <span class="pre">target_accept=0.95)</span></code>. The blue dots represent divergences.</span><a class="headerlink" href="#fig-divergences-pair" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>Something is definitely problematic with <code class="docutils literal notranslate"><span class="pre">model0</span></code>. Upon inspection of
 the model definition in Code Block <a class="reference internal" href="#divm0"><span class="std std-ref">divm0</span></a> we may
 realize that we defined it in a weird way. <span class="math notranslate nohighlight">\(\theta1\)</span> is a Normal
@@ -1494,8 +1525,8 @@ computational cost. Additionally, reparameterization can also help to
 better interpret or communicate models and their results (see Alice and
 Bob example in Section <a class="reference internal" href="chp_01.html#conjugate-priors"><span class="std std-ref">Conjugate Priors</span></a>).</p>
 </div>
-</div>
-<div class="section" id="sampler-parameters-and-other-diagnostics">
+</section>
+<section id="sampler-parameters-and-other-diagnostics">
 <span id="id31"></span><h3><span class="section-number">2.4.8. </span>Sampler Parameters and Other Diagnostics<a class="headerlink" href="#sampler-parameters-and-other-diagnostics" title="Permalink to this headline">¶</a></h3>
 <p>Most sampler methods have hyperparameters that affect the sampler
 performance. While most PPLs try to use sensible defaults, in practice,
@@ -1528,9 +1559,9 @@ these diagnostics are useful and have their place but for the brevity of
 this text we have omitted them from this section. To see others we
 suggest visiting the ArviZ documentation and plot gallery which contains
 many more examples.</p>
-</div>
-</div>
-<div class="section" id="model-comparison">
+</section>
+</section>
+<section id="model-comparison">
 <span id="model-cmp"></span><h2><span class="section-number">2.5. </span>Model Comparison<a class="headerlink" href="#model-comparison" title="Permalink to this headline">¶</a></h2>
 <p>Usually we want to build models that are not too simple that they miss
 valuable information in our data nor too complex that they fit the noise
@@ -1580,7 +1611,7 @@ fit the model and thus we will, on average, overestimate the ELPD
 overfitting. Fortunately, there are a few ways to produce better
 estimations of the ELPD. One of them is cross-validation as we will see
 in the next section.</p>
-<div class="section" id="cross-validation-and-loo">
+<section id="cross-validation-and-loo">
 <span id="cv-and-loo"></span><h3><span class="section-number">2.5.1. </span>Cross-validation and LOO<a class="headerlink" href="#cross-validation-and-loo" title="Permalink to this headline">¶</a></h3>
 <p>Cross-validation (CV) is a method of estimating out-of-sample predictive
 accuracy. This method requires re-fitting a model many times, each time
@@ -1786,17 +1817,19 @@ with <code class="docutils literal notranslate"><span class="pre">mC</span></cod
 weights are expected to change (see Section <a class="reference internal" href="#model-averaging"><span class="std std-ref">Model Averaging</span></a>). We can
 easily check this is true by changing the random seed and refitting the
 model a few times.</p>
-<div class="figure align-default" id="fig-compare-dummy">
+<figure class="align-default" id="fig-compare-dummy">
 <a class="reference internal image-reference" href="../_images/compare_dummy.png"><img alt="../_images/compare_dummy.png" src="../_images/compare_dummy.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.16 </span><span class="caption-text">Model comparison using LOO. The open dots represent the values of <code class="docutils literal notranslate"><span class="pre">loo</span></code>,
+<figcaption>
+<p><span class="caption-number">Fig. 2.16 </span><span class="caption-text">Model comparison using LOO. The open dots represent the values of <code class="docutils literal notranslate"><span class="pre">loo</span></code>,
 the black dots are the predictive accuracy without the <code class="docutils literal notranslate"><span class="pre">p_loo</span></code>
 penalization term. The black segments represent the standard error for
 the LOO computations <code class="docutils literal notranslate"><span class="pre">se</span></code>. The grey segments, centered at the triangles,
 represent the standard errors of the difference <code class="docutils literal notranslate"><span class="pre">dse</span></code> between the values
 of LOO for each model and the best ranked model.</span><a class="headerlink" href="#fig-compare-dummy" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-<div class="section" id="expected-log-predictive-density">
+</figcaption>
+</figure>
+</section>
+<section id="expected-log-predictive-density">
 <span id="elpd-plots"></span><h3><span class="section-number">2.5.2. </span>Expected Log Predictive Density<a class="headerlink" href="#expected-log-predictive-density" title="Permalink to this headline">¶</a></h3>
 <p>In the previous section we computed a value of the ELPD for each model.
 Since this is a <em>global</em> comparison it reduces a model, and data, to a
@@ -1817,16 +1850,18 @@ can see that the first two plots <code class="docutils literal notranslate"><spa
 the reason is that model <code class="docutils literal notranslate"><span class="pre">mB</span></code> and model <code class="docutils literal notranslate"><span class="pre">mC</span></code> are in fact very similar to
 each other. <a class="reference internal" href="#fig-elpd-and-khat"><span class="std std-numref">Fig. 2.19</span></a> shows that observations 34, 49,
 72, 75 and 82 are in fact the five most <em>extreme</em> observations.</p>
-<div class="figure align-default" id="fig-elpd-dummy">
+<figure class="align-default" id="fig-elpd-dummy">
 <a class="reference internal image-reference" href="../_images/elpd_dummy.png"><img alt="../_images/elpd_dummy.png" src="../_images/elpd_dummy.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.17 </span><span class="caption-text">Pointwise ELPD differences. Annotated points correspond to observations
+<figcaption>
+<p><span class="caption-number">Fig. 2.17 </span><span class="caption-text">Pointwise ELPD differences. Annotated points correspond to observations
 with an ELPD difference 2 times the standard deviation of the computed
 ELPD differences. Differences are small in all 3 examples, especially
 between <code class="docutils literal notranslate"><span class="pre">mB</span></code> and <code class="docutils literal notranslate"><span class="pre">mC</span></code>. Positive values indicate that observations are
 better resolved for the first model than the second.</span><a class="headerlink" href="#fig-elpd-dummy" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-<div class="section" id="pareto-shape-parameter">
+</figcaption>
+</figure>
+</section>
+<section id="pareto-shape-parameter">
 <span id="k-paretto"></span><h3><span class="section-number">2.5.3. </span>Pareto Shape Parameter<a class="headerlink" href="#pareto-shape-parameter" title="Permalink to this headline">¶</a></h3>
 <p>As we already mentioned we use LOO to approximate
 <span class="math notranslate nohighlight">\(\text{ELPD}_\text{LOO-CV}\)</span>. This approximation involves the computation
@@ -1859,21 +1894,25 @@ you can try with other cutoff value if you want. Comparing
 <a class="reference internal" href="#fig-elpd-dummy"><span class="std std-numref">Fig. 2.17</span></a> against <a class="reference internal" href="#fig-loo-k-dummy"><span class="std std-numref">Fig. 2.18</span></a> we can see
 that the highest values of <span class="math notranslate nohighlight">\(\hat \kappa\)</span> are not necessarily the ones
 with the highest values of ELPD or vice versa.</p>
-<div class="figure align-default" id="fig-loo-k-dummy">
+<figure class="align-default" id="fig-loo-k-dummy">
 <a class="reference internal image-reference" href="../_images/loo_k_dummy.png"><img alt="../_images/loo_k_dummy.png" src="../_images/loo_k_dummy.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.18 </span><span class="caption-text"><span class="math notranslate nohighlight">\(\hat \kappa\)</span> values. Annotated points correspond to observations with
+<figcaption>
+<p><span class="caption-number">Fig. 2.18 </span><span class="caption-text"><span class="math notranslate nohighlight">\(\hat \kappa\)</span> values. Annotated points correspond to observations with
 <span class="math notranslate nohighlight">\(\hat \kappa &gt; 0.09\)</span>, a totally arbitrary threshold.</span><a class="headerlink" href="#fig-loo-k-dummy" title="Permalink to this image">¶</a></p>
-</div>
-<div class="figure align-default" id="fig-elpd-and-khat">
+</figcaption>
+</figure>
+<figure class="align-default" id="fig-elpd-and-khat">
 <a class="reference internal image-reference" href="../_images/elpd_and_khat.png"><img alt="../_images/elpd_and_khat.png" src="../_images/elpd_and_khat.png" style="width: 4.5in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.19 </span><span class="caption-text">Kernel density estimate of the observations fitted with <code class="docutils literal notranslate"><span class="pre">mA</span></code>, <code class="docutils literal notranslate"><span class="pre">mB</span></code> and
+<figcaption>
+<p><span class="caption-number">Fig. 2.19 </span><span class="caption-text">Kernel density estimate of the observations fitted with <code class="docutils literal notranslate"><span class="pre">mA</span></code>, <code class="docutils literal notranslate"><span class="pre">mB</span></code> and
 <code class="docutils literal notranslate"><span class="pre">mC</span></code>. The black lines represent the values of each observation. The
 annotated observations are the same one highlighted in
 <a class="reference internal" href="#fig-elpd-dummy"><span class="std std-numref">Fig. 2.17</span></a> except for the observation 78, annotated in
 boldface, which is only highlighted in <a class="reference internal" href="#fig-loo-k-dummy"><span class="std std-numref">Fig. 2.18</span></a>.</span><a class="headerlink" href="#fig-elpd-and-khat" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-<div class="section" id="interpreting-p-loo-when-pareto-hat-kappa-is-large">
+</figcaption>
+</figure>
+</section>
+<section id="interpreting-p-loo-when-pareto-hat-kappa-is-large">
 <span id="id41"></span><h3><span class="section-number">2.5.4. </span>Interpreting p_loo When Pareto <span class="math notranslate nohighlight">\(\hat \kappa\)</span> is Large<a class="headerlink" href="#interpreting-p-loo-when-pareto-hat-kappa-is-large" title="Permalink to this headline">¶</a></h3>
 <p>As previously said p_loo can be loosely interpreted as the estimated
 effective number of parameters in a model. Nevertheless, for models with
@@ -1902,8 +1941,8 @@ adding more structure to the model, for example, adding nonlinear
 components; using a different likelihood, for example, using an
 overdispersed likelihood like a NegativeBinomial instead of a Poisson
 distribution, or using mixture likelihood.</p>
-</div>
-<div class="section" id="loo-pit">
+</section>
+<section id="loo-pit">
 <span id="id44"></span><h3><span class="section-number">2.5.5. </span>LOO-PIT<a class="headerlink" href="#loo-pit" title="Permalink to this headline">¶</a></h3>
 <p>As we just saw in Sections <a class="reference internal" href="#elpd-plots"><span class="std std-ref">Expected Log Predictive Density</span></a> and <a class="reference internal" href="#k-paretto"><span class="std std-ref">Pareto Shape Parameter</span></a> model
 comparison, and LOO in particular, can be used for purposes other than
@@ -1945,16 +1984,18 @@ interpretation of the plots is the same.</p>
 more observed data than expected for low values and less data for high
 values, i.e. the model is biased. On the contrary, models <code class="docutils literal notranslate"><span class="pre">mB</span></code> and <code class="docutils literal notranslate"><span class="pre">mC</span></code>
 seem to be very well calibrated.</p>
-<div class="figure align-default" id="fig-loo-pit-dummy">
+<figure class="align-default" id="fig-loo-pit-dummy">
 <a class="reference internal image-reference" href="../_images/loo_pit_dummy.png"><img alt="../_images/loo_pit_dummy.png" src="../_images/loo_pit_dummy.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.20 </span><span class="caption-text">The black lines are a KDE of LOO-PIT, i.e. the proportion of predicted
+<figcaption>
+<p><span class="caption-number">Fig. 2.20 </span><span class="caption-text">The black lines are a KDE of LOO-PIT, i.e. the proportion of predicted
 values that are less or equal than the observed data, computed per each
 observation. The white lines represent the expected Uniform distribution
 and the gray band the expected deviation for a dataset of the same size
 as the one used.</span><a class="headerlink" href="#fig-loo-pit-dummy" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-<div class="section" id="model-averaging">
+</figcaption>
+</figure>
+</section>
+<section id="model-averaging">
 <span id="id46"></span><h3><span class="section-number">2.5.6. </span>Model Averaging<a class="headerlink" href="#model-averaging" title="Permalink to this headline">¶</a></h3>
 <p>Model averaging can be justified as being Bayesian about model
 uncertainty as we are Bayesian about parameter uncertainty. If we can
@@ -2017,9 +2058,9 @@ traces and a list of weights allowing us to easily generate weighted
 posterior predictive samples. The weights can be taken from anywhere,
 but using the weights computed with <code class="docutils literal notranslate"><span class="pre">az.compare(.,</span> <span class="pre">method=&quot;stacking&quot;)</span></code>
 makes a lot of sense.</p>
-</div>
-</div>
-<div class="section" id="exercises">
+</section>
+</section>
+<section id="exercises">
 <span id="exercises2"></span><h2><span class="section-number">2.6. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
 <p><strong>2E1.</strong> Using your own words, what are the main
 differences between prior predictive checks and posterior predictive
@@ -2308,8 +2349,8 @@ for general use with Bayesians models.</p>
 criteria</p>
 </dd>
 </dl>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

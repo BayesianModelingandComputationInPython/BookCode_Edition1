@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>8. Approximate Bayesian Computation &#8212; Bayesian Modeling and Computation in Python</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
@@ -52,8 +53,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -529,7 +530,7 @@ const thebe_selector_output = ".output, .cell_output"
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="approximate-bayesian-computation">
+  <section class="tex2jax_ignore mathjax_ignore" id="approximate-bayesian-computation">
 <span id="chap8"></span><h1><span class="section-number">8. </span>Approximate Bayesian Computation<a class="headerlink" href="#approximate-bayesian-computation" title="Permalink to this headline">¶</a></h1>
 <p>In this chapter we discuss Approximate Bayesian Computation (ABC). The
 “approximate” in ABC refers to the lack of explicit likelihood, but not
@@ -557,7 +558,7 @@ then being able to actually compute an approximated posterior.</p>
 perspective. We highly recommend readers interested into applying ABC
 methods to their own problems to complement this chapter with examples
 from their own domain knowledge.</p>
-<div class="section" id="life-beyond-likelihood">
+<section id="life-beyond-likelihood">
 <span id="id3"></span><h2><span class="section-number">8.1. </span>Life Beyond Likelihood<a class="headerlink" href="#life-beyond-likelihood" title="Permalink to this headline">¶</a></h2>
 <p>From Bayes theorem (Equation
 <a class="reference internal" href="chp_01.html#equation-eq-posterior-dist">(1.1)</a>), to compute a posterior we
@@ -632,8 +633,8 @@ dimension of <span class="math notranslate nohighlight">\(\theta\)</span> are th
 distribution, the dimension of the sufficient statistic increases with
 the sample size.</p>
 </div>
-</div>
-<div class="section" id="approximating-the-approximated-posterior">
+</section>
+<section id="approximating-the-approximated-posterior">
 <span id="id7"></span><h2><span class="section-number">8.2. </span>Approximating the Approximated Posterior<a class="headerlink" href="#approximating-the-approximated-posterior" title="Permalink to this headline">¶</a></h2>
 <p>The most basic method to perform Approximate Bayesian Computation is
 probably rejection sampling. We will describe it using
@@ -646,9 +647,10 @@ description of the algorithm as follows.</p>
 <span class="math notranslate nohighlight">\(\epsilon\)</span> save the proposed <span class="math notranslate nohighlight">\(\theta\)</span>, otherwise reject it.</p></li>
 <li><p>Repeat until having the desired number of samples.</p></li>
 </ol>
-<div class="figure align-default" id="fig-abc-rejection">
+<figure class="align-default" id="fig-abc-rejection">
 <a class="reference internal image-reference" href="../_images/ABC_rejection.png"><img alt="../_images/ABC_rejection.png" src="../_images/ABC_rejection.png" style="width: 4.5in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 8.1 </span><span class="caption-text">One step of an ABC-rejection sampler. We sample a set of <span class="math notranslate nohighlight">\(\theta\)</span> values
+<figcaption>
+<p><span class="caption-number">Fig. 8.1 </span><span class="caption-text">One step of an ABC-rejection sampler. We sample a set of <span class="math notranslate nohighlight">\(\theta\)</span> values
 from the prior distribution (at the top). Each value is passed to the
 simulator, which generates synthetic datasets (dashed distributions), we
 compare the synthetic data with the observed one (the distribution at
@@ -658,7 +660,8 @@ synthetic dataset close enough to the observed data, thus <span class="math notr
 statistics, instead of the entire dataset we should compute the summary
 statistics of the synthetic and observed data after step 2 and before
 step 3.</span><a class="headerlink" href="#fig-abc-rejection" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>The major drawback of the ABC-rejection sampler is that if the prior
 distribution is too different from the posterior distribution we will
 spend most of the time proposing values that will be rejected. A better
@@ -681,15 +684,17 @@ the geometry of the posterior the more intermediate steps SMC will take.
 <a class="reference internal" href="#fig-smc-tempering"><span class="std std-numref">Fig. 8.2</span></a> shows an hypothetical sequence of
 intermediate distributions from the prior in light grey to the posterior
 in blue.</p>
-<div class="figure align-default" id="fig-smc-tempering">
+<figure class="align-default" id="fig-smc-tempering">
 <a class="reference internal image-reference" href="../_images/smc_tempering.png"><img alt="../_images/smc_tempering.png" src="../_images/smc_tempering.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 8.2 </span><span class="caption-text">Hypothetical sequence of tempered posteriors explored by an SMC sampler,
+<figcaption>
+<p><span class="caption-number">Fig. 8.2 </span><span class="caption-text">Hypothetical sequence of tempered posteriors explored by an SMC sampler,
 from the prior (<span class="math notranslate nohighlight">\(\beta = 0\)</span>), light gray, to the actual posterior
 (<span class="math notranslate nohighlight">\(\beta = 1\)</span>), blue. Low <span class="math notranslate nohighlight">\(\beta\)</span> values at the beginning helps the
 sampler to not get stuck in a single maximum.</span><a class="headerlink" href="#fig-smc-tempering" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-<div class="section" id="fitting-a-gaussian-the-abc-way">
+</figcaption>
+</figure>
+</section>
+<section id="fitting-a-gaussian-the-abc-way">
 <span id="id8"></span><h2><span class="section-number">8.3. </span>Fitting a Gaussian the ABC-way<a class="headerlink" href="#fitting-a-gaussian-the-abc-way" title="Permalink to this headline">¶</a></h2>
 <p>Let us warm up with a simple example, the estimation of the mean and
 standard deviation from Gaussian distributed data with mean 0 and
@@ -771,15 +776,17 @@ try to do this automatically. <a class="reference internal" href="#fig-trace-g">
 running Code Block <a class="reference internal" href="#gauss-abc"><span class="std std-ref">gauss_abc</span></a> with two chains.
 We can see that we were able to recover the true parameters and that the
 sampler is not showing any evident sampling issue.</p>
-<div class="figure align-default" id="fig-trace-g">
+<figure class="align-default" id="fig-trace-g">
 <a class="reference internal image-reference" href="../_images/trace_g.png"><img alt="../_images/trace_g.png" src="../_images/trace_g.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 8.3 </span><span class="caption-text">As expected <span class="math notranslate nohighlight">\(\mu \approx 0\)</span> and <span class="math notranslate nohighlight">\(\sigma \approx 1\)</span>, both chains agree
+<figcaption>
+<p><span class="caption-number">Fig. 8.3 </span><span class="caption-text">As expected <span class="math notranslate nohighlight">\(\mu \approx 0\)</span> and <span class="math notranslate nohighlight">\(\sigma \approx 1\)</span>, both chains agree
 about the posterior as reflected by the KDEs and also by the rank plots.
 Notice that each of these 2 chains was obtained by running 2000 parallel
 SMC-chains/particles as described in the SMC algorithm.</span><a class="headerlink" href="#fig-trace-g" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-<div class="section" id="choosing-the-distance-function-epsilon-and-the-summary-statistics">
+</figcaption>
+</figure>
+</section>
+<section id="choosing-the-distance-function-epsilon-and-the-summary-statistics">
 <span id="id10"></span><h2><span class="section-number">8.4. </span>Choosing the Distance Function, <span class="math notranslate nohighlight">\(\epsilon\)</span> and the Summary Statistics<a class="headerlink" href="#choosing-the-distance-function-epsilon-and-the-summary-statistics" title="Permalink to this headline">¶</a></h2>
 <p>Defining a useful distance, summary statistic and <span class="math notranslate nohighlight">\(\epsilon\)</span> is problem
 dependent. This means that we should expect some trial and error before
@@ -789,7 +796,7 @@ choices. But we should embrace running experiments too as they are
 always helpful to better understand the problem and to make a more
 informed decision about these hyperparameters. In the following sections
 we will discuss a few general guidelines.</p>
-<div class="section" id="choosing-the-distance">
+<section id="choosing-the-distance">
 <span id="id11"></span><h3><span class="section-number">8.4.1. </span>Choosing the Distance<a class="headerlink" href="#choosing-the-distance" title="Permalink to this headline">¶</a></h3>
 <p>We run Code Block <a class="reference internal" href="#gauss-abc"><span class="std std-ref">gauss_abc</span></a> with the default
 distance function <code class="docutils literal notranslate"><span class="pre">distance=&quot;gaussian&quot;</span></code>, which is defined as:</p>
@@ -846,8 +853,8 @@ the 1-nearest neighbor distances of the observed to simulated data and
 distances will always be zero). As this method involves 2n operations of
 nearest neighbor search, it is generally implemented using k-d trees
 <span id="id18">[<a class="reference internal" href="references.html#id49" title="Jon Louis Bentley. Multidimensional binary search trees used for associative searching. Communications of the ACM, 18(9):509–517, 1975.">95</a>]</span>.</p>
-</div>
-<div class="section" id="choosing-epsilon">
+</section>
+<section id="choosing-epsilon">
 <span id="id19"></span><h3><span class="section-number">8.4.2. </span>Choosing <span class="math notranslate nohighlight">\(\epsilon\)</span><a class="headerlink" href="#choosing-epsilon" title="Permalink to this headline">¶</a></h3>
 <p>In many ABC methods the <span class="math notranslate nohighlight">\(\epsilon\)</span> parameter works as a hard-threshold,
 <span class="math notranslate nohighlight">\(\theta\)</span> values generating samples with distance larger than <span class="math notranslate nohighlight">\(\epsilon\)</span>
@@ -879,11 +886,13 @@ the lower the value of <span class="math notranslate nohighlight">\(\epsilon\)</
 <a class="reference internal" href="#fig-trace-g-many-eps"><span class="std std-numref">Fig. 8.4</span></a> shows a forest plot for <span class="math notranslate nohighlight">\(\mu\)</span> and
 <span class="math notranslate nohighlight">\(\sigma\)</span> for several values of <span class="math notranslate nohighlight">\(\epsilon\)</span> and also for the “NUTS”
 sampler (using a normal likelihood instead of a simulator).</p>
-<div class="figure align-default" id="fig-trace-g-many-eps">
+<figure class="align-default" id="fig-trace-g-many-eps">
 <a class="reference internal image-reference" href="../_images/trace_g_many_eps.png"><img alt="../_images/trace_g_many_eps.png" src="../_images/trace_g_many_eps.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 8.4 </span><span class="caption-text">Forest plot for <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>, obtained using NUTS or ABC with
+<figcaption>
+<p><span class="caption-number">Fig. 8.4 </span><span class="caption-text">Forest plot for <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>, obtained using NUTS or ABC with
 increasing values of <span class="math notranslate nohighlight">\(\epsilon\)</span>, 1, 5, and 10.</span><a class="headerlink" href="#fig-trace-g-many-eps" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>Decreasing the value of <span class="math notranslate nohighlight">\(\epsilon\)</span> has a limit, a too low value will
 make the sampler very inefficient, signaling that we are aiming at an
 accuracy level that does not make too much sense.
@@ -891,11 +900,13 @@ accuracy level that does not make too much sense.
 converge when the model from Code Block
 <a class="reference internal" href="#gauss-abc"><span class="std std-ref">gauss_abc</span></a> is sampled with a value of
 <code class="docutils literal notranslate"><span class="pre">epsilon=0.1</span></code>. As we can see the sampler fails spectacularly.</p>
-<div class="figure align-default" id="fig-trace-g-eps-too-low">
+<figure class="align-default" id="fig-trace-g-eps-too-low">
 <a class="reference internal image-reference" href="../_images/trace_g_eps_too_low.png"><img alt="../_images/trace_g_eps_too_low.png" src="../_images/trace_g_eps_too_low.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 8.5 </span><span class="caption-text">KDE and rank plot for model <code class="docutils literal notranslate"><span class="pre">trace_g_001</span></code>, failure of convergence could
+<figcaption>
+<p><span class="caption-number">Fig. 8.5 </span><span class="caption-text">KDE and rank plot for model <code class="docutils literal notranslate"><span class="pre">trace_g_001</span></code>, failure of convergence could
 indicate that the value <span class="math notranslate nohighlight">\(\epsilon=0.1\)</span> is too low for this problem.</span><a class="headerlink" href="#fig-trace-g-eps-too-low" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>To help us decide on a good value for <span class="math notranslate nohighlight">\(\epsilon\)</span> we can get help from
 the model criticism tools we have been using for non-ABC methods, like
 Bayesian p-values and posterior predictive checks as exemplified in
@@ -909,9 +920,10 @@ analysis of the computed posterior and reinspect the model definition.
 Additionally, for ABC methods, we should also inspect the value of the
 hyperparameter <span class="math notranslate nohighlight">\(\epsilon\)</span>, the summary statistics we have chosen or the
 distance function.</p>
-<div class="figure align-default" id="fig-bpv-g-many-eps-00">
+<figure class="align-default" id="fig-bpv-g-many-eps-00">
 <a class="reference internal image-reference" href="../_images/bpv_g_many_eps_00.png"><img alt="../_images/bpv_g_many_eps_00.png" src="../_images/bpv_g_many_eps_00.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 8.6 </span><span class="caption-text">Distribution of marginal Bayesian p-values for increasing values of
+<figcaption>
+<p><span class="caption-number">Fig. 8.6 </span><span class="caption-text">Distribution of marginal Bayesian p-values for increasing values of
 <span class="math notranslate nohighlight">\(\epsilon\)</span>. For a well calibrated model we should expect a Uniform
 distribution. We can see that for <span class="math notranslate nohighlight">\(\epsilon=0.1\)</span> the calibration is
 terrible, this is not surprising as this value of <span class="math notranslate nohighlight">\(\epsilon\)</span> is too. For
@@ -919,19 +931,23 @@ all the other values of <span class="math notranslate nohighlight">\(\epsilon\)<
 Uniform and the level of uniformity decreases as <span class="math notranslate nohighlight">\(\epsilon\)</span> increases.
 The <code class="docutils literal notranslate"><span class="pre">se</span></code> values are the (scaled) squared differences between the
 expected Uniform distribution and the computed KDEs.</span><a class="headerlink" href="#fig-bpv-g-many-eps-00" title="Permalink to this image">¶</a></p>
-</div>
-<div class="figure align-default" id="fig-bpv-g-many-eps-01">
+</figcaption>
+</figure>
+<figure class="align-default" id="fig-bpv-g-many-eps-01">
 <a class="reference internal image-reference" href="../_images/bpv_g_many_eps_01.png"><img alt="../_images/bpv_g_many_eps_01.png" src="../_images/bpv_g_many_eps_01.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 8.7 </span><span class="caption-text">Bayesian p-values for increasing values of epsilon. The blue curve is
+<figcaption>
+<p><span class="caption-number">Fig. 8.7 </span><span class="caption-text">Bayesian p-values for increasing values of epsilon. The blue curve is
 the observed distribution and the gray curves the expected ones. For a
 well calibrated model we should expect a distribution concentrated
 around 0.5. We can see that for <span class="math notranslate nohighlight">\(\epsilon=0.1\)</span> the calibration is
 terrible, this is not surprising as this value of <span class="math notranslate nohighlight">\(\epsilon\)</span> is too low.
 We can see that <span class="math notranslate nohighlight">\(\epsilon=1\)</span> provides the best results.</span><a class="headerlink" href="#fig-bpv-g-many-eps-01" title="Permalink to this image">¶</a></p>
-</div>
-<div class="figure align-default" id="fig-ppc-g-many-eps">
+</figcaption>
+</figure>
+<figure class="align-default" id="fig-ppc-g-many-eps">
 <a class="reference internal image-reference" href="../_images/ppc_g_many_eps.png"><img alt="../_images/ppc_g_many_eps.png" src="../_images/ppc_g_many_eps.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 8.8 </span><span class="caption-text">Posterior predictive checks for increasing values of <span class="math notranslate nohighlight">\(\epsilon\)</span>. The
+<figcaption>
+<p><span class="caption-number">Fig. 8.8 </span><span class="caption-text">Posterior predictive checks for increasing values of <span class="math notranslate nohighlight">\(\epsilon\)</span>. The
 blue curve is the observed distribution and the gray curves the expected
 ones. Surprisingly from <span class="math notranslate nohighlight">\(\epsilon=0.1\)</span> we get what seems to be a good
 adjustment, even when we know that the samples from that posterior are
@@ -940,9 +956,10 @@ answer out of pure luck. This is an example of <em>a too good to be true
 fit</em>. These are the worst! If we only consider models with posterior
 samples that look reasonable (i.e. not <span class="math notranslate nohighlight">\(\epsilon=0.1\)</span> ), we can see that
 <span class="math notranslate nohighlight">\(\epsilon=1\)</span> provides the best results.</span><a class="headerlink" href="#fig-ppc-g-many-eps" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-<div class="section" id="choosing-summary-statistics">
+</figcaption>
+</figure>
+</section>
+<section id="choosing-summary-statistics">
 <span id="id21"></span><h3><span class="section-number">8.4.3. </span>Choosing Summary Statistics<a class="headerlink" href="#choosing-summary-statistics" title="Permalink to this headline">¶</a></h3>
 <p>The choice of summary statistics is arguably more difficult and will
 have a larger effect than the choice of the distance function. For that
@@ -971,9 +988,9 @@ posterior predictive checks, etc and try alternatives if necessary (see
 Figures <a class="reference internal" href="#fig-trace-g-eps-too-low"><span class="std std-numref">Fig. 8.5</span></a>,
 <a class="reference internal" href="#fig-bpv-g-many-eps-00"><span class="std std-numref">Fig. 8.6</span></a>, <a class="reference internal" href="#fig-bpv-g-many-eps-01"><span class="std std-numref">Fig. 8.7</span></a>, and
 <a class="reference internal" href="#fig-ppc-g-many-eps"><span class="std std-numref">Fig. 8.8</span></a>).</p>
-</div>
-</div>
-<div class="section" id="g-and-k-distribution">
+</section>
+</section>
+<section id="g-and-k-distribution">
 <span id="id26"></span><h2><span class="section-number">8.5. </span>g-and-k Distribution<a class="headerlink" href="#g-and-k-distribution" title="Permalink to this headline">¶</a></h2>
 <p>Carbon monoxide (CO) is a colorless, odorless gas that can be harmful,
 even fatal, when inhaled in large amounts. This gas is generated when
@@ -987,11 +1004,13 @@ levels measured by one station in the city of Buenos Aires from 2010 to 2018.
 As we can see the data seems to be slightly right skewed.
 Additionally the data present a few observations with very high values.
 The bottom panel omits 8 observations between 3 and 30.</p>
-<div class="figure align-default" id="fig-co-ppm-bsas">
+<figure class="align-default" id="fig-co-ppm-bsas">
 <a class="reference internal image-reference" href="../_images/co_ppm_bsas.png"><img alt="../_images/co_ppm_bsas.png" src="../_images/co_ppm_bsas.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 8.9 </span><span class="caption-text">Histogram of CO levels. The top panel shows the entire data and the
+<figcaption>
+<p><span class="caption-number">Fig. 8.9 </span><span class="caption-text">Histogram of CO levels. The top panel shows the entire data and the
 bottom one omits values larger than 3.</span><a class="headerlink" href="#fig-co-ppm-bsas" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>To fit this data we are going to introduce the univariate g-and-k
 distribution. This is a 4 parameter distribution able to describe data
 with high skewness and/or kurtosis <span id="id27">[<a class="reference internal" href="references.html#id40" title="John W. Tukey. Modern Techniques in Data Analysis. In proceesings of the Sponsored Regional Research Conference. 1977.">100</a>, <a class="reference internal" href="references.html#id41" title="Glen D Rayner and Helen L MacGillivray. Numerical maximum likelihood estimation for the g-and-k and generalized g-and-h distributions. Statistics and Computing, 12(1):57–75, 2002.">101</a>]</span>. Its
@@ -1042,9 +1061,10 @@ examples of g-and-k distributions.</p>
 </pre></div>
 </div>
 </div>
-<div class="figure align-default" id="fig-gk-quantile">
+<figure class="align-default" id="fig-gk-quantile">
 <a class="reference internal image-reference" href="../_images/gk_quantile.png"><img alt="../_images/gk_quantile.png" src="../_images/gk_quantile.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 8.10 </span><span class="caption-text">The first row shows the quantile function, also known as the inverse of
+<figcaption>
+<p><span class="caption-number">Fig. 8.10 </span><span class="caption-text">The first row shows the quantile function, also known as the inverse of
 the cumulative distribution function. You feed it with a quantile value
 and it returns the value of the variable that represents that quantile.
 For example, if you have <span class="math notranslate nohighlight">\(P(X &lt;= x_q) = q\)</span>, you pass <span class="math notranslate nohighlight">\(q\)</span> to the quantile
@@ -1052,7 +1072,8 @@ function and you get <span class="math notranslate nohighlight">\(x_q\)</span>. 
 For this example the pdf has been computed using a kernel density
 estimation from the random samples generated with Code Block
 <a class="reference internal" href="#gk-quantile"><span class="std std-ref">gk_quantile</span></a>.</span><a class="headerlink" href="#fig-gk-quantile" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>To fit a g-and-k distribution using SMC-ABC, we can use the Gaussian
 distance and <code class="docutils literal notranslate"><span class="pre">sum_stat=&quot;sort&quot;</span></code> as we did for the Gaussian example.
 Alternative, we can also think of a summary statistic tailored for this
@@ -1125,9 +1146,10 @@ likely to be below 1.</p>
 </pre></div>
 </div>
 <p><a class="reference internal" href="#fig-plot-pair"><span class="std std-numref">Fig. 8.11</span></a> shows a pair plot of the fitted <code class="docutils literal notranslate"><span class="pre">gkm</span></code> model.</p>
-<div class="figure align-default" id="fig-plot-pair">
+<figure class="align-default" id="fig-plot-pair">
 <a class="reference internal image-reference" href="../_images/pair_gk.png"><img alt="../_images/pair_gk.png" src="../_images/pair_gk.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 8.11 </span><span class="caption-text">The distribution is slightly skewed and with some degree of kurtosis as
+<figcaption>
+<p><span class="caption-number">Fig. 8.11 </span><span class="caption-text">The distribution is slightly skewed and with some degree of kurtosis as
 expected from the few CO levels with values one or two orders of
 magnitude larger than the bulk of CO values. We can see that <span class="math notranslate nohighlight">\(b\)</span> and <span class="math notranslate nohighlight">\(k\)</span>
 are (slightly) correlated. This is expected, as the density in the tail
@@ -1135,9 +1157,10 @@ are (slightly) correlated. This is expected, as the density in the tail
 distribution can keep <span class="math notranslate nohighlight">\(b\)</span> small if <span class="math notranslate nohighlight">\(k\)</span> increases. It is like <span class="math notranslate nohighlight">\(k\)</span> is
 <em>absorbing</em> part of the dispersion, similar to what we observed with the
 scale and the <span class="math notranslate nohighlight">\(\nu\)</span> parameter in a Student’s t-distribution.</span><a class="headerlink" href="#fig-plot-pair" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-<div class="section" id="approximating-moving-averages">
+</figcaption>
+</figure>
+</section>
+<section id="approximating-moving-averages">
 <span id="abc-ma"></span><h2><span class="section-number">8.6. </span>Approximating Moving Averages<a class="headerlink" href="#approximating-moving-averages" title="Permalink to this headline">¶</a></h2>
 <p>The moving-average (MA) model is a common approach for modeling
 univariate time series (see Chapter <a class="reference internal" href="chp_06.html#chap4"><span class="std std-ref">6</span></a>). The MA(q) model
@@ -1165,12 +1188,14 @@ we can see two realizations from that simulator for the values
 </pre></div>
 </div>
 </div>
-<div class="figure align-default" id="fig-ma2-simulator-abc">
+<figure class="align-default" id="fig-ma2-simulator-abc">
 <a class="reference internal image-reference" href="../_images/ma2_simulator_abc.png"><img alt="../_images/ma2_simulator_abc.png" src="../_images/ma2_simulator_abc.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 8.12 </span><span class="caption-text">Two realizations of a MA(2) model, one with <span class="math notranslate nohighlight">\(\theta1=0.6, \theta2 =0.2\)</span>.
+<figcaption>
+<p><span class="caption-number">Fig. 8.12 </span><span class="caption-text">Two realizations of a MA(2) model, one with <span class="math notranslate nohighlight">\(\theta1=0.6, \theta2 =0.2\)</span>.
 On the left column the kernel density estimation on the right column the
 time series.</span><a class="headerlink" href="#fig-ma2-simulator-abc" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>In principle we could try to fit a MA(q) model using any distance
 function and/or summary statistic we want. Instead, we can use some
 properties of the MA(q) model as a guide. One property that is often of
@@ -1216,21 +1241,25 @@ specially useful to introduce restrictions, like in this example. In
 Code Block <a class="reference internal" href="#ma2-abc"><span class="std std-ref">MA2_abc</span></a> we sum 0 to the likelihood
 if the first argument in <code class="docutils literal notranslate"><span class="pre">pm.math.switch</span></code> is true or <span class="math notranslate nohighlight">\(-\infty\)</span>
 otherwise.</p>
-<div class="figure align-default" id="fig-ma2-trace">
+<figure class="align-default" id="fig-ma2-trace">
 <a class="reference internal image-reference" href="../_images/ma2_trace.png"><img alt="../_images/ma2_trace.png" src="../_images/ma2_trace.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 8.13 </span><span class="caption-text">ABC trace plot for the MA(2) model. As expected the true parameters are
+<figcaption>
+<p><span class="caption-number">Fig. 8.13 </span><span class="caption-text">ABC trace plot for the MA(2) model. As expected the true parameters are
 recovered and the rank plots look satisfactorily flat.</span><a class="headerlink" href="#fig-ma2-trace" title="Permalink to this image">¶</a></p>
-</div>
-<div class="figure align-default" id="fig-ma2-triangle">
+</figcaption>
+</figure>
+<figure class="align-default" id="fig-ma2-triangle">
 <a class="reference internal image-reference" href="../_images/ma2_triangle.png"><img alt="../_images/ma2_triangle.png" src="../_images/ma2_triangle.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 8.14 </span><span class="caption-text">ABC posterior for the MA(2) model as defined in Code Block
+<figcaption>
+<p><span class="caption-number">Fig. 8.14 </span><span class="caption-text">ABC posterior for the MA(2) model as defined in Code Block
 <a class="reference internal" href="#ma2-abc"><span class="std std-ref">MA2_abc</span></a>. In the center subplot the joint
 posterior and in the margins the marginal distributions for <span class="math notranslate nohighlight">\(\theta1\)</span>
 and <span class="math notranslate nohighlight">\(\theta2\)</span>. The gray triangle represents the prior distribution. The
 mean is indicated with a black dot.</span><a class="headerlink" href="#fig-ma2-triangle" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-<div class="section" id="model-comparison-in-the-abc-context">
+</figcaption>
+</figure>
+</section>
+<section id="model-comparison-in-the-abc-context">
 <span id="id37"></span><h2><span class="section-number">8.7. </span>Model Comparison in the ABC Context<a class="headerlink" href="#model-comparison-in-the-abc-context" title="Permalink to this headline">¶</a></h2>
 <p>ABC methods are frequently used for model choice. While many methods
 have been proposed <span id="id38">[<a class="reference internal" href="references.html#id50" title="S.A. Sisson, Y. Fan, and M. Beaumont. Handbook of Approximate Bayesian Computation. Chapman &amp; Hall/CRC Handbooks of Modern Statistical Methods. CRC Press, 2018. ISBN 9781439881514.">96</a>, <a class="reference internal" href="references.html#id52" title="Mark A. Beaumont. Approximate bayesian computation. Annual review of statistics and its application, 6:379–403, 2019.">107</a>]</span>, here we will discuss
@@ -1244,7 +1273,7 @@ to model choice under ABC with summary statistics. If we use the mean as
 the summary statistic, but models predict the same mean, then this
 summary statistic will not be sufficient to discriminate between models.
 We should take more time to think about what makes models different.</p>
-<div class="section" id="marginal-likelihood-and-loo">
+<section id="marginal-likelihood-and-loo">
 <span id="id40"></span><h3><span class="section-number">8.7.1. </span>Marginal Likelihood and LOO<a class="headerlink" href="#marginal-likelihood-and-loo" title="Permalink to this headline">¶</a></h3>
 <p>One common quantity used to perform model comparison for ABC methods is
 the marginal likelihood. Generally such comparison takes the form of a
@@ -1308,9 +1337,10 @@ that both models are basically indistinguishable for LOO, while the
 marginal likelihood reflects a larger difference. Once again the reason
 is that LOO is computed just from the posterior while the marginal
 likelihood directly takes the prior into account.</p>
-<div class="figure align-default" id="fig-model-comp-normal-0">
+<figure class="align-default" id="fig-model-comp-normal-0">
 <a class="reference internal image-reference" href="../_images/model_comp_normal_00.png"><img alt="../_images/model_comp_normal_00.png" src="../_images/model_comp_normal_00.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 8.15 </span><span class="caption-text">Model <code class="docutils literal notranslate"><span class="pre">m_0</span></code> is similar as the model described in Equation
+<figcaption>
+<p><span class="caption-number">Fig. 8.15 </span><span class="caption-text">Model <code class="docutils literal notranslate"><span class="pre">m_0</span></code> is similar as the model described in Equation
 <a class="reference internal" href="#equation-eq-gauss-model">(8.5)</a> but with <span class="math notranslate nohighlight">\(\sigma \sim \mathcal{HN}(0.1)\)</span>. <code class="docutils literal notranslate"><span class="pre">model_1</span></code>
 the same as Equation <a class="reference internal" href="#equation-eq-gauss-model">(8.5)</a>. <code class="docutils literal notranslate"><span class="pre">model_2</span></code> is the same as
 Equation <a class="reference internal" href="#equation-eq-gauss-model">(8.5)</a> but with <span class="math notranslate nohighlight">\(\sigma \sim \mathcal{HN}(10)\)</span>.
@@ -1320,7 +1350,8 @@ the second row to values computed using LOO. Sequential Monte Carlo
 as summary statistic <code class="docutils literal notranslate"><span class="pre">SMC-ABC_sm</span></code> and finally SMC-ABC using the mean and
 standard deviation <code class="docutils literal notranslate"><span class="pre">SMC-ABC_sq</span></code>. We run 50 experiments each one with
 sample size 50.</span><a class="headerlink" href="#fig-model-comp-normal-0" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>The second column shows what happens when we move into the ABC realm. We
 still get <code class="docutils literal notranslate"><span class="pre">model_1</span></code> as a better choice, but now the dispersion of
 <code class="docutils literal notranslate"><span class="pre">model_0</span></code> is much larger than the one from <code class="docutils literal notranslate"><span class="pre">model_1</span></code> or <code class="docutils literal notranslate"><span class="pre">model_2</span></code>.
@@ -1369,9 +1400,10 @@ likelihood and LOO computed from <code class="docutils literal notranslate"><spa
 observed when we use <code class="docutils literal notranslate"><span class="pre">SMC</span></code> or <code class="docutils literal notranslate"><span class="pre">SMC-ABC</span></code>. If we use the mean and the
 standard deviation <code class="docutils literal notranslate"><span class="pre">SMC-ABC_sq</span></code> as summary statistics we partially
 recover the behavior of using the whole data-set <code class="docutils literal notranslate"><span class="pre">SMC-ABC</span></code>.</p>
-<div class="figure align-default" id="fig-model-comp-normal-forest">
+<figure class="align-default" id="fig-model-comp-normal-forest">
 <a class="reference internal image-reference" href="../_images/model_comp_normal_forest.png"><img alt="../_images/model_comp_normal_forest.png" src="../_images/model_comp_normal_forest.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 8.16 </span><span class="caption-text">Model <code class="docutils literal notranslate"><span class="pre">m_0</span></code> is similar as the model described in Equation
+<figcaption>
+<p><span class="caption-number">Fig. 8.16 </span><span class="caption-text">Model <code class="docutils literal notranslate"><span class="pre">m_0</span></code> is similar as the model described in Equation
 <a class="reference internal" href="#equation-eq-gauss-model">(8.5)</a> but with <span class="math notranslate nohighlight">\(\sigma \sim \mathcal{HN}(0.1)\)</span>. <code class="docutils literal notranslate"><span class="pre">model_1</span></code>
 the same as Equation <a class="reference internal" href="#equation-eq-gauss-model">(8.5)</a>. <code class="docutils literal notranslate"><span class="pre">model_2</span></code> is the same as
 Equation <a class="reference internal" href="#equation-eq-gauss-model">(8.5)</a> but with <span class="math notranslate nohighlight">\(\sigma \sim \mathcal{HN}(10)\)</span>.
@@ -1381,16 +1413,18 @@ computing these values. Sequential Monte Carlo <code class="docutils literal not
 entire dataset <code class="docutils literal notranslate"><span class="pre">SMC-ABC</span></code>, SMC-ABC using the mean as summary statistic
 <code class="docutils literal notranslate"><span class="pre">SMC-ABC_sm</span></code> and finally SMC-ABC using the mean and standard deviation
 <code class="docutils literal notranslate"><span class="pre">SMC-ABC_sq</span></code>. We run 50 experiments each one with sample size 50.</span><a class="headerlink" href="#fig-model-comp-normal-forest" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>Figures <a class="reference internal" href="#fig-model-comp-pois-geom-0"><span class="std std-numref">Fig. 8.17</span></a> and
 <a class="reference internal" href="#fig-model-comp-pois-geom-forest"><span class="std std-numref">Fig. 8.18</span></a> shows a similar analysis but
 <code class="docutils literal notranslate"><span class="pre">model_0</span></code> is a geometric model and <code class="docutils literal notranslate"><span class="pre">model_1</span></code> is a Poisson model. The
 data follows a shifted Poisson distribution
 <span class="math notranslate nohighlight">\(\mu \sim 1 + \text{Pois}(2.5)\)</span>. We leave the analysis of these figures
 as an exercise for the readers.</p>
-<div class="figure align-default" id="fig-model-comp-pois-geom-0">
+<figure class="align-default" id="fig-model-comp-pois-geom-0">
 <a class="reference internal image-reference" href="../_images/model_comp_pois_geom_00.png"><img alt="../_images/model_comp_pois_geom_00.png" src="../_images/model_comp_pois_geom_00.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 8.17 </span><span class="caption-text">Model <code class="docutils literal notranslate"><span class="pre">m_0</span></code> is a geometric distribution with prior
+<figcaption>
+<p><span class="caption-number">Fig. 8.17 </span><span class="caption-text">Model <code class="docutils literal notranslate"><span class="pre">m_0</span></code> is a geometric distribution with prior
 <span class="math notranslate nohighlight">\(p \sim \mathcal{U}(0, 1)\)</span> and <code class="docutils literal notranslate"><span class="pre">model_1</span></code> is a Poisson distribution with
 prior <span class="math notranslate nohighlight">\(\mu \sim \mathcal{E}(1)\)</span>. The data follows a shifted Poisson
 distribution <span class="math notranslate nohighlight">\(\mu \sim 1 + \text{Pois}(2.5)\)</span>. Sequential Monte Carlo
@@ -1398,10 +1432,12 @@ distribution <span class="math notranslate nohighlight">\(\mu \sim 1 + \text{Poi
 as summary statistic <code class="docutils literal notranslate"><span class="pre">SMC-ABC_sm</span></code> and finally SMC-ABC using the mean and
 standard deviation <code class="docutils literal notranslate"><span class="pre">SMC-ABC_sq</span></code>.We run 50 experiments each one with
 sample size 50.</span><a class="headerlink" href="#fig-model-comp-pois-geom-0" title="Permalink to this image">¶</a></p>
-</div>
-<div class="figure align-default" id="fig-model-comp-pois-geom-forest">
+</figcaption>
+</figure>
+<figure class="align-default" id="fig-model-comp-pois-geom-forest">
 <a class="reference internal image-reference" href="../_images/model_comp_pois_geom_forest.png"><img alt="../_images/model_comp_pois_geom_forest.png" src="../_images/model_comp_pois_geom_forest.png" style="width: 8.00in;" /></a>
-<p class="caption"><span class="caption-number">Fig. 8.18 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">model_0</span></code> a geometric model/simulator with prior
+<figcaption>
+<p><span class="caption-number">Fig. 8.18 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">model_0</span></code> a geometric model/simulator with prior
 <span class="math notranslate nohighlight">\(p \sim \mathcal{U}(0, 1)\)</span> <code class="docutils literal notranslate"><span class="pre">model_1</span></code> A Poisson model/simulator with
 prior <span class="math notranslate nohighlight">\(p \sim \text{Expo}(1)\)</span>. The firs row contains the values of the
 marginal likelihood and the second the values of LOO. The column
@@ -1410,7 +1446,8 @@ Carlo <code class="docutils literal notranslate"><span class="pre">SMC</span></c
 the mean as summary statistic <code class="docutils literal notranslate"><span class="pre">SMC-ABC_sq</span></code> and finally SMC-ABC using
 quartiles <code class="docutils literal notranslate"><span class="pre">SMC-ABC_sq</span></code>. We run 50 experiments each one with sample size
 50.</span><a class="headerlink" href="#fig-model-comp-pois-geom-forest" title="Permalink to this image">¶</a></p>
-</div>
+</figcaption>
+</figure>
 <p>In the ABC literature it is common to use Bayes factors in an attempt to
 assign relative probabilities to models. We understand this can be
 perceived as valuable in certain fields. So we want to warn those
@@ -1433,8 +1470,8 @@ should be done only after we have shown the models provide a reasonable
 fit to the data. It does not make too much sense to compare models that
 are clearly a bad fit.</p>
 </div>
-</div>
-<div class="section" id="model-choice-via-random-forest">
+</section>
+<section id="model-choice-via-random-forest">
 <span id="id44"></span><h3><span class="section-number">8.7.2. </span>Model Choice via Random Forest<a class="headerlink" href="#model-choice-via-random-forest" title="Permalink to this headline">¶</a></h3>
 <p>The caveats we discussed in the previous section has motivated the
 research of new methods for model choice under the ABC framework. One
@@ -1521,8 +1558,8 @@ this can be done using a random forest, but this time we use a
 regression, with the misclassification error rate as response variable
 and the summary statistics in the reference table as independent
 variables <span id="id47">[<a class="reference internal" href="references.html#id51" title="Pierre Pudlo, Jean-Michel Marin, Arnaud Estoup, Jean-Marie Cornuet, Mathieu Gautier, and Christian P Robert. Reliable abc model choice via random forests. Bioinformatics, 32(6):859–866, 2016.">99</a>]</span>.</p>
-</div>
-<div class="section" id="model-choice-for-ma-model">
+</section>
+<section id="model-choice-for-ma-model">
 <span id="id48"></span><h3><span class="section-number">8.7.3. </span>Model Choice for MA Model<a class="headerlink" href="#model-choice-for-ma-model" title="Permalink to this headline">¶</a></h3>
 <p>Let us go back to the moving average example, this time we will focus on
 the following question. Is a MA(1) or MA(2) a better choice? To answer
@@ -1633,9 +1670,9 @@ the estimated posterior probability for that model. For our example we
 get model 0 with a probability of 0.68. It is a little bit reassuring
 that, at least for this example, both LOO and the random forest method
 agree on model choice and even their relative weight.</p>
-</div>
-</div>
-<div class="section" id="choosing-priors-for-abc">
+</section>
+</section>
+<section id="choosing-priors-for-abc">
 <span id="id51"></span><h2><span class="section-number">8.8. </span>Choosing Priors for ABC<a class="headerlink" href="#choosing-priors-for-abc" title="Permalink to this headline">¶</a></h2>
 <p>Not having a closed form likelihood makes it more difficult to get good
 models and thus ABC methods are in general more brittle than other
@@ -1666,8 +1703,8 @@ SMC-ABC. Beyond the general advice of more informative prior and what we
 have already discussed elsewhere in the book about prior
 elicitation/evaluation, we do not have further recommendation specific
 for ABC methods.</p>
-</div>
-<div class="section" id="exercises">
+</section>
+<section id="exercises">
 <span id="exercises8"></span><h2><span class="section-number">8.9. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
 <p><strong>8E1.</strong> In your words explain how ABC is approximate? What
 object or quantity is approximated and how.</p>
@@ -1798,8 +1835,8 @@ to use a random forest.</p>
 InferenceData object with the proper groups.</p>
 </dd>
 </dl>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
