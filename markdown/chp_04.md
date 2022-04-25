@@ -1249,10 +1249,9 @@ very few data points relative to others.
 
 
 def gen_hierarchical_salad_sales(input_df, beta_prior_fn, dtype=tf.float32):
-    customers = tf.constant(
-        hierarchical_salad_df["customers"].values, dtype=dtype)
-    location_category = hierarchical_salad_df["location"].values
-    sales = tf.constant(hierarchical_salad_df["sales"].values, dtype=dtype)
+    customers = tf.constant(input_df["customers"].values, dtype=dtype)
+    location_category = input_df["location"].values
+    sales = tf.constant(input_df["sales"].values, dtype=dtype)
 
     @tfd.JointDistributionCoroutine
     def model_hierarchical_salad_sales():

@@ -53,6 +53,7 @@
 | 101 | Given these choices we can write our model in Code Block 3.30**)**... | Given these choices we can write our model in Code Block 3.30 | Thanks Sebastian |
 | 101 | This is not a fully uninformative **priors**... | This is not a fully uninformative **prior**... | Thanks Sebastian |
 | 102 | ...fall into bounds that more reasonable... | ...fall into bounds that **are** more reasonable... | Thanks Sebastian |
+| 133 | (In Code Block 9.1) inside function `gen_hierarchical_salad_sales` all reference to `hierarchical_salad_df` | should be `input_df` | Thanks Alihan Zihna |
 | 183 | ...a backshift operator, also called Lag operator) | ...a backshift operator **(**also called Lag operator) |  |
 | 191 | (footnote) The Stan implementation of SARIMA can be found in https://github.com/asael697/**varstan**. | The Stan implementation of SARIMA can be found in **e.g.,** https://github.com/asael697/**bayesforecast**. |  |
 | 197 | we can apply the Kalman filter to **to** obtain**s** the posterior | we can apply the Kalman filter to obtain the posterior |  |
