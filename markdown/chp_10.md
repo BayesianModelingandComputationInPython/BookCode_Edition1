@@ -279,8 +279,8 @@ directly compute the posterior parameters.
 ```{math} 
 :label: eq:conjugate_beta_fraud
 \begin{split}
-    \alpha_\text{post} &= \alpha_\text{prior} + \text{\texttt{fraud\_observations}} \\
-    \beta_\text{post} &=  \beta_\text{prior} + \text{\texttt{non\_fraud\_observations}} \\
+    \alpha_\text{post} &= \alpha_\text{prior} + \texttt{fraud_observations} \\
+    \beta_\text{post} &=  \beta_\text{prior} + \texttt{non_fraud_observations} \\
    % p(\theta)  &= \text{Beta}(fraud\_prior, non\_fraud\_prior) \\
     p(\theta \mid y)  &= \text{Beta}(\alpha_\text{post}, \beta_\text{post}) \\
     \mathop{\mathbb{E}}[p(\theta \mid y)] &= \frac{\alpha_\text{post}}{\alpha_\text{post} + \beta_\text{post}}
