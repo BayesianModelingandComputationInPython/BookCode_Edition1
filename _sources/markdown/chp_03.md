@@ -1595,7 +1595,7 @@ models = {"bill": inf_data_logistic_penguins_bill_length,
 
 _, axes = plt.subplots(3, 1, figsize=(12, 4), sharey=True)
 for (label, model), ax in zip(models.items(), axes):
-    az.plot_separation(model, "p", ax=ax, color="C4")
+    az.plot_separation(model, "yl", ax=ax, color="C4")
     ax.set_title(label)
 ```
 

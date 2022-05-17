@@ -2,70 +2,53 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
-    <title>10. Probabilistic Programming Languages &#8212; Bayesian Modeling and Computation in Python</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
-
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
-
-    
-      
-
-    
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-codeautolink.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
-
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<title>10. Probabilistic Programming Languages — Bayesian Modeling and Computation in Python</title>
+<link href="../_static/css/theme.css" rel="stylesheet"/>
+<link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet"/>
+<link href="../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" rel="stylesheet" type="text/css">
+<link href="../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<link href="../_static/copybutton.css" rel="stylesheet" type="text/css">
+<link href="../_static/mystnb.css" rel="stylesheet" type="text/css">
+<link href="../_static/sphinx-thebe.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-codeautolink.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" rel="stylesheet" type="text/css"/>
+<link as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js" rel="preload"/>
+<script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+<script src="../_static/jquery.js"></script>
+<script src="../_static/underscore.js"></script>
+<script src="../_static/doctools.js"></script>
+<script src="../_static/clipboard.min.js"></script>
+<script src="../_static/copybutton.js"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../_static/togglebutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+<script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+<script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <link rel="shortcut icon" href="../_static/favicon.ico"/>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="11. Appendiceal Topics" href="chp_11.html" />
-    <link rel="prev" title="9. End to End Bayesian Workflows" href="chp_09.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+<script async="async" src="../_static/sphinx-thebe.js"></script>
+<script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+<script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link href="../_static/favicon.ico" rel="shortcut icon">
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="chp_11.html" rel="next" title="11. Appendiceal Topics"/>
+<link href="chp_09.html" rel="prev" title="9. End to End Bayesian Workflows"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="None" name="docsearch:language"/>
+<!-- Google Analytics -->
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-702QMHG8ST"></script>
 <script>
                     window.dataLayer = window.dataLayer || [];
@@ -73,516 +56,466 @@ const thebe_selector_output = ".output, .cell_output"
                     gtag('js', new Date());
                     gtag('config', 'G-702QMHG8ST');
                 </script>
-
-  </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
-
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
+</link></link></link></link></link></link></head>
+<body data-offset="80" data-spy="scroll" data-target="#bd-toc-nav">
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
-      
-      
-      
-      <h1 class="site-logo" id="site-title">Bayesian Modeling and Computation in Python</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
+<div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+<h1 class="site-logo" id="site-title">Bayesian Modeling and Computation in Python</h1>
+</a>
+</div><form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="icon fas fa-search"></i>
+<input aria-label="Buscar este libro ..." autocomplete="off" class="form-control" id="search-input" name="q" placeholder="Buscar este libro ..." type="search"/>
+</form><nav aria-label="Main" class="bd-links" id="bd-docs-nav">
+<div class="bd-toc-item active">
+<p aria-level="2" class="caption" role="heading">
+<span class="caption-text">
   Part 0
  </span>
 </p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="dedication.html">
+<li class="toctree-l1">
+<a class="reference internal" href="dedication.html">
    Dedication
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="foreword.html">
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="foreword.html">
    Foreword
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="preface.html">
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="preface.html">
    Preface
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="symbollist.html">
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="symbollist.html">
    Symbols
   </a>
- </li>
+</li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
+<span class="caption-text">
   Part 1
  </span>
 </p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_01.html">
+<li class="toctree-l1">
+<a class="reference internal" href="chp_01.html">
    1. Bayesian Inference
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_02.html">
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="chp_02.html">
    2. Exploratory Analysis of Bayesian Models
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_03.html">
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="chp_03.html">
    3. Linear Models and Probabilistic Programming Languages
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_04.html">
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="chp_04.html">
    4. Extending Linear Models
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_05.html">
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="chp_05.html">
    5. Splines
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_06.html">
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="chp_06.html">
    6. Time Series
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_07.html">
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="chp_07.html">
    7. Bayesian Additive Regression Trees
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_08.html">
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="chp_08.html">
    8. Approximate Bayesian Computation
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_09.html">
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="chp_09.html">
    9. End to End Bayesian Workflows
   </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+</li>
+<li class="toctree-l1 current active">
+<a class="current reference internal" href="#">
    10. Probabilistic Programming Languages
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_11.html">
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="chp_11.html">
    11. Appendiceal Topics
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="glossary.html">
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="glossary.html">
    12. Glossary
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="references.html">
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="references.html">
    13. References
   </a>
- </li>
+</li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
+<span class="caption-text">
   Part 2
  </span>
 </p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_01.html">
+<li class="toctree-l1">
+<a class="reference internal" href="../notebooks/chp_01.html">
    Code 1: Bayesian Inference
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_02.html">
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="../notebooks/chp_02.html">
    Code 2: Exploratory Analysis of Bayesian Models
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_03.html">
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="../notebooks/chp_03.html">
    Code 3: Linear Models and Probabilistic Programming Languages
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_04.html">
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="../notebooks/chp_04.html">
    Code 4: Extending Linear Models
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_05.html">
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="../notebooks/chp_05.html">
    Code 5: Splines
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_06.html">
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="../notebooks/chp_06.html">
    Code 6: Time Series
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_07.html">
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="../notebooks/chp_07.html">
    Code 7: Bayesian Additive Regression Trees
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_08.html">
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="../notebooks/chp_08.html">
    Code 8: Approximate Bayesian Computation
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_09.html">
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="../notebooks/chp_09.html">
    Code 9: End to End Bayesian Workflows
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_10.html">
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="../notebooks/chp_10.html">
    Code 10: Probabilistic Programming Languages
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_11.html">
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="../notebooks/chp_11.html">
    Code 11: Appendiceal Topics
   </a>
- </li>
+</li>
 </ul>
-
-    </div>
+</div>
 </nav> <!-- To handle the deprecated key -->
-
 <div class="navbar_extra_footer">
   Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
 </div>
-
 </div>
-
-
-          
-
-
-          
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-            <!-- Source interaction buttons -->
-
+<div class="topbar container-xl fixed-top">
+<div class="topbar-contents row">
+<div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+<div class="col pl-md-4 topbar-main">
+<button aria-controls="site-navigation" aria-expanded="true" aria-label="Navegación de palanca" class="navbar-toggler ml-0" data-placement="left" data-target=".site-navigation" data-toggle="tooltip" id="navbar-toggler" title="Navegación de palanca" type="button">
+<i class="fas fa-bars"></i>
+<i class="fas fa-arrow-left"></i>
+<i class="fas fa-arrow-up"></i>
+</button>
+<!-- Source interaction buttons -->
 <div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_10.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        
-    </div>
+<button aria-label="Connect with source repository" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fab fa-github"></i></button>
+<div class="dropdown-buttons sourcebuttons">
+<a class="repository-button" href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Repositorio de origen" type="button"><i class="fab fa-github"></i>repositorio</button></a>
+<a class="issues-button" href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_10.html&amp;body=Your%20issue%20content%20here."><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Abrir un problema" type="button"><i class="fas fa-lightbulb"></i>Tema abierto</button></a>
 </div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+</div>
+<!-- Full screen (wrap in <a> to have style consistency -->
+<a class="full-screen-button"><button aria-label="Modo de pantalla completa" class="btn btn-secondary topbarbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Modo de pantalla completa" type="button"><i class="fas fa-expand"></i></button></a>
+<!-- Launch buttons -->
+</div>
+<!-- Table of contents -->
+<div class="d-none d-md-block col-md-2 bd-toc show noprint">
+<div class="tocsection onthispage pt-5 pb-3">
+<i class="fas fa-list"></i> Contenido
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-systems-engineering-perspective-of-a-ppl">
+<nav aria-label="Page" id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#a-systems-engineering-perspective-of-a-ppl">
    10.1. A Systems Engineering Perspective of a PPL
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-rainier">
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#example-rainier">
      10.1.1. Example: Rainier
     </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#posterior-computation">
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#posterior-computation">
    10.2. Posterior Computation
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#getting-the-gradient">
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#getting-the-gradient">
      10.2.1. Getting the Gradient
     </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-near-real-time-inference">
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#example-near-real-time-inference">
      10.2.2. Example: Near Real Time Inference
     </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#application-programming-interfaces">
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#application-programming-interfaces">
    10.3. Application Programming Interfaces
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-stan-and-slicstan">
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#example-stan-and-slicstan">
      10.3.1. Example: Stan and Slicstan
     </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-pymc3-and-pymc4">
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#example-pymc3-and-pymc4">
      10.3.2. Example: PyMC3 and PyMC4
     </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#ppl-driven-transformations">
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#ppl-driven-transformations">
    10.4. PPL Driven Transformations
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#log-probabilities">
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#log-probabilities">
      10.4.1. Log Probabilities
     </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#random-variables-and-distributions-transformations">
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#random-variables-and-distributions-transformations">
      10.4.2. Random Variables and Distributions Transformations
     </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-sampling-comparison-between-bounded-and-unbounded-random-variables">
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#example-sampling-comparison-between-bounded-and-unbounded-random-variables">
      10.4.3. Example: Sampling Comparison between Bounded and Unbounded Random Variables
     </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#operation-graphs-and-automatic-reparameterization">
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#operation-graphs-and-automatic-reparameterization">
    10.5. Operation Graphs and Automatic Reparameterization
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#effect-handling">
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#effect-handling">
    10.6. Effect handling
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-effect-handling-in-tfp-and-numpyro">
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#example-effect-handling-in-tfp-and-numpyro">
      10.6.1. Example: Effect Handling in TFP and Numpyro
     </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#base-language-code-ecosystem-modularity-and-everything-else">
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#base-language-code-ecosystem-modularity-and-everything-else">
    10.7. Base Language, Code Ecosystem, Modularity and Everything Else
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#designing-a-ppl">
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#designing-a-ppl">
    10.8. Designing a PPL
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#shape-handling-in-ppls">
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#shape-handling-in-ppls">
      10.8.1. Shape Handling in PPLs
     </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#takeaways-for-the-applied-bayesian-practitioner">
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#takeaways-for-the-applied-bayesian-practitioner">
    10.9. Takeaways for the Applied Bayesian Practitioner
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#exercises">
    10.10. Exercises
   </a>
- </li>
+</li>
 </ul>
-
-            </nav>
-        </div>
-    </div>
+</nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Probabilistic Programming Languages</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-systems-engineering-perspective-of-a-ppl">
+</div>
+</div>
+<div class="row" id="main-content">
+<div class="col-12 col-md-9 pl-md-3 pr-md-0">
+<!-- Table of contents that is only displayed when printing the page -->
+<div class="onlyprint" id="jb-print-docs-body">
+<h1>Probabilistic Programming Languages</h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+<div>
+<h2> Contenido </h2>
+</div>
+<nav aria-label="Page">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#a-systems-engineering-perspective-of-a-ppl">
    10.1. A Systems Engineering Perspective of a PPL
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-rainier">
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#example-rainier">
      10.1.1. Example: Rainier
     </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#posterior-computation">
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#posterior-computation">
    10.2. Posterior Computation
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#getting-the-gradient">
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#getting-the-gradient">
      10.2.1. Getting the Gradient
     </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-near-real-time-inference">
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#example-near-real-time-inference">
      10.2.2. Example: Near Real Time Inference
     </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#application-programming-interfaces">
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#application-programming-interfaces">
    10.3. Application Programming Interfaces
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-stan-and-slicstan">
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#example-stan-and-slicstan">
      10.3.1. Example: Stan and Slicstan
     </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-pymc3-and-pymc4">
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#example-pymc3-and-pymc4">
      10.3.2. Example: PyMC3 and PyMC4
     </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#ppl-driven-transformations">
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#ppl-driven-transformations">
    10.4. PPL Driven Transformations
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#log-probabilities">
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#log-probabilities">
      10.4.1. Log Probabilities
     </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#random-variables-and-distributions-transformations">
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#random-variables-and-distributions-transformations">
      10.4.2. Random Variables and Distributions Transformations
     </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-sampling-comparison-between-bounded-and-unbounded-random-variables">
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#example-sampling-comparison-between-bounded-and-unbounded-random-variables">
      10.4.3. Example: Sampling Comparison between Bounded and Unbounded Random Variables
     </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#operation-graphs-and-automatic-reparameterization">
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#operation-graphs-and-automatic-reparameterization">
    10.5. Operation Graphs and Automatic Reparameterization
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#effect-handling">
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#effect-handling">
    10.6. Effect handling
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-effect-handling-in-tfp-and-numpyro">
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#example-effect-handling-in-tfp-and-numpyro">
      10.6.1. Example: Effect Handling in TFP and Numpyro
     </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#base-language-code-ecosystem-modularity-and-everything-else">
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#base-language-code-ecosystem-modularity-and-everything-else">
    10.7. Base Language, Code Ecosystem, Modularity and Everything Else
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#designing-a-ppl">
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#designing-a-ppl">
    10.8. Designing a PPL
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#shape-handling-in-ppls">
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#shape-handling-in-ppls">
      10.8.1. Shape Handling in PPLs
     </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#takeaways-for-the-applied-bayesian-practitioner">
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#takeaways-for-the-applied-bayesian-practitioner">
    10.9. Takeaways for the Applied Bayesian Practitioner
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#exercises">
    10.10. Exercises
   </a>
- </li>
+</li>
 </ul>
-
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
-                
-  <section class="tex2jax_ignore mathjax_ignore" id="probabilistic-programming-languages">
+</nav>
+</div>
+</div>
+</div>
+<div>
+<section class="tex2jax_ignore mathjax_ignore" id="probabilistic-programming-languages">
 <span id="chap10"></span><h1><span class="section-number">10. </span>Probabilistic Programming Languages<a class="headerlink" href="#probabilistic-programming-languages" title="Permalink to this headline">¶</a></h1>
 <p>In Chapter <a class="reference internal" href="chp_01.html#chap1"><span class="std std-ref">1</span></a> Section <a class="reference internal" href="chp_01.html#bayesian-modeling"><span class="std std-ref">Bayesian Modeling</span></a>, we used cars as analogy to
 understand applied Bayesian concepts. We will revisit this analogy but
@@ -779,8 +712,8 @@ thousands of times. We show one such calculation in Code Block
 <span class="n">observed</span><span class="p">,</span> <span class="n">test_point</span> <span class="o">=</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">2.5</span> 
 <span class="n">logp_val</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">test_point</span><span class="p">,</span> <span class="n">observed</span><span class="p">)</span>
 <span class="n">grad</span> <span class="o">=</span> <span class="n">model_grad</span><span class="p">(</span><span class="n">test_point</span><span class="p">,</span> <span class="n">observed</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;log_p_val: </span><span class="si">{</span><span class="n">logp_val</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;grad: </span><span class="si">{</span><span class="n">grad</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"log_p_val: </span><span class="si">{</span><span class="n">logp_val</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"grad: </span><span class="si">{</span><span class="n">grad</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -794,12 +727,12 @@ computing the gradient using Theano in Code Block
 <div class="literal-block-wrapper docutils container" id="pymc3-model-grad">
 <div class="code-block-caption"><span class="caption-number">Listing 10.3 </span><span class="caption-text">pymc3_model_grad</span><a class="headerlink" href="#pymc3-model-grad" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
-    <span class="n">z</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">5.</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">z</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">observed</span><span class="p">)</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"z"</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">5.</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">z</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">observed</span><span class="p">)</span>
 
 <span class="n">func</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">logp_dlogp_function</span><span class="p">()</span>
 <span class="n">func</span><span class="o">.</span><span class="n">set_extra_values</span><span class="p">({})</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">test_point</span><span class="p">])))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.array.html#numpy.array" title="numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">([</span><span class="n">test_point</span><span class="p">])))</span>
 </pre></div>
 </div>
 </div>
@@ -829,8 +762,8 @@ transactions directly. As transactions are observed they are used fairly
 directly compute the posterior parameters.</p>
 <div class="math notranslate nohighlight" id="equation-eq-conjugate-beta-fraud">
 <span class="eqno">(10.1)<a class="headerlink" href="#equation-eq-conjugate-beta-fraud" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\begin{split}\begin{split}
-    \alpha_\text{post} &amp;= \alpha_\text{prior} + \text{\texttt{fraud\_observations}} \\
-    \beta_\text{post} &amp;=  \beta_\text{prior} + \text{\texttt{non\_fraud\_observations}} \\
+    \alpha_\text{post} &amp;= \alpha_\text{prior} + \texttt{fraud_observations} \\
+    \beta_\text{post} &amp;=  \beta_\text{prior} + \texttt{non_fraud_observations} \\
    % p(\theta)  &amp;= \text{Beta}(fraud\_prior, non\_fraud\_prior) \\
     p(\theta \mid y)  &amp;= \text{Beta}(\alpha_\text{post}, \beta_\text{post}) \\
     \mathop{\mathbb{E}}[p(\theta \mid y)] &amp;= \frac{\alpha_\text{post}}{\alpha_\text{post} + \beta_\text{post}}\end{split}\\\end{split}\end{aligned}\end{align} \]</div>
@@ -841,12 +774,12 @@ deploy.</p>
 <div class="literal-block-wrapper docutils container" id="fraud-detector">
 <div class="code-block-caption"><span class="caption-number">Listing 10.4 </span><span class="caption-text">fraud_detector</span><a class="headerlink" href="#fraud-detector" title="Permalink to this code">¶</a></div>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fraud_detector</span><span class="p">(</span><span class="n">fraud_observations</span><span class="p">,</span> <span class="n">non_fraud_observations</span><span class="p">,</span> <span class="n">fraud_prior</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">non_fraud_prior</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Conjugate Beta Binomial model for fraud detection&quot;&quot;&quot;</span>
+    <span class="sd">"""Conjugate Beta Binomial model for fraud detection"""</span>
     <span class="n">expectation</span> <span class="o">=</span> <span class="p">(</span><span class="n">fraud_prior</span> <span class="o">+</span> <span class="n">fraud_observations</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span>
         <span class="n">fraud_prior</span> <span class="o">+</span> <span class="n">fraud_observations</span> <span class="o">+</span> <span class="n">non_fraud_prior</span> <span class="o">+</span> <span class="n">non_fraud_observations</span><span class="p">)</span>
     
     <span class="k">if</span> <span class="n">expectation</span> <span class="o">&gt;</span> <span class="mf">.5</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;suspend_card&quot;</span><span class="p">:</span><span class="kc">True</span><span class="p">}</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">"suspend_card"</span><span class="p">:</span><span class="kc">True</span><span class="p">}</span>
 
 <span class="o">%</span><span class="k">timeit</span> fraud_detector(2, 0)
 </pre></div>
@@ -1035,10 +968,10 @@ and the now, defunct <a class="footnote-reference brackets" href="#id72" id="id2
 <div class="literal-block-wrapper docutils container" id="pymc3-schools">
 <div class="code-block-caption"><span class="caption-number">Listing 10.7 </span><span class="caption-text">pymc3_schools</span><a class="headerlink" href="#pymc3-schools" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">eight_schools_pymc3</span><span class="p">:</span>
-    <span class="n">mu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;mu&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-    <span class="n">tau</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfCauchy</span><span class="p">(</span><span class="s2">&quot;tau&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-    <span class="n">theta</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;theta&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">tau</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
-    <span class="n">obs</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;obs&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">theta</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"mu"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="n">tau</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfCauchy</span><span class="p">(</span><span class="s2">"tau"</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"theta"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">tau</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">obs</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"obs"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">theta</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1046,16 +979,16 @@ and the now, defunct <a class="footnote-reference brackets" href="#id72" id="id2
 <div class="code-block-caption"><span class="caption-number">Listing 10.8 </span><span class="caption-text">pymc4_schools</span><a class="headerlink" href="#pymc4-schools" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@pm</span><span class="o">.</span><span class="n">model</span>
 <span class="k">def</span> <span class="nf">eight_schools_pymc4</span><span class="p">():</span>
-    <span class="n">mu</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;mu&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-    <span class="n">tau</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;tau&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-    <span class="n">theta</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;theta&quot;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">batch_stack</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"mu"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="n">tau</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">"tau"</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"theta"</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">batch_stack</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
 
-    <span class="n">obs</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">pm4</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;obs&quot;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">theta</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">obs</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">pm4</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"obs"</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">theta</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">obs</span>
 </pre></div>
 </div>
 </div>
-<p>The differences in PyMC4 is the decorator <code class="docutils literal notranslate"><span class="pre">&#64;pm.model</span></code>, the declaration
+<p>The differences in PyMC4 is the decorator <code class="docutils literal notranslate"><span class="pre">@pm.model</span></code>, the declaration
 of a Python function, the use of generators indicated by <code class="docutils literal notranslate"><span class="pre">yield</span></code>, and
 differing argument names. You may have noticed that the <code class="docutils literal notranslate"><span class="pre">yield</span></code> is the
 same that you have seen in the TensorFlow Probability code. In both PPLs
@@ -1099,9 +1032,9 @@ We can specify our model by expanding Equation
 little bit of code.</p>
 <div class="literal-block-wrapper docutils container" id="two-observed">
 <div class="code-block-caption"><span class="caption-number">Listing 10.9 </span><span class="caption-text">two_observed</span><a class="headerlink" href="#two-observed" title="Permalink to this code">¶</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">observed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">pdf</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">observed</span><span class="p">)</span>
-<span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">pdf</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">observed</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.repeat.html#numpy.repeat" title="numpy.repeat"><span class="n">np</span><span class="o">.</span><span class="n">repeat</span></a><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">pdf</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html#scipy.stats.norm" title="scipy.stats.norm"><span class="n">stats</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">observed</span><span class="p">)</span>
+<a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.prod.html#numpy.prod" title="numpy.prod"><span class="n">np</span><span class="o">.</span><span class="n">prod</span></a><span class="p">(</span><span class="n">pdf</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1118,9 +1051,9 @@ we have an issue, Python reports a joint probability density of 0.0,
 which cannot be true.</p>
 <div class="literal-block-wrapper docutils container" id="thousand-observed">
 <div class="code-block-caption"><span class="caption-number">Listing 10.10 </span><span class="caption-text">thousand_observed</span><a class="headerlink" href="#thousand-observed" title="Permalink to this code">¶</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">observed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
-<span class="n">pdf</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">observed</span><span class="p">)</span>
-<span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">pdf</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">observed</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.repeat.html#numpy.repeat" title="numpy.repeat"><span class="n">np</span><span class="o">.</span><span class="n">repeat</span></a><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">pdf</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html#scipy.stats.norm" title="scipy.stats.norm"><span class="n">stats</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">observed</span><span class="p">)</span>
+<a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.prod.html#numpy.prod" title="numpy.prod"><span class="n">np</span><span class="o">.</span><span class="n">prod</span></a><span class="p">(</span><span class="n">pdf</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1159,10 +1092,10 @@ we see a more numerically stable result in Code Block
 <a class="reference internal" href="#log-transform"><span class="std std-ref">log_transform</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="log-transform">
 <div class="code-block-caption"><span class="caption-number">Listing 10.12 </span><span class="caption-text">log_transform</span><a class="headerlink" href="#log-transform" title="Permalink to this code">¶</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">logpdf</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">observed</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">logpdf</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html#scipy.stats.norm" title="scipy.stats.norm"><span class="n">stats</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">observed</span><span class="p">)</span>
 
 <span class="c1"># Compute individual logpdf two ways for one observation, as well as total</span>
-<span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">pdf</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">logpdf</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">logpdf</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.log.html#numpy.log" title="numpy.log"><span class="n">np</span><span class="o">.</span><span class="n">log</span></a><span class="p">(</span><span class="n">pdf</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">logpdf</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">logpdf</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1208,10 +1141,10 @@ transformation the lower and upper bound <span class="math notranslate nohighlig
 <div class="literal-block-wrapper docutils container" id="interval-transform">
 <div class="code-block-caption"><span class="caption-number">Listing 10.13 </span><span class="caption-text">interval_transform</span><a class="headerlink" href="#interval-transform" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lower</span><span class="p">,</span> <span class="n">upper</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span>
-<span class="n">domain</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="n">transform</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">domain</span> <span class="o">-</span> <span class="n">lower</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">upper</span> <span class="o">-</span> <span class="n">domain</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Original domain: </span><span class="si">{</span><span class="n">domain</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Transformed domain: </span><span class="si">{</span><span class="n">transform</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">domain</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.linspace.html#numpy.linspace" title="numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">transform</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.log.html#numpy.log" title="numpy.log"><span class="n">np</span><span class="o">.</span><span class="n">log</span></a><span class="p">(</span><span class="n">domain</span> <span class="o">-</span> <span class="n">lower</span><span class="p">)</span> <span class="o">-</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.log.html#numpy.log" title="numpy.log"><span class="n">np</span><span class="o">.</span><span class="n">log</span></a><span class="p">(</span><span class="n">upper</span> <span class="o">-</span> <span class="n">domain</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Original domain: </span><span class="si">{</span><span class="n">domain</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Transformed domain: </span><span class="si">{</span><span class="n">transform</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1226,7 +1159,7 @@ distribution in the model object, as shown in Code Block
 <div class="literal-block-wrapper docutils container" id="uniform-transform">
 <div class="code-block-caption"><span class="caption-number">Listing 10.14 </span><span class="caption-text">uniform_transform</span><a class="headerlink" href="#uniform-transform" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">)</span>
 
 <span class="n">model</span><span class="o">.</span><span class="n">vars</span>
 </pre></div>
@@ -1246,10 +1179,10 @@ and 1, and how when we call <code class="docutils literal notranslate"><span cla
 automatically.</p>
 <div class="literal-block-wrapper docutils container" id="uniform-transform-logp">
 <div class="code-block-caption"><span class="caption-number">Listing 10.15 </span><span class="caption-text">uniform_transform_logp</span><a class="headerlink" href="#uniform-transform-logp" title="Permalink to this code">¶</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">logp</span><span class="p">({</span><span class="s2">&quot;x_interval__&quot;</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">}),</span>
-      <span class="n">model</span><span class="o">.</span><span class="n">logp_nojac</span><span class="p">({</span><span class="s2">&quot;x_interval__&quot;</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">}))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">logp</span><span class="p">({</span><span class="s2">&quot;x_interval__&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">}),</span>
-      <span class="n">model</span><span class="o">.</span><span class="n">logp_nojac</span><span class="p">({</span><span class="s2">&quot;x_interval__&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">}))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">logp</span><span class="p">({</span><span class="s2">"x_interval__"</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">}),</span>
+      <span class="n">model</span><span class="o">.</span><span class="n">logp_nojac</span><span class="p">({</span><span class="s2">"x_interval__"</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">}))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">logp</span><span class="p">({</span><span class="s2">"x_interval__"</span><span class="p">:</span><span class="mi">1</span><span class="p">}),</span>
+      <span class="n">model</span><span class="o">.</span><span class="n">logp_nojac</span><span class="p">({</span><span class="s2">"x_interval__"</span><span class="p">:</span><span class="mi">1</span><span class="p">}))</span>
 </pre></div>
 </div>
 </div>
@@ -1281,7 +1214,7 @@ bijectors (e.g., a neural network <span id="id28">[<a class="reference internal"
 <span class="n">lognormal1</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">TransformedDistribution</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">),</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Exp</span><span class="p">())</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">lognormal0</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 
-<span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">lognormal0</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">lognormal1</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.testing.assert_array_equal.html#numpy.testing.assert_array_equal" title="numpy.testing.assert_array_equal"><span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span></a><span class="p">(</span><span class="n">lognormal0</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">lognormal1</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1301,15 +1234,15 @@ deviation and model is specified in Code Block
 <a class="reference internal" href="#case-study-transform"><span class="std std-ref">case_study_transform</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="case-study-transform">
 <div class="code-block-caption"><span class="caption-number">Listing 10.17 </span><span class="caption-text">case_study_transform</span><a class="headerlink" href="#case-study-transform" title="Permalink to this code">¶</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y_observed</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">.01</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y_observed</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html#scipy.stats.norm" title="scipy.stats.norm"><span class="n">stats</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">.01</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
 
 <span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_transform</span><span class="p">:</span>
-    <span class="n">sd</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;sd&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sd</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">y_observed</span><span class="p">)</span>
+    <span class="n">sd</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">"sd"</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"y"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sd</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">y_observed</span><span class="p">)</span>
     <span class="n">trace_transform</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">chains</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">draws</span><span class="o">=</span><span class="mi">100000</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">model_transform</span><span class="o">.</span><span class="n">vars</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Diverging: </span><span class="si">{</span><span class="n">trace_transform</span><span class="o">.</span><span class="n">get_sampler_stats</span><span class="p">(</span><span class="s1">&#39;diverging&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Diverging: </span><span class="si">{</span><span class="n">trace_transform</span><span class="o">.</span><span class="n">get_sampler_stats</span><span class="p">(</span><span class="s1">'diverging'</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1331,12 +1264,12 @@ reports 423 divergences.</p>
 <div class="literal-block-wrapper docutils container" id="case-study-no-transform">
 <div class="code-block-caption"><span class="caption-number">Listing 10.18 </span><span class="caption-text">case_study_no_transform</span><a class="headerlink" href="#case-study-no-transform" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_no_transform</span><span class="p">:</span>
-    <span class="n">sd</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;sd&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sd</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">y_observed</span><span class="p">)</span>
+    <span class="n">sd</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">"sd"</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"y"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sd</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">y_observed</span><span class="p">)</span>
     <span class="n">trace_no_transform</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">chains</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">draws</span><span class="o">=</span><span class="mi">100000</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">model_no_transform</span><span class="o">.</span><span class="n">vars</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Diverging: </span><span class="si">{</span><span class="n">trace_no_transform</span><span class="o">.</span><span class="n">get_sampler_stats</span><span class="p">(</span><span class="s1">&#39;diverging&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Diverging: </span><span class="si">{</span><span class="n">trace_no_transform</span><span class="o">.</span><span class="n">get_sampler_stats</span><span class="p">(</span><span class="s1">'diverging'</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1376,20 +1309,20 @@ a <em>symbolic</em> representation of the computation as shown in Code Block
 <a class="reference internal" href="#unoptimized-symbolic-algebra"><span class="std std-ref">unoptimized_symbolic_algebra</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="unoptimized-symbolic-algebra">
 <div class="code-block-caption"><span class="caption-number">Listing 10.19 </span><span class="caption-text">unoptimized_symbolic_algebra</span><a class="headerlink" href="#unoptimized-symbolic-algebra" title="Permalink to this code">¶</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">theano</span><span class="o">.</span><span class="n">tensor</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">theano</span><span class="o">.</span><span class="n">tensor</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">theano</span><span class="o">.</span><span class="n">tensor</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="s2">"x"</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">theano</span><span class="o">.</span><span class="n">tensor</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="s2">"y"</span><span class="p">)</span>
 <span class="n">out</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mi">0</span>
 <span class="n">theano</span><span class="o">.</span><span class="n">printing</span><span class="o">.</span><span class="n">debugprint</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Elemwise{add,no_inplace} [id A] &#39;&#39;   
- |Elemwise{mul,no_inplace} [id B] &#39;&#39;   
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Elemwise{add,no_inplace} [id A] ''   
+ |Elemwise{mul,no_inplace} [id B] ''   
  | |x [id C]
- | |Elemwise{true_div,no_inplace} [id D] &#39;&#39;   
+ | |Elemwise{true_div,no_inplace} [id D] ''   
  |   |y [id E]
  |   |x [id C]
- |InplaceDimShuffle{x} [id F] &#39;&#39;   
+ |InplaceDimShuffle{x} [id F] ''   
    |TensorConstant{0} [id G]
 </pre></div>
 </div>
@@ -1420,7 +1353,7 @@ visually in <a class="reference internal" href="#fig-unoptimized-symbolic-algebr
 point no actual numeric calculations have taken place, but a sequence of
 operations, albeit an unoptimized one, has been generated.</p>
 <figure class="align-default" id="fig-unoptimized-symbolic-algebra-graph">
-<a class="reference internal image-reference" href="../_images/symbolic_graph_unopt.png"><img alt="../_images/symbolic_graph_unopt.png" src="../_images/symbolic_graph_unopt.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/symbolic_graph_unopt.png"><img alt="../_images/symbolic_graph_unopt.png" src="../_images/symbolic_graph_unopt.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 10.1 </span><span class="caption-text">Unoptimized Theano operation graph of Equation <a class="reference internal" href="#equation-eq-basic-arithmetic">(10.6)</a>
 as declared in Code Block
@@ -1442,12 +1375,12 @@ optimized operation graph is shown in
 </pre></div>
 </div>
 </div>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>DeepCopyOp [id A] &#39;y&#39;   0
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>DeepCopyOp [id A] 'y'   0
  |y [id B]
 </pre></div>
 </div>
 <figure class="align-default" id="fig-optimized-symbolic-algebra">
-<a class="reference internal image-reference" href="../_images/symbolic_graph_opt.png"><img alt="../_images/symbolic_graph_opt.png" src="../_images/symbolic_graph_opt.png" style="width: 4.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/symbolic_graph_opt.png"><img alt="../_images/symbolic_graph_opt.png" src="../_images/symbolic_graph_opt.png" style="width: 4.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 10.2 </span><span class="caption-text">Optimized Theano operation graph of Equation <a class="reference internal" href="#equation-eq-basic-arithmetic">(10.6)</a>
 after optimization in
@@ -1482,37 +1415,37 @@ level.</p>
 <div class="literal-block-wrapper docutils container" id="aesara-debug">
 <div class="code-block-caption"><span class="caption-number">Listing 10.22 </span><span class="caption-text">aesara_debug</span><a class="headerlink" href="#aesara-debug" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_normal</span><span class="p">:</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
 
 <span class="n">theano</span><span class="o">.</span><span class="n">printing</span><span class="o">.</span><span class="n">debugprint</span><span class="p">(</span><span class="n">aesara_normal</span><span class="o">.</span><span class="n">logpt</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Sum{acc_dtype=float64} [id A] &#39;__logp&#39;   
- |MakeVector{dtype=&#39;float64&#39;} [id B] &#39;&#39;   
-   |Sum{acc_dtype=float64} [id C] &#39;&#39;   
-     |Sum{acc_dtype=float64} [id D] &#39;__logp_x&#39;   
-       |Elemwise{switch,no_inplace} [id E] &#39;&#39;   
-         |Elemwise{mul,no_inplace} [id F] &#39;&#39;   
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Sum{acc_dtype=float64} [id A] '__logp'   
+ |MakeVector{dtype='float64'} [id B] ''   
+   |Sum{acc_dtype=float64} [id C] ''   
+     |Sum{acc_dtype=float64} [id D] '__logp_x'   
+       |Elemwise{switch,no_inplace} [id E] ''   
+         |Elemwise{mul,no_inplace} [id F] ''   
          | |TensorConstant{1} [id G]
-         | |Elemwise{mul,no_inplace} [id H] &#39;&#39;   
+         | |Elemwise{mul,no_inplace} [id H] ''   
          |   |TensorConstant{1} [id I]
-         |   |Elemwise{gt,no_inplace} [id J] &#39;&#39;   
+         |   |Elemwise{gt,no_inplace} [id J] ''   
          |     |TensorConstant{1.0} [id K]
          |     |TensorConstant{0} [id L]
-         |Elemwise{true_div,no_inplace} [id M] &#39;&#39;   
-         | |Elemwise{add,no_inplace} [id N] &#39;&#39;   
-         | | |Elemwise{mul,no_inplace} [id O] &#39;&#39;   
-         | | | |Elemwise{neg,no_inplace} [id P] &#39;&#39;   
+         |Elemwise{true_div,no_inplace} [id M] ''   
+         | |Elemwise{add,no_inplace} [id N] ''   
+         | | |Elemwise{mul,no_inplace} [id O] ''   
+         | | | |Elemwise{neg,no_inplace} [id P] ''   
          | | | | |TensorConstant{1.0} [id Q]
-         | | | |Elemwise{pow,no_inplace} [id R] &#39;&#39;   
-         | | |   |Elemwise{sub,no_inplace} [id S] &#39;&#39;   
+         | | | |Elemwise{pow,no_inplace} [id R] ''   
+         | | |   |Elemwise{sub,no_inplace} [id S] ''   
          | | |   | |x ~ Normal(mu=0.0, sigma=1.0) [id T]
          | | |   | |TensorConstant{0.0} [id U]
          | | |   |TensorConstant{2} [id V]
-         | | |Elemwise{log,no_inplace} [id W] &#39;&#39;   
-         | |   |Elemwise{true_div,no_inplace} [id X] &#39;&#39;   
-         | |     |Elemwise{true_div,no_inplace} [id Y] &#39;&#39;   
+         | | |Elemwise{log,no_inplace} [id W] ''   
+         | |   |Elemwise{true_div,no_inplace} [id X] ''   
+         | |     |Elemwise{true_div,no_inplace} [id Y] ''   
          | |     | |TensorConstant{1.0} [id Q]
          | |     | |TensorConstant{3.141592653589793} [id Z]
          | |     |TensorConstant{2.0} [id BA]
@@ -1577,14 +1510,14 @@ and write the model:</p>
 
 <span class="n">root</span> <span class="o">=</span> <span class="n">tfp_dist</span><span class="o">.</span><span class="n">JointDistributionCoroutine</span><span class="o">.</span><span class="n">Root</span>
 <span class="k">def</span> <span class="nf">tfp_model</span><span class="p">():</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfp_dist</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">))</span>
-    <span class="n">z</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfp_dist</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;z&quot;</span><span class="p">))</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">tfp_dist</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">z</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfp_dist</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"x"</span><span class="p">))</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfp_dist</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"z"</span><span class="p">))</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">tfp_dist</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">z</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"y"</span><span class="p">)</span>
     
 <span class="k">def</span> <span class="nf">numpyro_model</span><span class="p">():</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">numpyro</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">numpyro_dist</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">2.0</span><span class="p">))</span>
-    <span class="n">z</span> <span class="o">=</span> <span class="n">numpyro</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="n">numpyro_dist</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">))</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">numpyro</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">numpyro_dist</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">z</span><span class="p">))</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">numpyro</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">numpyro_dist</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">2.0</span><span class="p">))</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">numpyro</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="s2">"z"</span><span class="p">,</span> <span class="n">numpyro_dist</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">))</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">numpyro</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="s2">"y"</span><span class="p">,</span> <span class="n">numpyro_dist</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">z</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1620,7 +1553,7 @@ on the same prior samples (that returned by the TFP model).</p>
     <span class="n">params</span><span class="o">=</span><span class="n">tfp_sample</span><span class="o">.</span><span class="n">_asdict</span><span class="p">())</span>
 
 <span class="c1"># Validate that we get the same log prob</span>
-<span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">log_likelihood_tfp</span><span class="p">,</span> <span class="n">log_likelihood_numpyro</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.testing.assert_allclose.html#numpy.testing.assert_allclose" title="numpy.testing.assert_allclose"><span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span></a><span class="p">(</span><span class="n">log_likelihood_tfp</span><span class="p">,</span> <span class="n">log_likelihood_numpyro</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -1635,7 +1568,7 @@ condition <code class="docutils literal notranslate"><span class="pre">z</span> 
 
 <span class="c1"># Condition z to .01 in NumPyro and sample</span>
 <span class="n">predictive</span> <span class="o">=</span> <span class="n">numpyro</span><span class="o">.</span><span class="n">infer</span><span class="o">.</span><span class="n">Predictive</span><span class="p">(</span>
-    <span class="n">numpyro_model</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;z&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="mf">.01</span><span class="p">)})</span>
+    <span class="n">numpyro_model</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">"z"</span><span class="p">:</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.asarray.html#numpy.asarray" title="numpy.asarray"><span class="n">np</span><span class="o">.</span><span class="n">asarray</span></a><span class="p">(</span><span class="mf">.01</span><span class="p">)})</span>
 <span class="n">predictive</span><span class="p">(</span><span class="n">sample_key</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1661,13 +1594,13 @@ it.</p>
 <span class="k">assert</span> <span class="n">dist</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">scale</span> <span class="o">==</span> <span class="n">value</span><span class="o">.</span><span class="n">z</span>
 
 <span class="c1"># Conditioned z to .01 in NumPyro and construct conditional distributions</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">numpyro</span><span class="o">.</span><span class="n">handlers</span><span class="o">.</span><span class="n">substitute</span><span class="p">(</span><span class="n">numpyro_model</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;z&quot;</span><span class="p">:</span> <span class="mf">.01</span><span class="p">})</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">numpyro</span><span class="o">.</span><span class="n">handlers</span><span class="o">.</span><span class="n">substitute</span><span class="p">(</span><span class="n">numpyro_model</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">"z"</span><span class="p">:</span> <span class="mf">.01</span><span class="p">})</span>
 <span class="k">with</span> <span class="n">numpyro</span><span class="o">.</span><span class="n">handlers</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">rng_seed</span><span class="o">=</span><span class="n">sample_key</span><span class="p">):</span>
     <span class="c1"># Under the seed context, the default behavior of a NumPyro model is the</span>
     <span class="c1"># same as in Pyro: drawing prior sample.</span>
     <span class="n">model_trace</span> <span class="o">=</span> <span class="n">numpyro</span><span class="o">.</span><span class="n">handlers</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">numpyro_model</span><span class="p">)</span><span class="o">.</span><span class="n">get_trace</span><span class="p">()</span>
-<span class="k">assert</span> <span class="n">model_trace</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">][</span><span class="s2">&quot;fn&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span> <span class="o">==</span> <span class="n">model_trace</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
-<span class="k">assert</span> <span class="n">model_trace</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">][</span><span class="s2">&quot;fn&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">scale</span> <span class="o">==</span> <span class="n">model_trace</span><span class="p">[</span><span class="s2">&quot;z&quot;</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
+<span class="k">assert</span> <span class="n">model_trace</span><span class="p">[</span><span class="s2">"y"</span><span class="p">][</span><span class="s2">"fn"</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span> <span class="o">==</span> <span class="n">model_trace</span><span class="p">[</span><span class="s2">"x"</span><span class="p">][</span><span class="s2">"value"</span><span class="p">]</span>
+<span class="k">assert</span> <span class="n">model_trace</span><span class="p">[</span><span class="s2">"y"</span><span class="p">][</span><span class="s2">"fn"</span><span class="p">]</span><span class="o">.</span><span class="n">scale</span> <span class="o">==</span> <span class="n">model_trace</span><span class="p">[</span><span class="s2">"z"</span><span class="p">][</span><span class="s2">"value"</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1756,8 +1689,8 @@ drawing some samples from a <span class="math notranslate nohighlight">\(\mathca
 evaluate their log probability:</p>
 <div class="literal-block-wrapper docutils container" id="scipy-stats">
 <div class="code-block-caption"><span class="caption-number">Listing 10.27 </span><span class="caption-text">scipy_stats</span><a class="headerlink" href="#scipy-stats" title="Permalink to this code">¶</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/index.html#module-numpy" title="numpy"><span class="nn">numpy</span></a> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/index.html#module-scipy" title="scipy"><span class="nn">scipy</span></a> <span class="kn">import</span> <a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/stats.html#module-scipy.stats" title="scipy.stats"><span class="n">stats</span></a>
 
 <span class="c1"># Draw 2 samples from a Normal(1., 2.) distribution</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1234</span><span class="p">)</span>
@@ -1773,7 +1706,7 @@ Normal distribution with fixed parameters as shown in Code Block
 <a class="reference internal" href="#scipy-stats2"><span class="std std-ref">scipy_stats2</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="scipy-stats2">
 <div class="code-block-caption"><span class="caption-number">Listing 10.28 </span><span class="caption-text">scipy_stats2</span><a class="headerlink" href="#scipy-stats2" title="Permalink to this code">¶</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">random_variable_x</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">random_variable_x</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html#scipy.stats.norm" title="scipy.stats.norm"><span class="n">stats</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
 
 <span class="n">x</span> <span class="o">=</span> <span class="n">random_variable_x</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1234</span><span class="p">)</span>
 <span class="n">logp</span> <span class="o">=</span> <span class="n">random_variable_x</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -1796,14 +1729,14 @@ raises an exception because <code class="docutils literal notranslate"><span cla
 be a NumPy array <a class="footnote-reference brackets" href="#id83" id="id43">19</a>.</p>
 <div class="literal-block-wrapper docutils container" id="simple-model-not-working-scipy">
 <div class="code-block-caption"><span class="caption-number">Listing 10.29 </span><span class="caption-text">simple_model_not_working_scipy</span><a class="headerlink" href="#simple-model-not-working-scipy" title="Permalink to this code">¶</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html#scipy.stats.norm" title="scipy.stats.norm"><span class="n">stats</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html#scipy.stats.norm" title="scipy.stats.norm"><span class="n">stats</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 <span class="n">y</span><span class="o">.</span><span class="n">rvs</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>...
-TypeError: unsupported operand type(s) for +: &#39;float&#39; and &#39;rv_frozen&#39;
+TypeError: unsupported operand type(s) for +: 'float' and 'rv_frozen'
 </pre></div>
 </div>
 <p>From this it becomes evident how tricky it is to design an API, what
@@ -1837,14 +1770,14 @@ specific the model in Equation <a class="reference internal" href="#equation-eq-
         <span class="bp">self</span><span class="o">.</span><span class="n">distribution</span> <span class="o">=</span> <span class="n">distribution</span>
 
     <span class="k">def</span> <span class="nf">__array__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">distribution</span><span class="o">.</span><span class="n">rvs</span><span class="p">())</span>
+        <span class="k">return</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.asarray.html#numpy.asarray" title="numpy.asarray"><span class="n">np</span><span class="o">.</span><span class="n">asarray</span></a><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">distribution</span><span class="o">.</span><span class="n">rvs</span><span class="p">())</span>
 
-<span class="n">x</span> <span class="o">=</span> <span class="n">RandomVariable</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">2.0</span><span class="p">))</span>
-<span class="n">z</span> <span class="o">=</span> <span class="n">RandomVariable</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">halfnorm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.</span><span class="p">))</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">RandomVariable</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">z</span><span class="p">))</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">RandomVariable</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html#scipy.stats.norm" title="scipy.stats.norm"><span class="n">stats</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">2.0</span><span class="p">))</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">RandomVariable</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.halfnorm.html#scipy.stats.halfnorm" title="scipy.stats.halfnorm"><span class="n">stats</span><span class="o">.</span><span class="n">halfnorm</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.</span><span class="p">))</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">RandomVariable</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html#scipy.stats.norm" title="scipy.stats.norm"><span class="n">stats</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">z</span><span class="p">))</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.asarray.html#numpy.asarray" title="numpy.asarray"><span class="n">np</span><span class="o">.</span><span class="n">asarray</span></a><span class="p">(</span><span class="n">y</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1870,11 +1803,11 @@ implementation of a more functional <code class="docutils literal notranslate"><
         <span class="bp">self</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
     
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(value=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__array__</span><span class="p">()</span><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(value=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__array__</span><span class="p">()</span><span class="si">}</span><span class="s2">)"</span>
 
     <span class="k">def</span> <span class="nf">__array__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">distribution</span><span class="o">.</span><span class="n">rvs</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+            <span class="k">return</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.asarray.html#numpy.asarray" title="numpy.asarray"><span class="n">np</span><span class="o">.</span><span class="n">asarray</span></a><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">distribution</span><span class="o">.</span><span class="n">rvs</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
 
     <span class="k">def</span> <span class="nf">set_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -1883,11 +1816,11 @@ implementation of a more functional <code class="docutils literal notranslate"><
     <span class="k">def</span> <span class="nf">log_prob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">distribution</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">distribution</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.array.html#numpy.array" title="numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
 
-<span class="n">x</span> <span class="o">=</span> <span class="n">RandomVariable</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">2.0</span><span class="p">))</span>
-<span class="n">z</span> <span class="o">=</span> <span class="n">RandomVariable</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">halfnorm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.</span><span class="p">))</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">RandomVariable</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">z</span><span class="p">))</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">RandomVariable</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html#scipy.stats.norm" title="scipy.stats.norm"><span class="n">stats</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">2.0</span><span class="p">))</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">RandomVariable</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.halfnorm.html#scipy.stats.halfnorm" title="scipy.stats.halfnorm"><span class="n">stats</span><span class="o">.</span><span class="n">halfnorm</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.</span><span class="p">))</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">RandomVariable</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html#scipy.stats.norm" title="scipy.stats.norm"><span class="n">stats</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">z</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1901,13 +1834,13 @@ closer to <code class="docutils literal notranslate"><span class="pre">x</span><
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Set x=5 and z=0.1&quot;</span><span class="p">)</span>
-<span class="n">x</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
-<span class="n">z</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="mf">0.05</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Set x=5 and z=0.1"</span><span class="p">)</span>
+<span class="n">x</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.asarray.html#numpy.asarray" title="numpy.asarray"><span class="n">np</span><span class="o">.</span><span class="n">asarray</span></a><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">z</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.asarray.html#numpy.asarray" title="numpy.asarray"><span class="n">np</span><span class="o">.</span><span class="n">asarray</span></a><span class="p">(</span><span class="mf">0.05</span><span class="p">))</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Reset z&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Reset z"</span><span class="p">)</span>
 <span class="n">z</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
@@ -1934,10 +1867,10 @@ posterior distribution for <code class="docutils literal notranslate"><span clas
 <div class="literal-block-wrapper docutils container" id="scipy-rv1-posterior">
 <div class="code-block-caption"><span class="caption-number">Listing 10.33 </span><span class="caption-text">scipy_rv1_posterior</span><a class="headerlink" href="#scipy-rv1-posterior" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Observed y = 5.</span>
-<span class="n">y</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mf">5.</span><span class="p">))</span>
+<span class="n">y</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.array.html#numpy.array" title="numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">(</span><span class="mf">5.</span><span class="p">))</span>
 
 <span class="n">posterior_density</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">xval</span><span class="p">,</span> <span class="n">zval</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">xval</span><span class="p">)</span> <span class="o">+</span> <span class="n">z</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">zval</span><span class="p">)</span> <span class="o">+</span> <span class="n">y</span><span class="o">.</span><span class="n">log_prob</span><span class="p">()</span>
-<span class="n">posterior_density</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mf">0.</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mf">1.</span><span class="p">))</span>
+<span class="n">posterior_density</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.array.html#numpy.array" title="numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">(</span><span class="mf">0.</span><span class="p">),</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.array.html#numpy.array" title="numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">(</span><span class="mf">1.</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1950,9 +1883,9 @@ density function, as shown in Code Block
 <div class="literal-block-wrapper docutils container" id="scipy-posterior">
 <div class="code-block-caption"><span class="caption-number">Listing 10.34 </span><span class="caption-text">scipy_posterior</span><a class="headerlink" href="#scipy-posterior" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">log_prob</span><span class="p">(</span><span class="n">xval</span><span class="p">,</span> <span class="n">zval</span><span class="p">,</span> <span class="n">yval</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
-    <span class="n">x_dist</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
-    <span class="n">z_dist</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">halfnorm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span>
-    <span class="n">y_dist</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">xval</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">zval</span><span class="p">)</span>
+    <span class="n">x_dist</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html#scipy.stats.norm" title="scipy.stats.norm"><span class="n">stats</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+    <span class="n">z_dist</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.halfnorm.html#scipy.stats.halfnorm" title="scipy.stats.halfnorm"><span class="n">stats</span><span class="o">.</span><span class="n">halfnorm</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span>
+    <span class="n">y_dist</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html#scipy.stats.norm" title="scipy.stats.norm"><span class="n">stats</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">xval</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">zval</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">x_dist</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">xval</span><span class="p">)</span> <span class="o">+</span> <span class="n">z_dist</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">zval</span><span class="p">)</span> <span class="o">+</span> <span class="n">y_dist</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">yval</span><span class="p">)</span>
 
 <span class="n">log_prob</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
@@ -2007,9 +1940,9 @@ need to again rewrite it a bit, shown in Code Block
 <div class="literal-block-wrapper docutils container" id="scipy-prior">
 <div class="code-block-caption"><span class="caption-number">Listing 10.35 </span><span class="caption-text">scipy_prior</span><a class="headerlink" href="#scipy-prior" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">prior_sample</span><span class="p">():</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">()</span>
-    <span class="n">z</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">halfnorm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">()</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">z</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">()</span>
+    <span class="n">x</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html#scipy.stats.norm" title="scipy.stats.norm"><span class="n">stats</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">()</span>
+    <span class="n">z</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.halfnorm.html#scipy.stats.halfnorm" title="scipy.stats.halfnorm"><span class="n">stats</span><span class="o">.</span><span class="n">halfnorm</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">()</span>
+    <span class="n">y</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html#scipy.stats.norm" title="scipy.stats.norm"><span class="n">stats</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">z</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">y</span>
 </pre></div>
 </div>
@@ -2046,9 +1979,9 @@ us to draw iid samples easily, with a small modification in Code Block
 <div class="literal-block-wrapper docutils container" id="prior-batch">
 <div class="code-block-caption"><span class="caption-number">Listing 10.36 </span><span class="caption-text">prior_batch</span><a class="headerlink" href="#prior-batch" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">prior_sample</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
-    <span class="n">z</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">halfnorm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">z</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">()</span>
+    <span class="n">x</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html#scipy.stats.norm" title="scipy.stats.norm"><span class="n">stats</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">z</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.halfnorm.html#scipy.stats.halfnorm" title="scipy.stats.halfnorm"><span class="n">stats</span><span class="o">.</span><span class="n">halfnorm</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html#scipy.stats.norm" title="scipy.stats.norm"><span class="n">stats</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">z</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">y</span>
 
 <span class="nb">print</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">prior_sample</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">))])</span>
@@ -2071,14 +2004,14 @@ samples, and <code class="docutils literal notranslate"><span class="pre">lm_pri
 <div class="literal-block-wrapper docutils container" id="prior-lm-batch">
 <div class="code-block-caption"><span class="caption-number">Listing 10.37 </span><span class="caption-text">prior_lm_batch</span><a class="headerlink" href="#prior-lm-batch" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n_row</span><span class="p">,</span> <span class="n">n_feature</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">5</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_row</span><span class="p">,</span> <span class="n">n_feature</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.randn.html#numpy.random.randn" title="numpy.random.randn"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span></a><span class="p">(</span><span class="n">n_row</span><span class="p">,</span> <span class="n">n_feature</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">lm_prior_sample0</span><span class="p">():</span>
-    <span class="n">intercept</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">()</span>
-    <span class="n">beta</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_feature</span><span class="p">),</span> <span class="n">scale</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">()</span>
-    <span class="n">sigma</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">halfnorm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">()</span>
+    <span class="n">intercept</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html#scipy.stats.norm" title="scipy.stats.norm"><span class="n">stats</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">()</span>
+    <span class="n">beta</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html#scipy.stats.norm" title="scipy.stats.norm"><span class="n">stats</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.zeros.html#numpy.zeros" title="numpy.zeros"><span class="n">np</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">(</span><span class="n">n_feature</span><span class="p">),</span> <span class="n">scale</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">()</span>
+    <span class="n">sigma</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.halfnorm.html#scipy.stats.halfnorm" title="scipy.stats.halfnorm"><span class="n">stats</span><span class="o">.</span><span class="n">halfnorm</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">()</span>
     <span class="n">y_hat</span> <span class="o">=</span> <span class="n">X</span> <span class="o">@</span> <span class="n">beta</span> <span class="o">+</span> <span class="n">intercept</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sigma</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">()</span>
+    <span class="n">y</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html#scipy.stats.norm" title="scipy.stats.norm"><span class="n">stats</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sigma</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">y</span>
 
 <span class="k">def</span> <span class="nf">lm_prior_sample</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
@@ -2086,12 +2019,12 @@ samples, and <code class="docutils literal notranslate"><span class="pre">lm_pri
         <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="n">size</span><span class="p">,)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">size</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
-    <span class="n">intercept</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
-    <span class="n">beta</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_feature</span><span class="p">),</span> <span class="n">scale</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span>
+    <span class="n">intercept</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html#scipy.stats.norm" title="scipy.stats.norm"><span class="n">stats</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">beta</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html#scipy.stats.norm" title="scipy.stats.norm"><span class="n">stats</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.zeros.html#numpy.zeros" title="numpy.zeros"><span class="n">np</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">(</span><span class="n">n_feature</span><span class="p">),</span> <span class="n">scale</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span>
         <span class="n">size</span><span class="o">=</span><span class="n">size</span> <span class="o">+</span> <span class="p">(</span><span class="n">n_feature</span><span class="p">,))</span>
-    <span class="n">sigma</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">halfnorm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
-    <span class="n">y_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">X</span> <span class="o">@</span> <span class="n">beta</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">])</span> <span class="o">+</span> <span class="n">intercept</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sigma</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">])</span><span class="o">.</span><span class="n">rvs</span><span class="p">()</span>
+    <span class="n">sigma</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.halfnorm.html#scipy.stats.halfnorm" title="scipy.stats.halfnorm"><span class="n">stats</span><span class="o">.</span><span class="n">halfnorm</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">y_hat</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.squeeze.html#numpy.squeeze" title="numpy.squeeze"><span class="n">np</span><span class="o">.</span><span class="n">squeeze</span></a><span class="p">(</span><span class="n">X</span> <span class="o">@</span> <span class="n">beta</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">])</span> <span class="o">+</span> <span class="n">intercept</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html#scipy.stats.norm" title="scipy.stats.norm"><span class="n">stats</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sigma</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">])</span><span class="o">.</span><span class="n">rvs</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">y</span>
 </pre></div>
 </div>
@@ -2162,10 +2095,10 @@ Block <a class="reference internal" href="#jd-lm-batch"><span class="std std-ref
 <span class="linenos"> 4</span>    <span class="n">tfd</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
 <span class="linenos"> 5</span>    <span class="k">lambda</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">intercept</span><span class="p">:</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Independent</span><span class="p">(</span>
 <span class="linenos"> 6</span>        <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span>
-<span class="linenos"> 7</span>            <span class="n">loc</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;ij,...j-&gt;...i&quot;</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span> <span class="o">+</span> <span class="n">intercept</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+<span class="linenos"> 7</span>            <span class="n">loc</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">"ij,...j-&gt;...i"</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span> <span class="o">+</span> <span class="n">intercept</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
 <span class="linenos"> 8</span>            <span class="n">scale</span><span class="o">=</span><span class="n">sigma</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]),</span>
 <span class="linenos"> 9</span>        <span class="n">reinterpreted_batch_ndims</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-<span class="linenos">10</span>        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="linenos">10</span>        <span class="n">name</span><span class="o">=</span><span class="s2">"y"</span><span class="p">)</span>
 <span class="linenos">11</span><span class="p">])</span>
 <span class="linenos">12</span>
 <span class="linenos">13</span><span class="nb">print</span><span class="p">(</span><span class="n">jd</span><span class="p">)</span>
@@ -2176,7 +2109,7 @@ Block <a class="reference internal" href="#jd-lm-batch"><span class="std std-ref
 </pre></div>
 </div>
 </div>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>tfp.distributions.JointDistributionSequential &#39;JointDistributionSequential&#39; 
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>tfp.distributions.JointDistributionSequential 'JointDistributionSequential' 
 batch_shape=[[], [], [], []] 
 event_shape=[[], [5], [], [1000]] 
 dtype=[float32, float32, float32, float32]
@@ -2287,7 +2220,7 @@ for effect handling is to perform automatic reparameterization
 perform automatic non-centering of a random variable in a model. Hint:
 NumPyro already provides this functionality with
 <code class="docutils literal notranslate"><span class="pre">numpyro.handlers.reparam</span></code>.</p>
-<hr class="footnotes docutils" />
+<hr class="footnotes docutils"/>
 <dl class="footnote brackets">
 <dt class="label" id="id64"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>
 <dd><p>With the prerequisite that basic ingredients like APIs to specify
@@ -2413,8 +2346,7 @@ in PPLs in <em>PyMC3 shape handling</em>
 </dl>
 </section>
 </section>
-
-    <script type="text/x-thebe-config">
+<script type="text/x-thebe-config">
     {
         requestKernel: true,
         binderOptions: {
@@ -2432,46 +2364,38 @@ in PPLs in <em>PyMC3 shape handling</em>
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
-
-              </div>
-              
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="chp_09.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">9. </span>End to End Bayesian Workflows</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="chp_11.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">11. </span>Appendiceal Topics</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
+<script>kernelName = 'python3'</script>
 </div>
-            
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
+<!-- Previous / next buttons -->
+<div class="prev-next-area">
+<a class="left-prev" href="chp_09.html" id="prev-link" title="previous page">
+<i class="fas fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title"><span class="section-number">9. </span>End to End Bayesian Workflows</p>
+</div>
+</a>
+<a class="right-next" href="chp_11.html" id="next-link" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title"><span class="section-number">11. </span>Appendiceal Topics</p>
+</div>
+<i class="fas fa-angle-right"></i>
+</a>
+</div>
+</div>
+</div>
+<footer class="footer">
+<p>
     
-      By Martin, Kumar, Lao<br/>
+      Por Martin, Kumar, Lao<br/>
     
-        &copy; Copyright 2021.<br/>
-  </p>
+        © Derechos de autor 2021.<br/>
+</p>
 </footer>
 </main>
-
-
-      </div>
-    </div>
-  
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
-
-  </body>
+</div>
+</div>
+<script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+</body>
 </html>

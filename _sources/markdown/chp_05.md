@@ -75,9 +75,9 @@ fitted curve presents a *deep valley* followed by a *high peak* towards
 high values of $X$, even when there are no data points with such low or
 high values.
 
-Additionally, as the degree increases the fit becomes more to the
-removal of points, or equivalently to the addition of future data, in
-other words as the degree increases the model becomes more prone to
+Additionally, as the degree increases the fit becomes more sensitive to the
+removal of points, or equivalently to the addition of future data. In
+other words as the degree increases, the model becomes more prone to
 overfitting. For example, in {numref}`fig:polynomial_regression` the
 black lines represent the fit to the entire data and the dashed lines
 the fit when we remove one data point, indicated with a cross in the
