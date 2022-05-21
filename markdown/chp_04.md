@@ -1069,7 +1069,7 @@ in {numref}`tab:unpooled_sales`. In the unpooled estimate the mean of
 the $\sigma$ estimate for salads is 21.3, whereas in the hierarchical
 estimate the mean of the same parameter estimate is now 25.5, and has
 been "pulled\" up by the means of the pizza and sandwiches category.
-Moreover, the estimates of the pizza and salad categories in the
+Moreover, the estimates of the pizza and sandwich categories in the
 hierarchical category, while regressed towards the mean slightly, remain
 largely the same as the unpooled estimates. Note how the estimates of each
 sigma are distinctly different from each other. Given that our observed data
