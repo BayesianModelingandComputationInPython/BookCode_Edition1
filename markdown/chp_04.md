@@ -975,7 +975,7 @@ motivating restaurant example we believed the parameter $\sigma$ of the
 modeling we can express this idea with *hierarchical models*. In
 hierarchical models the parameters are *partially pooled*. The partial
 refers to the idea that groups that do not share one fixed parameter,
-but share a which describes the distribution of for the parameters of
+but share a *hyperprior distribution* which describes the distribution of the parameters of
 the prior itself. Conceptually this idea is shown in
 {numref}`fig:partial_pooled_model`. Each group gets its own parameters
 which are drawn from a common hyperprior distribution.
