@@ -1362,8 +1362,8 @@ multiple samples down to the 0 value on the x-axis.
 \begin{split}
 \beta_{\mu h} \sim& \mathcal{N} \\
 \beta_{\sigma h} \sim& \mathcal{HN} \\
-\beta_\text{m\_offset} \sim& \mathcal{N}(0,1) \\
-\beta_m =& \overbrace{\beta_{\mu h} + \beta_\text{m\_offset}*\beta_{\sigma h}}^{\text{Non-centered}}  \\
+\beta_\text{m_offset} \sim& \mathcal{N}(0,1) \\
+\beta_m =& \overbrace{\beta_{\mu h} + \beta_\text{m_offset}*\beta_{\sigma h}}^{\text{Non-centered}}  \\
 \sigma_{h} \sim& \mathcal{HN} \\
 \sigma_{m} \sim& \mathcal{HN}(\sigma_{h}) \\
 Y \sim& \mathcal{N}(\beta_{m} * X_m,\sigma_{m})
