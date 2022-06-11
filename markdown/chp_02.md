@@ -1713,7 +1713,7 @@ group, including divergences (`diverging`):
 **2E6.** In the GitHub repository we have included an
 InferenceData object with a Poisson model and one with a
 NegativeBinomial, both models are fitted to the same dataset. Use
-`az.load_arviz_data(.)` to load them, and then use ArviZ functions to
+`az.from_netcdf(.)` to load them, and then use ArviZ functions to
 answer the following questions:
 
 1.  Which model provides a better fit to the data? Use the functions
