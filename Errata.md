@@ -34,6 +34,7 @@
 | 61 | ...the computation of the weights **take** into account all models together. | ...the computation of the weights **takes** into account all models together. | Thanks Ero Carrera |
 | 61 | ...the weights computed with `az.compare(., method="stacking")`~~**,**~~ makes a lot of sense. | ...the weights computed with `az.compare(., method="stacking")` makes a lot of sense. | Thanks Ero Carrera |
 | 62 | ...Reproduce Figure 2.7, but using **az.plot_loo(ecdf=True)**... | ...Reproduce Figure 2.7, but using **az.plot_loo_pit(ecdf=True)**... | Thanks Alihan Zihna |
+| 62 | Use `az.load_arviz_data(.)` to load them... | Use `az.from_netcdf(.)` to load them... | Thanks Ikaro Silva |
 | 64 | ...and prior distribution $\mathcal{N}(201)... | ...and prior distribution $\mathcal{N}(20, 1)... | |
 | 70 |  | Figure 3.3 updated to include vertical lines of empirical estimate | |
 | 71 | Take a moment to compare the estimate of the mean with the summary mean show**s**... | Take a moment to compare the estimate of the mean with the summary mean show**n**... | Thanks Sebastian |
@@ -57,6 +58,7 @@
 | 126 | ... describes the distribution **of** for the parameters of the prior itself... | ... describes the distribution for the parameters of the prior itself... | |
 | 130 | ...the estimates of the pizza and salad categories... | ...the estimates of the pizza and **sandwich** categories... | Thanks  @paw-lu |
 | 133 | (In Code Block 9.1) inside function `gen_hierarchical_salad_sales` all reference to `hierarchical_salad_df` | should be `input_df` | Thanks Alihan Zihna |
+| 156 | Fig 5.7 y_labels is **count_std** | should be **count_normalized** | Thanks Paulo S. Costa |
 | 183 | ...a backshift operator, also called Lag operator) | ...a backshift operator **(**also called Lag operator) |  |
 | 191 | (footnote) The Stan implementation of SARIMA can be found in https://github.com/asael697/**varstan**. | The Stan implementation of SARIMA can be found in **e.g.,** https://github.com/asael697/**bayesforecast**. |  |
 | 197 | we can apply the Kalman filter to **to** obtain**s** the posterior | we can apply the Kalman filter to obtain the posterior |  |
