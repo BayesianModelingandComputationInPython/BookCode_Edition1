@@ -8,6 +8,7 @@
 | xvi | ...and may require a couple **read troughs** | ...and may require a couple **read-throughs** | Thanks John M. Shea |
 | xvi | For a reference on Python, or how to setup the computation environment needed for this book, go to README.md in Github to understand how to setup a code environment | For a reference on how to setup the computation environment needed for this book, go to README.md in GitHhub. |  |
 | 1 | ...we introduce these concepts and methods, many, which... | ...we introduce these concepts and methods, many **of** which... | Thanks  Thomas Ogden |
+| 2 | ...though this is not a **guaranteed** of any Bayesian model. | ...though this is not a **guarantee**  of any Bayesian model. | Thanks  Guilherme Costa  |
 | 8 | ...it will **depends** on the result... | ...it will **depend** on the result.. | Thanks Ero Carrera |
 | 9 | ...or **simple** the posterior. | ...or **simply** the posterior.  | Thanks Ero Carrera |
 | 23 | An absolute value mean... | An absolute deviation to the mean... | Thanks Zhengchen Cai|

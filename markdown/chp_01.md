@@ -92,7 +92,7 @@ modeling in 3 steps.
 2.  We use Bayes' theorem to condition our models to the available data.
     We call this process **inference**, and as a result we obtain a
     posterior distribution. We hope the data reduces the uncertainty for
-    possible parameter values, though this is not a guaranteed of any
+    possible parameter values, though this is not a guarantee of any
     Bayesian model.
 
 3.  We criticize the model by checking whether the model makes sense
