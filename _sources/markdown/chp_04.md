@@ -975,7 +975,7 @@ motivating restaurant example we believed the parameter $\sigma$ of the
 modeling we can express this idea with *hierarchical models*. In
 hierarchical models the parameters are *partially pooled*. The partial
 refers to the idea that groups that do not share one fixed parameter,
-but share a which describes the distribution of for the parameters of
+but share a *hyperprior distribution* which describes the distribution of the parameters of
 the prior itself. Conceptually this idea is shown in
 {numref}`fig:partial_pooled_model`. Each group gets its own parameters
 which are drawn from a common hyperprior distribution.
@@ -1069,7 +1069,7 @@ in {numref}`tab:unpooled_sales`. In the unpooled estimate the mean of
 the $\sigma$ estimate for salads is 21.3, whereas in the hierarchical
 estimate the mean of the same parameter estimate is now 25.5, and has
 been "pulled\" up by the means of the pizza and sandwiches category.
-Moreover, the estimates of the pizza and salad categories in the
+Moreover, the estimates of the pizza and sandwich categories in the
 hierarchical category, while regressed towards the mean slightly, remain
 largely the same as the unpooled estimates. Note how the estimates of each
 sigma are distinctly different from each other. Given that our observed data
@@ -1362,8 +1362,8 @@ multiple samples down to the 0 value on the x-axis.
 \begin{split}
 \beta_{\mu h} \sim& \mathcal{N} \\
 \beta_{\sigma h} \sim& \mathcal{HN} \\
-\beta_\text{m\_offset} \sim& \mathcal{N}(0,1) \\
-\beta_m =& \overbrace{\beta_{\mu h} + \beta_\text{m\_offset}*\beta_{\sigma h}}^{\text{Non-centered}}  \\
+\beta_\text{m_offset} \sim& \mathcal{N}(0,1) \\
+\beta_m =& \overbrace{\beta_{\mu h} + \beta_\text{m_offset}*\beta_{\sigma h}}^{\text{Non-centered}}  \\
 \sigma_{h} \sim& \mathcal{HN} \\
 \sigma_{m} \sim& \mathcal{HN}(\sigma_{h}) \\
 Y \sim& \mathcal{N}(\beta_{m} * X_m,\sigma_{m})
