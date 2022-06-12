@@ -61,7 +61,6 @@
 | 156 | Fig 5.7 y_labels is **count_std** | should be **count_normalized** | Thanks Paulo S. Costa |
 | 183 | ...a backshift operator, also called Lag operator) | ...a backshift operator **(**also called Lag operator) |  |
 | 191 | (footnote) The Stan implementation of SARIMA can be found in https://github.com/asael697/**varstan**. | The Stan implementation of SARIMA can be found in **e.g.,** https://github.com/asael697/**bayesforecast**. |  |
-| 196 | Equation (6.15) last line  | $\mathbf{P}_{t \mid t} & = \mathbf{P}_{t \mid t-1} - \mathbf{K}_t \mathbf{S}_t \mathbf{P}_{t \mid t-1}$ |  |
 | 197 | we can apply the Kalman filter to **to** obtain**s** the posterior | we can apply the Kalman filter to obtain the posterior |  |
 | 261 | Some **commons** elements to all Bayesian analyses, | Some **common** elements to all Bayesian analyses, | Thanks Ero Carrera |
 | 262 | (In Figure 9.1.) Model **Compasion** | Model **Comparison** | Thanks Ben Vincent |
