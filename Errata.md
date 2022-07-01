@@ -60,6 +60,7 @@
 | 133 | (In Code Block 9.1) inside function `gen_hierarchical_salad_sales` all reference to `hierarchical_salad_df` | should be `input_df` | Thanks Alihan Zihna |
 | 156 | Fig 5.7 y_labels is **count_std** | should be **count_normalized** | Thanks Paulo S. Costa |
 | 183 | ...a backshift operator, also called Lag operator) | ...a backshift operator **(**also called Lag operator) |  |
+| 189 | Equation (6.9) $y_t = \alpha + \sum_{i=1}^{p}\phi_i y_{t-period-i} + \sum_{j=1}^{q}\theta_j \epsilon_{t-period-j} + \epsilon_t$ | $y_t = \alpha + \sum_{i=1}^{p}\phi_i y_{t-period \cdot i} + \sum_{j=1}^{q}\theta_j \epsilon_{t-period \cdot j} + \epsilon_t$ | Thanks Marcin Elantkowski |
 | 191 | (footnote) The Stan implementation of SARIMA can be found in https://github.com/asael697/**varstan**. | The Stan implementation of SARIMA can be found in **e.g.,** https://github.com/asael697/**bayesforecast**. |  |
 | 197 | we can apply the Kalman filter to **to** obtain**s** the posterior | we can apply the Kalman filter to obtain the posterior |  |
 | 261 | Some **commons** elements to all Bayesian analyses, | Some **common** elements to all Bayesian analyses, | Thanks Ero Carrera |
