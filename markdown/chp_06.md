@@ -1046,7 +1046,7 @@ being ARMA(p, q). Similarly, for seasonal ARMA we have:
 :label: eq:sarma
 
 \begin{split}
-y_t = \alpha + \sum_{i=1}^{p}\phi_i y_{t-period-i} + \sum_{j=1}^{q}\theta_j \epsilon_{t-period-j} + \epsilon_t
+y_t = \alpha + \sum_{i=1}^{p}\phi_i y_{t-period*i} + \sum_{j=1}^{q}\theta_j \epsilon_{t-period*j} + \epsilon_t
 \end{split}
 ```
 
