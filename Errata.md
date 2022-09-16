@@ -8,14 +8,6 @@
 |xvi| If you have a good understanding of statistics, either by practice or formal training, but you have never being ... | If you have a good understanding of statistics, either by practice or formal training, but you have never **being**... | Thanks Behrouz B. |
 | xvi | ...and may require a couple **read troughs** | ...and may require a couple **read-throughs** | Thanks John M. Shea |
 | xvi | For a reference on Python, or how to setup the computation environment needed for this book, go to README.md in Github to understand how to setup a code environment | For a reference on how to setup the computation environment needed for this book, go to README.md in GitHhub. |  |
-
-
-|227| Only the first 2 independent variables are **unrelated**... | Only the first 2 independent variables are **related**... | Thanks  icfly2   |
-
-
-
-
-
 | 1 | ...we introduce these concepts and methods, many, which... | ...we introduce these concepts and methods, many **of** which... | Thanks  Thomas Ogden |
 | 2 | ...though this is not a **guaranteed** of any Bayesian model. | ...though this is not a **guarantee**  of any Bayesian model. | Thanks  Guilherme Costa  |
 |7| ...(conceptually it means it is equally likely **are** we are... | ...(conceptually it means it is equally likely we are... | Thanks Behrouz B. |
