@@ -5,11 +5,15 @@
 
 | Page | Printed text | Correct text | Note |
 |---|---|---|---|
+|xvi| If you have a good understanding of statistics, either by practice or formal training, but you have never being ... | If you have a good understanding of statistics, either by practice or formal training, but you have never **being**... | Thanks Behrouz B. |
 | xvi | ...and may require a couple **read troughs** | ...and may require a couple **read-throughs** | Thanks John M. Shea |
 | xvi | For a reference on Python, or how to setup the computation environment needed for this book, go to README.md in Github to understand how to setup a code environment | For a reference on how to setup the computation environment needed for this book, go to README.md in GitHhub. |  |
 | 1 | ...we introduce these concepts and methods, many, which... | ...we introduce these concepts and methods, many **of** which... | Thanks  Thomas Ogden |
 | 2 | ...though this is not a **guaranteed** of any Bayesian model. | ...though this is not a **guarantee**  of any Bayesian model. | Thanks  Guilherme Costa  |
+|7| ...(conceptually it means it is equally likely **are** we are... | ...(conceptually it means it is equally likely we are... | Thanks Behrouz B. |
+|8| At line **20**.... | At line **14**... | Thanks Behrouz B. |
 | 8 | ...it will **depends** on the result... | ...it will **depend** on the result.. | Thanks Ero Carrera |
+|9| Some people make the distinction that a sample is made up by a collection of draws, **other**... | Some people make the distinction that a sample is made up by a collection of draws, **others**... | Thanks Behrouz B. |
 | 9 | ...or **simple** the posterior. | ...or **simply** the posterior.  | Thanks Ero Carrera |
 | 23 | An absolute value mean... | An absolute deviation to the mean... | Thanks Zhengchen Cai|
 | 24 | One is what could called... | One is what could **be** called... | Thanks Sebastian |
@@ -31,6 +35,7 @@
 | 58 | ...comparing p_loo to the number of parameters $p$ can **provides** us with... | ...comparing p_loo to the number of parameters $p$ can **provide** us with... | Thanks Ero Carrera |
 | 59 | ...which is transformation in 1D where we can... | ...which is **a** transformation in 1D where we can... | Thanks Ero Carrera |
 | 61 | When using a logarithmic scoring rule this is **equivalently** to **compute**: | When using a logarithmic scoring rule this is **equivalent** to **computing**: | Thanks Ero Carrera |
+|61| $\max_{n} \frac{1}{n} \sum_{i=1}^{n}log\sum_{j=1}^{k} w_j p(y_i \mid y_{-i}, M_j)$ | $\max_{w} \frac{1}{n} \sum_{i=1}^{n}log\sum_{j=1}^{k} w_j p(y_i \mid y_{-i}, M_j)$ | Thanks Ikaro Silva  |
 | 61 | ...the computation of the weights **take** into account all models together. | ...the computation of the weights **takes** into account all models together. | Thanks Ero Carrera |
 | 61 | ...the weights computed with `az.compare(., method="stacking")`~~**,**~~ makes a lot of sense. | ...the weights computed with `az.compare(., method="stacking")` makes a lot of sense. | Thanks Ero Carrera |
 | 62 | ...Reproduce Figure 2.7, but using **az.plot_loo(ecdf=True)**... | ...Reproduce Figure 2.7, but using **az.plot_loo_pit(ecdf=True)**... | Thanks Alihan Zihna |
@@ -63,6 +68,7 @@
 | 189 | Equation (6.9) $y_t = \alpha + \sum_{i=1}^{p}\phi_i y_{t-period-i} + \sum_{j=1}^{q}\theta_j \epsilon_{t-period-j} + \epsilon_t$ | $y_t = \alpha + \sum_{i=1}^{p}\phi_i y_{t-period \cdot i} + \sum_{j=1}^{q}\theta_j \epsilon_{t-period \cdot j} + \epsilon_t$ | Thanks Marcin Elantkowski |
 | 191 | (footnote) The Stan implementation of SARIMA can be found in https://github.com/asael697/**varstan**. | The Stan implementation of SARIMA can be found in **e.g.,** https://github.com/asael697/**bayesforecast**. |  |
 | 197 | we can apply the Kalman filter to **to** obtain**s** the posterior | we can apply the Kalman filter to obtain the posterior |  |
+|227| Only the first 2 independent variables are **unrelated**... | Only the first 2 independent variables are **related**... | Thanks  icfly2   |
 | 261 | Some **commons** elements to all Bayesian analyses, | Some **common** elements to all Bayesian analyses, | Thanks Ero Carrera |
 | 262 | (In Figure 9.1.) Model **Compasion** | Model **Comparison** | Thanks Ben Vincent |
 | 262 | ...averaging some **of** all of them, or even presenting all the models and discussing their **strength** and... | ...averaging some **or** all of them, or even presenting all the models and discussing their **strengths** and... | Thanks Ero Carrera |

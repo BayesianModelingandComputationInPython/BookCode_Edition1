@@ -85,7 +85,7 @@ Probability {cite:p}`blitzstein_2019`. The latter is a little bit more
 theoretical, but both keep application in mind.
 
 If you have a good understanding of statistics, either by practice or
-formal training, but you have never being exposed to Bayesian
+formal training, but you have never been exposed to Bayesian
 statistics, you may still use this book as an introduction to the
 subject, the pace at the start (mostly the first two chapters) will be a
 bit rapid, and may require a couple read-throughs.
