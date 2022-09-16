@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>7. Bayesian Additive Regression Trees &#8212; Bayesian Modeling and Computation in Python</title>
     
@@ -38,6 +38,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
@@ -61,7 +62,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="8. Approximate Bayesian Computation" href="chp_08.html" />
     <link rel="prev" title="6. Time Series" href="chp_06.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
+    <meta name="docsearch:language" content="en">
     
 
     <!-- Google Analytics -->
@@ -96,7 +97,7 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Buscar este libro ..." aria-label="Buscar este libro ..." autocomplete="off" >
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <p aria-level="2" class="caption" role="heading">
@@ -301,8 +302,8 @@ const thebe_selector_output = ".output, .cell_output"
             
             <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
                 data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Navegación de palanca" aria-controls="site-navigation"
-                title="Navegación de palanca" data-toggle="tooltip" data-placement="left">
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
                 <i class="fas fa-bars"></i>
                 <i class="fas fa-arrow-left"></i>
                 <i class="fas fa-arrow-up"></i>
@@ -317,12 +318,12 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="dropdown-buttons sourcebuttons">
         <a class="repository-button"
             href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Repositorio de origen"><i
-                    class="fab fa-github"></i>repositorio</button></a>
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
             href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_07.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Abrir un problema"><i class="fas fa-lightbulb"></i>Tema abierto</button></a>
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
     </div>
 </div>
@@ -330,8 +331,8 @@ const thebe_selector_output = ".output, .cell_output"
             <!-- Full screen (wrap in <a> to have style consistency -->
 
 <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Modo de pantalla completa"
-        title="Modo de pantalla completa"><i
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
             class="fas fa-expand"></i></button></a>
 
             <!-- Launch buttons -->
@@ -342,7 +343,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contenido
+                <i class="fas fa-list"></i> Contents
             </div>
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
@@ -458,7 +459,7 @@ const thebe_selector_output = ".output, .cell_output"
                     <div id="jb-print-toc">
                         
                         <div>
-                            <h2> Contenido </h2>
+                            <h2> Contents </h2>
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
@@ -568,7 +569,7 @@ const thebe_selector_output = ".output, .cell_output"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="bayesian-additive-regression-trees">
-<span id="chap6"></span><h1><span class="section-number">7. </span>Bayesian Additive Regression Trees<a class="headerlink" href="#bayesian-additive-regression-trees" title="Permalink to this headline">¶</a></h1>
+<span id="chap6"></span><h1><span class="section-number">7. </span>Bayesian Additive Regression Trees<a class="headerlink" href="#bayesian-additive-regression-trees" title="Permalink to this heading">¶</a></h1>
 <p>In Chapter <a class="reference internal" href="chp_05.html#chap3-5"><span class="std std-ref">5</span></a> we saw how we can approximate a
 function by summing up a series of (simple) basis functions. We showed
 how B-splines have some nice properties when used as basis functions. In
@@ -578,7 +579,7 @@ another flexible way to represent the piecewise constant functions, or
 step functions, that we saw in Chapter <a class="reference internal" href="chp_05.html#chap3-5"><span class="std std-ref">5</span></a>. In
 particular we will focus on Bayesian Additive Regression Trees (BART). A
 Bayesian non-parametric model that uses a sum of decision trees to
-obtain a flexible model <a class="footnote-reference brackets" href="#id38" id="id1">1</a>. They are often discussed in terms closer
+obtain a flexible model <a class="footnote-reference brackets" href="#id38" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>. They are often discussed in terms closer
 to the machine learning verbiage than to the statistical ones
 <span id="id2">[<a class="reference internal" href="references.html#id148" title="Leo Breiman. Statistical modeling: the two cultures (with comments and a rejoinder by the author). Statistical science, 16(3):199–231, 2001.">69</a>]</span>. In a sense BART is more of a <em>fire and forget model</em>
 than the carefully hand crafted models we discuss in other chapters.</p>
@@ -602,7 +603,7 @@ prior (or shrinkage prior) to make each tree behave as a <em>weak learner</em>.<
 and apply, we should first discuss decisions trees. In case you are
 already familiar with them, feel free to skip the next section.</p>
 <section id="decision-trees">
-<span id="id4"></span><h2><span class="section-number">7.1. </span>Decision Trees<a class="headerlink" href="#decision-trees" title="Permalink to this headline">¶</a></h2>
+<span id="id4"></span><h2><span class="section-number">7.1. </span>Decision Trees<a class="headerlink" href="#decision-trees" title="Permalink to this heading">¶</a></h2>
 <p>Let us assume we have two variables <span class="math notranslate nohighlight">\(X_1\)</span> and <span class="math notranslate nohighlight">\(X_2\)</span> and we want to use
 those variables to classify objects into two classes:  ⬤ or ▲. To achieve
 this goal we can use a tree-structure as shown on the left panel of
@@ -748,7 +749,7 @@ potential to represent higher order interactions. Additionally, because
 we use an ensemble of trees we can build virtually any combination of
 main and interaction effects.</p>
 <section id="ensembles-of-decision-trees">
-<span id="id5"></span><h3><span class="section-number">7.1.1. </span>Ensembles of Decision Trees<a class="headerlink" href="#ensembles-of-decision-trees" title="Permalink to this headline">¶</a></h3>
+<span id="id5"></span><h3><span class="section-number">7.1.1. </span>Ensembles of Decision Trees<a class="headerlink" href="#ensembles-of-decision-trees" title="Permalink to this heading">¶</a></h3>
 <p>Considering that over-complex trees will likely not be very good at
 predicting new data, it is common to introduce devices to reduce the
 complexity of decision trees and get a fit that better adapts to the
@@ -774,7 +775,7 @@ flexibility and generalization.</p>
 </section>
 </section>
 <section id="the-bart-model">
-<span id="id6"></span><h2><span class="section-number">7.2. </span>The BART Model<a class="headerlink" href="#the-bart-model" title="Permalink to this headline">¶</a></h2>
+<span id="id6"></span><h2><span class="section-number">7.2. </span>The BART Model<a class="headerlink" href="#the-bart-model" title="Permalink to this heading">¶</a></h2>
 <p>If we assume that the <span class="math notranslate nohighlight">\(B_i\)</span> functions in equation <a class="reference internal" href="chp_05.html#equation-eq-bfr">(5.3)</a>
 are decision trees we can write:</p>
 <div class="math notranslate nohighlight" id="equation-eq-bart">
@@ -805,7 +806,7 @@ likelihood or over <span class="math notranslate nohighlight">\(\sigma\)</span> 
 so now we will focus on those priors particular to the BART model.</p>
 </section>
 <section id="priors-for-bart">
-<span id="id7"></span><h2><span class="section-number">7.3. </span>Priors for BART<a class="headerlink" href="#priors-for-bart" title="Permalink to this headline">¶</a></h2>
+<span id="id7"></span><h2><span class="section-number">7.3. </span>Priors for BART<a class="headerlink" href="#priors-for-bart" title="Permalink to this heading">¶</a></h2>
 <p>The original BART paper <span id="id8">[<a class="reference internal" href="references.html#id5" title="Hugh A. Chipman, Edward I. George, and Robert E. McCulloch. Bart: bayesian additive regression trees. The Annals of Applied Statistics, 4(1):266–298, 2010.">71</a>]</span>, and most
 subsequent modifications and implementations rely on conjugate priors.
 The BART implementation in PyMC3 does not use conjugate priors and also
@@ -813,23 +814,23 @@ deviates in other ways. Instead of discussing the differences we will
 focus on the PyMC3 implementation, which is the one we are going to use
 for the examples.</p>
 <section id="prior-independence">
-<span id="id9"></span><h3><span class="section-number">7.3.1. </span>Prior Independence<a class="headerlink" href="#prior-independence" title="Permalink to this headline">¶</a></h3>
+<span id="id9"></span><h3><span class="section-number">7.3.1. </span>Prior Independence<a class="headerlink" href="#prior-independence" title="Permalink to this heading">¶</a></h3>
 <p>In order to simplify the specification of the prior we assume that the
 structure of the tree <span class="math notranslate nohighlight">\(\mathcal{T}_j\)</span> and the leaf values
 <span class="math notranslate nohighlight">\(\mathcal{M}_j\)</span> are independent. Additionally these priors are
 independent from the rest of the parameters, <span class="math notranslate nohighlight">\(\theta\)</span> in Equation
 <a class="reference internal" href="#equation-eq-bart">(7.1)</a>. By assuming independence we are allowed to split the
 prior specification into parts. Otherwise we should devise a way to
-specify a single prior over the space of trees <a class="footnote-reference brackets" href="#id40" id="id10">2</a>.</p>
+specify a single prior over the space of trees <a class="footnote-reference brackets" href="#id40" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>.</p>
 </section>
 <section id="prior-for-the-tree-structure-mathcal-t-j">
-<span id="prior-for-the-tree-structure-mathcalt-j"></span><h3><span class="section-number">7.3.2. </span>Prior for the Tree Structure <span class="math notranslate nohighlight">\(\mathcal{T}_j\)</span><a class="headerlink" href="#prior-for-the-tree-structure-mathcal-t-j" title="Permalink to this headline">¶</a></h3>
+<span id="prior-for-the-tree-structure-mathcalt-j"></span><h3><span class="section-number">7.3.2. </span>Prior for the Tree Structure <span class="math notranslate nohighlight">\(\mathcal{T}_j\)</span><a class="headerlink" href="#prior-for-the-tree-structure-mathcal-t-j" title="Permalink to this heading">¶</a></h3>
 <p>The prior for the tree structure <span class="math notranslate nohighlight">\(\mathcal{T}_j\)</span> is specified by three
 aspects:</p>
 <ul class="simple">
 <li><p>The probability that a node at depth <span class="math notranslate nohighlight">\(d=(0, 1, 2, \dots)\)</span> is
 non-terminal, given by <span class="math notranslate nohighlight">\(\alpha^{d}\)</span>. <span class="math notranslate nohighlight">\(\alpha\)</span> it is recommended to
-be <span class="math notranslate nohighlight">\(\in [0, 0.5)\)</span> <span id="id11">[<a class="reference internal" href="references.html#id67" title="Veronika Ročková and Enakshi Saha. On theory for bart. In The 22nd International Conference on Artificial Intelligence and Statistics, 2839–2848. PMLR, 2019.">72</a>]</span> <a class="footnote-reference brackets" href="#id42" id="id12">3</a></p></li>
+be <span class="math notranslate nohighlight">\(\in [0, 0.5)\)</span> <span id="id11">[<a class="reference internal" href="references.html#id67" title="Veronika Ročková and Enakshi Saha. On theory for bart. In The 22nd International Conference on Artificial Intelligence and Statistics, 2839–2848. PMLR, 2019.">72</a>]</span> <a class="footnote-reference brackets" href="#id42" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a></p></li>
 <li><p>The distribution over the splitting variable. That is which
 covariate is included in the tree (<span class="math notranslate nohighlight">\(X_i\)</span> in
 <a class="reference internal" href="#fig-decision-tree"><span class="std std-numref">Fig. 7.1</span></a>). Most commonly this is Uniform over the
@@ -841,7 +842,7 @@ available values.</p></li>
 </ul>
 </section>
 <section id="prior-for-the-leaf-values-mu-ij-and-number-of-trees-m">
-<span id="bart-mu-m-priors"></span><h3><span class="section-number">7.3.3. </span>Prior for the Leaf Values <span class="math notranslate nohighlight">\(\mu_{ij}\)</span> and Number of Trees <span class="math notranslate nohighlight">\(m\)</span><a class="headerlink" href="#prior-for-the-leaf-values-mu-ij-and-number-of-trees-m" title="Permalink to this headline">¶</a></h3>
+<span id="bart-mu-m-priors"></span><h3><span class="section-number">7.3.3. </span>Prior for the Leaf Values <span class="math notranslate nohighlight">\(\mu_{ij}\)</span> and Number of Trees <span class="math notranslate nohighlight">\(m\)</span><a class="headerlink" href="#prior-for-the-leaf-values-mu-ij-and-number-of-trees-m" title="Permalink to this heading">¶</a></h3>
 <p>By default PyMC3 does not set a prior value for the leaf values, instead
 at each iteration of the sampling algorithm it returns the mean of the
 residuals.</p>
@@ -851,11 +852,11 @@ good results are generally achieved by setting the values of <span class="math n
 even as low as <span class="math notranslate nohighlight">\(m=10\)</span>. Additionally it has been observed that inference
 could be very robust to the exact value of <span class="math notranslate nohighlight">\(m\)</span>. So a general rule of
 thumb is to try a few values of <span class="math notranslate nohighlight">\(m\)</span> and perform cross-validation to pick
-the most adequate value for a particular problem <a class="footnote-reference brackets" href="#id43" id="id13">4</a>.</p>
+the most adequate value for a particular problem <a class="footnote-reference brackets" href="#id43" id="id13" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>.</p>
 </section>
 </section>
 <section id="fitting-bayesian-additive-regression-trees">
-<span id="id14"></span><h2><span class="section-number">7.4. </span>Fitting Bayesian Additive Regression Trees<a class="headerlink" href="#fitting-bayesian-additive-regression-trees" title="Permalink to this headline">¶</a></h2>
+<span id="id14"></span><h2><span class="section-number">7.4. </span>Fitting Bayesian Additive Regression Trees<a class="headerlink" href="#fitting-bayesian-additive-regression-trees" title="Permalink to this heading">¶</a></h2>
 <p>So far we have discussed how decision trees can be used to encode
 piecewise functions that we can use to model regression or
 classification problems. We have also discussed how we can specify
@@ -897,7 +898,7 @@ other random variables are present in the model, PyMC3 will assign other
 samplers like NUTS to those variables.</p>
 </section>
 <section id="bart-bikes">
-<span id="bart-bike"></span><h2><span class="section-number">7.5. </span>BART Bikes<a class="headerlink" href="#bart-bikes" title="Permalink to this headline">¶</a></h2>
+<span id="bart-bike"></span><h2><span class="section-number">7.5. </span>BART Bikes<a class="headerlink" href="#bart-bikes" title="Permalink to this heading">¶</a></h2>
 <p>Let us see how BART fits the bikes dataset which we previously studied
 in <a class="reference internal" href="chp_05.html#chap3-5"><span class="std std-ref">5</span></a>. The model will be:</p>
 <div class="math notranslate nohighlight" id="equation-eq-bart-bikes-model">
@@ -968,16 +969,16 @@ blue curve represents the mean trend. Compare with
 </figcaption>
 </figure>
 <p>The literature around BART tends to highlight its ability to, generally,
-provide competitive answers without tuning <a class="footnote-reference brackets" href="#id44" id="id16">5</a>. For example, compared
+provide competitive answers without tuning <a class="footnote-reference brackets" href="#id44" id="id16" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a>. For example, compared
 with fitting splines we do not need to worry about manually setting the
 knots or choose a prior to regularize knots. Of course someone may argue
 that for some problems being able to adjust the knots could be
 beneficial for the problem at hand, and that is fine.</p>
 </section>
 <section id="generalized-bart-models">
-<span id="id17"></span><h2><span class="section-number">7.6. </span>Generalized BART Models<a class="headerlink" href="#generalized-bart-models" title="Permalink to this headline">¶</a></h2>
+<span id="id17"></span><h2><span class="section-number">7.6. </span>Generalized BART Models<a class="headerlink" href="#generalized-bart-models" title="Permalink to this heading">¶</a></h2>
 <p>The PyMC3 implementation of BART attempts to make it easy to use
-different likelihoods <a class="footnote-reference brackets" href="#id45" id="id18">6</a> similar to how the Generalized Linear Model
+different likelihoods <a class="footnote-reference brackets" href="#id45" id="id18" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a> similar to how the Generalized Linear Model
 does as we saw in Chapter <a class="reference internal" href="chp_03.html#chap2"><span class="std std-ref">3</span></a>. Let us see how to use a
 Bernoulli likelihood with BART. For this example we are going to use a
 dataset of the Space Influenza disease, which affect mostly young and
@@ -1042,7 +1043,7 @@ out how much each covariate is contributing to the outcome. In the next
 sections we will show how this is done.</p>
 </section>
 <section id="interpretability-of-barts">
-<span id="id19"></span><h2><span class="section-number">7.7. </span>Interpretability of BARTs<a class="headerlink" href="#interpretability-of-barts" title="Permalink to this headline">¶</a></h2>
+<span id="id19"></span><h2><span class="section-number">7.7. </span>Interpretability of BARTs<a class="headerlink" href="#interpretability-of-barts" title="Permalink to this heading">¶</a></h2>
 <p>Individual decision trees are generally easy to interpret, but this is
 no longer true when we add a bunch of trees together. One may think that
 the reason is that by adding trees we get some weird unrecognizable or
@@ -1063,7 +1064,7 @@ discuss two related tools below: <strong>Partial Dependence Plots</strong> (PDP)
 <span id="id21">[<a class="reference internal" href="references.html#id72" title="Jerome H Friedman. Greedy function approximation: a gradient boosting machine. Annals of statistics, pages 1189–1232, 2001.">76</a>]</span> and <strong>Individual Conditional Expectation</strong> (ICE) plots
 <span id="id22">[<a class="reference internal" href="references.html#id73" title="Alex Goldstein, Adam Kapelner, Justin Bleich, and Emil Pitkin. Peeking inside the black box: visualizing statistical learning with plots of individual conditional expectation. journal of Computational and Graphical Statistics, 24(1):44–65, 2015.">77</a>]</span>.</p>
 <section id="partial-dependence-plots">
-<span id="id23"></span><h3><span class="section-number">7.7.1. </span>Partial Dependence Plots<a class="headerlink" href="#partial-dependence-plots" title="Permalink to this headline">¶</a></h3>
+<span id="id23"></span><h3><span class="section-number">7.7.1. </span>Partial Dependence Plots<a class="headerlink" href="#partial-dependence-plots" title="Permalink to this heading">¶</a></h3>
 <p>A very common method that appears in the BART literature is the so
 called Partial Dependence Plot (PDP) <span id="id24">[<a class="reference internal" href="references.html#id72" title="Jerome H Friedman. Greedy function approximation: a gradient boosting machine. Annals of statistics, pages 1189–1232, 2001.">76</a>]</span> (see
 <a class="reference internal" href="#fig-pdp-fake-example"><span class="std std-numref">Fig. 7.8</span></a>). A PDP shows how the value of the
@@ -1166,7 +1167,7 @@ useful for large datasets, is to subsample <span class="math notranslate nohighl
 </div>
 </section>
 <section id="individual-conditional-expectation">
-<span id="id26"></span><h3><span class="section-number">7.7.2. </span>Individual Conditional Expectation<a class="headerlink" href="#individual-conditional-expectation" title="Permalink to this headline">¶</a></h3>
+<span id="id26"></span><h3><span class="section-number">7.7.2. </span>Individual Conditional Expectation<a class="headerlink" href="#individual-conditional-expectation" title="Permalink to this heading">¶</a></h3>
 <p>Individual Conditional Expectation (ICE) plots are closely related to
 PDPs. The difference is that instead of plotting the target covariates’
 average partial effect on the predicted response, we plot the <span class="math notranslate nohighlight">\(n\)</span>
@@ -1216,14 +1217,14 @@ panel shows a partial dependence plot, we can see that according to this
 plot the relationship is flat, which is true <em>on average</em> but hides the
 interaction effect. On the contrary the last panel, an individual
 conditional expectation plot helps to uncover this relationship. The
-reason is that each gray curve represents one value of <span class="math notranslate nohighlight">\(X_{0,2}\)</span> <a class="footnote-reference brackets" href="#id46" id="id27">7</a>.
+reason is that each gray curve represents one value of <span class="math notranslate nohighlight">\(X_{0,2}\)</span> <a class="footnote-reference brackets" href="#id46" id="id27" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a>.
 The blue curve is the average of the gray curves and while is not
 exactly the same as the partial dependence mean curve it shows the same
-information <a class="footnote-reference brackets" href="#id47" id="id28">8</a>.</p>
+information <a class="footnote-reference brackets" href="#id47" id="id28" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a>.</p>
 </section>
 </section>
 <section id="variable-selection">
-<span id="sec-variable-selection"></span><h2><span class="section-number">7.8. </span>Variable Selection<a class="headerlink" href="#variable-selection" title="Permalink to this headline">¶</a></h2>
+<span id="sec-variable-selection"></span><h2><span class="section-number">7.8. </span>Variable Selection<a class="headerlink" href="#variable-selection" title="Permalink to this heading">¶</a></h2>
 <p>When fitting regressions with more than one predictor it is often of
 interest to learn which predictors are most important. Under some
 scenarios we may be genuinely interested in better understanding how
@@ -1262,7 +1263,7 @@ different datasets from known generative processes.</p>
 <li><p><span class="math notranslate nohighlight">\(Y \sim \mathcal{N}(0, 1)\)</span> <span class="math notranslate nohighlight">\(X_{0} \sim \mathcal{N}(Y, 0.1)\)</span> and
 <span class="math notranslate nohighlight">\(X_{1} \sim \mathcal{N}(Y, 0.2)\)</span>
 <span class="math notranslate nohighlight">\(\boldsymbol{X}_{2:9} \sim \mathcal{N}(0, 1)\)</span>. Only the first 2
-independent variables are unrelated to the predictor, and the first
+independent variables are related to the predictor, and the first
 is more related than the second.</p></li>
 <li><p><span class="math notranslate nohighlight">\(Y = 10 \sin(\pi X_0 X_1 ) + 20(X_2 - 0.5)^2 + 10X_3 + 5X_4 + \epsilon\)</span>
 Where <span class="math notranslate nohighlight">\(\epsilon \sim \mathcal{N}(0, 1)\)</span> and
@@ -1317,7 +1318,7 @@ alternative methods have been proposed <span id="id32">[<a class="reference inte
 of such methods can be summarized as follow:</p>
 <ol class="simple">
 <li><p>Fit a model many times (around 50) using a small value of <span class="math notranslate nohighlight">\(m\)</span>, like
-25 <a class="footnote-reference brackets" href="#id48" id="id33">9</a>. Record the root mean squared error.</p></li>
+25 <a class="footnote-reference brackets" href="#id48" id="id33" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a>. Record the root mean squared error.</p></li>
 <li><p>Eliminate the least informative variable across all 50 runs.</p></li>
 <li><p>Repeat 1 and 2, each time with one less variable in the model. Stop
 once you reach a given number of covariates in the model (not
@@ -1350,7 +1351,7 @@ The humidity and windspeed appear as less relevant covariates.</span><a class="h
 </figure>
 </section>
 <section id="priors-for-bart-in-pymc3">
-<span id="id35"></span><h2><span class="section-number">7.9. </span>Priors for BART in PyMC3<a class="headerlink" href="#priors-for-bart-in-pymc3" title="Permalink to this headline">¶</a></h2>
+<span id="id35"></span><h2><span class="section-number">7.9. </span>Priors for BART in PyMC3<a class="headerlink" href="#priors-for-bart-in-pymc3" title="Permalink to this heading">¶</a></h2>
 <p>Compared to other models in this book, BARTs are the most <em>blackboxsy</em>.
 We are not able to set whatever priors we want to generate a BART model.
 We instead control predefined priors through a few parameters. PyMC3
@@ -1374,7 +1375,7 @@ weights so different variables have different prior probabilities of
 being selected, this can be useful when the user has evidence that some
 variables may be more important than others, otherwise it is better to
 just keep it Uniform. More sophisticated Dirichlet-based priors have
-been proposed <a class="footnote-reference brackets" href="#id49" id="id37">10</a> to achieve this goal and to allow for better
+been proposed <a class="footnote-reference brackets" href="#id49" id="id37" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a> to achieve this goal and to allow for better
 inference when inducing sparsity is desired. This is useful in cases
 where we have a lot of covariates, but only a few are likely to
 contribute and we do not know beforehand which ones are the most
@@ -1400,7 +1401,7 @@ problem-tailored models as is usually the case with probabilistic
 programming languages.</p>
 </section>
 <section id="exercises">
-<span id="exercises7"></span><h2><span class="section-number">7.10. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<span id="exercises7"></span><h2><span class="section-number">7.10. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">¶</a></h2>
 <p><strong>7E1.</strong> Explain each of the following</p>
 <ol class="simple">
 <li><p>How is BART different from linear regression and splines.</p></li>
@@ -1473,40 +1474,47 @@ model with the covariates “bill_length_mm”, “bill_depth_mm”,
 variable importance. Compare the results with the PDPs from the previous
 exercise.</p>
 <hr class="footnotes docutils" />
-<dl class="footnote brackets">
-<dt class="label" id="id38"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p>Maybe you have heard about its non-Bayesian cousin: Random Forest
+<aside class="footnote brackets" id="id38" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>Maybe you have heard about its non-Bayesian cousin: Random Forest
 <span id="id39">[<a class="reference internal" href="references.html#id149" title="Leo Breiman. Random forests. Machine learning, 45(1):5–32, 2001.">81</a>]</span></p>
-</dd>
-<dt class="label" id="id40"><span class="brackets"><a class="fn-backref" href="#id10">2</a></span></dt>
-<dd><p>for alternatives see
+</aside>
+<aside class="footnote brackets" id="id40" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">2</a><span class="fn-bracket">]</span></span>
+<p>for alternatives see
 <span id="id41">[<a class="reference internal" href="references.html#id8" title="Matej Balog and Yee Whye Teh. The mondrian process for machine learning. arXiv preprint arXiv:1507.05181, 2015.">82</a>, <a class="reference internal" href="references.html#id7" title="Daniel M Roy and Yee Whye Teh. The mondrian process. In Proceedings of the 21st International Conference on Neural Information Processing Systems, 1377–1384. 2008.">83</a>]</span></p>
-</dd>
-<dt class="label" id="id42"><span class="brackets"><a class="fn-backref" href="#id12">3</a></span></dt>
-<dd><p>Node depth is defined as distance from the root. Thus, the root
+</aside>
+<aside class="footnote brackets" id="id42" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id12">3</a><span class="fn-bracket">]</span></span>
+<p>Node depth is defined as distance from the root. Thus, the root
 itself has depth 0, its first child node has depth 1, etc.</p>
-</dd>
-<dt class="label" id="id43"><span class="brackets"><a class="fn-backref" href="#id13">4</a></span></dt>
-<dd><p>In principle we can go fully Bayesian and estimate the number of
+</aside>
+<aside class="footnote brackets" id="id43" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id13">4</a><span class="fn-bracket">]</span></span>
+<p>In principle we can go fully Bayesian and estimate the number of
 tree <span class="math notranslate nohighlight">\(m\)</span> from the data, but there are reports showing this is not
 always the best approach. More research is likely needed in this
 area.</p>
-</dd>
-<dt class="label" id="id44"><span class="brackets"><a class="fn-backref" href="#id16">5</a></span></dt>
-<dd><p>The same literature generally shows that using cross-validation to
+</aside>
+<aside class="footnote brackets" id="id44" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id16">5</a><span class="fn-bracket">]</span></span>
+<p>The same literature generally shows that using cross-validation to
 tune the number of trees and/or the prior over the depth of the tree
 can be further beneficial.</p>
-</dd>
-<dt class="label" id="id45"><span class="brackets"><a class="fn-backref" href="#id18">6</a></span></dt>
-<dd><p>Other implementations are less flexible or require adjustments
+</aside>
+<aside class="footnote brackets" id="id45" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id18">6</a><span class="fn-bracket">]</span></span>
+<p>Other implementations are less flexible or require adjustments
 under the hood to make this work.</p>
-</dd>
-<dt class="label" id="id46"><span class="brackets"><a class="fn-backref" href="#id27">7</a></span></dt>
-<dd><p>This notation means the variables (<span class="math notranslate nohighlight">\(X_0\)</span>, <span class="math notranslate nohighlight">\(X_2\)</span>), that is,
+</aside>
+<aside class="footnote brackets" id="id46" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id27">7</a><span class="fn-bracket">]</span></span>
+<p>This notation means the variables (<span class="math notranslate nohighlight">\(X_0\)</span>, <span class="math notranslate nohighlight">\(X_2\)</span>), that is,
 excluding <span class="math notranslate nohighlight">\(X_1\)</span></p>
-</dd>
-<dt class="label" id="id47"><span class="brackets"><a class="fn-backref" href="#id28">8</a></span></dt>
-<dd><p>The mean of the ICE curves and the mean partial dependence curve
+</aside>
+<aside class="footnote brackets" id="id47" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id28">8</a><span class="fn-bracket">]</span></span>
+<p>The mean of the ICE curves and the mean partial dependence curve
 are slightly different. This is due to internal details on how these
 plots were made including the order in which we average over the
 posterior samples or over the observations. What really matter is
@@ -1515,16 +1523,17 @@ essentially flat. Also, to speed up computation we evaluate <span class="math no
 over 10 equally separated points for partial dependence plots and we
 subsample <span class="math notranslate nohighlight">\(X_{0,2}\)</span> for computing the individual conditional
 expectation plot</p>
-</dd>
-<dt class="label" id="id48"><span class="brackets"><a class="fn-backref" href="#id33">9</a></span></dt>
-<dd><p>The original proposal suggests 10, but our experience with the
+</aside>
+<aside class="footnote brackets" id="id48" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id33">9</a><span class="fn-bracket">]</span></span>
+<p>The original proposal suggests 10, but our experience with the
 BART implementation in PyMC3 is that values of <span class="math notranslate nohighlight">\(m\)</span> below 20 or 25
 could be problematic.</p>
-</dd>
-<dt class="label" id="id49"><span class="brackets"><a class="fn-backref" href="#id37">10</a></span></dt>
-<dd><p>This is likely to be added in the future versions of PyMC3.</p>
-</dd>
-</dl>
+</aside>
+<aside class="footnote brackets" id="id49" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id37">10</a><span class="fn-bracket">]</span></span>
+<p>This is likely to be added in the future versions of PyMC3.</p>
+</aside>
 </section>
 </section>
 
@@ -1574,9 +1583,9 @@ could be problematic.</p>
     <footer class="footer">
   <p>
     
-      Por Martin, Kumar, Lao<br/>
+      By Martin, Kumar, Lao<br/>
     
-        &copy; Derechos de autor 2021.<br/>
+        &copy; Copyright 2021.<br/>
   </p>
 </footer>
 </main>

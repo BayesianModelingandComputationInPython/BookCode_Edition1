@@ -1614,7 +1614,7 @@ logarithmic scoring rule this is equivalent to computing:
 
 ```{math}
 :label: eq_stacking
-\max_{n} \frac{1}{n} \sum_{i=1}^{n}log\sum_{j=1}^{k} w_j p(y_i \mid y_{-i}, M_j)
+\max_{w} \frac{1}{n} \sum_{i=1}^{n}log\sum_{j=1}^{k} w_j p(y_i \mid y_{-i}, M_j)
 
 ```
 

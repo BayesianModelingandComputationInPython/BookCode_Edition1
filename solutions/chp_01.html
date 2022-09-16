@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Solutions 1: Bayesian Inference &#8212; Bayesian Modeling and Computation in Python</title>
     
@@ -38,6 +38,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
@@ -61,7 +62,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="Solutions 2: Exploratory Analysis of Bayesian models" href="chp_02.html" />
     <link rel="prev" title="Code 11: Appendiceal Topics" href="../notebooks/chp_11.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
+    <meta name="docsearch:language" content="en">
     
 
     <!-- Google Analytics -->
@@ -96,7 +97,7 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Buscar este libro ..." aria-label="Buscar este libro ..." autocomplete="off" >
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <p aria-level="2" class="caption" role="heading">
@@ -301,8 +302,8 @@ const thebe_selector_output = ".output, .cell_output"
             
             <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
                 data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Navegación de palanca" aria-controls="site-navigation"
-                title="Navegación de palanca" data-toggle="tooltip" data-placement="left">
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
                 <i class="fas fa-bars"></i>
                 <i class="fas fa-arrow-left"></i>
                 <i class="fas fa-arrow-up"></i>
@@ -317,12 +318,12 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="dropdown-buttons sourcebuttons">
         <a class="repository-button"
             href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Repositorio de origen"><i
-                    class="fab fa-github"></i>repositorio</button></a>
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
             href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fsolutions/chp_01.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Abrir un problema"><i class="fas fa-lightbulb"></i>Tema abierto</button></a>
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
     </div>
 </div>
@@ -330,8 +331,8 @@ const thebe_selector_output = ".output, .cell_output"
             <!-- Full screen (wrap in <a> to have style consistency -->
 
 <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Modo de pantalla completa"
-        title="Modo de pantalla completa"><i
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
             class="fas fa-expand"></i></button></a>
 
             <!-- Launch buttons -->
@@ -342,7 +343,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contenido
+                <i class="fas fa-list"></i> Contents
             </div>
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
@@ -553,7 +554,7 @@ const thebe_selector_output = ".output, .cell_output"
                     <div id="jb-print-toc">
                         
                         <div>
-                            <h2> Contenido </h2>
+                            <h2> Contents </h2>
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
@@ -758,7 +759,7 @@ const thebe_selector_output = ".output, .cell_output"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="solutions-1-bayesian-inference">
-<h1>Solutions 1: Bayesian Inference<a class="headerlink" href="#solutions-1-bayesian-inference" title="Permalink to this headline">¶</a></h1>
+<h1>Solutions 1: Bayesian Inference<a class="headerlink" href="#solutions-1-bayesian-inference" title="Permalink to this heading">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
@@ -786,7 +787,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <section id="e1">
-<h2>1E1<a class="headerlink" href="#e1" title="Permalink to this headline">¶</a></h2>
+<h2>1E1<a class="headerlink" href="#e1" title="Permalink to this heading">¶</a></h2>
 <p>As we discussed, models are artificial representations used to help define and understand an object or process. However no model is able to perfectly replicate what it represents, and thus is deficient in some way. In this book we focus on a particular type of models, statistical models. What are other types of models you can think of? How do they aid understanding of the thing that is being modeled? How are they deficient?</p>
 <p>This is just one possible answer. Use it as a guide.</p>
 <ul class="simple">
@@ -796,7 +797,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </section>
 <section id="e2">
-<h2>1E2.<a class="headerlink" href="#e2" title="Permalink to this headline">¶</a></h2>
+<h2>1E2.<a class="headerlink" href="#e2" title="Permalink to this heading">¶</a></h2>
 <p>Match each of these verbal descriptions to their corresponding mathematical expression:</p>
 <p>(a) The probability of a parameter given the the observed data.</p>
 <p><span class="math notranslate nohighlight">\(p(\theta | Y)\)</span>, this is call the posterior</p>
@@ -810,7 +811,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p><span class="math notranslate nohighlight">\(\int_{\boldsymbol{\Theta}} p(\boldsymbol{Y^\ast} \mid \boldsymbol{\theta}) \; p(\boldsymbol{\theta}) \; d\boldsymbol{\theta}\)</span>, this is call the prior predictive distribution</p>
 </section>
 <section id="e3">
-<h2>1E3.<a class="headerlink" href="#e3" title="Permalink to this headline">¶</a></h2>
+<h2>1E3.<a class="headerlink" href="#e3" title="Permalink to this heading">¶</a></h2>
 <p>From the following expressions, which one corresponds to the sentence, The probability of being sunny given that it is July 9th of 1816?</p>
 <p>(a) <span class="math notranslate nohighlight">\(p(\text{sunny})\)</span></p>
 <p>(b) <span class="math notranslate nohighlight">\(p(\text{sunny} \mid \text{July})\)</span></p>
@@ -820,7 +821,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p>The correct answer are <strong>c</strong> and <strong>e</strong>, the last one follows from the definition of conditional probability</p>
 </section>
 <section id="e4">
-<h2>1E4.<a class="headerlink" href="#e4" title="Permalink to this headline">¶</a></h2>
+<h2>1E4.<a class="headerlink" href="#e4" title="Permalink to this heading">¶</a></h2>
 <p>Show that the probability of choosing a human at random and picking the Pope is not the same as the probability of the Pope being human. In the animated series Futurama, the (Space) Pope is a reptile. How does this change your previous calculations?</p>
 <p>Let’s assume there are 7.8x10⁸ humans and there is only 1 Pope, Pope Francis, at the time of this writing. If a human is picked at random from the entire human population, the chances of that human being the pope are 1 in 7.8x10⁸.
 $<span class="math notranslate nohighlight">\( p(\text{Pope} \mid \text{human}) = \frac{1}{7.8x10⁸} \)</span>$</p>
@@ -835,7 +836,7 @@ $<span class="math notranslate nohighlight">\( p(\text{Pope} \mid \text{human}) 
 \[ p(\text{human} \mid \text{Pope}) = 0 \]</div>
 </section>
 <section id="e5">
-<h2>1E5.<a class="headerlink" href="#e5" title="Permalink to this headline">¶</a></h2>
+<h2>1E5.<a class="headerlink" href="#e5" title="Permalink to this heading">¶</a></h2>
 <p>Sketch what the distribution of possible observed values could be for the following
 cases:</p>
 <p>(a) The number of people visiting your local cafe assuming Poisson distribution</p>
@@ -844,7 +845,7 @@ cases:</p>
 <p>(d) The weight of adult humans in pounds assuming skew Normal distribution</p>
 <p>We’ll generate “sketches” using scipy for ease of use presentation in this solution manual. Have your students make hand sketches</p>
 <section id="solution-a">
-<h3>Solution A<a class="headerlink" href="#solution-a" title="Permalink to this headline">¶</a></h3>
+<h3>Solution A<a class="headerlink" href="#solution-a" title="Permalink to this heading">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">visitors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
@@ -859,7 +860,7 @@ cases:</p>
 </div>
 </section>
 <section id="solution-b">
-<h3>Solution B<a class="headerlink" href="#solution-b" title="Permalink to this headline">¶</a></h3>
+<h3>Solution B<a class="headerlink" href="#solution-b" title="Permalink to this heading">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dog_weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
@@ -878,7 +879,7 @@ cases:</p>
 </div>
 </section>
 <section id="solution-c">
-<h3>Solution C<a class="headerlink" href="#solution-c" title="Permalink to this headline">¶</a></h3>
+<h3>Solution C<a class="headerlink" href="#solution-c" title="Permalink to this heading">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">elephant_weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15000</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
@@ -896,7 +897,7 @@ cases:</p>
 </div>
 </section>
 <section id="solution-d">
-<h3>Solution D<a class="headerlink" href="#solution-d" title="Permalink to this headline">¶</a></h3>
+<h3>Solution D<a class="headerlink" href="#solution-d" title="Permalink to this heading">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">human_weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">400</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
@@ -916,7 +917,7 @@ cases:</p>
 </section>
 </section>
 <section id="e6">
-<h2>1E6.<a class="headerlink" href="#e6" title="Permalink to this headline">¶</a></h2>
+<h2>1E6.<a class="headerlink" href="#e6" title="Permalink to this heading">¶</a></h2>
 <p>For each example in the previous exercise use SciPy to specify the distribution in
 Python. Pick parameters that you believe are reasonable, take a random sample of size
 1000, and plot the resulting distribution. Does this distribution look reasonable given your
@@ -977,7 +978,7 @@ reasonable.</p>
 </div>
 </section>
 <section id="e7">
-<h2>1E7.<a class="headerlink" href="#e7" title="Permalink to this headline">¶</a></h2>
+<h2>1E7.<a class="headerlink" href="#e7" title="Permalink to this heading">¶</a></h2>
 <p>Compare priors Beta(0.5, 0.5), Beta(1, 1), Beta(1, 4). How do the priors differ in terms
 of shape?</p>
 <p>Beta(0.5, 0.5) is U-like shaped</p>
@@ -1002,7 +1003,7 @@ of shape?</p>
 </div>
 </section>
 <section id="e8">
-<h2>1E8.<a class="headerlink" href="#e8" title="Permalink to this headline">¶</a></h2>
+<h2>1E8.<a class="headerlink" href="#e8" title="Permalink to this heading">¶</a></h2>
 <p>Rerun Code block 1.8 but using two Beta-priors of your choice Hint: you may want
 to try priors with <span class="math notranslate nohighlight">\(\alpha \not = \beta\)</span> like Beta(2, 5).</p>
 <div class="cell docutils container">
@@ -1038,7 +1039,7 @@ to try priors with <span class="math notranslate nohighlight">\(\alpha \not = \b
 </div>
 </section>
 <section id="e9">
-<h2>1E9.<a class="headerlink" href="#e9" title="Permalink to this headline">¶</a></h2>
+<h2>1E9.<a class="headerlink" href="#e9" title="Permalink to this heading">¶</a></h2>
 <p>Try to come up with new constraints in order to obtain new Max-Ent distributions (Code Block 1.9)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1065,7 +1066,7 @@ to try priors with <span class="math notranslate nohighlight">\(\alpha \not = \b
 </div>
 </section>
 <section id="e10">
-<h2>1E10.<a class="headerlink" href="#e10" title="Permalink to this headline">¶</a></h2>
+<h2>1E10.<a class="headerlink" href="#e10" title="Permalink to this heading">¶</a></h2>
 <p>In Code Block 1.3, change the value of <code class="docutils literal notranslate"><span class="pre">can_sd</span></code> and run the Metropolis-Hastings
 sampler. Try values like 0.01 and 1.</p>
 <p>(a) Compute the mean, sd and HDI and compare the values with those in the book
@@ -1153,7 +1154,7 @@ sampler. Try values like 0.01 and 1.</p>
 </div>
 </section>
 <section id="e11">
-<h2>1E11.<a class="headerlink" href="#e11" title="Permalink to this headline">¶</a></h2>
+<h2>1E11.<a class="headerlink" href="#e11" title="Permalink to this heading">¶</a></h2>
 <p>You need to estimate the weights of blue whales, humans and mice. You assume
 they are normally distributed and you set the same prior HN (200kg) for the variance.</p>
 <p>What type of prior is this for adult blue whales? Strongly informative, weakly informative, or non informative.</p>
@@ -1165,7 +1166,7 @@ they are normally distributed and you set the same prior HN (200kg) for the vari
 <p>** As noted in the example above we use “common knowledge” as an indication for our priors. We know mice and humans typically weigh grams and sub 200 kg typically. We also know that whales are very large. So even though the prior distribution is exactly the same, the informativeness of the prior differs for different problems, as the informativeness of a prior is a function of our real world knowledge for a given problem.</p>
 </section>
 <section id="e12">
-<h2>1E12.<a class="headerlink" href="#e12" title="Permalink to this headline">¶</a></h2>
+<h2>1E12.<a class="headerlink" href="#e12" title="Permalink to this heading">¶</a></h2>
 <p>Use the following function to explore different combinations of priors (change the
 parameters a and b) and data (change heads and trials). Summarize your observations.</p>
 <div class="cell docutils container">
@@ -1204,7 +1205,7 @@ parameters a and b) and data (change heads and trials). Summarize your observati
 </div>
 </section>
 <section id="e13">
-<h2>1E13.<a class="headerlink" href="#e13" title="Permalink to this headline">¶</a></h2>
+<h2>1E13.<a class="headerlink" href="#e13" title="Permalink to this heading">¶</a></h2>
 <p>Between the prior, prior predictive, posterior, and posterior predictive distributions
 which distribution would help answer each of these questions scenarios. Some items may have multiple
 answers.</p>
@@ -1215,32 +1216,32 @@ answers.</p>
 <p>(e) Which can be used to calculate numerical summaries, such as the mean, of the parameters?</p>
 <p>(f) Which can can be used to visualize a Highest Density Interval?</p>
 <section id="id1">
-<h3>Solution A<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<h3>Solution A<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h3>
 <p>Prior distribution</p>
 </section>
 <section id="id2">
-<h3>Solution B<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<h3>Solution B<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h3>
 <p>Prior predictive distribution</p>
 </section>
 <section id="id3">
-<h3>Solution C<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<h3>Solution C<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h3>
 <p>Posterior predictive distribution</p>
 </section>
 <section id="id4">
-<h3>Solution D<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<h3>Solution D<a class="headerlink" href="#id4" title="Permalink to this heading">¶</a></h3>
 <p>Posterior distribution</p>
 </section>
 <section id="solution-e">
-<h3>Solution E<a class="headerlink" href="#solution-e" title="Permalink to this headline">¶</a></h3>
+<h3>Solution E<a class="headerlink" href="#solution-e" title="Permalink to this heading">¶</a></h3>
 <p>Prior or Posteriors distribution. Both can represent our information about parameters so they can be used to calculate numerical summaries of parameters. The difference is whether those summaries represent information prior to conditioning on data or afterwards.</p>
 </section>
 <section id="solution-f">
-<h3>Solution F<a class="headerlink" href="#solution-f" title="Permalink to this headline">¶</a></h3>
+<h3>Solution F<a class="headerlink" href="#solution-f" title="Permalink to this heading">¶</a></h3>
 <p>A HDI can be calculated from any distribution, but the meaning will differ depending on what kind of distribution it is</p>
 </section>
 </section>
 <section id="m14">
-<h2>1M14.<a class="headerlink" href="#m14" title="Permalink to this headline">¶</a></h2>
+<h2>1M14.<a class="headerlink" href="#m14" title="Permalink to this heading">¶</a></h2>
 <p>Equation 1.1 contains the marginal likelihood in the denominator which is difficult
 to calculate. In Equation 1.3 we show that knowing the posterior up to a proportional
 constant is sufficient for inference. Show why the marginal likelihood is not needed for the
@@ -1270,7 +1271,7 @@ q(x_i \mid x_{i + 1})} {p(x_i) \; q (x_{i + 1} \mid x_i)} \right)
 <p>We can see that the denonimator <span class="math notranslate nohighlight">\(p(\boldsymbol{Y})\)</span> cancels out</p>
 </section>
 <section id="m15">
-<h2>1M15.<a class="headerlink" href="#m15" title="Permalink to this headline">¶</a></h2>
+<h2>1M15.<a class="headerlink" href="#m15" title="Permalink to this heading">¶</a></h2>
 <p>In the following definition of a probabilistic model, identify the prior, the likelihood and the posterior:</p>
 <p>\begin{equation*}
 \begin{split}
@@ -1282,13 +1283,13 @@ Y \sim \mathcal{N}(\mu, \sigma) \text{ Likelihood}\
 <p>The posterior is not represented here as the posterior is the result of conditioning the model to the data</p>
 </section>
 <section id="m16">
-<h2>1M16.<a class="headerlink" href="#m16" title="Permalink to this headline">¶</a></h2>
+<h2>1M16.<a class="headerlink" href="#m16" title="Permalink to this heading">¶</a></h2>
 <p>In the previous model, how many parameters will the posterior have? Compare your
 answer with that from the model in the coin-flipping problem in Equation 1.10.</p>
 <p>The posteriors will be bidimensional, as is representing the joint distribution of <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>. In the coin-flipping problem we only have one parameter, <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
 </section>
 <section id="m17">
-<h2>1M17.<a class="headerlink" href="#m17" title="Permalink to this headline">¶</a></h2>
+<h2>1M17.<a class="headerlink" href="#m17" title="Permalink to this heading">¶</a></h2>
 <p>Suppose that we have two coins; when we toss the first coin, half of the time it lands
 tails and half of the time on heads. The other coin is a loaded coin that always lands on
 heads. If we choose one of the coins at random and observe a head, what is the probability
@@ -1322,7 +1323,7 @@ p(\text{heads}) = p(\text{heads} \mid \text{fair coin})*p(\text{fair coin}) + p(
 </div>
 </section>
 <section id="m18">
-<h2>1M18<a class="headerlink" href="#m18" title="Permalink to this headline">¶</a></h2>
+<h2>1M18<a class="headerlink" href="#m18" title="Permalink to this heading">¶</a></h2>
 <p>Modify Code Block 1.2 to generate random samples from a Poisson distribution with a parameter of your choosing.</p>
 <p>Then modify Code Blocks 1.1 and 1.3 to generate MCMC samples and see if you can recover your chosen parameter. Test how the number of samples, MCMC iterations, and initial starting point affect convergence to your true chosen parameter.</p>
 <div class="cell docutils container">
@@ -1393,7 +1394,7 @@ p(\text{heads}) = p(\text{heads} \mid \text{fair coin})*p(\text{fair coin}) + p(
 </div>
 </section>
 <section id="h19">
-<h2>1H19.<a class="headerlink" href="#h19" title="Permalink to this headline">¶</a></h2>
+<h2>1H19.<a class="headerlink" href="#h19" title="Permalink to this heading">¶</a></h2>
 <p>Assume we are building a model to estimate the mean and standard deviation of adult human heights in centimeters. Build a model that will make this estimation. Start with Code Block 1.6  and change the likelihood and priors as needed. After doing so</p>
 <p>(a) Sample from the prior predictive. Generate a visualization and numerical summary of the prior predictive distribution.</p>
 <p>(b) Using the outputs from (a) justify your choices of priors and likelihoods</p>
@@ -1428,7 +1429,7 @@ p(\text{heads}) = p(\text{heads} \mid \text{fair coin})*p(\text{fair coin}) + p(
 </div>
 </section>
 <section id="m20">
-<h2>1M20.<a class="headerlink" href="#m20" title="Permalink to this headline">¶</a></h2>
+<h2>1M20.<a class="headerlink" href="#m20" title="Permalink to this heading">¶</a></h2>
 <p>From domain knowledge you have that a given parameter can not be negative, and has a mean that is roughly between 3 and 10 units, and a standard deviation of around 2. Determine two prior distributions that satisfy these constraints using Python. This may require trial and error by drawing samples and verifying these criteria have been met using both plots and numerical summaries.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1489,7 +1490,7 @@ p(\text{heads}) = p(\text{heads} \mid \text{fair coin})*p(\text{fair coin}) + p(
 </div>
 </section>
 <section id="m21">
-<h2>1M21.<a class="headerlink" href="#m21" title="Permalink to this headline">¶</a></h2>
+<h2>1M21.<a class="headerlink" href="#m21" title="Permalink to this heading">¶</a></h2>
 <p>A store is visited by n customers on a given day. The number of customers that
 make a purchase Y is distributed as Bin(n, θ) where θ is the probability that a customer
 makes a purchase. Assume we know θ and the prior for n is Pois(4.5).</p>
@@ -1699,7 +1700,7 @@ The number of effective samples is smaller than 25% for some parameters.
 </div>
 </section>
 <section id="h22">
-<h2>1H22.<a class="headerlink" href="#h22" title="Permalink to this headline">¶</a></h2>
+<h2>1H22.<a class="headerlink" href="#h22" title="Permalink to this heading">¶</a></h2>
 <p>Modify Code Block 1.2 to generate samples from a Normal Distribution, noting your choice of parameters for the mean and standard deviation. Then modify Code Blocks 1.1 and 1.3 to sample from a Normal model and see if you can recover your chosen parameters.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1799,7 +1800,7 @@ The number of effective samples is smaller than 25% for some parameters.
 </div>
 </section>
 <section id="h23">
-<h2>1H23.<a class="headerlink" href="#h23" title="Permalink to this headline">¶</a></h2>
+<h2>1H23.<a class="headerlink" href="#h23" title="Permalink to this heading">¶</a></h2>
 <p>Make a model that estimates the proportion of the number of sunny versus cloudy days in your area. Use the past 5 days of data from your personal observations. Think through the data collection process. How hard is it to remember the past 5 days. What if needed the past 30 days of data? Past year? Justify your choice of priors. Obtain a posterior distribution that estimates the proportion of sunny versus cloudy days. Generate predictions for the next 10 days of weather. Communicate your answer using both numerical summaries and visualizations.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1892,7 +1893,7 @@ NUTS: [θ]
 </div>
 </section>
 <section id="h24">
-<h2>1H24.<a class="headerlink" href="#h24" title="Permalink to this headline">¶</a></h2>
+<h2>1H24.<a class="headerlink" href="#h24" title="Permalink to this heading">¶</a></h2>
 <p>You planted 12 seedlings and 3 germinate. Let us call θ the probability that a seedling
 germinates. Assuming Beta(1, 1) prior distribution for θ.</p>
 <p>(a) Use pen and paper to compute the posterior mean and standard deviation. Verify your calculation using SciPy</p>
@@ -1900,7 +1901,7 @@ germinates. Assuming Beta(1, 1) prior distribution for θ.</p>
 <p>(c) Use SciPy to compute the posterior predictive probability that at least one seedling will germinate if you plant another 12 seedlings.</p>
 <p>After obtaining your results with SciPy repeat this exercise using PyMC3 and ArviZ</p>
 <section id="id5">
-<h3>Solution A<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<h3>Solution A<a class="headerlink" href="#id5" title="Permalink to this heading">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use a conjugate update to determine new posterior</span>
@@ -1939,7 +1940,7 @@ germinates. Assuming Beta(1, 1) prior distribution for θ.</p>
 </div>
 </section>
 <section id="id6">
-<h3>Solution B<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<h3>Solution B<a class="headerlink" href="#id6" title="Permalink to this heading">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">post</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">post_beta_a</span><span class="p">,</span> <span class="n">post_beta_b</span><span class="p">)</span>
@@ -1990,7 +1991,7 @@ germinates. Assuming Beta(1, 1) prior distribution for θ.</p>
 </div>
 </section>
 <section id="id7">
-<h3>Solution C<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<h3>Solution C<a class="headerlink" href="#id7" title="Permalink to this heading">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">samples</span> <span class="o">=</span> <span class="mi">10000</span>
@@ -2912,9 +2913,9 @@ Coordinates:
     <footer class="footer">
   <p>
     
-      Por Martin, Kumar, Lao<br/>
+      By Martin, Kumar, Lao<br/>
     
-        &copy; Derechos de autor 2021.<br/>
+        &copy; Copyright 2021.<br/>
   </p>
 </footer>
 </main>

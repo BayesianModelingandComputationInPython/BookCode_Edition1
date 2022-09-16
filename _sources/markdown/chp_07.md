@@ -792,7 +792,7 @@ different datasets from known generative processes.
 -   $Y \sim \mathcal{N}(0, 1)$ $X_{0} \sim \mathcal{N}(Y, 0.1)$ and
     $X_{1} \sim \mathcal{N}(Y, 0.2)$
     $\boldsymbol{X}_{2:9} \sim \mathcal{N}(0, 1)$. Only the first 2
-    independent variables are unrelated to the predictor, and the first
+    independent variables are related to the predictor, and the first
     is more related than the second.
 
 -   $Y = 10 \sin(\pi X_0 X_1 ) + 20(X_2 - 0.5)^2 + 10X_3 + 5X_4 + \epsilon$

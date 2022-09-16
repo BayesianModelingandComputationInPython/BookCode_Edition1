@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>5. Splines &#8212; Bayesian Modeling and Computation in Python</title>
     
@@ -38,6 +38,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
@@ -61,7 +62,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="6. Time Series" href="chp_06.html" />
     <link rel="prev" title="4. Extending Linear Models" href="chp_04.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
+    <meta name="docsearch:language" content="en">
     
 
     <!-- Google Analytics -->
@@ -96,7 +97,7 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Buscar este libro ..." aria-label="Buscar este libro ..." autocomplete="off" >
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <p aria-level="2" class="caption" role="heading">
@@ -301,8 +302,8 @@ const thebe_selector_output = ".output, .cell_output"
             
             <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
                 data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Navegación de palanca" aria-controls="site-navigation"
-                title="Navegación de palanca" data-toggle="tooltip" data-placement="left">
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
                 <i class="fas fa-bars"></i>
                 <i class="fas fa-arrow-left"></i>
                 <i class="fas fa-arrow-up"></i>
@@ -317,12 +318,12 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="dropdown-buttons sourcebuttons">
         <a class="repository-button"
             href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Repositorio de origen"><i
-                    class="fab fa-github"></i>repositorio</button></a>
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
             href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_05.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Abrir un problema"><i class="fas fa-lightbulb"></i>Tema abierto</button></a>
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
     </div>
 </div>
@@ -330,8 +331,8 @@ const thebe_selector_output = ".output, .cell_output"
             <!-- Full screen (wrap in <a> to have style consistency -->
 
 <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Modo de pantalla completa"
-        title="Modo de pantalla completa"><i
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
             class="fas fa-expand"></i></button></a>
 
             <!-- Launch buttons -->
@@ -342,7 +343,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contenido
+                <i class="fas fa-list"></i> Contents
             </div>
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
@@ -409,7 +410,7 @@ const thebe_selector_output = ".output, .cell_output"
                     <div id="jb-print-toc">
                         
                         <div>
-                            <h2> Contenido </h2>
+                            <h2> Contents </h2>
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
@@ -470,7 +471,7 @@ const thebe_selector_output = ".output, .cell_output"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="splines">
-<span id="chap3-5"></span><h1><span class="section-number">5. </span>Splines<a class="headerlink" href="#splines" title="Permalink to this headline">¶</a></h1>
+<span id="chap3-5"></span><h1><span class="section-number">5. </span>Splines<a class="headerlink" href="#splines" title="Permalink to this heading">¶</a></h1>
 <p>In this chapter we will discuss splines, which is an extension of
 concepts introduced into Chapter <a class="reference internal" href="chp_03.html#chap2"><span class="std std-ref">3</span></a> with the aim of
 adding more flexibility. In the models introduced in Chapter
@@ -479,7 +480,7 @@ independent variables was the same for their entire domain. Splines, in
 contrast, can split a problem into multiple local solutions, which can
 all be combined to produce a useful global solution. Let us see how.</p>
 <section id="polynomial-regression">
-<span id="id1"></span><h2><span class="section-number">5.1. </span>Polynomial Regression<a class="headerlink" href="#polynomial-regression" title="Permalink to this headline">¶</a></h2>
+<span id="id1"></span><h2><span class="section-number">5.1. </span>Polynomial Regression<a class="headerlink" href="#polynomial-regression" title="Permalink to this heading">¶</a></h2>
 <p>As we already saw in Chapter <a class="reference internal" href="chp_03.html#chap2"><span class="std std-ref">3</span></a>, we can write a linear
 model as:</p>
 <div class="math notranslate nohighlight" id="equation-eq-lin-model">
@@ -522,7 +523,7 @@ a polynomial of degree <span class="math notranslate nohighlight">\(m\)</span> w
 the independent and dependent variables is of degree <span class="math notranslate nohighlight">\(m\)</span> for the entire
 dataset. This can be problematic when different regions of our data need
 different levels of flexibility. This could lead, for example, to curves
-that are <em>too flexible</em> <a class="footnote-reference brackets" href="#id25" id="id2">1</a>. For example, in the last panel of
+that are <em>too flexible</em> <a class="footnote-reference brackets" href="#id25" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>. For example, in the last panel of
 <a class="reference internal" href="#fig-polynomial-regression"><span class="std std-numref">Fig. 5.1</span></a> (degree=15), we can see that the
 fitted curve presents a <em>deep valley</em> followed by a <em>high peak</em> towards
 high values of <span class="math notranslate nohighlight">\(X\)</span>, even when there are no data points with such low or
@@ -538,7 +539,7 @@ single data point changes the model fit with effects even far away from
 the location of the point.</p>
 </section>
 <section id="expanding-the-feature-space">
-<span id="expanding-feature-space"></span><h2><span class="section-number">5.2. </span>Expanding the Feature Space<a class="headerlink" href="#expanding-the-feature-space" title="Permalink to this headline">¶</a></h2>
+<span id="expanding-feature-space"></span><h2><span class="section-number">5.2. </span>Expanding the Feature Space<a class="headerlink" href="#expanding-the-feature-space" title="Permalink to this heading">¶</a></h2>
 <p>At a conceptual level we can think of polynomial regression as a recipe
 for creating new predictors, or in more formal terms to <strong>expanding the
 feature space</strong>. By performing this expansion we are able to fit a line
@@ -573,7 +574,7 @@ does).</p>
 <span class="math notranslate nohighlight">\(I(c_i \leq x_k &lt; c_j)\)</span> to break up the original <span class="math notranslate nohighlight">\(\boldsymbol{X}\)</span>
 predictor into (non-overlapping) subsets. And then fit polynomial
 <em>locally</em>, i.e., only inside these subsets. This procedure leads to
-fitting <strong>piecewise polynomials</strong> <a class="footnote-reference brackets" href="#id26" id="id3">2</a> as shown in
+fitting <strong>piecewise polynomials</strong> <a class="footnote-reference brackets" href="#id26" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> as shown in
 <a class="reference internal" href="#fig-piecewise"><span class="std std-numref">Fig. 5.2</span></a>.</p>
 <figure class="align-default" id="fig-piecewise">
 <a class="reference internal image-reference" href="../_images/piecewise.png"><img alt="../_images/piecewise.png" src="../_images/piecewise.png" style="width: 8.00in;" /></a>
@@ -595,12 +596,12 @@ seem to be a rather crude approximation but it may be all that we need.
 For example, step-functions may be OK if we are trying to find out a
 discontinuous outcome like the expected mean temperature during morning,
 afternoon, and night. Or when we are OK about getting a non-smooth
-approximation even if we think the outcome is smooth <a class="footnote-reference brackets" href="#id27" id="id4">3</a>.</p>
+approximation even if we think the outcome is smooth <a class="footnote-reference brackets" href="#id27" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>.</p>
 <p>In the second panel (piecewise linear) we do the same as in the first
 but instead of a constant function we use a linear function, which is a
 first degree polynomial. Notice that the contiguous linear solutions
 meet at the dashed lines, this is done on purpose. We could justify this
-restriction as trying to make the solution as smooth as possible <a class="footnote-reference brackets" href="#id28" id="id5">4</a>.</p>
+restriction as trying to make the solution as smooth as possible <a class="footnote-reference brackets" href="#id28" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>.</p>
 <p>In the third panel (piecewise quadratic) and fourth panel (piecewise
 cubic) we use quadratic and cubic piecewise polynomials. As we can see
 by increasing the degree of the piecewise polynomials we get further and
@@ -615,7 +616,7 @@ while providing a good overall model fit to the whole domain of the
 data.</p>
 <p>So far we have assumed we have a single predictor <span class="math notranslate nohighlight">\(X\)</span>, but the same idea
 can be extended to more than one predictor <span class="math notranslate nohighlight">\(X_0, X_1, \cdots, X_p\)</span>. And
-we can even add an inverse link function <span class="math notranslate nohighlight">\(\phi\)</span> <a class="footnote-reference brackets" href="#id29" id="id6">5</a> models of this form
+we can even add an inverse link function <span class="math notranslate nohighlight">\(\phi\)</span> <a class="footnote-reference brackets" href="#id29" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a> models of this form
 are known as Generalized Additive Models (GAM):
 <span id="id7">[<a class="reference internal" href="references.html#id3" title="A. Gelman, J.B. Carlin, H.S. Stern, D.B. Dunson, A. Vehtari, and D.B. Rubin. Bayesian Data Analysis, Third Edition. Chapman &amp; Hall/CRC Texts in Statistical Science. Taylor &amp; Francis, 2013. ISBN 9781439840955.">18</a>, <a class="reference internal" href="references.html#id4" title="S.N. Wood. Generalized Additive Models: An Introduction with R, Second Edition. Chapman &amp; Hall/CRC Texts in Statistical Science. CRC Press, 2017. ISBN 9781498728379.">49</a>]</span>.</p>
 <div class="math notranslate nohighlight" id="equation-eq-gam">
@@ -629,14 +630,14 @@ error. As not all transformations will have the same statistical
 properties, it would be nice to have access to some <em>default</em> functions
 with good general properties over a wider range of datasets. Starting in
 the next section and for the remainder of this chapter we will restrict
-the discussion to a family of basis functions known as B-splines <a class="footnote-reference brackets" href="#id30" id="id8">6</a>.</p>
+the discussion to a family of basis functions known as B-splines <a class="footnote-reference brackets" href="#id30" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a>.</p>
 </section>
 <section id="introducing-splines">
-<span id="id9"></span><h2><span class="section-number">5.3. </span>Introducing Splines<a class="headerlink" href="#introducing-splines" title="Permalink to this headline">¶</a></h2>
+<span id="id9"></span><h2><span class="section-number">5.3. </span>Introducing Splines<a class="headerlink" href="#introducing-splines" title="Permalink to this heading">¶</a></h2>
 <p>Splines can be seen as an attempt to use the flexibility of polynomials
 but keeping them under control and thus obtaining a model with overall
 good statistical properties. To define a spline we need to define knots
-<a class="footnote-reference brackets" href="#id31" id="id10">7</a>. The purpose of the knots is to split the domain of the variable
+<a class="footnote-reference brackets" href="#id31" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a>. The purpose of the knots is to split the domain of the variable
 <span class="math notranslate nohighlight">\(\boldsymbol{X}\)</span> into contiguous intervals. For example, the dashed
 vertical gray lines in <a class="reference internal" href="#fig-piecewise"><span class="std std-numref">Fig. 5.2</span></a> represent knots. For our
 purposes a spline is a piecewise polynomial constrained to be
@@ -674,7 +675,7 @@ the borders.</span><a class="headerlink" href="#fig-splines-basis" title="Permal
 </figure>
 <p>From <a class="reference internal" href="#fig-splines-basis"><span class="std std-numref">Fig. 5.3</span></a> we can see that as we increase the
 degree of the B-spline, the domain of the B-spline spans more and more
-<a class="footnote-reference brackets" href="#id32" id="id11">8</a>. Thus, for higher degree spline to make sense we need to define
+<a class="footnote-reference brackets" href="#id32" id="id11" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a>. Thus, for higher degree spline to make sense we need to define
 more knots. Note that in all cases B-splines are restricted to be
 non-zero only inside a given interval. This property make splines
 regression more <em>local</em> than what we would get from a polynomial
@@ -760,7 +761,7 @@ sudden changes of slope. One way of doing this is by adding the
 restriction that two contiguous piecewise polynomials should meet at
 their common knots. Cubic splines have two additional restrictions, the
 first and second derivatives are also continuous, meaning that the slope
-is continuous at the knots and also the slope of the slope <a class="footnote-reference brackets" href="#id33" id="id12">9</a>. In
+is continuous at the knots and also the slope of the slope <a class="footnote-reference brackets" href="#id33" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a>. In
 fact, a spline of degree <span class="math notranslate nohighlight">\(m\)</span> will have <span class="math notranslate nohighlight">\(m-1\)</span> derivatives at the knots.
 Having said all that, splines of lower or higher order can still be
 useful for some problems, it is just that cubic splines are good
@@ -768,12 +769,12 @@ defaults.</p>
 </div>
 </section>
 <section id="building-the-design-matrix-using-patsy">
-<span id="id13"></span><h2><span class="section-number">5.4. </span>Building the Design Matrix using Patsy<a class="headerlink" href="#building-the-design-matrix-using-patsy" title="Permalink to this headline">¶</a></h2>
+<span id="id13"></span><h2><span class="section-number">5.4. </span>Building the Design Matrix using Patsy<a class="headerlink" href="#building-the-design-matrix-using-patsy" title="Permalink to this heading">¶</a></h2>
 <p>In Figures <a class="reference internal" href="#fig-splines-basis"><span class="std std-numref">Fig. 5.3</span></a> and
 <a class="reference internal" href="#fig-splines-weighted"><span class="std std-numref">Fig. 5.4</span></a> we plot the B-splines, but so far we have
 omitted how to compute them. The main reason is that computation can be
 cumbersome and there are already efficient algorithms available in
-packages like Scipy <a class="footnote-reference brackets" href="#id34" id="id14">10</a>. Thus, instead of discussing how the B-splines
+packages like Scipy <a class="footnote-reference brackets" href="#id34" id="id14" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a>. Thus, instead of discussing how the B-splines
 can be computed from scratch we are going to rely on Patsy, a package
 for describing statistical models, especially linear models, or models
 that have a linear component, and building design matrices. It is
@@ -783,7 +784,7 @@ a taste of the formula language, a linear model with two covariates
 looks like <code class="docutils literal notranslate"><span class="pre">&quot;y</span> <span class="pre">~</span> <span class="pre">x1</span> <span class="pre">+</span> <span class="pre">x2&quot;</span></code> and if we want to add an interaction we can
 write <code class="docutils literal notranslate"><span class="pre">&quot;y</span> <span class="pre">~</span> <span class="pre">x1</span> <span class="pre">+</span> <span class="pre">x2</span> <span class="pre">+</span> <span class="pre">x1:x2&quot;</span></code>. This is a similar syntax as the one shown
 in Chapter <a class="reference internal" href="chp_03.html#chap2"><span class="std std-ref">3</span></a> in the box highlighting Bambi. For more
-details please check the patsy documentation <a class="footnote-reference brackets" href="#id35" id="id15">11</a>.</p>
+details please check the patsy documentation <a class="footnote-reference brackets" href="#id35" id="id15" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a>.</p>
 <p>To define a basis spline design matrix in Patsy we need to pass a string
 to the <code class="docutils literal notranslate"><span class="pre">dmatrix</span></code> function starting with the <em>particle</em> <code class="docutils literal notranslate"><span class="pre">bs()</span></code>, while
 this particle is a string is parsed by Patsy as a function. And thus it
@@ -875,7 +876,7 @@ We can now move forward into computing the weights. Let us see how we
 can do that in a Bayesian model with PyMC3.</p>
 </section>
 <section id="fitting-splines-in-pymc3">
-<span id="id16"></span><h2><span class="section-number">5.5. </span>Fitting Splines in PyMC3<a class="headerlink" href="#fitting-splines-in-pymc3" title="Permalink to this headline">¶</a></h2>
+<span id="id16"></span><h2><span class="section-number">5.5. </span>Fitting Splines in PyMC3<a class="headerlink" href="#fitting-splines-in-pymc3" title="Permalink to this heading">¶</a></h2>
 <p>In this section we are going to use PyMC3 to obtain the values of the
 regression coefficients <span class="math notranslate nohighlight">\(\beta\)</span> by fitting a set of B-splines to the
 data.</p>
@@ -884,7 +885,7 @@ to rent and return bikes in a completely automated fashion, helping to
 increase the efficiency of the public transportation and probably making
 part of the society healthier and even happier. We are going to use a
 dataset from such a bike sharing system from the University of
-California Irvine’s Machine Learning Repository <a class="footnote-reference brackets" href="#id36" id="id17">12</a>. For our example
+California Irvine’s Machine Learning Repository <a class="footnote-reference brackets" href="#id36" id="id17" role="doc-noteref"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></a>. For our example
 we are going to estimate the number of rental bikes rented per hour over
 a 24 hour period. Let us load and plot the data:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/bikes_hour.csv&quot;</span><span class="p">)</span>
@@ -1010,7 +1011,7 @@ check the Patsy documentation for more details and explore using <code class="do
 the previous model and compare results.</p>
 </section>
 <section id="choosing-knots-and-prior-for-splines">
-<span id="id19"></span><h2><span class="section-number">5.6. </span>Choosing Knots and Prior for Splines<a class="headerlink" href="#choosing-knots-and-prior-for-splines" title="Permalink to this headline">¶</a></h2>
+<span id="id19"></span><h2><span class="section-number">5.6. </span>Choosing Knots and Prior for Splines<a class="headerlink" href="#choosing-knots-and-prior-for-splines" title="Permalink to this heading">¶</a></h2>
 <p>One modeling decision we have to make when working with splines is to
 choose the number and location of the knots. This can be a little bit
 concerning, given that in general the number of knots and their spacing
@@ -1036,18 +1037,6 @@ still has something new to contribute to the model averaging.
 these models.</p>
 <table class="table" id="tab-loo-splines">
 <caption><span class="caption-number">Table 5.1 </span><span class="caption-text">Summary of model comparison using LOO for splines models with different number of knots.</span><a class="headerlink" href="#tab-loo-splines" title="Permalink to this table">¶</a></caption>
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 10%" />
-<col style="width: 10%" />
-<col style="width: 10%" />
-<col style="width: 10%" />
-<col style="width: 10%" />
-<col style="width: 10%" />
-<col style="width: 10%" />
-<col style="width: 10%" />
-<col style="width: 10%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td></td>
 <td><p><strong>rank</strong></p></td>
@@ -1137,7 +1126,7 @@ this way we will be putting more knots where we have more data and less
 knots where less data. This translates into a more flexible
 approximation for data-richer portions.</p>
 <section id="regularizing-prior-for-splines">
-<span id="id20"></span><h3><span class="section-number">5.6.1. </span>Regularizing Prior for Splines<a class="headerlink" href="#regularizing-prior-for-splines" title="Permalink to this headline">¶</a></h3>
+<span id="id20"></span><h3><span class="section-number">5.6.1. </span>Regularizing Prior for Splines<a class="headerlink" href="#regularizing-prior-for-splines" title="Permalink to this heading">¶</a></h3>
 <p>As choosing too few knots could lead to under-fitting and too many to
 overfitting, we may want to use a <em>rather large</em> number of knots and
 then choose a regularizing prior. From the definition of splines and
@@ -1199,7 +1188,7 @@ black line corresponds to the mean spline function computed from
 </section>
 </section>
 <section id="modeling-co2-uptake-with-splines">
-<span id="id21"></span><h2><span class="section-number">5.7. </span>Modeling CO₂ Uptake with Splines<a class="headerlink" href="#modeling-co2-uptake-with-splines" title="Permalink to this headline">¶</a></h2>
+<span id="id21"></span><h2><span class="section-number">5.7. </span>Modeling CO₂ Uptake with Splines<a class="headerlink" href="#modeling-co2-uptake-with-splines" title="Permalink to this heading">¶</a></h2>
 <p>For a final example of splines we are going to use data from an
 experimental study <span id="id22">[<a class="reference internal" href="references.html#id120" title="Catherine Potvin, Martin J Lechowicz, and Serge Tardif. The statistical analysis of ecophysiological response curves obtained from experiments involving repeated measures. Ecology, 71(4):1389–1400, 1990.">50</a>, <a class="reference internal" href="references.html#id121" title="Eric J Pedersen, David L Miller, Gavin L Simpson, and Noam Ross. Hierarchical generalized additive models in ecology: an introduction with mgcv. PeerJ, 7:e6876, 2019.">51</a>]</span>. The experiment consists
 of measuring the CO₂ uptake in 12 different plants under varying
@@ -1318,7 +1307,7 @@ black line is the mean spline fit from the model in Code Block
 represents the 94% HDI interval for that fit.</span><a class="headerlink" href="#fig-sp-individual" title="Permalink to this image">¶</a></p>
 </figcaption>
 </figure>
-<p>We can also mix both previous models <a class="footnote-reference brackets" href="#id37" id="id24">13</a>. This may be interesting if
+<p>We can also mix both previous models <a class="footnote-reference brackets" href="#id37" id="id24" role="doc-noteref"><span class="fn-bracket">[</span>13<span class="fn-bracket">]</span></a>. This may be interesting if
 we want to estimate a global trend for the 12 plants plus individual
 fits. Model <code class="docutils literal notranslate"><span class="pre">sp_mix</span></code> in Code Block <a class="reference internal" href="#sp-mix"><span class="std std-ref">sp_mix</span></a> use
 both previously defined design matrices <code class="docutils literal notranslate"><span class="pre">Bg</span></code> and <code class="docutils literal notranslate"><span class="pre">Bi</span></code>.</p>
@@ -1388,7 +1377,7 @@ LOO for each model and the best ranked model.</span><a class="headerlink" href="
 </figure>
 </section>
 <section id="exercises">
-<span id="exercises5"></span><h2><span class="section-number">5.8. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<span id="exercises5"></span><h2><span class="section-number">5.8. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">¶</a></h2>
 <p><strong>5E1.</strong>. Splines are quite powerful so its good to know
 when and where to use them. To reinforce this explain each of the
 following</p>
@@ -1558,63 +1547,74 @@ posterior predictive checks.</p></li>
 <li><p>Summarize all your findings</p></li>
 </ol>
 <hr class="footnotes docutils" />
-<dl class="footnote brackets">
-<dt class="label" id="id25"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>
-<dd><p>See Runge’s phenomenon for details. This can also be seen from
+<aside class="footnote brackets" id="id25" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">1</a><span class="fn-bracket">]</span></span>
+<p>See Runge’s phenomenon for details. This can also be seen from
 Taylor’s theorem, polynomials will be useful to approximate a
 function close to a single given point, but it will not be good over
 its whole domain. If you got lost try watching this video
 <a class="reference external" href="https://www.youtube.com/watch?v=3d6DsjIBzJ4">https://www.youtube.com/watch?v=3d6DsjIBzJ4</a>.</p>
-</dd>
-<dt class="label" id="id26"><span class="brackets"><a class="fn-backref" href="#id3">2</a></span></dt>
-<dd><p>A piecewise function is a function that is defined using
+</aside>
+<aside class="footnote brackets" id="id26" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">2</a><span class="fn-bracket">]</span></span>
+<p>A piecewise function is a function that is defined using
 sub-functions, where each sub-function applies to a different
 interval in the domain.</p>
-</dd>
-<dt class="label" id="id27"><span class="brackets"><a class="fn-backref" href="#id4">3</a></span></dt>
-<dd><p>In Chapter <a class="reference internal" href="chp_07.html#chap6"><span class="std std-ref">7</span></a> we explore how step-functions have a
+</aside>
+<aside class="footnote brackets" id="id27" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">3</a><span class="fn-bracket">]</span></span>
+<p>In Chapter <a class="reference internal" href="chp_07.html#chap6"><span class="std std-ref">7</span></a> we explore how step-functions have a
 central role in Bayesian Additive Regression Trees.</p>
-</dd>
-<dt class="label" id="id28"><span class="brackets"><a class="fn-backref" href="#id5">4</a></span></dt>
-<dd><p>This can also be justified numerically as this reduces the number
+</aside>
+<aside class="footnote brackets" id="id28" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">4</a><span class="fn-bracket">]</span></span>
+<p>This can also be justified numerically as this reduces the number
 of coefficients we need to find to compute a solution.</p>
-</dd>
-<dt class="label" id="id29"><span class="brackets"><a class="fn-backref" href="#id6">5</a></span></dt>
-<dd><p>As usual the identity function is a valid choice.</p>
-</dd>
-<dt class="label" id="id30"><span class="brackets"><a class="fn-backref" href="#id8">6</a></span></dt>
-<dd><p>Other basis functions could be wavelets or Fourier series as we
+</aside>
+<aside class="footnote brackets" id="id29" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">5</a><span class="fn-bracket">]</span></span>
+<p>As usual the identity function is a valid choice.</p>
+</aside>
+<aside class="footnote brackets" id="id30" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">6</a><span class="fn-bracket">]</span></span>
+<p>Other basis functions could be wavelets or Fourier series as we
 will see in Chapter <a class="reference internal" href="chp_06.html#chap4"><span class="std std-ref">6</span></a>.</p>
-</dd>
-<dt class="label" id="id31"><span class="brackets"><a class="fn-backref" href="#id10">7</a></span></dt>
-<dd><p>Also known as break points, which is arguably a more memorable
+</aside>
+<aside class="footnote brackets" id="id31" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">7</a><span class="fn-bracket">]</span></span>
+<p>Also known as break points, which is arguably a more memorable
 name, but still knots is widely used in the literature.</p>
-</dd>
-<dt class="label" id="id32"><span class="brackets"><a class="fn-backref" href="#id11">8</a></span></dt>
-<dd><p>In the limit of infinite degree a B-spline will span the entire
+</aside>
+<aside class="footnote brackets" id="id32" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id11">8</a><span class="fn-bracket">]</span></span>
+<p>In the limit of infinite degree a B-spline will span the entire
 real line and not only that, it will converge to a Gaussian
 <a class="reference external" href="https://www.youtube.com/watch/9CS7j5I6aOc">https://www.youtube.com/watch/9CS7j5I6aOc</a>.</p>
-</dd>
-<dt class="label" id="id33"><span class="brackets"><a class="fn-backref" href="#id12">9</a></span></dt>
-<dd><p>Check
+</aside>
+<aside class="footnote brackets" id="id33" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id12">9</a><span class="fn-bracket">]</span></span>
+<p>Check
 <a class="reference external" href="https://pclambert.net/interactivegraphs/spline_continuity/spline_continuity">https://pclambert.net/interactivegraphs/spline_continuity/spline_continuity</a>
 for further intuition</p>
-</dd>
-<dt class="label" id="id34"><span class="brackets"><a class="fn-backref" href="#id14">10</a></span></dt>
-<dd><p>If interested you can check
+</aside>
+<aside class="footnote brackets" id="id34" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id14">10</a><span class="fn-bracket">]</span></span>
+<p>If interested you can check
 <a class="reference external" href="https://en.wikipedia.org/wiki/De_Boor%27s_algorithm">https://en.wikipedia.org/wiki/De_Boor%27s_algorithm</a>.</p>
-</dd>
-<dt class="label" id="id35"><span class="brackets"><a class="fn-backref" href="#id15">11</a></span></dt>
-<dd><p><a class="reference external" href="https://patsy.readthedocs.io">https://patsy.readthedocs.io</a></p>
-</dd>
-<dt class="label" id="id36"><span class="brackets"><a class="fn-backref" href="#id17">12</a></span></dt>
-<dd><p><a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/bike+sharing+dataset">https://archive.ics.uci.edu/ml/datasets/bike+sharing+dataset</a></p>
-</dd>
-<dt class="label" id="id37"><span class="brackets"><a class="fn-backref" href="#id24">13</a></span></dt>
-<dd><p>Yes, this is also known as a mixed-effect model, you might recall
+</aside>
+<aside class="footnote brackets" id="id35" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id15">11</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://patsy.readthedocs.io">https://patsy.readthedocs.io</a></p>
+</aside>
+<aside class="footnote brackets" id="id36" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id17">12</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/bike+sharing+dataset">https://archive.ics.uci.edu/ml/datasets/bike+sharing+dataset</a></p>
+</aside>
+<aside class="footnote brackets" id="id37" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id24">13</a><span class="fn-bracket">]</span></span>
+<p>Yes, this is also known as a mixed-effect model, you might recall
 the related concept we discussed in Chapter <a class="reference internal" href="chp_04.html#chap3"><span class="std std-ref">4</span></a>.</p>
-</dd>
-</dl>
+</aside>
 </section>
 </section>
 
@@ -1664,9 +1664,9 @@ the related concept we discussed in Chapter <a class="reference internal" href="
     <footer class="footer">
   <p>
     
-      Por Martin, Kumar, Lao<br/>
+      By Martin, Kumar, Lao<br/>
     
-        &copy; Derechos de autor 2021.<br/>
+        &copy; Copyright 2021.<br/>
   </p>
 </footer>
 </main>

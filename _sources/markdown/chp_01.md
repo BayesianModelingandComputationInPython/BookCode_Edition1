@@ -515,7 +515,7 @@ When we use Markov chain Monte Carlo Methods to do Bayesian inference,
 we typically refer to them as MCMC samplers. At each iteration we draw a
 random sample from the sampler, so naturally we refer to the output from
 MCMC as *samples* or *draws*. Some people make the distinction that a
-sample is made up by a collection of draws, other treat samples and
+sample is made up by a collection of draws, others treat samples and
 draws as interchangeably.
 
 Since MCMC draws samples sequentially we also say we get a *chain* of

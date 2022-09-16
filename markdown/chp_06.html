@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>6. Time Series &#8212; Bayesian Modeling and Computation in Python</title>
     
@@ -38,6 +38,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
@@ -61,7 +62,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="7. Bayesian Additive Regression Trees" href="chp_07.html" />
     <link rel="prev" title="5. Splines" href="chp_05.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
+    <meta name="docsearch:language" content="en">
     
 
     <!-- Google Analytics -->
@@ -96,7 +97,7 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Buscar este libro ..." aria-label="Buscar este libro ..." autocomplete="off" >
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <p aria-level="2" class="caption" role="heading">
@@ -301,8 +302,8 @@ const thebe_selector_output = ".output, .cell_output"
             
             <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
                 data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Navegación de palanca" aria-controls="site-navigation"
-                title="Navegación de palanca" data-toggle="tooltip" data-placement="left">
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
                 <i class="fas fa-bars"></i>
                 <i class="fas fa-arrow-left"></i>
                 <i class="fas fa-arrow-up"></i>
@@ -317,12 +318,12 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="dropdown-buttons sourcebuttons">
         <a class="repository-button"
             href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Repositorio de origen"><i
-                    class="fab fa-github"></i>repositorio</button></a>
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
             href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_06.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Abrir un problema"><i class="fas fa-lightbulb"></i>Tema abierto</button></a>
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
     </div>
 </div>
@@ -330,8 +331,8 @@ const thebe_selector_output = ".output, .cell_output"
             <!-- Full screen (wrap in <a> to have style consistency -->
 
 <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Modo de pantalla completa"
-        title="Modo de pantalla completa"><i
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
             class="fas fa-expand"></i></button></a>
 
             <!-- Launch buttons -->
@@ -342,7 +343,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contenido
+                <i class="fas fa-list"></i> Contents
             </div>
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
@@ -445,7 +446,7 @@ const thebe_selector_output = ".output, .cell_output"
                     <div id="jb-print-toc">
                         
                         <div>
-                            <h2> Contenido </h2>
+                            <h2> Contents </h2>
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
@@ -542,10 +543,10 @@ const thebe_selector_output = ".output, .cell_output"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="time-series">
-<span id="chap4"></span><h1><span class="section-number">6. </span>Time Series<a class="headerlink" href="#time-series" title="Permalink to this headline">¶</a></h1>
+<span id="chap4"></span><h1><span class="section-number">6. </span>Time Series<a class="headerlink" href="#time-series" title="Permalink to this heading">¶</a></h1>
 <p>“It is difficult to make predictions, especially about the future”.
 This is true when dutch politician Karl Kristian Steincke allegedly said
-this sometime in the 1940s <a class="footnote-reference brackets" href="#id52" id="id1">1</a>, and it is still true today especially
+this sometime in the 1940s <a class="footnote-reference brackets" href="#id52" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, and it is still true today especially
 if you are working on time series and forecasting problems. There are
 many applications of time series analysis, from making predictions with
 forecasting, to understanding what were the underlying latent factors in
@@ -561,7 +562,7 @@ Filter. The remainder of the chapter will give a brief summary of model
 comparison as well as considerations to be made when choosing prior
 distributions for time series models.</p>
 <section id="an-overview-of-time-series-problems">
-<span id="id2"></span><h2><span class="section-number">6.1. </span>An Overview of Time Series Problems<a class="headerlink" href="#an-overview-of-time-series-problems" title="Permalink to this headline">¶</a></h2>
+<span id="id2"></span><h2><span class="section-number">6.1. </span>An Overview of Time Series Problems<a class="headerlink" href="#an-overview-of-time-series-problems" title="Permalink to this heading">¶</a></h2>
 <p>In many real life applications we observe data sequentially in time,
 generating timestamps along the way each time we make an observation. In
 addition to the observation itself, the timestamp information can be
@@ -572,7 +573,7 @@ global GDP, annual CO₂ emissions in the US. Usually this is an
 overall pattern which we intuitively label as “growth” or
 “decline”.</p></li>
 <li><p>There is some recurrent pattern correlated to time, called
-<strong>seasonality</strong> <a class="footnote-reference brackets" href="#id53" id="id3">2</a>. For example, changes in monthly temperature
+<strong>seasonality</strong> <a class="footnote-reference brackets" href="#id53" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>. For example, changes in monthly temperature
 (higher in the summer and lower in the winter), monthly rainfall
 amounts (in many regions of the world this is lower in winter and
 higher during summer), daily coffee consumption in a given office
@@ -580,7 +581,7 @@ building (higher in the weekdays and lower in the weekends), hourly
 number of bike rentals(higher in the day than during the night),
 like we saw in Chapter <a class="reference internal" href="chp_05.html#chap3-5"><span class="std std-ref">5</span></a>.</p></li>
 <li><p>The current data point informs the next data point in some way. In
-other words where noise or <strong>residuals</strong> are correlated <a class="footnote-reference brackets" href="#id54" id="id4">3</a>. For
+other words where noise or <strong>residuals</strong> are correlated <a class="footnote-reference brackets" href="#id54" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>. For
 example, the daily number of cases resolved at a help desk, stock
 price, hourly temperature, hourly rainfall amounts.</p></li>
 </ul>
@@ -595,7 +596,7 @@ and explore methods to capture these regular patterns, as well as the
 less-regular patterns (e.g., residuals correlated in time).</p>
 </section>
 <section id="time-series-analysis-as-a-regression-problem">
-<span id="id5"></span><h2><span class="section-number">6.2. </span>Time Series Analysis as a Regression Problem<a class="headerlink" href="#time-series-analysis-as-a-regression-problem" title="Permalink to this headline">¶</a></h2>
+<span id="id5"></span><h2><span class="section-number">6.2. </span>Time Series Analysis as a Regression Problem<a class="headerlink" href="#time-series-analysis-as-a-regression-problem" title="Permalink to this heading">¶</a></h2>
 <p>We will start with modeling a time series with a linear regression model
 on a widely used demo data set that appears in many tutorials (e.g.,
 PyMC3, TensorFlow Probability) and it was used as an example in the
@@ -844,19 +845,19 @@ is accelerating more than linearly.</span><a class="headerlink" href="#fig-fig5-
 <li><p>The linear trend does not perform well when we forecast further into
 the future and gives forecast consistently lower than the actual
 observed. Specifically the atmospheric CO₂ does not increase
-linearly with a constant slope over the years <a class="footnote-reference brackets" href="#id55" id="id7">4</a></p></li>
+linearly with a constant slope over the years <a class="footnote-reference brackets" href="#id55" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a></p></li>
 <li><p>The range of uncertainty is almost constant (sometimes also referred
 to as the forecast cone), where intuitively we expect the
 uncertainty to increase when we forecast farther into the future.</p></li>
 </ol>
 <section id="design-matrices-for-time-series">
-<span id="id8"></span><h3><span class="section-number">6.2.1. </span>Design Matrices for Time Series<a class="headerlink" href="#design-matrices-for-time-series" title="Permalink to this headline">¶</a></h3>
+<span id="id8"></span><h3><span class="section-number">6.2.1. </span>Design Matrices for Time Series<a class="headerlink" href="#design-matrices-for-time-series" title="Permalink to this heading">¶</a></h3>
 <p>In the regression model above, a rather simplistic design matrix was
 used. We can get a better model to capture our knowledge of the observed
 time series by adding additional information to our design matrix.</p>
 <p>Generally, a better trend component is the most important aspect for
 improving forecast performance: seasonality components are <em>usually</em>
-stationary <a class="footnote-reference brackets" href="#id56" id="id9">5</a> with easy to estimate parameters. Restated, there is a
+stationary <a class="footnote-reference brackets" href="#id56" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a> with easy to estimate parameters. Restated, there is a
 repeated pattern that forms a kind of a repeated measure. Thus most time
 series modeling involves designing a latent process that realistically
 captures the non-stationarity in the trend.</p>
@@ -864,7 +865,7 @@ captures the non-stationarity in the trend.</p>
 process for the trend component. Basically, it is a smooth trend that is
 linear within some range, with an intercept and coefficient that
 changes, or drifts, slowly over the observed time span. A prime example
-of such an application is Facebook Prophet <a class="footnote-reference brackets" href="#id57" id="id10">6</a>, where a semi-smooth
+of such an application is Facebook Prophet <a class="footnote-reference brackets" href="#id57" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a>, where a semi-smooth
 step linear function is used to model the trend <span id="id11">[<a class="reference internal" href="references.html#id125" title="Sean J Taylor and Benjamin Letham. Forecasting at scale. The American Statistician, 72(1):37–45, 2018.">53</a>]</span>. By
 allowing the slope to change at some specific breakpoints, we can
 generate a trend line that could capture the long-term trend much better
@@ -925,7 +926,7 @@ posterior towards 0. Automatic change point detection is also possible
 <span id="id12">[<a class="reference internal" href="references.html#id126" title="Ryan Prescott Adams and David JC MacKay. Bayesian online changepoint detection. arXiv preprint arXiv:0710.3742, 2007.">54</a>]</span>.</p>
 </section>
 <section id="basis-functions-and-generalized-additive-model">
-<span id="chp4-gam"></span><h3><span class="section-number">6.2.2. </span>Basis Functions and Generalized Additive Model<a class="headerlink" href="#basis-functions-and-generalized-additive-model" title="Permalink to this headline">¶</a></h3>
+<span id="chp4-gam"></span><h3><span class="section-number">6.2.2. </span>Basis Functions and Generalized Additive Model<a class="headerlink" href="#basis-functions-and-generalized-additive-model" title="Permalink to this heading">¶</a></h3>
 <p>In our regression model defined in Code Block
 <a class="reference internal" href="#regression-model-for-timeseries"><span class="std std-ref">regression_model_for_timeseries</span></a>,
 we model the seasonality component with a sparse, index, matrix. An
@@ -972,7 +973,7 @@ basis function as above requires estimating 2N parameters
 <span class="math notranslate nohighlight">\(\beta = [a_1, b_1, \dots , a_N , b_N]\)</span>.</p>
 <p>Regression models like Facebook Prophet are also referred to as a (GAM),
 as their response variable <span class="math notranslate nohighlight">\(Y_t\)</span> depends linearly on unknown smooth
-basis functions <a class="footnote-reference brackets" href="#id58" id="id15">7</a>. We also discussed other GAMs previously in Chapter
+basis functions <a class="footnote-reference brackets" href="#id58" id="id15" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a>. We also discussed other GAMs previously in Chapter
 <a class="reference internal" href="chp_05.html#chap3-5"><span class="std std-ref">5</span></a>.</p>
 <div class="admonition-mathematical-properties-of-design-matrix admonition">
 <p class="admonition-title">Mathematical properties of design matrix</p>
@@ -1076,7 +1077,7 @@ black and blue.</span><a class="headerlink" href="#fig-fig9-posterior-predictive
 </section>
 </section>
 <section id="autoregressive-models">
-<span id="chap4-ar"></span><h2><span class="section-number">6.3. </span>Autoregressive Models<a class="headerlink" href="#autoregressive-models" title="Permalink to this headline">¶</a></h2>
+<span id="chap4-ar"></span><h2><span class="section-number">6.3. </span>Autoregressive Models<a class="headerlink" href="#autoregressive-models" title="Permalink to this heading">¶</a></h2>
 <p>One characteristic of time series is the sequential dependency of the
 observations. This usually introduces structured errors that are
 correlated temporally on previous observation(s) or error(s). A typical
@@ -1275,7 +1276,7 @@ design matrix, and setting the element of this column <span class="math notransl
 <span class="math notranslate nohighlight">\(y_{i-1}\)</span>. The autoregressive coefficient <span class="math notranslate nohighlight">\(\rho\)</span> is then no different to
 any other regression coefficient, which is just telling us what is the
 linear contribution of the previous observation to the expectation of
-the current observation <a class="footnote-reference brackets" href="#id59" id="id17">8</a>. In this model, we found that the effect is
+the current observation <a class="footnote-reference brackets" href="#id59" id="id17" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a>. In this model, we found that the effect is
 almost negligible by inspecting the posterior distribution of <span class="math notranslate nohighlight">\(\rho\)</span>
 (see <a class="reference internal" href="#fig-fig11-ar1-likelihood-rho"><span class="std std-numref">Fig. 6.11</span></a>):</p>
 <figure class="align-default" id="fig-fig11-ar1-likelihood-rho">
@@ -1371,7 +1372,7 @@ displays posterior distribution of parameters from 2 different GAMs.</span><a cl
 </figcaption>
 </figure>
 <section id="latent-ar-process-and-smoothing">
-<span id="id18"></span><h3><span class="section-number">6.3.1. </span>Latent AR Process and Smoothing<a class="headerlink" href="#latent-ar-process-and-smoothing" title="Permalink to this headline">¶</a></h3>
+<span id="id18"></span><h3><span class="section-number">6.3.1. </span>Latent AR Process and Smoothing<a class="headerlink" href="#latent-ar-process-and-smoothing" title="Permalink to this heading">¶</a></h3>
 <p>A latent process is quite powerful at capturing the subtle trends in the
 observed time series. It can even approximate some arbitrary functions.
 To see that let us consider modeling a toy problem with a time series
@@ -1437,7 +1438,7 @@ the long-term trend. Even though the model seems to fit well the
 observation, during forecast you will observe the forecast value regress
 to the mean of the last few time steps very quickly. Same as what you
 will observe using the Gaussian Process with a constant mean function
-<a class="footnote-reference brackets" href="#id60" id="id20">9</a>.</p>
+<a class="footnote-reference brackets" href="#id60" id="id20" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a>.</p>
 <p>An autoregressive component as an additional trend component could place
 some challenges to model inference. For example, scaling could be an
 issue as we are adding a random variable with the same shape as the
@@ -1447,7 +1448,7 @@ alone already has the ability to approximate the underlying trend, a
 smoothed function, of the observed data as we have seen here.</p>
 </section>
 <section id="s-ar-i-ma-x">
-<span id="sarimax"></span><h3><span class="section-number">6.3.2. </span>(S)AR(I)MA(X)<a class="headerlink" href="#s-ar-i-ma-x" title="Permalink to this headline">¶</a></h3>
+<span id="sarimax"></span><h3><span class="section-number">6.3.2. </span>(S)AR(I)MA(X)<a class="headerlink" href="#s-ar-i-ma-x" title="Permalink to this heading">¶</a></h3>
 <p>Many classical time series models share a similar autoregressive like
 pattern, where you have some latent parameter at time <span class="math notranslate nohighlight">\(t\)</span> that is
 dependent on the value of itself or another parameter at <span class="math notranslate nohighlight">\(t-k\)</span>. Two
@@ -1548,7 +1549,7 @@ implementing the likelihood function of <span class="math notranslate nohighligh
 do that in Code Block
 <a class="reference internal" href="#sarima-likelihood"><span class="std std-ref">sarima_likelihood</span></a> using a
 <code class="docutils literal notranslate"><span class="pre">tf.while_loop</span></code> to construct the residual time series <span class="math notranslate nohighlight">\(\epsilon_t\)</span> and
-evaluated on a <span class="math notranslate nohighlight">\(\text{Normal}\)</span> distribution <a class="footnote-reference brackets" href="#id61" id="id24">10</a>. From the programming
+evaluated on a <span class="math notranslate nohighlight">\(\text{Normal}\)</span> distribution <a class="footnote-reference brackets" href="#id61" id="id24" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a>. From the programming
 point of view, the biggest challenge here is to make sure the shape is
 correct when we index to the time series. To avoid additional control
 flow to check whether some of the indexes are valid (e.g, we cannot
@@ -1603,7 +1604,7 @@ zeros.</p>
 posterior density function for inference. This is shown in Code Block
 <a class="reference internal" href="#sarima-posterior"><span class="std std-ref">sarima_posterior</span></a>, with a resulting
 <code class="docutils literal notranslate"><span class="pre">target_log_prob_fn</span></code> that we sample from in Code Block
-<a class="reference internal" href="#sarima-posterior"><span class="std std-ref">sarima_posterior</span></a> <a class="footnote-reference brackets" href="#id62" id="id25">11</a>.</p>
+<a class="reference internal" href="#sarima-posterior"><span class="std std-ref">sarima_posterior</span></a> <a class="footnote-reference brackets" href="#id62" id="id25" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="sarima-posterior">
 <div class="code-block-caption"><span class="caption-number">Listing 6.18 </span><span class="caption-text">sarima_posterior</span><a class="headerlink" href="#sarima-posterior" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@tfd</span><span class="o">.</span><span class="n">JointDistributionCoroutine</span>
@@ -1631,16 +1632,6 @@ Code Block <a class="reference internal" href="#sarima-posterior"><span class="s
 similar <span class="math notranslate nohighlight">\(\text{SARIMA}(0,1,2)(1,1,1)_{12}\)</span> model.</p>
 <table class="table" id="tab-loo-sarima">
 <caption><span class="caption-number">Table 6.1 </span><span class="caption-text">Summary of model comparison using LOO (log scale) for different SARIMA models.</span><a class="headerlink" href="#tab-loo-sarima" title="Permalink to this table">¶</a></caption>
-<colgroup>
-<col style="width: 13%" />
-<col style="width: 13%" />
-<col style="width: 13%" />
-<col style="width: 13%" />
-<col style="width: 13%" />
-<col style="width: 13%" />
-<col style="width: 13%" />
-<col style="width: 13%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td></td>
 <td><p><strong>rank</strong></p></td>
@@ -1674,7 +1665,7 @@ similar <span class="math notranslate nohighlight">\(\text{SARIMA}(0,1,2)(1,1,1)
 </section>
 </section>
 <section id="state-space-models">
-<span id="id26"></span><h2><span class="section-number">6.4. </span>State Space Models<a class="headerlink" href="#state-space-models" title="Permalink to this headline">¶</a></h2>
+<span id="id26"></span><h2><span class="section-number">6.4. </span>State Space Models<a class="headerlink" href="#state-space-models" title="Permalink to this heading">¶</a></h2>
 <p>In the implementation of the ARMA log-likelihood function above (Code
 Block <a class="reference internal" href="#sarima-likelihood"><span class="std std-ref">sarima_likelihood</span></a>), we iterate
 through time steps to condition on the observations and construct some
@@ -1687,7 +1678,7 @@ formulation of this pattern is the State Space model, a discrete-time
 process where we assume at each time step some latent states <span class="math notranslate nohighlight">\(X_t\)</span>
 evolves from previous step <span class="math notranslate nohighlight">\(X_{t-1}\)</span> (a Markov Sequence), and we
 observed <span class="math notranslate nohighlight">\(Y_t\)</span> that is some projection from the latent states <span class="math notranslate nohighlight">\(X_t\)</span> to
-the observable space <a class="footnote-reference brackets" href="#id63" id="id27">12</a>:</p>
+the observable space <a class="footnote-reference brackets" href="#id63" id="id27" role="doc-noteref"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></a>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-state-space-model">
 <span class="eqno">(6.10)<a class="headerlink" href="#equation-eq-state-space-model" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
 X_0 &amp; \sim p(X_0) \\
@@ -1757,7 +1748,7 @@ way we compute log likelihood of an ARMA process above could be seen as
 a filtering problem where the observed data is deconstructed into some
 latent unobserved states.</p>
 <section id="linear-gaussian-state-space-models-and-kalman-filter">
-<span id="lgssm-time-series"></span><h3><span class="section-number">6.4.1. </span>Linear Gaussian State Space Models and Kalman filter<a class="headerlink" href="#linear-gaussian-state-space-models-and-kalman-filter" title="Permalink to this headline">¶</a></h3>
+<span id="lgssm-time-series"></span><h3><span class="section-number">6.4.1. </span>Linear Gaussian State Space Models and Kalman filter<a class="headerlink" href="#linear-gaussian-state-space-models-and-kalman-filter" title="Permalink to this heading">¶</a></h3>
 <p>Perhaps one of the most notable State Space models is Linear Gaussian
 State Space Model, where we have latent states <span class="math notranslate nohighlight">\(X_t\)</span> and the observation
 model <span class="math notranslate nohighlight">\(Y_t\)</span> distributed as (multivariate) Gaussian, with the transition
@@ -1885,7 +1876,7 @@ prior distribution.</p>
 <p>Since the latent state does not change over time, the transition
 operator <span class="math notranslate nohighlight">\(F_t\)</span> is an identity matrix with no transition noise. The
 observation operator describes the “push-forward” from latent to
-measurement space, which is a matrix form of the linear function <a class="footnote-reference brackets" href="#id64" id="id30">13</a>:</p>
+measurement space, which is a matrix form of the linear function <a class="footnote-reference brackets" href="#id64" id="id30" role="doc-noteref"><span class="fn-bracket">[</span>13<span class="fn-bracket">]</span></a>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-linear-growth-observed-state">
 <span class="eqno">(6.17)<a class="headerlink" href="#equation-eq-linear-growth-observed-state" title="Permalink to this equation">¶</a></span>\[\begin{split}y_t = \theta_0 + \theta_1 * t = \left[\begin{array}{ccc}
   1, t \\
@@ -1953,7 +1944,7 @@ panel.</span><a class="headerlink" href="#fig-fig16-linear-growth-lgssm" title="
 </figure>
 </section>
 <section id="arima-expressed-as-a-state-space-model">
-<span id="id31"></span><h3><span class="section-number">6.4.2. </span>ARIMA, Expressed as a State Space Model<a class="headerlink" href="#arima-expressed-as-a-state-space-model" title="Permalink to this headline">¶</a></h3>
+<span id="id31"></span><h3><span class="section-number">6.4.2. </span>ARIMA, Expressed as a State Space Model<a class="headerlink" href="#arima-expressed-as-a-state-space-model" title="Permalink to this heading">¶</a></h3>
 <p>State space models are a unified methodology that generalized many
 classical time series models. However, it might not always be obvious
 how we can express a model in state space format. In this section we
@@ -1998,7 +1989,7 @@ y_t \\
 \end{array}\right]\end{split}\]</div>
 <p>The observation operator is thus simply an indexing matrix
 <span class="math notranslate nohighlight">\(\mathbf{H}_t = [1, 0, 0, \dots, 0]\)</span> with the observation equation being
-<span class="math notranslate nohighlight">\(y_t = \mathbf{H}_t X_t\)</span> <a class="footnote-reference brackets" href="#id65" id="id32">14</a>.</p>
+<span class="math notranslate nohighlight">\(y_t = \mathbf{H}_t X_t\)</span> <a class="footnote-reference brackets" href="#id65" id="id32" role="doc-noteref"><span class="fn-bracket">[</span>14<span class="fn-bracket">]</span></a>.</p>
 <p>For example, an ARMA(2,1) model in state space representation is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-arma-lgssm-state-full">
 <span class="eqno">(6.21)<a class="headerlink" href="#equation-eq-arma-lgssm-state-full" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
@@ -2176,7 +2167,7 @@ mean). More discussion around this topic and an in depth introduction to
 state space models for time series problems could be found in <span id="id33">Durbin and Koopman [<a class="reference internal" href="references.html#id131" title="James Durbin and Siem Jan Koopman. Time series analysis by state space methods. Oxford university press, 2012.">61</a>]</span>.</p>
 </section>
 <section id="bayesian-structural-time-series">
-<span id="id34"></span><h3><span class="section-number">6.4.3. </span>Bayesian Structural Time Series<a class="headerlink" href="#bayesian-structural-time-series" title="Permalink to this headline">¶</a></h3>
+<span id="id34"></span><h3><span class="section-number">6.4.3. </span>Bayesian Structural Time Series<a class="headerlink" href="#bayesian-structural-time-series" title="Permalink to this heading">¶</a></h3>
 <p>A linear Gaussian state space representation of a time series model has
 another advantage that it is easily extendable, especially with other
 linear Gaussian state space models. To combine two models, we follow the
@@ -2375,7 +2366,7 @@ structural time series.</span><a class="headerlink" href="#fig-fig19-bsts-lgssm-
 </section>
 </section>
 <section id="other-time-series-models">
-<span id="id35"></span><h2><span class="section-number">6.5. </span>Other Time Series Models<a class="headerlink" href="#other-time-series-models" title="Permalink to this headline">¶</a></h2>
+<span id="id35"></span><h2><span class="section-number">6.5. </span>Other Time Series Models<a class="headerlink" href="#other-time-series-models" title="Permalink to this heading">¶</a></h2>
 <p>While structural time series and linear Gaussian state space models are
 powerful and expressive classes of time series models, they certainly do
 not cover all our needs. For example, some interesting extensions
@@ -2400,11 +2391,6 @@ details of these models, they are well studied subjects with easy to use
 implementations in the Python computing ecosystem.</p>
 <table class="table" id="table-ts-model-type">
 <caption><span class="caption-number">Table 6.2 </span><span class="caption-text">Various time series models categorized by treatment of stochasticity and time</span><a class="headerlink" href="#table-ts-model-type" title="Permalink to this table">¶</a></caption>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td></td>
 <td><p><strong>Deterministic dynamics</strong></p></td>
@@ -2422,9 +2408,9 @@ implementations in the Python computing ecosystem.</p>
 </table>
 </section>
 <section id="model-criticism-and-choosing-priors">
-<span id="id39"></span><h2><span class="section-number">6.6. </span>Model Criticism and Choosing Priors<a class="headerlink" href="#model-criticism-and-choosing-priors" title="Permalink to this headline">¶</a></h2>
+<span id="id39"></span><h2><span class="section-number">6.6. </span>Model Criticism and Choosing Priors<a class="headerlink" href="#model-criticism-and-choosing-priors" title="Permalink to this heading">¶</a></h2>
 <p>In the seminal time series book by  <span id="id40">Box <em>et al.</em> [<a class="reference internal" href="references.html#id130" title="G.E.P. Box, G.M. Jenkins, and G.C. Reinsel. Time Series Analysis: Forecasting and Control. Wiley Series in Probability and Statistics. Wiley, 2008. ISBN 9780470272848.">57</a>]</span>
-<a class="footnote-reference brackets" href="#id66" id="id41">15</a>, they outlined five important practical problems for time series
+<a class="footnote-reference brackets" href="#id66" id="id41" role="doc-noteref"><span class="fn-bracket">[</span>15<span class="fn-bracket">]</span></a>, they outlined five important practical problems for time series
 modeling:</p>
 <ul class="simple">
 <li><p>Forecasting</p></li>
@@ -2475,12 +2461,12 @@ after initial model inference, to approximate 1-step-ahead predictions
 we would iterate over the hold out time series or future observations
 and evaluate on the log predictive density, and refit the model
 including a specific time point when the Pareto <span class="math notranslate nohighlight">\(k\)</span> estimate exceeds
-some threshold <a class="footnote-reference brackets" href="#id67" id="id44">16</a>. Thus, LFO-CV does not refer to one particular
+some threshold <a class="footnote-reference brackets" href="#id67" id="id44" role="doc-noteref"><span class="fn-bracket">[</span>16<span class="fn-bracket">]</span></a>. Thus, LFO-CV does not refer to one particular
 prediction task but rather to various possible cross validation
 approaches that all involve some form of prediction of future time
 points.</p>
 <section id="priors-for-time-series-models">
-<span id="id45"></span><h3><span class="section-number">6.6.1. </span>Priors for Time Series Models<a class="headerlink" href="#priors-for-time-series-models" title="Permalink to this headline">¶</a></h3>
+<span id="id45"></span><h3><span class="section-number">6.6.1. </span>Priors for Time Series Models<a class="headerlink" href="#priors-for-time-series-models" title="Permalink to this heading">¶</a></h3>
 <p>In Section <a class="reference internal" href="#chp4-gam"><span class="std std-ref">Basis Functions and Generalized Additive Model</span></a> we used a regularizing prior, the Laplace prior, for
 the slope of the step linear function. As we mentioned this is to
 express our prior knowledge that the change in slope is usually small
@@ -2504,7 +2490,7 @@ from the shrinkage. We can accommodate different levels of sparsity by
 changing the value of <span class="math notranslate nohighlight">\(\tau\)</span>: the closer <span class="math notranslate nohighlight">\(\tau\)</span> is to zero the more
 shrinkage of the holiday effect <span class="math notranslate nohighlight">\(\beta_t\)</span> to tends to zero, whereas with
 a larger <span class="math notranslate nohighlight">\(\tau\)</span> we have a more diffuse prior <span id="id47">[<a class="reference internal" href="references.html#id167" title="Juho Piironen and Aki Vehtari. On the hyperprior choice for the global shrinkage parameter in the horseshoe prior. In Artificial Intelligence and Statistics, 905–913. PMLR, 2017.">67</a>]</span>
-<a class="footnote-reference brackets" href="#id68" id="id48">17</a>. For example, in Case Study 2 of
+<a class="footnote-reference brackets" href="#id68" id="id48" role="doc-noteref"><span class="fn-bracket">[</span>17<span class="fn-bracket">]</span></a>. For example, in Case Study 2 of
 <span id="id49">Riutort-Mayol <em>et al.</em> [<a class="reference internal" href="references.html#id169" title="Gabriel Riutort-Mayol, Paul-Christian Bürkner, Michael R Andersen, Arno Solin, and Aki Vehtari. Practical hilbert space approximate bayesian gaussian processes for probabilistic programming. arXiv preprint arXiv:2004.11408, 2020.">68</a>]</span> they included a special day effect for each
 individual day of a year (366 as the Leap Day is included) and use a
 horseshoe prior to regularize it.</p>
@@ -2528,7 +2514,7 @@ prior accordingly.</p>
 </section>
 </section>
 <section id="exercises">
-<span id="exercises6"></span><h2><span class="section-number">6.7. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<span id="exercises6"></span><h2><span class="section-number">6.7. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">¶</a></h2>
 <p><strong>6E1.</strong> As we explained in Box <em>Parsing timestamp to design
 matrix</em> above, date information could be formatted into a design matrix
 for regression model to account for the periodic pattern in a time
@@ -2547,7 +2533,7 @@ generate all time stamps for 2021:</p>
 <li><p>Company G pay their employee on the 25th of every month, and if the
 25th falls on a weekend, the payday is moved up to the Friday
 before. Try to create a design matrix to encode the pay day of 2021.</p></li>
-<li><p>A design matrix for the US Federal holiday effect <a class="footnote-reference brackets" href="#id69" id="id50">18</a> in 2021.
+<li><p>A design matrix for the US Federal holiday effect <a class="footnote-reference brackets" href="#id69" id="id50" role="doc-noteref"><span class="fn-bracket">[</span>18<span class="fn-bracket">]</span></a> in 2021.
 Create the design matrix so that each holiday has their individual
 coefficient.</p></li>
 </ul>
@@ -2720,82 +2706,98 @@ the latent states?</p></li>
 reasoning with simulations.</p></li>
 </ul>
 <hr class="footnotes docutils" />
-<dl class="footnote brackets">
-<dt class="label" id="id52"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p><a class="reference external" href="https://quoteinvestigator.com/2013/10/20/no-predict/">https://quoteinvestigator.com/2013/10/20/no-predict/</a></p>
-</dd>
-<dt class="label" id="id53"><span class="brackets"><a class="fn-backref" href="#id3">2</a></span></dt>
-<dd><p>There is also a subtlety that not all periodic patterns in the
+<aside class="footnote brackets" id="id52" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://quoteinvestigator.com/2013/10/20/no-predict/">https://quoteinvestigator.com/2013/10/20/no-predict/</a></p>
+</aside>
+<aside class="footnote brackets" id="id53" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">2</a><span class="fn-bracket">]</span></span>
+<p>There is also a subtlety that not all periodic patterns in the
 time series should be considered seasonal. A useful distinction to
 make is between cyclic and seasonal behavior. You can find a nice
 summary in <a class="reference external" href="https://robjhyndman.com/hyndsight/cyclicts/">https://robjhyndman.com/hyndsight/cyclicts/</a>.</p>
-</dd>
-<dt class="label" id="id54"><span class="brackets"><a class="fn-backref" href="#id4">3</a></span></dt>
-<dd><p>This makes the observation not iid and not exchangeable. You can
+</aside>
+<aside class="footnote brackets" id="id54" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">3</a><span class="fn-bracket">]</span></span>
+<p>This makes the observation not iid and not exchangeable. You can
 also see in Chapter <a class="reference internal" href="chp_04.html#chap3"><span class="std std-ref">4</span></a> where we define residuals</p>
-</dd>
-<dt class="label" id="id55"><span class="brackets"><a class="fn-backref" href="#id7">4</a></span></dt>
-<dd><p>Which, it is unfortunate for our model and for our planet.</p>
-</dd>
-<dt class="label" id="id56"><span class="brackets"><a class="fn-backref" href="#id9">5</a></span></dt>
-<dd><p>A series is stationary if its characteristic properties such as
+</aside>
+<aside class="footnote brackets" id="id55" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">4</a><span class="fn-bracket">]</span></span>
+<p>Which, it is unfortunate for our model and for our planet.</p>
+</aside>
+<aside class="footnote brackets" id="id56" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">5</a><span class="fn-bracket">]</span></span>
+<p>A series is stationary if its characteristic properties such as
 means and covariances remain invariant across time.</p>
-</dd>
-<dt class="label" id="id57"><span class="brackets"><a class="fn-backref" href="#id10">6</a></span></dt>
-<dd><p><a class="reference external" href="https://facebook.github.io/prophet/">https://facebook.github.io/prophet/</a>.</p>
-</dd>
-<dt class="label" id="id58"><span class="brackets"><a class="fn-backref" href="#id15">7</a></span></dt>
-<dd><p>A demo of the design matrix used in Facebook Prophet could be
+</aside>
+<aside class="footnote brackets" id="id57" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">6</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://facebook.github.io/prophet/">https://facebook.github.io/prophet/</a>.</p>
+</aside>
+<aside class="footnote brackets" id="id58" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id15">7</a><span class="fn-bracket">]</span></span>
+<p>A demo of the design matrix used in Facebook Prophet could be
 found in <a class="reference external" href="http://prophet.mbrouns.com">http://prophet.mbrouns.com</a> from a PyMCon 2020
 presentation.</p>
-</dd>
-<dt class="label" id="id59"><span class="brackets"><a class="fn-backref" href="#id17">8</a></span></dt>
-<dd><p>That is why is called autoregressive, it applies a linear
+</aside>
+<aside class="footnote brackets" id="id59" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id17">8</a><span class="fn-bracket">]</span></span>
+<p>That is why is called autoregressive, it applies a linear
 regression to itself. Hence the similar naming to the
 autocorrelation diagnostic introduced in Section <a class="reference internal" href="chp_02.html#autocorr-plot"><span class="std std-ref">Autocorrelation Plots</span></a>.</p>
-</dd>
-<dt class="label" id="id60"><span class="brackets"><a class="fn-backref" href="#id20">9</a></span></dt>
-<dd><p>Actually, the AR example in this section <em>is</em> a Gaussian Process.</p>
-</dd>
-<dt class="label" id="id61"><span class="brackets"><a class="fn-backref" href="#id24">10</a></span></dt>
-<dd><p>The Stan implementation of SARIMA can be found in e.g.
+</aside>
+<aside class="footnote brackets" id="id60" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id20">9</a><span class="fn-bracket">]</span></span>
+<p>Actually, the AR example in this section <em>is</em> a Gaussian Process.</p>
+</aside>
+<aside class="footnote brackets" id="id61" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id24">10</a><span class="fn-bracket">]</span></span>
+<p>The Stan implementation of SARIMA can be found in e.g.
 <a class="reference external" href="https://github.com/asael697/bayesforecast">https://github.com/asael697/bayesforecast</a>.</p>
-</dd>
-<dt class="label" id="id62"><span class="brackets"><a class="fn-backref" href="#id25">11</a></span></dt>
-<dd><p>For brevity, we omitted the MCMC sampling code here. You can find
+</aside>
+<aside class="footnote brackets" id="id62" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id25">11</a><span class="fn-bracket">]</span></span>
+<p>For brevity, we omitted the MCMC sampling code here. You can find
 the details in the accompanying Jupyter Notebook.</p>
-</dd>
-<dt class="label" id="id63"><span class="brackets"><a class="fn-backref" href="#id27">12</a></span></dt>
-<dd><p>It might be useful to first consider “space” here being some
+</aside>
+<aside class="footnote brackets" id="id63" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id27">12</a><span class="fn-bracket">]</span></span>
+<p>It might be useful to first consider “space” here being some
 multi-dimensional Euclidean spaces, so <span class="math notranslate nohighlight">\(X_t\)</span> and <span class="math notranslate nohighlight">\(Y_t\)</span> is some
 multi-dimensional array/tensor when we do computations in Python.</p>
-</dd>
-<dt class="label" id="id64"><span class="brackets"><a class="fn-backref" href="#id30">13</a></span></dt>
-<dd><p>This also gives a nice example of a non-stationary observation
+</aside>
+<aside class="footnote brackets" id="id64" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id30">13</a><span class="fn-bracket">]</span></span>
+<p>This also gives a nice example of a non-stationary observation
 matrix <span class="math notranslate nohighlight">\(\mathbf{H}\)</span>.</p>
-</dd>
-<dt class="label" id="id65"><span class="brackets"><a class="fn-backref" href="#id32">14</a></span></dt>
-<dd><p>Note that this is not the only way to express ARMA model in a
+</aside>
+<aside class="footnote brackets" id="id65" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id32">14</a><span class="fn-bracket">]</span></span>
+<p>Note that this is not the only way to express ARMA model in a
 state-space form, for more detail see lecture note
 <a class="reference external" href="http://www-stat.wharton.upenn.edu/~stine/stat910/lectures/14_state_space.pdf">http://www-stat.wharton.upenn.edu/~stine/stat910/lectures/14_state_space.pdf</a>.</p>
-</dd>
-<dt class="label" id="id66"><span class="brackets"><a class="fn-backref" href="#id41">15</a></span></dt>
-<dd><p>Nothing more puts George E. P. Box’s famous quote: “All models
+</aside>
+<aside class="footnote brackets" id="id66" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id41">15</a><span class="fn-bracket">]</span></span>
+<p>Nothing more puts George E. P. Box’s famous quote: “All models
 are wrong, but some are useful” into perspective, than reading
 through his seminal book and working on forecasting problems.</p>
-</dd>
-<dt class="label" id="id67"><span class="brackets"><a class="fn-backref" href="#id44">16</a></span></dt>
-<dd><p>For a demonstration see
+</aside>
+<aside class="footnote brackets" id="id67" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id44">16</a><span class="fn-bracket">]</span></span>
+<p>For a demonstration see
 <a class="reference external" href="https://mc-stan.org/loo/articles/loo2-lfo.html">https://mc-stan.org/loo/articles/loo2-lfo.html</a>.</p>
-</dd>
-<dt class="label" id="id68"><span class="brackets"><a class="fn-backref" href="#id48">17</a></span></dt>
-<dd><p>Note that in practice we usually parameterize Equation
+</aside>
+<aside class="footnote brackets" id="id68" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id48">17</a><span class="fn-bracket">]</span></span>
+<p>Note that in practice we usually parameterize Equation
 <a class="reference internal" href="#equation-eq-horse-shoe">(6.25)</a> a little bit differently.</p>
-</dd>
-<dt class="label" id="id69"><span class="brackets"><a class="fn-backref" href="#id50">18</a></span></dt>
-<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Federal_holidays_in_the_United_States#List_of_federal_holidays">https://en.wikipedia.org/wiki/Federal_holidays_in_the_United_States#List_of_federal_holidays</a></p>
-</dd>
-</dl>
+</aside>
+<aside class="footnote brackets" id="id69" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id50">18</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Federal_holidays_in_the_United_States#List_of_federal_holidays">https://en.wikipedia.org/wiki/Federal_holidays_in_the_United_States#List_of_federal_holidays</a></p>
+</aside>
 </section>
 </section>
 
@@ -2845,9 +2847,9 @@ through his seminal book and working on forecasting problems.</p>
     <footer class="footer">
   <p>
     
-      Por Martin, Kumar, Lao<br/>
+      By Martin, Kumar, Lao<br/>
     
-        &copy; Derechos de autor 2021.<br/>
+        &copy; Copyright 2021.<br/>
   </p>
 </footer>
 </main>
