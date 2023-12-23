@@ -8,7 +8,7 @@
 </p>
 
 ## Open access and Code
-This repository contains the open access version of the text and the code examples in the book. All of this can be more easily viewed at www.bayesiancomputationbook.com
+This repository contains the open-access version of the text and the code examples in the book. All of this can be more easily viewed at www.bayesiancomputationbook.com
 
 ## See a mistake?
 If you see any issues please create an issue on [the issue tracker](https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues)
@@ -24,7 +24,32 @@ conda activate bmcp
 ```
 
 ### Colab
+
 The book code can also be run using Google Colab.
 https://colab.research.google.com
 
 More instructions to come soon
+
+### Citation
+
+If you use the online or printed versions of this book in your own work, please cite us using
+
+Martin Osvaldo A, Kumar Ravin; Lao Junpeng Bayesian Modeling and Computation in Python Boca Ratón, 2021. ISBN 978-0-367-89436-8
+
+Here is the citation in BibTeX format
+
+```
+@book{BMCP2021,
+  title = {{Bayesian Modeling and Computation in Python}},
+  author = {Martin, Osvaldo A. and Kumar, Ravin and Lao, Junpeng},
+  year = {2021},
+  month = dec,
+  address = {{Boca Raton}},
+  isbn = {978-0-367-89436-8},
+}
+```
+
+### Donation
+
+This book is only possible because of open source contributors working on the projects we used. If you like this book we encourage you to make a donation to [ArviZ](https://numfocus.org/arviz-bayesian-book-form) or [PyMC](https://numfocus.org/pymc-bayesian-book-form).
+
