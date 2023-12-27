@@ -15,6 +15,8 @@ jupyter:
 
 # Code 6: Time Series
 
+Note: This notebook is failing execution for us at the moment. Use it as a reference. We will have it updated shortly
+
 ```python
 import matplotlib.pyplot as plt
 import arviz as az
