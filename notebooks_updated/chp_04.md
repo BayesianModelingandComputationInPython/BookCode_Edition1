@@ -15,16 +15,6 @@ jupyter:
 
 # Code 4: Extending Linear Models
 
-
-```{admonition} This is a reference notebook for the book Bayesian Modeling and Computation in Python
-:class: tip, dropdown
-The textbook is not needed to use or run this code, though the context and explanation is missing from this notebook.
-
-If you'd like a copy it's available
-[from the CRC Press](https://www.routledge.com/Bayesian-Modeling-and-Computation-in-Python/Martin-Kumar-Lao/p/book/9780367894368)
-or from [Amazon](https://www.routledge.com/Bayesian-Modeling-and-Computation-in-Python/Martin-Kumar-Lao/p/book/9780367894368).
-``
-
 ```python
 import pymc as pm
 import matplotlib.pyplot as plt
@@ -386,7 +376,7 @@ mean = 5
 sigma = 2
 
 x = np.linspace(-5, 15, 1000)
-fig, ax = plt.subplots()
+fig, ax = plt.subplots(figsize=(10, 4))
 
 ax.plot(x, stats.norm(5,2).pdf(x), label=f"Normal μ={mean}, σ={sigma}", color="C4")
 
@@ -955,232 +945,231 @@ plt.savefig("img/chp04/multiple_salad_sales_scatter.png")
 ### Code 4.13
 
 ```python
-# import tensorflow as tf
-# import tensorflow_probability as tfp
+import tensorflow as tf
+import tensorflow_probability as tfp
 
-# tfd = tfp.distributions
-# root = tfd.JointDistributionCoroutine.Root
+tfd = tfp.distributions
+root = tfd.JointDistributionCoroutine.Root
 ```
 
 ```python
-# run_mcmc = tf.function(
-#     tfp.experimental.mcmc.windowed_adaptive_nuts,
-#     autograph=False, jit_compile=True)
+run_mcmc = tf.function(
+    tfp.experimental.mcmc.windowed_adaptive_nuts,
+    autograph=False, jit_compile=True)
 ```
 
 ```python
-# def gen_hierarchical_salad_sales(input_df, beta_prior_fn, dtype=tf.float32):
-#     customers = tf.constant(
-#         hierarchical_salad_df["customers"].values, dtype=dtype)
-#     location_category = hierarchical_salad_df["location"].values
-#     sales = tf.constant(hierarchical_salad_df["sales"].values, dtype=dtype)
+def gen_hierarchical_salad_sales(input_df, beta_prior_fn, dtype=tf.float32):
+    customers = tf.constant(
+        hierarchical_salad_df["customers"].values, dtype=dtype)
+    location_category = hierarchical_salad_df["location"].values
+    sales = tf.constant(hierarchical_salad_df["sales"].values, dtype=dtype)
 
-#     @tfd.JointDistributionCoroutine
-#     def model_hierarchical_salad_sales():
-#         β_μ_hyperprior = yield root(tfd.Normal(0, 10, name="beta_mu"))
-#         β_σ_hyperprior = yield root(tfd.HalfNormal(.1, name="beta_sigma"))
-#         β = yield from beta_prior_fn(β_μ_hyperprior, β_σ_hyperprior)
+    @tfd.JointDistributionCoroutine
+    def model_hierarchical_salad_sales():
+        β_μ_hyperprior = yield root(tfd.Normal(0, 10, name="beta_mu"))
+        β_σ_hyperprior = yield root(tfd.HalfNormal(.1, name="beta_sigma"))
+        β = yield from beta_prior_fn(β_μ_hyperprior, β_σ_hyperprior)
 
-#         σ_hyperprior = yield root(tfd.HalfNormal(30, name="sigma_prior"))
-#         σ = yield tfd.Sample(tfd.HalfNormal(σ_hyperprior), 6, name="sigma")
+        σ_hyperprior = yield root(tfd.HalfNormal(30, name="sigma_prior"))
+        σ = yield tfd.Sample(tfd.HalfNormal(σ_hyperprior), 6, name="sigma")
 
-#         loc = tf.gather(β, location_category, axis=-1) * customers
-#         scale = tf.gather(σ, location_category, axis=-1)
-#         sales = yield tfd.Independent(tfd.Normal(loc, scale),
-#                                       reinterpreted_batch_ndims=1,
-#                                       name="sales")
+        loc = tf.gather(β, location_category, axis=-1) * customers
+        scale = tf.gather(σ, location_category, axis=-1)
+        sales = yield tfd.Independent(tfd.Normal(loc, scale),
+                                      reinterpreted_batch_ndims=1,
+                                      name="sales")
 
-#     return model_hierarchical_salad_sales, sales
+    return model_hierarchical_salad_sales, sales
 ```
 
 ### Code 4.14 and 4.15
 
 ```python
-# def centered_beta_prior_fn(hyper_mu, hyper_sigma):
-#     β = yield tfd.Sample(tfd.Normal(hyper_mu, hyper_sigma), 6, name="beta")
-#     return β
+def centered_beta_prior_fn(hyper_mu, hyper_sigma):
+    β = yield tfd.Sample(tfd.Normal(hyper_mu, hyper_sigma), 6, name="beta")
+    return β
 
-# # hierarchical_salad_df is the generated dataset as pandas.DataFrame
-# centered_model, observed = gen_hierarchical_salad_sales(
-#     hierarchical_salad_df, centered_beta_prior_fn)
+# hierarchical_salad_df is the generated dataset as pandas.DataFrame
+centered_model, observed = gen_hierarchical_salad_sales(
+    hierarchical_salad_df, centered_beta_prior_fn)
 
-# mcmc_samples_centered, sampler_stats_centered = run_mcmc(
-#     1000, centered_model, n_chains=4, num_adaptation_steps=1000,
-#     sales=observed)
+mcmc_samples_centered, sampler_stats_centered = run_mcmc(
+    1000, centered_model, n_chains=4, num_adaptation_steps=1000,
+    sales=observed)
 
-# divergent_per_chain = np.sum(sampler_stats_centered['diverging'], axis=0)
-# print(f"""There were {divergent_per_chain} divergences after tuning per chain.""")
+divergent_per_chain = np.sum(sampler_stats_centered['diverging'], axis=0)
+print(f"""There were {divergent_per_chain} divergences after tuning per chain.""")
 ```
 
 ```python
-# idata_centered_model = az.from_dict(
-#     posterior={
-#         k:np.swapaxes(v, 1, 0)
-#         for k, v in mcmc_samples_centered._asdict().items()},
-#     sample_stats={
-#         k:np.swapaxes(sampler_stats_centered[k], 1, 0)
-#         for k in ["target_log_prob", "diverging", "accept_ratio", "n_steps"]}
-# )
+idata_centered_model = az.from_dict(
+    posterior={
+        k:np.swapaxes(v, 1, 0)
+        for k, v in mcmc_samples_centered._asdict().items()},
+    sample_stats={
+        k:np.swapaxes(sampler_stats_centered[k], 1, 0)
+        for k in ["target_log_prob", "diverging", "accept_ratio", "n_steps"]}
+)
 
-# az.plot_trace(idata_centered_model, compact=True);
+az.plot_trace(idata_centered_model, compact=True);
 ```
 
 ```python
-# az.summary(idata_centered_model)
+az.summary(idata_centered_model)
 ```
 
 ### Figure 4.27
 
 ```python
-# slope = mcmc_samples_centered.beta[..., 4].numpy().flatten()
-# sigma = mcmc_samples_centered.beta_sigma.numpy().flatten()
-# divergences = sampler_stats_centered['diverging'].numpy().flatten()
+slope = mcmc_samples_centered.beta[..., 4].numpy().flatten()
+sigma = mcmc_samples_centered.beta_sigma.numpy().flatten()
+divergences = sampler_stats_centered['diverging'].numpy().flatten()
 
-# axes = az.plot_joint({"β[4]": slope, "β_σ_hyperprior": sigma},
-#                      joint_kwargs={"alpha": .05}, figsize=(6, 6))
-# axes[0].scatter(slope[divergences], sigma[divergences], c="C4", alpha=.3, label='divergent sample')
-# axes[0].legend(frameon=True)
-# axes[0].set_ylim(0, .3)
-# axes[0].set_xlim(4.5, 5.5)
+axes = az.plot_pair({"β[4]": slope, "β_σ_hyperprior": sigma}, figsize=(10, 4))
 
-# plt.savefig("img/chp04/Neals_Funnel_Salad_Centered.png")
+axes.scatter(slope[divergences], sigma[divergences], c="C4", alpha=.3, label='divergent sample')
+axes.legend(frameon=True)
+axes.set_ylim(0, .3)
+axes.set_xlim(4.5, 5.5)
+
+plt.savefig("img/chp04/Neals_Funnel_Salad_Centered.png")
 ```
 
 ### Code 4.16
 
 ```python
-# def non_centered_beta_prior_fn(hyper_mu, hyper_sigma):
-#     β_offset = yield root(tfd.Sample(tfd.Normal(0, 1), 6, name="beta_offset"))
-#     return β_offset * hyper_sigma[..., None] + hyper_mu[..., None]
+def non_centered_beta_prior_fn(hyper_mu, hyper_sigma):
+    β_offset = yield root(tfd.Sample(tfd.Normal(0, 1), 6, name="beta_offset"))
+    return β_offset * hyper_sigma[..., None] + hyper_mu[..., None]
 
-# # hierarchical_salad_df is the generated dataset as pandas.DataFrame
-# non_centered_model, observed = gen_hierarchical_salad_sales(
-#     hierarchical_salad_df, non_centered_beta_prior_fn)
+# hierarchical_salad_df is the generated dataset as pandas.DataFrame
+non_centered_model, observed = gen_hierarchical_salad_sales(
+    hierarchical_salad_df, non_centered_beta_prior_fn)
 
-# mcmc_samples_noncentered, sampler_stats_noncentered = run_mcmc(
-#     1000, non_centered_model, n_chains=4, num_adaptation_steps=1000,
-#     sales=observed)
+mcmc_samples_noncentered, sampler_stats_noncentered = run_mcmc(
+    1000, non_centered_model, n_chains=4, num_adaptation_steps=1000,
+    sales=observed)
 
-# divergent_per_chain = np.sum(sampler_stats_noncentered['diverging'], axis=0)
-# print(f"""There were {divergent_per_chain} divergences after tuning per chain.""")
+divergent_per_chain = np.sum(sampler_stats_noncentered['diverging'], axis=0)
+print(f"""There were {divergent_per_chain} divergences after tuning per chain.""")
 ```
 
 ```python
-# idata_non_centered_model = az.from_dict(
-#     posterior={
-#         k:np.swapaxes(v, 1, 0)
-#         for k, v in mcmc_samples_noncentered._asdict().items()},
-#     sample_stats={
-#         k:np.swapaxes(sampler_stats_noncentered[k], 1, 0)
-#         for k in ["target_log_prob", "diverging", "accept_ratio", "n_steps"]}
-# )
+idata_non_centered_model = az.from_dict(
+    posterior={
+        k:np.swapaxes(v, 1, 0)
+        for k, v in mcmc_samples_noncentered._asdict().items()},
+    sample_stats={
+        k:np.swapaxes(sampler_stats_noncentered[k], 1, 0)
+        for k in ["target_log_prob", "diverging", "accept_ratio", "n_steps"]}
+)
 
-# az.plot_trace(idata_non_centered_model, compact=True);
+az.plot_trace(idata_non_centered_model, compact=True);
 ```
 
 ```python
-# az.summary(idata_non_centered_model)
+az.summary(idata_non_centered_model)
 ```
 
 ### Figure  4.28
 
 ```python
-# noncentered_beta = (mcmc_samples_noncentered.beta_mu[..., None]
-#         + mcmc_samples_noncentered.beta_offset * mcmc_samples_noncentered.beta_sigma[..., None])
-# slope = noncentered_beta[..., 4].numpy().flatten()
-# sigma = mcmc_samples_noncentered.beta_sigma.numpy().flatten()
-# divergences = sampler_stats_noncentered['diverging'].numpy().flatten()
+noncentered_beta = (mcmc_samples_noncentered.beta_mu[..., None]
+        + mcmc_samples_noncentered.beta_offset * mcmc_samples_noncentered.beta_sigma[..., None])
+slope = noncentered_beta[..., 4].numpy().flatten()
+sigma = mcmc_samples_noncentered.beta_sigma.numpy().flatten()
+divergences = sampler_stats_noncentered['diverging'].numpy().flatten()
 
-# axes = az.plot_joint({"β[4]": slope, "β_σ_hyperprior": sigma},
-#                      joint_kwargs={"alpha": .05}, figsize=(6, 6))
-# axes[0].scatter(slope[divergences], sigma[divergences], c="C4", alpha=.3, label='divergent sample')
-# axes[0].legend(frameon=True)
-# axes[0].set_ylim(0, .3)
-# axes[0].set_xlim(4.5, 5.5)
+axes = az.plot_pair({"β[4]": slope, "β_σ_hyperprior": sigma}, figsize=(10, 4))
+axes.scatter(slope[divergences], sigma[divergences], c="C4", alpha=.3, label='divergent sample')
+axes.legend(frameon=True)
+axes.set_ylim(0, .3)
+axes.set_xlim(4.5, 5.5)
 
-# plt.savefig("img/chp04/Neals_Funnel_Salad_NonCentered.png")
+plt.savefig("img/chp04/Neals_Funnel_Salad_NonCentered.png")
 ```
 
 ### Figure 4.29
 
 ```python
-# centered_β_sigma = mcmc_samples_centered.beta_sigma.numpy()
-# noncentered_β_sigma = mcmc_samples_noncentered.beta_sigma.numpy()
+centered_β_sigma = mcmc_samples_centered.beta_sigma.numpy()
+noncentered_β_sigma = mcmc_samples_noncentered.beta_sigma.numpy()
 ```
 
 ```python
-# fig, ax = plt.subplots()
-# az.plot_kde(centered_β_sigma, label="Centered β_σ_hyperprior", ax=ax)
-# az.plot_kde(noncentered_β_sigma, label="Noncentered β_σ_hyperprior", plot_kwargs={"color":"C4"}, ax=ax);
+fig, ax = plt.subplots()
+az.plot_kde(centered_β_sigma, label="Centered β_σ_hyperprior", ax=ax)
+az.plot_kde(noncentered_β_sigma, label="Noncentered β_σ_hyperprior", plot_kwargs={"color":"C4"}, ax=ax);
 
-# ax.set_title("Comparison of Centered vs Non Centered Estimates");
-# plt.savefig("img/chp04/Salad_Sales_Hierarchical_Comparison.png")
+ax.set_title("Comparison of Centered vs Non Centered Estimates");
+plt.savefig("img/chp04/Salad_Sales_Hierarchical_Comparison.png")
 ```
 
 ### Code 4.17
 
 ```python
-# out_of_sample_customers = 50.
+out_of_sample_customers = 50.
 
-# @tfd.JointDistributionCoroutine
-# def out_of_sample_prediction_model():
-#     model = yield root(non_centered_model)
-#     β = model.beta_offset * model.beta_sigma[..., None] + model.beta_mu[..., None]
+@tfd.JointDistributionCoroutine
+def out_of_sample_prediction_model():
+    model = yield root(non_centered_model)
+    β = model.beta_offset * model.beta_sigma[..., None] + model.beta_mu[..., None]
     
-#     β_group = yield tfd.Normal(
-#         model.beta_mu, model.beta_sigma, name="group_beta_prediction")
-#     group_level_prediction = yield tfd.Normal(
-#         β_group * out_of_sample_customers,
-#         model.sigma_prior,
-#         name="group_level_prediction")
-#     for l in [2, 4]:
-#         yield tfd.Normal(
-#             tf.gather(β, l, axis=-1) * out_of_sample_customers,
-#             tf.gather(model.sigma, l, axis=-1),
-#             name=f"location_{l}_prediction")
+    β_group = yield tfd.Normal(
+        model.beta_mu, model.beta_sigma, name="group_beta_prediction")
+    group_level_prediction = yield tfd.Normal(
+        β_group * out_of_sample_customers,
+        model.sigma_prior,
+        name="group_level_prediction")
+    for l in [2, 4]:
+        yield tfd.Normal(
+            tf.gather(β, l, axis=-1) * out_of_sample_customers,
+            tf.gather(model.sigma, l, axis=-1),
+            name=f"location_{l}_prediction")
 
-# amended_posterior = tf.nest.pack_sequence_as(
-#     non_centered_model.sample(),
-#     list(mcmc_samples_noncentered) + [observed],
-# )
-# ppc = out_of_sample_prediction_model.sample(var0=amended_posterior)
+amended_posterior = tf.nest.pack_sequence_as(
+    non_centered_model.sample(),
+    list(mcmc_samples_noncentered) + [observed],
+)
+ppc = out_of_sample_prediction_model.sample(var0=amended_posterior)
 ```
 
 ```python
-# fig, ax = plt.subplots()
+fig, ax = plt.subplots(figsize=(10, 3))
 
-# az.plot_kde(ppc.group_level_prediction, plot_kwargs={"color":"C0"}, ax=ax, label="All locations")
-# az.plot_kde(ppc.location_2_prediction, plot_kwargs={"color":"C2"}, ax=ax, label="Location 2")
-# az.plot_kde(ppc.location_4_prediction, plot_kwargs={"color":"C4"}, ax=ax, label="Location 4")
+az.plot_kde(ppc.group_level_prediction.numpy(), plot_kwargs={"color":"C0"}, ax=ax, label="All locations")
+az.plot_kde(ppc.location_2_prediction.numpy(), plot_kwargs={"color":"C2"}, ax=ax, label="Location 2")
+az.plot_kde(ppc.location_4_prediction.numpy(), plot_kwargs={"color":"C4"}, ax=ax, label="Location 4")
 
-# ax.set_xlabel("Predicted revenue with 50 customers")
-# ax.set_xlim([0,600])
+ax.set_xlabel("Predicted revenue with 50 customers")
+ax.set_xlim([0,600])
 
-# ax.set_yticks([])
+ax.set_yticks([])
 
-# plt.savefig("img/chp04/Salad_Sales_Hierarchical_Predictions.png")
+plt.savefig("img/chp04/Salad_Sales_Hierarchical_Predictions.png")
 ```
 
 ### Code 4.18
 
 ```python
-# out_of_sample_customers2 = np.arange(50, 90)
+out_of_sample_customers2 = np.arange(50, 90)
 
-# @tfd.JointDistributionCoroutine
-# def out_of_sample_prediction_model2():
-#     model = yield root(non_centered_model)
+@tfd.JointDistributionCoroutine
+def out_of_sample_prediction_model2():
+    model = yield root(non_centered_model)
     
-#     β_new_loc = yield tfd.Normal(
-#         model.beta_mu, model.beta_sigma, name="beta_new_loc")
-#     σ_new_loc = yield tfd.HalfNormal(model.sigma_prior, name="sigma_new_loc")
-#     group_level_prediction = yield tfd.Normal(
-#         β_new_loc[..., None] * out_of_sample_customers2,
-#         σ_new_loc[..., None],
-#         name="new_location_prediction")
+    β_new_loc = yield tfd.Normal(
+        model.beta_mu, model.beta_sigma, name="beta_new_loc")
+    σ_new_loc = yield tfd.HalfNormal(model.sigma_prior, name="sigma_new_loc")
+    group_level_prediction = yield tfd.Normal(
+        β_new_loc[..., None] * out_of_sample_customers2,
+        σ_new_loc[..., None],
+        name="new_location_prediction")
 
-# ppc = out_of_sample_prediction_model2.sample(var0=amended_posterior)
+ppc = out_of_sample_prediction_model2.sample(var0=amended_posterior)
 ```
 
 ```python
-# az.plot_hdi(out_of_sample_customers2, ppc.new_location_prediction, hdi_prob=.95)
+az.plot_hdi(out_of_sample_customers2, ppc.new_location_prediction, hdi_prob=.95, figsize=(10, 2));
 ```

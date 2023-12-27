@@ -15,16 +15,6 @@ jupyter:
 
 # Code 11: Appendiceal Topics
 
-
-```{admonition} This is a reference notebook for the book Bayesian Modeling and Computation in Python
-:class: tip, dropdown
-The textbook is not needed to use or run this code, though the context and explanation is missing from this notebook.
-
-If you'd like a copy it's available
-[from the CRC Press](https://www.routledge.com/Bayesian-Modeling-and-Computation-in-Python/Martin-Kumar-Lao/p/book/9780367894368)
-or from [Amazon](https://www.routledge.com/Bayesian-Modeling-and-Computation-in-Python/Martin-Kumar-Lao/p/book/9780367894368).
-``
-
 ```python
 import arviz as az
 import matplotlib.pyplot as plt
@@ -312,122 +302,122 @@ def posterior_grid(ngrid=10, α=1, β=1, heads=6, trials=9):
 See https://blog.tensorflow.org/2021/02/variational-inference-with-joint-distributions-in-tensorflow-probability.html for a more extended examples
 
 ```python
-# az.style.use("arviz-colors")
+az.style.use("arviz-colors")
 
-# import tensorflow as tf
-# import tensorflow_probability as tfp
+import tensorflow as tf
+import tensorflow_probability as tfp
 
-# tfd = tfp.distributions
+tfd = tfp.distributions
 ```
 
 ```python
-# # An arbitrary density function as target
-# target_logprob = lambda x, y: -(1.-x)**2 - 1.5*(y - x**2)**2
+# An arbitrary density function as target
+target_logprob = lambda x, y: -(1.-x)**2 - 1.5*(y - x**2)**2
 
-# # Set up two different surrogate posterior distribution
-# event_shape = [(), ()]  # theta is 2 scalar
-# mean_field_surrogate_posterior = tfp.experimental.vi.build_affine_surrogate_posterior(
-#     event_shape=event_shape, operators="diag")
-# full_rank_surrogate_posterior = tfp.experimental.vi.build_affine_surrogate_posterior(
-#     event_shape=event_shape, operators="tril")
+# Set up two different surrogate posterior distribution
+event_shape = [(), ()]  # theta is 2 scalar
+mean_field_surrogate_posterior = tfp.experimental.vi.build_affine_surrogate_posterior(
+    event_shape=event_shape, operators="diag")
+full_rank_surrogate_posterior = tfp.experimental.vi.build_affine_surrogate_posterior(
+    event_shape=event_shape, operators="tril")
 
-# # Optimization
-# losses = []
-# posterior_samples = []
-# for approx in [mean_field_surrogate_posterior, full_rank_surrogate_posterior]:
-#     loss = tfp.vi.fit_surrogate_posterior(
-#         target_logprob, approx, num_steps=200, optimizer=tf.optimizers.Adam(0.1),
-#         sample_size=5)
-#     losses.append(loss)
-#     # The approx is a tfp distribution, we can sample from it after training
-#     posterior_samples.append(approx.sample(10000))
+# Optimization
+losses = []
+posterior_samples = []
+for approx in [mean_field_surrogate_posterior, full_rank_surrogate_posterior]:
+    loss = tfp.vi.fit_surrogate_posterior(
+        target_logprob, approx, num_steps=200, optimizer=tf.optimizers.Adam(0.1),
+        sample_size=5)
+    losses.append(loss)
+    # The approx is a tfp distribution, we can sample from it after training
+    posterior_samples.append(approx.sample(10000))
 ```
 
 ```python
-# plt.plot(np.asarray(losses).T)
-# plt.legend(['mean-field', 'full-rank']);
+plt.plot(np.asarray(losses).T)
+plt.legend(['mean-field', 'full-rank']);
 ```
 
 ### Figure 11.33
 
 ```python
-# grid = np.meshgrid(np.linspace(-3, 3, 100), np.linspace(-2, 5, 100))
-# Z = - target_logprob(*grid)
+grid = np.meshgrid(np.linspace(-3, 3, 100), np.linspace(-2, 5, 100))
+Z = - target_logprob(*grid)
 
-# _, axes = plt.subplots(1, 2, figsize=(10, 5), sharex=True, sharey=True)
-# for ax, approx, name in zip(
-#     axes,
-#     [mean_field_surrogate_posterior, full_rank_surrogate_posterior],
-#     ["Mean-field Approximation", "Full-rank Approximation"]):
-#     ax.contour(*grid, Z, levels=np.arange(7))
-#     ax.plot(*approx.sample(10000), ".", alpha=.1)
-#     ax.set_title(name)
-# plt.tight_layout();
+_, axes = plt.subplots(1, 2, figsize=(10, 5), sharex=True, sharey=True)
+for ax, approx, name in zip(
+    axes,
+    [mean_field_surrogate_posterior, full_rank_surrogate_posterior],
+    ["Mean-field Approximation", "Full-rank Approximation"]):
+    ax.contour(*grid, Z, levels=np.arange(7))
+    ax.plot(*approx.sample(10000), ".", alpha=.1)
+    ax.set_title(name)
+plt.tight_layout();
 
-# plt.savefig("img/chp11/vi_in_tfp.png")
+plt.savefig("img/chp11/vi_in_tfp.png")
 ```
 
 ## VI Deep dive
 
 ```python
-# tfb = tfp.bijectors
+tfb = tfp.bijectors
 ```
 
 ```python
-# event_shape = [(), ()]
-# full_rank_surrogate_posterior = tfp.experimental.vi.build_affine_surrogate_posterior(
-#     event_shape=event_shape, operators="tril")
+event_shape = [(), ()]
+full_rank_surrogate_posterior = tfp.experimental.vi.build_affine_surrogate_posterior(
+    event_shape=event_shape, operators="tril")
 
-# # mean_field_surrogate_posterior = tfp.experimental.vi.build_affine_surrogate_posterior(
-# #     event_shape=event_shape, operators="diag")
-# mean_field_surrogate_posterior = tfd.JointDistributionSequential([
-#     tfd.Normal(tf.Variable(0.), tfp.util.TransformedVariable(1., bijector=tfb.Exp())),
-#     tfd.Normal(tf.Variable(0.), tfp.util.TransformedVariable(1., bijector=tfb.Exp())),
-# ])
+# mean_field_surrogate_posterior = tfp.experimental.vi.build_affine_surrogate_posterior(
+#     event_shape=event_shape, operators="diag")
+mean_field_surrogate_posterior = tfd.JointDistributionSequential([
+    tfd.Normal(tf.Variable(0.), tfp.util.TransformedVariable(1., bijector=tfb.Exp())),
+    tfd.Normal(tf.Variable(0.), tfp.util.TransformedVariable(1., bijector=tfb.Exp())),
+])
 
-# # Density estimation with MADE.
-# made = tfb.AutoregressiveNetwork(params=2, hidden_units=[10, 10])
-# flow_surrogate_posterior = tfd.TransformedDistribution(
-#     distribution=tfd.Sample(tfd.Normal(loc=0., scale=1.), sample_shape=[2]),
-#     bijector=tfb.Chain([
-#         tfb.JointMap([tfb.Reshape([]), tfb.Reshape([])]),
-#         tfb.Split([1, 1]),
-#         tfb.MaskedAutoregressiveFlow(made)
-#     ]))
-# # Create a Masked Autoregressive Flow bijector.
-# # prior = tfd.JointDistributionSequential([tfd.Normal(0., 1.), tfd.Normal(0., 1.)])
-# # maf = tfb.MaskedAutoregressiveFlow(shift_and_log_scale_fn=net)
-# # flow_surrogate_posterior = tfp.experimental.vi.build_split_flow_surrogate_posterior(
-# #     event_shape=prior.event_shape_tensor(), trainable_bijector=maf)
+# Density estimation with MADE.
+made = tfb.AutoregressiveNetwork(params=2, hidden_units=[10, 10])
+flow_surrogate_posterior = tfd.TransformedDistribution(
+    distribution=tfd.Sample(tfd.Normal(loc=0., scale=1.), sample_shape=[2]),
+    bijector=tfb.Chain([
+        tfb.JointMap([tfb.Reshape([]), tfb.Reshape([])]),
+        tfb.Split([1, 1]),
+        tfb.MaskedAutoregressiveFlow(made)
+    ]))
+# Create a Masked Autoregressive Flow bijector.
+# prior = tfd.JointDistributionSequential([tfd.Normal(0., 1.), tfd.Normal(0., 1.)])
+# maf = tfb.MaskedAutoregressiveFlow(shift_and_log_scale_fn=net)
+# flow_surrogate_posterior = tfp.experimental.vi.build_split_flow_surrogate_posterior(
+#     event_shape=prior.event_shape_tensor(), trainable_bijector=maf)
 
-# # Optimization
-# losses = []
-# posterior_samples = []
-# for approx in [mean_field_surrogate_posterior, full_rank_surrogate_posterior, flow_surrogate_posterior]:
-#     loss = tfp.vi.fit_surrogate_posterior(
-#         target_logprob, approx, num_steps=200, optimizer=tf.optimizers.Adam(0.1),
-#         sample_size=5)
-#     losses.append(loss)
-#     # The approx is a tfp distribution, we can sample from it after training
-#     posterior_samples.append(approx.sample(10000))
+# Optimization
+losses = []
+posterior_samples = []
+for approx in [mean_field_surrogate_posterior, full_rank_surrogate_posterior, flow_surrogate_posterior]:
+    loss = tfp.vi.fit_surrogate_posterior(
+        target_logprob, approx, num_steps=200, optimizer=tf.optimizers.Adam(0.1),
+        sample_size=5)
+    losses.append(loss)
+    # The approx is a tfp distribution, we can sample from it after training
+    posterior_samples.append(approx.sample(10000))
 ```
 
 ```python
-# plt.plot(np.asarray(losses).T)
-# plt.legend(['mean-field', 'full-rank', 'flow']);
+plt.plot(np.asarray(losses).T)
+plt.legend(['mean-field', 'full-rank', 'flow']);
 ```
 
 ```python
-# grid = np.meshgrid(np.linspace(-3, 3, 100), np.linspace(-2, 5, 100))
-# Z = - target_logprob(*grid)
+grid = np.meshgrid(np.linspace(-3, 3, 100), np.linspace(-2, 5, 100))
+Z = - target_logprob(*grid)
 
-# _, axes = plt.subplots(1, 3, figsize=(15, 5), sharex=True, sharey=True)
-# for ax, approx, name in zip(
-#     axes,
-#     [mean_field_surrogate_posterior, full_rank_surrogate_posterior, flow_surrogate_posterior],
-#     ["Mean-field Approximation", "Full-rank Approximation", "Flow Approximation"]):
-#     ax.contour(*grid, Z, levels=np.arange(7))
-#     ax.plot(*approx.sample(10000), ".", alpha=.1)
-#     ax.set_title(name)
-# plt.tight_layout();
+_, axes = plt.subplots(1, 3, figsize=(15, 5), sharex=True, sharey=True)
+for ax, approx, name in zip(
+    axes,
+    [mean_field_surrogate_posterior, full_rank_surrogate_posterior, flow_surrogate_posterior],
+    ["Mean-field Approximation", "Full-rank Approximation", "Flow Approximation"]):
+    ax.contour(*grid, Z, levels=np.arange(7))
+    ax.plot(*approx.sample(10000), ".", alpha=.1)
+    ax.set_title(name)
+plt.tight_layout();
 ```
