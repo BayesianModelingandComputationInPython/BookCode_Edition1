@@ -10,6 +10,9 @@
 ## Open access and Code
 This repository contains the open-access version of the text and the code examples in the book. All of this can be more easily viewed at www.bayesiancomputationbook.com
 
+## Updated code
+For the most up-to-date code please check the folder [notebooks_updated](https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/tree/main/notebooks_updated). This code is updated to work with the latest versions of the libraries used in the book, which means that some of the code will be different from the one in the book.
+
 ## See a mistake?
 If you see any issues please create an issue on [the issue tracker](https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues)
 
