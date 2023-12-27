@@ -24,6 +24,9 @@ File an [issue](https://github.com/BayesianModelingandComputationInPython/BookCo
 if you notice anything broken
 ```
 
+## Updated code
+For the most up-to-date code please check the folder [notebooks_updated](https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/tree/main/notebooks_updated). This code is updated to work with the latest versions of the libraries used in the book, which means that some of the code will be different from the one in the book.
+
 ## Citation
 
 If you use the online or printed versions of this book in your own work, please cite us using
