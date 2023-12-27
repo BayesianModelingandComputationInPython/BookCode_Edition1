@@ -15,16 +15,6 @@ jupyter:
 
 # Code 7: Bayesian Additive Regression Trees
 
-
-```{admonition} This is a reference notebook for the book Bayesian Modeling and Computation in Python
-:class: tip, dropdown
-The textbook is not needed to use or run this code, though the context and explanation is missing from this notebook.
-
-If you'd like a copy it's available
-[from the CRC Press](https://www.routledge.com/Bayesian-Modeling-and-Computation-in-Python/Martin-Kumar-Lao/p/book/9780367894368)
-or from [Amazon](https://www.routledge.com/Bayesian-Modeling-and-Computation-in-Python/Martin-Kumar-Lao/p/book/9780367894368).
-``
-
 ```python
 %matplotlib inline
 import arviz as az
@@ -34,7 +24,6 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from cycler import cycler
-
 ```
 
 ```python

@@ -15,16 +15,6 @@ jupyter:
 
 # Code 3: Linear Models and Probabilistic Programming Languages
 
-
-```{admonition} This is a reference notebook for the book Bayesian Modeling and Computation in Python
-:class: tip, dropdown
-The textbook is not needed to use or run this code, though the context and explanation is missing from this notebook.
-
-If you'd like a copy it's available
-[from the CRC Press](https://www.routledge.com/Bayesian-Modeling-and-Computation-in-Python/Martin-Kumar-Lao/p/book/9780367894368)
-or from [Amazon](https://www.routledge.com/Bayesian-Modeling-and-Computation-in-Python/Martin-Kumar-Lao/p/book/9780367894368).
-``
-
 ```python
 import pymc as pm
 import matplotlib.pyplot as plt
@@ -33,7 +23,6 @@ import xarray as xr
 import pandas as pd
 from scipy import special, stats
 import numpy as np
-
 ```
 
 ```python
@@ -177,112 +166,110 @@ plt.savefig("img/chp03/independent_model_forestplotsigma.png")
 ### Code 3.7
 
 ```python
-# import tensorflow as tf
-# import tensorflow_probability as tfp
+import tensorflow as tf
+import tensorflow_probability as tfp
 
-# tfd = tfp.distributions
-# root = tfd.JointDistributionCoroutine.Root
+tfd = tfp.distributions
+root = tfd.JointDistributionCoroutine.Root
 
-# species_idx = tf.constant(all_species.codes, tf.int32)
-# body_mass_g = tf.constant(penguins["body_mass_g"], tf.float32)
+species_idx = tf.constant(all_species.codes, tf.int32)
+body_mass_g = tf.constant(penguins["body_mass_g"], tf.float32)
 
-# @tfd.JointDistributionCoroutine
-# def jd_penguin_mass_all_species():
-#     σ = yield root(tfd.Sample(
-#             tfd.HalfStudentT(df=100, loc=0, scale=2000),
-#             sample_shape=3,
-#             name="sigma"))
-#     μ = yield root(tfd.Sample(
-#             tfd.Normal(loc=4000, scale=3000),
-#             sample_shape=3,
-#             name="mu"))
-#     mass = yield tfd.Independent(
-#         tfd.Normal(loc=tf.gather(μ, species_idx, axis=-1),
-#                    scale=tf.gather(σ, species_idx, axis=-1)),
-#         reinterpreted_batch_ndims=1,
-#         name="mass")
+@tfd.JointDistributionCoroutine
+def jd_penguin_mass_all_species():
+    σ = yield root(tfd.Sample(
+            tfd.HalfStudentT(df=100, loc=0, scale=2000),
+            sample_shape=3,
+            name="sigma"))
+    μ = yield root(tfd.Sample(
+            tfd.Normal(loc=4000, scale=3000),
+            sample_shape=3,
+            name="mu"))
+    mass = yield tfd.Independent(
+        tfd.Normal(loc=tf.gather(μ, species_idx, axis=-1),
+                   scale=tf.gather(σ, species_idx, axis=-1)),
+        reinterpreted_batch_ndims=1,
+        name="mass")
 ```
 
 ### Code 3.8
 
 ```python
-# prior_predictive_samples = jd_penguin_mass_all_species.sample(1000)
+prior_predictive_samples = jd_penguin_mass_all_species.sample(1000)
 ```
 
 ### Code 3.9
 
 ```python
-# jd_penguin_mass_all_species.sample(sigma=tf.constant([.1, .2, .3]))
-# jd_penguin_mass_all_species.sample(mu=tf.constant([.1, .2, .3]))
+jd_penguin_mass_all_species.sample(sigma=tf.constant([.1, .2, .3]))
+jd_penguin_mass_all_species.sample(mu=tf.constant([.1, .2, .3]));
 ```
 
 ### Code 3.10
 
 ```python
-# target_density_function = lambda *x: jd_penguin_mass_all_species.log_prob(
-#     *x, mass=body_mass_g)
+target_density_function = lambda *x: jd_penguin_mass_all_species.log_prob(*x, mass=body_mass_g)
 
-# jd_penguin_mass_observed = jd_penguin_mass_all_species.experimental_pin(
-#     mass=body_mass_g)
-# target_density_function = jd_penguin_mass_observed.unnormalized_log_prob
+jd_penguin_mass_observed = jd_penguin_mass_all_species.experimental_pin(mass=body_mass_g)
+target_density_function = jd_penguin_mass_observed.unnormalized_log_prob
 
-# # init_state = jd_penguin_mass_observed.sample_unpinned(10)
-# # target_density_function1(*init_state), target_density_function2(*init_state)
+# init_state = jd_penguin_mass_observed.sample_unpinned(10)
+# target_density_function1(*init_state), target_density_function2(*init_state)
 ```
 
 ### Code 3.11
 
 ```python
-# run_mcmc = tf.function(
-#     tfp.experimental.mcmc.windowed_adaptive_nuts,
-#     autograph=False, jit_compile=True)
-# mcmc_samples, sampler_stats = run_mcmc(
-#     1000, jd_penguin_mass_all_species, n_chains=4, num_adaptation_steps=1000,
-#     mass=body_mass_g)
+run_mcmc = tf.function(
+    tfp.experimental.mcmc.windowed_adaptive_nuts,
+    autograph=False, jit_compile=True)
+mcmc_samples, sampler_stats = run_mcmc(
+    1000, jd_penguin_mass_all_species, n_chains=4, num_adaptation_steps=1000,
+    mass=body_mass_g)
 
-# idata_penguin_mass_all_species2 = az.from_dict(
-#     posterior={
-#         # TFP mcmc returns (num_samples, num_chains, ...), we swap
-#         # the first and second axis below for each RV so the shape
-#         # is what ArviZ expected.
-#         k:np.swapaxes(v, 1, 0)
-#         for k, v in mcmc_samples._asdict().items()},
-#     sample_stats={
-#         k:np.swapaxes(sampler_stats[k], 1, 0)
-#         for k in ["target_log_prob", "diverging", "accept_ratio", "n_steps"]}
-# )
+idata_penguin_mass_all_species2 = az.from_dict(
+    posterior={
+        # TFP mcmc returns (num_samples, num_chains, ...), we swap
+        # the first and second axis below for each RV so the shape
+        # is what ArviZ expected.
+        k:np.swapaxes(v, 1, 0)
+        for k, v in mcmc_samples._asdict().items()},
+    sample_stats={
+        k:np.swapaxes(sampler_stats[k], 1, 0)
+        for k in ["target_log_prob", "diverging", "accept_ratio", "n_steps"]}
+)
 ```
 
 ```python
-# az.plot_trace(idata_penguin_mass_all_species2, divergences="bottom", kind="rank_bars", figsize=(6,4));
+az.plot_trace(idata_penguin_mass_all_species2, divergences="bottom", kind="rank_bars", figsize=(10,4));
 ```
 
 ### Code 3.12
 
 ```python
-# prior_predictive_samples = jd_penguin_mass_all_species.sample([1, 1000])
-# dist, samples = jd_penguin_mass_all_species.sample_distributions(
-#     value=mcmc_samples)
-# ppc_samples = samples[-1]
-# ppc_distribution = dist[-1].distribution
-# data_log_likelihood = ppc_distribution.log_prob(body_mass_g)
+prior_predictive_samples = jd_penguin_mass_all_species.sample([1, 1000])
+dist, samples = jd_penguin_mass_all_species.sample_distributions(
+    value=mcmc_samples)
+ppc_samples = samples[-1]
+ppc_distribution = dist[-1].distribution
+data_log_likelihood = ppc_distribution.log_prob(body_mass_g)
 
-# # Be careful not to run this code twice during REPL workflow.
-# idata_penguin_mass_all_species2.add_groups(
-#     prior=prior_predictive_samples[:-1]._asdict(),
-#     prior_predictive={"mass": prior_predictive_samples[-1]},
-#     posterior_predictive={"mass": np.swapaxes(ppc_samples, 1, 0)},
-#     log_likelihood={"mass": np.swapaxes(data_log_likelihood, 1, 0)},
-#     observed_data={"mass": body_mass_g}
-# )
+# Be careful not to run this code twice during REPL workflow.
+idata_penguin_mass_all_species2.add_groups(
+    prior=prior_predictive_samples[:-1]._asdict(),
+    prior_predictive={"mass": prior_predictive_samples[-1]},
+    posterior_predictive={"mass": np.swapaxes(ppc_samples, 1, 0)},
+    log_likelihood={"mass": np.swapaxes(data_log_likelihood, 1, 0)},
+    observed_data={"mass": body_mass_g}
+)
 ```
 
 ```python
-# az.plot_ppc(idata_penguin_mass_all_species2)
+az.plot_ppc(idata_penguin_mass_all_species2, num_pp_samples=50, figsize=(10, 3));
 ```
 
 ```python
-# az.loo(idata_penguin_mass_all_species2)
+az.loo(idata_penguin_mass_all_species2)
 ```
 
 ## Linear Regression
@@ -426,7 +413,6 @@ plt.savefig('img/chp03/flipper_length_mass_posterior_predictive.png', dpi=300)
 ```python
 adelie_flipper_length_obs = penguins.loc[adelie_mask, "flipper_length_mm"].values
 adelie_flipper_length_c = adelie_flipper_length_obs - adelie_flipper_length_obs.mean()
-
 ```
 
 ### PyMC Centered Model
@@ -452,55 +438,55 @@ plt.savefig("img/chp03/singlespecies_multipleregression_centered.png")
 ### Code 3.16
 
 ```python
-# adelie_flipper_length_c = adelie_flipper_length_obs - adelie_flipper_length_obs.mean()
+adelie_flipper_length_c = adelie_flipper_length_obs - adelie_flipper_length_obs.mean()
 ```
 
 ```python
-# def gen_adelie_flipper_model(adelie_flipper_length):
-#     adelie_flipper_length = tf.constant(adelie_flipper_length, tf.float32)
+def gen_adelie_flipper_model(adelie_flipper_length):
+    adelie_flipper_length = tf.constant(adelie_flipper_length, tf.float32)
 
-#     @tfd.JointDistributionCoroutine
-#     def jd_adelie_flipper_regression():
-#         σ = yield root(tfd.HalfStudentT(df=100, loc=0, scale=2000, name='sigma'))
-#         β_1 = yield root(tfd.Normal(loc=0, scale=4000, name='beta_1'))
-#         β_0 = yield root(tfd.Normal(loc=0, scale=4000, name='beta_0'))
-#         μ = β_0[..., None] + β_1[..., None] * adelie_flipper_length
-#         mass = yield tfd.Independent(
-#             tfd.Normal(loc=μ, scale=σ[..., None]),
-#             reinterpreted_batch_ndims=1,
-#             name='mass')
+    @tfd.JointDistributionCoroutine
+    def jd_adelie_flipper_regression():
+        σ = yield root(tfd.HalfStudentT(df=100, loc=0, scale=2000, name='sigma'))
+        β_1 = yield root(tfd.Normal(loc=0, scale=4000, name='beta_1'))
+        β_0 = yield root(tfd.Normal(loc=0, scale=4000, name='beta_0'))
+        μ = β_0[..., None] + β_1[..., None] * adelie_flipper_length
+        mass = yield tfd.Independent(
+            tfd.Normal(loc=μ, scale=σ[..., None]),
+            reinterpreted_batch_ndims=1,
+            name='mass')
 
-#     return jd_adelie_flipper_regression
+    return jd_adelie_flipper_regression
 
 
-# # Use non-centered predictor, this gives the same model as
-# # model_adelie_flipper_regression
-# jd_adelie_flipper_regression = gen_adelie_flipper_model(
-#     adelie_flipper_length_obs)
+# Use non-centered predictor, this gives the same model as
+# model_adelie_flipper_regression
+jd_adelie_flipper_regression = gen_adelie_flipper_model(
+    adelie_flipper_length_obs)
 
-# # Use centered predictor
-# jd_adelie_flipper_regression = gen_adelie_flipper_model(
-#     adelie_flipper_length_c)
+# Use centered predictor
+jd_adelie_flipper_regression = gen_adelie_flipper_model(
+    adelie_flipper_length_c)
 
-# mcmc_samples, sampler_stats = run_mcmc(
-#     1000, jd_adelie_flipper_regression, n_chains=4, num_adaptation_steps=1000,
-#     mass=tf.constant(adelie_mass_obs, tf.float32))
+mcmc_samples, sampler_stats = run_mcmc(
+    1000, jd_adelie_flipper_regression, n_chains=4, num_adaptation_steps=1000,
+    mass=tf.constant(adelie_mass_obs, tf.float32))
 
-# inf_data_adelie_flipper_length_c = az.from_dict(
-#     posterior={
-#         k:np.swapaxes(v, 1, 0)
-#         for k, v in mcmc_samples._asdict().items()},
-#     sample_stats={
-#         k:np.swapaxes(sampler_stats[k], 1, 0)
-#         for k in ["target_log_prob", "diverging", "accept_ratio", "n_steps"]
-#     }
-# )
+inf_data_adelie_flipper_length_c = az.from_dict(
+    posterior={
+        k:np.swapaxes(v, 1, 0)
+        for k, v in mcmc_samples._asdict().items()},
+    sample_stats={
+        k:np.swapaxes(sampler_stats[k], 1, 0)
+        for k in ["target_log_prob", "diverging", "accept_ratio", "n_steps"]
+    }
+)
 ```
 
 ### Figure 3.12
 
 ```python
-# az.plot_posterior(inf_data_adelie_flipper_length_c, var_names = ["beta_0", "beta_1"]);
+az.plot_posterior(inf_data_adelie_flipper_length_c, var_names = ["beta_0", "beta_1"]);
 ```
 
 ## Multiple Linear Regression
@@ -553,7 +539,7 @@ plt.savefig("img/chp03/singlespecies_multipleregression_forest_sigma_comparison.
 
 ```python
 # Fix colors
-fig, ax = plt.subplots()
+fig, ax = plt.subplots(figsize=(10, 4))
 alpha_1 = inf_data_penguin_mass_categorical.posterior["β_0"].mean().item()
 beta_1 = inf_data_penguin_mass_categorical.posterior["β_1"].mean().item()
 beta_2 = inf_data_penguin_mass_categorical.posterior["β_2"].mean().item()
@@ -582,86 +568,87 @@ plt.savefig("img/chp03/single_species_categorical_regression.png")
 ```
 
 ```python
-# def gen_jd_flipper_bill_sex(flipper_length, sex, bill_length, dtype=tf.float32):
-#     flipper_length, sex, bill_length = tf.nest.map_structure(
-#         lambda x: tf.constant(x, dtype),
-#         (flipper_length, sex, bill_length)
-#     )
+def gen_jd_flipper_bill_sex(flipper_length, sex, bill_length, dtype=tf.float32):
+    flipper_length, sex, bill_length = tf.nest.map_structure(
+        lambda x: tf.constant(x, dtype),
+        (flipper_length, sex, bill_length)
+    )
 
-#     @tfd.JointDistributionCoroutine
-#     def jd_flipper_bill_sex():
-#         σ = yield root(
-#             tfd.HalfStudentT(df=100, loc=0, scale=2000, name="sigma"))
-#         β_0 = yield root(tfd.Normal(loc=0, scale=3000, name="beta_0"))
-#         β_1 = yield root(tfd.Normal(loc=0, scale=3000, name="beta_1"))
-#         β_2 = yield root(tfd.Normal(loc=0, scale=3000, name="beta_2"))
-#         β_3 = yield root(tfd.Normal(loc=0, scale=3000, name="beta_3"))
-#         μ = (β_0[..., None]
-#              + β_1[..., None] * flipper_length
-#              + β_2[..., None] * sex
-#              + β_3[..., None] * bill_length
-#             )
-#         mass = yield tfd.Independent(
-#             tfd.Normal(loc=μ, scale=σ[..., None]),
-#             reinterpreted_batch_ndims=1,
-#             name="mass")
+    @tfd.JointDistributionCoroutine
+    def jd_flipper_bill_sex():
+        σ = yield root(
+            tfd.HalfStudentT(df=100, loc=0, scale=2000, name="sigma"))
+        β_0 = yield root(tfd.Normal(loc=0, scale=3000, name="beta_0"))
+        β_1 = yield root(tfd.Normal(loc=0, scale=3000, name="beta_1"))
+        β_2 = yield root(tfd.Normal(loc=0, scale=3000, name="beta_2"))
+        β_3 = yield root(tfd.Normal(loc=0, scale=3000, name="beta_3"))
+        μ = (β_0[..., None]
+             + β_1[..., None] * flipper_length
+             + β_2[..., None] * sex
+             + β_3[..., None] * bill_length
+            )
+        mass = yield tfd.Independent(
+            tfd.Normal(loc=μ, scale=σ[..., None]),
+            reinterpreted_batch_ndims=1,
+            name="mass")
 
-#     return jd_flipper_bill_sex
+    return jd_flipper_bill_sex
 
-# bill_length_obs = penguins.loc[adelie_mask, "bill_length_mm"]
-# jd_flipper_bill_sex = gen_jd_flipper_bill_sex(
-#     adelie_flipper_length_obs, sex_obs, bill_length_obs)
+bill_length_obs = penguins.loc[adelie_mask, "bill_length_mm"]
+jd_flipper_bill_sex = gen_jd_flipper_bill_sex(
+    adelie_flipper_length_obs, sex_obs, bill_length_obs)
 
-# mcmc_samples, sampler_stats = run_mcmc(
-#     1000, jd_flipper_bill_sex, n_chains=4, num_adaptation_steps=1000,
-#     mass=tf.constant(adelie_mass_obs, tf.float32))
+mcmc_samples, sampler_stats = run_mcmc(
+    1000, jd_flipper_bill_sex, n_chains=4, num_adaptation_steps=1000,
+    mass=tf.constant(adelie_mass_obs, tf.float32))
 ```
 
 ```python
-# idata_model_penguin_flipper_bill_sex = az.from_dict(
-#     posterior={
-#         k:np.swapaxes(v, 1, 0)
-#         for k, v in mcmc_samples._asdict().items()},
-#     sample_stats={
-#         k:np.swapaxes(sampler_stats[k], 1, 0)
-#         for k in ["target_log_prob", "diverging", "accept_ratio", "n_steps"]}
-# )
+idata_model_penguin_flipper_bill_sex = az.from_dict(
+    posterior={
+        k:np.swapaxes(v, 1, 0)
+        for k, v in mcmc_samples._asdict().items()},
+    sample_stats={
+        k:np.swapaxes(sampler_stats[k], 1, 0)
+        for k in ["target_log_prob", "diverging", "accept_ratio", "n_steps"]}
+)
 ```
 
 ```python
-# az.plot_posterior(idata_model_penguin_flipper_bill_sex, var_names=["beta_1", "beta_2", "beta_3"]);
+az.plot_posterior(idata_model_penguin_flipper_bill_sex, var_names=["beta_1", "beta_2", "beta_3"]);
 ```
 
 ```python
-# az.summary(inf_data_model_penguin_flipper_bill_sex, var_names=["beta_1", "beta_2", "beta_3", "sigma"])
+az.summary(idata_model_penguin_flipper_bill_sex, var_names=["beta_1", "beta_2", "beta_3", "sigma"])
 ```
 
 ### Code 3.21
 
 ```python
-# mean_flipper_length = penguins.loc[adelie_mask, "flipper_length_mm"].mean()
-# # Counterfactual dimensions is set to 21 to allow us to get the mean exactly
-# counterfactual_flipper_lengths = np.linspace(
-#     mean_flipper_length-20, mean_flipper_length+20, 21)
-# sex_male_indicator = np.zeros_like(counterfactual_flipper_lengths)
-# mean_bill_length = np.ones_like(
-#     counterfactual_flipper_lengths) * bill_length_obs.mean()
+mean_flipper_length = penguins.loc[adelie_mask, "flipper_length_mm"].mean()
+# Counterfactual dimensions is set to 21 to allow us to get the mean exactly
+counterfactual_flipper_lengths = np.linspace(
+    mean_flipper_length-20, mean_flipper_length+20, 21)
+sex_male_indicator = np.zeros_like(counterfactual_flipper_lengths)
+mean_bill_length = np.ones_like(
+    counterfactual_flipper_lengths) * bill_length_obs.mean()
 
-# jd_flipper_bill_sex_counterfactual = gen_jd_flipper_bill_sex(
-#     counterfactual_flipper_lengths, sex_male_indicator, mean_bill_length)
-# ppc_samples = jd_flipper_bill_sex_counterfactual.sample(value=mcmc_samples)
-# estimated_mass = ppc_samples[-1].numpy().reshape(-1, 21)
+jd_flipper_bill_sex_counterfactual = gen_jd_flipper_bill_sex(
+    counterfactual_flipper_lengths, sex_male_indicator, mean_bill_length)
+ppc_samples = jd_flipper_bill_sex_counterfactual.sample(value=mcmc_samples)
+estimated_mass = ppc_samples[-1].numpy().reshape(-1, 21)
 ```
 
 ### Figure 3.16
 
 ```python
-# az.plot_hdi(counterfactual_flipper_lengths, estimated_mass, color="C2", plot_kwargs={"ls": "--"})
-# plt.plot(counterfactual_flipper_lengths, estimated_mass.mean(axis=0), lw=4, c="blue")
-# plt.title("Mass estimates with Flipper Length Counterfactual for \n Male Penguins at Mean Observed Bill Length")
-# plt.xlabel("Counterfactual Flipper Length")
-# plt.ylabel("Mass")
-# plt.savefig("img/chp03/linear_counter_factual.png")
+_, ax = plt.subplots(figsize=(10, 3))
+az.plot_hdi(counterfactual_flipper_lengths, estimated_mass, color="C2", plot_kwargs={"ls": "--"}, ax=ax)
+ax.plot(counterfactual_flipper_lengths, estimated_mass.mean(axis=0), lw=4, c="blue")
+ax.set_title("Mass estimates with Flipper Length Counterfactual for \n Male Penguins at Mean Observed Bill Length")
+ax.set_xlabel("Counterfactual Flipper Length")
+ax.set_ylabel("Mass")
+plt.savefig("img/chp03/linear_counter_factual.png")
 ```
 
 ## Generalized Linear Models
@@ -673,6 +660,7 @@ plt.savefig("img/chp03/single_species_categorical_regression.png")
 x = np.linspace(-10, 10, 1000)
 y = special.expit(x)
 
+plt.figure(figsize=(10, 2))
 plt.plot(x,y)
 plt.savefig("img/chp03/logistic.png")
 ```
@@ -703,13 +691,13 @@ with pm.Model() as model_logistic_penguins_bill_length:
                                                     idata_kwargs={"log_likelihood":True})
     idata_logistic_penguins_bill_length.extend(pm.sample_prior_predictive(samples=10000))
     idata_logistic_penguins_bill_length.extend(pm.sample_posterior_predictive(idata_logistic_penguins_bill_length))
-
 ```
 
 ### Figure 3.18
 
 ```python
-ax = az.plot_dist(idata_logistic_penguins_bill_length.prior_predictive["yl"], color="C2")
+_, ax = plt.subplots(figsize=(10, 2))
+az.plot_dist(idata_logistic_penguins_bill_length.prior_predictive["yl"], color="C2", ax=ax)
 ax.set_xticklabels(["Adelie: 0", "Chinstrap: 1"] )
 plt.savefig("img/chp03/prior_predictive_logistic.png")
 ```
@@ -727,7 +715,7 @@ az.summary(idata_logistic_penguins_bill_length, var_names=["β_0", "β_1"], kind
 ### Figure 3.19
 
 ```python
-fig, ax = plt.subplots()
+fig, ax = plt.subplots(figsize=(10, 4))
 
 theta = idata_logistic_penguins_bill_length.posterior["θ"].mean(("chain", "draw"))
 
