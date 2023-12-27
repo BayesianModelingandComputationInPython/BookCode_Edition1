@@ -1,39 +1,47 @@
 
+
 <!DOCTYPE html>
 
-<html lang="en">
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Code 2: Exploratory Analysis of Bayesian Models &#8212; Bayesian Modeling and Computation in Python</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-codeautolink.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -42,656 +50,351 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/chp_02';</script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Code 3: Linear Models and Probabilistic Programming Languages" href="chp_03.html" />
     <link rel="prev" title="Code 1: Bayesian Inference" href="chp_01.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en">
-    
-
-    <!-- Google Analytics -->
-    
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-702QMHG8ST"></script>
-<script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){ dataLayer.push(arguments); }
-                    gtag('js', new Date());
-                    gtag('config', 'G-702QMHG8ST');
-                </script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-      
-      
-      <h1 class="site-logo" id="site-title">Bayesian Modeling and Computation in Python</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 0
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/dedication.html">
-   Dedication
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/foreword.html">
-   Foreword
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/preface.html">
-   Preface
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/symbollist.html">
-   Symbols
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 1
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_01.html">
-   1. Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_02.html">
-   2. Exploratory Analysis of Bayesian Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_03.html">
-   3. Linear Models and Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_04.html">
-   4. Extending Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_05.html">
-   5. Splines
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_06.html">
-   6. Time Series
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_07.html">
-   7. Bayesian Additive Regression Trees
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_08.html">
-   8. Approximate Bayesian Computation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_09.html">
-   9. End to End Bayesian Workflows
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_10.html">
-   10. Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_11.html">
-   11. Appendiceal Topics
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/glossary.html">
-   12. Glossary
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/references.html">
-   13. References
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 2
- </span>
-</p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_01.html">
-   Code 1: Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Code 2: Exploratory Analysis of Bayesian Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_03.html">
-   Code 3: Linear Models and Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_04.html">
-   Code 4: Extending Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_05.html">
-   Code 5: Splines
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_06.html">
-   Code 6: Time Series
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_07.html">
-   Code 7: Bayesian Additive Regression Trees
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_08.html">
-   Code 8: Approximate Bayesian Computation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_09.html">
-   Code 9: End to End Bayesian Workflows
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_10.html">
-   Code 10: Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_11.html">
-   Code 11: Appendiceal Topics
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 3
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../solutions/chp_01.html">
-   Solutions 1: Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../solutions/chp_02.html">
-   Solutions 2: Exploratory Analysis of Bayesian models
-  </a>
- </li>
-</ul>
-
-    </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fnotebooks/chp_02.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+      <div class="bd-sidebar-primary bd-sidebar">
         
-    </div>
-</div>
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
+  
 
-            <!-- Launch buttons -->
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#understanding-your-assumptions">
-   Understanding Your Assumptions
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-2-2">
-     Figure 2.2
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-2-3">
-     Figure 2.3
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#understanding-your-predictions">
-   Understanding Your Predictions
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-2-4">
-     Figure 2.4
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-2-5">
-     Figure 2.5
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-2-6">
-     Figure 2.6
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-2-7">
-     Figure 2.7
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#diagnosing-numerical-inference">
-   Diagnosing Numerical Inference
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-2-1">
-     Code 2.1
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-2-2">
-     Code 2.2
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-2-3-and-figure-2-8">
-     Code 2.3 and Figure 2.8
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-2-4">
-     Code 2.4
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-2-5">
-     Code 2.5
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-2-6-and-figure-2-9">
-     Code 2.6 and Figure 2.9
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-2-7">
-     Code 2.7
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-2-8-and-figure-2-10">
-     Code 2.8 and Figure 2.10
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-2-9-and-figure-2-11">
-     Code 2.9 and Figure 2.11
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-2-10-and-figure-2-12">
-     Code 2.10 and Figure 2.12
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-2-11-and-figure-2-13">
-     Code 2.11 and Figure 2.13
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-2-12-2-13-and-2-14">
-     Code 2.12, 2.13, and 2.14
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-2-14">
-     Figure 2.14
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-2-15">
-     Figure 2.15
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#model-comparison">
-   Model Comparison
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-2-15">
-     Code 2.15
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-2-16">
-     Figure 2.16
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-2-17">
-     Figure 2.17
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-2-18">
-     Figure 2.18
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-2-19">
-     Figure 2.19
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-2-20">
-     Figure 2.20
-    </a>
-   </li>
-  </ul>
- </li>
+<a class="navbar-brand logo" href="../welcome.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Bayesian Modeling and Computation in Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 0</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown/dedication.html">Dedication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/foreword.html">Foreword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/preface.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/symbollist.html">Symbols</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 1</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_01.html">1. Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_02.html">2. Exploratory Analysis of Bayesian Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_03.html">3. Linear Models and Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_04.html">4. Extending Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_05.html">5. Splines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_06.html">6. Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_07.html">7. Bayesian Additive Regression Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_08.html">8. Approximate Bayesian Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_09.html">9. End to End Bayesian Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_10.html">10. Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_11.html">11. Appendiceal Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/glossary.html">12. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/references.html">13. References</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 2</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chp_01.html">Code 1: Bayesian Inference</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Code 2: Exploratory Analysis of Bayesian Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_03.html">Code 3: Linear Models and Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_04.html">Code 4: Extending Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_05.html">Code 5: Splines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_06.html">Code 6: Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_07.html">Code 7: Bayesian Additive Regression Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_08.html">Code 8: Approximate Bayesian Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_09.html">Code 9: End to End Bayesian Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_10.html">Code 10: Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_11.html">Code 11: Appendiceal Topics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../solutions/chp_01.html">Solutions 1: Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/chp_02.html">Solutions 2: Exploratory Analysis of Bayesian models</a></li>
 </ul>
 
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fnotebooks/chp_02.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Code 2: Exploratory Analysis of Bayesian Models</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-your-assumptions">Understanding Your Assumptions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-2-2">Figure 2.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-2-3">Figure 2.3</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-your-predictions">Understanding Your Predictions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-2-4">Figure 2.4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-2-5">Figure 2.5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-2-6">Figure 2.6</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-2-7">Figure 2.7</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagnosing-numerical-inference">Diagnosing Numerical Inference</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-2-1">Code 2.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-2-2">Code 2.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-2-3-and-figure-2-8">Code 2.3 and Figure 2.8</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-2-4">Code 2.4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-2-5">Code 2.5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-2-6-and-figure-2-9">Code 2.6 and Figure 2.9</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-2-7">Code 2.7</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-2-8-and-figure-2-10">Code 2.8 and Figure 2.10</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-2-9-and-figure-2-11">Code 2.9 and Figure 2.11</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-2-10-and-figure-2-12">Code 2.10 and Figure 2.12</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-2-11-and-figure-2-13">Code 2.11 and Figure 2.13</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-2-12-2-13-and-2-14">Code 2.12, 2.13, and 2.14</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-2-14">Figure 2.14</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-2-15">Figure 2.15</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-comparison">Model Comparison</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-2-15">Code 2.15</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-2-16">Figure 2.16</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-2-17">Figure 2.17</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-2-18">Figure 2.18</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-2-19">Figure 2.19</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-2-20">Figure 2.20</a></li>
+</ul>
+</li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Code 2: Exploratory Analysis of Bayesian Models</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#understanding-your-assumptions">
-   Understanding Your Assumptions
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-2-2">
-     Figure 2.2
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-2-3">
-     Figure 2.3
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#understanding-your-predictions">
-   Understanding Your Predictions
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-2-4">
-     Figure 2.4
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-2-5">
-     Figure 2.5
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-2-6">
-     Figure 2.6
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-2-7">
-     Figure 2.7
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#diagnosing-numerical-inference">
-   Diagnosing Numerical Inference
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-2-1">
-     Code 2.1
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-2-2">
-     Code 2.2
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-2-3-and-figure-2-8">
-     Code 2.3 and Figure 2.8
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-2-4">
-     Code 2.4
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-2-5">
-     Code 2.5
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-2-6-and-figure-2-9">
-     Code 2.6 and Figure 2.9
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-2-7">
-     Code 2.7
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-2-8-and-figure-2-10">
-     Code 2.8 and Figure 2.10
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-2-9-and-figure-2-11">
-     Code 2.9 and Figure 2.11
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-2-10-and-figure-2-12">
-     Code 2.10 and Figure 2.12
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-2-11-and-figure-2-13">
-     Code 2.11 and Figure 2.13
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-2-12-2-13-and-2-14">
-     Code 2.12, 2.13, and 2.14
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-2-14">
-     Figure 2.14
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-2-15">
-     Figure 2.15
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#model-comparison">
-   Model Comparison
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-2-15">
-     Code 2.15
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-2-16">
-     Figure 2.16
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-2-17">
-     Figure 2.17
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-2-18">
-     Figure 2.18
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-2-19">
-     Figure 2.19
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-2-20">
-     Figure 2.20
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="code-2-exploratory-analysis-of-bayesian-models">
-<h1>Code 2: Exploratory Analysis of Bayesian Models<a class="headerlink" href="#code-2-exploratory-analysis-of-bayesian-models" title="Permalink to this heading">¶</a></h1>
+<h1>Code 2: Exploratory Analysis of Bayesian Models<a class="headerlink" href="#code-2-exploratory-analysis-of-bayesian-models" title="Permalink to this heading">#</a></h1>
 <div class="tip dropdown admonition">
 <p class="admonition-title">This is a reference notebook for the book Bayesian Modeling and Computation in Python</p>
 <p>The textbook is not needed to use or run this code, though the context and explanation is missing from this notebook.</p>
@@ -723,15 +426,15 @@ or from <a class="reference external" href="https://www.routledge.com/Bayesian-M
 </div>
 </div>
 <section id="understanding-your-assumptions">
-<h2>Understanding Your Assumptions<a class="headerlink" href="#understanding-your-assumptions" title="Permalink to this heading">¶</a></h2>
+<h2>Understanding Your Assumptions<a class="headerlink" href="#understanding-your-assumptions" title="Permalink to this heading">#</a></h2>
 <section id="figure-2-2">
-<h3>Figure 2.2<a class="headerlink" href="#figure-2-2" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 2.2<a class="headerlink" href="#figure-2-2" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">half_length</span> <span class="o">=</span> <span class="mf">3.66</span>  <span class="c1"># meters</span>
 <span class="n">penalty_point</span> <span class="o">=</span> <span class="mi">11</span>  <span class="c1"># meters</span>
 <span class="k">def</span> <span class="nf">Phi</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Calculates the standard normal cumulative distribution function.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the standard normal cumulative distribution function.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">tt</span><span class="o">.</span><span class="n">erf</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="n">tt</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span><span class="p">))</span>
 
 
@@ -770,12 +473,12 @@ or from <a class="reference external" href="https://www.routledge.com/Bayesian-M
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_02_7_0.png" src="../_images/chp_02_7_0.png" />
+<img alt="../_images/0ca65dd71bee66b2909c4fd249eba3eba21c69e7e2ed84c071b143c65d90882d.png" src="../_images/0ca65dd71bee66b2909c4fd249eba3eba21c69e7e2ed84c071b143c65d90882d.png" />
 </div>
 </div>
 </section>
 <section id="figure-2-3">
-<h3>Figure 2.3<a class="headerlink" href="#figure-2-3" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 2.3<a class="headerlink" href="#figure-2-3" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">expit</span>
@@ -796,15 +499,15 @@ or from <a class="reference external" href="https://www.routledge.com/Bayesian-M
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_02_9_0.png" src="../_images/chp_02_9_0.png" />
+<img alt="../_images/e67e15edeb75c60dd13710843dea9a913cc3b1dd8fdea038e75c19125fc2cca2.png" src="../_images/e67e15edeb75c60dd13710843dea9a913cc3b1dd8fdea038e75c19125fc2cca2.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="understanding-your-predictions">
-<h2>Understanding Your Predictions<a class="headerlink" href="#understanding-your-predictions" title="Permalink to this heading">¶</a></h2>
+<h2>Understanding Your Predictions<a class="headerlink" href="#understanding-your-predictions" title="Permalink to this heading">#</a></h2>
 <section id="figure-2-4">
-<h3>Figure 2.4<a class="headerlink" href="#figure-2-4" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 2.4<a class="headerlink" href="#figure-2-4" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">bernoulli</span><span class="p">(</span><span class="mf">0.7</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
@@ -825,23 +528,23 @@ NUTS: [θ]
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [8000/8000 00:01<00:00 Sampling 4 chains, 0 divergences]
-</div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 2 seconds.
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [8000/8000 00:01<00:00 Sampling 4 chains, 0 divergences]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 2 seconds.
 </pre></div>
 </div>
 </div>
@@ -858,23 +561,23 @@ NUTS: [θ]
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='1000' class='' max='1000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [1000/1000 00:00<00:00]
-</div>
-</div></div>
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='1000' class='' max='1000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [1000/1000 00:00<00:00]
+    </div>
+    </div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -900,12 +603,12 @@ NUTS: [θ]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_02_14_0.png" src="../_images/chp_02_14_0.png" />
+<img alt="../_images/bf74dd6e728cd900e4dfd247b02991970a2961bcf4c85189d1da9c47013cf4d0.png" src="../_images/bf74dd6e728cd900e4dfd247b02991970a2961bcf4c85189d1da9c47013cf4d0.png" />
 </div>
 </div>
 </section>
 <section id="figure-2-5">
-<h3>Figure 2.5<a class="headerlink" href="#figure-2-5" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 2.5<a class="headerlink" href="#figure-2-5" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">idata</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">posterior_predictive</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;y&quot;</span><span class="p">:</span><span class="n">pred_dist</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">100</span><span class="p">)},</span> <span class="n">observed_data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;y&quot;</span><span class="p">:</span><span class="n">Y</span><span class="p">})</span>
@@ -917,7 +620,7 @@ NUTS: [θ]
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="n">az</span><span class="o">.</span><span class="n">plot_bpv</span><span class="p">(</span><span class="n">idata</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;p_value&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;bpv=</span><span class="si">{</span><span class="p">(</span><span class="n">Y</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">pred_dist</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">],</span> <span class="n">handlelength</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;bpv=</span><span class="si">{</span><span class="p">(</span><span class="n">Y</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">pred_dist</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">],</span> <span class="n">handlelength</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">az</span><span class="o">.</span><span class="n">plot_bpv</span><span class="p">(</span><span class="n">idata</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;u_value&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.</span><span class="p">])</span>
@@ -926,12 +629,12 @@ NUTS: [θ]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_02_17_0.png" src="../_images/chp_02_17_0.png" />
+<img alt="../_images/32d1eee76e77bbef8da21aee052ffb9e89971115046ff32ae82b2d7b87a65856.png" src="../_images/32d1eee76e77bbef8da21aee052ffb9e89971115046ff32ae82b2d7b87a65856.png" />
 </div>
 </div>
 </section>
 <section id="figure-2-6">
-<h3>Figure 2.6<a class="headerlink" href="#figure-2-6" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 2.6<a class="headerlink" href="#figure-2-6" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
@@ -945,12 +648,12 @@ NUTS: [θ]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_02_19_0.png" src="../_images/chp_02_19_0.png" />
+<img alt="../_images/b0a075f85583e2717041e1ac953f82f656dadf332a9a67db46989c93b7ad0892.png" src="../_images/b0a075f85583e2717041e1ac953f82f656dadf332a9a67db46989c93b7ad0892.png" />
 </div>
 </div>
 </section>
 <section id="figure-2-7">
-<h3>Figure 2.7<a class="headerlink" href="#figure-2-7" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 2.7<a class="headerlink" href="#figure-2-7" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_obs</span> <span class="o">=</span> <span class="mi">500</span>
@@ -996,15 +699,15 @@ NUTS: [θ]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_02_21_0.png" src="../_images/chp_02_21_0.png" />
+<img alt="../_images/fdb4b65671bc138700dad2dd117e0e07978c7f7032bbd295de21b4d3d11240b1.png" src="../_images/fdb4b65671bc138700dad2dd117e0e07978c7f7032bbd295de21b4d3d11240b1.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="diagnosing-numerical-inference">
-<h2>Diagnosing Numerical Inference<a class="headerlink" href="#diagnosing-numerical-inference" title="Permalink to this heading">¶</a></h2>
+<h2>Diagnosing Numerical Inference<a class="headerlink" href="#diagnosing-numerical-inference" title="Permalink to this heading">#</a></h2>
 <section id="code-2-1">
-<h3>Code 2.1<a class="headerlink" href="#code-2-1" title="Permalink to this heading">¶</a></h3>
+<h3>Code 2.1<a class="headerlink" href="#code-2-1" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">5201</span><span class="p">)</span>
@@ -1031,7 +734,7 @@ NUTS: [θ]
 </div>
 </section>
 <section id="code-2-2">
-<h3>Code 2.2<a class="headerlink" href="#code-2-2" title="Permalink to this heading">¶</a></h3>
+<h3>Code 2.2<a class="headerlink" href="#code-2-2" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">ess</span><span class="p">(</span><span class="n">chains</span><span class="p">)</span>
@@ -1399,7 +1102,7 @@ Data variables:
 </div>
 </section>
 <section id="code-2-3-and-figure-2-8">
-<h3>Code 2.3 and Figure 2.8<a class="headerlink" href="#code-2-3-and-figure-2-8" title="Permalink to this heading">¶</a></h3>
+<h3>Code 2.3 and Figure 2.8<a class="headerlink" href="#code-2-3-and-figure-2-8" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1419,12 +1122,12 @@ Data variables:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_02_29_0.png" src="../_images/chp_02_29_0.png" />
+<img alt="../_images/f35a56634f8a46e90062cdd50f72bdeeffce3fff2a422a30ad87d9d43999d0a3.png" src="../_images/f35a56634f8a46e90062cdd50f72bdeeffce3fff2a422a30ad87d9d43999d0a3.png" />
 </div>
 </div>
 </section>
 <section id="code-2-4">
-<h3>Code 2.4<a class="headerlink" href="#code-2-4" title="Permalink to this heading">¶</a></h3>
+<h3>Code 2.4<a class="headerlink" href="#code-2-4" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">rhat</span><span class="p">(</span><span class="n">chains</span><span class="p">)</span>
@@ -1792,7 +1495,7 @@ Data variables:
 </div>
 </section>
 <section id="code-2-5">
-<h3>Code 2.5<a class="headerlink" href="#code-2-5" title="Permalink to this heading">¶</a></h3>
+<h3>Code 2.5<a class="headerlink" href="#code-2-5" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">mcse</span><span class="p">(</span><span class="n">chains</span><span class="p">)</span>
@@ -2160,7 +1863,7 @@ Data variables:
 </div>
 </section>
 <section id="code-2-6-and-figure-2-9">
-<h3>Code 2.6 and Figure 2.9<a class="headerlink" href="#code-2-6-and-figure-2-9" title="Permalink to this heading">¶</a></h3>
+<h3>Code 2.6 and Figure 2.9<a class="headerlink" href="#code-2-6-and-figure-2-9" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -2174,12 +1877,12 @@ Data variables:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_02_35_0.png" src="../_images/chp_02_35_0.png" />
+<img alt="../_images/b60806ce4d68cd40ffd12f96f1cdc102582ac87c33bb3876dd25a16bc4cdf6ff.png" src="../_images/b60806ce4d68cd40ffd12f96f1cdc102582ac87c33bb3876dd25a16bc4cdf6ff.png" />
 </div>
 </div>
 </section>
 <section id="code-2-7">
-<h3>Code 2.7<a class="headerlink" href="#code-2-7" title="Permalink to this heading">¶</a></h3>
+<h3>Code 2.7<a class="headerlink" href="#code-2-7" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">chains</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;diagnostics&quot;</span><span class="p">)</span>
@@ -2243,7 +1946,7 @@ Data variables:
 </div>
 </section>
 <section id="code-2-8-and-figure-2-10">
-<h3>Code 2.8 and Figure 2.10<a class="headerlink" href="#code-2-8-and-figure-2-10" title="Permalink to this heading">¶</a></h3>
+<h3>Code 2.8 and Figure 2.10<a class="headerlink" href="#code-2-8-and-figure-2-10" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_trace</span><span class="p">(</span><span class="n">chains</span><span class="p">)</span>
@@ -2252,12 +1955,12 @@ Data variables:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_02_39_0.png" src="../_images/chp_02_39_0.png" />
+<img alt="../_images/6ee4d2b0f598009c60576a9ef54c0859a0bf58d51f3ce4f3efffff5dc6d18cff.png" src="../_images/6ee4d2b0f598009c60576a9ef54c0859a0bf58d51f3ce4f3efffff5dc6d18cff.png" />
 </div>
 </div>
 </section>
 <section id="code-2-9-and-figure-2-11">
-<h3>Code 2.9 and Figure 2.11<a class="headerlink" href="#code-2-9-and-figure-2-11" title="Permalink to this heading">¶</a></h3>
+<h3>Code 2.9 and Figure 2.11<a class="headerlink" href="#code-2-9-and-figure-2-11" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_autocorr</span><span class="p">(</span><span class="n">chains</span><span class="p">,</span> <span class="n">combined</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
@@ -2266,12 +1969,12 @@ Data variables:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_02_41_0.png" src="../_images/chp_02_41_0.png" />
+<img alt="../_images/773d0ed11b30c659ebd9b20160d5f1d29967cf66315d6acdfaa0a4930a768546.png" src="../_images/773d0ed11b30c659ebd9b20160d5f1d29967cf66315d6acdfaa0a4930a768546.png" />
 </div>
 </div>
 </section>
 <section id="code-2-10-and-figure-2-12">
-<h3>Code 2.10 and Figure 2.12<a class="headerlink" href="#code-2-10-and-figure-2-12" title="Permalink to this heading">¶</a></h3>
+<h3>Code 2.10 and Figure 2.12<a class="headerlink" href="#code-2-10-and-figure-2-12" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
@@ -2285,12 +1988,12 @@ Data variables:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_02_43_0.png" src="../_images/chp_02_43_0.png" />
+<img alt="../_images/078dc882453e8d4ba8fe442f17b284f57922f53433e84ecb1d2d4c4528f2c6ae.png" src="../_images/078dc882453e8d4ba8fe442f17b284f57922f53433e84ecb1d2d4c4528f2c6ae.png" />
 </div>
 </div>
 </section>
 <section id="code-2-11-and-figure-2-13">
-<h3>Code 2.11 and Figure 2.13<a class="headerlink" href="#code-2-11-and-figure-2-13" title="Permalink to this heading">¶</a></h3>
+<h3>Code 2.11 and Figure 2.13<a class="headerlink" href="#code-2-11-and-figure-2-13" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_rank</span><span class="p">(</span><span class="n">chains</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;vlines&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
@@ -2299,12 +2002,12 @@ Data variables:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_02_45_0.png" src="../_images/chp_02_45_0.png" />
+<img alt="../_images/b835808f4910cf8bc33fc7327af21b25f9cfa149c9ed2e806a23a7f62cd45c63.png" src="../_images/b835808f4910cf8bc33fc7327af21b25f9cfa149c9ed2e806a23a7f62cd45c63.png" />
 </div>
 </div>
 </section>
 <section id="code-2-12-2-13-and-2-14">
-<h3>Code 2.12, 2.13, and 2.14<a class="headerlink" href="#code-2-12-2-13-and-2-14" title="Permalink to this heading">¶</a></h3>
+<h3>Code 2.12, 2.13, and 2.14<a class="headerlink" href="#code-2-12-2-13-and-2-14" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_0</span><span class="p">:</span>
@@ -2334,23 +2037,23 @@ NUTS: [θ2, θ1]
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [8000/8000 00:01<00:00 Sampling 4 chains, 2,300 divergences]
-</div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 2 seconds.
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [8000/8000 00:01<00:00 Sampling 4 chains, 2,300 divergences]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 2 seconds.
 There were 503 divergences after tuning. Increase `target_accept` or reparameterize.
 There were 579 divergences after tuning. Increase `target_accept` or reparameterize.
 There were 614 divergences after tuning. Increase `target_accept` or reparameterize.
@@ -2363,23 +2066,23 @@ NUTS: [θ2, θ1]
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [8000/8000 00:01<00:00 Sampling 4 chains, 6 divergences]
-</div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 2 seconds.
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [8000/8000 00:01<00:00 Sampling 4 chains, 6 divergences]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 2 seconds.
 There was 1 divergence after tuning. Increase `target_accept` or reparameterize.
 There was 1 divergence after tuning. Increase `target_accept` or reparameterize.
 The acceptance probability does not match the target. It is 0.8922895133642398, but should be close to 0.8. Try to increase the number of tuning steps.
@@ -2391,30 +2094,30 @@ NUTS: [θ2, θ1]
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [8000/8000 00:02<00:00 Sampling 4 chains, 0 divergences]
-</div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 2 seconds.
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [8000/8000 00:02<00:00 Sampling 4 chains, 0 divergences]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 2 seconds.
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="figure-2-14">
-<h3>Figure 2.14<a class="headerlink" href="#figure-2-14" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 2.14<a class="headerlink" href="#figure-2-14" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
@@ -2431,12 +2134,12 @@ NUTS: [θ2, θ1]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_02_49_0.png" src="../_images/chp_02_49_0.png" />
+<img alt="../_images/ed319b605d3b4117785c89b4ec00025879b7acc03d88054672ad0b3d4e443033.png" src="../_images/ed319b605d3b4117785c89b4ec00025879b7acc03d88054672ad0b3d4e443033.png" />
 </div>
 </div>
 </section>
 <section id="figure-2-15">
-<h3>Figure 2.15<a class="headerlink" href="#figure-2-15" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 2.15<a class="headerlink" href="#figure-2-15" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -2453,15 +2156,15 @@ NUTS: [θ2, θ1]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_02_51_0.png" src="../_images/chp_02_51_0.png" />
+<img alt="../_images/bbaaf5bd7aeeb485758b45e0d290249755cef98d5cd6d280e38750ae0bc60fb4.png" src="../_images/bbaaf5bd7aeeb485758b45e0d290249755cef98d5cd6d280e38750ae0bc60fb4.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="model-comparison">
-<h2>Model Comparison<a class="headerlink" href="#model-comparison" title="Permalink to this heading">¶</a></h2>
+<h2>Model Comparison<a class="headerlink" href="#model-comparison" title="Permalink to this heading">#</a></h2>
 <section id="code-2-15">
-<h3>Code 2.15<a class="headerlink" href="#code-2-15" title="Permalink to this heading">¶</a></h3>
+<h3>Code 2.15<a class="headerlink" href="#code-2-15" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">90210</span><span class="p">)</span>
@@ -2506,129 +2209,129 @@ NUTS: [σ]
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [8000/8000 00:01<00:00 Sampling 4 chains, 0 divergences]
-</div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 2 seconds.
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [8000/8000 00:01<00:00 Sampling 4 chains, 0 divergences]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 2 seconds.
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='4000' class='' max='4000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [4000/4000 00:04<00:00]
-</div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Auto-assigning NUTS sampler...
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='4000' class='' max='4000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [4000/4000 00:04<00:00]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Auto-assigning NUTS sampler...
 Initializing NUTS using jitter+adapt_diag...
 Multiprocess sampling (4 chains in 4 jobs)
 NUTS: [σ]
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [8000/8000 00:01<00:00 Sampling 4 chains, 0 divergences]
-</div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 2 seconds.
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [8000/8000 00:01<00:00 Sampling 4 chains, 0 divergences]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 2 seconds.
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='4000' class='' max='4000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [4000/4000 00:03<00:00]
-</div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Auto-assigning NUTS sampler...
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='4000' class='' max='4000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [4000/4000 00:03<00:00]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Auto-assigning NUTS sampler...
 Initializing NUTS using jitter+adapt_diag...
 Multiprocess sampling (4 chains in 4 jobs)
 NUTS: [σ, μ]
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [8000/8000 00:01<00:00 Sampling 4 chains, 0 divergences]
-</div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 2 seconds.
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [8000/8000 00:01<00:00 Sampling 4 chains, 0 divergences]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 2 seconds.
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='4000' class='' max='4000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [4000/4000 00:03<00:00]
-</div>
-</div></div>
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='4000' class='' max='4000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [4000/4000 00:03<00:00]
+    </div>
+    </div></div>
 </div>
 <p>#3# Table 2.1</p>
 <div class="cell docutils container">
@@ -2715,7 +2418,7 @@ NUTS: [σ, μ]
 </div>
 </section>
 <section id="figure-2-16">
-<h3>Figure 2.16<a class="headerlink" href="#figure-2-16" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 2.16<a class="headerlink" href="#figure-2-16" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_compare</span><span class="p">(</span><span class="n">cmp</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
@@ -2724,12 +2427,12 @@ NUTS: [σ, μ]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_02_59_0.png" src="../_images/chp_02_59_0.png" />
+<img alt="../_images/d66d8f0c69c88ece4f430d4251a9d1ef8559c187028ac7522d4db8c059e8e036.png" src="../_images/d66d8f0c69c88ece4f430d4251a9d1ef8559c187028ac7522d4db8c059e8e036.png" />
 </div>
 </div>
 </section>
 <section id="figure-2-17">
-<h3>Figure 2.17<a class="headerlink" href="#figure-2-17" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 2.17<a class="headerlink" href="#figure-2-17" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_elpd</span><span class="p">(</span><span class="n">idatas_cmp</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">plot_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;marker&quot;</span><span class="p">:</span><span class="s2">&quot;.&quot;</span><span class="p">},</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">2</span><span class="p">);</span>
@@ -2738,12 +2441,12 @@ NUTS: [σ, μ]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_02_61_0.png" src="../_images/chp_02_61_0.png" />
+<img alt="../_images/e3947fbcbf60e302620548b5412359e8f791872bfcc0f92fc57fc91578e2e226.png" src="../_images/e3947fbcbf60e302620548b5412359e8f791872bfcc0f92fc57fc91578e2e226.png" />
 </div>
 </div>
 </section>
 <section id="figure-2-18">
-<h3>Figure 2.18<a class="headerlink" href="#figure-2-18" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 2.18<a class="headerlink" href="#figure-2-18" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -2761,12 +2464,12 @@ NUTS: [σ, μ]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_02_63_0.png" src="../_images/chp_02_63_0.png" />
+<img alt="../_images/560ca2027fba61703d6facd71600040346ad1708f18f34019f3f5e9dbda5fe06.png" src="../_images/560ca2027fba61703d6facd71600040346ad1708f18f34019f3f5e9dbda5fe06.png" />
 </div>
 </div>
 </section>
 <section id="figure-2-19">
-<h3>Figure 2.19<a class="headerlink" href="#figure-2-19" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 2.19<a class="headerlink" href="#figure-2-19" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_kde</span><span class="p">(</span><span class="n">y_obs</span><span class="p">,</span> <span class="n">rug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -2780,12 +2483,12 @@ NUTS: [σ, μ]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_02_65_0.png" src="../_images/chp_02_65_0.png" />
+<img alt="../_images/08f31a5d7bede7115171fb057648454dc1ef9dfab331c383d79ff1d5303911a8.png" src="../_images/08f31a5d7bede7115171fb057648454dc1ef9dfab331c383d79ff1d5303911a8.png" />
 </div>
 </div>
 </section>
 <section id="figure-2-20">
-<h3>Figure 2.20<a class="headerlink" href="#figure-2-20" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 2.20<a class="headerlink" href="#figure-2-20" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -2800,7 +2503,7 @@ NUTS: [σ, μ]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_02_67_0.png" src="../_images/chp_02_67_0.png" />
+<img alt="../_images/d129507ad8cbae53ec3d5c363036d3cb15781163054616b930221f2d0eeffbd9.png" src="../_images/d129507ad8cbae53ec3d5c363036d3cb15781163054616b930221f2d0eeffbd9.png" />
 </div>
 </div>
 </section>
@@ -2819,7 +2522,7 @@ NUTS: [σ, μ]
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./notebooks"
         },
         predefinedOutput: true
@@ -2827,44 +2530,139 @@ NUTS: [σ, μ]
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="chp_01.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Code 1: Bayesian Inference</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chp_01.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Code 1: Bayesian Inference</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="chp_03.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="chp_03.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Code 3: Linear Models and Probabilistic Programming Languages</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
+                </footer>
+              
+            </div>
             
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Martin, Kumar, Lao<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-your-assumptions">Understanding Your Assumptions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-2-2">Figure 2.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-2-3">Figure 2.3</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-your-predictions">Understanding Your Predictions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-2-4">Figure 2.4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-2-5">Figure 2.5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-2-6">Figure 2.6</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-2-7">Figure 2.7</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagnosing-numerical-inference">Diagnosing Numerical Inference</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-2-1">Code 2.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-2-2">Code 2.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-2-3-and-figure-2-8">Code 2.3 and Figure 2.8</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-2-4">Code 2.4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-2-5">Code 2.5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-2-6-and-figure-2-9">Code 2.6 and Figure 2.9</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-2-7">Code 2.7</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-2-8-and-figure-2-10">Code 2.8 and Figure 2.10</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-2-9-and-figure-2-11">Code 2.9 and Figure 2.11</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-2-10-and-figure-2-12">Code 2.10 and Figure 2.12</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-2-11-and-figure-2-13">Code 2.11 and Figure 2.13</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-2-12-2-13-and-2-14">Code 2.12, 2.13, and 2.14</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-2-14">Figure 2.14</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-2-15">Figure 2.15</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-comparison">Model Comparison</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-2-15">Code 2.15</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-2-16">Figure 2.16</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-2-17">Figure 2.17</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-2-18">Figure 2.18</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-2-19">Figure 2.19</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-2-20">Figure 2.20</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
 
-      </div>
-    </div>
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Martin, Kumar, Lao
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

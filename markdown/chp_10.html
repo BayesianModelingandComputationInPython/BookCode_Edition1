@@ -1,39 +1,47 @@
 
+
 <!DOCTYPE html>
 
-<html lang="en">
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>10. Probabilistic Programming Languages &#8212; Bayesian Modeling and Computation in Python</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-codeautolink.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -42,12 +50,13 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -56,552 +65,332 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'markdown/chp_10';</script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="11. Appendiceal Topics" href="chp_11.html" />
     <link rel="prev" title="9. End to End Bayesian Workflows" href="chp_09.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en">
-    
-
-    <!-- Google Analytics -->
-    
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-702QMHG8ST"></script>
-<script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){ dataLayer.push(arguments); }
-                    gtag('js', new Date());
-                    gtag('config', 'G-702QMHG8ST');
-                </script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-      
-      
-      <h1 class="site-logo" id="site-title">Bayesian Modeling and Computation in Python</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 0
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="dedication.html">
-   Dedication
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="foreword.html">
-   Foreword
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="preface.html">
-   Preface
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="symbollist.html">
-   Symbols
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 1
- </span>
-</p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_01.html">
-   1. Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_02.html">
-   2. Exploratory Analysis of Bayesian Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_03.html">
-   3. Linear Models and Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_04.html">
-   4. Extending Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_05.html">
-   5. Splines
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_06.html">
-   6. Time Series
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_07.html">
-   7. Bayesian Additive Regression Trees
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_08.html">
-   8. Approximate Bayesian Computation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_09.html">
-   9. End to End Bayesian Workflows
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   10. Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_11.html">
-   11. Appendiceal Topics
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="glossary.html">
-   12. Glossary
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="references.html">
-   13. References
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 2
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_01.html">
-   Code 1: Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_02.html">
-   Code 2: Exploratory Analysis of Bayesian Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_03.html">
-   Code 3: Linear Models and Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_04.html">
-   Code 4: Extending Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_05.html">
-   Code 5: Splines
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_06.html">
-   Code 6: Time Series
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_07.html">
-   Code 7: Bayesian Additive Regression Trees
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_08.html">
-   Code 8: Approximate Bayesian Computation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_09.html">
-   Code 9: End to End Bayesian Workflows
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_10.html">
-   Code 10: Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_11.html">
-   Code 11: Appendiceal Topics
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 3
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../solutions/chp_01.html">
-   Solutions 1: Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../solutions/chp_02.html">
-   Solutions 2: Exploratory Analysis of Bayesian models
-  </a>
- </li>
-</ul>
-
-    </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_10.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+      <div class="bd-sidebar-primary bd-sidebar">
         
-    </div>
-</div>
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
+  
 
-            <!-- Launch buttons -->
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-systems-engineering-perspective-of-a-ppl">
-   10.1. A Systems Engineering Perspective of a PPL
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-rainier">
-     10.1.1. Example: Rainier
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#posterior-computation">
-   10.2. Posterior Computation
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#getting-the-gradient">
-     10.2.1. Getting the Gradient
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-near-real-time-inference">
-     10.2.2. Example: Near Real Time Inference
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#application-programming-interfaces">
-   10.3. Application Programming Interfaces
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-stan-and-slicstan">
-     10.3.1. Example: Stan and Slicstan
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-pymc3-and-pymc4">
-     10.3.2. Example: PyMC3 and PyMC4
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#ppl-driven-transformations">
-   10.4. PPL Driven Transformations
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#log-probabilities">
-     10.4.1. Log Probabilities
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#random-variables-and-distributions-transformations">
-     10.4.2. Random Variables and Distributions Transformations
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-sampling-comparison-between-bounded-and-unbounded-random-variables">
-     10.4.3. Example: Sampling Comparison between Bounded and Unbounded Random Variables
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#operation-graphs-and-automatic-reparameterization">
-   10.5. Operation Graphs and Automatic Reparameterization
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#effect-handling">
-   10.6. Effect handling
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-effect-handling-in-tfp-and-numpyro">
-     10.6.1. Example: Effect Handling in TFP and Numpyro
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#base-language-code-ecosystem-modularity-and-everything-else">
-   10.7. Base Language, Code Ecosystem, Modularity and Everything Else
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#designing-a-ppl">
-   10.8. Designing a PPL
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#shape-handling-in-ppls">
-     10.8.1. Shape Handling in PPLs
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#takeaways-for-the-applied-bayesian-practitioner">
-   10.9. Takeaways for the Applied Bayesian Practitioner
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
-   10.10. Exercises
-  </a>
- </li>
+<a class="navbar-brand logo" href="../welcome.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Bayesian Modeling and Computation in Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 0</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="dedication.html">Dedication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="foreword.html">Foreword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preface.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="symbollist.html">Symbols</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 1</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chp_01.html">1. Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_02.html">2. Exploratory Analysis of Bayesian Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_03.html">3. Linear Models and Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_04.html">4. Extending Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_05.html">5. Splines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_06.html">6. Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_07.html">7. Bayesian Additive Regression Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_08.html">8. Approximate Bayesian Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_09.html">9. End to End Bayesian Workflows</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">10. Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_11.html">11. Appendiceal Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">12. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">13. References</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_01.html">Code 1: Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_02.html">Code 2: Exploratory Analysis of Bayesian Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_03.html">Code 3: Linear Models and Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_04.html">Code 4: Extending Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_05.html">Code 5: Splines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_06.html">Code 6: Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_07.html">Code 7: Bayesian Additive Regression Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_08.html">Code 8: Approximate Bayesian Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_09.html">Code 9: End to End Bayesian Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_10.html">Code 10: Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_11.html">Code 11: Appendiceal Topics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../solutions/chp_01.html">Solutions 1: Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/chp_02.html">Solutions 2: Exploratory Analysis of Bayesian models</a></li>
 </ul>
 
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_10.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Probabilistic Programming Languages</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-systems-engineering-perspective-of-a-ppl">10.1. A Systems Engineering Perspective of a PPL</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-rainier">10.1.1. Example: Rainier</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#posterior-computation">10.2. Posterior Computation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-the-gradient">10.2.1. Getting the Gradient</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-near-real-time-inference">10.2.2. Example: Near Real Time Inference</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-programming-interfaces">10.3. Application Programming Interfaces</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-stan-and-slicstan">10.3.1. Example: Stan and Slicstan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-pymc3-and-pymc4">10.3.2. Example: PyMC3 and PyMC4</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ppl-driven-transformations">10.4. PPL Driven Transformations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#log-probabilities">10.4.1. Log Probabilities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variables-and-distributions-transformations">10.4.2. Random Variables and Distributions Transformations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-sampling-comparison-between-bounded-and-unbounded-random-variables">10.4.3. Example: Sampling Comparison between Bounded and Unbounded Random Variables</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operation-graphs-and-automatic-reparameterization">10.5. Operation Graphs and Automatic Reparameterization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#effect-handling">10.6. Effect handling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-effect-handling-in-tfp-and-numpyro">10.6.1. Example: Effect Handling in TFP and Numpyro</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#base-language-code-ecosystem-modularity-and-everything-else">10.7. Base Language, Code Ecosystem, Modularity and Everything Else</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#designing-a-ppl">10.8. Designing a PPL</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shape-handling-in-ppls">10.8.1. Shape Handling in PPLs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#takeaways-for-the-applied-bayesian-practitioner">10.9. Takeaways for the Applied Bayesian Practitioner</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">10.10. Exercises</a></li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Probabilistic Programming Languages</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-systems-engineering-perspective-of-a-ppl">
-   10.1. A Systems Engineering Perspective of a PPL
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-rainier">
-     10.1.1. Example: Rainier
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#posterior-computation">
-   10.2. Posterior Computation
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#getting-the-gradient">
-     10.2.1. Getting the Gradient
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-near-real-time-inference">
-     10.2.2. Example: Near Real Time Inference
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#application-programming-interfaces">
-   10.3. Application Programming Interfaces
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-stan-and-slicstan">
-     10.3.1. Example: Stan and Slicstan
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-pymc3-and-pymc4">
-     10.3.2. Example: PyMC3 and PyMC4
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#ppl-driven-transformations">
-   10.4. PPL Driven Transformations
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#log-probabilities">
-     10.4.1. Log Probabilities
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#random-variables-and-distributions-transformations">
-     10.4.2. Random Variables and Distributions Transformations
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-sampling-comparison-between-bounded-and-unbounded-random-variables">
-     10.4.3. Example: Sampling Comparison between Bounded and Unbounded Random Variables
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#operation-graphs-and-automatic-reparameterization">
-   10.5. Operation Graphs and Automatic Reparameterization
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#effect-handling">
-   10.6. Effect handling
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-effect-handling-in-tfp-and-numpyro">
-     10.6.1. Example: Effect Handling in TFP and Numpyro
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#base-language-code-ecosystem-modularity-and-everything-else">
-   10.7. Base Language, Code Ecosystem, Modularity and Everything Else
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#designing-a-ppl">
-   10.8. Designing a PPL
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#shape-handling-in-ppls">
-     10.8.1. Shape Handling in PPLs
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#takeaways-for-the-applied-bayesian-practitioner">
-   10.9. Takeaways for the Applied Bayesian Practitioner
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
-   10.10. Exercises
-  </a>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="probabilistic-programming-languages">
-<span id="chap10"></span><h1><span class="section-number">10. </span>Probabilistic Programming Languages<a class="headerlink" href="#probabilistic-programming-languages" title="Permalink to this heading">¶</a></h1>
+<span id="chap10"></span><h1><span class="section-number">10. </span>Probabilistic Programming Languages<a class="headerlink" href="#probabilistic-programming-languages" title="Permalink to this heading">#</a></h1>
 <p>In Chapter <a class="reference internal" href="chp_01.html#chap1"><span class="std std-ref">1</span></a> Section <a class="reference internal" href="chp_01.html#bayesian-modeling"><span class="std std-ref">Bayesian Modeling</span></a>, we used cars as analogy to
 understand applied Bayesian concepts. We will revisit this analogy but
 this time to understand Probabilistic Programming Languages. If we treat
@@ -632,7 +421,7 @@ you need to pick a PPL when starting a project or debug that arises
 during your statistical workflow. This understanding ultimately will
 lead to better experience for you, the modern Bayesian practitioner.</p>
 <section id="a-systems-engineering-perspective-of-a-ppl">
-<span id="id1"></span><h2><span class="section-number">10.1. </span>A Systems Engineering Perspective of a PPL<a class="headerlink" href="#a-systems-engineering-perspective-of-a-ppl" title="Permalink to this heading">¶</a></h2>
+<span id="id1"></span><h2><span class="section-number">10.1. </span>A Systems Engineering Perspective of a PPL<a class="headerlink" href="#a-systems-engineering-perspective-of-a-ppl" title="Permalink to this heading">#</a></h2>
 <p>Wikipedia defines systems engineering as “an interdisciplinary field of
 engineering and engineering management that focuses on how to design,
 integrate, and manage complex systems over their life cycles”. PPLs are
@@ -672,7 +461,7 @@ we hope that you will gain a better understanding of how to write more
 performative Bayesian models, and to diagnose computation bottlenecks
 and errors when they occur.</p>
 <section id="example-rainier">
-<span id="id5"></span><h3><span class="section-number">10.1.1. </span>Example: Rainier<a class="headerlink" href="#example-rainier" title="Permalink to this heading">¶</a></h3>
+<span id="id5"></span><h3><span class="section-number">10.1.1. </span>Example: Rainier<a class="headerlink" href="#example-rainier" title="Permalink to this heading">#</a></h3>
 <p>Consider the development of Rainier <a class="footnote-reference brackets" href="#id68" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>, a PPL written in Scala
 developed at Stripe. Stripe is a payments processing company that
 handles finances for many thousands of partner business. In Stripe, they
@@ -693,7 +482,7 @@ computational Bayesian.</p>
 </section>
 </section>
 <section id="posterior-computation">
-<span id="id7"></span><h2><span class="section-number">10.2. </span>Posterior Computation<a class="headerlink" href="#posterior-computation" title="Permalink to this heading">¶</a></h2>
+<span id="id7"></span><h2><span class="section-number">10.2. </span>Posterior Computation<a class="headerlink" href="#posterior-computation" title="Permalink to this heading">#</a></h2>
 <p>Inference is defined as a conclusion reached on the basis of evidence
 and reasoning and the posterior computational methodology is the engine
 that gets us to the conclusion. The posterior computation method can
@@ -736,7 +525,7 @@ most flexible, but not useful in all situations. As a user it is
 worthwhile understanding the availability and tradeoffs of each
 algorithm to be able to make an assessment for each situation.</p>
 <section id="getting-the-gradient">
-<span id="auto-grad"></span><h3><span class="section-number">10.2.1. </span>Getting the Gradient<a class="headerlink" href="#getting-the-gradient" title="Permalink to this heading">¶</a></h3>
+<span id="auto-grad"></span><h3><span class="section-number">10.2.1. </span>Getting the Gradient<a class="headerlink" href="#getting-the-gradient" title="Permalink to this heading">#</a></h3>
 <p>An incredibly useful piece of information in computational mathematics
 is the gradient. Also known as the slope, or the derivative for one
 dimensional functions, it indicates how fast a function output value is
@@ -763,7 +552,7 @@ about closed form solutions. All that is needed is an expression of the
 function itself and the computer can automatically calculate the
 gradient, as implied by “auto” in autograd.</p>
 <div class="literal-block-wrapper docutils container" id="jax-grad-small">
-<div class="code-block-caption"><span class="caption-number">Listing 10.1 </span><span class="caption-text">jax_grad_small</span><a class="headerlink" href="#jax-grad-small" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.1 </span><span class="caption-text">jax_grad_small</span><a class="headerlink" href="#jax-grad-small" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">grad</span>
 
 <span class="n">simple_grad</span> <span class="o">=</span> <span class="n">grad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
@@ -782,7 +571,7 @@ thousands of times. We show one such calculation in Code Block
 <a class="reference internal" href="#jax-model-grad"><span class="std std-ref">jax_model_grad</span></a> using JAX for a small
 “hand built” model.</p>
 <div class="literal-block-wrapper docutils container" id="jax-model-grad">
-<div class="code-block-caption"><span class="caption-number">Listing 10.2 </span><span class="caption-text">jax_model_grad</span><a class="headerlink" href="#jax-model-grad" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.2 </span><span class="caption-text">jax_model_grad</span><a class="headerlink" href="#jax-model-grad" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">grad</span>
 <span class="kn">from</span> <span class="nn">jax.scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
 
@@ -810,7 +599,7 @@ grad: 2.4000000953674316
 computing the gradient using Theano in Code Block
 <a class="reference internal" href="#pymc3-model-grad"><span class="std std-ref">pymc3_model_grad</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="pymc3-model-grad">
-<div class="code-block-caption"><span class="caption-number">Listing 10.3 </span><span class="caption-text">pymc3_model_grad</span><a class="headerlink" href="#pymc3-model-grad" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.3 </span><span class="caption-text">pymc3_model_grad</span><a class="headerlink" href="#pymc3-model-grad" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
     <span class="n">z</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">5.</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">z</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">observed</span><span class="p">)</span>
@@ -828,7 +617,7 @@ computing the gradient using Theano in Code Block
 gradient as the JAX model.</p>
 </section>
 <section id="example-near-real-time-inference">
-<span id="conjugate-case-study"></span><h3><span class="section-number">10.2.2. </span>Example: Near Real Time Inference<a class="headerlink" href="#example-near-real-time-inference" title="Permalink to this heading">¶</a></h3>
+<span id="conjugate-case-study"></span><h3><span class="section-number">10.2.2. </span>Example: Near Real Time Inference<a class="headerlink" href="#example-near-real-time-inference" title="Permalink to this heading">#</a></h3>
 <p>As a hypothetical example consider a statistician at a credit card
 company that is concerned with detecting credit card fraud quickly so it
 can disable cards before the thief can make more transactions. A
@@ -846,7 +635,7 @@ in Equation <a class="reference internal" href="#equation-eq-conjugate-beta-frau
 transactions directly. As transactions are observed they are used fairly
 directly compute the posterior parameters.</p>
 <div class="math notranslate nohighlight" id="equation-eq-conjugate-beta-fraud">
-<span class="eqno">(10.1)<a class="headerlink" href="#equation-eq-conjugate-beta-fraud" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\begin{split}\begin{split}
+<span class="eqno">(10.1)<a class="headerlink" href="#equation-eq-conjugate-beta-fraud" title="Permalink to this equation">#</a></span>\[ \begin{align}\begin{aligned}\begin{split}\begin{split}
     \alpha_\text{post} &amp;= \alpha_\text{prior} + \texttt{fraud_observations} \\
     \beta_\text{post} &amp;=  \beta_\text{prior} + \texttt{non_fraud_observations} \\
    % p(\theta)  &amp;= \text{Beta}(fraud\_prior, non\_fraud\_prior) \\
@@ -857,9 +646,9 @@ shown in Code Block <a class="reference internal" href="#fraud-detector"><span c
 external libraries needed either, making this function quite easy to
 deploy.</p>
 <div class="literal-block-wrapper docutils container" id="fraud-detector">
-<div class="code-block-caption"><span class="caption-number">Listing 10.4 </span><span class="caption-text">fraud_detector</span><a class="headerlink" href="#fraud-detector" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.4 </span><span class="caption-text">fraud_detector</span><a class="headerlink" href="#fraud-detector" title="Permalink to this code">#</a></div>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fraud_detector</span><span class="p">(</span><span class="n">fraud_observations</span><span class="p">,</span> <span class="n">non_fraud_observations</span><span class="p">,</span> <span class="n">fraud_prior</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">non_fraud_prior</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Conjugate Beta Binomial model for fraud detection&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Conjugate Beta Binomial model for fraud detection&quot;&quot;&quot;</span>
     <span class="n">expectation</span> <span class="o">=</span> <span class="p">(</span><span class="n">fraud_prior</span> <span class="o">+</span> <span class="n">fraud_observations</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span>
         <span class="n">fraud_prior</span> <span class="o">+</span> <span class="n">fraud_observations</span> <span class="o">+</span> <span class="n">non_fraud_prior</span> <span class="o">+</span> <span class="n">non_fraud_observations</span><span class="p">)</span>
     
@@ -904,7 +693,7 @@ also sample more chains in parallel.</p>
 </section>
 </section>
 <section id="application-programming-interfaces">
-<span id="id11"></span><h2><span class="section-number">10.3. </span>Application Programming Interfaces<a class="headerlink" href="#application-programming-interfaces" title="Permalink to this heading">¶</a></h2>
+<span id="id11"></span><h2><span class="section-number">10.3. </span>Application Programming Interfaces<a class="headerlink" href="#application-programming-interfaces" title="Permalink to this heading">#</a></h2>
 <p>Application Programming Interfaces (API) “define interactions between
 multiple software intermediaries”. In the Bayesian case the most narrow
 definition is the interactions between the user and the method to
@@ -968,7 +757,7 @@ distinctly <em>does not</em> feel like writing Python, but this is not a knock
 against the API. It is just a different choice from a design standpoint
 and a different experience for the user.</p>
 <section id="example-stan-and-slicstan">
-<span id="id15"></span><h3><span class="section-number">10.3.1. </span>Example: Stan and Slicstan<a class="headerlink" href="#example-stan-and-slicstan" title="Permalink to this heading">¶</a></h3>
+<span id="id15"></span><h3><span class="section-number">10.3.1. </span>Example: Stan and Slicstan<a class="headerlink" href="#example-stan-and-slicstan" title="Permalink to this heading">#</a></h3>
 <p>Depending on the use case, user might prefer different level of
 abstraction in terms model specification, independent of any other PPL
 component. Stan and Slicstan using from Gorinova etal {cite:p}`Gorinova_2019]
@@ -981,7 +770,7 @@ parameters, data transformations, prior and posterior predictive
 sampling, with corresponding names such as parameters, model,
 transformed parameters, and generated quantities.</p>
 <div class="literal-block-wrapper docutils container" id="code-stan">
-<div class="code-block-caption"><span class="caption-number">Listing 10.5 </span><span class="caption-text">code_stan</span><a class="headerlink" href="#code-stan" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.5 </span><span class="caption-text">code_stan</span><a class="headerlink" href="#code-stan" title="Permalink to this code">#</a></div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>parameters {
     real y_std;
     real x_std;
@@ -1009,7 +798,7 @@ model reviewer needs to read. Also, like Python, composable functions
 allow the user to define an idea once and reuse it many times, such as
 <code class="docutils literal notranslate"><span class="pre">my_normal</span></code> in the Slicstan snippet.</p>
 <div class="literal-block-wrapper docutils container" id="slicstan">
-<div class="code-block-caption"><span class="caption-number">Listing 10.6 </span><span class="caption-text">slicstan</span><a class="headerlink" href="#slicstan" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.6 </span><span class="caption-text">slicstan</span><a class="headerlink" href="#slicstan" title="Permalink to this code">#</a></div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>real my_normal(real m, real s) {
 real std ~ normal(0, 1);
     return s * std + m;
@@ -1037,7 +826,7 @@ details we suggest reading the full paper, which formalizes both sets of
 syntax and shows the level of detail goes into API design.</p>
 </section>
 <section id="example-pymc3-and-pymc4">
-<span id="id17"></span><h3><span class="section-number">10.3.2. </span>Example: PyMC3 and PyMC4<a class="headerlink" href="#example-pymc3-and-pymc4" title="Permalink to this heading">¶</a></h3>
+<span id="id17"></span><h3><span class="section-number">10.3.2. </span>Example: PyMC3 and PyMC4<a class="headerlink" href="#example-pymc3-and-pymc4" title="Permalink to this heading">#</a></h3>
 <p>Our second API is a case study of an API design change that was required
 because of a computational backend change, in this case from Theano in
 PyMC3 to TensorFlow in PyMC4 a PPL that was initially intended to
@@ -1051,7 +840,7 @@ PyMC3 syntax in Code Block <a class="reference internal" href="#pymc3-schools"><
 and the now, defunct <a class="footnote-reference brackets" href="#id72" id="id20" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a> PyMC4 syntax in Code Block
 <a class="reference internal" href="#pymc4-schools"><span class="std std-ref">pymc4_schools</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="pymc3-schools">
-<div class="code-block-caption"><span class="caption-number">Listing 10.7 </span><span class="caption-text">pymc3_schools</span><a class="headerlink" href="#pymc3-schools" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.7 </span><span class="caption-text">pymc3_schools</span><a class="headerlink" href="#pymc3-schools" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">eight_schools_pymc3</span><span class="p">:</span>
     <span class="n">mu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;mu&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
     <span class="n">tau</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfCauchy</span><span class="p">(</span><span class="s2">&quot;tau&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
@@ -1061,7 +850,7 @@ and the now, defunct <a class="footnote-reference brackets" href="#id72" id="id2
 </div>
 </div>
 <div class="literal-block-wrapper docutils container" id="pymc4-schools">
-<div class="code-block-caption"><span class="caption-number">Listing 10.8 </span><span class="caption-text">pymc4_schools</span><a class="headerlink" href="#pymc4-schools" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.8 </span><span class="caption-text">pymc4_schools</span><a class="headerlink" href="#pymc4-schools" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@pm</span><span class="o">.</span><span class="n">model</span>
 <span class="k">def</span> <span class="nf">eight_schools_pymc4</span><span class="p">():</span>
     <span class="n">mu</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;mu&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
@@ -1089,7 +878,7 @@ development.</p>
 </section>
 </section>
 <section id="ppl-driven-transformations">
-<span id="id21"></span><h2><span class="section-number">10.4. </span>PPL Driven Transformations<a class="headerlink" href="#ppl-driven-transformations" title="Permalink to this heading">¶</a></h2>
+<span id="id21"></span><h2><span class="section-number">10.4. </span>PPL Driven Transformations<a class="headerlink" href="#ppl-driven-transformations" title="Permalink to this heading">#</a></h2>
 <p>In this book we saw many mathematical transformations that allowed us to
 define a variety of models, easily and with great flexibility such as
 GLMs. Or we saw transformations that allowed us to make results more
@@ -1098,25 +887,25 @@ discuss transformations that are driven more specifically by PPL. They
 are sometimes a bit implicit and we will discuss two examples in this
 section.</p>
 <section id="log-probabilities">
-<span id="id22"></span><h3><span class="section-number">10.4.1. </span>Log Probabilities<a class="headerlink" href="#log-probabilities" title="Permalink to this heading">¶</a></h3>
+<span id="id22"></span><h3><span class="section-number">10.4.1. </span>Log Probabilities<a class="headerlink" href="#log-probabilities" title="Permalink to this heading">#</a></h3>
 <p>One of the most common transformations is the log probability transform.
 To understand why let us go through an example where we calculate an
 arbitrary likelihood. Assume we observe two independent outcomes <span class="math notranslate nohighlight">\(y_0\)</span>
 and <span class="math notranslate nohighlight">\(y_1\)</span>, their joint probability is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-expanded-likelihood">
-<span class="eqno">(10.2)<a class="headerlink" href="#equation-eq-expanded-likelihood" title="Permalink to this equation">¶</a></span>\[p(y_0, y_1 \mid \boldsymbol{\theta}) = p(y_0 \mid \boldsymbol{\theta})p(y_1 \mid \boldsymbol{\theta})
+<span class="eqno">(10.2)<a class="headerlink" href="#equation-eq-expanded-likelihood" title="Permalink to this equation">#</a></span>\[p(y_0, y_1 \mid \boldsymbol{\theta}) = p(y_0 \mid \boldsymbol{\theta})p(y_1 \mid \boldsymbol{\theta})
     \]</div>
 <p>To give a specific situation let us say we observed the value 2 twice
 and we decide to use a Normal distribution as a likelihood in our model.
 We can specify our model by expanding Equation
 <a class="reference internal" href="#equation-eq-expanded-likelihood">(10.2)</a> into:.</p>
 <div class="math notranslate nohighlight" id="equation-eq-expanded-likelihood-normal">
-<span class="eqno">(10.3)<a class="headerlink" href="#equation-eq-expanded-likelihood-normal" title="Permalink to this equation">¶</a></span>\[\mathcal{N}(2, 2 \mid \mu=0,\sigma=1) = \mathcal{N}(2 \mid 0,1)\mathcal{N}(2 \mid 0,1)
+<span class="eqno">(10.3)<a class="headerlink" href="#equation-eq-expanded-likelihood-normal" title="Permalink to this equation">#</a></span>\[\mathcal{N}(2, 2 \mid \mu=0,\sigma=1) = \mathcal{N}(2 \mid 0,1)\mathcal{N}(2 \mid 0,1)
     \]</div>
 <p>Being computational statisticians we can now calculate this value with a
 little bit of code.</p>
 <div class="literal-block-wrapper docutils container" id="two-observed">
-<div class="code-block-caption"><span class="caption-number">Listing 10.9 </span><span class="caption-text">two_observed</span><a class="headerlink" href="#two-observed" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.9 </span><span class="caption-text">two_observed</span><a class="headerlink" href="#two-observed" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">observed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 <span class="n">pdf</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">observed</span><span class="p">)</span>
 <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">pdf</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -1135,7 +924,7 @@ us assume we see a total of 1000 observations, all of the same value of
 we have an issue, Python reports a joint probability density of 0.0,
 which cannot be true.</p>
 <div class="literal-block-wrapper docutils container" id="thousand-observed">
-<div class="code-block-caption"><span class="caption-number">Listing 10.10 </span><span class="caption-text">thousand_observed</span><a class="headerlink" href="#thousand-observed" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.10 </span><span class="caption-text">thousand_observed</span><a class="headerlink" href="#thousand-observed" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">observed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
 <span class="n">pdf</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">observed</span><span class="p">)</span>
 <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">pdf</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -1153,7 +942,7 @@ user <a class="footnote-reference brackets" href="#id73" id="id23" role="doc-not
 precision, as shown in Code Block
 <a class="reference internal" href="#imperfect-subtract"><span class="std std-ref">imperfect_subtract</span></a></p>
 <div class="literal-block-wrapper docutils container" id="imperfect-subtract">
-<div class="code-block-caption"><span class="caption-number">Listing 10.11 </span><span class="caption-text">imperfect_subtract</span><a class="headerlink" href="#imperfect-subtract" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.11 </span><span class="caption-text">imperfect_subtract</span><a class="headerlink" href="#imperfect-subtract" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mf">1.2</span> <span class="o">-</span> <span class="mi">1</span>
 </pre></div>
 </div>
@@ -1168,7 +957,7 @@ together many times making them smaller yet. To mitigate this problem
 PPLs perform a log transformation of probability often abbreviated to
 <em>logp</em>. Thus expression <a class="reference internal" href="#equation-eq-expanded-likelihood">(10.2)</a> turns into:</p>
 <div class="math notranslate nohighlight" id="equation-eq-expanded-loglikelihood">
-<span class="eqno">(10.4)<a class="headerlink" href="#equation-eq-expanded-loglikelihood" title="Permalink to this equation">¶</a></span>\[\log (p(y_0, y_1 \mid \boldsymbol{\theta})) = \log (p(y_0 \mid \boldsymbol{\theta}))+ \log (p(y_1 \mid \boldsymbol{\theta}))
+<span class="eqno">(10.4)<a class="headerlink" href="#equation-eq-expanded-loglikelihood" title="Permalink to this equation">#</a></span>\[\log (p(y_0, y_1 \mid \boldsymbol{\theta})) = \log (p(y_0 \mid \boldsymbol{\theta}))+ \log (p(y_1 \mid \boldsymbol{\theta}))
     \]</div>
 <p>This has two effects, it makes small numbers relatively large, and due
 to the product rule of logarithms, changes the multiplication into a
@@ -1176,7 +965,7 @@ sum. Using the same example but performing the calculation in log space,
 we see a more numerically stable result in Code Block
 <a class="reference internal" href="#log-transform"><span class="std std-ref">log_transform</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="log-transform">
-<div class="code-block-caption"><span class="caption-number">Listing 10.12 </span><span class="caption-text">log_transform</span><a class="headerlink" href="#log-transform" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.12 </span><span class="caption-text">log_transform</span><a class="headerlink" href="#log-transform" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">logpdf</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">observed</span><span class="p">)</span>
 
 <span class="c1"># Compute individual logpdf two ways for one observation, as well as total</span>
@@ -1189,7 +978,7 @@ we see a more numerically stable result in Code Block
 </div>
 </section>
 <section id="random-variables-and-distributions-transformations">
-<span id="id24"></span><h3><span class="section-number">10.4.2. </span>Random Variables and Distributions Transformations<a class="headerlink" href="#random-variables-and-distributions-transformations" title="Permalink to this heading">¶</a></h3>
+<span id="id24"></span><h3><span class="section-number">10.4.2. </span>Random Variables and Distributions Transformations<a class="headerlink" href="#random-variables-and-distributions-transformations" title="Permalink to this heading">#</a></h3>
 <p>Random variables that distributed as a bounded distributions, like the
 Uniform distribution that is specified with a fixed interval <span class="math notranslate nohighlight">\([a, b]\)</span>,
 present a challenge for gradient evaluation and samplers based on them.
@@ -1218,13 +1007,13 @@ transformation the lower and upper bound <span class="math notranslate nohighlig
 <span class="math notranslate nohighlight">\(-\infty\)</span> and <span class="math notranslate nohighlight">\(\infty\)</span> respectively, and the values in between are
 “stretched” to values in between accordingly.</p>
 <div class="math notranslate nohighlight" id="equation-eq-interval-transform">
-<span class="eqno">(10.5)<a class="headerlink" href="#equation-eq-interval-transform" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(10.5)<a class="headerlink" href="#equation-eq-interval-transform" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{split}
     x_t =&amp; \log (x - a) - \log(b-x)\\
     x =&amp; a + \frac{1}{1 + e^{-x_t}} (b-a)
     
 \end{split}\end{split}\]</div>
 <div class="literal-block-wrapper docutils container" id="interval-transform">
-<div class="code-block-caption"><span class="caption-number">Listing 10.13 </span><span class="caption-text">interval_transform</span><a class="headerlink" href="#interval-transform" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.13 </span><span class="caption-text">interval_transform</span><a class="headerlink" href="#interval-transform" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lower</span><span class="p">,</span> <span class="n">upper</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span>
 <span class="n">domain</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 <span class="n">transform</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">domain</span> <span class="o">-</span> <span class="n">lower</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">upper</span> <span class="o">-</span> <span class="n">domain</span><span class="p">)</span>
@@ -1242,7 +1031,7 @@ to a PyMC3 model and inspecting the variable and the underlying
 distribution in the model object, as shown in Code Block
 <a class="reference internal" href="#uniform-transform"><span class="std std-ref">uniform_transform</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="uniform-transform">
-<div class="code-block-caption"><span class="caption-number">Listing 10.14 </span><span class="caption-text">uniform_transform</span><a class="headerlink" href="#uniform-transform" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.14 </span><span class="caption-text">uniform_transform</span><a class="headerlink" href="#uniform-transform" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">)</span>
 
@@ -1263,7 +1052,7 @@ obtain a finite logp value. Also note the logp returned from the
 and 1, and how when we call <code class="docutils literal notranslate"><span class="pre">logp</span></code> the Jacobian adjustment is made
 automatically.</p>
 <div class="literal-block-wrapper docutils container" id="uniform-transform-logp">
-<div class="code-block-caption"><span class="caption-number">Listing 10.15 </span><span class="caption-text">uniform_transform_logp</span><a class="headerlink" href="#uniform-transform-logp" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.15 </span><span class="caption-text">uniform_transform_logp</span><a class="headerlink" href="#uniform-transform-logp" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">logp</span><span class="p">({</span><span class="s2">&quot;x_interval__&quot;</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">}),</span>
       <span class="n">model</span><span class="o">.</span><span class="n">logp_nojac</span><span class="p">({</span><span class="s2">&quot;x_interval__&quot;</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">}))</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">logp</span><span class="p">({</span><span class="s2">&quot;x_interval__&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">}),</span>
@@ -1292,7 +1081,7 @@ allows users to define complicated transformation using trainable
 bijectors (e.g., a neural network <span id="id28">[<a class="reference internal" href="references.html#id142" title="George Papamakarios, Eric Nalisnick, Danilo Jimenez Rezende, Shakir Mohamed, and Balaji Lakshminarayanan. Normalizing flows for probabilistic modeling and inference. arXiv preprint arXiv:1912.02762, 2019.">121</a>]</span>) like
 <code class="docutils literal notranslate"><span class="pre">tfb.MaskedAutoregressiveFlow</span></code>.</p>
 <div class="literal-block-wrapper docutils container" id="bijector-lognormal">
-<div class="code-block-caption"><span class="caption-number">Listing 10.16 </span><span class="caption-text">bijector_lognormal</span><a class="headerlink" href="#bijector-lognormal" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.16 </span><span class="caption-text">bijector_lognormal</span><a class="headerlink" href="#bijector-lognormal" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tfb</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">bijectors</span>
 
 <span class="n">lognormal0</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">LogNormal</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
@@ -1311,14 +1100,14 @@ in getting good inference results efficiently, as shown in the next
 example.</p>
 </section>
 <section id="example-sampling-comparison-between-bounded-and-unbounded-random-variables">
-<span id="id29"></span><h3><span class="section-number">10.4.3. </span>Example: Sampling Comparison between Bounded and Unbounded Random Variables<a class="headerlink" href="#example-sampling-comparison-between-bounded-and-unbounded-random-variables" title="Permalink to this heading">¶</a></h3>
+<span id="id29"></span><h3><span class="section-number">10.4.3. </span>Example: Sampling Comparison between Bounded and Unbounded Random Variables<a class="headerlink" href="#example-sampling-comparison-between-bounded-and-unbounded-random-variables" title="Permalink to this heading">#</a></h3>
 <p>Here we create a small example to demonstrate the differences between
 sampling from transformed and un-transformed random variable. Data is
 simulated from a Normal distribution with a very small standard
 deviation and model is specified in Code Block
 <a class="reference internal" href="#case-study-transform"><span class="std std-ref">case_study_transform</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="case-study-transform">
-<div class="code-block-caption"><span class="caption-number">Listing 10.17 </span><span class="caption-text">case_study_transform</span><a class="headerlink" href="#case-study-transform" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.17 </span><span class="caption-text">case_study_transform</span><a class="headerlink" href="#case-study-transform" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y_observed</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">.01</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
 
 <span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_transform</span><span class="p">:</span>
@@ -1347,7 +1136,7 @@ transformed. This is reflected both in the model API, as well as when
 inspecting the models free variables. Subsequent sampling sampling
 reports 423 divergences.</p>
 <div class="literal-block-wrapper docutils container" id="case-study-no-transform">
-<div class="code-block-caption"><span class="caption-number">Listing 10.18 </span><span class="caption-text">case_study_no_transform</span><a class="headerlink" href="#case-study-no-transform" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.18 </span><span class="caption-text">case_study_no_transform</span><a class="headerlink" href="#case-study-no-transform" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_no_transform</span><span class="p">:</span>
     <span class="n">sd</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;sd&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sd</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">y_observed</span><span class="p">)</span>
@@ -1370,12 +1159,12 @@ away from building the model and performing inference.</p>
 </section>
 </section>
 <section id="operation-graphs-and-automatic-reparameterization">
-<span id="operation-graphs-ppl"></span><h2><span class="section-number">10.5. </span>Operation Graphs and Automatic Reparameterization<a class="headerlink" href="#operation-graphs-and-automatic-reparameterization" title="Permalink to this heading">¶</a></h2>
+<span id="operation-graphs-ppl"></span><h2><span class="section-number">10.5. </span>Operation Graphs and Automatic Reparameterization<a class="headerlink" href="#operation-graphs-and-automatic-reparameterization" title="Permalink to this heading">#</a></h2>
 <p>One manipulation that some PPLs perform is reparameterizing models, by
 first creating an <em>operation graph</em> and then subsequently optimizing
 that graph. To illustrate what this means let us define a computation:</p>
 <div class="math notranslate nohighlight" id="equation-eq-basic-arithmetic">
-<span class="eqno">(10.6)<a class="headerlink" href="#equation-eq-basic-arithmetic" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(10.6)<a class="headerlink" href="#equation-eq-basic-arithmetic" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{split}
     x=3 \\
     y=1 \\
     x*(y/x) + 0
@@ -1393,7 +1182,7 @@ that result by <span class="math notranslate nohighlight">\(x\)</span>, then add
 a <em>symbolic</em> representation of the computation as shown in Code Block
 <a class="reference internal" href="#unoptimized-symbolic-algebra"><span class="std std-ref">unoptimized_symbolic_algebra</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="unoptimized-symbolic-algebra">
-<div class="code-block-caption"><span class="caption-number">Listing 10.19 </span><span class="caption-text">unoptimized_symbolic_algebra</span><a class="headerlink" href="#unoptimized-symbolic-algebra" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.19 </span><span class="caption-text">unoptimized_symbolic_algebra</span><a class="headerlink" href="#unoptimized-symbolic-algebra" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">theano</span><span class="o">.</span><span class="n">tensor</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">theano</span><span class="o">.</span><span class="n">tensor</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
 <span class="n">out</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mi">0</span>
@@ -1442,7 +1231,7 @@ operations, albeit an unoptimized one, has been generated.</p>
 <figcaption>
 <p><span class="caption-number">Fig. 10.1 </span><span class="caption-text">Unoptimized Theano operation graph of Equation <a class="reference internal" href="#equation-eq-basic-arithmetic">(10.6)</a>
 as declared in Code Block
-<a class="reference internal" href="#unoptimized-symbolic-algebra"><span class="std std-ref">unoptimized_symbolic_algebra</span></a>.</span><a class="headerlink" href="#fig-unoptimized-symbolic-algebra-graph" title="Permalink to this image">¶</a></p>
+<a class="reference internal" href="#unoptimized-symbolic-algebra"><span class="std std-ref">unoptimized_symbolic_algebra</span></a>.</span><a class="headerlink" href="#fig-unoptimized-symbolic-algebra-graph" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>We can now optimize this graph using Theano, by passing this computation
@@ -1454,7 +1243,7 @@ that the addition of <span class="math notranslate nohighlight">\(0\)</span> has
 optimized operation graph is shown in
 <a class="reference internal" href="#fig-optimized-symbolic-algebra"><span class="std std-numref">Fig. 10.2</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="optimized-symbolic-algebra">
-<div class="code-block-caption"><span class="caption-number">Listing 10.20 </span><span class="caption-text">optimized_symbolic_algebra</span><a class="headerlink" href="#optimized-symbolic-algebra" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.20 </span><span class="caption-text">optimized_symbolic_algebra</span><a class="headerlink" href="#optimized-symbolic-algebra" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fgraph</span> <span class="o">=</span> <span class="n">theano</span><span class="o">.</span><span class="n">function</span><span class="p">([</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">],</span> <span class="p">[</span><span class="n">out</span><span class="p">])</span>
 <span class="n">theano</span><span class="o">.</span><span class="n">printing</span><span class="o">.</span><span class="n">debugprint</span><span class="p">(</span><span class="n">fgraph</span><span class="p">)</span>
 </pre></div>
@@ -1469,14 +1258,14 @@ optimized operation graph is shown in
 <figcaption>
 <p><span class="caption-number">Fig. 10.2 </span><span class="caption-text">Optimized Theano operation graph of Equation <a class="reference internal" href="#equation-eq-basic-arithmetic">(10.6)</a>
 after optimization in
-<a class="reference internal" href="#optimized-symbolic-algebra"><span class="std std-ref">optimized_symbolic_algebra</span></a>.</span><a class="headerlink" href="#fig-optimized-symbolic-algebra" title="Permalink to this image">¶</a></p>
+<a class="reference internal" href="#optimized-symbolic-algebra"><span class="std std-ref">optimized_symbolic_algebra</span></a>.</span><a class="headerlink" href="#fig-optimized-symbolic-algebra" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Theano can then calculate the answer when the optimized function is
 called with the numerical inputs as shown in Code Block
 <a class="reference internal" href="#optimized-symbolic-algebra-calc"><span class="std std-ref">optimized_symbolic_algebra_calc</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="optimized-symbolic-algebra-calc">
-<div class="code-block-caption"><span class="caption-number">Listing 10.21 </span><span class="caption-text">optimized_symbolic_algebra_calc</span><a class="headerlink" href="#optimized-symbolic-algebra-calc" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.21 </span><span class="caption-text">optimized_symbolic_algebra_calc</span><a class="headerlink" href="#optimized-symbolic-algebra-calc" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fgraph</span><span class="p">([</span><span class="mi">1</span><span class="p">],[</span><span class="mi">3</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -1498,7 +1287,7 @@ Code Block <a class="reference internal" href="#aesara-debug"><span class="std s
 PyMC3 model is turned into multi line computation graph at the operation
 level.</p>
 <div class="literal-block-wrapper docutils container" id="aesara-debug">
-<div class="code-block-caption"><span class="caption-number">Listing 10.22 </span><span class="caption-text">aesara_debug</span><a class="headerlink" href="#aesara-debug" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.22 </span><span class="caption-text">aesara_debug</span><a class="headerlink" href="#aesara-debug" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_normal</span><span class="p">:</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
 
@@ -1552,7 +1341,7 @@ users can further focus on the model and let the PPL “worry” about the
 computational optimizations.</p>
 </section>
 <section id="effect-handling">
-<span id="id34"></span><h2><span class="section-number">10.6. </span>Effect handling<a class="headerlink" href="#effect-handling" title="Permalink to this heading">¶</a></h2>
+<span id="id34"></span><h2><span class="section-number">10.6. </span>Effect handling<a class="headerlink" href="#effect-handling" title="Permalink to this heading">#</a></h2>
 <p>Effect handlers <span id="id35">[<a class="reference internal" href="references.html#id136" title="Ohad Kammar, Sam Lindley, and Nicolas Oury. Handlers in action. ACM SIGPLAN Notices, 48(9):145–158, 2013.">123</a>]</span> are an abstraction in programming
 languages that gives different interpretations, or side effects, to the
 standard behavior of statements in a program. A common example is
@@ -1572,7 +1361,7 @@ the driver under the hood but it definitely changes the driving
 experience. As effect handlers are typically “hidden” they are more
 easily explained through example rather than theory.</p>
 <section id="example-effect-handling-in-tfp-and-numpyro">
-<span id="id36"></span><h3><span class="section-number">10.6.1. </span>Example: Effect Handling in TFP and Numpyro<a class="headerlink" href="#example-effect-handling-in-tfp-and-numpyro" title="Permalink to this heading">¶</a></h3>
+<span id="id36"></span><h3><span class="section-number">10.6.1. </span>Example: Effect Handling in TFP and Numpyro<a class="headerlink" href="#example-effect-handling-in-tfp-and-numpyro" title="Permalink to this heading">#</a></h3>
 <p>In the rest of this section we will see how effect handling works in
 TensorFlow Probability and NumPyro. Briefly NumPyro is another PPL based
 on Jax. Specifically, we will compare the high level API between
@@ -1585,7 +1374,7 @@ backend. Again consider the model in Equation
 <a class="reference internal" href="#tfp-vs-numpyro"><span class="std std-ref">tfp_vs_numpyro</span></a> we import the libraries
 and write the model:</p>
 <div class="literal-block-wrapper docutils container" id="tfp-vs-numpyro">
-<div class="code-block-caption"><span class="caption-number">Listing 10.23 </span><span class="caption-text">tfp_vs_numpyro</span><a class="headerlink" href="#tfp-vs-numpyro" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.23 </span><span class="caption-text">tfp_vs_numpyro</span><a class="headerlink" href="#tfp-vs-numpyro" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jax</span>
 <span class="kn">import</span> <span class="nn">numpyro</span>
 <span class="kn">from</span> <span class="nn">tensorflow_probability.substrates</span> <span class="kn">import</span> <span class="n">jax</span> <span class="k">as</span> <span class="n">tfp_jax</span>
@@ -1618,7 +1407,7 @@ instruction. For example, in Code Block
 we draw prior samples from both models, and evaluate the log probability
 on the same prior samples (that returned by the TFP model).</p>
 <div class="literal-block-wrapper docutils container" id="tfp-vs-numpyro-prior-sample">
-<div class="code-block-caption"><span class="caption-number">Listing 10.24 </span><span class="caption-text">tfp_vs_numpyro_prior_sample</span><a class="headerlink" href="#tfp-vs-numpyro-prior-sample" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.24 </span><span class="caption-text">tfp_vs_numpyro_prior_sample</span><a class="headerlink" href="#tfp-vs-numpyro-prior-sample" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sample_key</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">52346</span><span class="p">)</span>
 
 <span class="c1"># Draw samples</span>
@@ -1647,7 +1436,7 @@ model, for example, in Code Block
 <a class="reference internal" href="#tfp-vs-numpyro-condition"><span class="std std-ref">tfp_vs_numpyro_condition</span></a> we
 condition <code class="docutils literal notranslate"><span class="pre">z</span> <span class="pre">=</span> <span class="pre">.01</span></code> and then sample from the model.</p>
 <div class="literal-block-wrapper docutils container" id="tfp-vs-numpyro-condition">
-<div class="code-block-caption"><span class="caption-number">Listing 10.25 </span><span class="caption-text">tfp_vs_numpyro_condition</span><a class="headerlink" href="#tfp-vs-numpyro-condition" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.25 </span><span class="caption-text">tfp_vs_numpyro_condition</span><a class="headerlink" href="#tfp-vs-numpyro-condition" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Condition z to .01 in TFP and sample</span>
 <span class="n">jd</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">z</span><span class="o">=</span><span class="mf">.01</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">sample_key</span><span class="p">)</span>
 
@@ -1672,7 +1461,7 @@ where we conditioned random variable <span class="math notranslate nohighlight">
 and construct conditional distribution <span class="math notranslate nohighlight">\(p(y \mid x, z)\)</span> and sample from
 it.</p>
 <div class="literal-block-wrapper docutils container" id="tfp-vs-numpyro-condition-distribution">
-<div class="code-block-caption"><span class="caption-number">Listing 10.26 </span><span class="caption-text">tfp_vs_numpyro_condition_distribution</span><a class="headerlink" href="#tfp-vs-numpyro-condition-distribution" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.26 </span><span class="caption-text">tfp_vs_numpyro_condition_distribution</span><a class="headerlink" href="#tfp-vs-numpyro-condition-distribution" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Conditioned z to .01 in TFP and construct conditional distributions</span>
 <span class="n">dist</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">jd</span><span class="o">.</span><span class="n">sample_distributions</span><span class="p">(</span><span class="n">z</span><span class="o">=</span><span class="mf">.01</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">sample_key</span><span class="p">)</span>
 <span class="k">assert</span> <span class="n">dist</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">loc</span> <span class="o">==</span> <span class="n">value</span><span class="o">.</span><span class="n">x</span>
@@ -1702,7 +1491,7 @@ their official documentation <a class="footnote-reference brackets" href="#id80"
 </section>
 </section>
 <section id="base-language-code-ecosystem-modularity-and-everything-else">
-<span id="id39"></span><h2><span class="section-number">10.7. </span>Base Language, Code Ecosystem, Modularity and Everything Else<a class="headerlink" href="#base-language-code-ecosystem-modularity-and-everything-else" title="Permalink to this heading">¶</a></h2>
+<span id="id39"></span><h2><span class="section-number">10.7. </span>Base Language, Code Ecosystem, Modularity and Everything Else<a class="headerlink" href="#base-language-code-ecosystem-modularity-and-everything-else" title="Permalink to this heading">#</a></h2>
 <p>When serious car enthusiasts pick a car, the availability of different
 components that can be mixed and match can be an informative factor in
 which car is ultimately purchased. These owners may choose to make
@@ -1754,7 +1543,7 @@ influential factors in evaluating PPL, as much as the technical
 capabilities in many circumstances.</p>
 </section>
 <section id="designing-a-ppl">
-<span id="id40"></span><h2><span class="section-number">10.8. </span>Designing a PPL<a class="headerlink" href="#designing-a-ppl" title="Permalink to this heading">¶</a></h2>
+<span id="id40"></span><h2><span class="section-number">10.8. </span>Designing a PPL<a class="headerlink" href="#designing-a-ppl" title="Permalink to this heading">#</a></h2>
 <p>In this section we will switch our perspective from a PPL overview as a
 user and to one of a PPL designer. Now that we identified the big
 components let us design a hypothetical PPL to see how components fit
@@ -1773,7 +1562,7 @@ number generators. Luckily, those are readily available via
 drawing some samples from a <span class="math notranslate nohighlight">\(\mathcal{N}(1, 2)\)</span> distribution and
 evaluate their log probability:</p>
 <div class="literal-block-wrapper docutils container" id="scipy-stats">
-<div class="code-block-caption"><span class="caption-number">Listing 10.27 </span><span class="caption-text">scipy_stats</span><a class="headerlink" href="#scipy-stats" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.27 </span><span class="caption-text">scipy_stats</span><a class="headerlink" href="#scipy-stats" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
 
@@ -1790,7 +1579,7 @@ family of</em> Normal distributions. Alternatively, we can initialize a
 Normal distribution with fixed parameters as shown in Code Block
 <a class="reference internal" href="#scipy-stats2"><span class="std std-ref">scipy_stats2</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="scipy-stats2">
-<div class="code-block-caption"><span class="caption-number">Listing 10.28 </span><span class="caption-text">scipy_stats2</span><a class="headerlink" href="#scipy-stats2" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.28 </span><span class="caption-text">scipy_stats2</span><a class="headerlink" href="#scipy-stats2" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">random_variable_x</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
 
 <span class="n">x</span> <span class="o">=</span> <span class="n">random_variable_x</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1234</span><span class="p">)</span>
@@ -1813,7 +1602,7 @@ Code Block
 raises an exception because <code class="docutils literal notranslate"><span class="pre">scipy.stats.norm</span></code> is expecting the input to
 be a NumPy array <a class="footnote-reference brackets" href="#id83" id="id43" role="doc-noteref"><span class="fn-bracket">[</span>19<span class="fn-bracket">]</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="simple-model-not-working-scipy">
-<div class="code-block-caption"><span class="caption-number">Listing 10.29 </span><span class="caption-text">simple_model_not_working_scipy</span><a class="headerlink" href="#simple-model-not-working-scipy" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.29 </span><span class="caption-text">simple_model_not_working_scipy</span><a class="headerlink" href="#simple-model-not-working-scipy" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 <span class="n">y</span><span class="o">.</span><span class="n">rvs</span><span class="p">()</span>
@@ -1830,7 +1619,7 @@ packages, In our case to write a PPL in Python we need to make a series
 of API design choices and other decision to make Code Block
 <a class="reference internal" href="#simple-model-not-working-scipy"><span class="std std-ref">simple_model_not_working_scipy</span></a>
 work. Specifically we want:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>A representation of random variables that could be used to
 initialize another random variable;</p></li>
 <li><p>To be able to condition the random variable on some specific values
@@ -1843,13 +1632,13 @@ class that could be recognized by NumPy as an array. We do this in Code
 Block <a class="reference internal" href="#scipy-rv0"><span class="std std-ref">scipy_rv0</span></a> and use the implementation to
 specific the model in Equation <a class="reference internal" href="#equation-eq-simple-normal-model">(10.7)</a>.</p>
 <div class="math notranslate nohighlight" id="equation-eq-simple-normal-model">
-<span class="eqno">(10.7)<a class="headerlink" href="#equation-eq-simple-normal-model" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(10.7)<a class="headerlink" href="#equation-eq-simple-normal-model" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{split}
     x \sim&amp; \mathcal{N}(1, 2) \\
     z \sim&amp; \mathcal{HN}(1) \\
     y \sim&amp; \mathcal{N}(x, z)
 \end{split}\end{split}\]</div>
 <div class="literal-block-wrapper docutils container" id="scipy-rv0">
-<div class="code-block-caption"><span class="caption-number">Listing 10.30 </span><span class="caption-text">scipy_rv0</span><a class="headerlink" href="#scipy-rv0" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.30 </span><span class="caption-text">scipy_rv0</span><a class="headerlink" href="#scipy-rv0" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">RandomVariable</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">distribution</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">distribution</span> <span class="o">=</span> <span class="n">distribution</span>
@@ -1881,7 +1670,7 @@ conditioned the random variable to some value, with a <code class="docutils lite
 we have in Code Block <a class="reference internal" href="#scipy-rv1"><span class="std std-ref">scipy_rv1</span></a> a toy
 implementation of a more functional <code class="docutils literal notranslate"><span class="pre">RandomVariable</span></code>:</p>
 <div class="literal-block-wrapper docutils container" id="scipy-rv1">
-<div class="code-block-caption"><span class="caption-number">Listing 10.31 </span><span class="caption-text">scipy_rv1</span><a class="headerlink" href="#scipy-rv1" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.31 </span><span class="caption-text">scipy_rv1</span><a class="headerlink" href="#scipy-rv1" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">RandomVariable</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">distribution</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">distribution</span> <span class="o">=</span> <span class="n">distribution</span>
@@ -1915,7 +1704,7 @@ of its dependencies in Code Block
 to match the expected behavior. In Code Block below note how <code class="docutils literal notranslate"><span class="pre">y</span></code> is much
 closer to <code class="docutils literal notranslate"><span class="pre">x</span></code> if we set <code class="docutils literal notranslate"><span class="pre">z</span></code> to a small value.</p>
 <div class="literal-block-wrapper docutils container" id="scipy-rv1-value">
-<div class="code-block-caption"><span class="caption-number">Listing 10.32 </span><span class="caption-text">scipy_rv1_value</span><a class="headerlink" href="#scipy-rv1-value" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.32 </span><span class="caption-text">scipy_rv1_value</span><a class="headerlink" href="#scipy-rv1-value" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 
@@ -1950,7 +1739,7 @@ the random variable. For example, in Code Block
 <a class="reference internal" href="#scipy-rv1-posterior"><span class="std std-ref">scipy_rv1_posterior</span></a> we generate the
 posterior distribution for <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">z</span></code> when we observe <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">5.0</span></code>.</p>
 <div class="literal-block-wrapper docutils container" id="scipy-rv1-posterior">
-<div class="code-block-caption"><span class="caption-number">Listing 10.33 </span><span class="caption-text">scipy_rv1_posterior</span><a class="headerlink" href="#scipy-rv1-posterior" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.33 </span><span class="caption-text">scipy_rv1_posterior</span><a class="headerlink" href="#scipy-rv1-posterior" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Observed y = 5.</span>
 <span class="n">y</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mf">5.</span><span class="p">))</span>
 
@@ -1966,7 +1755,7 @@ posterior distribution for <code class="docutils literal notranslate"><span clas
 density function, as shown in Code Block
 <a class="reference internal" href="#scipy-posterior"><span class="std std-ref">scipy_posterior</span></a>:</p>
 <div class="literal-block-wrapper docutils container" id="scipy-posterior">
-<div class="code-block-caption"><span class="caption-number">Listing 10.34 </span><span class="caption-text">scipy_posterior</span><a class="headerlink" href="#scipy-posterior" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.34 </span><span class="caption-text">scipy_posterior</span><a class="headerlink" href="#scipy-posterior" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">log_prob</span><span class="p">(</span><span class="n">xval</span><span class="p">,</span> <span class="n">zval</span><span class="p">,</span> <span class="n">yval</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
     <span class="n">x_dist</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
     <span class="n">z_dist</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">halfnorm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span>
@@ -2023,7 +1812,7 @@ model in Equation <a class="reference internal" href="#equation-eq-simple-normal
 need to again rewrite it a bit, shown in Code Block
 <a class="reference internal" href="#scipy-prior"><span class="std std-ref">scipy_prior</span></a>:</p>
 <div class="literal-block-wrapper docutils container" id="scipy-prior">
-<div class="code-block-caption"><span class="caption-number">Listing 10.35 </span><span class="caption-text">scipy_prior</span><a class="headerlink" href="#scipy-prior" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.35 </span><span class="caption-text">scipy_prior</span><a class="headerlink" href="#scipy-prior" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">prior_sample</span><span class="p">():</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">()</span>
     <span class="n">z</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">halfnorm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">()</span>
@@ -2045,7 +1834,7 @@ with Pyro <span id="id52">[<a class="reference internal" href="references.html#i
 Edward2 <span id="id54">[<a class="reference internal" href="references.html#id139" title="Dustin Tran, Matthew Hoffman, Dave Moore, Christopher Suter, Srinivas Vasudevan, Alexey Radul, Matthew Johnson, and Rif A Saurous. Simple, distributed, and accelerated probabilistic programming. arXiv preprint arXiv:1811.02091, 2018.">128</a>, <a class="reference internal" href="references.html#id140" title="Dave Moore and Maria I Gorinova. Effect handling for composable program transformations in edward2. arXiv preprint arXiv:1811.06150, 2018.">129</a>]</span>, and JointDistribution in
 TensorFlow Probability <span id="id55">[<a class="reference internal" href="references.html#id128" title="Dan Piponi, Dave Moore, and Joshua V. Dillon. Joint distributions for tensorflow probability. arXiv preprint arXiv:2001.11819, 2020.">29</a>]</span> <a class="footnote-reference brackets" href="#id90" id="id56" role="doc-noteref"><span class="fn-bracket">[</span>26<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id91" id="id57" role="doc-noteref"><span class="fn-bracket">[</span>27<span class="fn-bracket">]</span></a>.</p>
 <section id="shape-handling-in-ppls">
-<span id="shape-ppl"></span><h3><span class="section-number">10.8.1. </span>Shape Handling in PPLs<a class="headerlink" href="#shape-handling-in-ppls" title="Permalink to this heading">¶</a></h3>
+<span id="shape-ppl"></span><h3><span class="section-number">10.8.1. </span>Shape Handling in PPLs<a class="headerlink" href="#shape-handling-in-ppls" title="Permalink to this heading">#</a></h3>
 <p>Something that all PPLs must deal with, and subsquently PPL designers
 must think about, is shapes. One of the common requests for help and
 frustrations that PPL designers hear from Bayesian modeler and
@@ -2062,7 +1851,7 @@ it. Distribution in <code class="docutils literal notranslate"><span class="pre"
 us to draw iid samples easily, with a small modification in Code Block
 <a class="reference internal" href="#prior-batch"><span class="std std-ref">prior_batch</span></a> we have:</p>
 <div class="literal-block-wrapper docutils container" id="prior-batch">
-<div class="code-block-caption"><span class="caption-number">Listing 10.36 </span><span class="caption-text">prior_batch</span><a class="headerlink" href="#prior-batch" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.36 </span><span class="caption-text">prior_batch</span><a class="headerlink" href="#prior-batch" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">prior_sample</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
     <span class="n">z</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">halfnorm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
@@ -2087,7 +1876,7 @@ argument as the sample shape is already implied from its parents.</p>
 model, we implemented <code class="docutils literal notranslate"><span class="pre">lm_prior_sample0</span></code> to draw one set of prior
 samples, and <code class="docutils literal notranslate"><span class="pre">lm_prior_sample</span></code> to draw a batch of prior samples.</p>
 <div class="literal-block-wrapper docutils container" id="prior-lm-batch">
-<div class="code-block-caption"><span class="caption-number">Listing 10.37 </span><span class="caption-text">prior_lm_batch</span><a class="headerlink" href="#prior-lm-batch" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.37 </span><span class="caption-text">prior_lm_batch</span><a class="headerlink" href="#prior-lm-batch" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n_row</span><span class="p">,</span> <span class="n">n_feature</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">5</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_row</span><span class="p">,</span> <span class="n">n_feature</span><span class="p">)</span>
 
@@ -2173,7 +1962,7 @@ Code Block <a class="reference internal" href="#prior-lm-batch"><span class="std
 Block <a class="reference internal" href="#jd-lm-batch"><span class="std std-ref">jd_lm_batch</span></a> using
 <code class="docutils literal notranslate"><span class="pre">tfd.JointDistributionSequential</span></code>:</p>
 <div class="literal-block-wrapper docutils container" id="jd-lm-batch">
-<div class="code-block-caption"><span class="caption-number">Listing 10.38 </span><span class="caption-text">jd_lm_batch</span><a class="headerlink" href="#jd-lm-batch" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10.38 </span><span class="caption-text">jd_lm_batch</span><a class="headerlink" href="#jd-lm-batch" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">jd</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">JointDistributionSequential</span><span class="p">([</span>
 <span class="linenos"> 2</span>    <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
 <span class="linenos"> 3</span>    <span class="n">tfd</span><span class="o">.</span><span class="n">Sample</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">n_feature</span><span class="p">),</span>
@@ -2213,7 +2002,7 @@ Shapes and Probability Distributions</em>) <a class="footnote-reference brackets
 </section>
 </section>
 <section id="takeaways-for-the-applied-bayesian-practitioner">
-<span id="id61"></span><h2><span class="section-number">10.9. </span>Takeaways for the Applied Bayesian Practitioner<a class="headerlink" href="#takeaways-for-the-applied-bayesian-practitioner" title="Permalink to this heading">¶</a></h2>
+<span id="id61"></span><h2><span class="section-number">10.9. </span>Takeaways for the Applied Bayesian Practitioner<a class="headerlink" href="#takeaways-for-the-applied-bayesian-practitioner" title="Permalink to this heading">#</a></h2>
 <p>We want to stress to the reader that the goal of this chapter is <em>not</em>
 to make you a proficient PPL designer but more so an informed PPL user.
 As a user, particularly if you are just starting out, it can be
@@ -2242,7 +2031,7 @@ chapter, and personal experience through “taking some for a spin” we
 hope you will be finding the one that works best for you.</p>
 </section>
 <section id="exercises">
-<span id="exercises10"></span><h2><span class="section-number">10.10. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">¶</a></h2>
+<span id="exercises10"></span><h2><span class="section-number">10.10. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <p><strong>10E1.</strong> Find a PPLs that utilizes another base language
 other than Python. Determine what differences are between PyMC3 or TFP.
 Specifically note a difference between the API and the computational
@@ -2269,7 +2058,7 @@ Compare this to the TFP example, in particular noting the difference in
 primitives and syntax. What is similar? What is different?</p>
 <p><strong>10E7.</strong> Specify the following computation in Theano</p>
 <div class="math notranslate nohighlight" id="equation-eq-theano-comp">
-<span class="eqno">(10.8)<a class="headerlink" href="#equation-eq-theano-comp" title="Permalink to this equation">¶</a></span>\[\sin(\frac{1}{2}\pi x) + \exp(\log(x)) + \frac{(x-2)^2}{(x^2-4x+4)}\]</div>
+<span class="eqno">(10.8)<a class="headerlink" href="#equation-eq-theano-comp" title="Permalink to this equation">#</a></span>\[\sin(\frac{1}{2}\pi x) + \exp(\log(x)) + \frac{(x-2)^2}{(x^2-4x+4)}\]</div>
 <p>Generate the unoptimized computational graph. How many lines are
 printed. Use the <code class="docutils literal notranslate"><span class="pre">theano.function</span></code> method to run the optimizer. What is
 different about the optimized graph? Run a calculation using the
@@ -2325,7 +2114,7 @@ interested in both PPL development and usage.</p>
 </aside>
 <aside class="footnote brackets" id="id68" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">4</a><span class="fn-bracket">]</span></span>
-<p><a class="reference external" href="https://github.com/stripe/rainier">https://github.com/stripe/rainier</a>. A more in-depth reflection of
+<p><a class="github reference external" href="https://github.com/stripe/rainier">stripe/rainier</a>. A more in-depth reflection of
 the development of Rainer is described in a podcast
 <a class="reference external" href="https://www.learnbayesstats.com/episode/22-eliciting-priors-and-doing-bayesian-inference-at-scale-with-avi-bryant">https://www.learnbayesstats.com/episode/22-eliciting-priors-and-doing-bayesian-inference-at-scale-with-avi-bryant</a></p>
 </aside>
@@ -2374,7 +2163,7 @@ fitting name.</p>
 </aside>
 <aside class="footnote brackets" id="id78" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id33">14</a><span class="fn-bracket">]</span></span>
-<p><a class="reference external" href="https://github.com/pymc-devs/symbolic-pymc">https://github.com/pymc-devs/symbolic-pymc</a></p>
+<p><a class="github reference external" href="https://github.com/pymc-devs/symbolic-pymc">pymc-devs/symbolic-pymc</a></p>
 </aside>
 <aside class="footnote brackets" id="id79" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id37">15</a><span class="fn-bracket">]</span></span>
@@ -2410,7 +2199,7 @@ concept in PPL, but in many cases they are implicit.</p>
 </aside>
 <aside class="footnote brackets" id="id86" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id46">22</a><span class="fn-bracket">]</span></span>
-<p><a class="reference external" href="https://github.com/blei-lab/edward">https://github.com/blei-lab/edward</a></p>
+<p><a class="github reference external" href="https://github.com/blei-lab/edward">blei-lab/edward</a></p>
 </aside>
 <aside class="footnote brackets" id="id87" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id47">23</a><span class="fn-bracket">]</span></span>
@@ -2419,7 +2208,7 @@ current version (v2).</p>
 </aside>
 <aside class="footnote brackets" id="id88" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id50">24</a><span class="fn-bracket">]</span></span>
-<p>For example, <a class="reference external" href="https://github.com/jmschrei/pomegranate">https://github.com/jmschrei/pomegranate</a> for
+<p>For example, <a class="github reference external" href="https://github.com/jmschrei/pomegranate">jmschrei/pomegranate</a> for
 Bayesian Network.</p>
 </aside>
 <aside class="footnote brackets" id="id89" role="note">
@@ -2429,7 +2218,7 @@ Bayesian Network.</p>
 </aside>
 <aside class="footnote brackets" id="id90" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id56">26</a><span class="fn-bracket">]</span></span>
-<p>Also see mcx <a class="reference external" href="https://github.com/rlouf/mcx">https://github.com/rlouf/mcx</a> that use Python AST
+<p>Also see mcx <a class="github reference external" href="https://github.com/rlouf/mcx">rlouf/mcx</a> that use Python AST
 to do function rewrite; and oryx
 <a class="reference external" href="https://www.tensorflow.org/probability/oryx">https://www.tensorflow.org/probability/oryx</a> that make use of the
 JAX tracing for function transformation</p>
@@ -2472,7 +2261,7 @@ in PPLs in <em>PyMC3 shape handling</em>
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./markdown"
         },
         predefinedOutput: true
@@ -2480,44 +2269,133 @@ in PPLs in <em>PyMC3 shape handling</em>
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="chp_09.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">9. </span>End to End Bayesian Workflows</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chp_09.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>End to End Bayesian Workflows</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="chp_11.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="chp_11.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title"><span class="section-number">11. </span>Appendiceal Topics</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
+                </footer>
+              
+            </div>
             
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Martin, Kumar, Lao<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-systems-engineering-perspective-of-a-ppl">10.1. A Systems Engineering Perspective of a PPL</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-rainier">10.1.1. Example: Rainier</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#posterior-computation">10.2. Posterior Computation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-the-gradient">10.2.1. Getting the Gradient</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-near-real-time-inference">10.2.2. Example: Near Real Time Inference</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-programming-interfaces">10.3. Application Programming Interfaces</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-stan-and-slicstan">10.3.1. Example: Stan and Slicstan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-pymc3-and-pymc4">10.3.2. Example: PyMC3 and PyMC4</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ppl-driven-transformations">10.4. PPL Driven Transformations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#log-probabilities">10.4.1. Log Probabilities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variables-and-distributions-transformations">10.4.2. Random Variables and Distributions Transformations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-sampling-comparison-between-bounded-and-unbounded-random-variables">10.4.3. Example: Sampling Comparison between Bounded and Unbounded Random Variables</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operation-graphs-and-automatic-reparameterization">10.5. Operation Graphs and Automatic Reparameterization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#effect-handling">10.6. Effect handling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-effect-handling-in-tfp-and-numpyro">10.6.1. Example: Effect Handling in TFP and Numpyro</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#base-language-code-ecosystem-modularity-and-everything-else">10.7. Base Language, Code Ecosystem, Modularity and Everything Else</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#designing-a-ppl">10.8. Designing a PPL</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shape-handling-in-ppls">10.8.1. Shape Handling in PPLs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#takeaways-for-the-applied-bayesian-practitioner">10.9. Takeaways for the Applied Bayesian Practitioner</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">10.10. Exercises</a></li>
+</ul>
+  </nav></div>
 
-      </div>
-    </div>
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Martin, Kumar, Lao
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

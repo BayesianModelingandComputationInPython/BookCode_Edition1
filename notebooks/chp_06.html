@@ -1,39 +1,47 @@
 
+
 <!DOCTYPE html>
 
-<html lang="en">
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Code 6: Time Series &#8212; Bayesian Modeling and Computation in Python</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-codeautolink.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -42,12 +50,13 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -56,888 +65,372 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/chp_06';</script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Code 7: Bayesian Additive Regression Trees" href="chp_07.html" />
     <link rel="prev" title="Code 5: Splines" href="chp_05.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en">
-    
-
-    <!-- Google Analytics -->
-    
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-702QMHG8ST"></script>
-<script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){ dataLayer.push(arguments); }
-                    gtag('js', new Date());
-                    gtag('config', 'G-702QMHG8ST');
-                </script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-      
-      
-      <h1 class="site-logo" id="site-title">Bayesian Modeling and Computation in Python</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 0
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/dedication.html">
-   Dedication
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/foreword.html">
-   Foreword
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/preface.html">
-   Preface
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/symbollist.html">
-   Symbols
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 1
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_01.html">
-   1. Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_02.html">
-   2. Exploratory Analysis of Bayesian Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_03.html">
-   3. Linear Models and Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_04.html">
-   4. Extending Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_05.html">
-   5. Splines
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_06.html">
-   6. Time Series
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_07.html">
-   7. Bayesian Additive Regression Trees
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_08.html">
-   8. Approximate Bayesian Computation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_09.html">
-   9. End to End Bayesian Workflows
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_10.html">
-   10. Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_11.html">
-   11. Appendiceal Topics
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/glossary.html">
-   12. Glossary
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/references.html">
-   13. References
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 2
- </span>
-</p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_01.html">
-   Code 1: Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_02.html">
-   Code 2: Exploratory Analysis of Bayesian Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_03.html">
-   Code 3: Linear Models and Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_04.html">
-   Code 4: Extending Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_05.html">
-   Code 5: Splines
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Code 6: Time Series
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_07.html">
-   Code 7: Bayesian Additive Regression Trees
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_08.html">
-   Code 8: Approximate Bayesian Computation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_09.html">
-   Code 9: End to End Bayesian Workflows
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_10.html">
-   Code 10: Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_11.html">
-   Code 11: Appendiceal Topics
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 3
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../solutions/chp_01.html">
-   Solutions 1: Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../solutions/chp_02.html">
-   Solutions 2: Exploratory Analysis of Bayesian models
-  </a>
- </li>
-</ul>
-
-    </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fnotebooks/chp_06.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+      <div class="bd-sidebar-primary bd-sidebar">
         
-    </div>
-</div>
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
+  
 
-            <!-- Launch buttons -->
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#time-series-analysis-as-a-regression-problem">
-   Time Series Analysis as a Regression Problem
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-1">
-     Code 6.1
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-6-1">
-     Figure 6.1
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-2-and-figure-6-2">
-     Code 6.2 and Figure 6.2
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-3">
-     Code 6.3
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-4-and-figure-6-3">
-     Code 6.4 and Figure 6.3
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-5">
-     Code 6.5
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-6">
-     Code 6.6
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-6-4">
-     Figure 6.4
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-6-5">
-     Figure 6.5
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-7">
-     Code 6.7
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-8-and-figure-6-7">
-     Code 6.8 and Figure 6.7
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-9">
-     Code 6.9
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#autoregressive-models">
-   Autoregressive Models
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-6-8">
-     Figure 6.8
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-6-9">
-     Figure 6.9
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-10-and-figure-6-10">
-     Code 6.10 and Figure 6.10
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-11">
-     Code 6.11
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-12">
-     Code 6.12
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-13">
-     Code 6.13
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-6-11">
-     Figure 6.11
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-14">
-     Code 6.14
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-6-12">
-     Figure 6.12
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-6-13">
-     Figure 6.13
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#reflection-on-autoregressive-and-smoothing">
-       Reflection on autoregressive and smoothing
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-15">
-     Code 6.15
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-6-14">
-     Figure 6.14
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#sarima">
-       SARIMA
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-16-and-figure-6-15">
-     Code 6.16 and Figure 6.15
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#y-sarima-1-1-1-1-1-1-12">
-     y ~ Sarima(1,1,1)(1,1,1)[12]
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-17">
-     Code 6.17
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-18">
-     Code 6.18
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#sarimax-class">
-       SARIMAX Class
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id1">
-       y ~ Sarima(1,1,1)(1,1,1)[12]
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-8">
-     Code 6.8
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#y-sarima-0-1-2-1-1-1-12">
-       y ~ Sarima(0,1,2)(1,1,1)[12]
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#table-6-1">
-     Table 6.1
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#state-space-models">
-   State Space Models
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-19">
-     Code 6.19
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-20">
-     Code 6.20
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-21">
-     Code 6.21
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-6-16">
-     Figure 6.16
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#arma-as-lgssm">
-       ARMA as LGSSM
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-22">
-     Code 6.22
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-23">
-     Code 6.23
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-6-17">
-     Figure 6.17
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#bayesian-structural-time-series-models-on-monthly-live-birth-data">
-       Bayesian Structural Time Series Models on Monthly Live Birth Data
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-25">
-     Code 6.25
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-26">
-     Code 6.26
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-27">
-     Code 6.27
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#other-time-series-models">
-   Other Time Series Models
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-6-19">
-     Figure 6.19
-    </a>
-   </li>
-  </ul>
- </li>
+<a class="navbar-brand logo" href="../welcome.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Bayesian Modeling and Computation in Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 0</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown/dedication.html">Dedication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/foreword.html">Foreword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/preface.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/symbollist.html">Symbols</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 1</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_01.html">1. Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_02.html">2. Exploratory Analysis of Bayesian Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_03.html">3. Linear Models and Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_04.html">4. Extending Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_05.html">5. Splines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_06.html">6. Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_07.html">7. Bayesian Additive Regression Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_08.html">8. Approximate Bayesian Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_09.html">9. End to End Bayesian Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_10.html">10. Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_11.html">11. Appendiceal Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/glossary.html">12. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/references.html">13. References</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 2</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chp_01.html">Code 1: Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_02.html">Code 2: Exploratory Analysis of Bayesian Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_03.html">Code 3: Linear Models and Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_04.html">Code 4: Extending Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_05.html">Code 5: Splines</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Code 6: Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_07.html">Code 7: Bayesian Additive Regression Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_08.html">Code 8: Approximate Bayesian Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_09.html">Code 9: End to End Bayesian Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_10.html">Code 10: Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_11.html">Code 11: Appendiceal Topics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../solutions/chp_01.html">Solutions 1: Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/chp_02.html">Solutions 2: Exploratory Analysis of Bayesian models</a></li>
 </ul>
 
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fnotebooks/chp_06.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Code 6: Time Series</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-analysis-as-a-regression-problem">Time Series Analysis as a Regression Problem</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-1">Code 6.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-6-1">Figure 6.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-2-and-figure-6-2">Code 6.2 and Figure 6.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-3">Code 6.3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-4-and-figure-6-3">Code 6.4 and Figure 6.3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-5">Code 6.5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-6">Code 6.6</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-6-4">Figure 6.4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-6-5">Figure 6.5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-7">Code 6.7</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-8-and-figure-6-7">Code 6.8 and Figure 6.7</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-9">Code 6.9</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autoregressive-models">Autoregressive Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-6-8">Figure 6.8</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-6-9">Figure 6.9</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-10-and-figure-6-10">Code 6.10 and Figure 6.10</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-11">Code 6.11</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-12">Code 6.12</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-13">Code 6.13</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-6-11">Figure 6.11</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-14">Code 6.14</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-6-12">Figure 6.12</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-6-13">Figure 6.13</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reflection-on-autoregressive-and-smoothing">Reflection on autoregressive and smoothing</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-15">Code 6.15</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-6-14">Figure 6.14</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sarima">SARIMA</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-16-and-figure-6-15">Code 6.16 and Figure 6.15</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#y-sarima-1-1-1-1-1-1-12">y ~ Sarima(1,1,1)(1,1,1)[12]</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-17">Code 6.17</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-18">Code 6.18</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sarimax-class">SARIMAX Class</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">y ~ Sarima(1,1,1)(1,1,1)[12]</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-8">Code 6.8</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#y-sarima-0-1-2-1-1-1-12">y ~ Sarima(0,1,2)(1,1,1)[12]</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-6-1">Table 6.1</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-space-models">State Space Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-19">Code 6.19</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-20">Code 6.20</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-21">Code 6.21</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-6-16">Figure 6.16</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#arma-as-lgssm">ARMA as LGSSM</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-22">Code 6.22</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-23">Code 6.23</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-6-17">Figure 6.17</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-structural-time-series-models-on-monthly-live-birth-data">Bayesian Structural Time Series Models on Monthly Live Birth Data</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-25">Code 6.25</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-26">Code 6.26</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-27">Code 6.27</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-time-series-models">Other Time Series Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-6-19">Figure 6.19</a></li>
+</ul>
+</li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Code 6: Time Series</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#time-series-analysis-as-a-regression-problem">
-   Time Series Analysis as a Regression Problem
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-1">
-     Code 6.1
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-6-1">
-     Figure 6.1
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-2-and-figure-6-2">
-     Code 6.2 and Figure 6.2
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-3">
-     Code 6.3
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-4-and-figure-6-3">
-     Code 6.4 and Figure 6.3
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-5">
-     Code 6.5
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-6">
-     Code 6.6
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-6-4">
-     Figure 6.4
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-6-5">
-     Figure 6.5
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-7">
-     Code 6.7
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-8-and-figure-6-7">
-     Code 6.8 and Figure 6.7
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-9">
-     Code 6.9
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#autoregressive-models">
-   Autoregressive Models
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-6-8">
-     Figure 6.8
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-6-9">
-     Figure 6.9
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-10-and-figure-6-10">
-     Code 6.10 and Figure 6.10
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-11">
-     Code 6.11
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-12">
-     Code 6.12
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-13">
-     Code 6.13
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-6-11">
-     Figure 6.11
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-14">
-     Code 6.14
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-6-12">
-     Figure 6.12
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-6-13">
-     Figure 6.13
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#reflection-on-autoregressive-and-smoothing">
-       Reflection on autoregressive and smoothing
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-15">
-     Code 6.15
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-6-14">
-     Figure 6.14
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#sarima">
-       SARIMA
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-16-and-figure-6-15">
-     Code 6.16 and Figure 6.15
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#y-sarima-1-1-1-1-1-1-12">
-     y ~ Sarima(1,1,1)(1,1,1)[12]
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-17">
-     Code 6.17
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-18">
-     Code 6.18
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#sarimax-class">
-       SARIMAX Class
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id1">
-       y ~ Sarima(1,1,1)(1,1,1)[12]
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-8">
-     Code 6.8
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#y-sarima-0-1-2-1-1-1-12">
-       y ~ Sarima(0,1,2)(1,1,1)[12]
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#table-6-1">
-     Table 6.1
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#state-space-models">
-   State Space Models
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-19">
-     Code 6.19
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-20">
-     Code 6.20
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-21">
-     Code 6.21
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-6-16">
-     Figure 6.16
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#arma-as-lgssm">
-       ARMA as LGSSM
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-22">
-     Code 6.22
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-23">
-     Code 6.23
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-6-17">
-     Figure 6.17
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#bayesian-structural-time-series-models-on-monthly-live-birth-data">
-       Bayesian Structural Time Series Models on Monthly Live Birth Data
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-25">
-     Code 6.25
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-26">
-     Code 6.26
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-6-27">
-     Code 6.27
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#other-time-series-models">
-   Other Time Series Models
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-6-19">
-     Figure 6.19
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="code-6-time-series">
-<h1>Code 6: Time Series<a class="headerlink" href="#code-6-time-series" title="Permalink to this heading">¶</a></h1>
+<h1>Code 6: Time Series<a class="headerlink" href="#code-6-time-series" title="Permalink to this heading">#</a></h1>
 <div class="tip dropdown admonition">
 <p class="admonition-title">This is a reference notebook for the book Bayesian Modeling and Computation in Python</p>
 <p>The textbook is not needed to use or run this code, though the context and explanation is missing from this notebook.</p>
@@ -975,9 +468,9 @@ or from <a class="reference external" href="https://www.routledge.com/Bayesian-M
 </div>
 </div>
 <section id="time-series-analysis-as-a-regression-problem">
-<h2>Time Series Analysis as a Regression Problem<a class="headerlink" href="#time-series-analysis-as-a-regression-problem" title="Permalink to this heading">¶</a></h2>
+<h2>Time Series Analysis as a Regression Problem<a class="headerlink" href="#time-series-analysis-as-a-regression-problem" title="Permalink to this heading">#</a></h2>
 <section id="code-6-1">
-<h3>Code 6.1<a class="headerlink" href="#code-6-1" title="Permalink to this heading">¶</a></h3>
+<h3>Code 6.1<a class="headerlink" href="#code-6-1" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">co2_by_month</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/monthly_mauna_loa_co2.csv&quot;</span><span class="p">)</span>
@@ -994,7 +487,7 @@ or from <a class="reference external" href="https://www.routledge.com/Bayesian-M
 </div>
 </section>
 <section id="figure-6-1">
-<h3>Figure 6.1<a class="headerlink" href="#figure-6-1" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 6.1<a class="headerlink" href="#figure-6-1" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_co2_data</span><span class="p">(</span><span class="n">fig_ax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -1010,7 +503,7 @@ or from <a class="reference external" href="https://www.routledge.com/Bayesian-M
         <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Year&quot;</span>
     <span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.99</span><span class="p">,</span> <span class="mf">.02</span><span class="p">,</span>
-            <span class="sd">&quot;&quot;&quot;Source: Scripps Institute for Oceanography CO₂ program</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Source: Scripps Institute for Oceanography CO₂ program</span>
 <span class="sd">            http://scrippsco2.ucsd.edu/data/atmospheric_co2/primary_mlo_co2_record&quot;&quot;&quot;</span><span class="p">,</span>
             <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span>
             <span class="n">horizontalalignment</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span>
@@ -1029,12 +522,12 @@ or from <a class="reference external" href="https://www.routledge.com/Bayesian-M
   fig.autofmt_xdate()
 </pre></div>
 </div>
-<img alt="../_images/chp_06_8_1.png" src="../_images/chp_06_8_1.png" />
+<img alt="../_images/ccd78213bdc175738ebd6c762ae4501e4e32f216805e1c8c17b3eb5293e43dca.png" src="../_images/ccd78213bdc175738ebd6c762ae4501e4e32f216805e1c8c17b3eb5293e43dca.png" />
 </div>
 </div>
 </section>
 <section id="code-6-2-and-figure-6-2">
-<h3>Code 6.2 and Figure 6.2<a class="headerlink" href="#code-6-2-and-figure-6-2" title="Permalink to this heading">¶</a></h3>
+<h3>Code 6.2 and Figure 6.2<a class="headerlink" href="#code-6-2-and-figure-6-2" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trend_all</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">co2_by_month</span><span class="p">))[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
@@ -1060,12 +553,12 @@ or from <a class="reference external" href="https://www.routledge.com/Bayesian-M
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_06_10_0.png" src="../_images/chp_06_10_0.png" />
+<img alt="../_images/acde764da24c5e604efcc7265187cf439a6efdfac2ee321e5f5958c7999add87.png" src="../_images/acde764da24c5e604efcc7265187cf439a6efdfac2ee321e5f5958c7999add87.png" />
 </div>
 </div>
 </section>
 <section id="code-6-3">
-<h3>Code 6.3<a class="headerlink" href="#code-6-3" title="Permalink to this heading">¶</a></h3>
+<h3>Code 6.3<a class="headerlink" href="#code-6-3" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tfd</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">distributions</span>
@@ -1110,7 +603,7 @@ or from <a class="reference external" href="https://www.routledge.com/Bayesian-M
 </div>
 </section>
 <section id="code-6-4-and-figure-6-3">
-<h3>Code 6.4 and Figure 6.3<a class="headerlink" href="#code-6-4-and-figure-6-3" title="Permalink to this heading">¶</a></h3>
+<h3>Code 6.4 and Figure 6.3<a class="headerlink" href="#code-6-4-and-figure-6-3" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Draw 100 prior and prior predictive samples</span>
@@ -1132,12 +625,12 @@ or from <a class="reference external" href="https://www.routledge.com/Bayesian-M
   fig.autofmt_xdate()
 </pre></div>
 </div>
-<img alt="../_images/chp_06_14_1.png" src="../_images/chp_06_14_1.png" />
+<img alt="../_images/ebda6d0e82abc72c6ffbc1df00db3672b909fabdd1f6d5c3c08445c5e7f961c0.png" src="../_images/ebda6d0e82abc72c6ffbc1df00db3672b909fabdd1f6d5c3c08445c5e7f961c0.png" />
 </div>
 </div>
 </section>
 <section id="code-6-5">
-<h3>Code 6.5<a class="headerlink" href="#code-6-5" title="Permalink to this heading">¶</a></h3>
+<h3>Code 6.5<a class="headerlink" href="#code-6-5" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">run_mcmc</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">function</span><span class="p">(</span>
@@ -1409,12 +902,12 @@ Wall time: 25.2 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_06_19_0.png" src="../_images/chp_06_19_0.png" />
+<img alt="../_images/95a8563f991a8355f2c60ec2b024867d250699edf7b800bf8d8c7c255bd1a66d.png" src="../_images/95a8563f991a8355f2c60ec2b024867d250699edf7b800bf8d8c7c255bd1a66d.png" />
 </div>
 </div>
 </section>
 <section id="code-6-6">
-<h3>Code 6.6<a class="headerlink" href="#code-6-6" title="Permalink to this heading">¶</a></h3>
+<h3>Code 6.6<a class="headerlink" href="#code-6-6" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We can draw posterior predictive sample with jd.sample_distributions()</span>
@@ -1442,7 +935,7 @@ Wall time: 25.2 s
 </div>
 </section>
 <section id="figure-6-4">
-<h3>Figure 6.4<a class="headerlink" href="#figure-6-4" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 6.4<a class="headerlink" href="#figure-6-4" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot components</span>
@@ -1468,12 +961,12 @@ Wall time: 25.2 s
   fig.autofmt_xdate()
 </pre></div>
 </div>
-<img alt="../_images/chp_06_23_1.png" src="../_images/chp_06_23_1.png" />
+<img alt="../_images/f5f9590257b9311dbdb4a4dd18c8c1cbdfa1a8aecfd7171e4119547592ef9d88.png" src="../_images/f5f9590257b9311dbdb4a4dd18c8c1cbdfa1a8aecfd7171e4119547592ef9d88.png" />
 </div>
 </div>
 </section>
 <section id="figure-6-5">
-<h3>Figure 6.5<a class="headerlink" href="#figure-6-5" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 6.5<a class="headerlink" href="#figure-6-5" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
@@ -1493,12 +986,12 @@ Wall time: 25.2 s
   fig.autofmt_xdate()
 </pre></div>
 </div>
-<img alt="../_images/chp_06_25_1.png" src="../_images/chp_06_25_1.png" />
+<img alt="../_images/06e8e6be0961b0b0422c6b25d428f68d9647feb3966fd1b5233721ee1582062e.png" src="../_images/06e8e6be0961b0b0422c6b25d428f68d9647feb3966fd1b5233721ee1582062e.png" />
 </div>
 </div>
 </section>
 <section id="code-6-7">
-<h3>Code 6.7<a class="headerlink" href="#code-6-7" title="Permalink to this heading">¶</a></h3>
+<h3>Code 6.7<a class="headerlink" href="#code-6-7" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_changepoints</span> <span class="o">=</span> <span class="mi">8</span>
@@ -1538,12 +1031,12 @@ Wall time: 25.2 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_06_28_0.png" src="../_images/chp_06_28_0.png" />
+<img alt="../_images/c4e1fc96fcff42ccd1b48c5627dd871e356ab8997aa3610c1d7054d0b29264b1.png" src="../_images/c4e1fc96fcff42ccd1b48c5627dd871e356ab8997aa3610c1d7054d0b29264b1.png" />
 </div>
 </div>
 </section>
 <section id="code-6-8-and-figure-6-7">
-<h3>Code 6.8 and Figure 6.7<a class="headerlink" href="#code-6-8-and-figure-6-7" title="Permalink to this heading">¶</a></h3>
+<h3>Code 6.8 and Figure 6.7<a class="headerlink" href="#code-6-8-and-figure-6-7" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gen_fourier_basis</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">365.25</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
@@ -1564,12 +1057,12 @@ Wall time: 25.2 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_06_30_0.png" src="../_images/chp_06_30_0.png" />
+<img alt="../_images/cdffd66e59c0437704d318779b4f087fa1b681c02570bfdf1a2bfc24a381ddd1.png" src="../_images/cdffd66e59c0437704d318779b4f087fa1b681c02570bfdf1a2bfc24a381ddd1.png" />
 </div>
 </div>
 </section>
 <section id="code-6-9">
-<h3>Code 6.9<a class="headerlink" href="#code-6-9" title="Permalink to this heading">¶</a></h3>
+<h3>Code 6.9<a class="headerlink" href="#code-6-9" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate trend design matrix</span>
@@ -1630,9 +1123,9 @@ Wall time: 25.2 s
 </section>
 </section>
 <section id="autoregressive-models">
-<h2>Autoregressive Models<a class="headerlink" href="#autoregressive-models" title="Permalink to this heading">¶</a></h2>
+<h2>Autoregressive Models<a class="headerlink" href="#autoregressive-models" title="Permalink to this heading">#</a></h2>
 <section id="figure-6-8">
-<h3>Figure 6.8<a class="headerlink" href="#figure-6-8" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 6.8<a class="headerlink" href="#figure-6-8" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prior_samples</span> <span class="o">=</span> <span class="n">gam</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
@@ -1653,7 +1146,7 @@ Wall time: 25.2 s
   fig.autofmt_xdate()
 </pre></div>
 </div>
-<img alt="../_images/chp_06_35_1.png" src="../_images/chp_06_35_1.png" />
+<img alt="../_images/7445d4269cab8cb927181dea1dfc5bb9663075ddbe9011d0d2311b8545976eec.png" src="../_images/7445d4269cab8cb927181dea1dfc5bb9663075ddbe9011d0d2311b8545976eec.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1692,7 +1185,7 @@ Wall time: 1min 5s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_06_37_0.png" src="../_images/chp_06_37_0.png" />
+<img alt="../_images/16ab6f57b4f69c1c8a4bfb359fc6ced747067095da21f69f283ac38912b8cce3.png" src="../_images/16ab6f57b4f69c1c8a4bfb359fc6ced747067095da21f69f283ac38912b8cce3.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1723,12 +1216,12 @@ Wall time: 1min 5s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_06_39_0.png" src="../_images/chp_06_39_0.png" />
+<img alt="../_images/fb2ff351b170b92c016cf5cf075edd40b2ffbdbd7d20422be5259b7089bca49d.png" src="../_images/fb2ff351b170b92c016cf5cf075edd40b2ffbdbd7d20422be5259b7089bca49d.png" />
 </div>
 </div>
 </section>
 <section id="figure-6-9">
-<h3>Figure 6.9<a class="headerlink" href="#figure-6-9" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 6.9<a class="headerlink" href="#figure-6-9" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
@@ -1753,12 +1246,12 @@ Wall time: 1min 5s
   fig.autofmt_xdate()
 </pre></div>
 </div>
-<img alt="../_images/chp_06_41_1.png" src="../_images/chp_06_41_1.png" />
+<img alt="../_images/d51c19c043e18c450d71482d6f42b218a1279304e8ffc9df1dfe1c58c0e36442.png" src="../_images/d51c19c043e18c450d71482d6f42b218a1279304e8ffc9df1dfe1c58c0e36442.png" />
 </div>
 </div>
 </section>
 <section id="code-6-10-and-figure-6-10">
-<h3>Code 6.10 and Figure 6.10<a class="headerlink" href="#code-6-10-and-figure-6-10" title="Permalink to this heading">¶</a></h3>
+<h3>Code 6.10 and Figure 6.10<a class="headerlink" href="#code-6-10-and-figure-6-10" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_t</span> <span class="o">=</span> <span class="mi">200</span>
@@ -1789,12 +1282,12 @@ Wall time: 1min 5s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_06_43_0.png" src="../_images/chp_06_43_0.png" />
+<img alt="../_images/896c3700a84583ed333e578276e811112e940a04fa36580d546f9a7bca6f70f0.png" src="../_images/896c3700a84583ed333e578276e811112e940a04fa36580d546f9a7bca6f70f0.png" />
 </div>
 </div>
 </section>
 <section id="code-6-11">
-<h3>Code 6.11<a class="headerlink" href="#code-6-11" title="Permalink to this heading">¶</a></h3>
+<h3>Code 6.11<a class="headerlink" href="#code-6-11" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@tfd</span><span class="o">.</span><span class="n">JointDistributionCoroutine</span>
@@ -1826,7 +1319,7 @@ Wall time: 1min 5s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_06_45_0.png" src="../_images/chp_06_45_0.png" />
+<img alt="../_images/4eb73533a653ca31cfb019f5a818a2290035df8d585ce5d88aaf26d5d2460f08.png" src="../_images/4eb73533a653ca31cfb019f5a818a2290035df8d585ce5d88aaf26d5d2460f08.png" />
 </div>
 </div>
 <p>A more general way to implement this is to use a Lag operator <span class="math notranslate nohighlight">\(B\)</span></p>
@@ -1879,13 +1372,13 @@ Wall time: 1min 5s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_06_48_0.png" src="../_images/chp_06_48_0.png" />
+<img alt="../_images/4eb73533a653ca31cfb019f5a818a2290035df8d585ce5d88aaf26d5d2460f08.png" src="../_images/4eb73533a653ca31cfb019f5a818a2290035df8d585ce5d88aaf26d5d2460f08.png" />
 </div>
 </div>
 <p>Note that since we are using a stateless RNG seeding, we got the same result (yay!)</p>
 </section>
 <section id="code-6-12">
-<h3>Code 6.12<a class="headerlink" href="#code-6-12" title="Permalink to this heading">¶</a></h3>
+<h3>Code 6.12<a class="headerlink" href="#code-6-12" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gam_trend_seasonality</span><span class="p">():</span>
@@ -1971,7 +1464,7 @@ Wall time: 1min 5s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_06_52_0.png" src="../_images/chp_06_52_0.png" />
+<img alt="../_images/4a37a178807e68945aaffc57712060b4918a2aaf6bcdb273657b1a0562ffb835.png" src="../_images/4a37a178807e68945aaffc57712060b4918a2aaf6bcdb273657b1a0562ffb835.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1996,7 +1489,7 @@ Wall time: 1min 21s
 </div>
 </section>
 <section id="code-6-13">
-<h3>Code 6.13<a class="headerlink" href="#code-6-13" title="Permalink to this heading">¶</a></h3>
+<h3>Code 6.13<a class="headerlink" href="#code-6-13" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gam_ar_likelihood_idata</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span>
@@ -2013,7 +1506,7 @@ Wall time: 1min 21s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_06_55_0.png" src="../_images/chp_06_55_0.png" />
+<img alt="../_images/2b1359e83119879a4ecd9d834f3e4bef3391d384f353e0daab9f76e999c9e612.png" src="../_images/2b1359e83119879a4ecd9d834f3e4bef3391d384f353e0daab9f76e999c9e612.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2036,7 +1529,7 @@ Wall time: 1min 21s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_06_56_0.png" src="../_images/chp_06_56_0.png" />
+<img alt="../_images/8f67472e31af0c9fe945431863994c9d97c07d50d521989726bbb231f5d2058c.png" src="../_images/8f67472e31af0c9fe945431863994c9d97c07d50d521989726bbb231f5d2058c.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2062,12 +1555,12 @@ Wall time: 1min 21s
   fig.autofmt_xdate()
 </pre></div>
 </div>
-<img alt="../_images/chp_06_57_1.png" src="../_images/chp_06_57_1.png" />
+<img alt="../_images/518159461fc1a90de65976095de37a16ad7427f42ff782d4caf22893fe5155ba.png" src="../_images/518159461fc1a90de65976095de37a16ad7427f42ff782d4caf22893fe5155ba.png" />
 </div>
 </div>
 </section>
 <section id="figure-6-11">
-<h3>Figure 6.11<a class="headerlink" href="#figure-6-11" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 6.11<a class="headerlink" href="#figure-6-11" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
@@ -2083,12 +1576,12 @@ Wall time: 1min 21s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_06_59_0.png" src="../_images/chp_06_59_0.png" />
+<img alt="../_images/55a199c5b53fe72e4482af215ebeb0346a426c5368baa2f393cada9a9c7e5c42.png" src="../_images/55a199c5b53fe72e4482af215ebeb0346a426c5368baa2f393cada9a9c7e5c42.png" />
 </div>
 </div>
 </section>
 <section id="code-6-14">
-<h3>Code 6.14<a class="headerlink" href="#code-6-14" title="Permalink to this heading">¶</a></h3>
+<h3>Code 6.14<a class="headerlink" href="#code-6-14" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_gam_ar_latent</span><span class="p">(</span><span class="n">training</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -2133,7 +1626,7 @@ Wall time: 1min 21s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_06_61_0.png" src="../_images/chp_06_61_0.png" />
+<img alt="../_images/69b573f2e850096dd7d2cd9b79a325f90da5b29a0b4a931885e1db783ee69b10.png" src="../_images/69b573f2e850096dd7d2cd9b79a325f90da5b29a0b4a931885e1db783ee69b10.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2175,7 +1668,7 @@ Wall time: 3min 13s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_06_63_0.png" src="../_images/chp_06_63_0.png" />
+<img alt="../_images/884f0f2b6e301debf24a1541d88855b049273fbbe8c2939bbfe1897ce7b458ce.png" src="../_images/884f0f2b6e301debf24a1541d88855b049273fbbe8c2939bbfe1897ce7b458ce.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2188,7 +1681,7 @@ Wall time: 3min 13s
 </div>
 </section>
 <section id="figure-6-12">
-<h3>Figure 6.12<a class="headerlink" href="#figure-6-12" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 6.12<a class="headerlink" href="#figure-6-12" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot components</span>
@@ -2224,7 +1717,7 @@ Wall time: 3min 13s
   fig.autofmt_xdate()
 </pre></div>
 </div>
-<img alt="../_images/chp_06_66_1.png" src="../_images/chp_06_66_1.png" />
+<img alt="../_images/e24b4c524c7879daed32d05fd0e9e67a28026683938e3e9bde27eefdad7d4c81.png" src="../_images/e24b4c524c7879daed32d05fd0e9e67a28026683938e3e9bde27eefdad7d4c81.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2250,12 +1743,12 @@ Wall time: 3min 13s
   fig.autofmt_xdate()
 </pre></div>
 </div>
-<img alt="../_images/chp_06_67_1.png" src="../_images/chp_06_67_1.png" />
+<img alt="../_images/8bd56f98026718042b277da4649e8d8d1bca9ba6fd1c55f13bfb0123e5164cc2.png" src="../_images/8bd56f98026718042b277da4649e8d8d1bca9ba6fd1c55f13bfb0123e5164cc2.png" />
 </div>
 </div>
 </section>
 <section id="figure-6-13">
-<h3>Figure 6.13<a class="headerlink" href="#figure-6-13" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 6.13<a class="headerlink" href="#figure-6-13" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axes</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">plot_posterior</span><span class="p">(</span>
@@ -2272,11 +1765,11 @@ Wall time: 3min 13s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_06_69_0.png" src="../_images/chp_06_69_0.png" />
+<img alt="../_images/2e31c01f44d031699dedad23cf4aa05b6fd6766143b4ac3b8ca100b523b446d9.png" src="../_images/2e31c01f44d031699dedad23cf4aa05b6fd6766143b4ac3b8ca100b523b446d9.png" />
 </div>
 </div>
 <section id="reflection-on-autoregressive-and-smoothing">
-<h4>Reflection on autoregressive and smoothing<a class="headerlink" href="#reflection-on-autoregressive-and-smoothing" title="Permalink to this heading">¶</a></h4>
+<h4>Reflection on autoregressive and smoothing<a class="headerlink" href="#reflection-on-autoregressive-and-smoothing" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_steps</span> <span class="o">=</span> <span class="mi">100</span>
@@ -2294,13 +1787,13 @@ Wall time: 3min 13s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_06_71_0.png" src="../_images/chp_06_71_0.png" />
+<img alt="../_images/f398155f486d3c8d03300ab8d589ca03a8fc696bc609f451be5f895406e70e37.png" src="../_images/f398155f486d3c8d03300ab8d589ca03a8fc696bc609f451be5f895406e70e37.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="code-6-15">
-<h3>Code 6.15<a class="headerlink" href="#code-6-15" title="Permalink to this heading">¶</a></h3>
+<h3>Code 6.15<a class="headerlink" href="#code-6-15" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@tfd</span><span class="o">.</span><span class="n">JointDistributionCoroutine</span>
@@ -2379,12 +1872,12 @@ Wall time: 36.5 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_06_75_0.png" src="../_images/chp_06_75_0.png" />
+<img alt="../_images/b0c5adc59adce74a94cb0f8eb5bcd5b5ed1cc04ba79b3fc2097ae1d60b6add29.png" src="../_images/b0c5adc59adce74a94cb0f8eb5bcd5b5ed1cc04ba79b3fc2097ae1d60b6add29.png" />
 </div>
 </div>
 </section>
 <section id="figure-6-14">
-<h3>Figure 6.14<a class="headerlink" href="#figure-6-14" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 6.14<a class="headerlink" href="#figure-6-14" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nsample</span><span class="p">,</span> <span class="n">nchain</span> <span class="o">=</span> <span class="n">mcmc_samples</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
@@ -2407,15 +1900,15 @@ Wall time: 36.5 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_06_77_0.png" src="../_images/chp_06_77_0.png" />
+<img alt="../_images/957ed8f0a4d6edcbaa409f42a078a032d873ba6396535c0da6a97429c3eab8ac.png" src="../_images/957ed8f0a4d6edcbaa409f42a078a032d873ba6396535c0da6a97429c3eab8ac.png" />
 </div>
 </div>
 <section id="sarima">
-<h4>SARIMA<a class="headerlink" href="#sarima" title="Permalink to this heading">¶</a></h4>
+<h4>SARIMA<a class="headerlink" href="#sarima" title="Permalink to this heading">#</a></h4>
 </section>
 </section>
 <section id="code-6-16-and-figure-6-15">
-<h3>Code 6.16 and Figure 6.15<a class="headerlink" href="#code-6-16-and-figure-6-15" title="Permalink to this heading">¶</a></h3>
+<h3>Code 6.16 and Figure 6.15<a class="headerlink" href="#code-6-16-and-figure-6-15" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">us_monthly_birth</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/monthly_birth_usa.csv&quot;</span><span class="p">)</span>
@@ -2453,15 +1946,15 @@ Wall time: 36.5 s
   fig.autofmt_xdate()
 </pre></div>
 </div>
-<img alt="../_images/chp_06_80_1.png" src="../_images/chp_06_80_1.png" />
+<img alt="../_images/9d9d90ff8309048f5bbcd8f83b3fe7fd2c7a73e6f6587cafa562d1986f066cf9.png" src="../_images/9d9d90ff8309048f5bbcd8f83b3fe7fd2c7a73e6f6587cafa562d1986f066cf9.png" />
 </div>
 </div>
 </section>
 <section id="y-sarima-1-1-1-1-1-1-12">
-<h3>y ~ Sarima(1,1,1)(1,1,1)[12]<a class="headerlink" href="#y-sarima-1-1-1-1-1-1-12" title="Permalink to this heading">¶</a></h3>
+<h3>y ~ Sarima(1,1,1)(1,1,1)[12]<a class="headerlink" href="#y-sarima-1-1-1-1-1-1-12" title="Permalink to this heading">#</a></h3>
 </section>
 <section id="code-6-17">
-<h3>Code 6.17<a class="headerlink" href="#code-6-17" title="Permalink to this heading">¶</a></h3>
+<h3>Code 6.17<a class="headerlink" href="#code-6-17" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># y ~ Sarima(1,1,1)(1,1,1)[12]</span>
@@ -2521,7 +2014,7 @@ Wall time: 36.5 s
 </div>
 </section>
 <section id="code-6-18">
-<h3>Code 6.18<a class="headerlink" href="#code-6-18" title="Permalink to this heading">¶</a></h3>
+<h3>Code 6.18<a class="headerlink" href="#code-6-18" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@tfd</span><span class="o">.</span><span class="n">JointDistributionCoroutine</span>
@@ -2702,11 +2195,11 @@ Wall time: 28.8 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_06_88_0.png" src="../_images/chp_06_88_0.png" />
+<img alt="../_images/81d4d32880993dcc8bfbdb05acb9fc36a16574b69a12628aed3a9a039008b7e5.png" src="../_images/81d4d32880993dcc8bfbdb05acb9fc36a16574b69a12628aed3a9a039008b7e5.png" />
 </div>
 </div>
 <section id="sarimax-class">
-<h4>SARIMAX Class<a class="headerlink" href="#sarimax-class" title="Permalink to this heading">¶</a></h4>
+<h4>SARIMAX Class<a class="headerlink" href="#sarimax-class" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
@@ -2725,7 +2218,7 @@ Wall time: 28.8 s
                  <span class="n">seasonal_order</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
                  <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span>
                  <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        SARIMAX Likelihood for univariate time series</span>
 <span class="sd">        </span>
 <span class="sd">        order - (p,d,q)</span>
@@ -2860,7 +2353,7 @@ Wall time: 28.8 s
 </div>
 </section>
 <section id="id1">
-<h4>y ~ Sarima(1,1,1)(1,1,1)[12]<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h4>
+<h4>y ~ Sarima(1,1,1)(1,1,1)[12]<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">Q</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
@@ -2934,13 +2427,13 @@ Wall time: 31.1 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_06_94_0.png" src="../_images/chp_06_94_0.png" />
+<img alt="../_images/0f8f3c12a1af0bf650e7630cc4568538368c1e84d03a49ab8d9925d64b6240ea.png" src="../_images/0f8f3c12a1af0bf650e7630cc4568538368c1e84d03a49ab8d9925d64b6240ea.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="code-6-8">
-<h3>Code 6.8<a class="headerlink" href="#code-6-8" title="Permalink to this heading">¶</a></h3>
+<h3>Code 6.8<a class="headerlink" href="#code-6-8" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gen_fourier_basis</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">365.25</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
@@ -3028,11 +2521,11 @@ Wall time: 34.6 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_06_98_0.png" src="../_images/chp_06_98_0.png" />
+<img alt="../_images/beaa427120496440472ae83cf5832b6116def1253d58c1c7f0cdd98b69c810b3.png" src="../_images/beaa427120496440472ae83cf5832b6116def1253d58c1c7f0cdd98b69c810b3.png" />
 </div>
 </div>
 <section id="y-sarima-0-1-2-1-1-1-12">
-<h4>y ~ Sarima(0,1,2)(1,1,1)[12]<a class="headerlink" href="#y-sarima-0-1-2-1-1-1-12" title="Permalink to this heading">¶</a></h4>
+<h4>y ~ Sarima(0,1,2)(1,1,1)[12]<a class="headerlink" href="#y-sarima-0-1-2-1-1-1-12" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@tfd</span><span class="o">.</span><span class="n">JointDistributionCoroutine</span>
@@ -3102,7 +2595,7 @@ Wall time: 1min 3s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_06_102_0.png" src="../_images/chp_06_102_0.png" />
+<img alt="../_images/af86c69ac9869119105a62876ff1a89451574643e5a018c77b395adeea7ae0ce.png" src="../_images/af86c69ac9869119105a62876ff1a89451574643e5a018c77b395adeea7ae0ce.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -3221,7 +2714,7 @@ Wall time: 1min 3s
 </section>
 </section>
 <section id="table-6-1">
-<h3>Table 6.1<a class="headerlink" href="#table-6-1" title="Permalink to this heading">¶</a></h3>
+<h3>Table 6.1<a class="headerlink" href="#table-6-1" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">compare_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;SARIMA(1,1,1)(1,1,1)[12]&quot;</span><span class="p">:</span> <span class="n">sarima_0_idata</span><span class="p">,</span>
@@ -3305,9 +2798,9 @@ Wall time: 1min 3s
 </section>
 </section>
 <section id="state-space-models">
-<h2>State Space Models<a class="headerlink" href="#state-space-models" title="Permalink to this heading">¶</a></h2>
+<h2>State Space Models<a class="headerlink" href="#state-space-models" title="Permalink to this heading">#</a></h2>
 <section id="code-6-19">
-<h3>Code 6.19<a class="headerlink" href="#code-6-19" title="Permalink to this heading">¶</a></h3>
+<h3>Code 6.19<a class="headerlink" href="#code-6-19" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">theta0</span><span class="p">,</span> <span class="n">theta1</span> <span class="o">=</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">2.6</span>
@@ -3323,7 +2816,7 @@ Wall time: 1min 3s
 </div>
 </section>
 <section id="code-6-20">
-<h3>Code 6.20<a class="headerlink" href="#code-6-20" title="Permalink to this heading">¶</a></h3>
+<h3>Code 6.20<a class="headerlink" href="#code-6-20" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># X_0</span>
@@ -3355,7 +2848,7 @@ Wall time: 1min 3s
 </div>
 </section>
 <section id="code-6-21">
-<h3>Code 6.21<a class="headerlink" href="#code-6-21" title="Permalink to this heading">¶</a></h3>
+<h3>Code 6.21<a class="headerlink" href="#code-6-21" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run the Kalman filter</span>
@@ -3371,7 +2864,7 @@ Wall time: 1min 3s
 </div>
 </section>
 <section id="figure-6-16">
-<h3>Figure 6.16<a class="headerlink" href="#figure-6-16" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 6.16<a class="headerlink" href="#figure-6-16" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m0</span> <span class="o">=</span> <span class="n">initial_state_prior</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
@@ -3415,15 +2908,15 @@ Wall time: 1min 3s
   plt.tight_layout();
 </pre></div>
 </div>
-<img alt="../_images/chp_06_115_1.png" src="../_images/chp_06_115_1.png" />
+<img alt="../_images/69336afc9d2e942138b5055153efd67f21dad9b5748ee1bdb024cc21de358d3d.png" src="../_images/69336afc9d2e942138b5055153efd67f21dad9b5748ee1bdb024cc21de358d3d.png" />
 </div>
 </div>
 <section id="arma-as-lgssm">
-<h4>ARMA as LGSSM<a class="headerlink" href="#arma-as-lgssm" title="Permalink to this heading">¶</a></h4>
+<h4>ARMA as LGSSM<a class="headerlink" href="#arma-as-lgssm" title="Permalink to this heading">#</a></h4>
 </section>
 </section>
 <section id="code-6-22">
-<h3>Code 6.22<a class="headerlink" href="#code-6-22" title="Permalink to this heading">¶</a></h3>
+<h3>Code 6.22<a class="headerlink" href="#code-6-22" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_timesteps</span> <span class="o">=</span> <span class="mi">300</span>
@@ -3484,7 +2977,7 @@ Wall time: 1min 3s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_06_120_0.png" src="../_images/chp_06_120_0.png" />
+<img alt="../_images/cb4fcda0fdcaa0b71f64fe0b6a7c08d67603eed19f5a9167710a5b46317e2d62.png" src="../_images/cb4fcda0fdcaa0b71f64fe0b6a7c08d67603eed19f5a9167710a5b46317e2d62.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -3501,7 +2994,7 @@ Wall time: 1min 3s
 </div>
 </section>
 <section id="code-6-23">
-<h3>Code 6.23<a class="headerlink" href="#code-6-23" title="Permalink to this heading">¶</a></h3>
+<h3>Code 6.23<a class="headerlink" href="#code-6-23" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@tfd</span><span class="o">.</span><span class="n">JointDistributionCoroutine</span>
@@ -3576,7 +3069,7 @@ Wall time: 29.8 s
 </div>
 </section>
 <section id="figure-6-17">
-<h3>Figure 6.17<a class="headerlink" href="#figure-6-17" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 6.17<a class="headerlink" href="#figure-6-17" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_trace</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span>
@@ -3596,15 +3089,15 @@ Wall time: 29.8 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_06_126_0.png" src="../_images/chp_06_126_0.png" />
+<img alt="../_images/bce877af760b4b558d0bb7756871ade493e3026a6acf7100dd0f3bb433c28f8c.png" src="../_images/bce877af760b4b558d0bb7756871ade493e3026a6acf7100dd0f3bb433c28f8c.png" />
 </div>
 </div>
 <section id="bayesian-structural-time-series-models-on-monthly-live-birth-data">
-<h4>Bayesian Structural Time Series Models on Monthly Live Birth Data<a class="headerlink" href="#bayesian-structural-time-series-models-on-monthly-live-birth-data" title="Permalink to this heading">¶</a></h4>
+<h4>Bayesian Structural Time Series Models on Monthly Live Birth Data<a class="headerlink" href="#bayesian-structural-time-series-models-on-monthly-live-birth-data" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_bsts_model</span><span class="p">(</span><span class="n">observed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Args:</span>
 <span class="sd">    observed: Observed time series, tfp.sts use it to generate data informed prior.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -3639,7 +3132,7 @@ Instructions for updating:
 </section>
 </section>
 <section id="code-6-25">
-<h3>Code 6.25<a class="headerlink" href="#code-6-25" title="Permalink to this heading">¶</a></h3>
+<h3>Code 6.25<a class="headerlink" href="#code-6-25" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">birth_model</span><span class="o">.</span><span class="n">components</span>
@@ -3655,7 +3148,7 @@ Instructions for updating:
 </div>
 </section>
 <section id="code-6-26">
-<h3>Code 6.26<a class="headerlink" href="#code-6-26" title="Permalink to this heading">¶</a></h3>
+<h3>Code 6.26<a class="headerlink" href="#code-6-26" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">birth_model</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">parameters</span>
@@ -3704,12 +3197,12 @@ Wall time: 11min 22s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_06_134_0.png" src="../_images/chp_06_134_0.png" />
+<img alt="../_images/98b8962218d66dcfdd273168a6ec6a4519befcfccc682799ed864bfbaf53b4d0.png" src="../_images/98b8962218d66dcfdd273168a6ec6a4519befcfccc682799ed864bfbaf53b4d0.png" />
 </div>
 </div>
 </section>
 <section id="code-6-27">
-<h3>Code 6.27<a class="headerlink" href="#code-6-27" title="Permalink to this heading">¶</a></h3>
+<h3>Code 6.27<a class="headerlink" href="#code-6-27" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using a subset of posterior samples.</span>
@@ -3735,9 +3228,9 @@ Wall time: 11min 22s
 </section>
 </section>
 <section id="other-time-series-models">
-<h2>Other Time Series Models<a class="headerlink" href="#other-time-series-models" title="Permalink to this heading">¶</a></h2>
+<h2>Other Time Series Models<a class="headerlink" href="#other-time-series-models" title="Permalink to this heading">#</a></h2>
 <section id="figure-6-19">
-<h3>Figure 6.19<a class="headerlink" href="#figure-6-19" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 6.19<a class="headerlink" href="#figure-6-19" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">birth_dates</span> <span class="o">=</span> <span class="n">us_monthly_birth</span><span class="o">.</span><span class="n">index</span>
@@ -3794,7 +3287,7 @@ Wall time: 11min 22s
   fig.autofmt_xdate()
 </pre></div>
 </div>
-<img alt="../_images/chp_06_139_1.png" src="../_images/chp_06_139_1.png" />
+<img alt="../_images/7675ef90014e427cd636f2f944e1a970e8d855c4a1722ec776332c787426a915.png" src="../_images/7675ef90014e427cd636f2f944e1a970e8d855c4a1722ec776332c787426a915.png" />
 </div>
 </div>
 </section>
@@ -3813,7 +3306,7 @@ Wall time: 11min 22s
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./notebooks"
         },
         predefinedOutput: true
@@ -3821,44 +3314,173 @@ Wall time: 11min 22s
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="chp_05.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Code 5: Splines</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chp_05.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Code 5: Splines</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="chp_07.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="chp_07.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Code 7: Bayesian Additive Regression Trees</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
+                </footer>
+              
+            </div>
             
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Martin, Kumar, Lao<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-analysis-as-a-regression-problem">Time Series Analysis as a Regression Problem</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-1">Code 6.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-6-1">Figure 6.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-2-and-figure-6-2">Code 6.2 and Figure 6.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-3">Code 6.3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-4-and-figure-6-3">Code 6.4 and Figure 6.3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-5">Code 6.5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-6">Code 6.6</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-6-4">Figure 6.4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-6-5">Figure 6.5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-7">Code 6.7</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-8-and-figure-6-7">Code 6.8 and Figure 6.7</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-9">Code 6.9</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autoregressive-models">Autoregressive Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-6-8">Figure 6.8</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-6-9">Figure 6.9</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-10-and-figure-6-10">Code 6.10 and Figure 6.10</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-11">Code 6.11</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-12">Code 6.12</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-13">Code 6.13</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-6-11">Figure 6.11</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-14">Code 6.14</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-6-12">Figure 6.12</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-6-13">Figure 6.13</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reflection-on-autoregressive-and-smoothing">Reflection on autoregressive and smoothing</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-15">Code 6.15</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-6-14">Figure 6.14</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sarima">SARIMA</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-16-and-figure-6-15">Code 6.16 and Figure 6.15</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#y-sarima-1-1-1-1-1-1-12">y ~ Sarima(1,1,1)(1,1,1)[12]</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-17">Code 6.17</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-18">Code 6.18</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sarimax-class">SARIMAX Class</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">y ~ Sarima(1,1,1)(1,1,1)[12]</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-8">Code 6.8</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#y-sarima-0-1-2-1-1-1-12">y ~ Sarima(0,1,2)(1,1,1)[12]</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-6-1">Table 6.1</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-space-models">State Space Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-19">Code 6.19</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-20">Code 6.20</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-21">Code 6.21</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-6-16">Figure 6.16</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#arma-as-lgssm">ARMA as LGSSM</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-22">Code 6.22</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-23">Code 6.23</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-6-17">Figure 6.17</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-structural-time-series-models-on-monthly-live-birth-data">Bayesian Structural Time Series Models on Monthly Live Birth Data</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-25">Code 6.25</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-26">Code 6.26</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-6-27">Code 6.27</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-time-series-models">Other Time Series Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-6-19">Figure 6.19</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
 
-      </div>
-    </div>
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Martin, Kumar, Lao
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

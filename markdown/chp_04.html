@@ -1,39 +1,47 @@
 
+
 <!DOCTYPE html>
 
-<html lang="en">
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>4. Extending Linear Models &#8212; Bayesian Modeling and Computation in Python</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-codeautolink.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -42,12 +50,13 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -56,466 +65,317 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'markdown/chp_04';</script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="5. Splines" href="chp_05.html" />
     <link rel="prev" title="3. Linear Models and Probabilistic Programming Languages" href="chp_03.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en">
-    
-
-    <!-- Google Analytics -->
-    
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-702QMHG8ST"></script>
-<script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){ dataLayer.push(arguments); }
-                    gtag('js', new Date());
-                    gtag('config', 'G-702QMHG8ST');
-                </script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-      
-      
-      <h1 class="site-logo" id="site-title">Bayesian Modeling and Computation in Python</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 0
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="dedication.html">
-   Dedication
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="foreword.html">
-   Foreword
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="preface.html">
-   Preface
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="symbollist.html">
-   Symbols
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 1
- </span>
-</p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_01.html">
-   1. Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_02.html">
-   2. Exploratory Analysis of Bayesian Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_03.html">
-   3. Linear Models and Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   4. Extending Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_05.html">
-   5. Splines
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_06.html">
-   6. Time Series
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_07.html">
-   7. Bayesian Additive Regression Trees
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_08.html">
-   8. Approximate Bayesian Computation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_09.html">
-   9. End to End Bayesian Workflows
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_10.html">
-   10. Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_11.html">
-   11. Appendiceal Topics
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="glossary.html">
-   12. Glossary
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="references.html">
-   13. References
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 2
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_01.html">
-   Code 1: Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_02.html">
-   Code 2: Exploratory Analysis of Bayesian Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_03.html">
-   Code 3: Linear Models and Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_04.html">
-   Code 4: Extending Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_05.html">
-   Code 5: Splines
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_06.html">
-   Code 6: Time Series
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_07.html">
-   Code 7: Bayesian Additive Regression Trees
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_08.html">
-   Code 8: Approximate Bayesian Computation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_09.html">
-   Code 9: End to End Bayesian Workflows
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_10.html">
-   Code 10: Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_11.html">
-   Code 11: Appendiceal Topics
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 3
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../solutions/chp_01.html">
-   Solutions 1: Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../solutions/chp_02.html">
-   Solutions 2: Exploratory Analysis of Bayesian models
-  </a>
- </li>
-</ul>
-
-    </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_04.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+      <div class="bd-sidebar-primary bd-sidebar">
         
-    </div>
-</div>
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
+  
 
-            <!-- Launch buttons -->
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#transforming-covariates">
-   4.1. Transforming Covariates
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#varying-uncertainty">
-   4.2. Varying Uncertainty
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#interaction-effects">
-   4.3. Interaction Effects
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#robust-regression">
-   4.4. Robust Regression
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#pooling-multilevel-models-and-mixed-effects">
-   4.5. Pooling, Multilevel Models, and Mixed Effects
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#unpooled-parameters">
-     4.5.1. Unpooled Parameters
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#pooled-parameters">
-     4.5.2. Pooled Parameters
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#mixing-group-and-common-parameters">
-     4.5.3. Mixing Group and Common Parameters
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#hierarchical-models">
-   4.6. Hierarchical Models
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#posterior-geometry-matters">
-     4.6.1. Posterior Geometry Matters
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#predictions-at-multiple-levels">
-     4.6.2. Predictions at Multiple Levels
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#priors-for-multilevel-models">
-     4.6.3. Priors for Multilevel Models
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
-   4.7. Exercises
-  </a>
- </li>
+<a class="navbar-brand logo" href="../welcome.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Bayesian Modeling and Computation in Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 0</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="dedication.html">Dedication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="foreword.html">Foreword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preface.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="symbollist.html">Symbols</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 1</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chp_01.html">1. Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_02.html">2. Exploratory Analysis of Bayesian Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_03.html">3. Linear Models and Probabilistic Programming Languages</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Extending Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_05.html">5. Splines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_06.html">6. Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_07.html">7. Bayesian Additive Regression Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_08.html">8. Approximate Bayesian Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_09.html">9. End to End Bayesian Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_10.html">10. Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_11.html">11. Appendiceal Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">12. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">13. References</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_01.html">Code 1: Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_02.html">Code 2: Exploratory Analysis of Bayesian Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_03.html">Code 3: Linear Models and Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_04.html">Code 4: Extending Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_05.html">Code 5: Splines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_06.html">Code 6: Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_07.html">Code 7: Bayesian Additive Regression Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_08.html">Code 8: Approximate Bayesian Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_09.html">Code 9: End to End Bayesian Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_10.html">Code 10: Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_11.html">Code 11: Appendiceal Topics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../solutions/chp_01.html">Solutions 1: Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/chp_02.html">Solutions 2: Exploratory Analysis of Bayesian models</a></li>
 </ul>
 
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_04.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Extending Linear Models</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transforming-covariates">4.1. Transforming Covariates</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#varying-uncertainty">4.2. Varying Uncertainty</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interaction-effects">4.3. Interaction Effects</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robust-regression">4.4. Robust Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pooling-multilevel-models-and-mixed-effects">4.5. Pooling, Multilevel Models, and Mixed Effects</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unpooled-parameters">4.5.1. Unpooled Parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pooled-parameters">4.5.2. Pooled Parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mixing-group-and-common-parameters">4.5.3. Mixing Group and Common Parameters</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hierarchical-models">4.6. Hierarchical Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#posterior-geometry-matters">4.6.1. Posterior Geometry Matters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predictions-at-multiple-levels">4.6.2. Predictions at Multiple Levels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#priors-for-multilevel-models">4.6.3. Priors for Multilevel Models</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">4.7. Exercises</a></li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Extending Linear Models</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#transforming-covariates">
-   4.1. Transforming Covariates
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#varying-uncertainty">
-   4.2. Varying Uncertainty
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#interaction-effects">
-   4.3. Interaction Effects
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#robust-regression">
-   4.4. Robust Regression
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#pooling-multilevel-models-and-mixed-effects">
-   4.5. Pooling, Multilevel Models, and Mixed Effects
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#unpooled-parameters">
-     4.5.1. Unpooled Parameters
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#pooled-parameters">
-     4.5.2. Pooled Parameters
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#mixing-group-and-common-parameters">
-     4.5.3. Mixing Group and Common Parameters
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#hierarchical-models">
-   4.6. Hierarchical Models
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#posterior-geometry-matters">
-     4.6.1. Posterior Geometry Matters
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#predictions-at-multiple-levels">
-     4.6.2. Predictions at Multiple Levels
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#priors-for-multilevel-models">
-     4.6.3. Priors for Multilevel Models
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
-   4.7. Exercises
-  </a>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="extending-linear-models">
-<span id="chap3"></span><h1><span class="section-number">4. </span>Extending Linear Models<a class="headerlink" href="#extending-linear-models" title="Permalink to this heading">¶</a></h1>
+<span id="chap3"></span><h1><span class="section-number">4. </span>Extending Linear Models<a class="headerlink" href="#extending-linear-models" title="Permalink to this heading">#</a></h1>
 <p>A common trope in a sales pitch is the phrase “But wait! There is
 more!” In the lead up an audience is shown a product that incredibly
 seems to do it all, but somehow the salesperson shows off another use
@@ -527,7 +387,7 @@ varying variance, to multilevel models: each of these ideas provide
 extra flexibility to use linear regressions in an even wider set of
 circumstances.</p>
 <section id="transforming-covariates">
-<span id="id1"></span><h2><span class="section-number">4.1. </span>Transforming Covariates<a class="headerlink" href="#transforming-covariates" title="Permalink to this heading">¶</a></h2>
+<span id="id1"></span><h2><span class="section-number">4.1. </span>Transforming Covariates<a class="headerlink" href="#transforming-covariates" title="Permalink to this heading">#</a></h2>
 <p>In Chapter <a class="reference internal" href="chp_03.html#chap2"><span class="std std-ref">3</span></a> we saw that with a linear model and an
 identity link function, a unit change in <span class="math notranslate nohighlight">\(x_i\)</span> led to a <span class="math notranslate nohighlight">\(\beta_i\)</span> change
 in the expected response variable <span class="math notranslate nohighlight">\(Y\)</span>, at any value of <span class="math notranslate nohighlight">\(X_i\)</span>. Then we
@@ -544,7 +404,7 @@ express mathematically by extending Equation
 term, <span class="math notranslate nohighlight">\(f(.)\)</span>, which indicates an arbitrary transformation applied to
 each covariate <span class="math notranslate nohighlight">\((X_i)\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-covariate-transformation-regression">
-<span class="eqno">(4.1)<a class="headerlink" href="#equation-eq-covariate-transformation-regression" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(4.1)<a class="headerlink" href="#equation-eq-covariate-transformation-regression" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{split}
     \mu =&amp; \beta_0 + \beta_1 f_1(X_1) + \dots + \beta_m f_m(X_m) \\
 Y \sim&amp; \mathcal{N}(\mu, \sigma)
 \end{split}\end{split}\]</div>
@@ -558,7 +418,7 @@ the length of babies. First we will load the data and plot in Code Block
 <a class="reference internal" href="#babies-data"><span class="std std-ref">babies_data</span></a> and plot the age and month in
 <a class="reference internal" href="#fig-baby-length-scatter"><span class="std std-numref">Fig. 4.1</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="babies-data">
-<div class="code-block-caption"><span class="caption-number">Listing 4.1 </span><span class="caption-text">babies_data</span><a class="headerlink" href="#babies-data" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 4.1 </span><span class="caption-text">babies_data</span><a class="headerlink" href="#babies-data" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">babies</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/babies.csv&quot;</span><span class="p">)</span>
 <span class="c1"># Add a constant term so we can use the dot product to express the intercept</span>
 <span class="n">babies</span><span class="p">[</span><span class="s2">&quot;Intercept&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
@@ -569,7 +429,7 @@ the length of babies. First we will load the data and plot in Code Block
 <a class="reference internal image-reference" href="../_images/Baby_Length_Scatter.png"><img alt="../_images/Baby_Length_Scatter.png" src="../_images/Baby_Length_Scatter.png" style="width: 7.00in;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.1 </span><span class="caption-text">Scatter plot of the nonlinear correlation between a baby’s age in months
-and observed, or measured, length.</span><a class="headerlink" href="#fig-baby-length-scatter" title="Permalink to this image">¶</a></p>
+and observed, or measured, length.</span><a class="headerlink" href="#fig-baby-length-scatter" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Let us formulate a model in Code Block
@@ -579,7 +439,7 @@ determine how quickly a child is growing per month. Note that this model
 formulation contains no transformations, and nothing we have not seen
 already in Chapter <a class="reference internal" href="chp_03.html#chap2"><span class="std std-ref">3</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="babies-linear">
-<div class="code-block-caption"><span class="caption-number">Listing 4.2 </span><span class="caption-text">babies_linear</span><a class="headerlink" href="#babies-linear" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 4.2 </span><span class="caption-text">babies_linear</span><a class="headerlink" href="#babies-linear" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_baby_linear</span><span class="p">:</span>
     <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β&quot;</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
@@ -617,7 +477,7 @@ predictive and the light gray is the 94% highest density interval of the
 posterior predictive. The highest density interval around the mean line
 of fit covers most of the data points despite the predictions tend to be
 either biased high in the early months, 0 to 3, as well as late months,
-22 to 25, and biased low in the middle at months 10 to 15.</span><a class="headerlink" href="#fig-baby-length-linear" title="Permalink to this image">¶</a></p>
+22 to 25, and biased low in the middle at months 10 to 15.</span><a class="headerlink" href="#fig-baby-length-linear" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Thinking back to our model choices, we still believe that at any age, or
@@ -628,7 +488,7 @@ generally follows the shape of a square root transformation on the month
 covariate which we write in <code class="docutils literal notranslate"><span class="pre">model_sqrt</span></code> in Code Block
 <a class="reference internal" href="#babies-transformed"><span class="std std-ref">babies_transformed</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="babies-transformed">
-<div class="code-block-caption"><span class="caption-number">Listing 4.3 </span><span class="caption-text">babies_transformed</span><a class="headerlink" href="#babies-transformed" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 4.3 </span><span class="caption-text">babies_transformed</span><a class="headerlink" href="#babies-transformed" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_baby_sqrt</span><span class="p">:</span>
     <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β&quot;</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
@@ -645,7 +505,7 @@ covariate which we write in <code class="docutils literal notranslate"><span cla
 <figcaption>
 <p><span class="caption-number">Fig. 4.3 </span><span class="caption-text">Linear prediction with transformed covariate. On the left the x-axes is
 untransformed and on the right transformed. The linearization of the
-nonlinear growth rate is visible on the transformed axes on the right.</span><a class="headerlink" href="#fig-baby-length-non-linear" title="Permalink to this image">¶</a></p>
+nonlinear growth rate is visible on the transformed axes on the right.</span><a class="headerlink" href="#fig-baby-length-non-linear" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Plotting the fit of the means, along with bands representing the highest
@@ -659,7 +519,7 @@ your choice whatever it may be, and verify your results are reasonable
 using visual and numerical checks.</p>
 </section>
 <section id="varying-uncertainty">
-<span id="id3"></span><h2><span class="section-number">4.2. </span>Varying Uncertainty<a class="headerlink" href="#varying-uncertainty" title="Permalink to this heading">¶</a></h2>
+<span id="id3"></span><h2><span class="section-number">4.2. </span>Varying Uncertainty<a class="headerlink" href="#varying-uncertainty" title="Permalink to this heading">#</a></h2>
 <p>Thus far we have used linear models to model the mean of <span class="math notranslate nohighlight">\(Y\)</span> while
 assuming the variance of the residuals <a class="footnote-reference brackets" href="#id27" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> is constant along the range
 of the response. However, this assumption of fixed variance is a
@@ -667,7 +527,7 @@ modeling choice that may not be adequate. To account for changing
 uncertainty we can extend Equation
 <a class="reference internal" href="#equation-eq-covariate-transformation-regression">(4.1)</a> into:</p>
 <div class="math notranslate nohighlight" id="equation-eq-varying-variance">
-<span class="eqno">(4.2)<a class="headerlink" href="#equation-eq-varying-variance" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(4.2)<a class="headerlink" href="#equation-eq-varying-variance" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{split}
     \mu =&amp; \beta_0 + \beta_1 f_1(X_1) + \dots + \beta_m f_m(X_m) \\
     \sigma =&amp; \delta_0 + \delta_1 g_1(X_1) + \dots + \delta_m g_m(X_m) \\
 Y \sim&amp; \mathcal{N}(\mu, \sigma)
@@ -680,7 +540,7 @@ expand <code class="docutils literal notranslate"><span class="pre">model_sqrt</
 that when children are young their lengths tend to cluster closely
 together, but as they age their lengths tend to become more dispersed.</p>
 <div class="literal-block-wrapper docutils container" id="babies-varying-variance">
-<div class="code-block-caption"><span class="caption-number">Listing 4.4 </span><span class="caption-text">babies_varying_variance</span><a class="headerlink" href="#babies-varying-variance" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 4.4 </span><span class="caption-text">babies_varying_variance</span><a class="headerlink" href="#babies-varying-variance" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_baby_vv</span><span class="p">:</span>
     <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β&quot;</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
     
@@ -718,12 +578,12 @@ plot the expected mean prediction, represented with a blue line, is
 identical to <a class="reference internal" href="#fig-baby-length-non-linear"><span class="std std-numref">Fig. 4.3</span></a>, however, the HDI
 intervals of the posterior are non-constant. The bottom graph plots the
 expected error estimate <span class="math notranslate nohighlight">\(\sigma\)</span> as a function of age in months. Note
-how the expected estimate of error increases as months increase.</span><a class="headerlink" href="#fig-baby-length-sqrt-vv-fit-include-error" title="Permalink to this image">¶</a></p>
+how the expected estimate of error increases as months increase.</span><a class="headerlink" href="#fig-baby-length-sqrt-vv-fit-include-error" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="interaction-effects">
-<span id="id5"></span><h2><span class="section-number">4.3. </span>Interaction Effects<a class="headerlink" href="#interaction-effects" title="Permalink to this heading">¶</a></h2>
+<span id="id5"></span><h2><span class="section-number">4.3. </span>Interaction Effects<a class="headerlink" href="#interaction-effects" title="Permalink to this heading">#</a></h2>
 <p>In all our models thus far, we have assumed the effect of one covariate
 to the response variable is independent of any other covariates. This is
 not always the case. Consider a situation where we want to model ice
@@ -743,7 +603,7 @@ to contribute independently (as in a standard linear regression model),
 we will not be able to fully explain the phenomena. We can express an
 interaction effect as:</p>
 <div class="math notranslate nohighlight" id="equation-eq-interaction-effect">
-<span class="eqno">(4.3)<a class="headerlink" href="#equation-eq-interaction-effect" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(4.3)<a class="headerlink" href="#equation-eq-interaction-effect" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{split}
     \mu =&amp; \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_1X_2\\
     Y \sim&amp; \mathcal{N}(\mu, \sigma)
 \end{split}\end{split}\]</div>
@@ -766,7 +626,7 @@ effect between smoking and the total bill amount <a class="footnote-reference br
 <a class="reference internal" href="chp_03.html#penguin-mass-multi"><span class="std std-ref">penguin_mass_multi</span></a> we can include
 smokers as an independent categorical variable in our regression.</p>
 <div class="literal-block-wrapper docutils container" id="tips-no-interaction">
-<div class="code-block-caption"><span class="caption-number">Listing 4.5 </span><span class="caption-text">tips_no_interaction</span><a class="headerlink" href="#tips-no-interaction" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 4.5 </span><span class="caption-text">tips_no_interaction</span><a class="headerlink" href="#tips-no-interaction" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tips_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/tips.csv&quot;</span><span class="p">)</span>
 <span class="n">tips</span> <span class="o">=</span> <span class="n">tips_df</span><span class="p">[</span><span class="s2">&quot;tip&quot;</span><span class="p">]</span>
 <span class="n">total_bill_c</span> <span class="o">=</span> <span class="p">(</span><span class="n">tips_df</span><span class="p">[</span><span class="s2">&quot;total_bill&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">tips_df</span><span class="p">[</span><span class="s2">&quot;total_bill&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>  
@@ -788,7 +648,7 @@ smokers as an independent categorical variable in our regression.</p>
 <p>Let us also create a model where we include an interaction term in Code
 Block <a class="reference internal" href="#tips-interaction"><span class="std std-ref">tips_interaction</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="tips-interaction">
-<div class="code-block-caption"><span class="caption-number">Listing 4.6 </span><span class="caption-text">tips_interaction</span><a class="headerlink" href="#tips-interaction" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 4.6 </span><span class="caption-text">tips_interaction</span><a class="headerlink" href="#tips-interaction" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_interaction</span><span class="p">:</span>
     <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
     <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
@@ -814,7 +674,7 @@ estimated lines are parallel. On the left we show our model from Code
 Block <a class="reference internal" href="#tips-no-interaction"><span class="std std-ref">tips_no_interaction</span></a> that
 includes an interaction term between smoker or non-smoker and bill
 amount. In the interaction model the slopes between the groups are
-allowed to vary due to the added interaction term.</span><a class="headerlink" href="#fig-smoker-tip-interaction" title="Permalink to this image">¶</a></p>
+allowed to vary due to the added interaction term.</span><a class="headerlink" href="#fig-smoker-tip-interaction" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The difference is visible in <a class="reference internal" href="#fig-smoker-tip-interaction"><span class="std std-numref">Fig. 4.5</span></a>.
@@ -844,7 +704,7 @@ modeling different slopes per group, there are many additional benefits
 that arise from modeling all the data together.</p>
 </section>
 <section id="robust-regression">
-<span id="id7"></span><h2><span class="section-number">4.4. </span>Robust Regression<a class="headerlink" href="#robust-regression" title="Permalink to this heading">¶</a></h2>
+<span id="id7"></span><h2><span class="section-number">4.4. </span>Robust Regression<a class="headerlink" href="#robust-regression" title="Permalink to this heading">#</a></h2>
 <p>Outliers, as the name suggests, are observations that lie outside of the
 range “reasonable expectation”. Outliers are undesirable, as one, or
 few, of these data points could change the parameter estimation of a
@@ -888,7 +748,7 @@ with a Student’s t-distribution.</p>
 with varying <span class="math notranslate nohighlight">\(\nu\)</span> parameters. The location and scale parameters are all
 identical, which isolates the effect <span class="math notranslate nohighlight">\(\nu\)</span> has on the tails of the
 distribution. Smaller values of <span class="math notranslate nohighlight">\(\nu\)</span> put more density into the tails of
-the distribution.</span><a class="headerlink" href="#fig-studentt-normal-comparison" title="Permalink to this image">¶</a></p>
+the distribution.</span><a class="headerlink" href="#fig-studentt-normal-comparison" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>This can be shown in an example. Say you own a restaurant in Argentina
@@ -904,7 +764,7 @@ empanadas than usual.</p>
 <a class="reference internal image-reference" href="../_images/Empanada_Scatter_Plot.png"><img alt="../_images/Empanada_Scatter_Plot.png" src="../_images/Empanada_Scatter_Plot.png" style="width: 7.00in;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.7 </span><span class="caption-text">Simulated data of number of customers plotted against the pesos
-returned. The 5 dots at the top of the chart are considered outliers.</span><a class="headerlink" href="#fig-empanada-scatter-plot" title="Permalink to this image">¶</a></p>
+returned. The 5 dots at the top of the chart are considered outliers.</span><a class="headerlink" href="#fig-empanada-scatter-plot" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Regardless of the outliers, we want to estimate the relationship between
@@ -923,7 +783,7 @@ the 5 outliers, which affects the estimates. Additionally, note how the
 estimate of <span class="math notranslate nohighlight">\(\sigma\)</span> is quite wide compared to the plotted data in
 <a class="reference internal" href="#fig-empanada-scatter-non-robust"><span class="std std-numref">Fig. 4.8</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="non-robust-regression">
-<div class="code-block-caption"><span class="caption-number">Listing 4.7 </span><span class="caption-text">non_robust_regression</span><a class="headerlink" href="#non-robust-regression" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 4.7 </span><span class="caption-text">non_robust_regression</span><a class="headerlink" href="#non-robust-regression" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_non_robust</span><span class="p">:</span>
     <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
     <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
@@ -945,11 +805,11 @@ estimate of <span class="math notranslate nohighlight">\(\sigma\)</span> is quit
 scales, the top including the outliers, and the bottom focused on the
 regression itself. The systemic bias is more evident in bottom plot as
 the mean regression line is estimated to be above the nominal data
-points.</span><a class="headerlink" href="#fig-empanada-scatter-non-robust" title="Permalink to this image">¶</a></p>
+points.</span><a class="headerlink" href="#fig-empanada-scatter-non-robust" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <table class="table" id="tab-non-robust-regression">
-<caption><span class="caption-number">Table 4.1 </span><span class="caption-text">Estimate of parameters for model non_robust_regression.</span><a class="headerlink" href="#tab-non-robust-regression" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-number">Table 4.1 </span><span class="caption-text">Estimate of parameters for model non_robust_regression.</span><a class="headerlink" href="#tab-non-robust-regression" title="Permalink to this table">#</a></caption>
 <tbody>
 <tr class="row-odd"><td></td>
 <td><p><strong>mean</strong></p></td>
@@ -988,7 +848,7 @@ distribution shows that there is enough flexibility in the Student’s
 t-distribution to reasonably model the nominal data, despite the
 presence of outliers.</p>
 <div class="literal-block-wrapper docutils container" id="code-robust-regression">
-<div class="code-block-caption"><span class="caption-number">Listing 4.8 </span><span class="caption-text">code_robust_regression</span><a class="headerlink" href="#code-robust-regression" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 4.8 </span><span class="caption-text">code_robust_regression</span><a class="headerlink" href="#code-robust-regression" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_robust</span><span class="p">:</span>
     <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
     <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
@@ -1004,7 +864,7 @@ presence of outliers.</p>
 </div>
 </div>
 <table class="table" id="tab-robust-regression">
-<caption><span class="caption-number">Table 4.2 </span><span class="caption-text">Estimate of parameters for model robust_regression.</span><a class="headerlink" href="#tab-robust-regression" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-number">Table 4.2 </span><span class="caption-text">Estimate of parameters for model robust_regression.</span><a class="headerlink" href="#tab-robust-regression" title="Permalink to this table">#</a></caption>
 <tbody>
 <tr class="row-odd"><td></td>
 <td><p><strong>mean</strong></p></td>
@@ -1039,7 +899,7 @@ presence of outliers.</p>
 from Code Block <a class="reference internal" href="#code-robust-regression"><span class="std std-ref">code_robust_regression</span></a>.
 The outliers are not plotted but are present in the data. The fitted
 line falls within the range of the nominal data points, particularly if
-compared to <a class="reference internal" href="#fig-empanada-scatter-non-robust"><span class="std std-numref">Fig. 4.8</span></a>.</span><a class="headerlink" href="#fig-empanada-scatter-robust" title="Permalink to this image">¶</a></p>
+compared to <a class="reference internal" href="#fig-empanada-scatter-non-robust"><span class="std std-numref">Fig. 4.8</span></a>.</span><a class="headerlink" href="#fig-empanada-scatter-robust" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>In this example the “outliers” are actually part of the problem we want
@@ -1057,7 +917,7 @@ model or a multilevel model.</p>
 <p>Changing the likelihood to accommodate for robustness is just one example of a modification we can
 make to the model to better suit the observed data. For example, in
 detecting radioactive particle emission a zero count can arise because
-of a faulty sensor<span id="id12">[<a class="reference internal" href="references.html#id135" title="Michael Betancourt. Towards a principled bayesian workflow. \url https://betanalpha.github.io/assets/case_studies/principled_bayesian_workflow.html, 4 2020.">43</a>]</span> (or some other measuring
+of a faulty sensor<span id="id12">[<a class="reference internal" href="references.html#id135" title="Michael Betancourt. Towards a principled bayesian workflow. https://betanalpha.github.io/assets/case_studies/principled_bayesian_workflow.html, 4 2020.">43</a>]</span> (or some other measuring
 problem), or because there was actually no event to register. This
 unknown source of variation has the effect of <em>inflating</em> the count of
 zeros. A useful aid for this kind of problem is the class of models
@@ -1079,7 +939,7 @@ model.</p>
 </div>
 </section>
 <section id="pooling-multilevel-models-and-mixed-effects">
-<span id="multilevel-models"></span><h2><span class="section-number">4.5. </span>Pooling, Multilevel Models, and Mixed Effects<a class="headerlink" href="#pooling-multilevel-models-and-mixed-effects" title="Permalink to this heading">¶</a></h2>
+<span id="multilevel-models"></span><h2><span class="section-number">4.5. </span>Pooling, Multilevel Models, and Mixed Effects<a class="headerlink" href="#pooling-multilevel-models-and-mixed-effects" title="Permalink to this heading">#</a></h2>
 <p>Often we have dataset that contain additional nested structures among
 the predictors, which gives some hierarchical way to group the data. We
 can also think of it as different data generation processes. We are
@@ -1097,7 +957,7 @@ year’s worth of data on pizza and sandwich sales in the same market. The
 <figcaption>
 <p><span class="caption-number">Fig. 4.10 </span><span class="caption-text">A simulated dataset for a real world scenario. In this case an
 organization has 3 data points for the daily sales of salads, but has
-lots of data on the sales of pizza and sandwiches.</span><a class="headerlink" href="#fig-restaurant-order-scatter" title="Permalink to this image">¶</a></p>
+lots of data on the sales of pizza and sandwiches.</span><a class="headerlink" href="#fig-restaurant-order-scatter" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>From both expert knowledge and data, there is agreement that there are
@@ -1108,7 +968,7 @@ following sections we will discuss how to model this
 <em>similarity-yet-disimilarity</em> but let us start with the simpler case,
 all groups are unrelated to each other.</p>
 <section id="unpooled-parameters">
-<span id="id13"></span><h3><span class="section-number">4.5.1. </span>Unpooled Parameters<a class="headerlink" href="#unpooled-parameters" title="Permalink to this heading">¶</a></h3>
+<span id="id13"></span><h3><span class="section-number">4.5.1. </span>Unpooled Parameters<a class="headerlink" href="#unpooled-parameters" title="Permalink to this heading">#</a></h3>
 <p>We can create a regression model where we treat each group, in this case
 food category, as completely separated from the others. This is
 identical to running a separate regression for each category, and that
@@ -1123,11 +983,11 @@ separated group.</p>
 <a class="reference internal image-reference" href="../_images/unpooled_model.png"><img alt="../_images/unpooled_model.png" src="../_images/unpooled_model.png" style="width: 5.00in;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.11 </span><span class="caption-text">An unpooled model where each group of observations, <span class="math notranslate nohighlight">\(y_1, y_2, ..., y_j\)</span>
-has its own set of parameters, independent from any other group.</span><a class="headerlink" href="#fig-unpooled-model" title="Permalink to this image">¶</a></p>
+has its own set of parameters, independent from any other group.</span><a class="headerlink" href="#fig-unpooled-model" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="math notranslate nohighlight" id="equation-eq-unpooled-regression">
-<span class="eqno">(4.4)<a class="headerlink" href="#equation-eq-unpooled-regression" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(4.4)<a class="headerlink" href="#equation-eq-unpooled-regression" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{split}
 \beta_{mj} \sim&amp; \overbrace{\mathcal{N}(\mu_{\beta m}, \sigma_{\beta m})}^{\text{Group-specific}}\\
 \sigma_{j} \sim&amp; \overbrace{\mathcal{HN}(\sigma_{\sigma})}^{\text{Group-specific}}\\
 \mu_{j} =&amp; \beta_{1j} X_1 + \dots + \beta_{mj} X_m \\
@@ -1143,7 +1003,7 @@ include an intercept parameter for the simple reason that if a
 restaurant has zero customers, total sales will also be zero, so there
 is neither any interest nor any need for the extra parameter.</p>
 <div class="literal-block-wrapper docutils container" id="model-sales-unpooled">
-<div class="code-block-caption"><span class="caption-number">Listing 4.9 </span><span class="caption-text">model_sales_unpooled</span><a class="headerlink" href="#model-sales-unpooled" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 4.9 </span><span class="caption-text">model_sales_unpooled</span><a class="headerlink" href="#model-sales-unpooled" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">customers</span> <span class="o">=</span> <span class="n">sales_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;customers&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
 <span class="n">sales_observed</span> <span class="o">=</span> <span class="n">sales_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;sales&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
 <span class="n">food_category</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">sales_df</span><span class="p">[</span><span class="s2">&quot;Food_Category&quot;</span><span class="p">])</span>
@@ -1170,7 +1030,7 @@ is neither any interest nor any need for the extra parameter.</p>
 <figcaption>
 <p><span class="caption-number">Fig. 4.12 </span><span class="caption-text">A diagram of <code class="docutils literal notranslate"><span class="pre">model_sales_unpooled</span></code>. Note how the box around parameters
 <span class="math notranslate nohighlight">\(\beta\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> has a three in the lower right, indicating that the
-model estimated 3 parameters each for <span class="math notranslate nohighlight">\(\beta\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>.</span><a class="headerlink" href="#fig-salad-sales-basic-regression-model-unpooled" title="Permalink to this image">¶</a></p>
+model estimated 3 parameters each for <span class="math notranslate nohighlight">\(\beta\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>.</span><a class="headerlink" href="#fig-salad-sales-basic-regression-model-unpooled" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>After sampling from <code class="docutils literal notranslate"><span class="pre">model_sales_unpooled</span></code> we can create forest plots of
@@ -1186,7 +1046,7 @@ the categories, but much less for others.</p>
 <figcaption>
 <p><span class="caption-number">Fig. 4.13 </span><span class="caption-text">Forest plot of the <span class="math notranslate nohighlight">\(\beta\)</span> parameter estimates <code class="docutils literal notranslate"><span class="pre">model_sales_unpooled</span></code>.
 As expected the estimate of the <span class="math notranslate nohighlight">\(\beta\)</span> coefficient for the salads group
-is the widest as this group has the least amount of data.</span><a class="headerlink" href="#fig-salad-sales-basic-regression-forestplot-beta" title="Permalink to this image">¶</a></p>
+is the widest as this group has the least amount of data.</span><a class="headerlink" href="#fig-salad-sales-basic-regression-forestplot-beta" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="fig-salad-sales-basic-regression-forestplot-sigma">
@@ -1196,7 +1056,7 @@ is the widest as this group has the least amount of data.</span><a class="header
 Like <a class="reference internal" href="#fig-salad-sales-basic-regression-forestplot-beta"><span class="std std-numref">Fig. 4.13</span></a> the
 estimate of the variation of sales, <span class="math notranslate nohighlight">\(\sigma\)</span>, is largest for the salads
 group as there are not as many data points relative to the pizza and
-sandwich groups.</span><a class="headerlink" href="#fig-salad-sales-basic-regression-forestplot-sigma" title="Permalink to this image">¶</a></p>
+sandwich groups.</span><a class="headerlink" href="#fig-salad-sales-basic-regression-forestplot-sigma" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The unpooled model is no different than if we have created three
@@ -1210,7 +1070,7 @@ compare other models in the following sections, particularly to
 understand if the extra complexity is justified.</p>
 </section>
 <section id="pooled-parameters">
-<span id="id14"></span><h3><span class="section-number">4.5.2. </span>Pooled Parameters<a class="headerlink" href="#pooled-parameters" title="Permalink to this heading">¶</a></h3>
+<span id="id14"></span><h3><span class="section-number">4.5.2. </span>Pooled Parameters<a class="headerlink" href="#pooled-parameters" title="Permalink to this heading">#</a></h3>
 <p>If there are unpooled parameters, you might guess there are pooled
 parameters and you would be correct. As the name suggests pooled
 parameters are ones where the group distinction is ignored.
@@ -1221,7 +1081,7 @@ them as common parameters.</p>
 <a class="reference internal image-reference" href="../_images/pooled_model.png"><img alt="../_images/pooled_model.png" src="../_images/pooled_model.png" style="width: 5.00in;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.15 </span><span class="caption-text">A pooled model where each group of observations, <span class="math notranslate nohighlight">\(y_1, y_2, ..., y_j\)</span>
-shares parameters.</span><a class="headerlink" href="#fig-pooled-model" title="Permalink to this image">¶</a></p>
+shares parameters.</span><a class="headerlink" href="#fig-pooled-model" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>For our restaurant example, the model is written in Equation
@@ -1230,14 +1090,14 @@ shares parameters.</span><a class="headerlink" href="#fig-pooled-model" title="P
 representation is also shown in
 <a class="reference internal" href="#fig-salad-sales-basic-regression-model-unpooled"><span class="std std-numref">Fig. 4.12</span></a>.</p>
 <div class="math notranslate nohighlight" id="equation-eq-pooled-regression">
-<span class="eqno">(4.5)<a class="headerlink" href="#equation-eq-pooled-regression" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(4.5)<a class="headerlink" href="#equation-eq-pooled-regression" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{split}
 \beta \sim&amp; \overbrace{\mathcal{N}(\mu_{\beta}, \sigma_{\beta})}^{\text{Common}}\\
 \sigma \sim&amp; \overbrace{\mathcal{HN}(\sigma_{\sigma})}^{\text{Common}}\\
 \mu =&amp; \beta_{1} X_{1} + \dots + \beta_{m} X_{m} \\
 Y \sim&amp; \mathcal{N}(\mu, \sigma)
 \end{split}\end{split}\]</div>
 <div class="literal-block-wrapper docutils container" id="model-sales-pooled">
-<div class="code-block-caption"><span class="caption-number">Listing 4.10 </span><span class="caption-text">model_sales_pooled</span><a class="headerlink" href="#model-sales-pooled" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 4.10 </span><span class="caption-text">model_sales_pooled</span><a class="headerlink" href="#model-sales-pooled" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_sales_pooled</span><span class="p">:</span>
     <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
     <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
@@ -1256,7 +1116,7 @@ Y \sim&amp; \mathcal{N}(\mu, \sigma)
 <figcaption>
 <p><span class="caption-number">Fig. 4.16 </span><span class="caption-text">Diagram of <code class="docutils literal notranslate"><span class="pre">model_sales_pooled</span></code>. Unlike
 <a class="reference internal" href="#fig-salad-sales-basic-regression-model-unpooled"><span class="std std-numref">Fig. 4.12</span></a> there is only
-one instance of <span class="math notranslate nohighlight">\(\beta\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>.</span><a class="headerlink" href="#fig-salad-sales-basic-regression-model-pooled" title="Permalink to this image">¶</a></p>
+one instance of <span class="math notranslate nohighlight">\(\beta\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>.</span><a class="headerlink" href="#fig-salad-sales-basic-regression-model-pooled" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="fig-salad-sales-basic-regression-forestplot-sigma-comparison">
@@ -1266,7 +1126,7 @@ one instance of <span class="math notranslate nohighlight">\(\beta\)</span> and 
 <code class="docutils literal notranslate"><span class="pre">model_pooled_sales</span></code> and <code class="docutils literal notranslate"><span class="pre">model_unpooled_sales</span></code>. Note how we only get
 one estimate of <span class="math notranslate nohighlight">\(\sigma\)</span> that is much higher compared to the unpooled
 model as the single linear fit estimated must capture the variance in
-the pooled data.</span><a class="headerlink" href="#fig-salad-sales-basic-regression-forestplot-sigma-comparison" title="Permalink to this image">¶</a></p>
+the pooled data.</span><a class="headerlink" href="#fig-salad-sales-basic-regression-forestplot-sigma-comparison" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The benefit of the pooled approach is that more data will be used to
@@ -1290,12 +1150,12 @@ data it is not particularly useful for our intended purpose.</p>
 together. Each of the parameters is estimated using all the data but we
 end up with poor estimates of each individual group’s behavior as a 2
 parameter model cannot generalize well enough to capture the nuances of
-each group.</span><a class="headerlink" href="#fig-salad-sales-basic-regression-scatter-pooled" title="Permalink to this image">¶</a></p>
+each group.</span><a class="headerlink" href="#fig-salad-sales-basic-regression-scatter-pooled" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="mixing-group-and-common-parameters">
-<span id="id15"></span><h3><span class="section-number">4.5.3. </span>Mixing Group and Common Parameters<a class="headerlink" href="#mixing-group-and-common-parameters" title="Permalink to this heading">¶</a></h3>
+<span id="id15"></span><h3><span class="section-number">4.5.3. </span>Mixing Group and Common Parameters<a class="headerlink" href="#mixing-group-and-common-parameters" title="Permalink to this heading">#</a></h3>
 <p>In the unpooled approach we get the benefit of preserving the
 differences in our groups, and thus getting an estimated set of
 parameters for each group. In the pooled approach we get the benefit of
@@ -1310,7 +1170,7 @@ intercept, but in a regression that included an intercept term we would
 have a similar choice, pool all the data into a single estimate, or
 leave the data separated in groups for an estimate per group.</p>
 <div class="math notranslate nohighlight" id="equation-eq-multilevel-regression">
-<span class="eqno">(4.6)<a class="headerlink" href="#equation-eq-multilevel-regression" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(4.6)<a class="headerlink" href="#equation-eq-multilevel-regression" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{split}
 \beta_{mj} \sim&amp; \overbrace{\mathcal{N}(\mu_{\beta m}, \sigma_{\beta m})}^{\text{Group-specific}}\\
 \sigma \sim&amp; \overbrace{\mathcal{HN}(\sigma_{\sigma})}^{\text{Common}}\\
 \mu_{j} =&amp; \beta_{1j} X_{1} + \dots + \beta_{m} X_{m} \\
@@ -1348,7 +1208,7 @@ reasonable and for the salad group in particular it seems this model
 will be able to produce plausible inferences about salad sales in this
 new market.</p>
 <div class="literal-block-wrapper docutils container" id="model-sales-mixed-effect">
-<div class="code-block-caption"><span class="caption-number">Listing 4.11 </span><span class="caption-text">model_sales_mixed_effect</span><a class="headerlink" href="#model-sales-mixed-effect" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 4.11 </span><span class="caption-text">model_sales_mixed_effect</span><a class="headerlink" href="#model-sales-mixed-effect" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_pooled_sigma_sales</span><span class="p">:</span>
     <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
     <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
@@ -1375,7 +1235,7 @@ new market.</p>
 the box with 3 in the right corner, and <span class="math notranslate nohighlight">\(\sigma\)</span> is pooled, as the lack
 of number indicates a single parameter estimate for all groups.
 [fig:Salad_Sales_Basic_Regression_Model_Multilevel]{#fig:Salad_Sales_Basic_Regression_Model_Multilevel
-label=”fig:Salad_Sales_Basic_Regression_Model_Multilevel”}</span><a class="headerlink" href="#fig-salad-sales-basic-regression-model-multilevel" title="Permalink to this image">¶</a></p>
+label=”fig:Salad_Sales_Basic_Regression_Model_Multilevel”}</span><a class="headerlink" href="#fig-salad-sales-basic-regression-model-multilevel" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="fig-salad-sales-basic-regression-scatter-sigma-pooled-slope-unpooled">
@@ -1386,7 +1246,7 @@ more useful for our purposes of estimating salad sales as the slopes are
 independently estimated for each group. Note how all the data is being
 used to estimate the single posterior distribution of <span class="math notranslate nohighlight">\(\sigma\)</span>.
 [fig:Salad_Sales_Basic_Regression_Scatter_Sigma_Pooled_Slope_Unpooled]{#fig:Salad_Sales_Basic_Regression_Scatter_Sigma_Pooled_Slope_Unpooled
-label=”fig:Salad_Sales_Basic_Regression_Scatter_Sigma_Pooled_Slope_Unpooled”}</span><a class="headerlink" href="#fig-salad-sales-basic-regression-scatter-sigma-pooled-slope-unpooled" title="Permalink to this image">¶</a></p>
+label=”fig:Salad_Sales_Basic_Regression_Scatter_Sigma_Pooled_Slope_Unpooled”}</span><a class="headerlink" href="#fig-salad-sales-basic-regression-scatter-sigma-pooled-slope-unpooled" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="fig-salad-sales-forestplot-sigma-unpooled-multilevel-comparison">
@@ -1397,13 +1257,13 @@ label=”fig:Salad_Sales_Basic_Regression_Scatter_Sigma_Pooled_Slope_Unpooled”
 multilevel model is within the bounds of the <span class="math notranslate nohighlight">\(\sigma\)</span> estimates from the
 pooled model.
 [fig:Salad_Sales_ForestPlot_Sigma_Unpooled_Multilevel_Comparison]{#fig:Salad_Sales_ForestPlot_Sigma_Unpooled_Multilevel_Comparison
-label=”fig:Salad_Sales_ForestPlot_Sigma_Unpooled_Multilevel_Comparison”}</span><a class="headerlink" href="#fig-salad-sales-forestplot-sigma-unpooled-multilevel-comparison" title="Permalink to this image">¶</a></p>
+label=”fig:Salad_Sales_ForestPlot_Sigma_Unpooled_Multilevel_Comparison”}</span><a class="headerlink" href="#fig-salad-sales-forestplot-sigma-unpooled-multilevel-comparison" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 </section>
 <section id="hierarchical-models">
-<span id="id18"></span><h2><span class="section-number">4.6. </span>Hierarchical Models<a class="headerlink" href="#hierarchical-models" title="Permalink to this heading">¶</a></h2>
+<span id="id18"></span><h2><span class="section-number">4.6. </span>Hierarchical Models<a class="headerlink" href="#hierarchical-models" title="Permalink to this heading">#</a></h2>
 <p>In our data treatment thus far we have had two options for groups,
 pooled where there is no distinction between groups, and unpooled where
 there a complete distinction between groups. Recall though in our
@@ -1421,7 +1281,7 @@ which are drawn from a common hyperprior distribution.</p>
 <figcaption>
 <p><span class="caption-number">Fig. 4.22 </span><span class="caption-text">A partially pooled model architecture where each group of observations,
 <span class="math notranslate nohighlight">\(y_1, y_2, ..., y_k\)</span> has its own set of parameters, but they are not
-independent as they are drawn from a common distribution.</span><a class="headerlink" href="#fig-partial-pooled-model" title="Permalink to this image">¶</a></p>
+independent as they are drawn from a common distribution.</span><a class="headerlink" href="#fig-partial-pooled-model" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Using statistical notation we can write a hierarchical model in Equation
@@ -1430,7 +1290,7 @@ independent as they are drawn from a common distribution.</span><a class="header
 a graphical representation in
 <a class="reference internal" href="#fig-salad-sales-hierarchial-regression-model"><span class="std std-numref">Fig. 4.23</span></a>.</p>
 <div class="math notranslate nohighlight" id="equation-eq-hierarchical-regression">
-<span class="eqno">(4.7)<a class="headerlink" href="#equation-eq-hierarchical-regression" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(4.7)<a class="headerlink" href="#equation-eq-hierarchical-regression" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{split}
 \beta_{mj} \sim&amp; \mathcal{N}(\mu_{\beta m}, \sigma_{\beta m}) \\
 \sigma_{h} \sim&amp; \overbrace{\mathcal{HN}(\sigma)}^{\text{Hyperprior}} \\
 \sigma_{j} \sim&amp; \overbrace{\mathcal{HN}(\sigma_{h})}^{\substack{\text{Group-specific} \\ \text{pooled}}} \\
@@ -1451,7 +1311,7 @@ make this statement and “get away with it”, in a real life scenario
 more domain expertise and model comparison would be advised to justify
 this claim.</p>
 <div class="literal-block-wrapper docutils container" id="model-hierarchical-sales">
-<div class="code-block-caption"><span class="caption-number">Listing 4.12 </span><span class="caption-text">model_hierarchical_sales</span><a class="headerlink" href="#model-hierarchical-sales" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 4.12 </span><span class="caption-text">model_hierarchical_sales</span><a class="headerlink" href="#model-hierarchical-sales" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_hierarchical_sales</span><span class="p">:</span>
     <span class="n">σ_hyperprior</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ_hyperprior&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
@@ -1476,7 +1336,7 @@ this claim.</p>
 <a class="reference internal image-reference" href="../_images/Salad_Sales_Hierarchial_Regression_Model.png"><img alt="../_images/Salad_Sales_Hierarchial_Regression_Model.png" src="../_images/Salad_Sales_Hierarchial_Regression_Model.png" style="width: 3.00in;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.23 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">model_hierarchical_sales</span></code> where <span class="math notranslate nohighlight">\(\sigma_{hyperprior}\)</span> is the single
-hierarchical distribution for the three <span class="math notranslate nohighlight">\(\sigma\)</span> distributions.</span><a class="headerlink" href="#fig-salad-sales-hierarchial-regression-model" title="Permalink to this image">¶</a></p>
+hierarchical distribution for the three <span class="math notranslate nohighlight">\(\sigma\)</span> distributions.</span><a class="headerlink" href="#fig-salad-sales-hierarchial-regression-model" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="fig-salad-sales-forestplot-sigma-hierarchical">
@@ -1484,7 +1344,7 @@ hierarchical distribution for the three <span class="math notranslate nohighligh
 <figcaption>
 <p><span class="caption-number">Fig. 4.24 </span><span class="caption-text">Forest plot of the <span class="math notranslate nohighlight">\(\sigma\)</span> parameter estimates for
 <code class="docutils literal notranslate"><span class="pre">model_hierarchical_sales</span></code>. Note how the hyperprior tends to represent
-fall within the range of the three group priors.</span><a class="headerlink" href="#fig-salad-sales-forestplot-sigma-hierarchical" title="Permalink to this image">¶</a></p>
+fall within the range of the three group priors.</span><a class="headerlink" href="#fig-salad-sales-forestplot-sigma-hierarchical" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>After fitting the hierarchical model we can inspect the <span class="math notranslate nohighlight">\(\sigma\)</span>
@@ -1505,7 +1365,7 @@ sigma are distinctly different from each other. Given that our observed data
 and the model which does not share information between groups this consistent
 with our expectations.</p>
 <table class="table" id="tab-unpooled-sales">
-<caption><span class="caption-number">Table 4.3 </span><span class="caption-text">Estimates of σ for each category from the unpooled sales model</span><a class="headerlink" href="#tab-unpooled-sales" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-number">Table 4.3 </span><span class="caption-text">Estimates of σ for each category from the unpooled sales model</span><a class="headerlink" href="#tab-unpooled-sales" title="Permalink to this table">#</a></caption>
 <tbody>
 <tr class="row-odd"><td></td>
 <td><p><strong>mean</strong></p></td>
@@ -1534,7 +1394,7 @@ with our expectations.</p>
 </tbody>
 </table>
 <table class="table" id="tab-hierarchical-sales">
-<caption><span class="caption-number">Table 4.4 </span><span class="caption-text">Estimates of σ for each category from the hierarchical sales model</span><a class="headerlink" href="#tab-hierarchical-sales" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-number">Table 4.4 </span><span class="caption-text">Estimates of σ for each category from the hierarchical sales model</span><a class="headerlink" href="#tab-hierarchical-sales" title="Permalink to this table">#</a></caption>
 <tbody>
 <tr class="row-odd"><td></td>
 <td><p><strong>mean</strong></p></td>
@@ -1599,7 +1459,7 @@ priors on how each store was doing. This allows easy comparisons in mean
 and variation, and expands the application in many different ways based
 on a single model.</p>
 <section id="posterior-geometry-matters">
-<span id="model-geometry"></span><h3><span class="section-number">4.6.1. </span>Posterior Geometry Matters<a class="headerlink" href="#posterior-geometry-matters" title="Permalink to this heading">¶</a></h3>
+<span id="model-geometry"></span><h3><span class="section-number">4.6.1. </span>Posterior Geometry Matters<a class="headerlink" href="#posterior-geometry-matters" title="Permalink to this heading">#</a></h3>
 <p>So far we have largely focused on the structure and math behind the
 model, and assumed our sampler would be able to provide us an
 “accurate” estimate of the posterior. And for relatively simple models
@@ -1626,7 +1486,7 @@ any direction will likely result in step into a low-density region. This
 drastic difference in the posterior geometry shape is one reason poor
 posterior estimation, can occur for sampling based estimates. For HMC
 samplers the occurence of divergences can help diagnose these sampling
-issues.</span><a class="headerlink" href="#fig-neals-funnel" title="Permalink to this image">¶</a></p>
+issues.</span><a class="headerlink" href="#fig-neals-funnel" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>In hierarchical models the geometry is largely defined by the
@@ -1652,7 +1512,7 @@ parameterization. This model follows the standard hierarchical format,
 where a hyperprior partially pools the parameters of the slope
 <span class="math notranslate nohighlight">\(\beta_m\)</span>.</p>
 <div class="math notranslate nohighlight" id="equation-eq-centered-hierarchical-regression">
-<span class="eqno">(4.8)<a class="headerlink" href="#equation-eq-centered-hierarchical-regression" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(4.8)<a class="headerlink" href="#equation-eq-centered-hierarchical-regression" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{split}
 \beta_{\mu h} \sim&amp; \mathcal{N} \\
 \beta_{\sigma h} \sim&amp; \mathcal{HN} \\
 \beta_m \sim&amp; \overbrace{\mathcal{N}(\beta_{\mu h},\beta_{\sigma h})}^{\text{Centered}}  \\
@@ -1664,11 +1524,11 @@ Y \sim&amp; \mathcal{N}(\beta_{m} * X_m,\sigma_{m})
 <a class="reference internal image-reference" href="../_images/Multiple_Salad_Sales_Scatter.png"><img alt="../_images/Multiple_Salad_Sales_Scatter.png" src="../_images/Multiple_Salad_Sales_Scatter.png" style="width: 7.00in;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.26 </span><span class="caption-text">Observed salad sales across 6 locations. Note how some locations have
-very few data points relative to others.</span><a class="headerlink" href="#fig-multiple-salad-sales-scatter" title="Permalink to this image">¶</a></p>
+very few data points relative to others.</span><a class="headerlink" href="#fig-multiple-salad-sales-scatter" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="literal-block-wrapper docutils container" id="model-hierarchical-salad-sales">
-<div class="code-block-caption"><span class="caption-number">Listing 4.13 </span><span class="caption-text">model_hierarchical_salad_sales</span><a class="headerlink" href="#model-hierarchical-salad-sales" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 4.13 </span><span class="caption-text">model_hierarchical_salad_sales</span><a class="headerlink" href="#model-hierarchical-salad-sales" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="k">def</span> <span class="nf">gen_hierarchical_salad_sales</span><span class="p">(</span><span class="n">input_df</span><span class="p">,</span> <span class="n">beta_prior_fn</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">):</span>
     <span class="n">customers</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">input_df</span><span class="p">[</span><span class="s2">&quot;customers&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
@@ -1704,7 +1564,7 @@ description may be too abstract in words but is easier to see action in
 Code Block
 <a class="reference internal" href="#model-hierarchical-salad-sales-centered"><span class="std std-ref">model_hierarchical_salad_sales_centered</span></a>:</p>
 <div class="literal-block-wrapper docutils container" id="model-hierarchical-salad-sales-centered">
-<div class="code-block-caption"><span class="caption-number">Listing 4.14 </span><span class="caption-text">model_hierarchical_salad_sales_centered</span><a class="headerlink" href="#model-hierarchical-salad-sales-centered" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 4.14 </span><span class="caption-text">model_hierarchical_salad_sales_centered</span><a class="headerlink" href="#model-hierarchical-salad-sales-centered" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">centered_beta_prior_fn</span><span class="p">(</span><span class="n">hyper_mu</span><span class="p">,</span> <span class="n">hyper_sigma</span><span class="p">):</span>
     <span class="n">β</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Sample</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">hyper_mu</span><span class="p">,</span> <span class="n">hyper_sigma</span><span class="p">),</span> <span class="mi">6</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;beta&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">β</span>
@@ -1725,7 +1585,7 @@ Now that we have our model, we can run inference and inspect the result
 in Code Block
 <a class="reference internal" href="#model-hierarchical-salad-sales-centered-inference"><span class="std std-ref">model_hierarchical_salad_sales_centered_inference</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="model-hierarchical-salad-sales-centered-inference">
-<div class="code-block-caption"><span class="caption-number">Listing 4.15 </span><span class="caption-text">model_hierarchical_salad_sales_centered_inference</span><a class="headerlink" href="#model-hierarchical-salad-sales-centered-inference" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 4.15 </span><span class="caption-text">model_hierarchical_salad_sales_centered_inference</span><a class="headerlink" href="#model-hierarchical-salad-sales-centered-inference" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mcmc_samples_centered</span><span class="p">,</span> <span class="n">sampler_stats_centered</span> <span class="o">=</span> <span class="n">run_mcmc</span><span class="p">(</span>
     <span class="mi">1000</span><span class="p">,</span> <span class="n">centered_model</span><span class="p">,</span> <span class="n">n_chains</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">num_adaptation_steps</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
     <span class="n">sales</span><span class="o">=</span><span class="n">observed</span><span class="p">)</span>
@@ -1757,7 +1617,7 @@ effectively characterize this space of the posterior.</p>
 <code class="docutils literal notranslate"><span class="pre">centered_model</span></code> defined in Code Block
 <a class="reference internal" href="#model-hierarchical-salad-sales-centered"><span class="std std-ref">model_hierarchical_salad_sales_centered</span></a>.
 As the hyperprior approaches zero the posterior space for slope
-collapses results in the divergences seen in blue.</span><a class="headerlink" href="#fig-neals-funnel-salad-centered" title="Permalink to this image">¶</a></p>
+collapses results in the divergences seen in blue.</span><a class="headerlink" href="#fig-neals-funnel-salad-centered" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>To alleviate this issue the centered parameterization can be converted
@@ -1773,7 +1633,7 @@ that allows the sampler to more easily explore all possible values of
 shown in <a class="reference internal" href="#fig-neals-funnel-salad-noncentered"><span class="std std-numref">Fig. 4.28</span></a>, where there are
 multiple samples down to the 0 value on the x-axis.</p>
 <div class="math notranslate nohighlight" id="equation-eq-noncentered-hierarchical-regression">
-<span class="eqno">(4.9)<a class="headerlink" href="#equation-eq-noncentered-hierarchical-regression" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(4.9)<a class="headerlink" href="#equation-eq-noncentered-hierarchical-regression" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{split}
 \beta_{\mu h} \sim&amp; \mathcal{N} \\
 \beta_{\sigma h} \sim&amp; \mathcal{HN} \\
 \beta_\text{m_offset} \sim&amp; \mathcal{N}(0,1) \\
@@ -1783,7 +1643,7 @@ multiple samples down to the 0 value on the x-axis.</p>
 Y \sim&amp; \mathcal{N}(\beta_{m} * X_m,\sigma_{m})
 \end{split}\end{split}\]</div>
 <div class="literal-block-wrapper docutils container" id="model-hierarchical-salad-sales-non-centered">
-<div class="code-block-caption"><span class="caption-number">Listing 4.16 </span><span class="caption-text">model_hierarchical_salad_sales_non_centered</span><a class="headerlink" href="#model-hierarchical-salad-sales-non-centered" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 4.16 </span><span class="caption-text">model_hierarchical_salad_sales_non_centered</span><a class="headerlink" href="#model-hierarchical-salad-sales-non-centered" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">non_centered_beta_prior_fn</span><span class="p">(</span><span class="n">hyper_mu</span><span class="p">,</span> <span class="n">hyper_sigma</span><span class="p">):</span>
     <span class="n">β_offset</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Sample</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">6</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;beta_offset&quot;</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">β_offset</span> <span class="o">*</span> <span class="n">hyper_sigma</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">+</span> <span class="n">hyper_mu</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
@@ -1812,7 +1672,7 @@ location 4 from <code class="docutils literal notranslate"><span class="pre">non
 <a class="reference internal" href="#model-hierarchical-salad-sales-non-centered"><span class="std std-ref">model_hierarchical_salad_sales_non_centered</span></a>.
 In the non-centered parameterization the sampler is able to sample
 parameters close to zero. The divergences are lesser in number and are
-not concentrated in one area.</span><a class="headerlink" href="#fig-neals-funnel-salad-noncentered" title="Permalink to this image">¶</a></p>
+not concentrated in one area.</span><a class="headerlink" href="#fig-neals-funnel-salad-noncentered" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The improvement in sampling has a material effect on the estimated
@@ -1835,18 +1695,18 @@ different prior specifications. You might even find cases where you need
 <em>both</em> centered and non-centered parameterization in a single model. We
 recommend you to read Michael Betancourt’s case study Hierarchical
 Modeling on this topic if you suspect model parameterization is causing
-you sampling issues <span id="id21">[<a class="reference internal" href="references.html#id164" title="Michael Betancourt. Hierarchical modeling. \url https://betanalpha.github.io/assets/case_studies/hierarchical_modeling.html, 11 2020.">47</a>]</span>.</p>
+you sampling issues <span id="id21">[<a class="reference internal" href="references.html#id164" title="Michael Betancourt. Hierarchical modeling. https://betanalpha.github.io/assets/case_studies/hierarchical_modeling.html, 11 2020.">47</a>]</span>.</p>
 <figure class="align-default" id="fig-salad-sales-hierarchical-comparison">
 <a class="reference internal image-reference" href="../_images/Salad_Sales_Hierarchical_Comparison.png"><img alt="../_images/Salad_Sales_Hierarchical_Comparison.png" src="../_images/Salad_Sales_Hierarchical_Comparison.png" style="width: 7.00in;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.29 </span><span class="caption-text">KDE of the distributions of <span class="math notranslate nohighlight">\(\beta_{\sigma h}\)</span> in both centered and
 non-centered parameterizations. The change is due to the sampler being
-able to more adequately explore the possible parameter space.</span><a class="headerlink" href="#fig-salad-sales-hierarchical-comparison" title="Permalink to this image">¶</a></p>
+able to more adequately explore the possible parameter space.</span><a class="headerlink" href="#fig-salad-sales-hierarchical-comparison" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="predictions-at-multiple-levels">
-<span id="id22"></span><h3><span class="section-number">4.6.2. </span>Predictions at Multiple Levels<a class="headerlink" href="#predictions-at-multiple-levels" title="Permalink to this heading">¶</a></h3>
+<span id="id22"></span><h3><span class="section-number">4.6.2. </span>Predictions at Multiple Levels<a class="headerlink" href="#predictions-at-multiple-levels" title="Permalink to this heading">#</a></h3>
 <p>A subtle feature of hierarchical models is that they are able to make
 estimates at multiple levels. While seemingly obvious this is very
 useful, as it lets us use one model to answer many more questions than a
@@ -1870,7 +1730,7 @@ graphical model that extends our initial <code class="docutils literal notransla
 nodes for out of sample prediction. The estimates are plotted in
 <a class="reference internal" href="#fig-salad-sales-hierarchical-predictions"><span class="std std-numref">Fig. 4.30</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="model-hierarchical-salad-sales-predictions">
-<div class="code-block-caption"><span class="caption-number">Listing 4.17 </span><span class="caption-text">model_hierarchical_salad_sales_predictions</span><a class="headerlink" href="#model-hierarchical-salad-sales-predictions" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 4.17 </span><span class="caption-text">model_hierarchical_salad_sales_predictions</span><a class="headerlink" href="#model-hierarchical-salad-sales-predictions" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">out_of_sample_customers</span> <span class="o">=</span> <span class="mf">50.</span>
 
 <span class="nd">@tfd</span><span class="o">.</span><span class="n">JointDistributionCoroutine</span>
@@ -1903,7 +1763,7 @@ nodes for out of sample prediction. The estimates are plotted in
 <figcaption>
 <p><span class="caption-number">Fig. 4.30 </span><span class="caption-text">Posterior predictive estimates for the revenues for two of the groups
 and for total population estimated by model
-<code class="docutils literal notranslate"><span class="pre">model_hierarchical_salad_sales_non_centered</span></code>.</span><a class="headerlink" href="#fig-salad-sales-hierarchical-predictions" title="Permalink to this image">¶</a></p>
+<code class="docutils literal notranslate"><span class="pre">model_hierarchical_salad_sales_non_centered</span></code>.</span><a class="headerlink" href="#fig-salad-sales-hierarchical-predictions" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Another feature in making predictions is using hierarchical models with
@@ -1916,7 +1776,7 @@ the posterior predictive distribution to get salad sales prediction.
 This is demonstrated in Code Block
 <a class="reference internal" href="#model-hierarchical-salad-sales-predictions-new-location"><span class="std std-ref">model_hierarchical_salad_sales_predictions_new_location</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="model-hierarchical-salad-sales-predictions-new-location">
-<div class="code-block-caption"><span class="caption-number">Listing 4.18 </span><span class="caption-text">model_hierarchical_salad_sales_predictions_new_location</span><a class="headerlink" href="#model-hierarchical-salad-sales-predictions-new-location" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 4.18 </span><span class="caption-text">model_hierarchical_salad_sales_predictions_new_location</span><a class="headerlink" href="#model-hierarchical-salad-sales-predictions-new-location" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">out_of_sample_customers2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
 
 <span class="nd">@tfd</span><span class="o">.</span><span class="n">JointDistributionCoroutine</span>
@@ -1960,7 +1820,7 @@ point/group/etc being close to each other.</p>
 </div>
 </section>
 <section id="priors-for-multilevel-models">
-<span id="id23"></span><h3><span class="section-number">4.6.3. </span>Priors for Multilevel Models<a class="headerlink" href="#priors-for-multilevel-models" title="Permalink to this heading">¶</a></h3>
+<span id="id23"></span><h3><span class="section-number">4.6.3. </span>Priors for Multilevel Models<a class="headerlink" href="#priors-for-multilevel-models" title="Permalink to this heading">#</a></h3>
 <p>Prior choice is all the more important for multilevel models, because of
 how the prior interacts with the informativeness of the likelihood, as
 shown above in Section <a class="reference internal" href="#model-geometry"><span class="std std-ref">Posterior Geometry Matters</span></a>. Moreover, not only does the
@@ -1983,7 +1843,7 @@ sensitivity studies to better inform our prior choice. For instance
 Lemoine <span id="id26">[<a class="reference internal" href="references.html#id122" title="Nathan P Lemoine. Moving beyond noninformative priors: why and how to choose weakly informative priors in bayesian analyses. Oikos, 128(7):912–928, 2019.">48</a>]</span> showed that when modeling ecology data with a
 model structure of</p>
 <div class="math notranslate nohighlight" id="equation-eq-ecology-regression">
-<span class="eqno">(4.10)<a class="headerlink" href="#equation-eq-ecology-regression" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(4.10)<a class="headerlink" href="#equation-eq-ecology-regression" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{split}
     \alpha_i \sim&amp; \mathcal{N}(\mu_{\alpha},\sigma^2_{\alpha}) \\
     \mu_{i} =&amp; \alpha_i + \beta Day_i \\
     Y \sim&amp; \mathcal{N}(\mu_{j},\sigma^2)
@@ -1998,7 +1858,7 @@ tools such as prior predictive distributions to make an informed choice.</p>
 </section>
 </section>
 <section id="exercises">
-<span id="exercises4"></span><h2><span class="section-number">4.7. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">¶</a></h2>
+<span id="exercises4"></span><h2><span class="section-number">4.7. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <p><strong>4E1.</strong> What are examples of covariate-response
 relationships that are nonlinear in everyday life?</p>
 <p><strong>4E2.</strong> Assume you are studying the relationship between a
@@ -2013,7 +1873,7 @@ structure.</p>
 <p>Also assume you now need to extend the model structure in each of the
 ways listed below. For each item write the mathematical equations that
 specify the full model.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Pooled</p></li>
 <li><p>Unpooled</p></li>
 <li><p>Mixed Effect with pooled <span class="math notranslate nohighlight">\(\beta_0\)</span></p></li>
@@ -2039,7 +1899,7 @@ parameterization to Cauchy or Normal.</p>
 individuals. If given a dataset of height and one of the following
 covariates explain which type of regression would be appropriate between
 unpooled, pooled, partially pooled, and interaction. Explain why</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>A vector of random noise</p></li>
 <li><p>Gender</p></li>
 <li><p>Familial relationship</p></li>
@@ -2080,7 +1940,7 @@ in a household as radon may enter the household more easily through the
 ground. We have provided a dataset of the radon levels at homes in
 Minnesota, in the GitHub repository as well as the county of the home,
 and the presence of a basement.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Run an unpooled regression estimating the effect of basements on
 radon levels.</p></li>
 <li><p>Create a hierarchical model grouping by county. Justify why this
@@ -2096,7 +1956,7 @@ two.</p>
 <p>For example, we may generate data that follows a linear pattern
 <span class="math notranslate nohighlight">\(x=[1,2,3,4], y=[2,4,6,8]\)</span>. Then fit a model of the form <span class="math notranslate nohighlight">\(y=bx\)</span> and
 another of the form <span class="math notranslate nohighlight">\(y=bx**2\)</span></p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Linear Model</p></li>
 <li><p>Linear model with transformed covariate</p></li>
 <li><p>Linear model with interaction effect</p></li>
@@ -2116,12 +1976,12 @@ available in the Github repository in the file
 <code class="docutils literal notranslate"><span class="pre">gravity_measurements.csv</span></code> You know that from Newton’s Laws of physics
 if the acceleration is <span class="math notranslate nohighlight">\(g\)</span> and the time <span class="math notranslate nohighlight">\(t\)</span> then</p>
 <div class="math notranslate nohighlight" id="equation-eq-physics-experiment">
-<span class="eqno">(4.11)<a class="headerlink" href="#equation-eq-physics-experiment" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(4.11)<a class="headerlink" href="#equation-eq-physics-experiment" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{split}
 \text{velocity} &amp;= gt \\
 \text{position} &amp;= \frac{1}{2}gt^2 \\
 \end{split}\end{split}\]</div>
 <p>Your friend asks you to estimate the following quantities</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>The gravitational constant of the planet</p></li>
 <li><p>A characterization of the noise of her measurement device</p></li>
 <li><p>The velocity of the ball at each point during her measurements</p></li>
@@ -2162,7 +2022,7 @@ Argentine independence day respectively.</p>
 </aside>
 <aside class="footnote brackets" id="id33" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id25">7</a><span class="fn-bracket">]</span></span>
-<p><a class="reference external" href="https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations">https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations</a></p>
+<p><a class="github reference external" href="https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations">stan-dev/stan</a></p>
 </aside>
 </section>
 </section>
@@ -2179,7 +2039,7 @@ Argentine independence day respectively.</p>
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./markdown"
         },
         predefinedOutput: true
@@ -2187,44 +2047,118 @@ Argentine independence day respectively.</p>
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="chp_03.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">3. </span>Linear Models and Probabilistic Programming Languages</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chp_03.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Linear Models and Probabilistic Programming Languages</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="chp_05.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="chp_05.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title"><span class="section-number">5. </span>Splines</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
+                </footer>
+              
+            </div>
             
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Martin, Kumar, Lao<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transforming-covariates">4.1. Transforming Covariates</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#varying-uncertainty">4.2. Varying Uncertainty</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interaction-effects">4.3. Interaction Effects</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robust-regression">4.4. Robust Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pooling-multilevel-models-and-mixed-effects">4.5. Pooling, Multilevel Models, and Mixed Effects</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unpooled-parameters">4.5.1. Unpooled Parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pooled-parameters">4.5.2. Pooled Parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mixing-group-and-common-parameters">4.5.3. Mixing Group and Common Parameters</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hierarchical-models">4.6. Hierarchical Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#posterior-geometry-matters">4.6.1. Posterior Geometry Matters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predictions-at-multiple-levels">4.6.2. Predictions at Multiple Levels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#priors-for-multilevel-models">4.6.3. Priors for Multilevel Models</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">4.7. Exercises</a></li>
+</ul>
+  </nav></div>
 
-      </div>
-    </div>
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Martin, Kumar, Lao
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

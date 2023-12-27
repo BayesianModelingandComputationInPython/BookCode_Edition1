@@ -1,39 +1,47 @@
 
+
 <!DOCTYPE html>
 
-<html lang="en">
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>1. Bayesian Inference &#8212; Bayesian Modeling and Computation in Python</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-codeautolink.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -42,12 +50,13 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -56,456 +65,316 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'markdown/chp_01';</script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="2. Exploratory Analysis of Bayesian Models" href="chp_02.html" />
     <link rel="prev" title="Symbols" href="symbollist.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en">
-    
-
-    <!-- Google Analytics -->
-    
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-702QMHG8ST"></script>
-<script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){ dataLayer.push(arguments); }
-                    gtag('js', new Date());
-                    gtag('config', 'G-702QMHG8ST');
-                </script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-      
-      
-      <h1 class="site-logo" id="site-title">Bayesian Modeling and Computation in Python</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 0
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="dedication.html">
-   Dedication
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="foreword.html">
-   Foreword
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="preface.html">
-   Preface
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="symbollist.html">
-   Symbols
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 1
- </span>
-</p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   1. Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_02.html">
-   2. Exploratory Analysis of Bayesian Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_03.html">
-   3. Linear Models and Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_04.html">
-   4. Extending Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_05.html">
-   5. Splines
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_06.html">
-   6. Time Series
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_07.html">
-   7. Bayesian Additive Regression Trees
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_08.html">
-   8. Approximate Bayesian Computation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_09.html">
-   9. End to End Bayesian Workflows
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_10.html">
-   10. Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_11.html">
-   11. Appendiceal Topics
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="glossary.html">
-   12. Glossary
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="references.html">
-   13. References
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 2
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_01.html">
-   Code 1: Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_02.html">
-   Code 2: Exploratory Analysis of Bayesian Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_03.html">
-   Code 3: Linear Models and Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_04.html">
-   Code 4: Extending Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_05.html">
-   Code 5: Splines
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_06.html">
-   Code 6: Time Series
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_07.html">
-   Code 7: Bayesian Additive Regression Trees
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_08.html">
-   Code 8: Approximate Bayesian Computation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_09.html">
-   Code 9: End to End Bayesian Workflows
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_10.html">
-   Code 10: Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_11.html">
-   Code 11: Appendiceal Topics
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 3
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../solutions/chp_01.html">
-   Solutions 1: Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../solutions/chp_02.html">
-   Solutions 2: Exploratory Analysis of Bayesian models
-  </a>
- </li>
-</ul>
-
-    </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_01.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+      <div class="bd-sidebar-primary bd-sidebar">
         
-    </div>
-</div>
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
+  
 
-            <!-- Launch buttons -->
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#bayesian-modeling">
-   1.1. Bayesian Modeling
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#bayesian-models">
-     1.1.1. Bayesian Models
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id6">
-     1.1.2. Bayesian Inference
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-diy-sampler-do-not-try-this-at-home">
-   1.2. A DIY Sampler, Do Not Try This at Home
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#say-yes-to-automating-inference-say-no-to-automated-model-building">
-   1.3. Say Yes to Automating Inference, Say No to Automated Model Building
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-few-options-to-quantify-your-prior-information">
-   1.4. A Few Options to Quantify Your Prior Information
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#conjugate-priors">
-     1.4.1. Conjugate Priors
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#objective-priors">
-     1.4.2. Objective Priors
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#maximum-entropy-priors">
-     1.4.3. Maximum Entropy Priors
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#weakly-informative-priors-and-regularization-priors">
-     1.4.4. Weakly Informative Priors and Regularization Priors
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#using-prior-predictive-distributions-to-assess-priors">
-     1.4.5. Using Prior Predictive Distributions to Assess Priors
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
-   1.5. Exercises
-  </a>
- </li>
+<a class="navbar-brand logo" href="../welcome.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Bayesian Modeling and Computation in Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 0</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="dedication.html">Dedication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="foreword.html">Foreword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preface.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="symbollist.html">Symbols</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 1</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_02.html">2. Exploratory Analysis of Bayesian Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_03.html">3. Linear Models and Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_04.html">4. Extending Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_05.html">5. Splines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_06.html">6. Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_07.html">7. Bayesian Additive Regression Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_08.html">8. Approximate Bayesian Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_09.html">9. End to End Bayesian Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_10.html">10. Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_11.html">11. Appendiceal Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">12. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">13. References</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_01.html">Code 1: Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_02.html">Code 2: Exploratory Analysis of Bayesian Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_03.html">Code 3: Linear Models and Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_04.html">Code 4: Extending Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_05.html">Code 5: Splines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_06.html">Code 6: Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_07.html">Code 7: Bayesian Additive Regression Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_08.html">Code 8: Approximate Bayesian Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_09.html">Code 9: End to End Bayesian Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_10.html">Code 10: Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_11.html">Code 11: Appendiceal Topics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../solutions/chp_01.html">Solutions 1: Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/chp_02.html">Solutions 2: Exploratory Analysis of Bayesian models</a></li>
 </ul>
 
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_01.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Bayesian Inference</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-modeling">1.1. Bayesian Modeling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-models">1.1.1. Bayesian Models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">1.1.2. Bayesian Inference</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-diy-sampler-do-not-try-this-at-home">1.2. A DIY Sampler, Do Not Try This at Home</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#say-yes-to-automating-inference-say-no-to-automated-model-building">1.3. Say Yes to Automating Inference, Say No to Automated Model Building</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-few-options-to-quantify-your-prior-information">1.4. A Few Options to Quantify Your Prior Information</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conjugate-priors">1.4.1. Conjugate Priors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objective-priors">1.4.2. Objective Priors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-entropy-priors">1.4.3. Maximum Entropy Priors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#weakly-informative-priors-and-regularization-priors">1.4.4. Weakly Informative Priors and Regularization Priors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-prior-predictive-distributions-to-assess-priors">1.4.5. Using Prior Predictive Distributions to Assess Priors</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">1.5. Exercises</a></li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Bayesian Inference</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#bayesian-modeling">
-   1.1. Bayesian Modeling
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#bayesian-models">
-     1.1.1. Bayesian Models
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id6">
-     1.1.2. Bayesian Inference
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-diy-sampler-do-not-try-this-at-home">
-   1.2. A DIY Sampler, Do Not Try This at Home
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#say-yes-to-automating-inference-say-no-to-automated-model-building">
-   1.3. Say Yes to Automating Inference, Say No to Automated Model Building
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-few-options-to-quantify-your-prior-information">
-   1.4. A Few Options to Quantify Your Prior Information
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#conjugate-priors">
-     1.4.1. Conjugate Priors
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#objective-priors">
-     1.4.2. Objective Priors
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#maximum-entropy-priors">
-     1.4.3. Maximum Entropy Priors
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#weakly-informative-priors-and-regularization-priors">
-     1.4.4. Weakly Informative Priors and Regularization Priors
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#using-prior-predictive-distributions-to-assess-priors">
-     1.4.5. Using Prior Predictive Distributions to Assess Priors
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
-   1.5. Exercises
-  </a>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="bayesian-inference">
-<span id="chap1"></span><h1><span class="section-number">1. </span>Bayesian Inference<a class="headerlink" href="#bayesian-inference" title="Permalink to this heading">¶</a></h1>
+<span id="chap1"></span><h1><span class="section-number">1. </span>Bayesian Inference<a class="headerlink" href="#bayesian-inference" title="Permalink to this heading">#</a></h1>
 <p>Modern Bayesian statistics is mostly performed using computer code. This
 has dramatically changed how Bayesian statistics was performed from even
 a few decades ago. The complexity of models we can build has increased,
@@ -522,7 +391,7 @@ useful to effectively apply statistical methods. In this first chapter,
 we introduce these concepts and methods, many of which will be further
 explored and expanded throughout the rest of the book.</p>
 <section id="bayesian-modeling">
-<span id="id1"></span><h2><span class="section-number">1.1. </span>Bayesian Modeling<a class="headerlink" href="#bayesian-modeling" title="Permalink to this heading">¶</a></h2>
+<span id="id1"></span><h2><span class="section-number">1.1. </span>Bayesian Modeling<a class="headerlink" href="#bayesian-modeling" title="Permalink to this heading">#</a></h2>
 <p>A conceptual model is a representation of a system, made of the
 composition of concepts that are used to help people know, understand,
 or simulate the object or process the model represents
@@ -567,7 +436,7 @@ Bayesian practitioner has many ways to express their ideas, generate
 results, and share the outputs, allowing a much wider distribution of
 positive outcomes for the practitioner and their peers.</p>
 <section id="bayesian-models">
-<span id="id3"></span><h3><span class="section-number">1.1.1. </span>Bayesian Models<a class="headerlink" href="#bayesian-models" title="Permalink to this heading">¶</a></h3>
+<span id="id3"></span><h3><span class="section-number">1.1.1. </span>Bayesian Models<a class="headerlink" href="#bayesian-models" title="Permalink to this heading">#</a></h3>
 <p>Bayesian models, computational or otherwise, have two defining
 characteristics:</p>
 <ul class="simple">
@@ -579,7 +448,7 @@ reallocation of probabilities.</p></li>
 </ul>
 <p>At a high-level we can describe the process of constructing Bayesian
 modeling in 3 steps.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Given some data and some assumptions on how this data could have
 been generated, we design a model by combining and transforming
 random variables.</p></li>
@@ -608,7 +477,7 @@ we dedicated an entire Chapter <a class="reference internal" href="chp_09.html#c
 rediscuss these ideas.</p>
 </section>
 <section id="id6">
-<span id="id7"></span><h3><span class="section-number">1.1.2. </span>Bayesian Inference<a class="headerlink" href="#id6" title="Permalink to this heading">¶</a></h3>
+<span id="id7"></span><h3><span class="section-number">1.1.2. </span>Bayesian Inference<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
 <p>In colloquial terms, inference is associated with obtaining conclusions
 based on evidence and reasoning. Bayesian inference is a particular form
 of statistical inference based on combining probability distributions in
@@ -617,7 +486,7 @@ us with a general recipe to estimate the value of the parameter
 <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> given that we have observed some data
 <span class="math notranslate nohighlight">\(\boldsymbol{Y}\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-posterior-dist">
-<span class="eqno">(1.1)<a class="headerlink" href="#equation-eq-posterior-dist" title="Permalink to this equation">¶</a></span>\[\underbrace{p(\boldsymbol{\theta} \mid \boldsymbol{Y})}_{\text{posterior}} = \frac{\overbrace{p(\boldsymbol{Y} \mid \boldsymbol{\theta})}^{\text{likelihood}}\; \overbrace{p(\boldsymbol{\theta})}^{\text{prior}}}{\underbrace{{p(\boldsymbol{Y})}}_{\text{marginal likelihood}}}\]</div>
+<span class="eqno">(1.1)<a class="headerlink" href="#equation-eq-posterior-dist" title="Permalink to this equation">#</a></span>\[\underbrace{p(\boldsymbol{\theta} \mid \boldsymbol{Y})}_{\text{posterior}} = \frac{\overbrace{p(\boldsymbol{Y} \mid \boldsymbol{\theta})}^{\text{likelihood}}\; \overbrace{p(\boldsymbol{\theta})}^{\text{prior}}}{\underbrace{{p(\boldsymbol{Y})}}_{\text{marginal likelihood}}}\]</div>
 <p>The likelihood function links the observed data with the unknown
 parameters while the prior distribution represents the uncertainty <a class="footnote-reference brackets" href="#id42" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>
 about the parameters before observing the data <span class="math notranslate nohighlight">\(\boldsymbol{Y}\)</span>. By
@@ -639,7 +508,7 @@ panel, the same functions as in the left panel but the y-axis is in the
 log-scale. Notice that the information about relative values is
 preserved, for example, the location of the maxima and minima is the
 same in both panels. The log scale is preferred to perform calculations
-as computations are numerically more stable.</span><a class="headerlink" href="#fig-bayesian-triad" title="Permalink to this image">¶</a></p>
+as computations are numerically more stable.</span><a class="headerlink" href="#fig-bayesian-triad" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Notice that while <span class="math notranslate nohighlight">\(\boldsymbol{Y}\)</span> is the observed data, it also is a
@@ -658,7 +527,7 @@ normalizing constant. Unfortunately, difficulties arise from the need to
 compute the normalizing constant <span class="math notranslate nohighlight">\(p(\boldsymbol{Y})\)</span>. This is easier to
 see if we write the marginal likelihood as:</p>
 <div class="math notranslate nohighlight" id="equation-eq-marginal-likelihood">
-<span class="eqno">(1.2)<a class="headerlink" href="#equation-eq-marginal-likelihood" title="Permalink to this equation">¶</a></span>\[{p(\boldsymbol{Y}) = \int_{\boldsymbol{\Theta}} p(\boldsymbol{Y} \mid \boldsymbol{\theta})p(\boldsymbol{\theta}) d\boldsymbol{\theta}}\]</div>
+<span class="eqno">(1.2)<a class="headerlink" href="#equation-eq-marginal-likelihood" title="Permalink to this equation">#</a></span>\[{p(\boldsymbol{Y}) = \int_{\boldsymbol{\Theta}} p(\boldsymbol{Y} \mid \boldsymbol{\theta})p(\boldsymbol{\theta}) d\boldsymbol{\theta}}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\Theta\)</span> means we are integrating over all the possible values of
 <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
 <p>Computing integrals like this can be much harder than would first appear
@@ -669,7 +538,7 @@ numerical methods that can help us with this challenge if used properly.
 As the marginal likelihood is not generally computed, it is very common
 to see Bayes’ theorem expressed as a proportionality:</p>
 <div class="math notranslate nohighlight" id="equation-eq-proportional-bayes">
-<span class="eqno">(1.3)<a class="headerlink" href="#equation-eq-proportional-bayes" title="Permalink to this equation">¶</a></span>\[\underbrace{p(\boldsymbol{\theta} \mid \boldsymbol{Y})}_{\text{posterior}} \propto \overbrace{p(\boldsymbol{Y} \mid \boldsymbol{\theta})}^{\text{likelihood}}\; \overbrace{p(\boldsymbol{\theta})}^{\text{prior}}\]</div>
+<span class="eqno">(1.3)<a class="headerlink" href="#equation-eq-proportional-bayes" title="Permalink to this equation">#</a></span>\[\underbrace{p(\boldsymbol{\theta} \mid \boldsymbol{Y})}_{\text{posterior}} \propto \overbrace{p(\boldsymbol{Y} \mid \boldsymbol{\theta})}^{\text{likelihood}}\; \overbrace{p(\boldsymbol{\theta})}^{\text{prior}}\]</div>
 <div class="admonition-a-note-on-notation admonition">
 <p class="admonition-title">A note on notation</p>
 <p>In this book we use the same notation <span class="math notranslate nohighlight">\(p(\cdot)\)</span> to
@@ -703,24 +572,24 @@ have a healthy quota of skepticism about our data, models, and results.
 To make this more explicit, we may want to express Bayes’ theorem in a
 more nuanced way:</p>
 <div class="math notranslate nohighlight" id="equation-eq-posterior-cond-model">
-<span class="eqno">(1.4)<a class="headerlink" href="#equation-eq-posterior-cond-model" title="Permalink to this equation">¶</a></span>\[p(\boldsymbol{\theta} \mid  \boldsymbol{Y}, M) \propto  p(\boldsymbol{Y} \mid \boldsymbol{\theta}, M) \; p(\boldsymbol{\theta}, M)\]</div>
+<span class="eqno">(1.4)<a class="headerlink" href="#equation-eq-posterior-cond-model" title="Permalink to this equation">#</a></span>\[p(\boldsymbol{\theta} \mid  \boldsymbol{Y}, M) \propto  p(\boldsymbol{Y} \mid \boldsymbol{\theta}, M) \; p(\boldsymbol{\theta}, M)\]</div>
 <p>Emphasizing that our inferences are always dependent on the assumptions
 made by model <span class="math notranslate nohighlight">\(M\)</span>.</p>
 <p>Having said that, once we have a posterior distribution we can use it to
 derive other quantities of interest. This is generally done by computing
 expectations, for example:</p>
 <div class="math notranslate nohighlight" id="equation-eq-posterior-expectation">
-<span class="eqno">(1.5)<a class="headerlink" href="#equation-eq-posterior-expectation" title="Permalink to this equation">¶</a></span>\[J = \int f(\boldsymbol{\theta}) \; p(\boldsymbol{\theta} \mid \boldsymbol{Y}) \; d\boldsymbol{\theta}\]</div>
+<span class="eqno">(1.5)<a class="headerlink" href="#equation-eq-posterior-expectation" title="Permalink to this equation">#</a></span>\[J = \int f(\boldsymbol{\theta}) \; p(\boldsymbol{\theta} \mid \boldsymbol{Y}) \; d\boldsymbol{\theta}\]</div>
 <p>If <span class="math notranslate nohighlight">\(f\)</span> is the identity function <span class="math notranslate nohighlight">\(J\)</span> will turn out be the mean <a class="footnote-reference brackets" href="#id46" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a> of
 <span class="math notranslate nohighlight">\(\boldsymbol{\theta}.\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-posterior-expectation-mean">
-<span class="eqno">(1.6)<a class="headerlink" href="#equation-eq-posterior-expectation-mean" title="Permalink to this equation">¶</a></span>\[\bar{\boldsymbol{\theta}} = \int_{\boldsymbol{\Theta}} \boldsymbol{\theta}  p(\boldsymbol{\theta} \mid \boldsymbol{Y})  d\boldsymbol{\theta}\]</div>
+<span class="eqno">(1.6)<a class="headerlink" href="#equation-eq-posterior-expectation-mean" title="Permalink to this equation">#</a></span>\[\bar{\boldsymbol{\theta}} = \int_{\boldsymbol{\Theta}} \boldsymbol{\theta}  p(\boldsymbol{\theta} \mid \boldsymbol{Y})  d\boldsymbol{\theta}\]</div>
 <p>The posterior distribution is the central object in Bayesian statistics,
 but it is not the only one. Besides making inferences about parameter
 values, we may want to make inferences about data. This can be done by
 computing the <strong>prior predictive distribution</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-prior-pred-dist">
-<span class="eqno">(1.7)<a class="headerlink" href="#equation-eq-prior-pred-dist" title="Permalink to this equation">¶</a></span>\[p(\boldsymbol{Y}^\ast) =  \int_{\boldsymbol{\Theta}} p(\boldsymbol{Y^\ast} \mid \boldsymbol{\theta}) \; p(\boldsymbol{\theta}) \; d\boldsymbol{\theta}\]</div>
+<span class="eqno">(1.7)<a class="headerlink" href="#equation-eq-prior-pred-dist" title="Permalink to this equation">#</a></span>\[p(\boldsymbol{Y}^\ast) =  \int_{\boldsymbol{\Theta}} p(\boldsymbol{Y^\ast} \mid \boldsymbol{\theta}) \; p(\boldsymbol{\theta}) \; d\boldsymbol{\theta}\]</div>
 <p>This is the expected distribution of the data according to the model
 (prior and likelihood). That is the data we expect, given the model,
 before actually seeing any observed data <span class="math notranslate nohighlight">\(\boldsymbol{Y}^\ast\)</span>. Notice
@@ -757,7 +626,7 @@ Iterate if necessary.</p>
 </div>
 <p>Another useful quantity to compute is the <strong>posterior predictive distribution</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-post-pred-dist">
-<span class="eqno">(1.8)<a class="headerlink" href="#equation-eq-post-pred-dist" title="Permalink to this equation">¶</a></span>\[p(\tilde{\boldsymbol{Y}} \mid \boldsymbol{Y}) = \int_{\boldsymbol{\Theta}} p(\tilde{\boldsymbol{Y}} \mid \boldsymbol{\theta}) \, p(\boldsymbol{\theta} \mid \boldsymbol{Y}) \, d\boldsymbol{\theta}\]</div>
+<span class="eqno">(1.8)<a class="headerlink" href="#equation-eq-post-pred-dist" title="Permalink to this equation">#</a></span>\[p(\tilde{\boldsymbol{Y}} \mid \boldsymbol{Y}) = \int_{\boldsymbol{\Theta}} p(\tilde{\boldsymbol{Y}} \mid \boldsymbol{\theta}) \, p(\boldsymbol{\theta} \mid \boldsymbol{Y}) \, d\boldsymbol{\theta}\]</div>
 <p>This is the distribution of expected, future, data
 <span class="math notranslate nohighlight">\(\tilde{\boldsymbol{Y}}\)</span> according to the posterior
 <span class="math notranslate nohighlight">\(p(\boldsymbol{\theta} \mid \boldsymbol{Y})\)</span>, which in turn is a
@@ -784,7 +653,7 @@ of these!</p>
 </section>
 </section>
 <section id="a-diy-sampler-do-not-try-this-at-home">
-<span id="sampling-methods-intro"></span><h2><span class="section-number">1.2. </span>A DIY Sampler, Do Not Try This at Home<a class="headerlink" href="#a-diy-sampler-do-not-try-this-at-home" title="Permalink to this heading">¶</a></h2>
+<span id="sampling-methods-intro"></span><h2><span class="section-number">1.2. </span>A DIY Sampler, Do Not Try This at Home<a class="headerlink" href="#a-diy-sampler-do-not-try-this-at-home" title="Permalink to this heading">#</a></h2>
 <p>Closed form expressions for the integral in Equation
 <a class="reference internal" href="#equation-eq-marginal-likelihood">(1.2)</a> are not always possible and thus much of
 modern Bayesian inference is done using numerical methods that we call
@@ -817,13 +686,13 @@ modern or particularly efficient algorithm, but Metropolis-Hastings is
 simple to understand and also provides a foundation to understand more
 sophisticated and powerful methods. <a class="footnote-reference brackets" href="#id48" id="id16" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a></p>
 <p>The Metropolis-Hasting algorithm is defined as follows:</p>
-<ol>
+<ol class="arabic">
 <li><p>Initialize the value of the parameter <span class="math notranslate nohighlight">\(\boldsymbol{X}\)</span> at <span class="math notranslate nohighlight">\(x_i\)</span></p></li>
 <li><p>Use a proposal distribution <a class="footnote-reference brackets" href="#id49" id="id17" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a> <span class="math notranslate nohighlight">\(q(x_{i + 1} \mid x_i)\)</span> to
 generate a new value <span class="math notranslate nohighlight">\(x_{i + 1}\)</span> from the old one <span class="math notranslate nohighlight">\(x_i\)</span>.</p></li>
 <li><p>Compute the probability of accepting the new value as:</p>
 <div class="math notranslate nohighlight" id="equation-acceptance-prob">
-<span class="eqno">(1.9)<a class="headerlink" href="#equation-acceptance-prob" title="Permalink to this equation">¶</a></span>\[p_a (x_{i + 1} \mid x_i) = \min \left (1, \frac{p(x_{i + 1}) \;
+<span class="eqno">(1.9)<a class="headerlink" href="#equation-acceptance-prob" title="Permalink to this equation">#</a></span>\[p_a (x_{i + 1} \mid x_i) = \min \left (1, \frac{p(x_{i + 1}) \;
 q(x_i \mid x_{i + 1})} {p(x_i) \; q (x_{i + 1} \mid x_i)} \right)\]</div>
 </li>
 <li><p>If <span class="math notranslate nohighlight">\(p_a &gt; R\)</span> where <span class="math notranslate nohighlight">\(R \sim \mathcal{U}(0, 1)\)</span>, save the new value,
@@ -858,7 +727,7 @@ statistics, because it is a simple model that we can solve and compute
 with ease. In statistical notation we can write the Beta-Binomial models
 as:</p>
 <div class="math notranslate nohighlight" id="equation-eq-beta-binomial">
-<span class="eqno">(1.10)<a class="headerlink" href="#equation-eq-beta-binomial" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\begin{split}\begin{split}
+<span class="eqno">(1.10)<a class="headerlink" href="#equation-eq-beta-binomial" title="Permalink to this equation">#</a></span>\[ \begin{align}\begin{aligned}\begin{split}\begin{split}
     \theta \sim &amp;\; \text{Beta}(\alpha, \beta) \\
     Y \sim &amp;\; \text{Bin}(n=1, p=\theta)\end{split}\\\end{split}\end{aligned}\end{align} \]</div>
 <p>In Equation <a class="reference internal" href="#equation-eq-beta-binomial">(1.10)</a> we are saying the parameter <span class="math notranslate nohighlight">\(\theta\)</span>
@@ -875,7 +744,7 @@ Metropolis-Hastings algorithm into Python code in order to get an
 approximate answer. We will do it with the help of SciPy statistical
 functions:</p>
 <div class="literal-block-wrapper docutils container" id="metropolis-hastings-sampler">
-<div class="code-block-caption"><span class="caption-number">Listing 1.1 </span><span class="caption-text">metropolis_hastings_sampler</span><a class="headerlink" href="#metropolis-hastings-sampler" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 1.1 </span><span class="caption-text">metropolis_hastings_sampler</span><a class="headerlink" href="#metropolis-hastings-sampler" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">α</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">β</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">θ</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
         <span class="n">prior</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">α</span><span class="p">,</span> <span class="n">β</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">θ</span><span class="p">)</span>
@@ -890,7 +759,7 @@ functions:</p>
 <p>We also need data, so we will generate some random fake data for this
 purpose.</p>
 <div class="literal-block-wrapper docutils container" id="metropolis-hastings-sampler-rvs">
-<div class="code-block-caption"><span class="caption-number">Listing 1.2 </span><span class="caption-text">metropolis_hastings_sampler_rvs</span><a class="headerlink" href="#metropolis-hastings-sampler-rvs" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 1.2 </span><span class="caption-text">metropolis_hastings_sampler_rvs</span><a class="headerlink" href="#metropolis-hastings-sampler-rvs" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">bernoulli</span><span class="p">(</span><span class="mf">0.7</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -898,7 +767,7 @@ purpose.</p>
 <p>And finally we run our implementation of the Metropolis-Hastings
 algorithm:</p>
 <div class="literal-block-wrapper docutils container" id="metropolis-hastings">
-<div class="code-block-caption"><span class="caption-number">Listing 1.3 </span><span class="caption-text">metropolis_hastings</span><a class="headerlink" href="#metropolis-hastings" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 1.3 </span><span class="caption-text">metropolis_hastings</span><a class="headerlink" href="#metropolis-hastings" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">n_iters</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="linenos"> 2</span><span class="n">can_sd</span> <span class="o">=</span> <span class="mf">0.05</span>
 <span class="linenos"> 3</span><span class="n">α</span> <span class="o">=</span> <span class="n">β</span> <span class="o">=</span>  <span class="mi">1</span>
@@ -963,7 +832,7 @@ distributions. For example, we can use the code in Code Block
 <a class="reference internal" href="#diy-trace-plot"><span class="std std-ref">diy_trace_plot</span></a> to plot
 <a class="reference internal" href="#fig-traceplot"><span class="std std-numref">Fig. 1.2</span></a> <a class="footnote-reference brackets" href="#id50" id="id18" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a>:</p>
 <div class="literal-block-wrapper docutils container" id="diy-trace-plot">
-<div class="code-block-caption"><span class="caption-number">Listing 1.4 </span><span class="caption-text">diy_trace_plot</span><a class="headerlink" href="#diy-trace-plot" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 1.4 </span><span class="caption-text">diy_trace_plot</span><a class="headerlink" href="#diy-trace-plot" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">trace</span><span class="p">[</span><span class="s1">&#39;θ&#39;</span><span class="p">],</span> <span class="s1">&#39;0.5&#39;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;θ&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
@@ -980,7 +849,7 @@ each iteration. On the right, we have the histogram of the sampled
 values of <span class="math notranslate nohighlight">\(\theta\)</span>. The histogram is rotated, to make it easier to see
 that both plots are closely related. The plot on the left shows the
 <em>sequence</em> of sampled values. This sequence is our Markov Chain. The
-plot on the right shows the distribution of the sampled values.</span><a class="headerlink" href="#fig-traceplot" title="Permalink to this image">¶</a></p>
+plot on the right shows the distribution of the sampled values.</span><a class="headerlink" href="#fig-traceplot" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Generally it is also useful to compute some numerical summaries. Here we
@@ -990,7 +859,7 @@ statistics:</p>
 </pre></div>
 </div>
 <table class="table" id="tab-posterior-summary">
-<caption><span class="caption-number">Table 1.1 </span><span class="caption-text">Posterior summary</span><a class="headerlink" href="#tab-posterior-summary" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-number">Table 1.1 </span><span class="caption-text">Posterior summary</span><a class="headerlink" href="#tab-posterior-summary" title="Permalink to this table">#</a></caption>
 <tbody>
 <tr class="row-odd"><td></td>
 <td><p><strong>mean</strong></p></td>
@@ -1023,7 +892,7 @@ computations.</p>
 <p><span class="caption-number">Fig. 1.3 </span><span class="caption-text">Posterior plot visualizing the samples generated from Code Block
 <a class="reference internal" href="#metropolis-hastings"><span class="std std-ref">metropolis_hastings</span></a>. The posterior distribution is represented using
 a KDE, the mean and the limits of the HDI 94% are represented in the
-figure.</span><a class="headerlink" href="#fig-plot-posterior" title="Permalink to this image">¶</a></p>
+figure.</span><a class="headerlink" href="#fig-plot-posterior" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The HDI is a common choice in Bayesian statistics and <em>round</em> values
@@ -1038,7 +907,7 @@ your needs <span id="id22">[<a class="reference internal" href="references.html#
 default.</p>
 </section>
 <section id="say-yes-to-automating-inference-say-no-to-automated-model-building">
-<span id="automating-inference"></span><h2><span class="section-number">1.3. </span>Say Yes to Automating Inference, Say No to Automated Model Building<a class="headerlink" href="#say-yes-to-automating-inference-say-no-to-automated-model-building" title="Permalink to this heading">¶</a></h2>
+<span id="automating-inference"></span><h2><span class="section-number">1.3. </span>Say Yes to Automating Inference, Say No to Automated Model Building<a class="headerlink" href="#say-yes-to-automating-inference-say-no-to-automated-model-building" title="Permalink to this heading">#</a></h2>
 <p>Instead of writing our own sampler and having to define our models using
 <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> method we can leverage the aid of <strong>Probabilistic
 Programming Languages</strong> (PPL). These tools allow users to express
@@ -1056,7 +925,7 @@ able to understand and work around these limitations.</p>
 Probability <span id="id24">[<a class="reference internal" href="references.html#id141" title="Joshua V. Dillon, Ian Langmore, Dustin Tran, Eugene Brevdo, Srinivas Vasudevan, Dave Moore, Brian Patton, Alex Alemi, Matt Hoffman, and Rif A Saurous. Tensorflow distributions. arXiv preprint arXiv:1711.10604, 2017.">2</a>]</span>. Let us write the model from
 Equation <a class="reference internal" href="#equation-eq-beta-binomial">(1.10)</a> using PyMC3:</p>
 <div class="literal-block-wrapper docutils container" id="beta-binom">
-<div class="code-block-caption"><span class="caption-number">Listing 1.5 </span><span class="caption-text">beta_binom</span><a class="headerlink" href="#beta-binom" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 1.5 </span><span class="caption-text">beta_binom</span><a class="headerlink" href="#beta-binom" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Declare a model in PyMC3</span>
 <span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
     <span class="c1"># Specify the prior distribution of unknown parameter</span>
@@ -1087,7 +956,7 @@ the model in Code Block <a class="reference internal" href="#beta-binom"><span c
 and likelihood, whereas the 20 in this case indicates the number of
 observations.
 [fig:BetaBinomModelGraphViz]{#fig:BetaBinomModelGraphViz
-label=”fig:BetaBinomModelGraphViz”}</span><a class="headerlink" href="#fig-betabinommodelgraphviz" title="Permalink to this image">¶</a></p>
+label=”fig:BetaBinomModelGraphViz”}</span><a class="headerlink" href="#fig-betabinommodelgraphviz" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>A Probabilistic Programming Language can not only evaluate the
@@ -1106,7 +975,7 @@ samples from the prior and posterior predictive distributions are
 represented in the top and bottom panel, respectively, from
 <a class="reference internal" href="#fig-quartet"><span class="std std-numref">Fig. 1.5</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="predictive-distributions">
-<div class="code-block-caption"><span class="caption-number">Listing 1.6 </span><span class="caption-text">predictive_distributions</span><a class="headerlink" href="#predictive-distributions" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 1.6 </span><span class="caption-text">predictive_distributions</span><a class="headerlink" href="#predictive-distributions" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pred_dists</span> <span class="o">=</span> <span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">sample_prior_predictive</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">model</span><span class="p">)[</span><span class="s2">&quot;y_obs&quot;</span><span class="p">],</span>
               <span class="n">pm</span><span class="o">.</span><span class="n">sample_posterior_predictive</span><span class="p">(</span><span class="n">idata</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">model</span><span class="p">)[</span><span class="s2">&quot;y_obs&quot;</span><span class="p">])</span>
 </pre></div>
@@ -1151,7 +1020,7 @@ distribution of the total number of successes; (3) posterior samples of
 the parameter <span class="math notranslate nohighlight">\(\theta\)</span>; (4) posterior predictive distribution of the
 total number of successes. The x-axis and y-axis scales are shared
 between the first and third plots and then between the second and fourth
-plots.</span><a class="headerlink" href="#fig-quartet" title="Permalink to this image">¶</a></p>
+plots.</span><a class="headerlink" href="#fig-quartet" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>As we already mentioned, posterior predictive distributions take into
@@ -1165,12 +1034,12 @@ similar picture if we change the mean to any other point-estimate.</p>
 <figcaption>
 <p><span class="caption-number">Fig. 1.6 </span><span class="caption-text">Predictions for the Beta-Binomial model, using the posterior mean (gray
 histogram) vs predictions using the entire posterior, i.e. the posterior
-predictive distribution (blue histogram).</span><a class="headerlink" href="#fig-predictions-distributions" title="Permalink to this image">¶</a></p>
+predictive distribution (blue histogram).</span><a class="headerlink" href="#fig-predictions-distributions" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="a-few-options-to-quantify-your-prior-information">
-<span id="make-prior-count"></span><h2><span class="section-number">1.4. </span>A Few Options to Quantify Your Prior Information<a class="headerlink" href="#a-few-options-to-quantify-your-prior-information" title="Permalink to this heading">¶</a></h2>
+<span id="make-prior-count"></span><h2><span class="section-number">1.4. </span>A Few Options to Quantify Your Prior Information<a class="headerlink" href="#a-few-options-to-quantify-your-prior-information" title="Permalink to this heading">#</a></h2>
 <p>Having to choose a prior distribution is portrayed both as a burden and
 as a blessing. We choose to affirm that is a necessity, if you are not
 choosing your priors someone else is doing it for you. Letting others
@@ -1195,7 +1064,7 @@ As with the other sections in this chapter, this discussion is more on
 the theoretical side. In the following chapters we will discuss how to
 choose priors in more practical settings.</p>
 <section id="conjugate-priors">
-<span id="id25"></span><h3><span class="section-number">1.4.1. </span>Conjugate Priors<a class="headerlink" href="#conjugate-priors" title="Permalink to this heading">¶</a></h3>
+<span id="id25"></span><h3><span class="section-number">1.4.1. </span>Conjugate Priors<a class="headerlink" href="#conjugate-priors" title="Permalink to this heading">#</a></h3>
 <p>A prior is conjugate to a likelihood if the posterior belongs to the
 same family of distributions as the prior. For example, if the
 likelihood is Poisson and the prior Gamma, then the posterior will also
@@ -1216,14 +1085,14 @@ model.</p>
 <p>As the name suggests, the conjugate prior for the binomial distribution
 is the Beta distribution:</p>
 <div class="math notranslate nohighlight" id="equation-eq-beta-distribution">
-<span class="eqno">(1.11)<a class="headerlink" href="#equation-eq-beta-distribution" title="Permalink to this equation">¶</a></span>\[p(\theta \mid Y) \propto \overbrace{\frac{N!}{y!(N-y)!} \theta^y (1 - \theta)^{N-y}}^{\text{binomial-likelihood}} \: \overbrace{\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\, \theta^{\alpha-1}(1-\theta)^{\beta-1}}^{\text{beta.prior}}\]</div>
+<span class="eqno">(1.11)<a class="headerlink" href="#equation-eq-beta-distribution" title="Permalink to this equation">#</a></span>\[p(\theta \mid Y) \propto \overbrace{\frac{N!}{y!(N-y)!} \theta^y (1 - \theta)^{N-y}}^{\text{binomial-likelihood}} \: \overbrace{\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\, \theta^{\alpha-1}(1-\theta)^{\beta-1}}^{\text{beta.prior}}\]</div>
 <p>Because all the terms not depending on <span class="math notranslate nohighlight">\(\theta\)</span> are constant we can drop
 them and we get:</p>
 <div class="math notranslate nohighlight" id="equation-eq-beta-distribution-no-normalization">
-<span class="eqno">(1.12)<a class="headerlink" href="#equation-eq-beta-distribution-no-normalization" title="Permalink to this equation">¶</a></span>\[p(\theta \mid Y) \propto \overbrace{\theta^y (1 - \theta)^{N-y}}^{\text{binomial-likelihood}} \: \overbrace{ \theta^{\alpha-1}(1-\theta)^{\beta-1}}^{\text{beta.prior}}\]</div>
+<span class="eqno">(1.12)<a class="headerlink" href="#equation-eq-beta-distribution-no-normalization" title="Permalink to this equation">#</a></span>\[p(\theta \mid Y) \propto \overbrace{\theta^y (1 - \theta)^{N-y}}^{\text{binomial-likelihood}} \: \overbrace{ \theta^{\alpha-1}(1-\theta)^{\beta-1}}^{\text{beta.prior}}\]</div>
 <p>Reordering:</p>
 <div class="math notranslate nohighlight" id="equation-eq-kernel-beta">
-<span class="eqno">(1.13)<a class="headerlink" href="#equation-eq-kernel-beta" title="Permalink to this equation">¶</a></span>\[p(\theta \mid Y) \propto \theta^{\alpha-1+y}(1-\theta)^{\beta-1+N-y}\]</div>
+<span class="eqno">(1.13)<a class="headerlink" href="#equation-eq-kernel-beta" title="Permalink to this equation">#</a></span>\[p(\theta \mid Y) \propto \theta^{\alpha-1+y}(1-\theta)^{\beta-1+N-y}\]</div>
 <p>If we want to ensure that the posterior is a proper probability
 distribution function, we need to add a normalization constant ensuring
 that the integral of the PDF is 1 (see Section <a class="reference internal" href="chp_11.html#cont-rvs"><span class="std std-ref">Continuous Random Variables and Distributions</span></a>). Notice
@@ -1232,7 +1101,7 @@ distribution, thus by adding the normalization constant of a Beta
 distribution we arrive to the conclusion that the posterior distribution
 for a Beta-Binomial model is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-beta-posterior">
-<span class="eqno">(1.14)<a class="headerlink" href="#equation-eq-beta-posterior" title="Permalink to this equation">¶</a></span>\[p(\theta \mid Y) \propto \frac{\Gamma(\alpha_{post}+\beta_{post})}{\Gamma(\alpha_{post})\Gamma(\beta_{post})} \theta^{\alpha_{post}-1}(1-\theta)^{\beta_{post}-1} = \text{Beta}(\alpha_{post}, \beta_{post})\]</div>
+<span class="eqno">(1.14)<a class="headerlink" href="#equation-eq-beta-posterior" title="Permalink to this equation">#</a></span>\[p(\theta \mid Y) \propto \frac{\Gamma(\alpha_{post}+\beta_{post})}{\Gamma(\alpha_{post})\Gamma(\beta_{post})} \theta^{\alpha_{post}-1}(1-\theta)^{\beta_{post}-1} = \text{Beta}(\alpha_{post}, \beta_{post})\]</div>
 <p>where <span class="math notranslate nohighlight">\(\alpha_{post} = \alpha+y\)</span> and <span class="math notranslate nohighlight">\(\beta_{post} = \beta+N-y\)</span>.</p>
 <p>As the posterior of a Beta-Binomial model is a Beta distribution we can
 use a Beta-posterior as the prior for a future analysis. This means that
@@ -1257,7 +1126,7 @@ In the limit of infinite data, the posteriors (irrespective of priors
 used to compute those posteriors) will have all its density at
 <span class="math notranslate nohighlight">\(\hat \theta = \frac{y}{n}\)</span>.</p>
 <div class="literal-block-wrapper docutils container" id="binomial-update">
-<div class="code-block-caption"><span class="caption-number">Listing 1.7 </span><span class="caption-text">binomial_update</span><a class="headerlink" href="#binomial-update" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 1.7 </span><span class="caption-text">binomial_update</span><a class="headerlink" href="#binomial-update" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">axes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">axes</span><span class="p">)</span>
 
@@ -1286,16 +1155,16 @@ used to compute those posteriors) will have all its density at
 <p><span class="caption-number">Fig. 1.7 </span><span class="caption-text">Successive prior updating starting from 3 different priors and
 increasing the number of trials (and possible the number of successes
 too). The black dot represents the sampling proportion estimator
-<span class="math notranslate nohighlight">\(\hat \theta = \frac{y}{n}\)</span>.</span><a class="headerlink" href="#fig-beta-binomial-update" title="Permalink to this image">¶</a></p>
+<span class="math notranslate nohighlight">\(\hat \theta = \frac{y}{n}\)</span>.</span><a class="headerlink" href="#fig-beta-binomial-update" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The mean of the Beta distribution is <span class="math notranslate nohighlight">\(\frac{\alpha}{\alpha + \beta}\)</span>,
 thus the prior mean is:</p>
 <div class="math notranslate nohighlight" id="equation-beta-prior-mean">
-<span class="eqno">(1.15)<a class="headerlink" href="#equation-beta-prior-mean" title="Permalink to this equation">¶</a></span>\[\mathbb{E}[\theta]  = \frac{\alpha}{\alpha + \beta}\]</div>
+<span class="eqno">(1.15)<a class="headerlink" href="#equation-beta-prior-mean" title="Permalink to this equation">#</a></span>\[\mathbb{E}[\theta]  = \frac{\alpha}{\alpha + \beta}\]</div>
 <p>and the posterior mean is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-beta-binom-mean">
-<span class="eqno">(1.16)<a class="headerlink" href="#equation-eq-beta-binom-mean" title="Permalink to this equation">¶</a></span>\[\mathbb{E}[\theta \mid Y]  = \frac{\alpha + y}{\alpha + \beta + n}\]</div>
+<span class="eqno">(1.16)<a class="headerlink" href="#equation-eq-beta-binom-mean" title="Permalink to this equation">#</a></span>\[\mathbb{E}[\theta \mid Y]  = \frac{\alpha + y}{\alpha + \beta + n}\]</div>
 <p>We can see that if the value of <span class="math notranslate nohighlight">\(n\)</span> is small in relation with the values
 of <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> then the posterior mean will be closer to the
 prior mean. That is, the prior contributes more to the result than the
@@ -1306,7 +1175,7 @@ exactly match the sample proportion no matter which prior values we
 choose for <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>.</p>
 <p>For the Beta Binomial model the posterior mode is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-beta-binom-mode">
-<span class="eqno">(1.17)<a class="headerlink" href="#equation-eq-beta-binom-mode" title="Permalink to this equation">¶</a></span>\[\operatorname*{argmax}_{\theta}{[\theta \mid Y]}  = \frac{\alpha + y - 1}{\alpha + \beta + n - 2}\]</div>
+<span class="eqno">(1.17)<a class="headerlink" href="#equation-eq-beta-binom-mode" title="Permalink to this equation">#</a></span>\[\operatorname*{argmax}_{\theta}{[\theta \mid Y]}  = \frac{\alpha + y - 1}{\alpha + \beta + n - 2}\]</div>
 <p>We can see that when the prior is Beta<span class="math notranslate nohighlight">\((\alpha\!=\!1, \beta\!=\!1)\)</span>
 (Uniform) the posterior mode is numerically equivalent to the sampling
 proportion estimator <span class="math notranslate nohighlight">\(\hat \theta = \frac{y}{n}\)</span>. The posterior mode is
@@ -1330,7 +1199,7 @@ little bit weird as a literal interpretation would say that the prior
 half success or maybe one trial with undetermined outcome. Spooky!</p>
 </section>
 <section id="objective-priors">
-<span id="id29"></span><h3><span class="section-number">1.4.2. </span>Objective Priors<a class="headerlink" href="#objective-priors" title="Permalink to this heading">¶</a></h3>
+<span id="id29"></span><h3><span class="section-number">1.4.2. </span>Objective Priors<a class="headerlink" href="#objective-priors" title="Permalink to this heading">#</a></h3>
 <p>In the absence of prior information, it sounds reasonable to follow the
 <em>principle of indifference</em> also known as the <em>principle of insufficient
 reason</em>. This principle basically says that if you do not have
@@ -1366,10 +1235,10 @@ two (or more) parameterization of a model will necessarily lead to
 posteriors that are coherent.</p>
 <p>For the one-dimensional case JP for <span class="math notranslate nohighlight">\(\theta\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-eq-jeffreys-prior0">
-<span class="eqno">(1.18)<a class="headerlink" href="#equation-eq-jeffreys-prior0" title="Permalink to this equation">¶</a></span>\[p(\theta) \propto \sqrt{I(\theta)}\]</div>
+<span class="eqno">(1.18)<a class="headerlink" href="#equation-eq-jeffreys-prior0" title="Permalink to this equation">#</a></span>\[p(\theta) \propto \sqrt{I(\theta)}\]</div>
 <p>where <span class="math notranslate nohighlight">\(I(\theta)\)</span> is the expected Fisher information:</p>
 <div class="math notranslate nohighlight" id="equation-eq-jeffreys-prior">
-<span class="eqno">(1.19)<a class="headerlink" href="#equation-eq-jeffreys-prior" title="Permalink to this equation">¶</a></span>\[I(\theta) = - \mathbb{E_{Y}}\left[\frac{d^2}{d\theta^2} \log p(Y \mid \theta)\right]\]</div>
+<span class="eqno">(1.19)<a class="headerlink" href="#equation-eq-jeffreys-prior" title="Permalink to this equation">#</a></span>\[I(\theta) = - \mathbb{E_{Y}}\left[\frac{d^2}{d\theta^2} \log p(Y \mid \theta)\right]\]</div>
 <p>Once the likelihood function <span class="math notranslate nohighlight">\(p(Y \mid \theta)\)</span> has been decided by the
 practitioner, then the JP gets automatically determined, eliminating any
 discussion over prior choices, until that annoying person at the back of
@@ -1378,13 +1247,13 @@ the conference room objects your choice of a JP in the first place.</p>
 Section <a class="reference internal" href="chp_11.html#jeffreys-prior-derivation"><span class="std std-ref">Jeffreys’ Prior Derivation</span></a>. If you
 want to skip those details here we have the JP for Alice:</p>
 <div class="math notranslate nohighlight" id="equation-fig-alice-prior">
-<span class="eqno">(1.20)<a class="headerlink" href="#equation-fig-alice-prior" title="Permalink to this equation">¶</a></span>\[p(\theta) \propto \theta^{-0.5} (1-\theta)^{-0.5}\]</div>
+<span class="eqno">(1.20)<a class="headerlink" href="#equation-fig-alice-prior" title="Permalink to this equation">#</a></span>\[p(\theta) \propto \theta^{-0.5} (1-\theta)^{-0.5}\]</div>
 <p>This turns to be the kernel of the <span class="math notranslate nohighlight">\(\text{Beta}(0.5, 0.5)\)</span> distribution.
 Which is a u-shaped distribution as shown in the left-top panel of
 <a class="reference internal" href="#fig-jeffrey-priors"><span class="std std-numref">Fig. 1.8</span></a>.</p>
 <p>For Bob the JP is:</p>
 <div class="math notranslate nohighlight" id="equation-fig-bob-prior">
-<span class="eqno">(1.21)<a class="headerlink" href="#equation-fig-bob-prior" title="Permalink to this equation">¶</a></span>\[p(\kappa) \propto \kappa^{-0.5} (1 + \kappa)^{-1}\]</div>
+<span class="eqno">(1.21)<a class="headerlink" href="#equation-fig-bob-prior" title="Permalink to this equation">#</a></span>\[p(\kappa) \propto \kappa^{-0.5} (1 + \kappa)^{-1}\]</div>
 <p>This is a half-u-shaped distribution, defined in the <span class="math notranslate nohighlight">\([0, \infty)\)</span>
 interval, see top-right panel in <a class="reference internal" href="#fig-jeffrey-priors"><span class="std std-numref">Fig. 1.8</span></a>. Saying
 this is a half-u-shaped may sound a little bit weird. Actually it is not
@@ -1401,7 +1270,7 @@ term of the odds <span class="math notranslate nohighlight">\(\kappa\)</span> (r
 number of success <span class="math notranslate nohighlight">\(\theta\)</span> (left) or in term of the odds <span class="math notranslate nohighlight">\(\kappa\)</span>
 (right). The arrows between the posteriors indicate that the posterior
 are inter-convertible by applying the change of variable rule (see Section
-<a class="reference internal" href="chp_11.html#transformations"><span class="std std-ref">Transformations</span></a> for details).</span><a class="headerlink" href="#fig-jeffrey-priors" title="Permalink to this image">¶</a></p>
+<a class="reference internal" href="chp_11.html#transformations"><span class="std std-ref">Transformations</span></a> for details).</span><a class="headerlink" href="#fig-jeffrey-priors" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Notice that as the expectation in Equation <a class="reference internal" href="#equation-eq-jeffreys-prior">(1.19)</a> is
@@ -1430,7 +1299,7 @@ Additionally, objective priors may not exist or be difficult to derive
 for complicated models.</p>
 </section>
 <section id="maximum-entropy-priors">
-<span id="id32"></span><h3><span class="section-number">1.4.3. </span>Maximum Entropy Priors<a class="headerlink" href="#maximum-entropy-priors" title="Permalink to this heading">¶</a></h3>
+<span id="id32"></span><h3><span class="section-number">1.4.3. </span>Maximum Entropy Priors<a class="headerlink" href="#maximum-entropy-priors" title="Permalink to this heading">#</a></h3>
 <p>Yet another way to justify a choice of priors is to pick the prior with
 the highest entropy. If we are totally indifferent about the plausible
 values then such prior turns out to be the Uniform distribution over the
@@ -1465,7 +1334,7 @@ distribution we can think of them as <em>intrinsic</em> or even <em>ontological<
 constraints. For that reason we say that the purple distribution in
 <a class="reference internal" href="#fig-max-entropy"><span class="std std-numref">Fig. 1.9</span></a> was obtained under no-constraint.</p>
 <div class="literal-block-wrapper docutils container" id="max-ent-priors">
-<div class="code-block-caption"><span class="caption-number">Listing 1.8 </span><span class="caption-text">max_ent_priors</span><a class="headerlink" href="#max-ent-priors" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 1.8 </span><span class="caption-text">max_ent_priors</span><a class="headerlink" href="#max-ent-priors" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cons</span> <span class="o">=</span> <span class="p">[[{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;eq&quot;</span><span class="p">,</span> <span class="s2">&quot;fun&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">}],</span>
         <span class="p">[{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;eq&quot;</span><span class="p">,</span> <span class="s2">&quot;fun&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">},</span>
          <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;eq&quot;</span><span class="p">,</span> <span class="s2">&quot;fun&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">1.5</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">))}],</span>
@@ -1489,7 +1358,7 @@ constraints. For that reason we say that the purple distribution in
 <p><span class="caption-number">Fig. 1.9 </span><span class="caption-text">Discrete distributions obtained by maximizing the entropy under
 different constraints. We are using the function <code class="docutils literal notranslate"><span class="pre">entropy</span></code> from
 <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> to estimate these distributions. Notice how adding
-constraints can drastically change the distribution.</span><a class="headerlink" href="#fig-max-entropy" title="Permalink to this image">¶</a></p>
+constraints can drastically change the distribution.</span><a class="headerlink" href="#fig-max-entropy" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>We can think of the maximum entropy principle as the procedure of
@@ -1546,7 +1415,7 @@ distributions with maximum entropy, computed with Code Block
 <a class="reference internal" href="#max-ent-priors"><span class="std std-ref">max_ent_priors</span></a>. We can see that none of
 the randomly generated distributions have an entropy larger that the
 distributions with maximum entropy, while this is no formal proof, this
-is certainly reassuring.</span><a class="headerlink" href="#fig-max-entropy-vs-random-dist" title="Permalink to this image">¶</a></p>
+is certainly reassuring.</span><a class="headerlink" href="#fig-max-entropy-vs-random-dist" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The distributions with the largest entropy under the following
@@ -1571,7 +1440,7 @@ the models. Similar to objective priors, MaxEnt prior may not exist or
 are difficult to derive.</p>
 </section>
 <section id="weakly-informative-priors-and-regularization-priors">
-<span id="id35"></span><h3><span class="section-number">1.4.4. </span>Weakly Informative Priors and Regularization Priors<a class="headerlink" href="#weakly-informative-priors-and-regularization-priors" title="Permalink to this heading">¶</a></h3>
+<span id="id35"></span><h3><span class="section-number">1.4.4. </span>Weakly Informative Priors and Regularization Priors<a class="headerlink" href="#weakly-informative-priors-and-regularization-priors" title="Permalink to this heading">#</a></h3>
 <p>In previous sections we used general procedures to generate vague,
 non-informative priors designed to not put <em>too much</em> information into
 our analysis. These procedures to generate priors also provide a
@@ -1623,7 +1492,7 @@ reality giraffe heights differ greatly than human heights.</p>
 <p><span class="caption-number">Fig. 1.11 </span><span class="caption-text">Prior informativeness spectrum: While Jeffreys and MaxEnt priors are
 uniquely defined for a binomial likelihood, weakly informative and
 informative priors are not and instead depend on previous information
-and practitioner’s modeling decisions.</span><a class="headerlink" href="#fig-prior-informativeness-spectrum" title="Permalink to this image">¶</a></p>
+and practitioner’s modeling decisions.</span><a class="headerlink" href="#fig-prior-informativeness-spectrum" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Because weakly-informative priors work to keep the posterior
@@ -1651,7 +1520,7 @@ data. We will discuss more about there topics in Sections
 </div>
 </section>
 <section id="using-prior-predictive-distributions-to-assess-priors">
-<span id="id39"></span><h3><span class="section-number">1.4.5. </span>Using Prior Predictive Distributions to Assess Priors<a class="headerlink" href="#using-prior-predictive-distributions-to-assess-priors" title="Permalink to this heading">¶</a></h3>
+<span id="id39"></span><h3><span class="section-number">1.4.5. </span>Using Prior Predictive Distributions to Assess Priors<a class="headerlink" href="#using-prior-predictive-distributions-to-assess-priors" title="Permalink to this heading">#</a></h3>
 <p>When evaluating the choice of priors, the prior predictive distribution
 shown in <a class="reference internal" href="#automating-inference"><span class="std std-ref">Say Yes to Automating Inference, Say No to Automated Model Building</span></a> is a handy tool. By sampling from
 the prior predictive distribution, the computer does the work of
@@ -1672,7 +1541,7 @@ prior predictive samples and use them to choose reasonable priors.</p>
 </section>
 </section>
 <section id="exercises">
-<span id="exercises1"></span><h2><span class="section-number">1.5. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">¶</a></h2>
+<span id="exercises1"></span><h2><span class="section-number">1.5. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <p>Problems are labeled Easy (E), Medium (M), and Hard (H).</p>
 <p><strong>1E1.</strong> As we discussed, models are artificial
 representations used to help define and understand an object or process.
@@ -1683,7 +1552,7 @@ can think of? How do they aid understanding of the thing that is being
 modeled? How are they deficient?</p>
 <p><strong>1E2.</strong> Match each of these verbal descriptions to their
 corresponding mathematical expression:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>The probability of a parameter given the observed data</p></li>
 <li><p>The distribution of parameters before seeing any data</p></li>
 <li><p>The plausibility of the observed data given a parameter value</p></li>
@@ -1693,7 +1562,7 @@ corresponding mathematical expression:</p>
 <p><strong>1E3.</strong> From the following expressions, which one
 corresponds to the sentence, The probability of being sunny given that
 it is July 9th of 1816?</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p><span class="math notranslate nohighlight">\(p(\text{sunny})\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(p(\text{sunny} \mid \text{July})\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(p(\text{sunny} \mid \text{July 9th of 1816})\)</span></p></li>
@@ -1706,7 +1575,7 @@ Pope being human. In the animated series Futurama, the (Space) Pope is a
 reptile. How does this change your previous calculations?</p>
 <p><strong>1E5.</strong> Sketch what the distribution of possible observed
 values could be for the following cases:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>The number of people visiting your local cafe assuming Poisson
 distribution</p></li>
 <li><p>The weight of adult dogs in kilograms assuming a Uniform
@@ -1735,7 +1604,7 @@ obtain new Max-Ent distributions (Code Block
 <p><strong>1E10.</strong> In Code Block <a class="reference internal" href="#metropolis-hastings"><span class="std std-ref">metropolis_hastings</span></a>, change the
 value of <code class="docutils literal notranslate"><span class="pre">can_sd</span></code> and run the Metropolis-Hastings sampler. Try values
 like 0.001 and 1.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Compute the mean, SD, and HDI and compare the values with those in
 the book (computed using <code class="docutils literal notranslate"><span class="pre">can_sd=0.05</span></code>). How different are the
 estimates?</p></li>
@@ -1778,7 +1647,7 @@ combinations of priors (change the parameters <code class="docutils literal notr
 <p><strong>1E13.</strong> Between the prior, prior predictive, posterior, and
 posterior predictive distributions which distribution would help answer
 each of these questions. Some items may have multiple answers.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>How do we think is the distribution of parameters values before
 seeing any data?</p></li>
 <li><p>What observed values do we think we could see before seeing any
@@ -1801,7 +1670,7 @@ exercise, try by expanding Equation <a class="reference internal" href="#equatio
 <p><strong>1M15.</strong> In the following definition of a probabilistic
 model, identify the prior, the likelihood, and the posterior:</p>
 <div class="math notranslate nohighlight" id="equation-eq-probabilistic-model">
-<span class="eqno">(1.22)<a class="headerlink" href="#equation-eq-probabilistic-model" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(1.22)<a class="headerlink" href="#equation-eq-probabilistic-model" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{split}
 Y \sim \mathcal{N}(\mu, \sigma)\\
 \mu \sim \mathcal{N}(0, 1)\\
 \sigma \sim \mathcal{HN}(1)\\
@@ -1826,7 +1695,7 @@ and standard deviation of adult human heights in centimeters. Build a
 model that will make this estimation. Start with Code Block
 <a class="reference internal" href="#beta-binom"><span class="std std-ref">beta_binom</span></a> and change the likelihood and
 priors as needed. After doing so then</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Sample from the prior predictive. Generate a visualization and
 numerical summary of the prior predictive distribution</p></li>
 <li><p>Using the outputs from (a) to justify your choices of priors and
@@ -1843,7 +1712,7 @@ The number of customers that make a purchase <span class="math notranslate nohig
 <span class="math notranslate nohighlight">\(\text{Bin}(n, \theta)\)</span>, where <span class="math notranslate nohighlight">\(\theta\)</span> is the probability that a
 customer makes a purchase. Assume we know <span class="math notranslate nohighlight">\(\theta\)</span> and the prior for <span class="math notranslate nohighlight">\(n\)</span>
 is <span class="math notranslate nohighlight">\(\text{Pois}(4.5)\)</span>.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Use PyMC3 to compute the posterior distribution of <span class="math notranslate nohighlight">\(n\)</span> for all
 combinations of <span class="math notranslate nohighlight">\(Y \in {0, 5, 10}\)</span> and <span class="math notranslate nohighlight">\(\theta \in {0.2, 0.5}\)</span>. Use
 <code class="docutils literal notranslate"><span class="pre">az.plot_posterior</span></code> to plot the results in a single plot.</p></li>
@@ -1868,7 +1737,7 @@ visualizations.</p>
 <p><strong>1H24.</strong> You planted 12 seedlings and 3 germinate. Let us
 call <span class="math notranslate nohighlight">\(\theta\)</span> the probability that a seedling germinates. Assuming
 <span class="math notranslate nohighlight">\(\text{Beta}(1, 1)\)</span> prior distribution for <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Use pen and paper to compute the posterior mean and standard
 deviation. Verify your calculations using SciPy.</p></li>
 <li><p>Use SciPy to compute the equal-tailed and highest density 94%
@@ -1995,7 +1864,7 @@ intuition, that will be refined as we progress through this book.</p>
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./markdown"
         },
         predefinedOutput: true
@@ -2003,44 +1872,117 @@ intuition, that will be refined as we progress through this book.</p>
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="symbollist.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Symbols</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="symbollist.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Symbols</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="chp_02.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="chp_02.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title"><span class="section-number">2. </span>Exploratory Analysis of Bayesian Models</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
+                </footer>
+              
+            </div>
             
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Martin, Kumar, Lao<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-modeling">1.1. Bayesian Modeling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-models">1.1.1. Bayesian Models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">1.1.2. Bayesian Inference</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-diy-sampler-do-not-try-this-at-home">1.2. A DIY Sampler, Do Not Try This at Home</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#say-yes-to-automating-inference-say-no-to-automated-model-building">1.3. Say Yes to Automating Inference, Say No to Automated Model Building</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-few-options-to-quantify-your-prior-information">1.4. A Few Options to Quantify Your Prior Information</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conjugate-priors">1.4.1. Conjugate Priors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objective-priors">1.4.2. Objective Priors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-entropy-priors">1.4.3. Maximum Entropy Priors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#weakly-informative-priors-and-regularization-priors">1.4.4. Weakly Informative Priors and Regularization Priors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-prior-predictive-distributions-to-assess-priors">1.4.5. Using Prior Predictive Distributions to Assess Priors</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">1.5. Exercises</a></li>
+</ul>
+  </nav></div>
 
-      </div>
-    </div>
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Martin, Kumar, Lao
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

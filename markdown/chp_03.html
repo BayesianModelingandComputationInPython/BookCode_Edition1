@@ -1,39 +1,47 @@
 
+
 <!DOCTYPE html>
 
-<html lang="en">
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>3. Linear Models and Probabilistic Programming Languages &#8212; Bayesian Modeling and Computation in Python</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-codeautolink.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -42,12 +50,13 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -56,484 +65,322 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'markdown/chp_03';</script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="4. Extending Linear Models" href="chp_04.html" />
     <link rel="prev" title="2. Exploratory Analysis of Bayesian Models" href="chp_02.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en">
-    
-
-    <!-- Google Analytics -->
-    
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-702QMHG8ST"></script>
-<script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){ dataLayer.push(arguments); }
-                    gtag('js', new Date());
-                    gtag('config', 'G-702QMHG8ST');
-                </script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-      
-      
-      <h1 class="site-logo" id="site-title">Bayesian Modeling and Computation in Python</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 0
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="dedication.html">
-   Dedication
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="foreword.html">
-   Foreword
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="preface.html">
-   Preface
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="symbollist.html">
-   Symbols
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 1
- </span>
-</p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_01.html">
-   1. Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_02.html">
-   2. Exploratory Analysis of Bayesian Models
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   3. Linear Models and Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_04.html">
-   4. Extending Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_05.html">
-   5. Splines
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_06.html">
-   6. Time Series
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_07.html">
-   7. Bayesian Additive Regression Trees
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_08.html">
-   8. Approximate Bayesian Computation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_09.html">
-   9. End to End Bayesian Workflows
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_10.html">
-   10. Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_11.html">
-   11. Appendiceal Topics
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="glossary.html">
-   12. Glossary
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="references.html">
-   13. References
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 2
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_01.html">
-   Code 1: Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_02.html">
-   Code 2: Exploratory Analysis of Bayesian Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_03.html">
-   Code 3: Linear Models and Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_04.html">
-   Code 4: Extending Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_05.html">
-   Code 5: Splines
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_06.html">
-   Code 6: Time Series
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_07.html">
-   Code 7: Bayesian Additive Regression Trees
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_08.html">
-   Code 8: Approximate Bayesian Computation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_09.html">
-   Code 9: End to End Bayesian Workflows
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_10.html">
-   Code 10: Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_11.html">
-   Code 11: Appendiceal Topics
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 3
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../solutions/chp_01.html">
-   Solutions 1: Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../solutions/chp_02.html">
-   Solutions 2: Exploratory Analysis of Bayesian models
-  </a>
- </li>
-</ul>
-
-    </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_03.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+      <div class="bd-sidebar-primary bd-sidebar">
         
-    </div>
-</div>
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
+  
 
-            <!-- Launch buttons -->
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#comparing-two-or-more-groups">
-   3.1. Comparing Two (or More) Groups
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#comparing-two-ppls">
-     3.1.1. Comparing Two PPLs
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#linear-regression">
-   3.2. Linear Regression
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#linear-penguins">
-     3.2.1. Linear Penguins
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#predictions">
-     3.2.2. Predictions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#centering">
-     3.2.3. Centering
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#multiple-linear-regression">
-   3.3. Multiple Linear Regression
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#counterfactuals">
-     3.3.1. Counterfactuals
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#generalized-linear-models">
-   3.4. Generalized Linear Models
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#logistic-regression">
-     3.4.1. Logistic Regression
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#classifying-penguins">
-     3.4.2. Classifying Penguins
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#interpreting-log-odds">
-     3.4.3. Interpreting Log Odds
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#picking-priors-in-regression-models">
-   3.5. Picking Priors in Regression Models
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
-   3.6. Exercises
-  </a>
- </li>
+<a class="navbar-brand logo" href="../welcome.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Bayesian Modeling and Computation in Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 0</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="dedication.html">Dedication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="foreword.html">Foreword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preface.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="symbollist.html">Symbols</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 1</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chp_01.html">1. Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_02.html">2. Exploratory Analysis of Bayesian Models</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Linear Models and Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_04.html">4. Extending Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_05.html">5. Splines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_06.html">6. Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_07.html">7. Bayesian Additive Regression Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_08.html">8. Approximate Bayesian Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_09.html">9. End to End Bayesian Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_10.html">10. Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_11.html">11. Appendiceal Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">12. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">13. References</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_01.html">Code 1: Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_02.html">Code 2: Exploratory Analysis of Bayesian Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_03.html">Code 3: Linear Models and Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_04.html">Code 4: Extending Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_05.html">Code 5: Splines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_06.html">Code 6: Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_07.html">Code 7: Bayesian Additive Regression Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_08.html">Code 8: Approximate Bayesian Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_09.html">Code 9: End to End Bayesian Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_10.html">Code 10: Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_11.html">Code 11: Appendiceal Topics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../solutions/chp_01.html">Solutions 1: Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/chp_02.html">Solutions 2: Exploratory Analysis of Bayesian models</a></li>
 </ul>
 
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_03.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Linear Models and Probabilistic Programming Languages</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-two-or-more-groups">3.1. Comparing Two (or More) Groups</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-two-ppls">3.1.1. Comparing Two PPLs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">3.2. Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-penguins">3.2.1. Linear Penguins</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predictions">3.2.2. Predictions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#centering">3.2.3. Centering</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-linear-regression">3.3. Multiple Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#counterfactuals">3.3.1. Counterfactuals</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generalized-linear-models">3.4. Generalized Linear Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">3.4.1. Logistic Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classifying-penguins">3.4.2. Classifying Penguins</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-log-odds">3.4.3. Interpreting Log Odds</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#picking-priors-in-regression-models">3.5. Picking Priors in Regression Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">3.6. Exercises</a></li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Linear Models and Probabilistic Programming Languages</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#comparing-two-or-more-groups">
-   3.1. Comparing Two (or More) Groups
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#comparing-two-ppls">
-     3.1.1. Comparing Two PPLs
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#linear-regression">
-   3.2. Linear Regression
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#linear-penguins">
-     3.2.1. Linear Penguins
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#predictions">
-     3.2.2. Predictions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#centering">
-     3.2.3. Centering
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#multiple-linear-regression">
-   3.3. Multiple Linear Regression
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#counterfactuals">
-     3.3.1. Counterfactuals
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#generalized-linear-models">
-   3.4. Generalized Linear Models
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#logistic-regression">
-     3.4.1. Logistic Regression
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#classifying-penguins">
-     3.4.2. Classifying Penguins
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#interpreting-log-odds">
-     3.4.3. Interpreting Log Odds
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#picking-priors-in-regression-models">
-   3.5. Picking Priors in Regression Models
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
-   3.6. Exercises
-  </a>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="linear-models-and-probabilistic-programming-languages">
-<span id="chap2"></span><h1><span class="section-number">3. </span>Linear Models and Probabilistic Programming Languages<a class="headerlink" href="#linear-models-and-probabilistic-programming-languages" title="Permalink to this heading">¶</a></h1>
+<span id="chap2"></span><h1><span class="section-number">3. </span>Linear Models and Probabilistic Programming Languages<a class="headerlink" href="#linear-models-and-probabilistic-programming-languages" title="Permalink to this heading">#</a></h1>
 <p>With the advent of Probabilistic Programming Languages, modern Bayesian
 modeling can be as simple as coding a model and “pressing a button”.
 However, effective model building and analysis usually takes more work.
@@ -558,7 +405,7 @@ with linear models, more familiar with many of the steps in a Bayesian
 workflow, and more comfortable conducting Bayesian workflows with PyMC3,
 TFP and ArviZ.</p>
 <section id="comparing-two-or-more-groups">
-<span id="comparing-distributions"></span><h2><span class="section-number">3.1. </span>Comparing Two (or More) Groups<a class="headerlink" href="#comparing-two-or-more-groups" title="Permalink to this heading">¶</a></h2>
+<span id="comparing-distributions"></span><h2><span class="section-number">3.1. </span>Comparing Two (or More) Groups<a class="headerlink" href="#comparing-two-or-more-groups" title="Permalink to this heading">#</a></h2>
 <p>If you are looking for something to compare it is hard to beat penguins.
 After all, what is not to like about these cute flightless birds? Our
 first question may be “What is the average mass of each penguin
@@ -578,7 +425,7 @@ handle the missing values in another way, either through data
 imputation, or imputation during modeling, we will opt to take the
 simplest approach for this chapter.</p>
 <div class="literal-block-wrapper docutils container" id="penguin-load">
-<div class="code-block-caption"><span class="caption-number">Listing 3.1 </span><span class="caption-text">penguin_load</span><a class="headerlink" href="#penguin-load" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.1 </span><span class="caption-text">penguin_load</span><a class="headerlink" href="#penguin-load" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">penguins</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/penguins.csv&quot;</span><span class="p">)</span>
 <span class="c1"># Subset to the columns needed</span>
 <span class="n">missing_data</span> <span class="o">=</span> <span class="n">penguins</span><span class="o">.</span><span class="n">isnull</span><span class="p">()[</span>
@@ -594,7 +441,7 @@ Code Block
 <a class="reference internal" href="#penguin-mass-empirical"><span class="std std-ref">penguin_mass_empirical</span></a> with just
 a little bit of code, the results of which are in <a class="reference internal" href="#tab-penguin-mass-parameters-point-estimates"><span class="std std-numref">Table 3.1</span></a></p>
 <div class="literal-block-wrapper docutils container" id="penguin-mass-empirical">
-<div class="code-block-caption"><span class="caption-number">Listing 3.2 </span><span class="caption-text">penguin_mass_empirical</span><a class="headerlink" href="#penguin-mass-empirical" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.2 </span><span class="caption-text">penguin_mass_empirical</span><a class="headerlink" href="#penguin-mass-empirical" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">summary_stats</span> <span class="o">=</span> <span class="p">(</span><span class="n">penguins</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="s2">&quot;body_mass_g&quot;</span><span class="p">]]</span>
                          <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;species&quot;</span><span class="p">)</span>
                          <span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;std&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">]))</span>
@@ -602,7 +449,7 @@ a little bit of code, the results of which are in <a class="reference internal" 
 </div>
 </div>
 <table class="table" id="tab-penguin-mass-parameters-point-estimates">
-<caption><span class="caption-number">Table 3.1 </span><span class="caption-text">Empirical mean and standard deviation of penguin mass. The count column indicates the observed number of penguins per species.</span><a class="headerlink" href="#tab-penguin-mass-parameters-point-estimates" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-number">Table 3.1 </span><span class="caption-text">Empirical mean and standard deviation of penguin mass. The count column indicates the observed number of penguins per species.</span><a class="headerlink" href="#tab-penguin-mass-parameters-point-estimates" title="Permalink to this table">#</a></caption>
 <tbody>
 <tr class="row-odd"><td><p><strong>species</strong></p></td>
 <td><p><strong>mean (grams)</strong></p></td>
@@ -632,7 +479,7 @@ estimates of uncertainty is by using Bayesian methods. In order to do so
 we need to conjecture a relationship of observations to parameters as
 example:</p>
 <div class="math notranslate nohighlight" id="equation-eq-gaussian-bayes">
-<span class="eqno">(3.1)<a class="headerlink" href="#equation-eq-gaussian-bayes" title="Permalink to this equation">¶</a></span>\[\overbrace{p(\mu, \sigma \mid Y)}^{Posterior} \propto \overbrace{\mathcal{N}(Y \mid \mu, \sigma)}^{Likelihood}\;  \overbrace{\underbrace{\mathcal{N}(4000, 3000)}_{\mu}
+<span class="eqno">(3.1)<a class="headerlink" href="#equation-eq-gaussian-bayes" title="Permalink to this equation">#</a></span>\[\overbrace{p(\mu, \sigma \mid Y)}^{Posterior} \propto \overbrace{\mathcal{N}(Y \mid \mu, \sigma)}^{Likelihood}\;  \overbrace{\underbrace{\mathcal{N}(4000, 3000)}_{\mu}
      \underbrace{\mathcal{H}\text{T}(100, 2000)}_{\sigma}}^{Prior}\]</div>
 <p>Equation <a class="reference internal" href="#equation-eq-gaussian-bayes">(3.1)</a> is a restatement of Equation
 <a class="reference internal" href="chp_01.html#equation-eq-proportional-bayes">(1.3)</a> where each parameter
@@ -646,7 +493,7 @@ likelihood for penguin mass and biological mass in general, so we will
 go with it. Let us translate Equation <a class="reference internal" href="#equation-eq-gaussian-bayes">(3.1)</a> into a
 computational model.</p>
 <div class="literal-block-wrapper docutils container" id="penguin-mass">
-<div class="code-block-caption"><span class="caption-number">Listing 3.3 </span><span class="caption-text">penguin_mass</span><a class="headerlink" href="#penguin-mass" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.3 </span><span class="caption-text">penguin_mass</span><a class="headerlink" href="#penguin-mass" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">adelie_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">penguins</span><span class="p">[</span><span class="s2">&quot;species&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Adelie&quot;</span><span class="p">)</span>
 <span class="n">adelie_mass_obs</span> <span class="o">=</span> <span class="n">penguins</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">adelie_mask</span><span class="p">,</span> <span class="s2">&quot;body_mass_g&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
 
@@ -680,7 +527,7 @@ the posterior distribution.</p>
 <p><span class="caption-number">Fig. 3.1 </span><span class="caption-text">Prior samples generated in Code Block
 <a class="reference internal" href="#penguin-mass"><span class="std std-ref">penguin_mass</span></a>. The distribution estimates
 of both the mean and standard deviation for the mass distribution cover
-a wide range of possibilities.</span><a class="headerlink" href="#fig-singlespecies-prior-predictive" title="Permalink to this image">¶</a></p>
+a wide range of possibilities.</span><a class="headerlink" href="#fig-singlespecies-prior-predictive" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>After sampling from our model, we can create
@@ -692,7 +539,7 @@ belief that the chains converged. Using the intuition we built in
 Chapter <a class="reference internal" href="chp_02.html#chap1bis"><span class="std std-ref">2</span></a> we can judge that these fits are
 acceptable and we will continue with our analysis.</p>
 <table class="table" id="tab-penguin-mass-parameters-bayesian-estimates">
-<caption><span class="caption-number">Table 3.2 </span><span class="caption-text">Bayesian estimates of the mean (μ) and standard deviation (σ) of Adelie penguin mass. Sampling diagnostics also included</span><a class="headerlink" href="#tab-penguin-mass-parameters-bayesian-estimates" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-number">Table 3.2 </span><span class="caption-text">Bayesian estimates of the mean (μ) and standard deviation (σ) of Adelie penguin mass. Sampling diagnostics also included</span><a class="headerlink" href="#tab-penguin-mass-parameters-bayesian-estimates" title="Permalink to this table">#</a></caption>
 <tbody>
 <tr class="row-odd"><td></td>
 <td><p><strong>mean</strong></p></td>
@@ -736,7 +583,7 @@ acceptable and we will continue with our analysis.</p>
 <a class="reference internal" href="#penguin-mass"><span class="std std-ref">penguin_mass</span></a> of Adelie penguin mass. This
 plot serves as a visual diagnostic of the sampling to help judge if
 there were any issues during sampling across the multiple sampling
-chains.</span><a class="headerlink" href="#fig-single-penguins-rank-kde-plot" title="Permalink to this image">¶</a></p>
+chains.</span><a class="headerlink" href="#fig-single-penguins-rank-kde-plot" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Comfortable with the fit we plot a posterior plot in
@@ -749,7 +596,7 @@ standard deviation with our Bayesian estimates as shown in
 <figcaption>
 <p><span class="caption-number">Fig. 3.3 </span><span class="caption-text">Posterior plot of the posterior of the Bayesian model in Code Block
 <a class="reference internal" href="#penguin-mass"><span class="std std-ref">penguin_mass</span></a> of Adelie penguins mass. The
-vertical lines are the empirical mean and standard deviation.</span><a class="headerlink" href="#fig-singlespecies-mass-posteriorplot" title="Permalink to this image">¶</a></p>
+vertical lines are the empirical mean and standard deviation.</span><a class="headerlink" href="#fig-singlespecies-mass-posteriorplot" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>With the Bayesian estimate however, we also get the distribution of
@@ -769,7 +616,7 @@ same for the other species. We could do so by writing two more models
 but instead let us just run one model with 3 separated groups, one per
 species.</p>
 <div class="literal-block-wrapper docutils container" id="nocovariate-mass">
-<div class="code-block-caption"><span class="caption-number">Listing 3.4 </span><span class="caption-text">nocovariate_mass</span><a class="headerlink" href="#nocovariate-mass" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.4 </span><span class="caption-text">nocovariate_mass</span><a class="headerlink" href="#nocovariate-mass" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># pd.categorical makes it easy to index species below</span>
 <span class="n">all_species</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">penguins</span><span class="p">[</span><span class="s2">&quot;species&quot;</span><span class="p">])</span>
 
@@ -814,11 +661,11 @@ than Adelie or Chinstrap penguins.</p>
 <figcaption>
 <p><span class="caption-number">Fig. 3.4 </span><span class="caption-text">KDE and rank plot for posterior estimates of parameters of masses for
 each species of penguins from the <code class="docutils literal notranslate"><span class="pre">penguins_masses</span></code> model. Note how each
-species has its own pair of estimates for each parameter.</span><a class="headerlink" href="#fig-all-penguins-rank-kde-plot" title="Permalink to this image">¶</a></p>
+species has its own pair of estimates for each parameter.</span><a class="headerlink" href="#fig-all-penguins-rank-kde-plot" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="literal-block-wrapper docutils container" id="mass-forest-plot">
-<div class="code-block-caption"><span class="caption-number">Listing 3.5 </span><span class="caption-text">mass_forest_plot</span><a class="headerlink" href="#mass-forest-plot" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.5 </span><span class="caption-text">mass_forest_plot</span><a class="headerlink" href="#mass-forest-plot" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_forest</span><span class="p">(</span><span class="n">inf_data_model_penguin_mass_all_species</span><span class="p">,</span> <span class="n">var_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;μ&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -829,7 +676,7 @@ species has its own pair of estimates for each parameter.</span><a class="header
 <p><span class="caption-number">Fig. 3.5 </span><span class="caption-text">Forest plot of the mean of mass of each species group in
 <code class="docutils literal notranslate"><span class="pre">model_penguin_mass_all_species</span></code>.  Each line represents one chain in the sampler, the dot is the
 mean, the thick line is the interquartile range and the thin line is the 94% Highest Density
-Interval.</span><a class="headerlink" href="#fig-forest-plot-means" title="Permalink to this image">¶</a></p>
+Interval.</span><a class="headerlink" href="#fig-forest-plot-means" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p><a class="reference internal" href="#fig-forest-plot-means"><span class="std std-numref">Fig. 3.5</span></a> makes it easier to compare our estimates
@@ -847,11 +694,11 @@ posterior is reporting uncertainty in the order of 100 grams.</p>
 group in <code class="docutils literal notranslate"><span class="pre">model_penguin_mass_all_species</span></code>. This plot depicts our
 estimation of the dispersion of penguin mass, so for example, given a
 mean estimate of the Gentoo penguin distribution, the associated
-standard deviation is plausibly anywhere between 450 grams to 550 grams.</span><a class="headerlink" href="#fig-forest-plot-sigma" title="Permalink to this image">¶</a></p>
+standard deviation is plausibly anywhere between 450 grams to 550 grams.</span><a class="headerlink" href="#fig-forest-plot-sigma" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="comparing-two-ppls">
-<span id="id2"></span><h3><span class="section-number">3.1.1. </span>Comparing Two PPLs<a class="headerlink" href="#comparing-two-ppls" title="Permalink to this heading">¶</a></h3>
+<span id="id2"></span><h3><span class="section-number">3.1.1. </span>Comparing Two PPLs<a class="headerlink" href="#comparing-two-ppls" title="Permalink to this heading">#</a></h3>
 <p>Before expanding on the statistical and modeling ideas further, we will
 take a moment to talk about the probabilistic programming languages and
 introduce another PPL we will be using in this book, TensorFlow
@@ -905,7 +752,7 @@ focus on the model building and inference.
 <code class="docutils literal notranslate"><span class="pre">model_penguin_mass_all_species</span></code> expressed in TFP which is shown in Code
 Block <a class="reference internal" href="#penguin-mass-tfp"><span class="std std-ref">penguin_mass_tfp</span></a> below</p>
 <div class="literal-block-wrapper docutils container" id="penguin-mass-tfp">
-<div class="code-block-caption"><span class="caption-number">Listing 3.6 </span><span class="caption-text">penguin_mass_tfp</span><a class="headerlink" href="#penguin-mass-tfp" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.6 </span><span class="caption-text">penguin_mass_tfp</span><a class="headerlink" href="#penguin-mass-tfp" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 <span class="kn">import</span> <span class="nn">tensorflow_probability</span> <span class="k">as</span> <span class="nn">tfp</span>
 
@@ -969,7 +816,7 @@ which returns a custom nested Python structure similar to a
 <a class="reference internal" href="#penguin-mass-tfp-prior-predictive"><span class="std std-ref">penguin_mass_tfp_prior_predictive</span></a>
 we draw 1000 prior and prior predictive samples.</p>
 <div class="literal-block-wrapper docutils container" id="penguin-mass-tfp-prior-predictive">
-<div class="code-block-caption"><span class="caption-number">Listing 3.7 </span><span class="caption-text">penguin_mass_tfp_prior_predictive</span><a class="headerlink" href="#penguin-mass-tfp-prior-predictive" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.7 </span><span class="caption-text">penguin_mass_tfp_prior_predictive</span><a class="headerlink" href="#penguin-mass-tfp-prior-predictive" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">prior_predictive_samples</span> <span class="o">=</span> <span class="n">jd_penguin_mass_all_species</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -982,7 +829,7 @@ and inspect the output to see how random samples change if you condition
 some random variables in the model to some specific values. Overall, we
 invoke the <em>forward</em> generative process when calling <code class="docutils literal notranslate"><span class="pre">.sample(.)</span></code>.</p>
 <div class="literal-block-wrapper docutils container" id="penguin-mass-tfp-prior-predictive2">
-<div class="code-block-caption"><span class="caption-number">Listing 3.8 </span><span class="caption-text">penguin_mass_tfp_prior_predictive2</span><a class="headerlink" href="#penguin-mass-tfp-prior-predictive2" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.8 </span><span class="caption-text">penguin_mass_tfp_prior_predictive2</span><a class="headerlink" href="#penguin-mass-tfp-prior-predictive2" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">jd_penguin_mass_all_species</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">sigma</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span><span class="mf">.1</span><span class="p">,</span> <span class="mf">.2</span><span class="p">,</span> <span class="mf">.3</span><span class="p">]))</span>
 <span class="n">jd_penguin_mass_all_species</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span><span class="mf">.1</span><span class="p">,</span> <span class="mf">.2</span><span class="p">,</span> <span class="mf">.3</span><span class="p">]))</span>
 </pre></div>
@@ -996,7 +843,7 @@ the input. This could be done by creating a Python function closure or
 using the <code class="docutils literal notranslate"><span class="pre">.experimental_pin</span></code> method, as shown in Code Block
 <a class="reference internal" href="#tfp-posterior-generation"><span class="std std-ref">tfp_posterior_generation</span></a>:</p>
 <div class="literal-block-wrapper docutils container" id="tfp-posterior-generation">
-<div class="code-block-caption"><span class="caption-number">Listing 3.9 </span><span class="caption-text">tfp_posterior_generation</span><a class="headerlink" href="#tfp-posterior-generation" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.9 </span><span class="caption-text">tfp_posterior_generation</span><a class="headerlink" href="#tfp-posterior-generation" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">target_density_function</span> <span class="o">=</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">x</span><span class="p">:</span> <span class="n">jd_penguin_mass_all_species</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span>
     <span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="n">mass</span><span class="o">=</span><span class="n">body_mass_g</span><span class="p">)</span>
 
@@ -1014,7 +861,7 @@ using a standard sampling routine similar to what is currently used in
 PyMC3 <a class="footnote-reference brackets" href="#id37" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> as shown in Code Block
 <a class="reference internal" href="#tfp-posterior-inference"><span class="std std-ref">tfp_posterior_inference</span></a>:</p>
 <div class="literal-block-wrapper docutils container" id="tfp-posterior-inference">
-<div class="code-block-caption"><span class="caption-number">Listing 3.10 </span><span class="caption-text">tfp_posterior_inference</span><a class="headerlink" href="#tfp-posterior-inference" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.10 </span><span class="caption-text">tfp_posterior_inference</span><a class="headerlink" href="#tfp-posterior-inference" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">run_mcmc</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">function</span><span class="p">(</span>
     <span class="n">tfp</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">mcmc</span><span class="o">.</span><span class="n">windowed_adaptive_nuts</span><span class="p">,</span>
     <span class="n">autograph</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">jit_compile</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1052,7 +899,7 @@ that we make use of the <code class="docutils literal notranslate"><span class="
 <code class="docutils literal notranslate"><span class="pre">tfd.JointDistribution</span></code> that draws samples <em>and</em> generates a
 distribution conditioned on the posterior samples.</p>
 <div class="literal-block-wrapper docutils container" id="tfp-idata-additional">
-<div class="code-block-caption"><span class="caption-number">Listing 3.11 </span><span class="caption-text">tfp_idata_additional</span><a class="headerlink" href="#tfp-idata-additional" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.11 </span><span class="caption-text">tfp_idata_additional</span><a class="headerlink" href="#tfp-idata-additional" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">prior_predictive_samples</span> <span class="o">=</span> <span class="n">jd_penguin_mass_all_species</span><span class="o">.</span><span class="n">sample</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">])</span>
 <span class="n">dist</span><span class="p">,</span> <span class="n">samples</span> <span class="o">=</span> <span class="n">jd_penguin_mass_all_species</span><span class="o">.</span><span class="n">sample_distributions</span><span class="p">(</span>
     <span class="n">value</span><span class="o">=</span><span class="n">mcmc_samples</span><span class="p">)</span>
@@ -1083,7 +930,7 @@ polyglot.</p>
 </section>
 </section>
 <section id="linear-regression">
-<span id="id8"></span><h2><span class="section-number">3.2. </span>Linear Regression<a class="headerlink" href="#linear-regression" title="Permalink to this heading">¶</a></h2>
+<span id="id8"></span><h2><span class="section-number">3.2. </span>Linear Regression<a class="headerlink" href="#linear-regression" title="Permalink to this heading">#</a></h2>
 <p>In the previous section we modeled the distribution of penguin mass by
 setting prior distributions over the mean and standard deviation of a
 Gaussian distribution. Importantly we assumed that the mass did not vary
@@ -1097,7 +944,7 @@ this relationship of observed flipper length on estimated mass is to fit
 a linear regression model, where the mean is <em>conditionally</em> modeled as
 a linear combination of other variables</p>
 <div class="math notranslate nohighlight" id="equation-eq-expanded-regression">
-<span class="eqno">(3.2)<a class="headerlink" href="#equation-eq-expanded-regression" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(3.2)<a class="headerlink" href="#equation-eq-expanded-regression" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{split}
     \mu =&amp; \beta_0 + \beta_1 X_1 + \dots + \beta_m X_m \\
 Y \sim&amp; \mathcal{N}(\mu, \sigma)
 \end{split}\end{split}\]</div>
@@ -1117,14 +964,14 @@ hyperplane.</p>
 <p>Alternatively we can express Equation <a class="reference internal" href="#equation-eq-expanded-regression">(3.2)</a> using
 matrix notation:</p>
 <div class="math notranslate nohighlight" id="equation-eq-linear-model-matrix">
-<span class="eqno">(3.3)<a class="headerlink" href="#equation-eq-linear-model-matrix" title="Permalink to this equation">¶</a></span>\[\mu = \mathbf{X}\boldsymbol{\beta}\]</div>
+<span class="eqno">(3.3)<a class="headerlink" href="#equation-eq-linear-model-matrix" title="Permalink to this equation">#</a></span>\[\mu = \mathbf{X}\boldsymbol{\beta}\]</div>
 <p>where we are taking the matrix-vector product between the coefficient
 column vector <span class="math notranslate nohighlight">\(\beta\)</span> and the matrix of covariates <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>.</p>
 <p>An alternative expression you might have seen in other (non-Bayesian)
 occasions is to rewrite Equation <a class="reference internal" href="#equation-eq-expanded-regression">(3.2)</a> as noisy
 observation of some linear prediction:</p>
 <div class="math notranslate nohighlight" id="equation-eq-linear-model-enginner">
-<span class="eqno">(3.4)<a class="headerlink" href="#equation-eq-linear-model-enginner" title="Permalink to this equation">¶</a></span>\[Y = \mathbf{X}\boldsymbol{\beta} + \epsilon,\; \epsilon \sim \mathcal{N}(0, \sigma)\]</div>
+<span class="eqno">(3.4)<a class="headerlink" href="#equation-eq-linear-model-enginner" title="Permalink to this equation">#</a></span>\[Y = \mathbf{X}\boldsymbol{\beta} + \epsilon,\; \epsilon \sim \mathcal{N}(0, \sigma)\]</div>
 <p>The formulation in Equation <a class="reference internal" href="#equation-eq-linear-model-enginner">(3.4)</a> separates the
 deterministic part (linear prediction) and the stochastic part (noise)
 of linear regression. However, we prefer Equation
@@ -1173,11 +1020,11 @@ Chapter <a class="reference internal" href="chp_04.html#chap3"><span class="std 
 points. Note this plot only shows one possible Gaussian distribution at
 each value of <span class="math notranslate nohighlight">\(x\)</span>, where after fitting a Bayesian model we will end up
 with a distribution of Gaussian, whose parameters may follow a
-distribution other than Gaussian.</span><a class="headerlink" href="#fig-3d-linear-regression" title="Permalink to this image">¶</a></p>
+distribution other than Gaussian.</span><a class="headerlink" href="#fig-3d-linear-regression" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="linear-penguins">
-<span id="linear-regression-intro"></span><h3><span class="section-number">3.2.1. </span>Linear Penguins<a class="headerlink" href="#linear-penguins" title="Permalink to this heading">¶</a></h3>
+<span id="linear-regression-intro"></span><h3><span class="section-number">3.2.1. </span>Linear Penguins<a class="headerlink" href="#linear-penguins" title="Permalink to this heading">#</a></h3>
 <p>If we recall our penguins we were interested using additional data to
 better estimate the mean mass of a group of penguins. Using linear
 regression we write the model in Code Block
@@ -1189,7 +1036,7 @@ saying we assume no domain expertise. We subsequently run our sampler,
 which has now estimated three parameters <span class="math notranslate nohighlight">\(\sigma\)</span>, <span class="math notranslate nohighlight">\(\beta_1\)</span> and
 <span class="math notranslate nohighlight">\(\beta_0\)</span>.</p>
 <div class="literal-block-wrapper docutils container" id="non-centered-regression">
-<div class="code-block-caption"><span class="caption-number">Listing 3.12 </span><span class="caption-text">non_centered_regression</span><a class="headerlink" href="#non-centered-regression" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.12 </span><span class="caption-text">non_centered_regression</span><a class="headerlink" href="#non-centered-regression" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">adelie_flipper_length_obs</span> <span class="o">=</span> <span class="n">penguins</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">adelie_mask</span><span class="p">,</span> <span class="s2">&quot;flipper_length_mm&quot;</span><span class="p">]</span>
 
 <span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_adelie_flipper_regression</span><span class="p">:</span>
@@ -1215,7 +1062,7 @@ approximation.</p>
 <a class="reference internal image-reference" href="../_images/adelie_coefficient_posterior_plots.png"><img alt="../_images/adelie_coefficient_posterior_plots.png" src="../_images/adelie_coefficient_posterior_plots.png" style="width: 5in;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3.8 </span><span class="caption-text">Estimates of the parameter value distributions of our linear regression
-coefficient from <code class="docutils literal notranslate"><span class="pre">model_adelie_flipper_regression</span></code>.</span><a class="headerlink" href="#fig-adelie-coefficient-posterior-plots" title="Permalink to this image">¶</a></p>
+coefficient from <code class="docutils literal notranslate"><span class="pre">model_adelie_flipper_regression</span></code>.</span><a class="headerlink" href="#fig-adelie-coefficient-posterior-plots" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>After our sampler finishes running we can plot
@@ -1272,7 +1119,7 @@ mean of around <span class="math notranslate nohighlight">\(\approx 460\)</span>
 the magnitude of the estimated error is reduced from a mean of slightly
 over 460 grams to around 380 grams. This intuitively makes sense as if
 we are given information about a quantity we are estimating, we can
-leverage that information to make better estimates.</span><a class="headerlink" href="#fig-singlespecies-singleregression-forest-sigma-comparison" title="Permalink to this image">¶</a></p>
+leverage that information to make better estimates.</span><a class="headerlink" href="#fig-singlespecies-singleregression-forest-sigma-comparison" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="fig-flipper-length-mass-regression">
@@ -1280,12 +1127,12 @@ leverage that information to make better estimates.</span><a class="headerlink" 
 <figcaption>
 <p><span class="caption-number">Fig. 3.10 </span><span class="caption-text">Observed Adelie data of flipper length vs mass as scatter plot, and mean
 estimate of the likelihood as black line, and 94% HDI of the mean as
-gray interval. Note how our mean estimate varies as flipper varies.</span><a class="headerlink" href="#fig-flipper-length-mass-regression" title="Permalink to this image">¶</a></p>
+gray interval. Note how our mean estimate varies as flipper varies.</span><a class="headerlink" href="#fig-flipper-length-mass-regression" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="predictions">
-<span id="chp2-predictions"></span><h3><span class="section-number">3.2.2. </span>Predictions<a class="headerlink" href="#predictions" title="Permalink to this heading">¶</a></h3>
+<span id="chp2-predictions"></span><h3><span class="section-number">3.2.2. </span>Predictions<a class="headerlink" href="#predictions" title="Permalink to this heading">#</a></h3>
 <p>In the <a class="reference internal" href="#linear-regression-intro"><span class="std std-ref">Linear Penguins</span></a> we estimated a linear relationship
 between flipper length and mass. Another use of regression is to
 leverage that relationship in order to make predictions. In our case
@@ -1302,7 +1149,7 @@ a penguin of average flipper length and wanted to predict the likely
 mass using <code class="docutils literal notranslate"><span class="pre">PyMC3</span></code> we would write Code Block
 <a class="reference internal" href="#penguins-ppd"><span class="std std-ref">penguins_ppd</span></a>:</p>
 <div class="literal-block-wrapper docutils container" id="penguins-ppd">
-<div class="code-block-caption"><span class="caption-number">Listing 3.13 </span><span class="caption-text">penguins_ppd</span><a class="headerlink" href="#penguins-ppd" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.13 </span><span class="caption-text">penguins_ppd</span><a class="headerlink" href="#penguins-ppd" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">model_adelie_flipper_regression</span><span class="p">:</span>
     <span class="c1"># Change the underlying value to the mean observed flipper length</span>
     <span class="c1"># for our posterior predictive samples</span>
@@ -1328,7 +1175,7 @@ flipper length in blue and the posterior predictive distribution
 evaluated at the mean flipper length in black. The black curve is wider
 as it describes the distribution of the predicted data (for a given
 flipper length), while the blue curve represents the distribution of
-just the mean of the predicted data.</span><a class="headerlink" href="#fig-flipper-length-mass-posterior-predictive" title="Permalink to this image">¶</a></p>
+just the mean of the predicted data.</span><a class="headerlink" href="#fig-flipper-length-mass-posterior-predictive" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>In short not only can we use our model in Code Block
@@ -1345,7 +1192,7 @@ uncertainty about our estimates, as seen from Equation
 <a class="reference internal" href="chp_01.html#equation-eq-post-pred-dist">(1.8)</a>.</p>
 </section>
 <section id="centering">
-<span id="id9"></span><h3><span class="section-number">3.2.3. </span>Centering<a class="headerlink" href="#centering" title="Permalink to this heading">¶</a></h3>
+<span id="id9"></span><h3><span class="section-number">3.2.3. </span>Centering<a class="headerlink" href="#centering" title="Permalink to this heading">#</a></h3>
 <p>Our model in Code Block
 <a class="reference internal" href="#non-centered-regression"><span class="std std-ref">non_centered_regression</span></a> worked
 well for estimating the correlation between flipper length and penguin
@@ -1357,7 +1204,7 @@ will opt for a centering transformation, which takes a set of values and
 centers its mean value at zero as shown in Code Block
 <a class="reference internal" href="#flipper-centering"><span class="std std-ref">flipper_centering</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="flipper-centering">
-<div class="code-block-caption"><span class="caption-number">Listing 3.14 </span><span class="caption-text">flipper_centering</span><a class="headerlink" href="#flipper-centering" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.14 </span><span class="caption-text">flipper_centering</span><a class="headerlink" href="#flipper-centering" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">adelie_flipper_length_c</span> <span class="o">=</span> <span class="p">(</span><span class="n">adelie_flipper_length_obs</span> <span class="o">-</span>
                            <span class="n">adelie_flipper_length_obs</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
 </pre></div>
@@ -1366,7 +1213,7 @@ centers its mean value at zero as shown in Code Block
 <p>With our now centered covariate let us fit our model again, this time
 using TFP.</p>
 <div class="literal-block-wrapper docutils container" id="tfp-penguins-centered-predictor">
-<div class="code-block-caption"><span class="caption-number">Listing 3.15 </span><span class="caption-text">tfp_penguins_centered_predictor</span><a class="headerlink" href="#tfp-penguins-centered-predictor" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.15 </span><span class="caption-text">tfp_penguins_centered_predictor</span><a class="headerlink" href="#tfp-penguins-centered-predictor" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gen_adelie_flipper_model</span><span class="p">(</span><span class="n">adelie_flipper_length</span><span class="p">):</span>
     <span class="n">adelie_flipper_length</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">adelie_flipper_length</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 
@@ -1413,7 +1260,7 @@ Notice that the distribution of <span class="math notranslate nohighlight">\(bet
 <a class="reference internal" href="#fig-adelie-coefficient-posterior-plots"><span class="std std-numref">Fig. 3.8</span></a>, but the distribution
 of <span class="math notranslate nohighlight">\(beta\_0\)</span> has shifted. Because we centered the observations around
 the mean of flipper length <span class="math notranslate nohighlight">\(beta\_0\)</span> now represents the mass
-distribution of the average flipper penguin.</span><a class="headerlink" href="#fig-singlespecies-multipleregression-centered" title="Permalink to this image">¶</a></p>
+distribution of the average flipper penguin.</span><a class="headerlink" href="#fig-singlespecies-multipleregression-centered" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The mathematical model we defined in Code Block
@@ -1446,7 +1293,7 @@ Analysis and Generalized Linear Models <span id="id10">[<a class="reference inte
 </section>
 </section>
 <section id="multiple-linear-regression">
-<span id="id11"></span><h2><span class="section-number">3.3. </span>Multiple Linear Regression<a class="headerlink" href="#multiple-linear-regression" title="Permalink to this heading">¶</a></h2>
+<span id="id11"></span><h2><span class="section-number">3.3. </span>Multiple Linear Regression<a class="headerlink" href="#multiple-linear-regression" title="Permalink to this heading">#</a></h2>
 <p>In many species there is a dimorphism, or difference, between different
 sexes. The study of sexual dimorphism in penguins actually was the
 motivating factor for collecting the Palmer Penguin dataset
@@ -1455,7 +1302,7 @@ let us add a second covariate, this time sex, encoding it as a
 categorical variable and seeing if we can estimate a penguins mass more
 precisely.</p>
 <div class="literal-block-wrapper docutils container" id="penguin-mass-multi">
-<div class="code-block-caption"><span class="caption-number">Listing 3.16 </span><span class="caption-text">penguin_mass_multi</span><a class="headerlink" href="#penguin-mass-multi" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.16 </span><span class="caption-text">penguin_mass_multi</span><a class="headerlink" href="#penguin-mass-multi" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Binary encoding of the categorical predictor</span>
 <span class="n">sex_obs</span> <span class="o">=</span> <span class="n">penguins</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">adelie_mask</span> <span class="p">,</span><span class="s2">&quot;sex&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s2">&quot;male&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;female&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span>
 
@@ -1486,7 +1333,7 @@ for males is a sum of two terms (as the <span class="math notranslate nohighligh
 <p><span class="caption-number">Fig. 3.13 </span><span class="caption-text">Estimate of coefficient for sex covariate, <span class="math notranslate nohighlight">\(\beta_{2}\)</span> in model. As male
 is encoded as 0, and female is encoded as 1, this indicates the
 additional mass we would expect between a male and female Adelie penguin
-with the same flipper length.</span><a class="headerlink" href="#fig-adelie-sex-coefficient-posterior" title="Permalink to this image">¶</a></p>
+with the same flipper length.</span><a class="headerlink" href="#fig-adelie-sex-coefficient-posterior" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="admonition-syntactic-linear-sugar admonition">
@@ -1503,7 +1350,7 @@ model, if disregarding the priors<a class="footnote-reference brackets" href="#i
 <a class="reference internal" href="#penguin-mass-multi"><span class="std std-ref">penguin_mass_multi</span></a> in Bambi we would
 write:</p>
 <div class="literal-block-wrapper docutils container" id="bambi-categorical">
-<div class="code-block-caption"><span class="caption-number">Listing 3.17 </span><span class="caption-text">bambi_categorical</span><a class="headerlink" href="#bambi-categorical" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.17 </span><span class="caption-text">bambi_categorical</span><a class="headerlink" href="#bambi-categorical" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bambi</span> <span class="k">as</span> <span class="nn">bmb</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">bmb</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="s2">&quot;body_mass_g ~ flipper_length_mm + sex&quot;</span><span class="p">,</span>
                   <span class="n">penguins</span><span class="p">[</span><span class="n">adelie_mask</span><span class="p">])</span>
@@ -1532,7 +1379,7 @@ other covariates are held constant <a class="footnote-reference brackets" href="
 Adelie penguins coded as a categorical covariate. Note how the
 difference mass between male and female penguins is constant at every
 flipper length. This difference is equivalent to the magnitude of the
-<span class="math notranslate nohighlight">\(\beta_2\)</span> coefficient.</span><a class="headerlink" href="#fig-single-species-categorical-regression" title="Permalink to this image">¶</a></p>
+<span class="math notranslate nohighlight">\(\beta_2\)</span> coefficient.</span><a class="headerlink" href="#fig-single-species-categorical-regression" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>We again can compare the standard deviations across our three models in
@@ -1548,7 +1395,7 @@ flipper length and sex as a covariates. This reduction in uncertainty
 suggests that sex does indeed provide information for estimating a
 penguin’s mass.</p>
 <div class="literal-block-wrapper docutils container" id="forest-multiple-models">
-<div class="code-block-caption"><span class="caption-number">Listing 3.18 </span><span class="caption-text">forest_multiple_models</span><a class="headerlink" href="#forest-multiple-models" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.18 </span><span class="caption-text">forest_multiple_models</span><a class="headerlink" href="#forest-multiple-models" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_forest</span><span class="p">([</span><span class="n">inf_data_adelie_penguin_mass</span><span class="p">,</span>
         <span class="n">inf_data_adelie_flipper_regression</span><span class="p">,</span>
         <span class="n">inf_data_penguin_mass_categorical</span><span class="p">],</span>
@@ -1563,7 +1410,7 @@ penguin’s mass.</p>
 the estimated distribution of <span class="math notranslate nohighlight">\(\sigma\)</span> from this model is centered
 around 300 grams, which is a lower value than the estimated by our fixed mean
 model and our single covariate model. This figure is generated from Code
-Block <a class="reference internal" href="#forest-multiple-models"><span class="std std-ref">forest_multiple_models</span></a>.</span><a class="headerlink" href="#fig-singlespecies-multipleregression-forest-sigma-comparison" title="Permalink to this image">¶</a></p>
+Block <a class="reference internal" href="#forest-multiple-models"><span class="std std-ref">forest_multiple_models</span></a>.</span><a class="headerlink" href="#fig-singlespecies-multipleregression-forest-sigma-comparison" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="admonition-more-covariates-is-not-always-better admonition">
@@ -1577,7 +1424,7 @@ simulated dataset <span id="id20">[<a class="reference internal" href="reference
 we would be led to believe our linear model is doing quite well.</p>
 </div>
 <section id="counterfactuals">
-<span id="linear-counter-factuals"></span><h3><span class="section-number">3.3.1. </span>Counterfactuals<a class="headerlink" href="#counterfactuals" title="Permalink to this heading">¶</a></h3>
+<span id="linear-counter-factuals"></span><h3><span class="section-number">3.3.1. </span>Counterfactuals<a class="headerlink" href="#counterfactuals" title="Permalink to this heading">#</a></h3>
 <p>In Code Block <a class="reference internal" href="#penguins-ppd"><span class="std std-ref">penguins_ppd</span></a> we made a
 prediction using parameters fitted in a model with a single covariate
 and our target, and changing that covariate, flipper length, to get an
@@ -1592,7 +1439,7 @@ including bill length, and run a counterfactual analysis in TFP. The
 model building and inference is shown in Code Block
 <a class="reference internal" href="#tfp-flipper-bill-sex"><span class="std std-ref">tfp_flipper_bill_sex</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="tfp-flipper-bill-sex">
-<div class="code-block-caption"><span class="caption-number">Listing 3.19 </span><span class="caption-text">tfp_flipper_bill_sex</span><a class="headerlink" href="#tfp-flipper-bill-sex" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.19 </span><span class="caption-text">tfp_flipper_bill_sex</span><a class="headerlink" href="#tfp-flipper-bill-sex" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gen_jd_flipper_bill_sex</span><span class="p">(</span><span class="n">flipper_length</span><span class="p">,</span> <span class="n">sex</span><span class="p">,</span> <span class="n">bill_length</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">):</span>
     <span class="n">flipper_length</span><span class="p">,</span> <span class="n">sex</span><span class="p">,</span> <span class="n">bill_length</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nest</span><span class="o">.</span><span class="n">map_structure</span><span class="p">(</span>
         <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="p">),</span>
@@ -1640,7 +1487,7 @@ we wrap the model generation in a Python function (a functional
 programming style approach), it is easy to condition on new predictors,
 which is useful for counterfactual analyses.</p>
 <div class="literal-block-wrapper docutils container" id="tfp-flipper-bill-sex-counterfactuals">
-<div class="code-block-caption"><span class="caption-number">Listing 3.20 </span><span class="caption-text">tfp_flipper_bill_sex_counterfactuals</span><a class="headerlink" href="#tfp-flipper-bill-sex-counterfactuals" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.20 </span><span class="caption-text">tfp_flipper_bill_sex_counterfactuals</span><a class="headerlink" href="#tfp-flipper-bill-sex-counterfactuals" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mean_flipper_length</span> <span class="o">=</span> <span class="n">penguins</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">adelie_mask</span><span class="p">,</span> <span class="s2">&quot;flipper_length_mm&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 <span class="c1"># Counterfactual dimensions is set to 21 to allow us to get the mean exactly</span>
 <span class="n">counterfactual_flipper_lengths</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span>
@@ -1661,7 +1508,7 @@ which is useful for counterfactual analyses.</p>
 <figcaption>
 <p><span class="caption-number">Fig. 3.16 </span><span class="caption-text">Estimated counterfactual mass values for Adelie penguins from Code Block
 <a class="reference internal" href="#tfp-flipper-bill-sex-counterfactuals"><span class="std std-ref">tfp_flipper_bill_sex_counterfactuals</span></a>
-where flipper length is varied holding all other covariates constant.</span><a class="headerlink" href="#fig-linearcounterfactual" title="Permalink to this image">¶</a></p>
+where flipper length is varied holding all other covariates constant.</span><a class="headerlink" href="#fig-linearcounterfactual" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Following McElreath<span id="id21">[<a class="reference internal" href="references.html#id33" title="R. McElreath. Statistical Rethinking: A Bayesian Course with Examples in R and Stan. Chapman &amp; Hall/CRC Texts in Statistical Science. CRC Press, 2020. ISBN 9781482253481.">10</a>]</span> <a class="reference internal" href="#fig-linearcounterfactual"><span class="std std-numref">Fig. 3.16</span></a>
@@ -1703,7 +1550,7 @@ a brief discussion)</p>
 </section>
 </section>
 <section id="generalized-linear-models">
-<span id="id24"></span><h2><span class="section-number">3.4. </span>Generalized Linear Models<a class="headerlink" href="#generalized-linear-models" title="Permalink to this heading">¶</a></h2>
+<span id="id24"></span><h2><span class="section-number">3.4. </span>Generalized Linear Models<a class="headerlink" href="#generalized-linear-models" title="Permalink to this heading">#</a></h2>
 <p>All linear models discussed so far assumed the distribution of
 observations are conditionally Gaussian which works well in many
 scenarios. However, we may want to use other distributions. For example,
@@ -1714,7 +1561,7 @@ linear function, <span class="math notranslate nohighlight">\(\mathbf{X} \mathit
 inverse link function <a class="footnote-reference brackets" href="#id42" id="id25" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a> <span class="math notranslate nohighlight">\(\phi\)</span> as shown in Equation
 <a class="reference internal" href="#equation-eq-generalized-linear-model">(3.5)</a>.</p>
 <div class="math notranslate nohighlight" id="equation-eq-generalized-linear-model">
-<span class="eqno">(3.5)<a class="headerlink" href="#equation-eq-generalized-linear-model" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\begin{split}\begin{split}
+<span class="eqno">(3.5)<a class="headerlink" href="#equation-eq-generalized-linear-model" title="Permalink to this equation">#</a></span>\[ \begin{align}\begin{aligned}\begin{split}\begin{split}
 \mu =&amp; \phi(\mathbf{X} \beta) \\
 Y \sim&amp; \Psi (\mu, \theta)\end{split}\\\end{split}\end{aligned}\end{align} \]</div>
 <p>where <span class="math notranslate nohighlight">\(\Psi\)</span> is some distribution parameterized by <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\theta\)</span>
@@ -1729,7 +1576,7 @@ generates the observation still follows a linear function of the
 parameter and the covariates but now we can generalize the use and
 application of these models to many more scenarios <a class="footnote-reference brackets" href="#id43" id="id26" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a>.</p>
 <section id="logistic-regression">
-<span id="id27"></span><h3><span class="section-number">3.4.1. </span>Logistic Regression<a class="headerlink" href="#logistic-regression" title="Permalink to this heading">¶</a></h3>
+<span id="id27"></span><h3><span class="section-number">3.4.1. </span>Logistic Regression<a class="headerlink" href="#logistic-regression" title="Permalink to this heading">#</a></h3>
 <p>One of the most common generalized linear model is the logistic
 regression. It is particularly useful in modeling data where there are
 only two possible outcomes, we observed either one thing or another
@@ -1743,12 +1590,12 @@ interval. This is handy because now we can map linear functions to the
 range we would expect for a parameter that estimates probability values,
 that must be in the range 0 and 1 by definition.</p>
 <div class="math notranslate nohighlight" id="equation-eq-logistic">
-<span class="eqno">(3.6)<a class="headerlink" href="#equation-eq-logistic" title="Permalink to this equation">¶</a></span>\[p = \frac{1}{1+e^{-\mathbf{X}\beta}}\]</div>
+<span class="eqno">(3.6)<a class="headerlink" href="#equation-eq-logistic" title="Permalink to this equation">#</a></span>\[p = \frac{1}{1+e^{-\mathbf{X}\beta}}\]</div>
 <figure class="align-default" id="fig-logistic">
 <a class="reference internal image-reference" href="../_images/Logistic.png"><img alt="../_images/Logistic.png" src="../_images/Logistic.png" style="width: 7.00in;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3.17 </span><span class="caption-text">A plot of a sample logistic function. Note the response has been
-“squished” into the interval (0,1).</span><a class="headerlink" href="#fig-logistic" title="Permalink to this image">¶</a></p>
+“squished” into the interval (0,1).</span><a class="headerlink" href="#fig-logistic" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>With logistic regression we are able to use linear models to estimate
@@ -1760,7 +1607,7 @@ prediction in the set <span class="math notranslate nohighlight">\({0,1}\)</span
 boundary set at a probability of 0.5. For a model with an intercept and
 one covariate we have:</p>
 <div class="math notranslate nohighlight" id="equation-decision-boundary">
-<span class="eqno">(3.7)<a class="headerlink" href="#equation-decision-boundary" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(3.7)<a class="headerlink" href="#equation-decision-boundary" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{split}
 0.5 &amp;= logistic(\beta_{0} + \beta_{1}*x) \\
 logit(0.5) &amp;= \beta_{0} + \beta_{1}*x \\
 0 &amp;= \beta_{0} + \beta_{1}*x \\
@@ -1772,7 +1619,7 @@ easily compute the value of <span class="math notranslate nohighlight">\(x\)</sp
 is greater than 0.5.</p>
 </section>
 <section id="classifying-penguins">
-<span id="id29"></span><h3><span class="section-number">3.4.2. </span>Classifying Penguins<a class="headerlink" href="#classifying-penguins" title="Permalink to this heading">¶</a></h3>
+<span id="id29"></span><h3><span class="section-number">3.4.2. </span>Classifying Penguins<a class="headerlink" href="#classifying-penguins" title="Permalink to this heading">#</a></h3>
 <p>In the previous sections we used the sex, and bill length of a penguin
 to estimate the mass of a penguin. Lets now alter the question, if we
 were given the mass, sex, and bill length of a penguin can we predict
@@ -1781,7 +1628,7 @@ binary task. Like last time we use a simple model first with just one
 covariate, bill length. We write this logistic model in Code Block
 <a class="reference internal" href="#model-logistic-penguins-bill-length"><span class="std std-ref">model_logistic_penguins_bill_length</span></a></p>
 <div class="literal-block-wrapper docutils container" id="model-logistic-penguins-bill-length">
-<div class="code-block-caption"><span class="caption-number">Listing 3.21 </span><span class="caption-text">model_logistic_penguins_bill_length</span><a class="headerlink" href="#model-logistic-penguins-bill-length" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.21 </span><span class="caption-text">model_logistic_penguins_bill_length</span><a class="headerlink" href="#model-logistic-penguins-bill-length" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">species_filter</span> <span class="o">=</span> <span class="n">penguins</span><span class="p">[</span><span class="s2">&quot;species&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s2">&quot;Adelie&quot;</span><span class="p">,</span> <span class="s2">&quot;Chinstrap&quot;</span><span class="p">])</span>
 <span class="n">bill_length_obs</span> <span class="o">=</span> <span class="n">penguins</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">species_filter</span><span class="p">,</span> <span class="s2">&quot;bill_length_mm&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
 <span class="n">species</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">penguins</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">species_filter</span><span class="p">,</span> <span class="s2">&quot;species&quot;</span><span class="p">])</span>
@@ -1825,7 +1672,7 @@ what we would expect.</p>
 <p><span class="caption-number">Fig. 3.18 </span><span class="caption-text">5000 prior predictive samples of class prediction from the
 <code class="docutils literal notranslate"><span class="pre">model_logistic_penguins_bill_length</span></code>. This likelihood is discrete, more
 specifically binary, as opposed to the continuous distribution of mass
-that was being estimated in earlier models.</span><a class="headerlink" href="#fig-prior-predictive-logistic" title="Permalink to this image">¶</a></p>
+that was being estimated in earlier models.</span><a class="headerlink" href="#fig-prior-predictive-logistic" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>After fitting the parameters in our model we can inspect the
@@ -1848,11 +1695,11 @@ expect it given the data.</p>
 points and decision boundary for <code class="docutils literal notranslate"><span class="pre">model_logistic_penguins_bill_length</span></code>.
 Looking at just the observed data it seems there is a separation around
 45mm bill length for both species, and our model similarly discerned the
-separation around that value.</span><a class="headerlink" href="#fig-logistic-bill-length" title="Permalink to this image">¶</a></p>
+separation around that value.</span><a class="headerlink" href="#fig-logistic-bill-length" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <table class="table" id="table-logistic-penguins-bill-length">
-<caption><span class="caption-number">Table 3.3 </span><span class="caption-text">Logistic regression coefficients for model_logistic_penguins_bill_length.</span><a class="headerlink" href="#table-logistic-penguins-bill-length" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-number">Table 3.3 </span><span class="caption-text">Logistic regression coefficients for model_logistic_penguins_bill_length.</span><a class="headerlink" href="#table-logistic-penguins-bill-length" title="Permalink to this table">#</a></caption>
 <tbody>
 <tr class="row-odd"><td></td>
 <td><p><strong>mean</strong></p></td>
@@ -1879,7 +1726,7 @@ this time using mass as a covariate. Code Block
 <a class="reference internal" href="#model-logistic-penguins-mass"><span class="std std-ref">model_logistic_penguins_mass</span></a>
 shows a model for that purpose.</p>
 <div class="literal-block-wrapper docutils container" id="model-logistic-penguins-mass">
-<div class="code-block-caption"><span class="caption-number">Listing 3.22 </span><span class="caption-text">model_logistic_penguins_mass</span><a class="headerlink" href="#model-logistic-penguins-mass" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.22 </span><span class="caption-text">model_logistic_penguins_mass</span><a class="headerlink" href="#model-logistic-penguins-mass" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mass_obs</span> <span class="o">=</span> <span class="n">penguins</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">species_filter</span><span class="p">,</span> <span class="s2">&quot;body_mass_g&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
 
 <span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_logistic_penguins_mass</span><span class="p">:</span>
@@ -1898,7 +1745,7 @@ shows a model for that purpose.</p>
 </div>
 </div>
 <table class="table" id="table-logistic-penguins-mass">
-<caption><span class="caption-number">Table 3.4 </span><span class="caption-text">Logistic regression coefficients for model_logistic_penguins_mass.</span><a class="headerlink" href="#table-logistic-penguins-mass" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-number">Table 3.4 </span><span class="caption-text">Logistic regression coefficients for model_logistic_penguins_mass.</span><a class="headerlink" href="#table-logistic-penguins-mass" title="Permalink to this table">#</a></caption>
 <tbody>
 <tr class="row-odd"><td></td>
 <td><p><strong>mean</strong></p></td>
@@ -1933,7 +1780,7 @@ fit in <a class="reference internal" href="#fig-logistic-mass"><span class="std 
 <p><span class="caption-number">Fig. 3.20 </span><span class="caption-text">Plot of the observed data and logistic regression for
 <code class="docutils literal notranslate"><span class="pre">model_logistic_penguins_mass</span></code>. Unlike
 <a class="reference internal" href="#fig-logistic-bill-length"><span class="std std-numref">Fig. 3.19</span></a> the data does not look very separable
-and our model did discern one as well.</span><a class="headerlink" href="#fig-logistic-mass" title="Permalink to this image">¶</a></p>
+and our model did discern one as well.</span><a class="headerlink" href="#fig-logistic-mass" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>We should not let this lack of relationship discourage us, effective
@@ -1951,7 +1798,7 @@ can see the decision boundary between the dependent variables. All these
 visual checks have been helpful but subjective. We can quantify our fits
 numerically as well using diagnostics.</p>
 <div class="literal-block-wrapper docutils container" id="model-logistic-penguins-bill-length-mass">
-<div class="code-block-caption"><span class="caption-number">Listing 3.23 </span><span class="caption-text">model_logistic_penguins_bill_length_mass</span><a class="headerlink" href="#model-logistic-penguins-bill-length-mass" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.23 </span><span class="caption-text">model_logistic_penguins_bill_length_mass</span><a class="headerlink" href="#model-logistic-penguins-bill-length-mass" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">penguins</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">species_filter</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;bill_length_mm&quot;</span><span class="p">,</span> <span class="s2">&quot;body_mass_g&quot;</span><span class="p">]]</span>
 
 <span class="c1"># Add a column of 1s for the intercept</span>
@@ -1980,7 +1827,7 @@ numerically as well using diagnostics.</p>
 <p><span class="caption-number">Fig. 3.21 </span><span class="caption-text">Decision boundary of species class plotted against bill length and mass.
 We can see that most of the species separability comes from bill length
 although mass now adds some extra information in regards to class
-separability as indicated by the slope of the line.</span><a class="headerlink" href="#fig-decision-boundary-logistic-mass-bill-length" title="Permalink to this image">¶</a></p>
+separability as indicated by the slope of the line.</span><a class="headerlink" href="#fig-decision-boundary-logistic-mass-bill-length" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>To evaluate the model fit for logistic regressions we can use a
@@ -1997,7 +1844,7 @@ the goal of a Bayesian analysis, nevertheless separation plots (and
 other calibration assessment methods like LOO-PIT) can help us to
 compare models and reveal opportunities to improve them.</p>
 <div class="literal-block-wrapper docutils container" id="separability-plot">
-<div class="code-block-caption"><span class="caption-number">Listing 3.24 </span><span class="caption-text">separability_plot</span><a class="headerlink" href="#separability-plot" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.24 </span><span class="caption-text">separability_plot</span><a class="headerlink" href="#separability-plot" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;bill&quot;</span><span class="p">:</span> <span class="n">inf_data_logistic_penguins_bill_length</span><span class="p">,</span>
           <span class="s2">&quot;mass&quot;</span><span class="p">:</span> <span class="n">inf_data_logistic_penguins_mass</span><span class="p">,</span>
           <span class="s2">&quot;mass bill&quot;</span><span class="p">:</span> <span class="n">inf_data_logistic_penguins_bill_length_mass</span><span class="p">}</span>
@@ -2015,7 +1862,7 @@ compare models and reveal opportunities to improve them.</p>
 <p><span class="caption-number">Fig. 3.22 </span><span class="caption-text">Separation plot of all three penguin models. The light versus dark value
 indicates the binary class label. In this plot its much more evident
 that the mass only model does a poor job separating the two species,
-where are the bill and mass bill models perform better at this task.</span><a class="headerlink" href="#fig-penguins-separation-plot" title="Permalink to this image">¶</a></p>
+where are the bill and mass bill models perform better at this task.</span><a class="headerlink" href="#fig-penguins-separation-plot" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>We can also use LOO to compare the three models we have just created,
@@ -2027,7 +1874,7 @@ the middle candidate model, and the mass and bill length model performed
 the best. This is unsurprising given what we have seen from the plots,
 and now we have a numerical confirmation as well.</p>
 <div class="literal-block-wrapper docutils container" id="penguin-model-loo">
-<div class="code-block-caption"><span class="caption-number">Listing 3.25 </span><span class="caption-text">penguin_model_loo</span><a class="headerlink" href="#penguin-model-loo" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.25 </span><span class="caption-text">penguin_model_loo</span><a class="headerlink" href="#penguin-model-loo" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">compare</span><span class="p">({</span><span class="s2">&quot;mass&quot;</span><span class="p">:</span><span class="n">inf_data_logistic_penguins_mass</span><span class="p">,</span>
             <span class="s2">&quot;bill&quot;</span><span class="p">:</span> <span class="n">inf_data_logistic_penguins_bill_length</span><span class="p">,</span>
             <span class="s2">&quot;mass_bill&quot;</span><span class="p">:</span><span class="n">inf_data_logistic_penguins_bill_length_mass</span><span class="p">})</span>
@@ -2035,7 +1882,7 @@ and now we have a numerical confirmation as well.</p>
 </div>
 </div>
 <table class="table" id="tab-penguin-loo">
-<caption><span class="caption-number">Table 3.5 </span><span class="caption-text">Summary of model comparison. Models are ranked from lowest to highest ELPD values (loo column).</span><a class="headerlink" href="#tab-penguin-loo" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-number">Table 3.5 </span><span class="caption-text">Summary of model comparison. Models are ranked from lowest to highest ELPD values (loo column).</span><a class="headerlink" href="#tab-penguin-loo" title="Permalink to this table">#</a></caption>
 <tbody>
 <tr class="row-odd"><td></td>
 <td><p><strong>rank</strong></p></td>
@@ -2085,7 +1932,7 @@ and now we have a numerical confirmation as well.</p>
 </table>
 </section>
 <section id="interpreting-log-odds">
-<span id="log-odds"></span><h3><span class="section-number">3.4.3. </span>Interpreting Log Odds<a class="headerlink" href="#interpreting-log-odds" title="Permalink to this heading">¶</a></h3>
+<span id="log-odds"></span><h3><span class="section-number">3.4.3. </span>Interpreting Log Odds<a class="headerlink" href="#interpreting-log-odds" title="Permalink to this heading">#</a></h3>
 <p>In a logistic regression the slope is telling you the increase in log
 odds units when x is incremented one unit. Odds most simply are the
 ratio between the probability of occurrence and probability of no
@@ -2094,7 +1941,7 @@ random penguin from Adelie or Chinstrap penguins the probability that we
 pick an Adelie penguin would be 0.68 as seen in Code Block
 <a class="reference internal" href="#adelie-prob"><span class="std std-ref">adelie_prob</span></a></p>
 <div class="literal-block-wrapper docutils container" id="adelie-prob">
-<div class="code-block-caption"><span class="caption-number">Listing 3.26 </span><span class="caption-text">adelie_prob</span><a class="headerlink" href="#adelie-prob" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.26 </span><span class="caption-text">adelie_prob</span><a class="headerlink" href="#adelie-prob" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Class counts of each penguin species</span>
 <span class="n">counts</span> <span class="o">=</span> <span class="n">penguins</span><span class="p">[</span><span class="s2">&quot;species&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
 <span class="n">adelie_count</span> <span class="o">=</span> <span class="n">counts</span><span class="p">[</span><span class="s2">&quot;Adelie&quot;</span><span class="p">],</span>
@@ -2108,7 +1955,7 @@ pick an Adelie penguin would be 0.68 as seen in Code Block
 </div>
 <p>And for the same event the odds would be</p>
 <div class="literal-block-wrapper docutils container" id="adelie-odds">
-<div class="code-block-caption"><span class="caption-number">Listing 3.27 </span><span class="caption-text">adelie_odds</span><a class="headerlink" href="#adelie-odds" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.27 </span><span class="caption-text">adelie_odds</span><a class="headerlink" href="#adelie-odds" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">adelie_count</span> <span class="o">/</span> <span class="n">chinstrap_count</span>
 </pre></div>
 </div>
@@ -2127,7 +1974,7 @@ natural log of the odds which is the fraction shown in Equation
 <a class="reference internal" href="#equation-eq-logit">(3.8)</a>. We can rewrite the logistic regression in Equation
 <a class="reference internal" href="#equation-eq-logistic">(3.6)</a> in an alternative form of using the logit.</p>
 <div class="math notranslate nohighlight" id="equation-eq-logit">
-<span class="eqno">(3.8)<a class="headerlink" href="#equation-eq-logit" title="Permalink to this equation">¶</a></span>\[\log \left(\frac{p}{1-p} \right) = \boldsymbol{X} \beta\]</div>
+<span class="eqno">(3.8)<a class="headerlink" href="#equation-eq-logit" title="Permalink to this equation">#</a></span>\[\log \left(\frac{p}{1-p} \right) = \boldsymbol{X} \beta\]</div>
 <p>This alternative formulation lets us interpret the coefficients of
 logistic regression as the change in log odds. Using this knowledge we
 can calculate the probability of observing Adelie to Chinstrap penguins
@@ -2137,7 +1984,7 @@ Transformations like these are both interesting mathematically, but also
 very practically useful when discussing statistical results, a topic we
 will discuss more deeply in <a class="reference internal" href="chp_09.html#section-sharing-results"><span class="std std-ref">Sharing the Results With a Particular Audience</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="logistic-interpretation">
-<div class="code-block-caption"><span class="caption-number">Listing 3.28 </span><span class="caption-text">logistic_interpretation</span><a class="headerlink" href="#logistic-interpretation" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.28 </span><span class="caption-text">logistic_interpretation</span><a class="headerlink" href="#logistic-interpretation" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">45</span>
 <span class="n">β_0</span> <span class="o">=</span> <span class="n">inf_data_logistic_penguins_bill_length</span><span class="o">.</span><span class="n">posterior</span><span class="p">[</span><span class="s2">&quot;β_0&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
 <span class="n">β_1</span> <span class="o">=</span> <span class="n">inf_data_logistic_penguins_bill_length</span><span class="o">.</span><span class="n">posterior</span><span class="p">[</span><span class="s2">&quot;β_1&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
@@ -2147,7 +1994,7 @@ will discuss more deeply in <a class="reference internal" href="chp_09.html#sect
 <span class="n">val_2</span> <span class="o">=</span> <span class="n">β_0</span> <span class="o">+</span> <span class="n">β_1</span><span class="o">*</span><span class="p">(</span><span class="n">bill_length</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="sa">f</span><span class="s2">&quot;&quot;&quot;(Class Probability change from 45mm Bill Length to 46mm:</span>
-<span class="si">{</span><span class="p">(</span><span class="n">special</span><span class="o">.</span><span class="n">expit</span><span class="p">(</span><span class="n">val_2</span><span class="p">)</span> <span class="o">-</span>  <span class="n">special</span><span class="o">.</span><span class="n">expit</span><span class="p">(</span><span class="n">val_1</span><span class="p">))</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">%)&quot;&quot;&quot;</span>
+<span class="si">{</span><span class="p">(</span><span class="n">special</span><span class="o">.</span><span class="n">expit</span><span class="p">(</span><span class="n">val_2</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w">  </span><span class="n">special</span><span class="o">.</span><span class="n">expit</span><span class="p">(</span><span class="n">val_1</span><span class="p">))</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">%)&quot;&quot;&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -2157,7 +2004,7 @@ will discuss more deeply in <a class="reference internal" href="chp_09.html#sect
 </section>
 </section>
 <section id="picking-priors-in-regression-models">
-<span id="id31"></span><h2><span class="section-number">3.5. </span>Picking Priors in Regression Models<a class="headerlink" href="#picking-priors-in-regression-models" title="Permalink to this heading">¶</a></h2>
+<span id="id31"></span><h2><span class="section-number">3.5. </span>Picking Priors in Regression Models<a class="headerlink" href="#picking-priors-in-regression-models" title="Permalink to this heading">#</a></h2>
 <p>Now that we are familiar with generalized linear models let us focus on
 the prior and its effect on posterior estimation. We will be borrowing
 an example from Regression and Other Stories <span id="id32">[<a class="reference internal" href="references.html#id62" title="A. Gelman, J. Hill, and A. Vehtari. Regression and Other Stories. Analytical Methods for Social Research. Cambridge University Press, 2020. ISBN 9781107023987.">40</a>]</span>, in particular a
@@ -2177,11 +2024,11 @@ and not independently.</p>
 <a class="reference internal image-reference" href="../_images/BeautyRatio.png"><img alt="../_images/BeautyRatio.png" src="../_images/BeautyRatio.png" style="width: 7.00in;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3.23 </span><span class="caption-text">Data on the attractiveness of parents plotted against the gender ratio
-of their children.</span><a class="headerlink" href="#fig-beautyratio" title="Permalink to this image">¶</a></p>
+of their children.</span><a class="headerlink" href="#fig-beautyratio" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="literal-block-wrapper docutils container" id="uninformative-prior-sex-ratio">
-<div class="code-block-caption"><span class="caption-number">Listing 3.29 </span><span class="caption-text">uninformative_prior_sex_ratio</span><a class="headerlink" href="#uninformative-prior-sex-ratio" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.29 </span><span class="caption-text">uninformative_prior_sex_ratio</span><a class="headerlink" href="#uninformative-prior-sex-ratio" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="mi">50</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">56</span><span class="p">])</span>
 
@@ -2211,7 +2058,7 @@ of their children.</span><a class="headerlink" href="#fig-beautyratio" title="Pe
 <p><span class="caption-number">Fig. 3.24 </span><span class="caption-text">With vague or very wide priors the model shows that large differences in
 birth ratios are possible for parents rated as attractive. Some of these
 possible fits are as large as a 20% change which seems implausible as no
-other study has shown an effect this large on the sex ratio of births.</span><a class="headerlink" href="#fig-posterioruninformativelinearregression" title="Permalink to this image">¶</a></p>
+other study has shown an effect this large on the sex ratio of births.</span><a class="headerlink" href="#fig-posterioruninformativelinearregression" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Nominally we will assume births are equally split between males and
@@ -2251,7 +2098,7 @@ samples the concentration of coefficients is smaller and the plotted
 posterior lines fall into bounds that are more reasonable when considering
 possible ratios.</p>
 <div class="literal-block-wrapper docutils container" id="informative-prior-sex-ratio">
-<div class="code-block-caption"><span class="caption-number">Listing 3.30 </span><span class="caption-text">informative_prior_sex_ratio</span><a class="headerlink" href="#informative-prior-sex-ratio" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.30 </span><span class="caption-text">informative_prior_sex_ratio</span><a class="headerlink" href="#informative-prior-sex-ratio" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_informative_prior_sex_ratio</span><span class="p">:</span>
     <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Exponential</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="mf">.5</span><span class="p">)</span>
 
@@ -2278,7 +2125,7 @@ possible ratios.</p>
 <p><span class="caption-number">Fig. 3.25 </span><span class="caption-text">With priors informed from other papers and domain expertise the mean
 posterior hardly changes across attractiveness ratio indicating that if
 there is a belief there is an effect on birth ratio from the parents
-attractiveness more data should be collected to showcase the effect.</span><a class="headerlink" href="#fig-posteriorinformativelinearregression" title="Permalink to this image">¶</a></p>
+attractiveness more data should be collected to showcase the effect.</span><a class="headerlink" href="#fig-posteriorinformativelinearregression" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>This time we see that estimated effect of attractiveness on gender is
@@ -2289,7 +2136,7 @@ you believe it is, it is important to use this statistical tool with an
 explainable and principled choice.</p>
 </section>
 <section id="exercises">
-<span id="exercises3"></span><h2><span class="section-number">3.6. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">¶</a></h2>
+<span id="exercises3"></span><h2><span class="section-number">3.6. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <p><strong>E1.</strong> Comparisons are part of everyday life. What is
 something you compare on a daily basis and answer the following
 question:</p>
@@ -2301,7 +2148,7 @@ example in the penguin model we use species or sex</p></li>
 </ul>
 <p><strong>E2.</strong> Referring to Model
 <a class="reference internal" href="#penguin-mass"><span class="std std-ref">penguin_mass</span></a> complete the following tasks.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Compute the values of Monte Carlo Standard Error Mean using
 <code class="docutils literal notranslate"><span class="pre">az.summary</span></code>. Given the computed values which of the following
 reported values of <span class="math notranslate nohighlight">\(\mu\)</span> would not be well supported as a point
@@ -2313,7 +2160,7 @@ values of <span class="math notranslate nohighlight">\(\hat R\)</span>, and ESS<
 </ol>
 <p><strong>E3.</strong> In your own words explain how regression can be used
 to do the following:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Covariate estimation</p></li>
 <li><p>Prediction</p></li>
 <li><p>Counterfactual analysis</p></li>
@@ -2331,7 +2178,7 @@ centered model. What is different, what is the same. How does the
 interpretation of this model change when compared to the centered model?</p>
 <p><strong>E5.</strong> Translate the following primitives from PyMC3 to
 TFP. Assume the model name is <code class="docutils literal notranslate"><span class="pre">pymc_model</span></code></p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">pm.StudentT(&quot;x&quot;,</span> <span class="pre">0,</span> <span class="pre">10,</span> <span class="pre">20)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">pm.sample(chains=2)</span></code></p></li>
 </ol>
@@ -2343,7 +2190,7 @@ Distribution is parameterized as <code class="docutils literal notranslate"><spa
 whereas in TFP it is <code class="docutils literal notranslate"><span class="pre">tfd.Uniform(low=,</span> <span class="pre">high=)</span></code>. Use the online
 documentation to identify the difference in argument names for the
 following distributions.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Normal</p></li>
 <li><p>Poisson</p></li>
 <li><p>Beta</p></li>
@@ -2507,7 +2354,7 @@ value.</p>
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./markdown"
         },
         predefinedOutput: true
@@ -2515,44 +2362,123 @@ value.</p>
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="chp_02.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">2. </span>Exploratory Analysis of Bayesian Models</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chp_02.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>Exploratory Analysis of Bayesian Models</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="chp_04.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="chp_04.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title"><span class="section-number">4. </span>Extending Linear Models</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
+                </footer>
+              
+            </div>
             
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Martin, Kumar, Lao<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-two-or-more-groups">3.1. Comparing Two (or More) Groups</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-two-ppls">3.1.1. Comparing Two PPLs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">3.2. Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-penguins">3.2.1. Linear Penguins</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predictions">3.2.2. Predictions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#centering">3.2.3. Centering</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-linear-regression">3.3. Multiple Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#counterfactuals">3.3.1. Counterfactuals</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generalized-linear-models">3.4. Generalized Linear Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">3.4.1. Logistic Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classifying-penguins">3.4.2. Classifying Penguins</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-log-odds">3.4.3. Interpreting Log Odds</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#picking-priors-in-regression-models">3.5. Picking Priors in Regression Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">3.6. Exercises</a></li>
+</ul>
+  </nav></div>
 
-      </div>
-    </div>
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Martin, Kumar, Lao
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

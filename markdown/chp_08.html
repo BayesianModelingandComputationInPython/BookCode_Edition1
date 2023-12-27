@@ -1,39 +1,47 @@
 
+
 <!DOCTYPE html>
 
-<html lang="en">
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>8. Approximate Bayesian Computation &#8212; Bayesian Modeling and Computation in Python</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-codeautolink.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -42,12 +50,13 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -56,500 +65,319 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'markdown/chp_08';</script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="9. End to End Bayesian Workflows" href="chp_09.html" />
     <link rel="prev" title="7. Bayesian Additive Regression Trees" href="chp_07.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en">
-    
-
-    <!-- Google Analytics -->
-    
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-702QMHG8ST"></script>
-<script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){ dataLayer.push(arguments); }
-                    gtag('js', new Date());
-                    gtag('config', 'G-702QMHG8ST');
-                </script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-      
-      
-      <h1 class="site-logo" id="site-title">Bayesian Modeling and Computation in Python</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 0
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="dedication.html">
-   Dedication
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="foreword.html">
-   Foreword
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="preface.html">
-   Preface
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="symbollist.html">
-   Symbols
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 1
- </span>
-</p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_01.html">
-   1. Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_02.html">
-   2. Exploratory Analysis of Bayesian Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_03.html">
-   3. Linear Models and Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_04.html">
-   4. Extending Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_05.html">
-   5. Splines
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_06.html">
-   6. Time Series
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_07.html">
-   7. Bayesian Additive Regression Trees
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   8. Approximate Bayesian Computation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_09.html">
-   9. End to End Bayesian Workflows
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_10.html">
-   10. Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_11.html">
-   11. Appendiceal Topics
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="glossary.html">
-   12. Glossary
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="references.html">
-   13. References
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 2
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_01.html">
-   Code 1: Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_02.html">
-   Code 2: Exploratory Analysis of Bayesian Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_03.html">
-   Code 3: Linear Models and Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_04.html">
-   Code 4: Extending Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_05.html">
-   Code 5: Splines
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_06.html">
-   Code 6: Time Series
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_07.html">
-   Code 7: Bayesian Additive Regression Trees
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_08.html">
-   Code 8: Approximate Bayesian Computation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_09.html">
-   Code 9: End to End Bayesian Workflows
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_10.html">
-   Code 10: Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_11.html">
-   Code 11: Appendiceal Topics
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 3
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../solutions/chp_01.html">
-   Solutions 1: Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../solutions/chp_02.html">
-   Solutions 2: Exploratory Analysis of Bayesian models
-  </a>
- </li>
-</ul>
-
-    </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_08.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+      <div class="bd-sidebar-primary bd-sidebar">
         
-    </div>
-</div>
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
+  
 
-            <!-- Launch buttons -->
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#life-beyond-likelihood">
-   8.1. Life Beyond Likelihood
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#approximating-the-approximated-posterior">
-   8.2. Approximating the Approximated Posterior
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fitting-a-gaussian-the-abc-way">
-   8.3. Fitting a Gaussian the ABC-way
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#choosing-the-distance-function-epsilon-and-the-summary-statistics">
-   8.4. Choosing the Distance Function,
-   <span class="math notranslate nohighlight">
-    \(\epsilon\)
-   </span>
-   and the Summary Statistics
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#choosing-the-distance">
-     8.4.1. Choosing the Distance
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#choosing-epsilon">
-     8.4.2. Choosing
-     <span class="math notranslate nohighlight">
-      \(\epsilon\)
-     </span>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#choosing-summary-statistics">
-     8.4.3. Choosing Summary Statistics
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#g-and-k-distribution">
-   8.5. g-and-k Distribution
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#approximating-moving-averages">
-   8.6. Approximating Moving Averages
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#model-comparison-in-the-abc-context">
-   8.7. Model Comparison in the ABC Context
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#marginal-likelihood-and-loo">
-     8.7.1. Marginal Likelihood and LOO
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#model-choice-via-random-forest">
-     8.7.2. Model Choice via Random Forest
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#model-choice-for-ma-model">
-     8.7.3. Model Choice for MA Model
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#choosing-priors-for-abc">
-   8.8. Choosing Priors for ABC
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
-   8.9. Exercises
-  </a>
- </li>
+<a class="navbar-brand logo" href="../welcome.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Bayesian Modeling and Computation in Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 0</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="dedication.html">Dedication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="foreword.html">Foreword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preface.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="symbollist.html">Symbols</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 1</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chp_01.html">1. Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_02.html">2. Exploratory Analysis of Bayesian Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_03.html">3. Linear Models and Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_04.html">4. Extending Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_05.html">5. Splines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_06.html">6. Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_07.html">7. Bayesian Additive Regression Trees</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">8. Approximate Bayesian Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_09.html">9. End to End Bayesian Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_10.html">10. Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_11.html">11. Appendiceal Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">12. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">13. References</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_01.html">Code 1: Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_02.html">Code 2: Exploratory Analysis of Bayesian Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_03.html">Code 3: Linear Models and Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_04.html">Code 4: Extending Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_05.html">Code 5: Splines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_06.html">Code 6: Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_07.html">Code 7: Bayesian Additive Regression Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_08.html">Code 8: Approximate Bayesian Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_09.html">Code 9: End to End Bayesian Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_10.html">Code 10: Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_11.html">Code 11: Appendiceal Topics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../solutions/chp_01.html">Solutions 1: Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/chp_02.html">Solutions 2: Exploratory Analysis of Bayesian models</a></li>
 </ul>
 
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_08.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Approximate Bayesian Computation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#life-beyond-likelihood">8.1. Life Beyond Likelihood</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approximating-the-approximated-posterior">8.2. Approximating the Approximated Posterior</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-a-gaussian-the-abc-way">8.3. Fitting a Gaussian the ABC-way</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-distance-function-epsilon-and-the-summary-statistics">8.4. Choosing the Distance Function, <span class="math notranslate nohighlight">\(\epsilon\)</span> and the Summary Statistics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-distance">8.4.1. Choosing the Distance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-epsilon">8.4.2. Choosing <span class="math notranslate nohighlight">\(\epsilon\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-summary-statistics">8.4.3. Choosing Summary Statistics</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#g-and-k-distribution">8.5. g-and-k Distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approximating-moving-averages">8.6. Approximating Moving Averages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-comparison-in-the-abc-context">8.7. Model Comparison in the ABC Context</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#marginal-likelihood-and-loo">8.7.1. Marginal Likelihood and LOO</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-choice-via-random-forest">8.7.2. Model Choice via Random Forest</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-choice-for-ma-model">8.7.3. Model Choice for MA Model</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-priors-for-abc">8.8. Choosing Priors for ABC</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">8.9. Exercises</a></li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Approximate Bayesian Computation</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#life-beyond-likelihood">
-   8.1. Life Beyond Likelihood
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#approximating-the-approximated-posterior">
-   8.2. Approximating the Approximated Posterior
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fitting-a-gaussian-the-abc-way">
-   8.3. Fitting a Gaussian the ABC-way
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#choosing-the-distance-function-epsilon-and-the-summary-statistics">
-   8.4. Choosing the Distance Function,
-   <span class="math notranslate nohighlight">
-    \(\epsilon\)
-   </span>
-   and the Summary Statistics
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#choosing-the-distance">
-     8.4.1. Choosing the Distance
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#choosing-epsilon">
-     8.4.2. Choosing
-     <span class="math notranslate nohighlight">
-      \(\epsilon\)
-     </span>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#choosing-summary-statistics">
-     8.4.3. Choosing Summary Statistics
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#g-and-k-distribution">
-   8.5. g-and-k Distribution
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#approximating-moving-averages">
-   8.6. Approximating Moving Averages
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#model-comparison-in-the-abc-context">
-   8.7. Model Comparison in the ABC Context
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#marginal-likelihood-and-loo">
-     8.7.1. Marginal Likelihood and LOO
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#model-choice-via-random-forest">
-     8.7.2. Model Choice via Random Forest
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#model-choice-for-ma-model">
-     8.7.3. Model Choice for MA Model
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#choosing-priors-for-abc">
-   8.8. Choosing Priors for ABC
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
-   8.9. Exercises
-  </a>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="approximate-bayesian-computation">
-<span id="chap8"></span><h1><span class="section-number">8. </span>Approximate Bayesian Computation<a class="headerlink" href="#approximate-bayesian-computation" title="Permalink to this heading">¶</a></h1>
+<span id="chap8"></span><h1><span class="section-number">8. </span>Approximate Bayesian Computation<a class="headerlink" href="#approximate-bayesian-computation" title="Permalink to this heading">#</a></h1>
 <p>In this chapter we discuss Approximate Bayesian Computation (ABC). The
 “approximate” in ABC refers to the lack of explicit likelihood, but not
 to the use of numerical methods to approximate the posterior, such as
@@ -577,7 +405,7 @@ perspective. We highly recommend readers interested into applying ABC
 methods to their own problems to complement this chapter with examples
 from their own domain knowledge.</p>
 <section id="life-beyond-likelihood">
-<span id="id3"></span><h2><span class="section-number">8.1. </span>Life Beyond Likelihood<a class="headerlink" href="#life-beyond-likelihood" title="Permalink to this heading">¶</a></h2>
+<span id="id3"></span><h2><span class="section-number">8.1. </span>Life Beyond Likelihood<a class="headerlink" href="#life-beyond-likelihood" title="Permalink to this heading">#</a></h2>
 <p>From Bayes theorem (Equation
 <a class="reference internal" href="chp_01.html#equation-eq-posterior-dist">(1.1)</a>), to compute a posterior we
 need two basic ingredients, a prior and a likelihood. However, for
@@ -596,15 +424,15 @@ by a <span class="math notranslate nohighlight">\(\delta\)</span> function that 
 form of discrepancy between the observed data <span class="math notranslate nohighlight">\(Y\)</span> and the synthetic data
 <span class="math notranslate nohighlight">\(\hat Y\)</span> generated by a parameterized simulator <span class="math notranslate nohighlight">\(Sim\)</span>.</p>
 <div class="math notranslate nohighlight" id="equation-eq-simulator">
-<span class="eqno">(8.1)<a class="headerlink" href="#equation-eq-simulator" title="Permalink to this equation">¶</a></span>\[\hat Y \sim Sim(\theta)\]</div>
+<span class="eqno">(8.1)<a class="headerlink" href="#equation-eq-simulator" title="Permalink to this equation">#</a></span>\[\hat Y \sim Sim(\theta)\]</div>
 <div class="math notranslate nohighlight" id="equation-eq-approx-likelihood">
-<span class="eqno">(8.2)<a class="headerlink" href="#equation-eq-approx-likelihood" title="Permalink to this equation">¶</a></span>\[p(\theta \mid Y) 
+<span class="eqno">(8.2)<a class="headerlink" href="#equation-eq-approx-likelihood" title="Permalink to this equation">#</a></span>\[p(\theta \mid Y) 
     \underset{\sim}{\propto} 
     \delta(Y, \hat Y \mid \epsilon)\; p(\boldsymbol{\theta})\]</div>
 <p>We aim at using a function <span class="math notranslate nohighlight">\(\delta\)</span> to obtain a <em>practically good
 enough</em> approximation to the <em>true</em> likelihood:</p>
 <div class="math notranslate nohighlight" id="equation-eq-converge-true-likelihood">
-<span class="eqno">(8.3)<a class="headerlink" href="#equation-eq-converge-true-likelihood" title="Permalink to this equation">¶</a></span>\[\lim_{\epsilon \to 0} \delta(Y, \hat Y \mid \epsilon) = p(Y \mid \boldsymbol{\theta})\]</div>
+<span class="eqno">(8.3)<a class="headerlink" href="#equation-eq-converge-true-likelihood" title="Permalink to this equation">#</a></span>\[\lim_{\epsilon \to 0} \delta(Y, \hat Y \mid \epsilon) = p(Y \mid \boldsymbol{\theta})\]</div>
 <p>We introduce a tolerance parameter <span class="math notranslate nohighlight">\(\epsilon\)</span> because the chance of
 generating a synthetic data-set <span class="math notranslate nohighlight">\(\hat Y\)</span> being equal to the observed
 data <span class="math notranslate nohighlight">\(Y\)</span> is virtually null for most problems <a class="footnote-reference brackets" href="#id54" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>. The larger the value
@@ -620,7 +448,7 @@ approximation. A better solution could be to instead use one or more
 summary statistics <span class="math notranslate nohighlight">\(S\)</span> and compute the distance between the data
 summaries instead of between the simulated and real datasets.</p>
 <div class="math notranslate nohighlight" id="equation-eq-summary-statistics">
-<span class="eqno">(8.4)<a class="headerlink" href="#equation-eq-summary-statistics" title="Permalink to this equation">¶</a></span>\[\delta\left(S(Y), S(\hat Y) \mid \epsilon\right)\]</div>
+<span class="eqno">(8.4)<a class="headerlink" href="#equation-eq-summary-statistics" title="Permalink to this equation">#</a></span>\[\delta\left(S(Y), S(\hat Y) \mid \epsilon\right)\]</div>
 <p>We must be aware that using a summary statistic introduces an additional
 source of error to the ABC approximation, unless the summary statistics
 are sufficient with respect to the model parameters <span class="math notranslate nohighlight">\(\theta\)</span>.
@@ -653,12 +481,12 @@ the sample size.</p>
 </div>
 </section>
 <section id="approximating-the-approximated-posterior">
-<span id="id7"></span><h2><span class="section-number">8.2. </span>Approximating the Approximated Posterior<a class="headerlink" href="#approximating-the-approximated-posterior" title="Permalink to this heading">¶</a></h2>
+<span id="id7"></span><h2><span class="section-number">8.2. </span>Approximating the Approximated Posterior<a class="headerlink" href="#approximating-the-approximated-posterior" title="Permalink to this heading">#</a></h2>
 <p>The most basic method to perform Approximate Bayesian Computation is
 probably rejection sampling. We will describe it using
 <a class="reference internal" href="#fig-abc-rejection"><span class="std std-numref">Fig. 8.1</span></a> together with the high level step by step
 description of the algorithm as follows.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Sample a value of <span class="math notranslate nohighlight">\(\theta\)</span> from the prior distribution.</p></li>
 <li><p>Pass that value to the simulator and generate synthetic data.</p></li>
 <li><p>If the synthetic data is at a <em>distance</em> <span class="math notranslate nohighlight">\(\delta\)</span> closer than
@@ -677,7 +505,7 @@ synthetic dataset close enough to the observed data, thus <span class="math notr
 <span class="math notranslate nohighlight">\(\theta_2\)</span> were rejected. Notice that if we were using a summary
 statistics, instead of the entire dataset we should compute the summary
 statistics of the synthetic and observed data after step 2 and before
-step 3.</span><a class="headerlink" href="#fig-abc-rejection" title="Permalink to this image">¶</a></p>
+step 3.</span><a class="headerlink" href="#fig-abc-rejection" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The major drawback of the ABC-rejection sampler is that if the prior
@@ -708,24 +536,24 @@ in blue.</p>
 <p><span class="caption-number">Fig. 8.2 </span><span class="caption-text">Hypothetical sequence of tempered posteriors explored by an SMC sampler,
 from the prior (<span class="math notranslate nohighlight">\(\beta = 0\)</span>), light gray, to the actual posterior
 (<span class="math notranslate nohighlight">\(\beta = 1\)</span>), blue. Low <span class="math notranslate nohighlight">\(\beta\)</span> values at the beginning helps the
-sampler to not get stuck in a single maximum.</span><a class="headerlink" href="#fig-smc-tempering" title="Permalink to this image">¶</a></p>
+sampler to not get stuck in a single maximum.</span><a class="headerlink" href="#fig-smc-tempering" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="fitting-a-gaussian-the-abc-way">
-<span id="id8"></span><h2><span class="section-number">8.3. </span>Fitting a Gaussian the ABC-way<a class="headerlink" href="#fitting-a-gaussian-the-abc-way" title="Permalink to this heading">¶</a></h2>
+<span id="id8"></span><h2><span class="section-number">8.3. </span>Fitting a Gaussian the ABC-way<a class="headerlink" href="#fitting-a-gaussian-the-abc-way" title="Permalink to this heading">#</a></h2>
 <p>Let us warm up with a simple example, the estimation of the mean and
 standard deviation from Gaussian distributed data with mean 0 and
 standard deviation 1. For this problem we can fit the model:</p>
 <div class="math notranslate nohighlight" id="equation-eq-gauss-model">
-<span class="eqno">(8.5)<a class="headerlink" href="#equation-eq-gauss-model" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\begin{split}\begin{split}
+<span class="eqno">(8.5)<a class="headerlink" href="#equation-eq-gauss-model" title="Permalink to this equation">#</a></span>\[ \begin{align}\begin{aligned}\begin{split}\begin{split}
     \boldsymbol{\mu} \sim &amp;\; \mathcal{N}(0, 1) \\
     \boldsymbol{\sigma} \sim &amp;\; \mathcal{HN}(1) \\
     \boldsymbol{s} \sim &amp;\; \mathcal{N}(\boldsymbol{\mu}, \boldsymbol{\sigma})\end{split}\\\end{split}\end{aligned}\end{align} \]</div>
 <p>The straightforward way to write this model in PyMC3 is shown in Code
 Block <a class="reference internal" href="#gauss-nuts"><span class="std std-ref">gauss_nuts</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="gauss-nuts">
-<div class="code-block-caption"><span class="caption-number">Listing 8.1 </span><span class="caption-text">gauss_nuts</span><a class="headerlink" href="#gauss-nuts" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 8.1 </span><span class="caption-text">gauss_nuts</span><a class="headerlink" href="#gauss-nuts" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">gauss</span><span class="p">:</span>
     <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;μ&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -737,7 +565,7 @@ Block <a class="reference internal" href="#gauss-nuts"><span class="std std-ref"
 <p>The equivalent model using SMC-ABC is shown in Code Block
 <a class="reference internal" href="#gauss-abc"><span class="std std-ref">gauss_abc</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="gauss-abc">
-<div class="code-block-caption"><span class="caption-number">Listing 8.2 </span><span class="caption-text">gauss_abc</span><a class="headerlink" href="#gauss-abc" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 8.2 </span><span class="caption-text">gauss_abc</span><a class="headerlink" href="#gauss-abc" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">gauss</span><span class="p">:</span>
     <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;μ&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -766,7 +594,7 @@ that generates synthetic data, in this example the function
 of this function for a sample size of 1000 and unknown parameters <span class="math notranslate nohighlight">\(\mu\)</span>
 and <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
 <div class="literal-block-wrapper docutils container" id="normal-simulator">
-<div class="code-block-caption"><span class="caption-number">Listing 8.3 </span><span class="caption-text">normal_simulator</span><a class="headerlink" href="#normal-simulator" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 8.3 </span><span class="caption-text">normal_simulator</span><a class="headerlink" href="#normal-simulator" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">normal_simulator</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
 </pre></div>
@@ -800,12 +628,12 @@ sampler is not showing any evident sampling issue.</p>
 <p><span class="caption-number">Fig. 8.3 </span><span class="caption-text">As expected <span class="math notranslate nohighlight">\(\mu \approx 0\)</span> and <span class="math notranslate nohighlight">\(\sigma \approx 1\)</span>, both chains agree
 about the posterior as reflected by the KDEs and also by the rank plots.
 Notice that each of these 2 chains was obtained by running 2000 parallel
-SMC-chains/particles as described in the SMC algorithm.</span><a class="headerlink" href="#fig-trace-g" title="Permalink to this image">¶</a></p>
+SMC-chains/particles as described in the SMC algorithm.</span><a class="headerlink" href="#fig-trace-g" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="choosing-the-distance-function-epsilon-and-the-summary-statistics">
-<span id="id10"></span><h2><span class="section-number">8.4. </span>Choosing the Distance Function, <span class="math notranslate nohighlight">\(\epsilon\)</span> and the Summary Statistics<a class="headerlink" href="#choosing-the-distance-function-epsilon-and-the-summary-statistics" title="Permalink to this heading">¶</a></h2>
+<span id="id10"></span><h2><span class="section-number">8.4. </span>Choosing the Distance Function, <span class="math notranslate nohighlight">\(\epsilon\)</span> and the Summary Statistics<a class="headerlink" href="#choosing-the-distance-function-epsilon-and-the-summary-statistics" title="Permalink to this heading">#</a></h2>
 <p>Defining a useful distance, summary statistic and <span class="math notranslate nohighlight">\(\epsilon\)</span> is problem
 dependent. This means that we should expect some trial and error before
 getting good results, especially when jumping into a new problem. As
@@ -815,11 +643,11 @@ always helpful to better understand the problem and to make a more
 informed decision about these hyperparameters. In the following sections
 we will discuss a few general guidelines.</p>
 <section id="choosing-the-distance">
-<span id="id11"></span><h3><span class="section-number">8.4.1. </span>Choosing the Distance<a class="headerlink" href="#choosing-the-distance" title="Permalink to this heading">¶</a></h3>
+<span id="id11"></span><h3><span class="section-number">8.4.1. </span>Choosing the Distance<a class="headerlink" href="#choosing-the-distance" title="Permalink to this heading">#</a></h3>
 <p>We run Code Block <a class="reference internal" href="#gauss-abc"><span class="std std-ref">gauss_abc</span></a> with the default
 distance function <code class="docutils literal notranslate"><span class="pre">distance=&quot;gaussian&quot;</span></code>, which is defined as:</p>
 <div class="math notranslate nohighlight" id="equation-eq-euclidean-abc">
-<span class="eqno">(8.6)<a class="headerlink" href="#equation-eq-euclidean-abc" title="Permalink to this equation">¶</a></span>\[\sum_i - \frac{||X_{oi} - X_{si}||^2}{2 \epsilon_i^2}\]</div>
+<span class="eqno">(8.6)<a class="headerlink" href="#equation-eq-euclidean-abc" title="Permalink to this equation">#</a></span>\[\sum_i - \frac{||X_{oi} - X_{si}||^2}{2 \epsilon_i^2}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(X_{o}\)</span> is the observed data, <span class="math notranslate nohighlight">\(X_{s}\)</span> is the simulated data and
 <span class="math notranslate nohighlight">\(\epsilon\)</span> its scaling parameter. We call <a class="reference internal" href="#equation-eq-euclidean-abc">(8.6)</a>
 <em>Gaussian</em> because it is the Gaussian kernel<a class="footnote-reference brackets" href="#id57" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> in log scale. We use
@@ -862,7 +690,7 @@ statistic is the use of the KL divergence (see Section <a class="reference inter
 divergence is approximated using the following expression
 <span id="id17">[<a class="reference internal" href="references.html#id48" title="Fernando Pérez-Cruz. Kullback-leibler divergence estimation of continuous distributions. In 2008 IEEE international symposium on information theory, 1666–1670. IEEE, 2008.">92</a>, <a class="reference internal" href="references.html#id47" title="Bai Jiang. Approximate bayesian computation with kullback-leibler divergence as data discrepancy. In International conference on artificial intelligence and statistics, 1711–1721. PMLR, 2018.">93</a>]</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-kl-abc">
-<span class="eqno">(8.7)<a class="headerlink" href="#equation-eq-kl-abc" title="Permalink to this equation">¶</a></span>\[\frac{d}{n}  \sum \left(- \frac{\log(\frac{\nu_d}{\rho_d})}{\epsilon} \right) + \log\left(\frac{n}{n-1}\right)\]</div>
+<span class="eqno">(8.7)<a class="headerlink" href="#equation-eq-kl-abc" title="Permalink to this equation">#</a></span>\[\frac{d}{n}  \sum \left(- \frac{\log(\frac{\nu_d}{\rho_d})}{\epsilon} \right) + \log\left(\frac{n}{n-1}\right)\]</div>
 <p>Where <span class="math notranslate nohighlight">\(d\)</span> is the dimension of the dataset (number of variables or
 features), <span class="math notranslate nohighlight">\(n\)</span> is the number of observed datapoints. <span class="math notranslate nohighlight">\(\nu_d\)</span> contains
 the 1-nearest neighbor distances of the observed to simulated data and
@@ -873,7 +701,7 @@ nearest neighbor search, it is generally implemented using k-d trees
 <span id="id18">[<a class="reference internal" href="references.html#id49" title="Jon Louis Bentley. Multidimensional binary search trees used for associative searching. Communications of the ACM, 18(9):509–517, 1975.">95</a>]</span>.</p>
 </section>
 <section id="choosing-epsilon">
-<span id="id19"></span><h3><span class="section-number">8.4.2. </span>Choosing <span class="math notranslate nohighlight">\(\epsilon\)</span><a class="headerlink" href="#choosing-epsilon" title="Permalink to this heading">¶</a></h3>
+<span id="id19"></span><h3><span class="section-number">8.4.2. </span>Choosing <span class="math notranslate nohighlight">\(\epsilon\)</span><a class="headerlink" href="#choosing-epsilon" title="Permalink to this heading">#</a></h3>
 <p>In many ABC methods the <span class="math notranslate nohighlight">\(\epsilon\)</span> parameter works as a hard-threshold,
 <span class="math notranslate nohighlight">\(\theta\)</span> values generating samples with distance larger than <span class="math notranslate nohighlight">\(\epsilon\)</span>
 are rejected. Additionally <span class="math notranslate nohighlight">\(\epsilon\)</span> can be a list of decreasing values
@@ -908,7 +736,7 @@ sampler (using a normal likelihood instead of a simulator).</p>
 <a class="reference internal image-reference" href="../_images/trace_g_many_eps.png"><img alt="../_images/trace_g_many_eps.png" src="../_images/trace_g_many_eps.png" style="width: 8.00in;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 8.4 </span><span class="caption-text">Forest plot for <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>, obtained using NUTS or ABC with
-increasing values of <span class="math notranslate nohighlight">\(\epsilon\)</span>, 1, 5, and 10.</span><a class="headerlink" href="#fig-trace-g-many-eps" title="Permalink to this image">¶</a></p>
+increasing values of <span class="math notranslate nohighlight">\(\epsilon\)</span>, 1, 5, and 10.</span><a class="headerlink" href="#fig-trace-g-many-eps" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Decreasing the value of <span class="math notranslate nohighlight">\(\epsilon\)</span> has a limit, a too low value will
@@ -922,7 +750,7 @@ converge when the model from Code Block
 <a class="reference internal image-reference" href="../_images/trace_g_eps_too_low.png"><img alt="../_images/trace_g_eps_too_low.png" src="../_images/trace_g_eps_too_low.png" style="width: 8.00in;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 8.5 </span><span class="caption-text">KDE and rank plot for model <code class="docutils literal notranslate"><span class="pre">trace_g_001</span></code>, failure of convergence could
-indicate that the value <span class="math notranslate nohighlight">\(\epsilon=0.1\)</span> is too low for this problem.</span><a class="headerlink" href="#fig-trace-g-eps-too-low" title="Permalink to this image">¶</a></p>
+indicate that the value <span class="math notranslate nohighlight">\(\epsilon=0.1\)</span> is too low for this problem.</span><a class="headerlink" href="#fig-trace-g-eps-too-low" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>To help us decide on a good value for <span class="math notranslate nohighlight">\(\epsilon\)</span> we can get help from
@@ -948,7 +776,7 @@ terrible, this is not surprising as this value of <span class="math notranslate 
 all the other values of <span class="math notranslate nohighlight">\(\epsilon\)</span> the distribution looks much more
 Uniform and the level of uniformity decreases as <span class="math notranslate nohighlight">\(\epsilon\)</span> increases.
 The <code class="docutils literal notranslate"><span class="pre">se</span></code> values are the (scaled) squared differences between the
-expected Uniform distribution and the computed KDEs.</span><a class="headerlink" href="#fig-bpv-g-many-eps-00" title="Permalink to this image">¶</a></p>
+expected Uniform distribution and the computed KDEs.</span><a class="headerlink" href="#fig-bpv-g-many-eps-00" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="fig-bpv-g-many-eps-01">
@@ -959,7 +787,7 @@ the observed distribution and the gray curves the expected ones. For a
 well calibrated model we should expect a distribution concentrated
 around 0.5. We can see that for <span class="math notranslate nohighlight">\(\epsilon=0.1\)</span> the calibration is
 terrible, this is not surprising as this value of <span class="math notranslate nohighlight">\(\epsilon\)</span> is too low.
-We can see that <span class="math notranslate nohighlight">\(\epsilon=1\)</span> provides the best results.</span><a class="headerlink" href="#fig-bpv-g-many-eps-01" title="Permalink to this image">¶</a></p>
+We can see that <span class="math notranslate nohighlight">\(\epsilon=1\)</span> provides the best results.</span><a class="headerlink" href="#fig-bpv-g-many-eps-01" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="fig-ppc-g-many-eps">
@@ -973,12 +801,12 @@ not trustworthy, this is a very simple example and we got the right
 answer out of pure luck. This is an example of <em>a too good to be true
 fit</em>. These are the worst! If we only consider models with posterior
 samples that look reasonable (i.e. not <span class="math notranslate nohighlight">\(\epsilon=0.1\)</span> ), we can see that
-<span class="math notranslate nohighlight">\(\epsilon=1\)</span> provides the best results.</span><a class="headerlink" href="#fig-ppc-g-many-eps" title="Permalink to this image">¶</a></p>
+<span class="math notranslate nohighlight">\(\epsilon=1\)</span> provides the best results.</span><a class="headerlink" href="#fig-ppc-g-many-eps" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="choosing-summary-statistics">
-<span id="id21"></span><h3><span class="section-number">8.4.3. </span>Choosing Summary Statistics<a class="headerlink" href="#choosing-summary-statistics" title="Permalink to this heading">¶</a></h3>
+<span id="id21"></span><h3><span class="section-number">8.4.3. </span>Choosing Summary Statistics<a class="headerlink" href="#choosing-summary-statistics" title="Permalink to this heading">#</a></h3>
 <p>The choice of summary statistics is arguably more difficult and will
 have a larger effect than the choice of the distance function. For that
 reason a lot of research has been focused on the subject from the use of
@@ -1009,7 +837,7 @@ Figures <a class="reference internal" href="#fig-trace-g-eps-too-low"><span clas
 </section>
 </section>
 <section id="g-and-k-distribution">
-<span id="id26"></span><h2><span class="section-number">8.5. </span>g-and-k Distribution<a class="headerlink" href="#g-and-k-distribution" title="Permalink to this heading">¶</a></h2>
+<span id="id26"></span><h2><span class="section-number">8.5. </span>g-and-k Distribution<a class="headerlink" href="#g-and-k-distribution" title="Permalink to this heading">#</a></h2>
 <p>Carbon monoxide (CO) is a colorless, odorless gas that can be harmful,
 even fatal, when inhaled in large amounts. This gas is generated when
 something is burned, especially in situations when oxygen levels are
@@ -1026,7 +854,7 @@ The bottom panel omits 8 observations between 3 and 30.</p>
 <a class="reference internal image-reference" href="../_images/co_ppm_bsas.png"><img alt="../_images/co_ppm_bsas.png" src="../_images/co_ppm_bsas.png" style="width: 8.00in;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 8.9 </span><span class="caption-text">Histogram of CO levels. The top panel shows the entire data and the
-bottom one omits values larger than 3.</span><a class="headerlink" href="#fig-co-ppm-bsas" title="Permalink to this image">¶</a></p>
+bottom one omits values larger than 3.</span><a class="headerlink" href="#fig-co-ppm-bsas" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>To fit this data we are going to introduce the univariate g-and-k
@@ -1036,7 +864,7 @@ density function in unavailable in closed form and the g-and-k
 distribution are defined through its quantile function, i.e. the inverse
 of the cumulative distribution function:</p>
 <div class="math notranslate nohighlight" id="equation-eq-g-and-k">
-<span class="eqno">(8.8)<a class="headerlink" href="#equation-eq-g-and-k" title="Permalink to this equation">¶</a></span>\[a + b \ \left(1 + c \ \text{tanh}\left[\frac{gz(x)}{2}\right]\right) \left(1+z(x)^2\right)^k z(x)\]</div>
+<span class="eqno">(8.8)<a class="headerlink" href="#equation-eq-g-and-k" title="Permalink to this equation">#</a></span>\[a + b \ \left(1 + c \ \text{tanh}\left[\frac{gz(x)}{2}\right]\right) \left(1+z(x)^2\right)^k z(x)\]</div>
 <p>where <span class="math notranslate nohighlight">\(z\)</span> is the inverse of the standard normal cumulative distribution
 function and <span class="math notranslate nohighlight">\(x \in (0,1)\)</span>.</p>
 <p>The parameters <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(b\)</span>, <span class="math notranslate nohighlight">\(g\)</span> and <span class="math notranslate nohighlight">\(k\)</span> are the location, scale, skewness
@@ -1064,7 +892,7 @@ sample <span class="math notranslate nohighlight">\(x \sim \mathcal{U}(0, 1)\)</
 shows how to do this in Python and <a class="reference internal" href="#fig-gk-quantile"><span class="std std-numref">Fig. 8.10</span></a> shows
 examples of g-and-k distributions.</p>
 <div class="literal-block-wrapper docutils container" id="gk-quantile">
-<div class="code-block-caption"><span class="caption-number">Listing 8.4 </span><span class="caption-text">gk_quantile</span><a class="headerlink" href="#gk-quantile" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 8.4 </span><span class="caption-text">gk_quantile</span><a class="headerlink" href="#gk-quantile" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">g_and_k_quantile</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">quantile_normal</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">ppf</span>
@@ -1089,7 +917,7 @@ For example, if you have <span class="math notranslate nohighlight">\(P(X &lt;= 
 function and you get <span class="math notranslate nohighlight">\(x_q\)</span>. The second row shows the (approximated) pdf.
 For this example the pdf has been computed using a kernel density
 estimation from the random samples generated with Code Block
-<a class="reference internal" href="#gk-quantile"><span class="std std-ref">gk_quantile</span></a>.</span><a class="headerlink" href="#fig-gk-quantile" title="Permalink to this image">¶</a></p>
+<a class="reference internal" href="#gk-quantile"><span class="std std-ref">gk_quantile</span></a>.</span><a class="headerlink" href="#fig-gk-quantile" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>To fit a g-and-k distribution using SMC-ABC, we can use the Gaussian
@@ -1100,7 +928,7 @@ with location, scale, skewness and kurtosis respectively. Thus, we can
 think of a summary statistic based on robust estimates for these
 quantities <span id="id32">[<a class="reference internal" href="references.html#id42" title="Christopher C Drovandi and Anthony N Pettitt. Likelihood-free bayesian estimation of multivariate quantile distributions. Computational Statistics &amp; Data Analysis, 55(9):2541–2556, 2011.">103</a>]</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-octiles">
-<span class="eqno">(8.9)<a class="headerlink" href="#equation-eq-octiles" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(8.9)<a class="headerlink" href="#equation-eq-octiles" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{split}
 sa &amp;= e4 \\
 sb &amp;= e6 - e2 \\  
 sg &amp;= (e6 + e2 - 2*e4)/sb \\ 
@@ -1174,31 +1002,31 @@ are (slightly) correlated. This is expected, as the density in the tail
 (kurtosis) increases, the dispersion increases, but the g-and-k
 distribution can keep <span class="math notranslate nohighlight">\(b\)</span> small if <span class="math notranslate nohighlight">\(k\)</span> increases. It is like <span class="math notranslate nohighlight">\(k\)</span> is
 <em>absorbing</em> part of the dispersion, similar to what we observed with the
-scale and the <span class="math notranslate nohighlight">\(\nu\)</span> parameter in a Student’s t-distribution.</span><a class="headerlink" href="#fig-plot-pair" title="Permalink to this image">¶</a></p>
+scale and the <span class="math notranslate nohighlight">\(\nu\)</span> parameter in a Student’s t-distribution.</span><a class="headerlink" href="#fig-plot-pair" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="approximating-moving-averages">
-<span id="abc-ma"></span><h2><span class="section-number">8.6. </span>Approximating Moving Averages<a class="headerlink" href="#approximating-moving-averages" title="Permalink to this heading">¶</a></h2>
+<span id="abc-ma"></span><h2><span class="section-number">8.6. </span>Approximating Moving Averages<a class="headerlink" href="#approximating-moving-averages" title="Permalink to this heading">#</a></h2>
 <p>The moving-average (MA) model is a common approach for modeling
 univariate time series (see Chapter <a class="reference internal" href="chp_06.html#chap4"><span class="std std-ref">6</span></a>). The MA(q) model
 specifies that the output variable depends linearly on the current and
 <span class="math notranslate nohighlight">\(q\)</span> previous past values of a stochastic term <span class="math notranslate nohighlight">\(\lambda\)</span>. <span class="math notranslate nohighlight">\(q\)</span> is known as
 the order of the MA model.</p>
 <div class="math notranslate nohighlight" id="equation-eq-ma-model">
-<span class="eqno">(8.10)<a class="headerlink" href="#equation-eq-ma-model" title="Permalink to this equation">¶</a></span>\[y_t = \mu + \lambda_t + \theta_1 \lambda_{t-1} + \cdots + \theta_q \lambda_{t-q}\]</div>
+<span class="eqno">(8.10)<a class="headerlink" href="#equation-eq-ma-model" title="Permalink to this equation">#</a></span>\[y_t = \mu + \lambda_t + \theta_1 \lambda_{t-1} + \cdots + \theta_q \lambda_{t-q}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\lambda\)</span> are white Gaussian noise error terms <a class="footnote-reference brackets" href="#id63" id="id35" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a>.</p>
 <p>We are going to use a toy-model taken from <span id="id36">Marin <em>et al.</em> [<a class="reference internal" href="references.html#id39" title="Jean-Michel Marin, Pierre Pudlo, Christian P Robert, and Robin J Ryder. Approximate bayesian computational methods. Statistics and Computing, 22(6):1167–1180, 2012.">106</a>]</span>. For
 this example we are going to use the MA(2) model with mean value 0 (i.e.
 <span class="math notranslate nohighlight">\(\mu =0\)</span>), thus our model looks like:</p>
 <div class="math notranslate nohighlight" id="equation-eq-ma2-model">
-<span class="eqno">(8.11)<a class="headerlink" href="#equation-eq-ma2-model" title="Permalink to this equation">¶</a></span>\[y_t = \lambda_t + \theta_1 \lambda_{t-1} +  \theta_2 \lambda_{t-2}\]</div>
+<span class="eqno">(8.11)<a class="headerlink" href="#equation-eq-ma2-model" title="Permalink to this equation">#</a></span>\[y_t = \lambda_t + \theta_1 \lambda_{t-1} +  \theta_2 \lambda_{t-2}\]</div>
 <p>Code Block <a class="reference internal" href="#ma2-simulator-abc"><span class="std std-ref">ma2_simulator_abc</span></a> shows a
 Python simulator for this model and in <a class="reference internal" href="#fig-ma2-simulator-abc"><span class="std std-numref">Fig. 8.12</span></a>
 we can see two realizations from that simulator for the values
 <span class="math notranslate nohighlight">\(\theta1 = 0.6, \theta2=0.2\)</span>.</p>
 <div class="literal-block-wrapper docutils container" id="ma2-simulator-abc">
-<div class="code-block-caption"><span class="caption-number">Listing 8.5 </span><span class="caption-text">ma2_simulator_abc</span><a class="headerlink" href="#ma2-simulator-abc" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 8.5 </span><span class="caption-text">ma2_simulator_abc</span><a class="headerlink" href="#ma2-simulator-abc" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">moving_average_2</span><span class="p">(</span><span class="n">θ1</span><span class="p">,</span> <span class="n">θ2</span><span class="p">,</span> <span class="n">n_obs</span><span class="o">=</span><span class="mi">200</span><span class="p">):</span>
     <span class="n">λ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n_obs</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">λ</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span> <span class="o">+</span> <span class="n">θ1</span><span class="o">*</span><span class="n">λ</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">θ2</span><span class="o">*</span><span class="n">λ</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
@@ -1211,7 +1039,7 @@ we can see two realizations from that simulator for the values
 <figcaption>
 <p><span class="caption-number">Fig. 8.12 </span><span class="caption-text">Two realizations of a MA(2) model, one with <span class="math notranslate nohighlight">\(\theta1=0.6, \theta2 =0.2\)</span>.
 On the left column the kernel density estimation on the right column the
-time series.</span><a class="headerlink" href="#fig-ma2-simulator-abc" title="Permalink to this image">¶</a></p>
+time series.</span><a class="headerlink" href="#fig-ma2-simulator-abc" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>In principle we could try to fit a MA(q) model using any distance
@@ -1236,7 +1064,7 @@ triangle as shown in <a class="reference internal" href="#fig-ma2-triangle"><spa
 restrictions we have that the ABC model is specified as in Code Block
 <a class="reference internal" href="#ma2-abc"><span class="std std-ref">MA2_abc</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="ma2-abc">
-<div class="code-block-caption"><span class="caption-number">Listing 8.6 </span><span class="caption-text">MA2_abc</span><a class="headerlink" href="#ma2-abc" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 8.6 </span><span class="caption-text">MA2_abc</span><a class="headerlink" href="#ma2-abc" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">m_ma2</span><span class="p">:</span>
     <span class="n">θ1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">&quot;θ1&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
     <span class="n">θ2</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">&quot;θ2&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
@@ -1263,7 +1091,7 @@ otherwise.</p>
 <a class="reference internal image-reference" href="../_images/ma2_trace.png"><img alt="../_images/ma2_trace.png" src="../_images/ma2_trace.png" style="width: 8.00in;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 8.13 </span><span class="caption-text">ABC trace plot for the MA(2) model. As expected the true parameters are
-recovered and the rank plots look satisfactorily flat.</span><a class="headerlink" href="#fig-ma2-trace" title="Permalink to this image">¶</a></p>
+recovered and the rank plots look satisfactorily flat.</span><a class="headerlink" href="#fig-ma2-trace" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="fig-ma2-triangle">
@@ -1273,12 +1101,12 @@ recovered and the rank plots look satisfactorily flat.</span><a class="headerlin
 <a class="reference internal" href="#ma2-abc"><span class="std std-ref">MA2_abc</span></a>. In the center subplot the joint
 posterior and in the margins the marginal distributions for <span class="math notranslate nohighlight">\(\theta1\)</span>
 and <span class="math notranslate nohighlight">\(\theta2\)</span>. The gray triangle represents the prior distribution. The
-mean is indicated with a black dot.</span><a class="headerlink" href="#fig-ma2-triangle" title="Permalink to this image">¶</a></p>
+mean is indicated with a black dot.</span><a class="headerlink" href="#fig-ma2-triangle" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="model-comparison-in-the-abc-context">
-<span id="id37"></span><h2><span class="section-number">8.7. </span>Model Comparison in the ABC Context<a class="headerlink" href="#model-comparison-in-the-abc-context" title="Permalink to this heading">¶</a></h2>
+<span id="id37"></span><h2><span class="section-number">8.7. </span>Model Comparison in the ABC Context<a class="headerlink" href="#model-comparison-in-the-abc-context" title="Permalink to this heading">#</a></h2>
 <p>ABC methods are frequently used for model choice. While many methods
 have been proposed <span id="id38">[<a class="reference internal" href="references.html#id50" title="S.A. Sisson, Y. Fan, and M. Beaumont. Handbook of Approximate Bayesian Computation. Chapman &amp; Hall/CRC Handbooks of Modern Statistical Methods. CRC Press, 2018. ISBN 9781439881514.">96</a>, <a class="reference internal" href="references.html#id52" title="Mark A. Beaumont. Approximate bayesian computation. Annual review of statistics and its application, 6:379–403, 2019.">107</a>]</span>, here we will discuss
 two approaches; Bayes factors, including a comparison with LOO, and
@@ -1292,7 +1120,7 @@ the summary statistic, but models predict the same mean, then this
 summary statistic will not be sufficient to discriminate between models.
 We should take more time to think about what makes models different.</p>
 <section id="marginal-likelihood-and-loo">
-<span id="id40"></span><h3><span class="section-number">8.7.1. </span>Marginal Likelihood and LOO<a class="headerlink" href="#marginal-likelihood-and-loo" title="Permalink to this heading">¶</a></h3>
+<span id="id40"></span><h3><span class="section-number">8.7.1. </span>Marginal Likelihood and LOO<a class="headerlink" href="#marginal-likelihood-and-loo" title="Permalink to this heading">#</a></h3>
 <p>One common quantity used to perform model comparison for ABC methods is
 the marginal likelihood. Generally such comparison takes the form of a
 ratio of marginal likelihoods, which is known as Bayes factors. If the
@@ -1367,7 +1195,7 @@ the second row to values computed using LOO. Sequential Monte Carlo
 <code class="docutils literal notranslate"><span class="pre">SMC</span></code>, SMC-ABC with the entire dataset <code class="docutils literal notranslate"><span class="pre">SMC-ABC</span></code>, SMC-ABC using the mean
 as summary statistic <code class="docutils literal notranslate"><span class="pre">SMC-ABC_sm</span></code> and finally SMC-ABC using the mean and
 standard deviation <code class="docutils literal notranslate"><span class="pre">SMC-ABC_sq</span></code>. We run 50 experiments each one with
-sample size 50.</span><a class="headerlink" href="#fig-model-comp-normal-0" title="Permalink to this image">¶</a></p>
+sample size 50.</span><a class="headerlink" href="#fig-model-comp-normal-0" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The second column shows what happens when we move into the ABC realm. We
@@ -1430,7 +1258,7 @@ second the values of LOO. The column represents different methods of
 computing these values. Sequential Monte Carlo <code class="docutils literal notranslate"><span class="pre">SMC</span></code>, SMC-ABC with the
 entire dataset <code class="docutils literal notranslate"><span class="pre">SMC-ABC</span></code>, SMC-ABC using the mean as summary statistic
 <code class="docutils literal notranslate"><span class="pre">SMC-ABC_sm</span></code> and finally SMC-ABC using the mean and standard deviation
-<code class="docutils literal notranslate"><span class="pre">SMC-ABC_sq</span></code>. We run 50 experiments each one with sample size 50.</span><a class="headerlink" href="#fig-model-comp-normal-forest" title="Permalink to this image">¶</a></p>
+<code class="docutils literal notranslate"><span class="pre">SMC-ABC_sq</span></code>. We run 50 experiments each one with sample size 50.</span><a class="headerlink" href="#fig-model-comp-normal-forest" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Figures <a class="reference internal" href="#fig-model-comp-pois-geom-0"><span class="std std-numref">Fig. 8.17</span></a> and
@@ -1449,7 +1277,7 @@ distribution <span class="math notranslate nohighlight">\(\mu \sim 1 + \text{Poi
 <code class="docutils literal notranslate"><span class="pre">SMC</span></code>, SMC-ABC with the entire dataset <code class="docutils literal notranslate"><span class="pre">SMC-ABC</span></code>, SMC-ABC using the mean
 as summary statistic <code class="docutils literal notranslate"><span class="pre">SMC-ABC_sm</span></code> and finally SMC-ABC using the mean and
 standard deviation <code class="docutils literal notranslate"><span class="pre">SMC-ABC_sq</span></code>.We run 50 experiments each one with
-sample size 50.</span><a class="headerlink" href="#fig-model-comp-pois-geom-0" title="Permalink to this image">¶</a></p>
+sample size 50.</span><a class="headerlink" href="#fig-model-comp-pois-geom-0" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="fig-model-comp-pois-geom-forest">
@@ -1463,7 +1291,7 @@ represents different methods of computing these values. Sequential Monte
 Carlo <code class="docutils literal notranslate"><span class="pre">SMC</span></code>, SMC-ABC with the entire dataset <code class="docutils literal notranslate"><span class="pre">SMC-ABC</span></code>, SMC-ABC using
 the mean as summary statistic <code class="docutils literal notranslate"><span class="pre">SMC-ABC_sq</span></code> and finally SMC-ABC using
 quartiles <code class="docutils literal notranslate"><span class="pre">SMC-ABC_sq</span></code>. We run 50 experiments each one with sample size
-50.</span><a class="headerlink" href="#fig-model-comp-pois-geom-forest" title="Permalink to this image">¶</a></p>
+50.</span><a class="headerlink" href="#fig-model-comp-pois-geom-forest" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>In the ABC literature it is common to use Bayes factors in an attempt to
@@ -1490,7 +1318,7 @@ are clearly a bad fit.</p>
 </div>
 </section>
 <section id="model-choice-via-random-forest">
-<span id="id44"></span><h3><span class="section-number">8.7.2. </span>Model Choice via Random Forest<a class="headerlink" href="#model-choice-via-random-forest" title="Permalink to this heading">¶</a></h3>
+<span id="id44"></span><h3><span class="section-number">8.7.2. </span>Model Choice via Random Forest<a class="headerlink" href="#model-choice-via-random-forest" title="Permalink to this heading">#</a></h3>
 <p>The caveats we discussed in the previous section has motivated the
 research of new methods for model choice under the ABC framework. One
 such alternative method reframes the model selection problem as random
@@ -1517,7 +1345,7 @@ same <span class="math notranslate nohighlight">\(n\)</span> summary statistics 
 time applied to our observed data. The predicted model by the classifier
 will be our best model.</p>
 <table class="table" id="table-abc-random-forest-ref-table">
-<caption><span class="caption-number">Table 8.1 </span><span class="caption-text">Reference table</span><a class="headerlink" href="#table-abc-random-forest-ref-table" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-number">Table 8.1 </span><span class="caption-text">Reference table</span><a class="headerlink" href="#table-abc-random-forest-ref-table" title="Permalink to this table">#</a></caption>
 <tbody>
 <tr class="row-odd"><td><p><strong>Model</strong></p></td>
 <td><p><span class="math notranslate nohighlight">\(\mathbf{S^{0}}\)</span></p></td>
@@ -1571,13 +1399,13 @@ and the summary statistics in the reference table as independent
 variables <span id="id47">[<a class="reference internal" href="references.html#id51" title="Pierre Pudlo, Jean-Michel Marin, Arnaud Estoup, Jean-Marie Cornuet, Mathieu Gautier, and Christian P Robert. Reliable abc model choice via random forests. Bioinformatics, 32(6):859–866, 2016.">99</a>]</span>.</p>
 </section>
 <section id="model-choice-for-ma-model">
-<span id="id48"></span><h3><span class="section-number">8.7.3. </span>Model Choice for MA Model<a class="headerlink" href="#model-choice-for-ma-model" title="Permalink to this heading">¶</a></h3>
+<span id="id48"></span><h3><span class="section-number">8.7.3. </span>Model Choice for MA Model<a class="headerlink" href="#model-choice-for-ma-model" title="Permalink to this heading">#</a></h3>
 <p>Let us go back to the moving average example, this time we will focus on
 the following question. Is a MA(1) or MA(2) a better choice? To answer
 this question we will use LOO (based on the pointwise pseudo-likelihood
 values) and random forest. The MA(1) models looks like this</p>
 <div class="literal-block-wrapper docutils container" id="ma1-abc">
-<div class="code-block-caption"><span class="caption-number">Listing 8.7 </span><span class="caption-text">MA1_abc</span><a class="headerlink" href="#ma1-abc" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 8.7 </span><span class="caption-text">MA1_abc</span><a class="headerlink" href="#ma1-abc" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">m_ma1</span><span class="p">:</span>
     <span class="n">θ1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">&quot;θ1&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Simulator</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">moving_average_1</span><span class="p">,</span>
@@ -1593,7 +1421,7 @@ object with a <code class="docutils literal notranslate"><span class="pre">log_l
 comparison is summarized in <a class="reference internal" href="#table-abc-loo"><span class="std std-numref">Table 8.2</span></a>. As
 expected, we can see that the MA(2) model is preferred.</p>
 <div class="literal-block-wrapper docutils container" id="idata-pseudo">
-<div class="code-block-caption"><span class="caption-number">Listing 8.8 </span><span class="caption-text">idata_pseudo</span><a class="headerlink" href="#idata-pseudo" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 8.8 </span><span class="caption-text">idata_pseudo</span><a class="headerlink" href="#idata-pseudo" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">idata_ma1</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">from_pymc3</span><span class="p">(</span><span class="n">trace_ma1</span><span class="p">)</span>
 <span class="n">lpll</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;s&quot;</span><span class="p">:</span> <span class="n">trace_ma2</span><span class="o">.</span><span class="n">report</span><span class="o">.</span><span class="n">log_pseudolikelihood</span><span class="p">}</span>
 <span class="n">idata_ma1</span><span class="o">.</span><span class="n">log_likelihood</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">dict_to_dataset</span><span class="p">(</span><span class="n">lpll</span><span class="p">)</span>
@@ -1607,7 +1435,7 @@ expected, we can see that the MA(2) model is preferred.</p>
 </div>
 </div>
 <table class="table" id="table-abc-loo">
-<caption><span class="caption-number">Table 8.2 </span><span class="caption-text">Summary ABC-model comparison using LOO</span><a class="headerlink" href="#table-abc-loo" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-number">Table 8.2 </span><span class="caption-text">Summary ABC-model comparison using LOO</span><a class="headerlink" href="#table-abc-loo" title="Permalink to this table">#</a></caption>
 <tbody>
 <tr class="row-odd"><td></td>
 <td><p><strong>rank</strong></p></td>
@@ -1672,7 +1500,7 @@ agree on model choice and even their relative weight.</p>
 </section>
 </section>
 <section id="choosing-priors-for-abc">
-<span id="id51"></span><h2><span class="section-number">8.8. </span>Choosing Priors for ABC<a class="headerlink" href="#choosing-priors-for-abc" title="Permalink to this heading">¶</a></h2>
+<span id="id51"></span><h2><span class="section-number">8.8. </span>Choosing Priors for ABC<a class="headerlink" href="#choosing-priors-for-abc" title="Permalink to this heading">#</a></h2>
 <p>Not having a closed form likelihood makes it more difficult to get good
 models and thus ABC methods are in general more brittle than other
 approximations. Consequently we should be extra careful about modeling
@@ -1704,7 +1532,7 @@ elicitation/evaluation, we do not have further recommendation specific
 for ABC methods.</p>
 </section>
 <section id="exercises">
-<span id="exercises8"></span><h2><span class="section-number">8.9. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">¶</a></h2>
+<span id="exercises8"></span><h2><span class="section-number">8.9. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <p><strong>8E1.</strong> In your words explain how ABC is approximate? What
 object or quantity is approximated and how.</p>
 <p><strong>8E2.</strong> In the context of ABC, what is the problem that SMC
@@ -1722,7 +1550,7 @@ Code Block <a class="reference internal" href="#gauss-abc"><span class="std std-
 <p><strong>8E5.</strong> Refit the <code class="docutils literal notranslate"><span class="pre">gauss</span></code> model from Code Block
 <a class="reference internal" href="#gauss-abc"><span class="std std-ref">gauss_abc</span></a> using <code class="docutils literal notranslate"><span class="pre">sum_stat=&quot;identity&quot;</span></code>.
 Evaluate the results using:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Trace Plot</p></li>
 <li><p>Rank Plot</p></li>
 <li><p><span class="math notranslate nohighlight">\(\hat R\)</span></p></li>
@@ -1733,7 +1561,7 @@ Evaluate the results using:</p>
 <p><strong>8E6.</strong> Refit the <code class="docutils literal notranslate"><span class="pre">gauss</span></code> model from Code Block
 <a class="reference internal" href="#gauss-abc"><span class="std std-ref">gauss_abc</span></a> using quintiles as summary
 statistics.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>How the results compare with the example in the book?</p></li>
 <li><p>Try other values for <code class="docutils literal notranslate"><span class="pre">epsilon</span></code>. Is 1 a good choice?</p></li>
 </ol>
@@ -1859,7 +1687,7 @@ InferenceData object with the proper groups.</p>
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./markdown"
         },
         predefinedOutput: true
@@ -1867,44 +1695,120 @@ InferenceData object with the proper groups.</p>
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="chp_07.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">7. </span>Bayesian Additive Regression Trees</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chp_07.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Bayesian Additive Regression Trees</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="chp_09.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="chp_09.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title"><span class="section-number">9. </span>End to End Bayesian Workflows</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
+                </footer>
+              
+            </div>
             
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Martin, Kumar, Lao<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#life-beyond-likelihood">8.1. Life Beyond Likelihood</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approximating-the-approximated-posterior">8.2. Approximating the Approximated Posterior</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-a-gaussian-the-abc-way">8.3. Fitting a Gaussian the ABC-way</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-distance-function-epsilon-and-the-summary-statistics">8.4. Choosing the Distance Function, <span class="math notranslate nohighlight">\(\epsilon\)</span> and the Summary Statistics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-distance">8.4.1. Choosing the Distance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-epsilon">8.4.2. Choosing <span class="math notranslate nohighlight">\(\epsilon\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-summary-statistics">8.4.3. Choosing Summary Statistics</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#g-and-k-distribution">8.5. g-and-k Distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approximating-moving-averages">8.6. Approximating Moving Averages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-comparison-in-the-abc-context">8.7. Model Comparison in the ABC Context</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#marginal-likelihood-and-loo">8.7.1. Marginal Likelihood and LOO</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-choice-via-random-forest">8.7.2. Model Choice via Random Forest</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-choice-for-ma-model">8.7.3. Model Choice for MA Model</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-priors-for-abc">8.8. Choosing Priors for ABC</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">8.9. Exercises</a></li>
+</ul>
+  </nav></div>
 
-      </div>
-    </div>
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Martin, Kumar, Lao
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

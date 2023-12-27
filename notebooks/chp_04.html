@@ -1,39 +1,47 @@
 
+
 <!DOCTYPE html>
 
-<html lang="en">
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Code 4: Extending Linear Models &#8212; Bayesian Modeling and Computation in Python</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-codeautolink.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -42,880 +50,375 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/chp_04';</script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Code 5: Splines" href="chp_05.html" />
     <link rel="prev" title="Code 3: Linear Models and Probabilistic Programming Languages" href="chp_03.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en">
-    
-
-    <!-- Google Analytics -->
-    
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-702QMHG8ST"></script>
-<script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){ dataLayer.push(arguments); }
-                    gtag('js', new Date());
-                    gtag('config', 'G-702QMHG8ST');
-                </script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-      
-      
-      <h1 class="site-logo" id="site-title">Bayesian Modeling and Computation in Python</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 0
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/dedication.html">
-   Dedication
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/foreword.html">
-   Foreword
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/preface.html">
-   Preface
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/symbollist.html">
-   Symbols
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 1
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_01.html">
-   1. Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_02.html">
-   2. Exploratory Analysis of Bayesian Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_03.html">
-   3. Linear Models and Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_04.html">
-   4. Extending Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_05.html">
-   5. Splines
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_06.html">
-   6. Time Series
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_07.html">
-   7. Bayesian Additive Regression Trees
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_08.html">
-   8. Approximate Bayesian Computation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_09.html">
-   9. End to End Bayesian Workflows
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_10.html">
-   10. Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_11.html">
-   11. Appendiceal Topics
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/glossary.html">
-   12. Glossary
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/references.html">
-   13. References
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 2
- </span>
-</p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_01.html">
-   Code 1: Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_02.html">
-   Code 2: Exploratory Analysis of Bayesian Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_03.html">
-   Code 3: Linear Models and Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Code 4: Extending Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_05.html">
-   Code 5: Splines
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_06.html">
-   Code 6: Time Series
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_07.html">
-   Code 7: Bayesian Additive Regression Trees
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_08.html">
-   Code 8: Approximate Bayesian Computation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_09.html">
-   Code 9: End to End Bayesian Workflows
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_10.html">
-   Code 10: Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_11.html">
-   Code 11: Appendiceal Topics
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 3
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../solutions/chp_01.html">
-   Solutions 1: Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../solutions/chp_02.html">
-   Solutions 2: Exploratory Analysis of Bayesian models
-  </a>
- </li>
-</ul>
-
-    </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fnotebooks/chp_04.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+      <div class="bd-sidebar-primary bd-sidebar">
         
-    </div>
-</div>
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
+  
 
-            <!-- Launch buttons -->
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#transforming-covariates">
-   Transforming Covariates
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-4-1">
-     Code 4.1
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-1">
-     Figure 4.1
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-4-2">
-     Code 4.2
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-2">
-     Figure 4.2
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-4-3">
-     Code 4.3
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-3">
-     Figure 4.3
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#varying-uncertainty">
-   Varying Uncertainty
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-4-4">
-     Code 4.4
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-4">
-     Figure 4.4
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#interaction-effects">
-   Interaction effects
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-4-5">
-     Code 4.5
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-4-6">
-     Code 4.6
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-5">
-     Figure 4.5
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#robust-regression">
-   Robust Regression
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-6">
-     Figure 4.6
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-7">
-     Figure 4.7
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-4-7">
-     Code 4.7
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-8">
-     Figure 4.8
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#table-4-1">
-     Table 4.1
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#table-4-2">
-     Table 4.2
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-9">
-     Figure 4.9
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#pooling-multilevel-models-and-mixed-effects">
-   Pooling, Multilevel Models, and Mixed Effects
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-10">
-     Figure 4.10
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#unpooled-model">
-     Unpooled Model
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-4-9">
-     Code 4.9
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-12">
-     Figure 4.12
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-13">
-     Figure 4.13
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-14">
-     Figure 4.14
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#pooled-model">
-     Pooled Model
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-4-10">
-     Code 4.10
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-16">
-     Figure 4.16
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-17">
-     Figure 4.17
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-18">
-     Figure 4.18
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-4-11">
-     Code 4.11
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-20">
-     Figure 4.20
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-21">
-     Figure 4.21
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#hierarchical">
-     Hierarchical
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-4-12">
-     Code 4.12
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-23">
-     Figure 4.23
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#table-4-3">
-     Table 4.3
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#table-4-4">
-     Table 4.4
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-25">
-     Figure 4.25
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-26">
-     Figure 4.26
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-4-13">
-     Code 4.13
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-4-14-and-4-15">
-     Code 4.14 and 4.15
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-27">
-     Figure 4.27
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-4-16">
-     Code 4.16
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-28">
-     Figure  4.28
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-29">
-     Figure 4.29
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-4-17">
-     Code 4.17
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-4-18">
-     Code 4.18
-    </a>
-   </li>
-  </ul>
- </li>
+<a class="navbar-brand logo" href="../welcome.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Bayesian Modeling and Computation in Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 0</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown/dedication.html">Dedication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/foreword.html">Foreword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/preface.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/symbollist.html">Symbols</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 1</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_01.html">1. Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_02.html">2. Exploratory Analysis of Bayesian Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_03.html">3. Linear Models and Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_04.html">4. Extending Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_05.html">5. Splines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_06.html">6. Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_07.html">7. Bayesian Additive Regression Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_08.html">8. Approximate Bayesian Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_09.html">9. End to End Bayesian Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_10.html">10. Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_11.html">11. Appendiceal Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/glossary.html">12. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/references.html">13. References</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 2</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chp_01.html">Code 1: Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_02.html">Code 2: Exploratory Analysis of Bayesian Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_03.html">Code 3: Linear Models and Probabilistic Programming Languages</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Code 4: Extending Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_05.html">Code 5: Splines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_06.html">Code 6: Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_07.html">Code 7: Bayesian Additive Regression Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_08.html">Code 8: Approximate Bayesian Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_09.html">Code 9: End to End Bayesian Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_10.html">Code 10: Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_11.html">Code 11: Appendiceal Topics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../solutions/chp_01.html">Solutions 1: Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/chp_02.html">Solutions 2: Exploratory Analysis of Bayesian models</a></li>
 </ul>
 
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fnotebooks/chp_04.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Code 4: Extending Linear Models</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transforming-covariates">Transforming Covariates</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-4-1">Code 4.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-1">Figure 4.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-4-2">Code 4.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-2">Figure 4.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-4-3">Code 4.3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-3">Figure 4.3</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#varying-uncertainty">Varying Uncertainty</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-4-4">Code 4.4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-4">Figure 4.4</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interaction-effects">Interaction effects</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-4-5">Code 4.5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-4-6">Code 4.6</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-5">Figure 4.5</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robust-regression">Robust Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-6">Figure 4.6</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-7">Figure 4.7</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-4-7">Code 4.7</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-8">Figure 4.8</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-4-1">Table 4.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-4-2">Table 4.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-9">Figure 4.9</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pooling-multilevel-models-and-mixed-effects">Pooling, Multilevel Models, and Mixed Effects</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-10">Figure 4.10</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unpooled-model">Unpooled Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-4-9">Code 4.9</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-12">Figure 4.12</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-13">Figure 4.13</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-14">Figure 4.14</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pooled-model">Pooled Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-4-10">Code 4.10</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-16">Figure 4.16</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-17">Figure 4.17</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-18">Figure 4.18</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-4-11">Code 4.11</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-20">Figure 4.20</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-21">Figure 4.21</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hierarchical">Hierarchical</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-4-12">Code 4.12</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-23">Figure 4.23</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-4-3">Table 4.3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-4-4">Table 4.4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-25">Figure 4.25</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-26">Figure 4.26</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-4-13">Code 4.13</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-4-14-and-4-15">Code 4.14 and 4.15</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-27">Figure 4.27</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-4-16">Code 4.16</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-28">Figure  4.28</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-29">Figure 4.29</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-4-17">Code 4.17</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-4-18">Code 4.18</a></li>
+</ul>
+</li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Code 4: Extending Linear Models</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#transforming-covariates">
-   Transforming Covariates
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-4-1">
-     Code 4.1
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-1">
-     Figure 4.1
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-4-2">
-     Code 4.2
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-2">
-     Figure 4.2
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-4-3">
-     Code 4.3
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-3">
-     Figure 4.3
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#varying-uncertainty">
-   Varying Uncertainty
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-4-4">
-     Code 4.4
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-4">
-     Figure 4.4
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#interaction-effects">
-   Interaction effects
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-4-5">
-     Code 4.5
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-4-6">
-     Code 4.6
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-5">
-     Figure 4.5
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#robust-regression">
-   Robust Regression
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-6">
-     Figure 4.6
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-7">
-     Figure 4.7
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-4-7">
-     Code 4.7
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-8">
-     Figure 4.8
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#table-4-1">
-     Table 4.1
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#table-4-2">
-     Table 4.2
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-9">
-     Figure 4.9
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#pooling-multilevel-models-and-mixed-effects">
-   Pooling, Multilevel Models, and Mixed Effects
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-10">
-     Figure 4.10
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#unpooled-model">
-     Unpooled Model
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-4-9">
-     Code 4.9
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-12">
-     Figure 4.12
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-13">
-     Figure 4.13
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-14">
-     Figure 4.14
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#pooled-model">
-     Pooled Model
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-4-10">
-     Code 4.10
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-16">
-     Figure 4.16
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-17">
-     Figure 4.17
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-18">
-     Figure 4.18
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-4-11">
-     Code 4.11
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-20">
-     Figure 4.20
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-21">
-     Figure 4.21
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#hierarchical">
-     Hierarchical
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-4-12">
-     Code 4.12
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-23">
-     Figure 4.23
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#table-4-3">
-     Table 4.3
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#table-4-4">
-     Table 4.4
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-25">
-     Figure 4.25
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-26">
-     Figure 4.26
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-4-13">
-     Code 4.13
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-4-14-and-4-15">
-     Code 4.14 and 4.15
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-27">
-     Figure 4.27
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-4-16">
-     Code 4.16
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-28">
-     Figure  4.28
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figure-4-29">
-     Figure 4.29
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-4-17">
-     Code 4.17
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-4-18">
-     Code 4.18
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="code-4-extending-linear-models">
-<h1>Code 4: Extending Linear Models<a class="headerlink" href="#code-4-extending-linear-models" title="Permalink to this heading">¶</a></h1>
+<h1>Code 4: Extending Linear Models<a class="headerlink" href="#code-4-extending-linear-models" title="Permalink to this heading">#</a></h1>
 <div class="tip dropdown admonition">
 <p class="admonition-title">This is a reference notebook for the book Bayesian Modeling and Computation in Python</p>
 <p>The textbook is not needed to use or run this code, though the context and explanation is missing from this notebook.</p>
@@ -956,9 +459,9 @@ or from <a class="reference external" href="https://www.routledge.com/Bayesian-M
 </div>
 </div>
 <section id="transforming-covariates">
-<h2>Transforming Covariates<a class="headerlink" href="#transforming-covariates" title="Permalink to this heading">¶</a></h2>
+<h2>Transforming Covariates<a class="headerlink" href="#transforming-covariates" title="Permalink to this heading">#</a></h2>
 <section id="code-4-1">
-<h3>Code 4.1<a class="headerlink" href="#code-4-1" title="Permalink to this heading">¶</a></h3>
+<h3>Code 4.1<a class="headerlink" href="#code-4-1" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">babies</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/babies.csv&#39;</span><span class="p">)</span>
@@ -1031,7 +534,7 @@ or from <a class="reference external" href="https://www.routledge.com/Bayesian-M
 </div>
 </section>
 <section id="figure-4-1">
-<h3>Figure 4.1<a class="headerlink" href="#figure-4-1" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 4.1<a class="headerlink" href="#figure-4-1" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
@@ -1044,12 +547,12 @@ or from <a class="reference external" href="https://www.routledge.com/Bayesian-M
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_04_8_0.png" src="../_images/chp_04_8_0.png" />
+<img alt="../_images/e1457a310fb2286e4a0e3b13e62b5bb5c8f0627bae35c3a4cebe45753e539972.png" src="../_images/e1457a310fb2286e4a0e3b13e62b5bb5c8f0627bae35c3a4cebe45753e539972.png" />
 </div>
 </div>
 </section>
 <section id="code-4-2">
-<h3>Code 4.2<a class="headerlink" href="#code-4-2" title="Permalink to this heading">¶</a></h3>
+<h3>Code 4.2<a class="headerlink" href="#code-4-2" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_baby_linear</span><span class="p">:</span>
@@ -1078,49 +581,49 @@ NUTS: [ϵ, β]
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='24000' class='' max='24000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [24000/24000 00:08<00:00 Sampling 4 chains, 0 divergences]
-</div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 4_000 tune and 2_000 draw iterations (16_000 + 8_000 draws total) took 18 seconds.
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='24000' class='' max='24000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [24000/24000 00:08<00:00 Sampling 4 chains, 0 divergences]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 4_000 tune and 2_000 draw iterations (16_000 + 8_000 draws total) took 18 seconds.
 The acceptance probability does not match the target. It is 0.5738214538580835, but should be close to 0.8. Try to increase the number of tuning steps.
 The acceptance probability does not match the target. It is 0.8837497551468421, but should be close to 0.8. Try to increase the number of tuning steps.
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [8000/8000 00:06<00:00]
-</div>
-</div></div>
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [8000/8000 00:06<00:00]
+    </div>
+    </div></div>
 </div>
 </section>
 <section id="figure-4-2">
-<h3>Figure 4.2<a class="headerlink" href="#figure-4-2" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 4.2<a class="headerlink" href="#figure-4-2" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
@@ -1141,7 +644,7 @@ The acceptance probability does not match the target. It is 0.8837497551468421, 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_04_12_0.png" src="../_images/chp_04_12_0.png" />
+<img alt="../_images/5f9faf04dea74a256155450ed9b726f6974439ae77621b0c7b846168bc23242c.png" src="../_images/5f9faf04dea74a256155450ed9b726f6974439ae77621b0c7b846168bc23242c.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1162,7 +665,7 @@ p_loo        3.23        -
 </div>
 </section>
 <section id="code-4-3">
-<h3>Code 4.3<a class="headerlink" href="#code-4-3" title="Permalink to this heading">¶</a></h3>
+<h3>Code 4.3<a class="headerlink" href="#code-4-3" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_baby_sqrt</span><span class="p">:</span>
@@ -1190,43 +693,43 @@ NUTS: [σ, β]
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='24000' class='' max='24000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [24000/24000 00:10<00:00 Sampling 4 chains, 0 divergences]
-</div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 4_000 tune and 2_000 draw iterations (16_000 + 8_000 draws total) took 19 seconds.
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='24000' class='' max='24000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [24000/24000 00:10<00:00 Sampling 4 chains, 0 divergences]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 4_000 tune and 2_000 draw iterations (16_000 + 8_000 draws total) took 19 seconds.
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [8000/8000 00:06<00:00]
-</div>
-</div></div>
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [8000/8000 00:06<00:00]
+    </div>
+    </div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1249,12 +752,12 @@ NUTS: [σ, β]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_04_16_0.png" src="../_images/chp_04_16_0.png" />
+<img alt="../_images/06b95f40cd4148511e7bd6931a46efe83f339e56ded5bd4b896c23bbb821b6d0.png" src="../_images/06b95f40cd4148511e7bd6931a46efe83f339e56ded5bd4b896c23bbb821b6d0.png" />
 </div>
 </div>
 </section>
 <section id="figure-4-3">
-<h3>Figure 4.3<a class="headerlink" href="#figure-4-3" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 4.3<a class="headerlink" href="#figure-4-3" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
@@ -1284,7 +787,7 @@ NUTS: [σ, β]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_04_18_0.png" src="../_images/chp_04_18_0.png" />
+<img alt="../_images/3bf323a35470d502a0a28682005680643c12bd25cdb5f4a0169dc545953afb31.png" src="../_images/3bf323a35470d502a0a28682005680643c12bd25cdb5f4a0169dc545953afb31.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1359,9 +862,9 @@ NUTS: [σ, β]
 </section>
 </section>
 <section id="varying-uncertainty">
-<h2>Varying Uncertainty<a class="headerlink" href="#varying-uncertainty" title="Permalink to this heading">¶</a></h2>
+<h2>Varying Uncertainty<a class="headerlink" href="#varying-uncertainty" title="Permalink to this heading">#</a></h2>
 <section id="code-4-4">
-<h3>Code 4.4<a class="headerlink" href="#code-4-4" title="Permalink to this heading">¶</a></h3>
+<h3>Code 4.4<a class="headerlink" href="#code-4-4" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_baby_vv</span><span class="p">:</span>
@@ -1393,43 +896,43 @@ NUTS: [δ, β]
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='12000' class='' max='12000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [12000/12000 00:09<00:00 Sampling 4 chains, 0 divergences]
-</div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 2_000 draw iterations (4_000 + 8_000 draws total) took 19 seconds.
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='12000' class='' max='12000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [12000/12000 00:09<00:00 Sampling 4 chains, 0 divergences]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 2_000 draw iterations (4_000 + 8_000 draws total) took 19 seconds.
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [8000/8000 00:08<00:00]
-</div>
-</div></div>
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [8000/8000 00:08<00:00]
+    </div>
+    </div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1517,12 +1020,12 @@ NUTS: [δ, β]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_04_24_0.png" src="../_images/chp_04_24_0.png" />
+<img alt="../_images/01874093ba1a8781efdf3f5cd41b7b2b6ba315f536a1bf26ef2118a629726a47.png" src="../_images/01874093ba1a8781efdf3f5cd41b7b2b6ba315f536a1bf26ef2118a629726a47.png" />
 </div>
 </div>
 </section>
 <section id="figure-4-4">
-<h3>Figure 4.4<a class="headerlink" href="#figure-4-4" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 4.4<a class="headerlink" href="#figure-4-4" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
@@ -1552,15 +1055,15 @@ NUTS: [δ, β]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_04_26_0.png" src="../_images/chp_04_26_0.png" />
+<img alt="../_images/e9722b4a4e660679c803b7c3d56471105af0cab0d0698be9f3d786adeba678e1.png" src="../_images/e9722b4a4e660679c803b7c3d56471105af0cab0d0698be9f3d786adeba678e1.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="interaction-effects">
-<h2>Interaction effects<a class="headerlink" href="#interaction-effects" title="Permalink to this heading">¶</a></h2>
+<h2>Interaction effects<a class="headerlink" href="#interaction-effects" title="Permalink to this heading">#</a></h2>
 <section id="code-4-5">
-<h3>Code 4.5<a class="headerlink" href="#code-4-5" title="Permalink to this heading">¶</a></h3>
+<h3>Code 4.5<a class="headerlink" href="#code-4-5" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tips_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/tips.csv&#39;</span><span class="p">)</span>
@@ -1680,23 +1183,23 @@ NUTS: [σ, β]
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [8000/8000 00:03<00:00 Sampling 4 chains, 0 divergences]
-</div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 13 seconds.
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [8000/8000 00:03<00:00 Sampling 4 chains, 0 divergences]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 13 seconds.
 </pre></div>
 </div>
 </div>
@@ -1730,12 +1233,12 @@ NUTS: [σ, β]
   pred_y_smokers = β0_nonint + β1_nonint * total_bill_c[:,None] + β2_nonint
 </pre></div>
 </div>
-<img alt="../_images/chp_04_31_1.png" src="../_images/chp_04_31_1.png" />
+<img alt="../_images/17e5163bbbe08d1c9773c196b80d11a0d248a2f955beca9e50144b728b2a0256.png" src="../_images/17e5163bbbe08d1c9773c196b80d11a0d248a2f955beca9e50144b728b2a0256.png" />
 </div>
 </div>
 </section>
 <section id="code-4-6">
-<h3>Code 4.6<a class="headerlink" href="#code-4-6" title="Permalink to this heading">¶</a></h3>
+<h3>Code 4.6<a class="headerlink" href="#code-4-6" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_interaction</span><span class="p">:</span>
@@ -1763,30 +1266,30 @@ NUTS: [σ, β]
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [8000/8000 00:04<00:00 Sampling 4 chains, 0 divergences]
-</div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 13 seconds.
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [8000/8000 00:04<00:00 Sampling 4 chains, 0 divergences]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 13 seconds.
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="figure-4-5">
-<h3>Figure 4.5<a class="headerlink" href="#figure-4-5" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 4.5<a class="headerlink" href="#figure-4-5" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total_bill_c</span> <span class="o">=</span> <span class="n">total_bill_c</span><span class="o">.</span><span class="n">values</span>
@@ -1860,15 +1363,15 @@ NUTS: [σ, β]
   warnings.warn(
 </pre></div>
 </div>
-<img alt="../_images/chp_04_35_1.png" src="../_images/chp_04_35_1.png" />
+<img alt="../_images/eabd52505ca5cf79c32689961c628fb140d4ed89c9eaf11d6031145d6a5f7a94.png" src="../_images/eabd52505ca5cf79c32689961c628fb140d4ed89c9eaf11d6031145d6a5f7a94.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="robust-regression">
-<h2>Robust Regression<a class="headerlink" href="#robust-regression" title="Permalink to this heading">¶</a></h2>
+<h2>Robust Regression<a class="headerlink" href="#robust-regression" title="Permalink to this heading">#</a></h2>
 <section id="figure-4-6">
-<h3>Figure 4.6<a class="headerlink" href="#figure-4-6" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 4.6<a class="headerlink" href="#figure-4-6" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean</span> <span class="o">=</span> <span class="mi">5</span>
@@ -1890,12 +1393,12 @@ NUTS: [σ, β]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_04_38_0.png" src="../_images/chp_04_38_0.png" />
+<img alt="../_images/248e8d6fadddf823df8a764495b525362fa762411345c41ea9897cafaf4aafa7.png" src="../_images/248e8d6fadddf823df8a764495b525362fa762411345c41ea9897cafaf4aafa7.png" />
 </div>
 </div>
 </section>
 <section id="figure-4-7">
-<h3>Figure 4.7<a class="headerlink" href="#figure-4-7" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 4.7<a class="headerlink" href="#figure-4-7" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_sales</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">days</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">std</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
@@ -1945,12 +1448,12 @@ NUTS: [σ, β]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_04_41_0.png" src="../_images/chp_04_41_0.png" />
+<img alt="../_images/9319f512c99bfd1c3fc71c13c49953f4e459fa09afa768d67c69d542ee75d977.png" src="../_images/9319f512c99bfd1c3fc71c13c49953f4e459fa09afa768d67c69d542ee75d977.png" />
 </div>
 </div>
 </section>
 <section id="code-4-7">
-<h3>Code 4.7<a class="headerlink" href="#code-4-7" title="Permalink to this heading">¶</a></h3>
+<h3>Code 4.7<a class="headerlink" href="#code-4-7" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_non_robust</span><span class="p">:</span>
@@ -1979,48 +1482,48 @@ NUTS: [β, σ]
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [8000/8000 00:07<00:00 Sampling 4 chains, 0 divergences]
-</div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 16 seconds.
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [8000/8000 00:07<00:00 Sampling 4 chains, 0 divergences]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 16 seconds.
 The acceptance probability does not match the target. It is 0.8860777877942666, but should be close to 0.8. Try to increase the number of tuning steps.
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='4000' class='' max='4000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [4000/4000 00:03<00:00]
-</div>
-</div></div>
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='4000' class='' max='4000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [4000/4000 00:03<00:00]
+    </div>
+    </div></div>
 </div>
 </section>
 <section id="figure-4-8">
-<h3>Figure 4.8<a class="headerlink" href="#figure-4-8" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 4.8<a class="headerlink" href="#figure-4-8" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -2042,12 +1545,12 @@ The acceptance probability does not match the target. It is 0.8860777877942666, 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_04_45_0.png" src="../_images/chp_04_45_0.png" />
+<img alt="../_images/a6576c0ec6edce5ba4b663a2a7fd064f73c1466e2e6af64850916aefa4f06532.png" src="../_images/a6576c0ec6edce5ba4b663a2a7fd064f73c1466e2e6af64850916aefa4f06532.png" />
 </div>
 </div>
 </section>
 <section id="table-4-1">
-<h3>Table 4.1<a class="headerlink" href="#table-4-1" title="Permalink to this heading">¶</a></h3>
+<h3>Table 4.1<a class="headerlink" href="#table-4-1" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">inf_data_non_robust</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;stats&quot;</span><span class="p">,</span> <span class="n">var_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;β&quot;</span><span class="p">,</span> <span class="s2">&quot;σ&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -2129,47 +1632,47 @@ NUTS: [ν, β, σ]
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [8000/8000 00:03<00:00 Sampling 4 chains, 0 divergences]
-</div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 12 seconds.
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [8000/8000 00:03<00:00 Sampling 4 chains, 0 divergences]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 12 seconds.
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='4000' class='' max='4000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [4000/4000 00:02<00:00]
-</div>
-</div></div>
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='4000' class='' max='4000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [4000/4000 00:02<00:00]
+    </div>
+    </div></div>
 </div>
 </section>
 <section id="table-4-2">
-<h3>Table 4.2<a class="headerlink" href="#table-4-2" title="Permalink to this heading">¶</a></h3>
+<h3>Table 4.2<a class="headerlink" href="#table-4-2" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">inf_data_robust</span><span class="p">,</span> <span class="n">var_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;β&quot;</span><span class="p">,</span> <span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="s2">&quot;ν&quot;</span><span class="p">],</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;stats&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -2229,7 +1732,7 @@ NUTS: [ν, β, σ]
 </div>
 </section>
 <section id="figure-4-9">
-<h3>Figure 4.9<a class="headerlink" href="#figure-4-9" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 4.9<a class="headerlink" href="#figure-4-9" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
@@ -2248,7 +1751,7 @@ NUTS: [ν, β, σ]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_04_52_0.png" src="../_images/chp_04_52_0.png" />
+<img alt="../_images/388f2084cea358bdb3aab1d16f5298266f6bc2f7c0fec8bcb5290ae3102f1f91.png" src="../_images/388f2084cea358bdb3aab1d16f5298266f6bc2f7c0fec8bcb5290ae3102f1f91.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2325,7 +1828,7 @@ NUTS: [ν, β, σ]
 </section>
 </section>
 <section id="pooling-multilevel-models-and-mixed-effects">
-<h2>Pooling, Multilevel Models, and Mixed Effects<a class="headerlink" href="#pooling-multilevel-models-and-mixed-effects" title="Permalink to this heading">¶</a></h2>
+<h2>Pooling, Multilevel Models, and Mixed Effects<a class="headerlink" href="#pooling-multilevel-models-and-mixed-effects" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_sales</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">days</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">std</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
@@ -2364,7 +1867,7 @@ NUTS: [ν, β, σ]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_04_56_0.png" src="../_images/chp_04_56_0.png" />
+<img alt="../_images/d57080a81eead43317b362173c174ecb769e5a75f44b12d04a5f933fb05944c3.png" src="../_images/d57080a81eead43317b362173c174ecb769e5a75f44b12d04a5f933fb05944c3.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2472,7 +1975,7 @@ NUTS: [ν, β, σ]
 </div></div></div>
 </div>
 <section id="figure-4-10">
-<h3>Figure 4.10<a class="headerlink" href="#figure-4-10" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 4.10<a class="headerlink" href="#figure-4-10" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
@@ -2490,15 +1993,15 @@ NUTS: [ν, β, σ]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_04_59_0.png" src="../_images/chp_04_59_0.png" />
+<img alt="../_images/97465c9d7f9ba4a071675f1ff29e8c95768f95b01eec8c4ce9088cc05024ca74.png" src="../_images/97465c9d7f9ba4a071675f1ff29e8c95768f95b01eec8c4ce9088cc05024ca74.png" />
 </div>
 </div>
 </section>
 <section id="unpooled-model">
-<h3>Unpooled Model<a class="headerlink" href="#unpooled-model" title="Permalink to this heading">¶</a></h3>
+<h3>Unpooled Model<a class="headerlink" href="#unpooled-model" title="Permalink to this heading">#</a></h3>
 </section>
 <section id="code-4-9">
-<h3>Code 4.9<a class="headerlink" href="#code-4-9" title="Permalink to this heading">¶</a></h3>
+<h3>Code 4.9<a class="headerlink" href="#code-4-9" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">customers</span> <span class="o">=</span> <span class="n">sales_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;customers&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
@@ -2532,30 +2035,30 @@ NUTS: [β, σ]
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [8000/8000 00:05<00:00 Sampling 4 chains, 0 divergences]
-</div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 14 seconds.
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [8000/8000 00:05<00:00 Sampling 4 chains, 0 divergences]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 14 seconds.
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="figure-4-12">
-<h3>Figure 4.12<a class="headerlink" href="#figure-4-12" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 4.12<a class="headerlink" href="#figure-4-12" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sales_unpooled_diagram</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">model_to_graphviz</span><span class="p">(</span><span class="n">model_sales_unpooled</span><span class="p">)</span>
@@ -2565,7 +2068,7 @@ NUTS: [β, σ]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_04_64_0.svg" src="../_images/chp_04_64_0.svg" /></div>
+<img alt="../_images/704f876828c7d7ed6abecf46583f65abd1939d57d9f83cb19013fa56da5ea5a1.svg" src="../_images/704f876828c7d7ed6abecf46583f65abd1939d57d9f83cb19013fa56da5ea5a1.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2694,12 +2197,12 @@ NUTS: [β, σ]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_04_67_0.png" src="../_images/chp_04_67_0.png" />
+<img alt="../_images/d8eb04a46da20dde9264e2bce7634064d3f27a242031dab5364b0239366a27b9.png" src="../_images/d8eb04a46da20dde9264e2bce7634064d3f27a242031dab5364b0239366a27b9.png" />
 </div>
 </div>
 </section>
 <section id="figure-4-13">
-<h3>Figure 4.13<a class="headerlink" href="#figure-4-13" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 4.13<a class="headerlink" href="#figure-4-13" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axes</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">plot_forest</span><span class="p">([</span><span class="n">inf_data_sales_unpooled</span><span class="p">],</span>
@@ -2711,12 +2214,12 @@ NUTS: [β, σ]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_04_69_0.png" src="../_images/chp_04_69_0.png" />
+<img alt="../_images/485f8371fb87baffceff7095d4c4378d04edb9783dc985c0a8bb3bf6add0cf86.png" src="../_images/485f8371fb87baffceff7095d4c4378d04edb9783dc985c0a8bb3bf6add0cf86.png" />
 </div>
 </div>
 </section>
 <section id="figure-4-14">
-<h3>Figure 4.14<a class="headerlink" href="#figure-4-14" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 4.14<a class="headerlink" href="#figure-4-14" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axes</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">plot_forest</span><span class="p">([</span><span class="n">inf_data_salads_sales_unpooled</span><span class="p">,],</span>
@@ -2728,15 +2231,15 @@ NUTS: [β, σ]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_04_71_0.png" src="../_images/chp_04_71_0.png" />
+<img alt="../_images/57856cc75ce6aa263e12ed87f68e9019ad1cc607fd53d7950d8453c65336bf5f.png" src="../_images/57856cc75ce6aa263e12ed87f68e9019ad1cc607fd53d7950d8453c65336bf5f.png" />
 </div>
 </div>
 </section>
 <section id="pooled-model">
-<h3>Pooled Model<a class="headerlink" href="#pooled-model" title="Permalink to this heading">¶</a></h3>
+<h3>Pooled Model<a class="headerlink" href="#pooled-model" title="Permalink to this heading">#</a></h3>
 </section>
 <section id="code-4-10">
-<h3>Code 4.10<a class="headerlink" href="#code-4-10" title="Permalink to this heading">¶</a></h3>
+<h3>Code 4.10<a class="headerlink" href="#code-4-10" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_sales_pooled</span><span class="p">:</span>
@@ -2762,23 +2265,23 @@ NUTS: [β, σ]
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [8000/8000 00:02<00:00 Sampling 4 chains, 0 divergences]
-</div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 11 seconds.
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [8000/8000 00:02<00:00 Sampling 4 chains, 0 divergences]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 11 seconds.
 </pre></div>
 </div>
 </div>
@@ -2795,27 +2298,27 @@ NUTS: [β, σ]
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='4000' class='' max='4000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [4000/4000 00:03<00:00]
-</div>
-</div></div>
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='4000' class='' max='4000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [4000/4000 00:03<00:00]
+    </div>
+    </div></div>
 </div>
 </section>
 <section id="figure-4-16">
-<h3>Figure 4.16<a class="headerlink" href="#figure-4-16" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 4.16<a class="headerlink" href="#figure-4-16" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pooled_sales_diagram</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">model_to_graphviz</span><span class="p">(</span><span class="n">model_sales_pooled</span><span class="p">)</span>
@@ -2825,7 +2328,7 @@ NUTS: [β, σ]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_04_77_0.svg" src="../_images/chp_04_77_0.svg" /></div>
+<img alt="../_images/e6f72e358bdcd8564fecb62cdf6844657039917c8ca5f94d89666459fd10d6c9.svg" src="../_images/e6f72e358bdcd8564fecb62cdf6844657039917c8ca5f94d89666459fd10d6c9.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2834,7 +2337,7 @@ NUTS: [β, σ]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_04_78_0.png" src="../_images/chp_04_78_0.png" />
+<img alt="../_images/1c20f18c227aa4d279be7007b14920b44e05e302ce65f649ff13ecf37b2918db.png" src="../_images/1c20f18c227aa4d279be7007b14920b44e05e302ce65f649ff13ecf37b2918db.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2904,7 +2407,7 @@ NUTS: [β, σ]
 </div>
 </section>
 <section id="figure-4-17">
-<h3>Figure 4.17<a class="headerlink" href="#figure-4-17" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 4.17<a class="headerlink" href="#figure-4-17" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axes</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">plot_forest</span><span class="p">([</span><span class="n">inf_data_sales_pooled</span><span class="p">,</span> <span class="n">inf_data_sales_unpooled</span><span class="p">],</span>
@@ -2917,12 +2420,12 @@ NUTS: [β, σ]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_04_81_0.png" src="../_images/chp_04_81_0.png" />
+<img alt="../_images/5abfa819da4f3b92d766cc1a9f0417bd8eba943a39152f3308e919a7e68f4814.png" src="../_images/5abfa819da4f3b92d766cc1a9f0417bd8eba943a39152f3308e919a7e68f4814.png" />
 </div>
 </div>
 </section>
 <section id="figure-4-18">
-<h3>Figure 4.18<a class="headerlink" href="#figure-4-18" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 4.18<a class="headerlink" href="#figure-4-18" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
@@ -2948,12 +2451,12 @@ NUTS: [β, σ]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_04_83_0.png" src="../_images/chp_04_83_0.png" />
+<img alt="../_images/811b5475339fd8c39c4da6373e73d0590e012a319cb91cddfd11cfdefe7d4d1f.png" src="../_images/811b5475339fd8c39c4da6373e73d0590e012a319cb91cddfd11cfdefe7d4d1f.png" />
 </div>
 </div>
 </section>
 <section id="code-4-11">
-<h3>Code 4.11<a class="headerlink" href="#code-4-11" title="Permalink to this heading">¶</a></h3>
+<h3>Code 4.11<a class="headerlink" href="#code-4-11" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_pooled_sigma_sales</span><span class="p">:</span>
@@ -2985,43 +2488,43 @@ NUTS: [β, σ]
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [8000/8000 00:03<00:00 Sampling 4 chains, 0 divergences]
-</div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 12 seconds.
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [8000/8000 00:03<00:00 Sampling 4 chains, 0 divergences]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 12 seconds.
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='4000' class='' max='4000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [4000/4000 00:03<00:00]
-</div>
-</div></div>
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='4000' class='' max='4000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [4000/4000 00:03<00:00]
+    </div>
+    </div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3032,7 +2535,7 @@ NUTS: [β, σ]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_04_86_0.svg" src="../_images/chp_04_86_0.svg" /></div>
+<img alt="../_images/591bda2333294bb384e58fbd36f14157ed2f20f198d7ba5886c8023f1fb5050e.svg" src="../_images/591bda2333294bb384e58fbd36f14157ed2f20f198d7ba5886c8023f1fb5050e.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3125,7 +2628,7 @@ NUTS: [β, σ]
 </div>
 </section>
 <section id="figure-4-20">
-<h3>Figure 4.20<a class="headerlink" href="#figure-4-20" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 4.20<a class="headerlink" href="#figure-4-20" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
@@ -3154,12 +2657,12 @@ NUTS: [β, σ]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_04_89_0.png" src="../_images/chp_04_89_0.png" />
+<img alt="../_images/1167b0b5d026aa53920b0c1fd7052fba048c4d22c2c782a8554a0dcf6f688eea.png" src="../_images/1167b0b5d026aa53920b0c1fd7052fba048c4d22c2c782a8554a0dcf6f688eea.png" />
 </div>
 </div>
 </section>
 <section id="figure-4-21">
-<h3>Figure 4.21<a class="headerlink" href="#figure-4-21" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 4.21<a class="headerlink" href="#figure-4-21" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axes</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">plot_forest</span><span class="p">([</span><span class="n">inf_data_sales_unpooled</span><span class="p">,</span>
@@ -3176,7 +2679,7 @@ NUTS: [β, σ]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_04_91_0.png" src="../_images/chp_04_91_0.png" />
+<img alt="../_images/a1b470e542d4002633295d112c2fb2954b812c71ac1c7b44e6ac17b46ff4bd86.png" src="../_images/a1b470e542d4002633295d112c2fb2954b812c71ac1c7b44e6ac17b46ff4bd86.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -3196,7 +2699,7 @@ NUTS: [β, σ]
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Comparison of β parameters 94% HDI&#39;)
 </pre></div>
 </div>
-<img alt="../_images/chp_04_92_1.png" src="../_images/chp_04_92_1.png" />
+<img alt="../_images/5078c492339af079f671452f410a887f721aca47bda4e082cb272973bce8d554.png" src="../_images/5078c492339af079f671452f410a887f721aca47bda4e082cb272973bce8d554.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -3208,10 +2711,10 @@ NUTS: [β, σ]
 </div>
 </section>
 <section id="hierarchical">
-<h3>Hierarchical<a class="headerlink" href="#hierarchical" title="Permalink to this heading">¶</a></h3>
+<h3>Hierarchical<a class="headerlink" href="#hierarchical" title="Permalink to this heading">#</a></h3>
 </section>
 <section id="code-4-12">
-<h3>Code 4.12<a class="headerlink" href="#code-4-12" title="Permalink to this heading">¶</a></h3>
+<h3>Code 4.12<a class="headerlink" href="#code-4-12" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_hierarchical_sales</span><span class="p">:</span>
@@ -3243,23 +2746,23 @@ NUTS: [β, σ, σ_hyperprior]
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [8000/8000 00:05<00:00 Sampling 4 chains, 7 divergences]
-</div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 15 seconds.
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [8000/8000 00:05<00:00 Sampling 4 chains, 7 divergences]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 15 seconds.
 There were 5 divergences after tuning. Increase `target_accept` or reparameterize.
 There were 2 divergences after tuning. Increase `target_accept` or reparameterize.
 </pre></div>
@@ -3273,7 +2776,7 @@ There were 2 divergences after tuning. Increase `target_accept` or reparameteriz
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_04_97_0.png" src="../_images/chp_04_97_0.png" />
+<img alt="../_images/6a0dd0935df45d1931e3f3de0ee52842d2756954c5c6183f03e729a3c4c8d609.png" src="../_images/6a0dd0935df45d1931e3f3de0ee52842d2756954c5c6183f03e729a3c4c8d609.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -3286,12 +2789,12 @@ There were 2 divergences after tuning. Increase `target_accept` or reparameteriz
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
 </pre></div>
 </div>
-<img alt="../_images/chp_04_98_1.png" src="../_images/chp_04_98_1.png" />
+<img alt="../_images/99b704342a9eb78b9675fd1a4bf0a714381faee79c88d30a4995e8e7b051e460.png" src="../_images/99b704342a9eb78b9675fd1a4bf0a714381faee79c88d30a4995e8e7b051e460.png" />
 </div>
 </div>
 </section>
 <section id="figure-4-23">
-<h3>Figure 4.23<a class="headerlink" href="#figure-4-23" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 4.23<a class="headerlink" href="#figure-4-23" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hierarchial_sales_diagram</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">model_to_graphviz</span><span class="p">(</span><span class="n">model_hierarchical_sales</span><span class="p">)</span>
@@ -3301,7 +2804,7 @@ There were 2 divergences after tuning. Increase `target_accept` or reparameteriz
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_04_100_0.svg" src="../_images/chp_04_100_0.svg" /></div>
+<img alt="../_images/4a72064a42f8bd8fd5f4109defad4d495e13c70b0dc958ffcb74aeb5a04e3a0f.svg" src="../_images/4a72064a42f8bd8fd5f4109defad4d495e13c70b0dc958ffcb74aeb5a04e3a0f.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3427,7 +2930,7 @@ There were 2 divergences after tuning. Increase `target_accept` or reparameteriz
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Hierarchical β estimates 94% HDI&#39;)
 </pre></div>
 </div>
-<img alt="../_images/chp_04_102_1.png" src="../_images/chp_04_102_1.png" />
+<img alt="../_images/afd4797e9a8de1ac6ab796de0cfdbbd219430a53f9a01b33300d07d8b526cb81.png" src="../_images/afd4797e9a8de1ac6ab796de0cfdbbd219430a53f9a01b33300d07d8b526cb81.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -3439,7 +2942,7 @@ There were 2 divergences after tuning. Increase `target_accept` or reparameteriz
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_04_103_0.png" src="../_images/chp_04_103_0.png" />
+<img alt="../_images/8316bb91a5aa7a6381d320a430b23b51fa54ebd0e10af26256edb6cd827d16e1.png" src="../_images/8316bb91a5aa7a6381d320a430b23b51fa54ebd0e10af26256edb6cd827d16e1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -3456,7 +2959,7 @@ There were 2 divergences after tuning. Increase `target_accept` or reparameteriz
 </div>
 </section>
 <section id="table-4-3">
-<h3>Table 4.3<a class="headerlink" href="#table-4-3" title="Permalink to this heading">¶</a></h3>
+<h3>Table 4.3<a class="headerlink" href="#table-4-3" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">inf_data_sales_unpooled</span><span class="o">.</span><span class="n">posterior</span><span class="p">[</span><span class="s2">&quot;σ&quot;</span><span class="p">],</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;stats&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -3516,7 +3019,7 @@ There were 2 divergences after tuning. Increase `target_accept` or reparameteriz
 </div>
 </section>
 <section id="table-4-4">
-<h3>Table 4.4<a class="headerlink" href="#table-4-4" title="Permalink to this heading">¶</a></h3>
+<h3>Table 4.4<a class="headerlink" href="#table-4-4" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">inf_data_hierarchical_sales</span><span class="p">,</span> <span class="n">var_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="s2">&quot;σ_hyperprior&quot;</span><span class="p">],</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;stats&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -3598,7 +3101,7 @@ There were 2 divergences after tuning. Increase `target_accept` or reparameteriz
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_04_109_0.png" src="../_images/chp_04_109_0.png" />
+<img alt="../_images/44e8e65f9a1476c699145892fd1e173e61ea820062194a7421ed09018013f0d0.png" src="../_images/44e8e65f9a1476c699145892fd1e173e61ea820062194a7421ed09018013f0d0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -3615,12 +3118,12 @@ There were 2 divergences after tuning. Increase `target_accept` or reparameteriz
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Comparison of Hierarchical versus Unpooled Variance&#39;)
 </pre></div>
 </div>
-<img alt="../_images/chp_04_110_1.png" src="../_images/chp_04_110_1.png" />
+<img alt="../_images/0e92bbbbe01dd4065b5dd4f0349116aa7eb6365b28bb116e5fe9d46e54300c3c.png" src="../_images/0e92bbbbe01dd4065b5dd4f0349116aa7eb6365b28bb116e5fe9d46e54300c3c.png" />
 </div>
 </div>
 </section>
 <section id="figure-4-25">
-<h3>Figure 4.25<a class="headerlink" href="#figure-4-25" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 4.25<a class="headerlink" href="#figure-4-25" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nsample</span> <span class="o">=</span> <span class="mi">10000</span>
@@ -3641,13 +3144,13 @@ There were 2 divergences after tuning. Increase `target_accept` or reparameteriz
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;y&#39;)
 </pre></div>
 </div>
-<img alt="../_images/chp_04_112_1.png" src="../_images/chp_04_112_1.png" />
+<img alt="../_images/ab9d842cf50f8cfe48338b7464cbc4da00dcf49c5d553deb3b4b792d7c5fa034.png" src="../_images/ab9d842cf50f8cfe48338b7464cbc4da00dcf49c5d553deb3b4b792d7c5fa034.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">salad_generator</span><span class="p">(</span><span class="n">hyperprior_beta_mean</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">hyperprior_beta_sigma</span><span class="o">=</span><span class="mf">.2</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">days_per_location</span><span class="o">=</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">sigma_per_location</span><span class="o">=</span><span class="p">[</span><span class="mi">50</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">80</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">20</span><span class="p">]):</span>
-    <span class="sd">&quot;&quot;&quot;Generate noisy salad data&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate noisy salad data&quot;&quot;&quot;</span>
     <span class="n">beta_hyperprior</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">hyperprior_beta_mean</span><span class="p">,</span> <span class="n">hyperprior_beta_sigma</span><span class="p">)</span>
     
     <span class="c1"># Generate demands days per restaurant</span>
@@ -3672,7 +3175,7 @@ There were 2 divergences after tuning. Increase `target_accept` or reparameteriz
 </div>
 </section>
 <section id="figure-4-26">
-<h3>Figure 4.26<a class="headerlink" href="#figure-4-26" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 4.26<a class="headerlink" href="#figure-4-26" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -3691,12 +3194,12 @@ There were 2 divergences after tuning. Increase `target_accept` or reparameteriz
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_04_115_0.png" src="../_images/chp_04_115_0.png" />
+<img alt="../_images/fd0f31e0d3d68e6e91de398f5ff8f7dc5f7c2391a6decea490d33098fa69fcfc.png" src="../_images/fd0f31e0d3d68e6e91de398f5ff8f7dc5f7c2391a6decea490d33098fa69fcfc.png" />
 </div>
 </div>
 </section>
 <section id="code-4-13">
-<h3>Code 4.13<a class="headerlink" href="#code-4-13" title="Permalink to this heading">¶</a></h3>
+<h3>Code 4.13<a class="headerlink" href="#code-4-13" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
@@ -3747,7 +3250,7 @@ There were 2 divergences after tuning. Increase `target_accept` or reparameteriz
 </div>
 </section>
 <section id="code-4-14-and-4-15">
-<h3>Code 4.14 and 4.15<a class="headerlink" href="#code-4-14-and-4-15" title="Permalink to this heading">¶</a></h3>
+<h3>Code 4.14 and 4.15<a class="headerlink" href="#code-4-14-and-4-15" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">centered_beta_prior_fn</span><span class="p">(</span><span class="n">hyper_mu</span><span class="p">,</span> <span class="n">hyper_sigma</span><span class="p">):</span>
@@ -3798,7 +3301,7 @@ Instructions for updating:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_04_122_0.png" src="../_images/chp_04_122_0.png" />
+<img alt="../_images/b09315880231fe959255066ee24972b5e2fcf7c6440fbbae14173c8cd23845e1.png" src="../_images/b09315880231fe959255066ee24972b5e2fcf7c6440fbbae14173c8cd23845e1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -4024,7 +3527,7 @@ Instructions for updating:
 </div>
 </section>
 <section id="figure-4-27">
-<h3>Figure 4.27<a class="headerlink" href="#figure-4-27" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 4.27<a class="headerlink" href="#figure-4-27" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">slope</span> <span class="o">=</span> <span class="n">mcmc_samples_centered</span><span class="o">.</span><span class="n">beta</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
@@ -4047,12 +3550,12 @@ Instructions for updating:
   warnings.warn(&quot;plot_joint will be deprecated. Please use plot_pair instead.&quot;)
 </pre></div>
 </div>
-<img alt="../_images/chp_04_125_1.png" src="../_images/chp_04_125_1.png" />
+<img alt="../_images/21a60684cdbf5edaaa0ba530d4db6b43d16ce758eca19e3f330a66b12af88104.png" src="../_images/21a60684cdbf5edaaa0ba530d4db6b43d16ce758eca19e3f330a66b12af88104.png" />
 </div>
 </div>
 </section>
 <section id="code-4-16">
-<h3>Code 4.16<a class="headerlink" href="#code-4-16" title="Permalink to this heading">¶</a></h3>
+<h3>Code 4.16<a class="headerlink" href="#code-4-16" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">non_centered_beta_prior_fn</span><span class="p">(</span><span class="n">hyper_mu</span><span class="p">,</span> <span class="n">hyper_sigma</span><span class="p">):</span>
@@ -4097,7 +3600,7 @@ Instructions for updating:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_04_128_0.png" src="../_images/chp_04_128_0.png" />
+<img alt="../_images/1d54620806c2ff428fb7fde0cce0a0b88593638d086310440dba78553a2be8cb.png" src="../_images/1d54620806c2ff428fb7fde0cce0a0b88593638d086310440dba78553a2be8cb.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -4323,7 +3826,7 @@ Instructions for updating:
 </div>
 </section>
 <section id="figure-4-28">
-<h3>Figure  4.28<a class="headerlink" href="#figure-4-28" title="Permalink to this heading">¶</a></h3>
+<h3>Figure  4.28<a class="headerlink" href="#figure-4-28" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">noncentered_beta</span> <span class="o">=</span> <span class="p">(</span><span class="n">mcmc_samples_noncentered</span><span class="o">.</span><span class="n">beta_mu</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
@@ -4348,12 +3851,12 @@ Instructions for updating:
   warnings.warn(&quot;plot_joint will be deprecated. Please use plot_pair instead.&quot;)
 </pre></div>
 </div>
-<img alt="../_images/chp_04_131_1.png" src="../_images/chp_04_131_1.png" />
+<img alt="../_images/496b43dcdd854ab958a3e567aa1b428bd3e914fbd0848723e68f3b7140641905.png" src="../_images/496b43dcdd854ab958a3e567aa1b428bd3e914fbd0848723e68f3b7140641905.png" />
 </div>
 </div>
 </section>
 <section id="figure-4-29">
-<h3>Figure 4.29<a class="headerlink" href="#figure-4-29" title="Permalink to this heading">¶</a></h3>
+<h3>Figure 4.29<a class="headerlink" href="#figure-4-29" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">centered_β_sigma</span> <span class="o">=</span> <span class="n">mcmc_samples_centered</span><span class="o">.</span><span class="n">beta_sigma</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
@@ -4374,12 +3877,12 @@ Instructions for updating:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_04_134_0.png" src="../_images/chp_04_134_0.png" />
+<img alt="../_images/32c68a15b653bcdd9100cd88283c31ec43813b6655b3d42a6d38e3f6058205dd.png" src="../_images/32c68a15b653bcdd9100cd88283c31ec43813b6655b3d42a6d38e3f6058205dd.png" />
 </div>
 </div>
 </section>
 <section id="code-4-17">
-<h3>Code 4.17<a class="headerlink" href="#code-4-17" title="Permalink to this heading">¶</a></h3>
+<h3>Code 4.17<a class="headerlink" href="#code-4-17" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">out_of_sample_customers</span> <span class="o">=</span> <span class="mf">50.</span>
@@ -4428,12 +3931,12 @@ Instructions for updating:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_04_137_0.png" src="../_images/chp_04_137_0.png" />
+<img alt="../_images/c6c9ec26da63caef4a2366e1125668cdd82ad528e3cd8510fc541af511fa2d8c.png" src="../_images/c6c9ec26da63caef4a2366e1125668cdd82ad528e3cd8510fc541af511fa2d8c.png" />
 </div>
 </div>
 </section>
 <section id="code-4-18">
-<h3>Code 4.18<a class="headerlink" href="#code-4-18" title="Permalink to this heading">¶</a></h3>
+<h3>Code 4.18<a class="headerlink" href="#code-4-18" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">out_of_sample_customers2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
@@ -4469,7 +3972,7 @@ Instructions for updating:
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
 </pre></div>
 </div>
-<img alt="../_images/chp_04_140_2.png" src="../_images/chp_04_140_2.png" />
+<img alt="../_images/3425a4507498b403c98c18c87517f0e4895464afd91745a08dc23d8bbf54d4cf.png" src="../_images/3425a4507498b403c98c18c87517f0e4895464afd91745a08dc23d8bbf54d4cf.png" />
 </div>
 </div>
 </section>
@@ -4488,7 +3991,7 @@ Instructions for updating:
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./notebooks"
         },
         predefinedOutput: true
@@ -4496,44 +3999,163 @@ Instructions for updating:
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="chp_03.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Code 3: Linear Models and Probabilistic Programming Languages</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chp_03.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Code 3: Linear Models and Probabilistic Programming Languages</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="chp_05.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="chp_05.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Code 5: Splines</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
+                </footer>
+              
+            </div>
             
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Martin, Kumar, Lao<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transforming-covariates">Transforming Covariates</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-4-1">Code 4.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-1">Figure 4.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-4-2">Code 4.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-2">Figure 4.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-4-3">Code 4.3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-3">Figure 4.3</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#varying-uncertainty">Varying Uncertainty</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-4-4">Code 4.4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-4">Figure 4.4</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interaction-effects">Interaction effects</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-4-5">Code 4.5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-4-6">Code 4.6</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-5">Figure 4.5</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robust-regression">Robust Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-6">Figure 4.6</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-7">Figure 4.7</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-4-7">Code 4.7</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-8">Figure 4.8</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-4-1">Table 4.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-4-2">Table 4.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-9">Figure 4.9</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pooling-multilevel-models-and-mixed-effects">Pooling, Multilevel Models, and Mixed Effects</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-10">Figure 4.10</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unpooled-model">Unpooled Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-4-9">Code 4.9</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-12">Figure 4.12</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-13">Figure 4.13</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-14">Figure 4.14</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pooled-model">Pooled Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-4-10">Code 4.10</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-16">Figure 4.16</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-17">Figure 4.17</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-18">Figure 4.18</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-4-11">Code 4.11</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-20">Figure 4.20</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-21">Figure 4.21</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hierarchical">Hierarchical</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-4-12">Code 4.12</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-23">Figure 4.23</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-4-3">Table 4.3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-4-4">Table 4.4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-25">Figure 4.25</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-26">Figure 4.26</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-4-13">Code 4.13</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-4-14-and-4-15">Code 4.14 and 4.15</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-27">Figure 4.27</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-4-16">Code 4.16</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-28">Figure  4.28</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-4-29">Figure 4.29</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-4-17">Code 4.17</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-4-18">Code 4.18</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
 
-      </div>
-    </div>
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Martin, Kumar, Lao
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

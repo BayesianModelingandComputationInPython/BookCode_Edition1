@@ -1,39 +1,47 @@
 
+
 <!DOCTYPE html>
 
-<html lang="en">
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>7. Bayesian Additive Regression Trees &#8212; Bayesian Modeling and Computation in Python</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-codeautolink.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -42,12 +50,13 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -56,520 +65,322 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'markdown/chp_07';</script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="8. Approximate Bayesian Computation" href="chp_08.html" />
     <link rel="prev" title="6. Time Series" href="chp_06.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en">
-    
-
-    <!-- Google Analytics -->
-    
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-702QMHG8ST"></script>
-<script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){ dataLayer.push(arguments); }
-                    gtag('js', new Date());
-                    gtag('config', 'G-702QMHG8ST');
-                </script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-      
-      
-      <h1 class="site-logo" id="site-title">Bayesian Modeling and Computation in Python</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 0
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="dedication.html">
-   Dedication
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="foreword.html">
-   Foreword
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="preface.html">
-   Preface
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="symbollist.html">
-   Symbols
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 1
- </span>
-</p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_01.html">
-   1. Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_02.html">
-   2. Exploratory Analysis of Bayesian Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_03.html">
-   3. Linear Models and Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_04.html">
-   4. Extending Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_05.html">
-   5. Splines
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_06.html">
-   6. Time Series
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   7. Bayesian Additive Regression Trees
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_08.html">
-   8. Approximate Bayesian Computation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_09.html">
-   9. End to End Bayesian Workflows
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_10.html">
-   10. Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_11.html">
-   11. Appendiceal Topics
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="glossary.html">
-   12. Glossary
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="references.html">
-   13. References
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 2
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_01.html">
-   Code 1: Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_02.html">
-   Code 2: Exploratory Analysis of Bayesian Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_03.html">
-   Code 3: Linear Models and Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_04.html">
-   Code 4: Extending Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_05.html">
-   Code 5: Splines
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_06.html">
-   Code 6: Time Series
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_07.html">
-   Code 7: Bayesian Additive Regression Trees
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_08.html">
-   Code 8: Approximate Bayesian Computation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_09.html">
-   Code 9: End to End Bayesian Workflows
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_10.html">
-   Code 10: Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_11.html">
-   Code 11: Appendiceal Topics
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 3
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../solutions/chp_01.html">
-   Solutions 1: Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../solutions/chp_02.html">
-   Solutions 2: Exploratory Analysis of Bayesian models
-  </a>
- </li>
-</ul>
-
-    </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_07.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+      <div class="bd-sidebar-primary bd-sidebar">
         
-    </div>
-</div>
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
+  
 
-            <!-- Launch buttons -->
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#decision-trees">
-   7.1. Decision Trees
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#ensembles-of-decision-trees">
-     7.1.1. Ensembles of Decision Trees
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-bart-model">
-   7.2. The BART Model
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#priors-for-bart">
-   7.3. Priors for BART
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#prior-independence">
-     7.3.1. Prior Independence
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#prior-for-the-tree-structure-mathcal-t-j">
-     7.3.2. Prior for the Tree Structure
-     <span class="math notranslate nohighlight">
-      \(\mathcal{T}_j\)
-     </span>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#prior-for-the-leaf-values-mu-ij-and-number-of-trees-m">
-     7.3.3. Prior for the Leaf Values
-     <span class="math notranslate nohighlight">
-      \(\mu_{ij}\)
-     </span>
-     and Number of Trees
-     <span class="math notranslate nohighlight">
-      \(m\)
-     </span>
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fitting-bayesian-additive-regression-trees">
-   7.4. Fitting Bayesian Additive Regression Trees
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#bart-bikes">
-   7.5. BART Bikes
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#generalized-bart-models">
-   7.6. Generalized BART Models
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#interpretability-of-barts">
-   7.7. Interpretability of BARTs
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#partial-dependence-plots">
-     7.7.1. Partial Dependence Plots
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#individual-conditional-expectation">
-     7.7.2. Individual Conditional Expectation
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#variable-selection">
-   7.8. Variable Selection
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#priors-for-bart-in-pymc3">
-   7.9. Priors for BART in PyMC3
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
-   7.10. Exercises
-  </a>
- </li>
+<a class="navbar-brand logo" href="../welcome.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Bayesian Modeling and Computation in Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 0</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="dedication.html">Dedication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="foreword.html">Foreword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preface.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="symbollist.html">Symbols</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 1</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chp_01.html">1. Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_02.html">2. Exploratory Analysis of Bayesian Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_03.html">3. Linear Models and Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_04.html">4. Extending Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_05.html">5. Splines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_06.html">6. Time Series</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">7. Bayesian Additive Regression Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_08.html">8. Approximate Bayesian Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_09.html">9. End to End Bayesian Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_10.html">10. Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_11.html">11. Appendiceal Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">12. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">13. References</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_01.html">Code 1: Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_02.html">Code 2: Exploratory Analysis of Bayesian Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_03.html">Code 3: Linear Models and Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_04.html">Code 4: Extending Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_05.html">Code 5: Splines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_06.html">Code 6: Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_07.html">Code 7: Bayesian Additive Regression Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_08.html">Code 8: Approximate Bayesian Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_09.html">Code 9: End to End Bayesian Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_10.html">Code 10: Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_11.html">Code 11: Appendiceal Topics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../solutions/chp_01.html">Solutions 1: Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/chp_02.html">Solutions 2: Exploratory Analysis of Bayesian models</a></li>
 </ul>
 
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_07.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Bayesian Additive Regression Trees</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-trees">7.1. Decision Trees</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensembles-of-decision-trees">7.1.1. Ensembles of Decision Trees</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bart-model">7.2. The BART Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#priors-for-bart">7.3. Priors for BART</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prior-independence">7.3.1. Prior Independence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prior-for-the-tree-structure-mathcal-t-j">7.3.2. Prior for the Tree Structure <span class="math notranslate nohighlight">\(\mathcal{T}_j\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prior-for-the-leaf-values-mu-ij-and-number-of-trees-m">7.3.3. Prior for the Leaf Values <span class="math notranslate nohighlight">\(\mu_{ij}\)</span> and Number of Trees <span class="math notranslate nohighlight">\(m\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-bayesian-additive-regression-trees">7.4. Fitting Bayesian Additive Regression Trees</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bart-bikes">7.5. BART Bikes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generalized-bart-models">7.6. Generalized BART Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretability-of-barts">7.7. Interpretability of BARTs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partial-dependence-plots">7.7.1. Partial Dependence Plots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#individual-conditional-expectation">7.7.2. Individual Conditional Expectation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-selection">7.8. Variable Selection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#priors-for-bart-in-pymc3">7.9. Priors for BART in PyMC3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">7.10. Exercises</a></li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Bayesian Additive Regression Trees</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#decision-trees">
-   7.1. Decision Trees
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#ensembles-of-decision-trees">
-     7.1.1. Ensembles of Decision Trees
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-bart-model">
-   7.2. The BART Model
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#priors-for-bart">
-   7.3. Priors for BART
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#prior-independence">
-     7.3.1. Prior Independence
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#prior-for-the-tree-structure-mathcal-t-j">
-     7.3.2. Prior for the Tree Structure
-     <span class="math notranslate nohighlight">
-      \(\mathcal{T}_j\)
-     </span>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#prior-for-the-leaf-values-mu-ij-and-number-of-trees-m">
-     7.3.3. Prior for the Leaf Values
-     <span class="math notranslate nohighlight">
-      \(\mu_{ij}\)
-     </span>
-     and Number of Trees
-     <span class="math notranslate nohighlight">
-      \(m\)
-     </span>
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fitting-bayesian-additive-regression-trees">
-   7.4. Fitting Bayesian Additive Regression Trees
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#bart-bikes">
-   7.5. BART Bikes
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#generalized-bart-models">
-   7.6. Generalized BART Models
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#interpretability-of-barts">
-   7.7. Interpretability of BARTs
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#partial-dependence-plots">
-     7.7.1. Partial Dependence Plots
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#individual-conditional-expectation">
-     7.7.2. Individual Conditional Expectation
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#variable-selection">
-   7.8. Variable Selection
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#priors-for-bart-in-pymc3">
-   7.9. Priors for BART in PyMC3
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
-   7.10. Exercises
-  </a>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="bayesian-additive-regression-trees">
-<span id="chap6"></span><h1><span class="section-number">7. </span>Bayesian Additive Regression Trees<a class="headerlink" href="#bayesian-additive-regression-trees" title="Permalink to this heading">¶</a></h1>
+<span id="chap6"></span><h1><span class="section-number">7. </span>Bayesian Additive Regression Trees<a class="headerlink" href="#bayesian-additive-regression-trees" title="Permalink to this heading">#</a></h1>
 <p>In Chapter <a class="reference internal" href="chp_05.html#chap3-5"><span class="std std-ref">5</span></a> we saw how we can approximate a
 function by summing up a series of (simple) basis functions. We showed
 how B-splines have some nice properties when used as basis functions. In
@@ -603,7 +414,7 @@ prior (or shrinkage prior) to make each tree behave as a <em>weak learner</em>.<
 and apply, we should first discuss decisions trees. In case you are
 already familiar with them, feel free to skip the next section.</p>
 <section id="decision-trees">
-<span id="id4"></span><h2><span class="section-number">7.1. </span>Decision Trees<a class="headerlink" href="#decision-trees" title="Permalink to this heading">¶</a></h2>
+<span id="id4"></span><h2><span class="section-number">7.1. </span>Decision Trees<a class="headerlink" href="#decision-trees" title="Permalink to this heading">#</a></h2>
 <p>Let us assume we have two variables <span class="math notranslate nohighlight">\(X_1\)</span> and <span class="math notranslate nohighlight">\(X_2\)</span> and we want to use
 those variables to classify objects into two classes:  ⬤ or ▲. To achieve
 this goal we can use a tree-structure as shown on the left panel of
@@ -657,7 +468,7 @@ with them. Terminal nodes, or leaves, are those without children and
 they contain the values to return, in this example ⬤ or ▲. A decision tree
 generates a partition of the sample space into blocks delimited by
 axis-perpendicular splitting lines. This means that every split of the
-sample space will be aligned with one of the covariate axes.</span><a class="headerlink" href="#fig-decision-tree" title="Permalink to this image">¶</a></p>
+sample space will be aligned with one of the covariate axes.</span><a class="headerlink" href="#fig-decision-tree" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>While <a class="reference internal" href="#fig-decision-tree"><span class="std std-numref">Fig. 7.1</span></a> shows how to use a decision tree for a
@@ -683,7 +494,7 @@ to a node below them), internal nodes have splitting rules associated
 with them. Terminal nodes (or leafs) are those without children and they
 contain the values to return (in this example 1.1, 1.9 and 0.1). We can
 see how a tree is a way to represent piecewise function, like the ones
-discussed in Chapter <a class="reference internal" href="chp_05.html#chap3-5"><span class="std std-ref">5</span></a>.</span><a class="headerlink" href="#fig-decision-tree-reg" title="Permalink to this image">¶</a></p>
+discussed in Chapter <a class="reference internal" href="chp_05.html#chap3-5"><span class="std std-ref">5</span></a>.</span><a class="headerlink" href="#fig-decision-tree-reg" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Regression trees are not limited to returning the mean of the data
@@ -723,7 +534,7 @@ accuracy using a much simpler partition like the one used in
 generalize than the more complex one, i.e. it is most likely to predict,
 and explain new data.
 [fig:decision_tree_overfitting]{#fig:decision_tree_overfitting
-label=”fig:decision_tree_overfitting”}.</span><a class="headerlink" href="#fig-decision-tree-overfitting" title="Permalink to this image">¶</a></p>
+label=”fig:decision_tree_overfitting”}.</span><a class="headerlink" href="#fig-decision-tree-overfitting" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>One interesting property of trees arises when we think about them in
@@ -749,7 +560,7 @@ potential to represent higher order interactions. Additionally, because
 we use an ensemble of trees we can build virtually any combination of
 main and interaction effects.</p>
 <section id="ensembles-of-decision-trees">
-<span id="id5"></span><h3><span class="section-number">7.1.1. </span>Ensembles of Decision Trees<a class="headerlink" href="#ensembles-of-decision-trees" title="Permalink to this heading">¶</a></h3>
+<span id="id5"></span><h3><span class="section-number">7.1.1. </span>Ensembles of Decision Trees<a class="headerlink" href="#ensembles-of-decision-trees" title="Permalink to this heading">#</a></h3>
 <p>Considering that over-complex trees will likely not be very good at
 predicting new data, it is common to introduce devices to reduce the
 complexity of decision trees and get a fit that better adapts to the
@@ -775,11 +586,11 @@ flexibility and generalization.</p>
 </section>
 </section>
 <section id="the-bart-model">
-<span id="id6"></span><h2><span class="section-number">7.2. </span>The BART Model<a class="headerlink" href="#the-bart-model" title="Permalink to this heading">¶</a></h2>
+<span id="id6"></span><h2><span class="section-number">7.2. </span>The BART Model<a class="headerlink" href="#the-bart-model" title="Permalink to this heading">#</a></h2>
 <p>If we assume that the <span class="math notranslate nohighlight">\(B_i\)</span> functions in equation <a class="reference internal" href="chp_05.html#equation-eq-bfr">(5.3)</a>
 are decision trees we can write:</p>
 <div class="math notranslate nohighlight" id="equation-eq-bart">
-<span class="eqno">(7.1)<a class="headerlink" href="#equation-eq-bart" title="Permalink to this equation">¶</a></span>\[\mathbb{E}[Y] = \phi \left(\sum_{j=0}^m g_j(\boldsymbol{X}; \mathcal{T}_j, \mathcal{M}_j), \theta \right)\]</div>
+<span class="eqno">(7.1)<a class="headerlink" href="#equation-eq-bart" title="Permalink to this equation">#</a></span>\[\mathbb{E}[Y] = \phi \left(\sum_{j=0}^m g_j(\boldsymbol{X}; \mathcal{T}_j, \mathcal{M}_j), \theta \right)\]</div>
 <p>Where each <span class="math notranslate nohighlight">\(g_j\)</span> is a tree of the form
 <span class="math notranslate nohighlight">\(g(\boldsymbol{X}; \mathcal{T}_j, \mathcal{M}_j)\)</span>, where <span class="math notranslate nohighlight">\(\mathcal{T}_j\)</span>
 represents the structure of a binary tree, i.e. the set of internal
@@ -791,22 +602,22 @@ in our model and <span class="math notranslate nohighlight">\(\theta\)</span> ot
 sum of trees.</p>
 <p>For example we could set <span class="math notranslate nohighlight">\(\phi\)</span> as a Gaussian and then we will have:</p>
 <div class="math notranslate nohighlight" id="equation-eq-bart-gaussian">
-<span class="eqno">(7.2)<a class="headerlink" href="#equation-eq-bart-gaussian" title="Permalink to this equation">¶</a></span>\[Y = \mathcal{N}\left(\mu = \sum_{j=0}^m g_j(\boldsymbol{X}; \mathcal{T}_j, \mathcal{M}_j), \sigma \right)\]</div>
+<span class="eqno">(7.2)<a class="headerlink" href="#equation-eq-bart-gaussian" title="Permalink to this equation">#</a></span>\[Y = \mathcal{N}\left(\mu = \sum_{j=0}^m g_j(\boldsymbol{X}; \mathcal{T}_j, \mathcal{M}_j), \sigma \right)\]</div>
 <p>Or we can do as we did for Generalized Linear Models in Chapter
 <a class="reference internal" href="chp_03.html#chap2"><span class="std std-ref">3</span></a> and try other distributions. For example if <span class="math notranslate nohighlight">\(\phi\)</span> is
 a Poisson distribution we get</p>
 <div class="math notranslate nohighlight" id="equation-eq-bart-poisson">
-<span class="eqno">(7.3)<a class="headerlink" href="#equation-eq-bart-poisson" title="Permalink to this equation">¶</a></span>\[Y = \text{Pois}\left(\lambda = \sum_{j}^m g_j(\boldsymbol{X}; \mathcal{T}_j, \mathcal{M}_j)\right)\]</div>
+<span class="eqno">(7.3)<a class="headerlink" href="#equation-eq-bart-poisson" title="Permalink to this equation">#</a></span>\[Y = \text{Pois}\left(\lambda = \sum_{j}^m g_j(\boldsymbol{X}; \mathcal{T}_j, \mathcal{M}_j)\right)\]</div>
 <p>Or maybe <span class="math notranslate nohighlight">\(\phi\)</span> is the Student’s t-distribution, then:</p>
 <div class="math notranslate nohighlight" id="equation-eq-bart-student">
-<span class="eqno">(7.4)<a class="headerlink" href="#equation-eq-bart-student" title="Permalink to this equation">¶</a></span>\[Y = \text{T}\left(\mu = \sum_{j}^m g_j(\boldsymbol{X}; \mathcal{T}_j, \mathcal{M}_j), \sigma, \nu \right)\]</div>
+<span class="eqno">(7.4)<a class="headerlink" href="#equation-eq-bart-student" title="Permalink to this equation">#</a></span>\[Y = \text{T}\left(\mu = \sum_{j}^m g_j(\boldsymbol{X}; \mathcal{T}_j, \mathcal{M}_j), \sigma, \nu \right)\]</div>
 <p>As usual to fully specify a BART model we need to choose priors. We are
 already familiar to prior specifications for <span class="math notranslate nohighlight">\(\sigma\)</span> for the Gaussian
 likelihood or over <span class="math notranslate nohighlight">\(\sigma\)</span> and <span class="math notranslate nohighlight">\(\nu\)</span> for the Student’s t-distribution
 so now we will focus on those priors particular to the BART model.</p>
 </section>
 <section id="priors-for-bart">
-<span id="id7"></span><h2><span class="section-number">7.3. </span>Priors for BART<a class="headerlink" href="#priors-for-bart" title="Permalink to this heading">¶</a></h2>
+<span id="id7"></span><h2><span class="section-number">7.3. </span>Priors for BART<a class="headerlink" href="#priors-for-bart" title="Permalink to this heading">#</a></h2>
 <p>The original BART paper <span id="id8">[<a class="reference internal" href="references.html#id5" title="Hugh A. Chipman, Edward I. George, and Robert E. McCulloch. Bart: bayesian additive regression trees. The Annals of Applied Statistics, 4(1):266–298, 2010.">71</a>]</span>, and most
 subsequent modifications and implementations rely on conjugate priors.
 The BART implementation in PyMC3 does not use conjugate priors and also
@@ -814,7 +625,7 @@ deviates in other ways. Instead of discussing the differences we will
 focus on the PyMC3 implementation, which is the one we are going to use
 for the examples.</p>
 <section id="prior-independence">
-<span id="id9"></span><h3><span class="section-number">7.3.1. </span>Prior Independence<a class="headerlink" href="#prior-independence" title="Permalink to this heading">¶</a></h3>
+<span id="id9"></span><h3><span class="section-number">7.3.1. </span>Prior Independence<a class="headerlink" href="#prior-independence" title="Permalink to this heading">#</a></h3>
 <p>In order to simplify the specification of the prior we assume that the
 structure of the tree <span class="math notranslate nohighlight">\(\mathcal{T}_j\)</span> and the leaf values
 <span class="math notranslate nohighlight">\(\mathcal{M}_j\)</span> are independent. Additionally these priors are
@@ -824,7 +635,7 @@ prior specification into parts. Otherwise we should devise a way to
 specify a single prior over the space of trees <a class="footnote-reference brackets" href="#id40" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>.</p>
 </section>
 <section id="prior-for-the-tree-structure-mathcal-t-j">
-<span id="prior-for-the-tree-structure-mathcalt-j"></span><h3><span class="section-number">7.3.2. </span>Prior for the Tree Structure <span class="math notranslate nohighlight">\(\mathcal{T}_j\)</span><a class="headerlink" href="#prior-for-the-tree-structure-mathcal-t-j" title="Permalink to this heading">¶</a></h3>
+<span id="prior-for-the-tree-structure-mathcalt-j"></span><h3><span class="section-number">7.3.2. </span>Prior for the Tree Structure <span class="math notranslate nohighlight">\(\mathcal{T}_j\)</span><a class="headerlink" href="#prior-for-the-tree-structure-mathcal-t-j" title="Permalink to this heading">#</a></h3>
 <p>The prior for the tree structure <span class="math notranslate nohighlight">\(\mathcal{T}_j\)</span> is specified by three
 aspects:</p>
 <ul class="simple">
@@ -842,7 +653,7 @@ available values.</p></li>
 </ul>
 </section>
 <section id="prior-for-the-leaf-values-mu-ij-and-number-of-trees-m">
-<span id="bart-mu-m-priors"></span><h3><span class="section-number">7.3.3. </span>Prior for the Leaf Values <span class="math notranslate nohighlight">\(\mu_{ij}\)</span> and Number of Trees <span class="math notranslate nohighlight">\(m\)</span><a class="headerlink" href="#prior-for-the-leaf-values-mu-ij-and-number-of-trees-m" title="Permalink to this heading">¶</a></h3>
+<span id="bart-mu-m-priors"></span><h3><span class="section-number">7.3.3. </span>Prior for the Leaf Values <span class="math notranslate nohighlight">\(\mu_{ij}\)</span> and Number of Trees <span class="math notranslate nohighlight">\(m\)</span><a class="headerlink" href="#prior-for-the-leaf-values-mu-ij-and-number-of-trees-m" title="Permalink to this heading">#</a></h3>
 <p>By default PyMC3 does not set a prior value for the leaf values, instead
 at each iteration of the sampling algorithm it returns the mean of the
 residuals.</p>
@@ -856,7 +667,7 @@ the most adequate value for a particular problem <a class="footnote-reference br
 </section>
 </section>
 <section id="fitting-bayesian-additive-regression-trees">
-<span id="id14"></span><h2><span class="section-number">7.4. </span>Fitting Bayesian Additive Regression Trees<a class="headerlink" href="#fitting-bayesian-additive-regression-trees" title="Permalink to this heading">¶</a></h2>
+<span id="id14"></span><h2><span class="section-number">7.4. </span>Fitting Bayesian Additive Regression Trees<a class="headerlink" href="#fitting-bayesian-additive-regression-trees" title="Permalink to this heading">#</a></h2>
 <p>So far we have discussed how decision trees can be used to encode
 piecewise functions that we can use to model regression or
 classification problems. We have also discussed how we can specify
@@ -898,11 +709,11 @@ other random variables are present in the model, PyMC3 will assign other
 samplers like NUTS to those variables.</p>
 </section>
 <section id="bart-bikes">
-<span id="bart-bike"></span><h2><span class="section-number">7.5. </span>BART Bikes<a class="headerlink" href="#bart-bikes" title="Permalink to this heading">¶</a></h2>
+<span id="bart-bike"></span><h2><span class="section-number">7.5. </span>BART Bikes<a class="headerlink" href="#bart-bikes" title="Permalink to this heading">#</a></h2>
 <p>Let us see how BART fits the bikes dataset which we previously studied
 in <a class="reference internal" href="chp_05.html#chap3-5"><span class="std std-ref">5</span></a>. The model will be:</p>
 <div class="math notranslate nohighlight" id="equation-eq-bart-bikes-model">
-<span class="eqno">(7.5)<a class="headerlink" href="#equation-eq-bart-bikes-model" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(7.5)<a class="headerlink" href="#equation-eq-bart-bikes-model" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{aligned}
 \begin{split}
     \mu \sim&amp; \; \text{BART}(m=50) \\
     \sigma \sim&amp; \; \mathcal{HN}(1) \\
@@ -917,7 +728,7 @@ section.</p>
 <p>Having made all these clarifications the model in PyMC3 looks as
 follows:</p>
 <div class="literal-block-wrapper docutils container" id="bart-model-gauss">
-<div class="code-block-caption"><span class="caption-number">Listing 7.1 </span><span class="caption-text">bart_model_gauss</span><a class="headerlink" href="#bart-model-gauss" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 7.1 </span><span class="caption-text">bart_model_gauss</span><a class="headerlink" href="#bart-model-gauss" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">bart_g</span><span class="p">:</span>
     <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="n">Y</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
     <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">BART</span><span class="p">(</span><span class="s2">&quot;μ&quot;</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
@@ -949,7 +760,7 @@ sum over <span class="math notranslate nohighlight">\(m\)</span> trees.</p>
 from the posterior. Bottom panel, three posterior samples, each one is a
 sum over <span class="math notranslate nohighlight">\(m\)</span> trees. Actual BART sampled values are represented by
 circles while the dashed lines are a visual aid. Small dots (only in
-bottom panel) represent the observed number of rented bikes.</span><a class="headerlink" href="#fig-bart-bikes-samples" title="Permalink to this image">¶</a></p>
+bottom panel) represent the observed number of rented bikes.</span><a class="headerlink" href="#fig-bart-bikes-samples" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p><a class="reference internal" href="#fig-bart-bikes"><span class="std std-numref">Fig. 7.5</span></a> shows the result of fitting BART to the bike
@@ -965,7 +776,7 @@ HDI.</p>
 <p><span class="caption-number">Fig. 7.5 </span><span class="caption-text">Bikes data (black dots) fitted using BARTs (specifically <code class="docutils literal notranslate"><span class="pre">bart_model</span></code>).
 The shaded curve represents the 94% HDI interval (of the mean) and the
 blue curve represents the mean trend. Compare with
-<a class="reference internal" href="chp_05.html#fig-bikes-data2"><span class="std std-numref">Fig. 5.9</span></a>.</span><a class="headerlink" href="#fig-bart-bikes" title="Permalink to this image">¶</a></p>
+<a class="reference internal" href="chp_05.html#fig-bikes-data2"><span class="std std-numref">Fig. 5.9</span></a>.</span><a class="headerlink" href="#fig-bart-bikes" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The literature around BART tends to highlight its ability to, generally,
@@ -976,7 +787,7 @@ that for some problems being able to adjust the knots could be
 beneficial for the problem at hand, and that is fine.</p>
 </section>
 <section id="generalized-bart-models">
-<span id="id17"></span><h2><span class="section-number">7.6. </span>Generalized BART Models<a class="headerlink" href="#generalized-bart-models" title="Permalink to this heading">¶</a></h2>
+<span id="id17"></span><h2><span class="section-number">7.6. </span>Generalized BART Models<a class="headerlink" href="#generalized-bart-models" title="Permalink to this heading">#</a></h2>
 <p>The PyMC3 implementation of BART attempts to make it easy to use
 different likelihoods <a class="footnote-reference brackets" href="#id45" id="id18" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a> similar to how the Generalized Linear Model
 does as we saw in Chapter <a class="reference internal" href="chp_03.html#chap2"><span class="std std-ref">3</span></a>. Let us see how to use a
@@ -990,7 +801,7 @@ model with Gaussian likelihood from Code Block
 <a class="reference internal" href="#bart-model-gauss"><span class="std std-ref">bart_model_gauss</span></a> as reference we see
 that differences are small:</p>
 <div class="literal-block-wrapper docutils container" id="bart-model-bern">
-<div class="code-block-caption"><span class="caption-number">Listing 7.2 </span><span class="caption-text">bart_model_bern</span><a class="headerlink" href="#bart-model-bern" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 7.2 </span><span class="caption-text">bart_model_bern</span><a class="headerlink" href="#bart-model-bern" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
     <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">BART</span><span class="p">(</span><span class="s2">&quot;μ&quot;</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
                 <span class="n">inv_link</span><span class="o">=</span><span class="s2">&quot;logistic&quot;</span><span class="p">)</span>
@@ -1022,7 +833,7 @@ large).</p>
 <figcaption>
 <p><span class="caption-number">Fig. 7.6 </span><span class="caption-text">LOO comparison of the model in Code Block
 <a class="reference internal" href="#bart-model-bern"><span class="std std-ref">bart_model_bern</span></a> with <span class="math notranslate nohighlight">\(m\)</span> values (2, 10,
-20, 50). According to LOO, <span class="math notranslate nohighlight">\(m=10\)</span> provides the best fit.</span><a class="headerlink" href="#fig-bart-space-flu-comp" title="Permalink to this image">¶</a></p>
+20, 50). According to LOO, <span class="math notranslate nohighlight">\(m=10\)</span> provides the best fit.</span><a class="headerlink" href="#fig-bart-space-flu-comp" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="fig-bart-space-flu-fit">
@@ -1030,7 +841,7 @@ large).</p>
 <figcaption>
 <p><span class="caption-number">Fig. 7.7 </span><span class="caption-text">BART fit to the Space Influenza dataset with 4 values for <span class="math notranslate nohighlight">\(m\)</span> (2, 10,
 20, 50). In line with LOO, the model with <span class="math notranslate nohighlight">\(m\)</span> is underfitting and with
-the one with <span class="math notranslate nohighlight">\(m=50\)</span> is overfitting.</span><a class="headerlink" href="#fig-bart-space-flu-fit" title="Permalink to this image">¶</a></p>
+the one with <span class="math notranslate nohighlight">\(m=50\)</span> is overfitting.</span><a class="headerlink" href="#fig-bart-space-flu-fit" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>So far we have discussed regressions with a single covariate, we do this
@@ -1043,7 +854,7 @@ out how much each covariate is contributing to the outcome. In the next
 sections we will show how this is done.</p>
 </section>
 <section id="interpretability-of-barts">
-<span id="id19"></span><h2><span class="section-number">7.7. </span>Interpretability of BARTs<a class="headerlink" href="#interpretability-of-barts" title="Permalink to this heading">¶</a></h2>
+<span id="id19"></span><h2><span class="section-number">7.7. </span>Interpretability of BARTs<a class="headerlink" href="#interpretability-of-barts" title="Permalink to this heading">#</a></h2>
 <p>Individual decision trees are generally easy to interpret, but this is
 no longer true when we add a bunch of trees together. One may think that
 the reason is that by adding trees we get some weird unrecognizable or
@@ -1064,7 +875,7 @@ discuss two related tools below: <strong>Partial Dependence Plots</strong> (PDP)
 <span id="id21">[<a class="reference internal" href="references.html#id72" title="Jerome H Friedman. Greedy function approximation: a gradient boosting machine. Annals of statistics, pages 1189–1232, 2001.">76</a>]</span> and <strong>Individual Conditional Expectation</strong> (ICE) plots
 <span id="id22">[<a class="reference internal" href="references.html#id73" title="Alex Goldstein, Adam Kapelner, Justin Bleich, and Emil Pitkin. Peeking inside the black box: visualizing statistical learning with plots of individual conditional expectation. journal of Computational and Graphical Statistics, 24(1):44–65, 2015.">77</a>]</span>.</p>
 <section id="partial-dependence-plots">
-<span id="id23"></span><h3><span class="section-number">7.7.1. </span>Partial Dependence Plots<a class="headerlink" href="#partial-dependence-plots" title="Permalink to this heading">¶</a></h3>
+<span id="id23"></span><h3><span class="section-number">7.7.1. </span>Partial Dependence Plots<a class="headerlink" href="#partial-dependence-plots" title="Permalink to this heading">#</a></h3>
 <p>A very common method that appears in the BART literature is the so
 called Partial Dependence Plot (PDP) <span id="id24">[<a class="reference internal" href="references.html#id72" title="Jerome H Friedman. Greedy function approximation: a gradient boosting machine. Annals of statistics, pages 1189–1232, 2001.">76</a>]</span> (see
 <a class="reference internal" href="#fig-pdp-fake-example"><span class="std std-numref">Fig. 7.8</span></a>). A PDP shows how the value of the
@@ -1072,7 +883,7 @@ predicted variable changes when we change a covariate while averaging
 over the marginal distribution of the rest of the covariates. That is,
 we compute and then plot:</p>
 <div class="math notranslate nohighlight" id="equation-eq-partial-dependence">
-<span class="eqno">(7.6)<a class="headerlink" href="#equation-eq-partial-dependence" title="Permalink to this equation">¶</a></span>\[\tilde{Y}_{\boldsymbol{X}_i}= \mathbb{E}_{\boldsymbol{X}_{-i}}[\tilde{Y}(\boldsymbol{X}_i, \boldsymbol{X}_{-i})] \approx \frac{1}{n}\sum_{j=1}^{n} \tilde{Y}(\boldsymbol{X}_i, \boldsymbol{X}_{-ij})\]</div>
+<span class="eqno">(7.6)<a class="headerlink" href="#equation-eq-partial-dependence" title="Permalink to this equation">#</a></span>\[\tilde{Y}_{\boldsymbol{X}_i}= \mathbb{E}_{\boldsymbol{X}_{-i}}[\tilde{Y}(\boldsymbol{X}_i, \boldsymbol{X}_{-i})] \approx \frac{1}{n}\sum_{j=1}^{n} \tilde{Y}(\boldsymbol{X}_i, \boldsymbol{X}_{-ij})\]</div>
 <p>where <span class="math notranslate nohighlight">\(\tilde{Y}_{\boldsymbol{X}_i}\)</span> is the value of the predicted
 variable as a function of <span class="math notranslate nohighlight">\(\boldsymbol{X}_i\)</span> while all the variables
 except <span class="math notranslate nohighlight">\(i\)</span> (<span class="math notranslate nohighlight">\(\boldsymbol{X}_{-i}\)</span>) have been marginalized. In general
@@ -1096,7 +907,7 @@ counterfactual device.</p>
 variables (<span class="math notranslate nohighlight">\(X_{-i}\)</span>). The gray bands represent the HDI 94%. Both the
 mean and HDI bands has been smoothed (see <code class="docutils literal notranslate"><span class="pre">plot_ppd</span></code> function). The
 rugplot, the black bars at the bottom of each subplot, shows the
-observed values for each covariate.</span><a class="headerlink" href="#fig-pdp-fake-example" title="Permalink to this image">¶</a></p>
+observed values for each covariate.</span><a class="headerlink" href="#fig-pdp-fake-example" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p><a class="reference internal" href="#fig-pdp-fake-example"><span class="std std-numref">Fig. 7.8</span></a> shows a PDP after fitting a BART model to
@@ -1137,7 +948,7 @@ while marginalizing the contributions from the rest of the variables
 (<span class="math notranslate nohighlight">\(X_{-i}\)</span>). The gray bands represent the HDI 94%. Both the mean and HDI
 bands have been smoothed (see <code class="docutils literal notranslate"><span class="pre">plot_ppd</span></code> function). The rugplot, the
 black bars at the bottom of each subplot, shows the observed values for
-each covariate.</span><a class="headerlink" href="#fig-partial-dependence-plot-bikes" title="Permalink to this image">¶</a></p>
+each covariate.</span><a class="headerlink" href="#fig-partial-dependence-plot-bikes" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>One assumption when computing partial dependence plots is that variables
@@ -1167,7 +978,7 @@ useful for large datasets, is to subsample <span class="math notranslate nohighl
 </div>
 </section>
 <section id="individual-conditional-expectation">
-<span id="id26"></span><h3><span class="section-number">7.7.2. </span>Individual Conditional Expectation<a class="headerlink" href="#individual-conditional-expectation" title="Permalink to this heading">¶</a></h3>
+<span id="id26"></span><h3><span class="section-number">7.7.2. </span>Individual Conditional Expectation<a class="headerlink" href="#individual-conditional-expectation" title="Permalink to this heading">#</a></h3>
 <p>Individual Conditional Expectation (ICE) plots are closely related to
 PDPs. The difference is that instead of plotting the target covariates’
 average partial effect on the predicted response, we plot the <span class="math notranslate nohighlight">\(n\)</span>
@@ -1188,7 +999,7 @@ and wind speed while fixing the rest (<span class="math notranslate nohighlight"
 The blue curve corresponds to the average of the gray curves. All curves
 have been smoothed (see <code class="docutils literal notranslate"><span class="pre">plot_ice</span></code> function). The rugplot, the black
 bars at the bottom of each subplot, shows the observed values for each
-covariate.</span><a class="headerlink" href="#fig-individual-conditional-expectation-plot-bikes" title="Permalink to this image">¶</a></p>
+covariate.</span><a class="headerlink" href="#fig-individual-conditional-expectation-plot-bikes" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Individual conditional expectation plots are best suited to problems
@@ -1206,7 +1017,7 @@ Notice how the value of <span class="math notranslate nohighlight">\(X_1\)</span
 <figcaption>
 <p><span class="caption-number">Fig. 7.11 </span><span class="caption-text">Partial dependence plot vs individual conditional expectation plot.
 First panel, scatter plot between <span class="math notranslate nohighlight">\(X_1\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>, middle panel partial
-dependence plot, last panel individual conditional expectation plot.</span><a class="headerlink" href="#fig-pdp-vs-ice-toy" title="Permalink to this image">¶</a></p>
+dependence plot, last panel individual conditional expectation plot.</span><a class="headerlink" href="#fig-pdp-vs-ice-toy" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>In the first panel of <a class="reference internal" href="#fig-pdp-vs-ice-toy"><span class="std std-numref">Fig. 7.11</span></a> we plot <span class="math notranslate nohighlight">\(X_1\)</span> versus
@@ -1224,7 +1035,7 @@ information <a class="footnote-reference brackets" href="#id47" id="id28" role="
 </section>
 </section>
 <section id="variable-selection">
-<span id="sec-variable-selection"></span><h2><span class="section-number">7.8. </span>Variable Selection<a class="headerlink" href="#variable-selection" title="Permalink to this heading">¶</a></h2>
+<span id="sec-variable-selection"></span><h2><span class="section-number">7.8. </span>Variable Selection<a class="headerlink" href="#variable-selection" title="Permalink to this heading">#</a></h2>
 <p>When fitting regressions with more than one predictor it is often of
 interest to learn which predictors are most important. Under some
 scenarios we may be genuinely interested in better understanding how
@@ -1283,7 +1094,7 @@ contribute to the predictor variable and the rest are noise. Middle
 panel, the first 5 variable are related to the output variable. Finally
 on the right panel the 10 input variables are completely unrelated to
 the predictor variable. The black dashed line represents the value of
-the variable importance if all variables were equally important.</span><a class="headerlink" href="#fig-bart-vi-toy" title="Permalink to this image">¶</a></p>
+the variable importance if all variables were equally important.</span><a class="headerlink" href="#fig-bart-vi-toy" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>One thing we can see from <a class="reference internal" href="#fig-bart-vi-toy"><span class="std std-numref">Fig. 7.12</span></a> is the effect of
@@ -1316,7 +1127,7 @@ Nevertheless, the lack of a clear threshold separating the important
 from the unimportant variables can be seen as problematic. Some
 alternative methods have been proposed <span id="id32">[<a class="reference internal" href="references.html#id71" title="Colin J. Carlson. Embarcadero: species distribution modelling with bayesian additive regression trees in r. Methods in Ecology and Evolution, 11(7):850–858, 2020.">79</a>, <a class="reference internal" href="references.html#id76" title="Justin Bleich, Adam Kapelner, Edward I George, and Shane T Jensen. Variable selection for bart: an application to gene regulation. The Annals of Applied Statistics, pages 1750–1781, 2014.">80</a>]</span>. One
 of such methods can be summarized as follow:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Fit a model many times (around 50) using a small value of <span class="math notranslate nohighlight">\(m\)</span>, like
 25 <a class="footnote-reference brackets" href="#id48" id="id33" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a>. Record the root mean squared error.</p></li>
 <li><p>Eliminate the least informative variable across all 50 runs.</p></li>
@@ -1346,12 +1157,12 @@ expectation plots (Figure
 <figcaption>
 <p><span class="caption-number">Fig. 7.13 </span><span class="caption-text">Relative variable importance from fitted BARTs with different number of
 trees. Hour is the most important covariate followed by the temperature.
-The humidity and windspeed appear as less relevant covariates.</span><a class="headerlink" href="#fig-bart-vi-bikes" title="Permalink to this image">¶</a></p>
+The humidity and windspeed appear as less relevant covariates.</span><a class="headerlink" href="#fig-bart-vi-bikes" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="priors-for-bart-in-pymc3">
-<span id="id35"></span><h2><span class="section-number">7.9. </span>Priors for BART in PyMC3<a class="headerlink" href="#priors-for-bart-in-pymc3" title="Permalink to this heading">¶</a></h2>
+<span id="id35"></span><h2><span class="section-number">7.9. </span>Priors for BART in PyMC3<a class="headerlink" href="#priors-for-bart-in-pymc3" title="Permalink to this heading">#</a></h2>
 <p>Compared to other models in this book, BARTs are the most <em>blackboxsy</em>.
 We are not able to set whatever priors we want to generate a BART model.
 We instead control predefined priors through a few parameters. PyMC3
@@ -1401,9 +1212,9 @@ problem-tailored models as is usually the case with probabilistic
 programming languages.</p>
 </section>
 <section id="exercises">
-<span id="exercises7"></span><h2><span class="section-number">7.10. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">¶</a></h2>
+<span id="exercises7"></span><h2><span class="section-number">7.10. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <p><strong>7E1.</strong> Explain each of the following</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>How is BART different from linear regression and splines.</p></li>
 <li><p>When you may want to use linear regression over BART?</p></li>
 <li><p>When you may want to use splines over BART?</p></li>
@@ -1424,7 +1235,7 @@ tree. What is the difference in the two approaches? What are the
 tradeoffs?</p>
 <p><strong>7E7.</strong> Below we provide some data. To each data fit a BART
 model with m=50. Plot the fit, including the data. Describe the fit.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">np.linspace(-1,</span> <span class="pre">1.,</span> <span class="pre">200)</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">np.random.normal(2*x,</span> <span class="pre">0.25)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">np.linspace(-1,</span> <span class="pre">1.,</span> <span class="pre">200)</span></code> and
 <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">np.random.normal(x**2,</span> <span class="pre">0.25)</span></code></p></li>
@@ -1440,7 +1251,7 @@ number of counts is large, but still brings some problems, like
 predicting negative number of rented bikes (for example, at night when
 the observed number of rented bikes is close to zero). To fix this issue
 and improve our models we can try with other likelihoods:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>use a Poisson likelihood (hint you will need to use an inverse link
 function, check <code class="docutils literal notranslate"><span class="pre">pm.Bart</span></code> docstring). How the fit differs from the
 example in the book. Is this a better fit? In what sense?</p></li>
@@ -1549,7 +1360,7 @@ could be problematic.</p>
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./markdown"
         },
         predefinedOutput: true
@@ -1557,44 +1368,123 @@ could be problematic.</p>
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="chp_06.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">6. </span>Time Series</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chp_06.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Time Series</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="chp_08.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="chp_08.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title"><span class="section-number">8. </span>Approximate Bayesian Computation</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
+                </footer>
+              
+            </div>
             
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Martin, Kumar, Lao<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-trees">7.1. Decision Trees</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensembles-of-decision-trees">7.1.1. Ensembles of Decision Trees</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bart-model">7.2. The BART Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#priors-for-bart">7.3. Priors for BART</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prior-independence">7.3.1. Prior Independence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prior-for-the-tree-structure-mathcal-t-j">7.3.2. Prior for the Tree Structure <span class="math notranslate nohighlight">\(\mathcal{T}_j\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prior-for-the-leaf-values-mu-ij-and-number-of-trees-m">7.3.3. Prior for the Leaf Values <span class="math notranslate nohighlight">\(\mu_{ij}\)</span> and Number of Trees <span class="math notranslate nohighlight">\(m\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-bayesian-additive-regression-trees">7.4. Fitting Bayesian Additive Regression Trees</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bart-bikes">7.5. BART Bikes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generalized-bart-models">7.6. Generalized BART Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretability-of-barts">7.7. Interpretability of BARTs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partial-dependence-plots">7.7.1. Partial Dependence Plots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#individual-conditional-expectation">7.7.2. Individual Conditional Expectation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-selection">7.8. Variable Selection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#priors-for-bart-in-pymc3">7.9. Priors for BART in PyMC3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">7.10. Exercises</a></li>
+</ul>
+  </nav></div>
 
-      </div>
-    </div>
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Martin, Kumar, Lao
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

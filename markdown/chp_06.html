@@ -1,39 +1,47 @@
 
+
 <!DOCTYPE html>
 
-<html lang="en">
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>6. Time Series &#8212; Bayesian Modeling and Computation in Python</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-codeautolink.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -42,12 +50,13 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -56,494 +65,323 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'markdown/chp_06';</script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="7. Bayesian Additive Regression Trees" href="chp_07.html" />
     <link rel="prev" title="5. Splines" href="chp_05.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en">
-    
-
-    <!-- Google Analytics -->
-    
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-702QMHG8ST"></script>
-<script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){ dataLayer.push(arguments); }
-                    gtag('js', new Date());
-                    gtag('config', 'G-702QMHG8ST');
-                </script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-      
-      
-      <h1 class="site-logo" id="site-title">Bayesian Modeling and Computation in Python</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 0
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="dedication.html">
-   Dedication
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="foreword.html">
-   Foreword
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="preface.html">
-   Preface
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="symbollist.html">
-   Symbols
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 1
- </span>
-</p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_01.html">
-   1. Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_02.html">
-   2. Exploratory Analysis of Bayesian Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_03.html">
-   3. Linear Models and Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_04.html">
-   4. Extending Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_05.html">
-   5. Splines
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   6. Time Series
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_07.html">
-   7. Bayesian Additive Regression Trees
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_08.html">
-   8. Approximate Bayesian Computation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_09.html">
-   9. End to End Bayesian Workflows
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_10.html">
-   10. Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_11.html">
-   11. Appendiceal Topics
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="glossary.html">
-   12. Glossary
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="references.html">
-   13. References
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 2
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_01.html">
-   Code 1: Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_02.html">
-   Code 2: Exploratory Analysis of Bayesian Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_03.html">
-   Code 3: Linear Models and Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_04.html">
-   Code 4: Extending Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_05.html">
-   Code 5: Splines
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_06.html">
-   Code 6: Time Series
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_07.html">
-   Code 7: Bayesian Additive Regression Trees
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_08.html">
-   Code 8: Approximate Bayesian Computation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_09.html">
-   Code 9: End to End Bayesian Workflows
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_10.html">
-   Code 10: Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_11.html">
-   Code 11: Appendiceal Topics
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 3
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../solutions/chp_01.html">
-   Solutions 1: Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../solutions/chp_02.html">
-   Solutions 2: Exploratory Analysis of Bayesian models
-  </a>
- </li>
-</ul>
-
-    </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_06.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+      <div class="bd-sidebar-primary bd-sidebar">
         
-    </div>
-</div>
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
+  
 
-            <!-- Launch buttons -->
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#an-overview-of-time-series-problems">
-   6.1. An Overview of Time Series Problems
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#time-series-analysis-as-a-regression-problem">
-   6.2. Time Series Analysis as a Regression Problem
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#design-matrices-for-time-series">
-     6.2.1. Design Matrices for Time Series
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#basis-functions-and-generalized-additive-model">
-     6.2.2. Basis Functions and Generalized Additive Model
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#autoregressive-models">
-   6.3. Autoregressive Models
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#latent-ar-process-and-smoothing">
-     6.3.1. Latent AR Process and Smoothing
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#s-ar-i-ma-x">
-     6.3.2. (S)AR(I)MA(X)
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#state-space-models">
-   6.4. State Space Models
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#linear-gaussian-state-space-models-and-kalman-filter">
-     6.4.1. Linear Gaussian State Space Models and Kalman filter
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#arima-expressed-as-a-state-space-model">
-     6.4.2. ARIMA, Expressed as a State Space Model
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#bayesian-structural-time-series">
-     6.4.3. Bayesian Structural Time Series
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#other-time-series-models">
-   6.5. Other Time Series Models
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#model-criticism-and-choosing-priors">
-   6.6. Model Criticism and Choosing Priors
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#priors-for-time-series-models">
-     6.6.1. Priors for Time Series Models
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
-   6.7. Exercises
-  </a>
- </li>
+<a class="navbar-brand logo" href="../welcome.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Bayesian Modeling and Computation in Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 0</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="dedication.html">Dedication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="foreword.html">Foreword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preface.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="symbollist.html">Symbols</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 1</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chp_01.html">1. Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_02.html">2. Exploratory Analysis of Bayesian Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_03.html">3. Linear Models and Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_04.html">4. Extending Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_05.html">5. Splines</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_07.html">7. Bayesian Additive Regression Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_08.html">8. Approximate Bayesian Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_09.html">9. End to End Bayesian Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_10.html">10. Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_11.html">11. Appendiceal Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">12. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">13. References</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_01.html">Code 1: Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_02.html">Code 2: Exploratory Analysis of Bayesian Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_03.html">Code 3: Linear Models and Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_04.html">Code 4: Extending Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_05.html">Code 5: Splines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_06.html">Code 6: Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_07.html">Code 7: Bayesian Additive Regression Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_08.html">Code 8: Approximate Bayesian Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_09.html">Code 9: End to End Bayesian Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_10.html">Code 10: Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_11.html">Code 11: Appendiceal Topics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../solutions/chp_01.html">Solutions 1: Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/chp_02.html">Solutions 2: Exploratory Analysis of Bayesian models</a></li>
 </ul>
 
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_06.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Time Series</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-overview-of-time-series-problems">6.1. An Overview of Time Series Problems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-analysis-as-a-regression-problem">6.2. Time Series Analysis as a Regression Problem</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#design-matrices-for-time-series">6.2.1. Design Matrices for Time Series</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basis-functions-and-generalized-additive-model">6.2.2. Basis Functions and Generalized Additive Model</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autoregressive-models">6.3. Autoregressive Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#latent-ar-process-and-smoothing">6.3.1. Latent AR Process and Smoothing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#s-ar-i-ma-x">6.3.2. (S)AR(I)MA(X)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-space-models">6.4. State Space Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-gaussian-state-space-models-and-kalman-filter">6.4.1. Linear Gaussian State Space Models and Kalman filter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arima-expressed-as-a-state-space-model">6.4.2. ARIMA, Expressed as a State Space Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-structural-time-series">6.4.3. Bayesian Structural Time Series</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-time-series-models">6.5. Other Time Series Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-criticism-and-choosing-priors">6.6. Model Criticism and Choosing Priors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#priors-for-time-series-models">6.6.1. Priors for Time Series Models</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">6.7. Exercises</a></li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Time Series</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#an-overview-of-time-series-problems">
-   6.1. An Overview of Time Series Problems
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#time-series-analysis-as-a-regression-problem">
-   6.2. Time Series Analysis as a Regression Problem
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#design-matrices-for-time-series">
-     6.2.1. Design Matrices for Time Series
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#basis-functions-and-generalized-additive-model">
-     6.2.2. Basis Functions and Generalized Additive Model
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#autoregressive-models">
-   6.3. Autoregressive Models
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#latent-ar-process-and-smoothing">
-     6.3.1. Latent AR Process and Smoothing
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#s-ar-i-ma-x">
-     6.3.2. (S)AR(I)MA(X)
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#state-space-models">
-   6.4. State Space Models
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#linear-gaussian-state-space-models-and-kalman-filter">
-     6.4.1. Linear Gaussian State Space Models and Kalman filter
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#arima-expressed-as-a-state-space-model">
-     6.4.2. ARIMA, Expressed as a State Space Model
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#bayesian-structural-time-series">
-     6.4.3. Bayesian Structural Time Series
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#other-time-series-models">
-   6.5. Other Time Series Models
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#model-criticism-and-choosing-priors">
-   6.6. Model Criticism and Choosing Priors
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#priors-for-time-series-models">
-     6.6.1. Priors for Time Series Models
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
-   6.7. Exercises
-  </a>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="time-series">
-<span id="chap4"></span><h1><span class="section-number">6. </span>Time Series<a class="headerlink" href="#time-series" title="Permalink to this heading">¶</a></h1>
+<span id="chap4"></span><h1><span class="section-number">6. </span>Time Series<a class="headerlink" href="#time-series" title="Permalink to this heading">#</a></h1>
 <p>“It is difficult to make predictions, especially about the future”.
 This is true when dutch politician Karl Kristian Steincke allegedly said
 this sometime in the 1940s <a class="footnote-reference brackets" href="#id52" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, and it is still true today especially
@@ -562,7 +400,7 @@ Filter. The remainder of the chapter will give a brief summary of model
 comparison as well as considerations to be made when choosing prior
 distributions for time series models.</p>
 <section id="an-overview-of-time-series-problems">
-<span id="id2"></span><h2><span class="section-number">6.1. </span>An Overview of Time Series Problems<a class="headerlink" href="#an-overview-of-time-series-problems" title="Permalink to this heading">¶</a></h2>
+<span id="id2"></span><h2><span class="section-number">6.1. </span>An Overview of Time Series Problems<a class="headerlink" href="#an-overview-of-time-series-problems" title="Permalink to this heading">#</a></h2>
 <p>In many real life applications we observe data sequentially in time,
 generating timestamps along the way each time we make an observation. In
 addition to the observation itself, the timestamp information can be
@@ -588,7 +426,7 @@ price, hourly temperature, hourly rainfall amounts.</p></li>
 <p>It is thus quite natural and useful to consider the decomposition of a
 time series into:</p>
 <div class="math notranslate nohighlight" id="equation-eq-generic-time-series">
-<span class="eqno">(6.1)<a class="headerlink" href="#equation-eq-generic-time-series" title="Permalink to this equation">¶</a></span>\[    y_t = \text{Trend}_t + \text{Seasonality}_t + \text{Residuals}_t\]</div>
+<span class="eqno">(6.1)<a class="headerlink" href="#equation-eq-generic-time-series" title="Permalink to this equation">#</a></span>\[    y_t = \text{Trend}_t + \text{Seasonality}_t + \text{Residuals}_t\]</div>
 <p>Most of the classical time series models are based on this
 decomposition. In this chapter, we will discuss modeling approaches on
 time series that display some level of temporal trend and seasonality,
@@ -596,7 +434,7 @@ and explore methods to capture these regular patterns, as well as the
 less-regular patterns (e.g., residuals correlated in time).</p>
 </section>
 <section id="time-series-analysis-as-a-regression-problem">
-<span id="id5"></span><h2><span class="section-number">6.2. </span>Time Series Analysis as a Regression Problem<a class="headerlink" href="#time-series-analysis-as-a-regression-problem" title="Permalink to this heading">¶</a></h2>
+<span id="id5"></span><h2><span class="section-number">6.2. </span>Time Series Analysis as a Regression Problem<a class="headerlink" href="#time-series-analysis-as-a-regression-problem" title="Permalink to this heading">#</a></h2>
 <p>We will start with modeling a time series with a linear regression model
 on a widely used demo data set that appears in many tutorials (e.g.,
 PyMC3, TensorFlow Probability) and it was used as an example in the
@@ -615,11 +453,11 @@ training set only, and evaluate the forecast against the testing set.</p>
 <p><span class="caption-number">Fig. 6.1 </span><span class="caption-text">Monthly CO₂ measurements in Mauna Loa from 1966 January to 2019
 February, split into training (shown in black) and testing (shown in
 blue) set. We can see a strong upward trend and seasonality pattern in
-the data.</span><a class="headerlink" href="#fig-fig1-co2-by-month" title="Permalink to this image">¶</a></p>
+the data.</span><a class="headerlink" href="#fig-fig1-co2-by-month" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="literal-block-wrapper docutils container" id="load-co2-data">
-<div class="code-block-caption"><span class="caption-number">Listing 6.1 </span><span class="caption-text">load_co2_data</span><a class="headerlink" href="#load-co2-data" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 6.1 </span><span class="caption-text">load_co2_data</span><a class="headerlink" href="#load-co2-data" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">co2_by_month</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/monthly_mauna_loa_co2.csv&quot;</span><span class="p">)</span>
 <span class="n">co2_by_month</span><span class="p">[</span><span class="s2">&quot;date_month&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">co2_by_month</span><span class="p">[</span><span class="s2">&quot;date_month&quot;</span><span class="p">])</span>
 <span class="n">co2_by_month</span><span class="p">[</span><span class="s2">&quot;CO2&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">co2_by_month</span><span class="p">[</span><span class="s2">&quot;CO2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
@@ -637,7 +475,7 @@ with a timestamp. The month of the year could be nicely parsed into a
 vector of <span class="math notranslate nohighlight">\([1, 2, 3,\dots, 12, 1, 2,\dots]\)</span>. Recall that for linear
 regression we can state the likelihood as follows:</p>
 <div class="math notranslate nohighlight" id="equation-eq-regression-model">
-<span class="eqno">(6.2)<a class="headerlink" href="#equation-eq-regression-model" title="Permalink to this equation">¶</a></span>\[    Y \sim \mathcal{N}(\mathbf{X} \beta, \sigma)\]</div>
+<span class="eqno">(6.2)<a class="headerlink" href="#equation-eq-regression-model" title="Permalink to this equation">#</a></span>\[    Y \sim \mathcal{N}(\mathbf{X} \beta, \sigma)\]</div>
 <p>Considering the seasonality effect, we can use the month of the year
 predictor directly to index a vector of regression coefficient. Here
 using Code Block
@@ -656,11 +494,11 @@ transposed into <span class="math notranslate nohighlight">\(feature * timestamp
 the figure, the first row (index 0) contains continuous values between 0
 and 1 representing the time and the linear growth. The rest of the rows
 (index 1 - 12) are dummy coding of month information. The color coding
-goes from black for 1 to light gray for 0.</span><a class="headerlink" href="#fig-fig2-sparse-design-matrix" title="Permalink to this image">¶</a></p>
+goes from black for 1 to light gray for 0.</span><a class="headerlink" href="#fig-fig2-sparse-design-matrix" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="literal-block-wrapper docutils container" id="generate-design-matrix">
-<div class="code-block-caption"><span class="caption-number">Listing 6.2 </span><span class="caption-text">generate_design_matrix</span><a class="headerlink" href="#generate-design-matrix" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 6.2 </span><span class="caption-text">generate_design_matrix</span><a class="headerlink" href="#generate-design-matrix" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">trend_all</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">co2_by_month</span><span class="p">))[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
 <span class="n">trend_all</span> <span class="o">=</span> <span class="n">trend_all</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 <span class="n">trend</span> <span class="o">=</span> <span class="n">trend_all</span><span class="p">[:</span><span class="o">-</span><span class="n">num_forecast_steps</span><span class="p">,</span> <span class="p">:]</span>
@@ -702,7 +540,7 @@ problem, using <code class="docutils literal notranslate"><span class="pre">tfd.
 <code class="docutils literal notranslate"><span class="pre">tfd.JointDistributionCoroutine</span></code> API and TFP Bayesian modeling methods
 we introduced in Chapter <a class="reference internal" href="chp_03.html#chap2"><span class="std std-ref">3</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="regression-model-for-timeseries">
-<div class="code-block-caption"><span class="caption-number">Listing 6.3 </span><span class="caption-text">regression_model_for_timeseries</span><a class="headerlink" href="#regression-model-for-timeseries" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 6.3 </span><span class="caption-text">regression_model_for_timeseries</span><a class="headerlink" href="#regression-model-for-timeseries" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tfd</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">distributions</span>
 <span class="n">root</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">JointDistributionCoroutine</span><span class="o">.</span><span class="n">Root</span>
 
@@ -744,7 +582,7 @@ workflow. To draw prior and prior predictive samples, we can call the
 <a class="reference internal" href="#prior-predictive"><span class="std std-ref">prior_predictive</span></a>, with the result
 shown in <a class="reference internal" href="#fig-fig3-prior-predictive1"><span class="std std-numref">Fig. 6.3</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="prior-predictive">
-<div class="code-block-caption"><span class="caption-number">Listing 6.4 </span><span class="caption-text">prior_predictive</span><a class="headerlink" href="#prior-predictive" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 6.4 </span><span class="caption-text">prior_predictive</span><a class="headerlink" href="#prior-predictive" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Draw 100 prior and prior predictive samples</span>
 <span class="n">prior_samples</span> <span class="o">=</span> <span class="n">ts_regression_model</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>  
 <span class="n">prior_predictive_timeseries</span> <span class="o">=</span> <span class="n">prior_samples</span><span class="o">.</span><span class="n">observed</span>
@@ -763,14 +601,14 @@ shown in <a class="reference internal" href="#fig-fig3-prior-predictive1"><span 
 <p><span class="caption-number">Fig. 6.3 </span><span class="caption-text">Prior predictive samples from a simple regression model for modeling the
 Monthly CO₂ measurements in Mauna Loa time series. Each line plot is
 one simulated time series. Since we use an uninformative prior the prior
-prediction has a pretty wide range.</span><a class="headerlink" href="#fig-fig3-prior-predictive1" title="Permalink to this image">¶</a></p>
+prediction has a pretty wide range.</span><a class="headerlink" href="#fig-fig3-prior-predictive1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>We can now run inference of the regression model and format the result
 into an <code class="docutils literal notranslate"><span class="pre">az.InferenceData</span></code> object in Code Block
 <a class="reference internal" href="#inference-of-regression-model"><span class="std std-ref">inference_of_regression_model</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="inference-of-regression-model">
-<div class="code-block-caption"><span class="caption-number">Listing 6.5 </span><span class="caption-text">inference_of_regression_model</span><a class="headerlink" href="#inference-of-regression-model" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 6.5 </span><span class="caption-text">inference_of_regression_model</span><a class="headerlink" href="#inference-of-regression-model" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">run_mcmc</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">function</span><span class="p">(</span>
     <span class="n">tfp</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">mcmc</span><span class="o">.</span><span class="n">windowed_adaptive_nuts</span><span class="p">,</span>
     <span class="n">autograph</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">jit_compile</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -804,7 +642,7 @@ with the result displayed in
 seasonality components and in <a class="reference internal" href="#fig-fig5-posterior-predictive1"><span class="std std-numref">Fig. 6.5</span></a>
 for the overall model fit and forecast.</p>
 <div class="literal-block-wrapper docutils container" id="posterior-predictive-with-component">
-<div class="code-block-caption"><span class="caption-number">Listing 6.6 </span><span class="caption-text">posterior_predictive_with_component</span><a class="headerlink" href="#posterior-predictive-with-component" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 6.6 </span><span class="caption-text">posterior_predictive_with_component</span><a class="headerlink" href="#posterior-predictive-with-component" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># We can draw posterior predictive sample with jd.sample_distributions()</span>
 <span class="c1"># But since we want to also plot the posterior predictive distribution for </span>
 <span class="c1"># each components, conditioned on both training and testing data, we</span>
@@ -826,7 +664,7 @@ for the overall model fit and forecast.</p>
 <a class="reference internal image-reference" href="../_images/fig4_posterior_predictive_components1.png"><img alt="../_images/fig4_posterior_predictive_components1.png" src="../_images/fig4_posterior_predictive_components1.png" style="width: 8.00in;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 6.4 </span><span class="caption-text">Posterior predictive samples of the trend component and seasonality
-component of a regression model for time series.</span><a class="headerlink" href="#fig-fig4-posterior-predictive-components1" title="Permalink to this image">¶</a></p>
+component of a regression model for time series.</span><a class="headerlink" href="#fig-fig4-posterior-predictive-components1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="fig-fig5-posterior-predictive1">
@@ -836,12 +674,12 @@ component of a regression model for time series.</span><a class="headerlink" hre
 series in gray, with the actual data plotted in black and blue. While
 the overall fit is reasonable for the training set (plotted in black),
 the forecast (out of sample prediction) is poor as the underlying trend
-is accelerating more than linearly.</span><a class="headerlink" href="#fig-fig5-posterior-predictive1" title="Permalink to this image">¶</a></p>
+is accelerating more than linearly.</span><a class="headerlink" href="#fig-fig5-posterior-predictive1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Looking at the out of sample prediction in
 <a class="reference internal" href="#fig-fig5-posterior-predictive1"><span class="std std-numref">Fig. 6.5</span></a>, we notice that:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>The linear trend does not perform well when we forecast further into
 the future and gives forecast consistently lower than the actual
 observed. Specifically the atmospheric CO₂ does not increase
@@ -851,7 +689,7 @@ to as the forecast cone), where intuitively we expect the
 uncertainty to increase when we forecast farther into the future.</p></li>
 </ol>
 <section id="design-matrices-for-time-series">
-<span id="id8"></span><h3><span class="section-number">6.2.1. </span>Design Matrices for Time Series<a class="headerlink" href="#design-matrices-for-time-series" title="Permalink to this heading">¶</a></h3>
+<span id="id8"></span><h3><span class="section-number">6.2.1. </span>Design Matrices for Time Series<a class="headerlink" href="#design-matrices-for-time-series" title="Permalink to this heading">#</a></h3>
 <p>In the regression model above, a rather simplistic design matrix was
 used. We can get a better model to capture our knowledge of the observed
 time series by adding additional information to our design matrix.</p>
@@ -874,7 +712,7 @@ we discussed in Section <a class="reference internal" href="chp_05.html#expandin
 context we specify this idea mathematically in Equation
 <a class="reference internal" href="#equation-eq-step-linear-function">(6.3)</a></p>
 <div class="math notranslate nohighlight" id="equation-eq-step-linear-function">
-<span class="eqno">(6.3)<a class="headerlink" href="#equation-eq-step-linear-function" title="Permalink to this equation">¶</a></span>\[    g(t) = (k + \mathbf{A}\delta) t + (m + \mathbf{A} \gamma)\]</div>
+<span class="eqno">(6.3)<a class="headerlink" href="#equation-eq-step-linear-function" title="Permalink to this equation">#</a></span>\[    g(t) = (k + \mathbf{A}\delta) t + (m + \mathbf{A} \gamma)\]</div>
 <p>where <span class="math notranslate nohighlight">\(k\)</span> is the (global) growth rate, <span class="math notranslate nohighlight">\(\delta\)</span> is a vector of rate
 adjustments at each change point, <span class="math notranslate nohighlight">\(m\)</span> is the (global) intercept.
 <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is a matrix with <code class="docutils literal notranslate"><span class="pre">shape=(n_t,</span> <span class="pre">n_s)</span></code> with <span class="math notranslate nohighlight">\(n_s\)</span> being the
@@ -888,7 +726,7 @@ sudden or large change in the slope. You can see in Code Block
 for an example of a randomly generated step linear function and its
 breakdown in <a class="reference internal" href="#fig-fig6-step-linear-function"><span class="std std-numref">Fig. 6.6</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="step-linear-function-for-trend">
-<div class="code-block-caption"><span class="caption-number">Listing 6.7 </span><span class="caption-text">step_linear_function_for_trend</span><a class="headerlink" href="#step-linear-function-for-trend" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 6.7 </span><span class="caption-text">step_linear_function_for_trend</span><a class="headerlink" href="#step-linear-function-for-trend" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n_changepoints</span> <span class="o">=</span> <span class="mi">8</span>
 <span class="n">n_tp</span> <span class="o">=</span> <span class="mi">500</span>
 <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n_tp</span><span class="p">)</span>
@@ -915,7 +753,7 @@ resulting function <span class="math notranslate nohighlight">\(g(t)\)</span> in
 we could use as trend in a time series model. The two middle panels are
 the breakdown of the two components in Equation
 <a class="reference internal" href="#equation-eq-step-linear-function">(6.3)</a>. Note how combining the two makes the
-resulting trend continuous.</span><a class="headerlink" href="#fig-fig6-step-linear-function" title="Permalink to this image">¶</a></p>
+resulting trend continuous.</span><a class="headerlink" href="#fig-fig6-step-linear-function" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>In practice, we usually specify a priori how many change points there
@@ -926,7 +764,7 @@ posterior towards 0. Automatic change point detection is also possible
 <span id="id12">[<a class="reference internal" href="references.html#id126" title="Ryan Prescott Adams and David JC MacKay. Bayesian online changepoint detection. arXiv preprint arXiv:0710.3742, 2007.">54</a>]</span>.</p>
 </section>
 <section id="basis-functions-and-generalized-additive-model">
-<span id="chp4-gam"></span><h3><span class="section-number">6.2.2. </span>Basis Functions and Generalized Additive Model<a class="headerlink" href="#basis-functions-and-generalized-additive-model" title="Permalink to this heading">¶</a></h3>
+<span id="chp4-gam"></span><h3><span class="section-number">6.2.2. </span>Basis Functions and Generalized Additive Model<a class="headerlink" href="#basis-functions-and-generalized-additive-model" title="Permalink to this heading">#</a></h3>
 <p>In our regression model defined in Code Block
 <a class="reference internal" href="#regression-model-for-timeseries"><span class="std std-ref">regression_model_for_timeseries</span></a>,
 we model the seasonality component with a sparse, index, matrix. An
@@ -940,7 +778,7 @@ more stable <span id="id13">[<a class="reference internal" href="references.html
 that can be used for approximating arbitrary smooth seasonal effects
 <span id="id14">[<a class="reference internal" href="references.html#id127" title="Andrew C Harvey and Neil Shephard. Structural time series models. Handbook of Statistics,(edited by GS Maddala, CR Rao and HD Vinod), 11:261–302, 1993.">56</a>]</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-fourier-basis-functions">
-<span class="eqno">(6.4)<a class="headerlink" href="#equation-eq-fourier-basis-functions" title="Permalink to this equation">¶</a></span>\[    s(t) = \sum^N_{n=1} \left[a_n \text{cos}\left(\frac{2 \pi nt}{P} \right) + b_n \text{sin}\left(\frac{2 \pi nt}{P}\right) \right]\]</div>
+<span class="eqno">(6.4)<a class="headerlink" href="#equation-eq-fourier-basis-functions" title="Permalink to this equation">#</a></span>\[    s(t) = \sum^N_{n=1} \left[a_n \text{cos}\left(\frac{2 \pi nt}{P} \right) + b_n \text{sin}\left(\frac{2 \pi nt}{P}\right) \right]\]</div>
 <p>where <span class="math notranslate nohighlight">\(P\)</span> is the regular period the time series has (e.g. <span class="math notranslate nohighlight">\(P = 365.25\)</span>
 for yearly data or <span class="math notranslate nohighlight">\(P = 7\)</span> for weekly data, when the time variable is
 scaled in days). We can generate them statically with formulation as
@@ -948,7 +786,7 @@ shown in Code Block
 <a class="reference internal" href="#fourier-basis-as-seasonality"><span class="std std-ref">fourier_basis_as_seasonality</span></a>,
 and visualize it in <a class="reference internal" href="#fig-fig7-fourier-basis"><span class="std std-numref">Fig. 6.7</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="fourier-basis-as-seasonality">
-<div class="code-block-caption"><span class="caption-number">Listing 6.8 </span><span class="caption-text">fourier_basis_as_seasonality</span><a class="headerlink" href="#fourier-basis-as-seasonality" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 6.8 </span><span class="caption-text">fourier_basis_as_seasonality</span><a class="headerlink" href="#fourier-basis-as-seasonality" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="k">def</span> <span class="nf">gen_fourier_basis</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">365.25</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
     <span class="n">x</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">t</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">/</span> <span class="n">p</span>
@@ -965,7 +803,7 @@ and visualize it in <a class="reference internal" href="#fig-fig7-fourier-basis"
 <a class="reference internal image-reference" href="../_images/fig7_fourier_basis.png"><img alt="../_images/fig7_fourier_basis.png" src="../_images/fig7_fourier_basis.png" style="width: 8.00in;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 6.7 </span><span class="caption-text">Fourier basis function with n=3. There are in total 6 predictors, where
-we highlighted the first one by setting the rest semi-transparent.</span><a class="headerlink" href="#fig-fig7-fourier-basis" title="Permalink to this image">¶</a></p>
+we highlighted the first one by setting the rest semi-transparent.</span><a class="headerlink" href="#fig-fig7-fourier-basis" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Fitting the seasonality using a design matrix generated from Fourier
@@ -999,7 +837,7 @@ measure is trending upward in general. This gives prior predictive
 samples in a similar range of what is actually being observed (see
 <a class="reference internal" href="#fig-fig8-prior-predictive2"><span class="std std-numref">Fig. 6.8</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="gam">
-<div class="code-block-caption"><span class="caption-number">Listing 6.9 </span><span class="caption-text">gam</span><a class="headerlink" href="#gam" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 6.9 </span><span class="caption-text">gam</span><a class="headerlink" href="#gam" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate trend design matrix</span>
 <span class="n">n_changepoints</span> <span class="o">=</span> <span class="mi">12</span>
 <span class="n">n_tp</span> <span class="o">=</span> <span class="n">seasonality_all</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -1049,7 +887,7 @@ informative prior on trend related parameters generated from Code Block
 <a class="reference internal" href="#gam"><span class="std std-ref">gam</span></a>. Each line plot is one simulated time series.
 The predictive samples are now in a similar range to what actually being
 observed, particularly when comparing this figure to
-<a class="reference internal" href="#fig-fig3-prior-predictive1"><span class="std std-numref">Fig. 6.3</span></a>.</span><a class="headerlink" href="#fig-fig8-prior-predictive2" title="Permalink to this image">¶</a></p>
+<a class="reference internal" href="#fig-fig3-prior-predictive1"><span class="std std-numref">Fig. 6.3</span></a>.</span><a class="headerlink" href="#fig-fig8-prior-predictive2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>After inference, we can generate posterior predictive samples. As you
@@ -1071,13 +909,13 @@ the last period.</p>
 <figcaption>
 <p><span class="caption-number">Fig. 6.9 </span><span class="caption-text">Posterior predictive samples from a Facebook Prophet-like from Code
 Block <a class="reference internal" href="#gam"><span class="std std-ref">gam</span></a> in gray, with the actual data plotted in
-black and blue.</span><a class="headerlink" href="#fig-fig9-posterior-predictive2" title="Permalink to this image">¶</a></p>
+black and blue.</span><a class="headerlink" href="#fig-fig9-posterior-predictive2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 </section>
 <section id="autoregressive-models">
-<span id="chap4-ar"></span><h2><span class="section-number">6.3. </span>Autoregressive Models<a class="headerlink" href="#autoregressive-models" title="Permalink to this heading">¶</a></h2>
+<span id="chap4-ar"></span><h2><span class="section-number">6.3. </span>Autoregressive Models<a class="headerlink" href="#autoregressive-models" title="Permalink to this heading">#</a></h2>
 <p>One characteristic of time series is the sequential dependency of the
 observations. This usually introduces structured errors that are
 correlated temporally on previous observation(s) or error(s). A typical
@@ -1086,7 +924,7 @@ distribution of output at time <span class="math notranslate nohighlight">\(t\)<
 of previous observations. Consider a first-order autoregressive model
 (usually we write that as AR(1) with a Gaussian likelihood:</p>
 <div class="math notranslate nohighlight" id="equation-eq-ar1">
-<span class="eqno">(6.5)<a class="headerlink" href="#equation-eq-ar1" title="Permalink to this equation">¶</a></span>\[    y_t \sim \mathcal{N}(\alpha + \rho y_{t-1}, \sigma)\]</div>
+<span class="eqno">(6.5)<a class="headerlink" href="#equation-eq-ar1" title="Permalink to this equation">#</a></span>\[    y_t \sim \mathcal{N}(\alpha + \rho y_{t-1}, \sigma)\]</div>
 <p>The distribution of <span class="math notranslate nohighlight">\(y_t\)</span> follows a Normal distribution with the
 location being a linear function of <span class="math notranslate nohighlight">\(y_{t-1}\)</span>. In Python, we can write
 down such a model with a for loop that explicitly builds out the
@@ -1097,7 +935,7 @@ draw random samples from it by conditioned on <span class="math notranslate nohi
 values of <span class="math notranslate nohighlight">\(\rho\)</span>. The result is shown in
 <a class="reference internal" href="#fig-fig10-ar1-process"><span class="std std-numref">Fig. 6.10</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="ar1-with-forloop">
-<div class="code-block-caption"><span class="caption-number">Listing 6.10 </span><span class="caption-text">ar1_with_forloop</span><a class="headerlink" href="#ar1-with-forloop" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 6.10 </span><span class="caption-text">ar1_with_forloop</span><a class="headerlink" href="#ar1-with-forloop" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n_t</span> <span class="o">=</span> <span class="mi">200</span>
 
 <span class="nd">@tfd</span><span class="o">.</span><span class="n">JointDistributionCoroutine</span>
@@ -1126,7 +964,7 @@ values of <span class="math notranslate nohighlight">\(\rho\)</span>. The result
 <figcaption>
 <p><span class="caption-number">Fig. 6.10 </span><span class="caption-text">Random sample of an AR(1) process with <span class="math notranslate nohighlight">\(\sigma = 1\)</span> and different
 <span class="math notranslate nohighlight">\(\rho\)</span>. Note that the AR(1) process is not stationary when
-<span class="math notranslate nohighlight">\(\mid \rho \mid &gt; 1\)</span>.</span><a class="headerlink" href="#fig-fig10-ar1-process" title="Permalink to this image">¶</a></p>
+<span class="math notranslate nohighlight">\(\mid \rho \mid &gt; 1\)</span>.</span><a class="headerlink" href="#fig-fig10-ar1-process" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Using a for-loop to generate the time series random variable is pretty
@@ -1157,7 +995,7 @@ operator <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> explic
 function <code class="docutils literal notranslate"><span class="pre">ar1_fun</span></code> applies the backshift operation and generates the
 distribution for the next step.</p>
 <div class="literal-block-wrapper docutils container" id="ar1-without-forloop">
-<div class="code-block-caption"><span class="caption-number">Listing 6.11 </span><span class="caption-text">ar1_without_forloop</span><a class="headerlink" href="#ar1-without-forloop" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 6.11 </span><span class="caption-text">ar1_without_forloop</span><a class="headerlink" href="#ar1-without-forloop" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@tfd</span><span class="o">.</span><span class="n">JointDistributionCoroutine</span>
 <span class="k">def</span> <span class="nf">ar1_without_forloop</span><span class="p">():</span>
     <span class="n">sigma</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="mf">1.</span><span class="p">))</span>
@@ -1182,7 +1020,7 @@ AR(1) process as likelihood. But before we do that let us rewrite the
 GAM in Code Block <a class="reference internal" href="#gam"><span class="std std-ref">gam</span></a> slightly differently into
 Code Block <a class="reference internal" href="#gam-alternative"><span class="std std-ref">gam_alternative</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="gam-alternative">
-<div class="code-block-caption"><span class="caption-number">Listing 6.12 </span><span class="caption-text">gam_alternative</span><a class="headerlink" href="#gam-alternative" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 6.12 </span><span class="caption-text">gam_alternative</span><a class="headerlink" href="#gam-alternative" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gam_trend_seasonality</span><span class="p">():</span>
     <span class="n">beta</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Sample</span><span class="p">(</span>
         <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">),</span> <span class="n">sample_shape</span><span class="o">=</span><span class="n">n_pred</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;beta&quot;</span><span class="p">))</span>
@@ -1225,7 +1063,7 @@ Code Block <a class="reference internal" href="#gam-alternative"><span class="st
 </div>
 <p>Comparing Code Block <a class="reference internal" href="#gam-alternative"><span class="std std-ref">gam_alternative</span></a>
 with Code Block <a class="reference internal" href="#gam"><span class="std std-ref">gam</span></a>, we see two major differences:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>We split out the construction of the trend and seasonality
 components (with their priors) into a separate function, and in the
 <code class="docutils literal notranslate"><span class="pre">tfd.JointDistributionCoroutine</span></code> model block we use a <code class="docutils literal notranslate"><span class="pre">yield</span> <span class="pre">from</span></code>
@@ -1240,7 +1078,7 @@ more modular approach. We can write down a GAM with an AR(1) likelihood
 by just changing the likelihood part. This is what we do in Code Block
 <a class="reference internal" href="#gam-with-ar-likelihood"><span class="std std-ref">gam_with_ar_likelihood</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="gam-with-ar-likelihood">
-<div class="code-block-caption"><span class="caption-number">Listing 6.13 </span><span class="caption-text">gam_with_ar_likelihood</span><a class="headerlink" href="#gam-with-ar-likelihood" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 6.13 </span><span class="caption-text">gam_with_ar_likelihood</span><a class="headerlink" href="#gam-with-ar-likelihood" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_gam_ar_likelihood</span><span class="p">(</span><span class="n">training</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 
     <span class="nd">@tfd</span><span class="o">.</span><span class="n">JointDistributionCoroutine</span>
@@ -1288,7 +1126,7 @@ Facebook Prophet -like GAM defined in Code Block
 panel is the <span class="math notranslate nohighlight">\(\sigma\)</span> in the model with a Normal likelihood, middle and
 rightmost panels are <span class="math notranslate nohighlight">\(\sigma\)</span> and <span class="math notranslate nohighlight">\(\rho\)</span> in the model with an AR(1)
 likelihood. Both models return a similar estimation of <span class="math notranslate nohighlight">\(\sigma\)</span>, with
-the <span class="math notranslate nohighlight">\(\rho\)</span> estimated centered around 0.</span><a class="headerlink" href="#fig-fig11-ar1-likelihood-rho" title="Permalink to this image">¶</a></p>
+the <span class="math notranslate nohighlight">\(\rho\)</span> estimated centered around 0.</span><a class="headerlink" href="#fig-fig11-ar1-likelihood-rho" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Instead of using an AR(k) likelihood, we can also include AR in a time
@@ -1296,7 +1134,7 @@ series model by adding a latent AR component to the linear prediction.
 This is the <code class="docutils literal notranslate"><span class="pre">gam_with_latent_ar</span></code> model in Code Block
 <a class="reference internal" href="#gam-with-latent-ar"><span class="std std-ref">gam_with_latent_ar</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="gam-with-latent-ar">
-<div class="code-block-caption"><span class="caption-number">Listing 6.14 </span><span class="caption-text">gam_with_latent_ar</span><a class="headerlink" href="#gam-with-latent-ar" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 6.14 </span><span class="caption-text">gam_with_latent_ar</span><a class="headerlink" href="#gam-with-latent-ar" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_gam_ar_latent</span><span class="p">(</span><span class="n">training</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 
     <span class="nd">@tfd</span><span class="o">.</span><span class="n">JointDistributionCoroutine</span>
@@ -1349,7 +1187,7 @@ series model (see <a class="reference internal" href="#fig-fig12-posterior-predi
 <p><span class="caption-number">Fig. 6.12 </span><span class="caption-text">Posterior predictive samples of the trend, seasonality, and AR(1)
 components of the GAM based time series model <code class="docutils literal notranslate"><span class="pre">gam_with_latent_ar</span></code>
 specified in Code Block
-<a class="reference internal" href="#gam-with-latent-ar"><span class="std std-ref">gam_with_latent_ar</span></a>.</span><a class="headerlink" href="#fig-fig12-posterior-predictive-ar1" title="Permalink to this image">¶</a></p>
+<a class="reference internal" href="#gam-with-latent-ar"><span class="std std-ref">gam_with_latent_ar</span></a>.</span><a class="headerlink" href="#fig-fig12-posterior-predictive-ar1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Another way to interpret the explicit latent AR process is that it
@@ -1368,18 +1206,18 @@ estimation of <span class="math notranslate nohighlight">\(\rho\)</span>.</p>
 the AR(1) latent component for <code class="docutils literal notranslate"><span class="pre">gam_with_latent_ar</span></code> specified in Code
 Block <a class="reference internal" href="#gam-with-latent-ar"><span class="std std-ref">gam_with_latent_ar</span></a>. Note not
 to be confused with <a class="reference internal" href="#fig-fig11-ar1-likelihood-rho"><span class="std std-numref">Fig. 6.11</span></a> where we
-displays posterior distribution of parameters from 2 different GAMs.</span><a class="headerlink" href="#fig-fig13-ar1-likelihood-rho2" title="Permalink to this image">¶</a></p>
+displays posterior distribution of parameters from 2 different GAMs.</span><a class="headerlink" href="#fig-fig13-ar1-likelihood-rho2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="latent-ar-process-and-smoothing">
-<span id="id18"></span><h3><span class="section-number">6.3.1. </span>Latent AR Process and Smoothing<a class="headerlink" href="#latent-ar-process-and-smoothing" title="Permalink to this heading">¶</a></h3>
+<span id="id18"></span><h3><span class="section-number">6.3.1. </span>Latent AR Process and Smoothing<a class="headerlink" href="#latent-ar-process-and-smoothing" title="Permalink to this heading">#</a></h3>
 <p>A latent process is quite powerful at capturing the subtle trends in the
 observed time series. It can even approximate some arbitrary functions.
 To see that let us consider modeling a toy problem with a time series
 model that contains a latent (GRW) component, as formulated in Equation
 <a class="reference internal" href="#equation-eq-gw-formulation1">(6.6)</a>.</p>
 <div class="math notranslate nohighlight" id="equation-eq-gw-formulation1">
-<span class="eqno">(6.6)<a class="headerlink" href="#equation-eq-gw-formulation1" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(6.6)<a class="headerlink" href="#equation-eq-gw-formulation1" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{split}
 z_i &amp; \sim \mathcal{N}(z_{i-1}, \sigma_{z}^2) \: \text{ for } i=1,\dots,N \\
 y_i &amp; \sim \mathcal{N}(z_i,  \sigma_{y}^2)
 \end{split}\end{split}\]</div>
@@ -1394,7 +1232,7 @@ smoothing. Thus we can express the model in Equation
 <a class="reference internal" href="#equation-eq-gw-formulation1">(6.6)</a> equivalently as Equation
 <a class="reference internal" href="#equation-eq-gw-formulation2">(6.7)</a>.</p>
 <div class="math notranslate nohighlight" id="equation-eq-gw-formulation2">
-<span class="eqno">(6.7)<a class="headerlink" href="#equation-eq-gw-formulation2" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(6.7)<a class="headerlink" href="#equation-eq-gw-formulation2" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{split}
 z_i &amp; \sim \mathcal{N}(z_{i-1}, (1 - \alpha) \sigma^2) \: \text{ for } i=1,\dots,N \\
 y_i &amp; \sim \mathcal{N}(z_i,   \alpha \sigma^2)
 \end{split}\end{split}\]</div>
@@ -1408,7 +1246,7 @@ black solid dots in <a class="reference internal" href="#fig-fig14-smoothing-wit
 fitted latent Random Walk displayed in the same Figure. As you can see
 we can approximate the underlying function pretty well.</p>
 <div class="literal-block-wrapper docutils container" id="gw-tfp">
-<div class="code-block-caption"><span class="caption-number">Listing 6.15 </span><span class="caption-text">gw_tfp</span><a class="headerlink" href="#gw-tfp" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 6.15 </span><span class="caption-text">gw_tfp</span><a class="headerlink" href="#gw-tfp" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@tfd</span><span class="o">.</span><span class="n">JointDistributionCoroutine</span>
 <span class="k">def</span> <span class="nf">smoothing_grw</span><span class="p">():</span>
     <span class="n">alpha</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Beta</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mf">1.</span><span class="p">))</span>
@@ -1428,7 +1266,7 @@ we can approximate the underlying function pretty well.</p>
 <span class="math notranslate nohighlight">\(f(x) = e^{1 + x^{0.5} - e^{\frac{x}{15}}}\)</span>, and the inferred latent
 Gaussian Random Walk. The gray semi-transparent region is the posterior
 94% HDI interval of the latent Gaussian Random Walk <span class="math notranslate nohighlight">\(z\)</span>, with the
-posterior mean plot in dash blue line.</span><a class="headerlink" href="#fig-fig14-smoothing-with-gw" title="Permalink to this image">¶</a></p>
+posterior mean plot in dash blue line.</span><a class="headerlink" href="#fig-fig14-smoothing-with-gw" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>There are a few other interesting properties of the AR process, with
@@ -1448,7 +1286,7 @@ alone already has the ability to approximate the underlying trend, a
 smoothed function, of the observed data as we have seen here.</p>
 </section>
 <section id="s-ar-i-ma-x">
-<span id="sarimax"></span><h3><span class="section-number">6.3.2. </span>(S)AR(I)MA(X)<a class="headerlink" href="#s-ar-i-ma-x" title="Permalink to this heading">¶</a></h3>
+<span id="sarimax"></span><h3><span class="section-number">6.3.2. </span>(S)AR(I)MA(X)<a class="headerlink" href="#s-ar-i-ma-x" title="Permalink to this heading">#</a></h3>
 <p>Many classical time series models share a similar autoregressive like
 pattern, where you have some latent parameter at time <span class="math notranslate nohighlight">\(t\)</span> that is
 dependent on the value of itself or another parameter at <span class="math notranslate nohighlight">\(t-k\)</span>. Two
@@ -1466,7 +1304,7 @@ While the naming might look intimidating, the basic concept is largely a
 straightforward combination of the AR and MA model. Extending the AR
 model with MA we get:</p>
 <div class="math notranslate nohighlight" id="equation-eq-arma">
-<span class="eqno">(6.8)<a class="headerlink" href="#equation-eq-arma" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(6.8)<a class="headerlink" href="#equation-eq-arma" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{split}
 y_t &amp; = \alpha + \sum_{i=1}^{p}\phi_i y_{t-i} + \sum_{j=1}^{q}\theta_j \epsilon_{t-j} + \epsilon_t \\
 \epsilon_t &amp; \sim \mathcal{N}(0, \sigma^2)
 \end{split}\end{split}\]</div>
@@ -1474,7 +1312,7 @@ y_t &amp; = \alpha + \sum_{i=1}^{p}\phi_i y_{t-i} + \sum_{j=1}^{q}\theta_j \epsi
 of the moving average model. Conventionally, we write models as such
 being ARMA(p, q). Similarly, for seasonal ARMA we have:</p>
 <div class="math notranslate nohighlight" id="equation-eq-sarma">
-<span class="eqno">(6.9)<a class="headerlink" href="#equation-eq-sarma" title="Permalink to this equation">¶</a></span>\[\begin{split}
+<span class="eqno">(6.9)<a class="headerlink" href="#equation-eq-sarma" title="Permalink to this equation">#</a></span>\[\begin{split}
 y_t = \alpha + \sum_{i=1}^{p}\phi_i y_{t-period*i} + \sum_{j=1}^{q}\theta_j \epsilon_{t-period*j} + \epsilon_t
 \end{split}\]</div>
 <p>The integrated part of an ARIMA model refers to the summary statistics
@@ -1515,14 +1353,14 @@ from 1948 to 1979 <span id="id22">[<a class="reference internal" href="reference
 <a class="reference internal image-reference" href="../_images/fig15_birth_by_month.png"><img alt="../_images/fig15_birth_by_month.png" src="../_images/fig15_birth_by_month.png" style="width: 8.00in;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 6.15 </span><span class="caption-text">Monthly live births in the United States (1948-1979). Y-axis shows the
-number of births in thousands.</span><a class="headerlink" href="#fig-fig15-birth-by-month" title="Permalink to this image">¶</a></p>
+number of births in thousands.</span><a class="headerlink" href="#fig-fig15-birth-by-month" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>We will start with a <span class="math notranslate nohighlight">\(\text{SARIMA}(1, 1, 1)(1, 1, 1)_{12}\)</span> model. First
 we load and pre-process the observed time series in Code Block
 <a class="reference internal" href="#sarima-preprocess"><span class="std std-ref">sarima_preprocess</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="sarima-preprocess">
-<div class="code-block-caption"><span class="caption-number">Listing 6.16 </span><span class="caption-text">sarima_preprocess</span><a class="headerlink" href="#sarima-preprocess" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 6.16 </span><span class="caption-text">sarima_preprocess</span><a class="headerlink" href="#sarima-preprocess" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">us_monthly_birth</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/monthly_birth_usa.csv&quot;</span><span class="p">)</span>
 <span class="n">us_monthly_birth</span><span class="p">[</span><span class="s2">&quot;date_month&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">us_monthly_birth</span><span class="p">[</span><span class="s2">&quot;date_month&quot;</span><span class="p">])</span>
 <span class="n">us_monthly_birth</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;date_month&quot;</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1556,7 +1394,7 @@ flow to check whether some of the indexes are valid (e.g, we cannot
 index to <span class="math notranslate nohighlight">\(t-1\)</span> and <span class="math notranslate nohighlight">\(t-period-1\)</span> when <span class="math notranslate nohighlight">\(t=0\)</span>), we pad the time series with
 zeros.</p>
 <div class="literal-block-wrapper docutils container" id="sarima-likelihood">
-<div class="code-block-caption"><span class="caption-number">Listing 6.17 </span><span class="caption-text">sarima_likelihood</span><a class="headerlink" href="#sarima-likelihood" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 6.17 </span><span class="caption-text">sarima_likelihood</span><a class="headerlink" href="#sarima-likelihood" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">likelihood</span><span class="p">(</span><span class="n">mu0</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">sphi</span><span class="p">,</span> <span class="n">stheta</span><span class="p">):</span>
     <span class="n">batch_shape</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">mu0</span><span class="p">)</span>
     <span class="n">y_extended</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
@@ -1606,7 +1444,7 @@ posterior density function for inference. This is shown in Code Block
 <code class="docutils literal notranslate"><span class="pre">target_log_prob_fn</span></code> that we sample from in Code Block
 <a class="reference internal" href="#sarima-posterior"><span class="std std-ref">sarima_posterior</span></a> <a class="footnote-reference brackets" href="#id62" id="id25" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="sarima-posterior">
-<div class="code-block-caption"><span class="caption-number">Listing 6.18 </span><span class="caption-text">sarima_posterior</span><a class="headerlink" href="#sarima-posterior" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 6.18 </span><span class="caption-text">sarima_posterior</span><a class="headerlink" href="#sarima-posterior" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@tfd</span><span class="o">.</span><span class="n">JointDistributionCoroutine</span>
 <span class="k">def</span> <span class="nf">sarima_priors</span><span class="p">():</span>
     <span class="n">mu0</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">StudentT</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;mu0&#39;</span><span class="p">))</span>
@@ -1631,7 +1469,7 @@ comparison between the <span class="math notranslate nohighlight">\(\text{SARIMA
 Code Block <a class="reference internal" href="#sarima-posterior"><span class="std std-ref">sarima_posterior</span></a> and a
 similar <span class="math notranslate nohighlight">\(\text{SARIMA}(0,1,2)(1,1,1)_{12}\)</span> model.</p>
 <table class="table" id="tab-loo-sarima">
-<caption><span class="caption-number">Table 6.1 </span><span class="caption-text">Summary of model comparison using LOO (log scale) for different SARIMA models.</span><a class="headerlink" href="#tab-loo-sarima" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-number">Table 6.1 </span><span class="caption-text">Summary of model comparison using LOO (log scale) for different SARIMA models.</span><a class="headerlink" href="#tab-loo-sarima" title="Permalink to this table">#</a></caption>
 <tbody>
 <tr class="row-odd"><td></td>
 <td><p><strong>rank</strong></p></td>
@@ -1665,7 +1503,7 @@ similar <span class="math notranslate nohighlight">\(\text{SARIMA}(0,1,2)(1,1,1)
 </section>
 </section>
 <section id="state-space-models">
-<span id="id26"></span><h2><span class="section-number">6.4. </span>State Space Models<a class="headerlink" href="#state-space-models" title="Permalink to this heading">¶</a></h2>
+<span id="id26"></span><h2><span class="section-number">6.4. </span>State Space Models<a class="headerlink" href="#state-space-models" title="Permalink to this heading">#</a></h2>
 <p>In the implementation of the ARMA log-likelihood function above (Code
 Block <a class="reference internal" href="#sarima-likelihood"><span class="std std-ref">sarima_likelihood</span></a>), we iterate
 through time steps to condition on the observations and construct some
@@ -1680,7 +1518,7 @@ evolves from previous step <span class="math notranslate nohighlight">\(X_{t-1}\
 observed <span class="math notranslate nohighlight">\(Y_t\)</span> that is some projection from the latent states <span class="math notranslate nohighlight">\(X_t\)</span> to
 the observable space <a class="footnote-reference brackets" href="#id63" id="id27" role="doc-noteref"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></a>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-state-space-model">
-<span class="eqno">(6.10)<a class="headerlink" href="#equation-eq-state-space-model" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(6.10)<a class="headerlink" href="#equation-eq-state-space-model" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{split}
 X_0 &amp; \sim p(X_0) \\
 \text{for t in 0...T:} \\
     Y_t &amp; \sim p^{\psi}(Y_t \mid X_t) \\
@@ -1748,13 +1586,13 @@ way we compute log likelihood of an ARMA process above could be seen as
 a filtering problem where the observed data is deconstructed into some
 latent unobserved states.</p>
 <section id="linear-gaussian-state-space-models-and-kalman-filter">
-<span id="lgssm-time-series"></span><h3><span class="section-number">6.4.1. </span>Linear Gaussian State Space Models and Kalman filter<a class="headerlink" href="#linear-gaussian-state-space-models-and-kalman-filter" title="Permalink to this heading">¶</a></h3>
+<span id="lgssm-time-series"></span><h3><span class="section-number">6.4.1. </span>Linear Gaussian State Space Models and Kalman filter<a class="headerlink" href="#linear-gaussian-state-space-models-and-kalman-filter" title="Permalink to this heading">#</a></h3>
 <p>Perhaps one of the most notable State Space models is Linear Gaussian
 State Space Model, where we have latent states <span class="math notranslate nohighlight">\(X_t\)</span> and the observation
 model <span class="math notranslate nohighlight">\(Y_t\)</span> distributed as (multivariate) Gaussian, with the transition
 and measurement both being linear functions:</p>
 <div class="math notranslate nohighlight" id="equation-eq-lgssm">
-<span class="eqno">(6.11)<a class="headerlink" href="#equation-eq-lgssm" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(6.11)<a class="headerlink" href="#equation-eq-lgssm" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{split}
 Y_t &amp; = \mathbf{H}_t X_t + \epsilon_t \\
 X_t &amp; = \mathbf{F}_t X_{t-1} + \eta_t
 \end{split}\end{split}\]</div>
@@ -1780,7 +1618,7 @@ moon and is still widely used in many areas.</p>
 the generative process from time <span class="math notranslate nohighlight">\(t-1\)</span> to <span class="math notranslate nohighlight">\(t\)</span> of the Linear Gaussian
 State Space Model:</p>
 <div class="math notranslate nohighlight" id="equation-eq-lgssm-generative">
-<span class="eqno">(6.12)<a class="headerlink" href="#equation-eq-lgssm-generative" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(6.12)<a class="headerlink" href="#equation-eq-lgssm-generative" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{split}
 X_t \sim p(X_t \mid X_{t-1}) &amp; \equiv \mathcal{N}(\mathbf{F}_{t} X_{t-1}, \mathbf{Q}_{t}) \\
     Y_t \sim p(Y_t \mid X_t) &amp; \equiv \mathcal{N}(\mathbf{H}_t X_t, \mathbf{R}_t)
 \end{split}\end{split}\]</div>
@@ -1795,7 +1633,7 @@ context, <span class="math notranslate nohighlight">\(Y_t\)</span> is observed (
 be used to update the state <span class="math notranslate nohighlight">\(X_t\)</span>, similar to how we update the prior
 using the observed likelihood in a static model:</p>
 <div class="math notranslate nohighlight" id="equation-eq-kalman-fitler">
-<span class="eqno">(6.13)<a class="headerlink" href="#equation-eq-kalman-fitler" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(6.13)<a class="headerlink" href="#equation-eq-kalman-fitler" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{split}
 X_0 \sim p(X_0 \mid m_0, \mathbf{P}_0) &amp; \equiv \mathcal{N}(m_0, \mathbf{P}_0) \\
 X_{t \mid t-1} \sim p(X_{t \mid t-1} \mid Y_{0:t-1}) &amp; \equiv \mathcal{N}(m_{t \mid t-1}, \mathbf{P}_{t \mid t-1}) \\
 X_{t \mid t} \sim p(X_{t \mid t} \mid Y_{0:t}) &amp; \equiv \mathcal{N}(m_{t \mid t}, \mathbf{P}_{t \mid t}) \\
@@ -1819,14 +1657,14 @@ and update steps:</p>
 <ul>
 <li><p>Prediction</p>
 <div class="math notranslate nohighlight" id="equation-eq-kalman-fitler-preddict-step">
-<span class="eqno">(6.14)<a class="headerlink" href="#equation-eq-kalman-fitler-preddict-step" title="Permalink to this equation">¶</a></span>\[\begin{split}    \begin{split}
+<span class="eqno">(6.14)<a class="headerlink" href="#equation-eq-kalman-fitler-preddict-step" title="Permalink to this equation">#</a></span>\[\begin{split}    \begin{split}
     m_{t \mid t-1} &amp; = \mathbf{F}_{t} m_{t-1 \mid t-1} \\
     \mathbf{P}_{t \mid t-1} &amp; = \mathbf{F}_{t} \mathbf{P}_{t-1 \mid t-1} \mathbf{F}_{t}^T + \mathbf{Q}_{t}
     \end{split}\end{split}\]</div>
 </li>
 <li><p>Update</p>
 <div class="math notranslate nohighlight" id="equation-eq-kalman-fitler-update-step">
-<span class="eqno">(6.15)<a class="headerlink" href="#equation-eq-kalman-fitler-update-step" title="Permalink to this equation">¶</a></span>\[\begin{split}    \begin{split}
+<span class="eqno">(6.15)<a class="headerlink" href="#equation-eq-kalman-fitler-update-step" title="Permalink to this equation">#</a></span>\[\begin{split}    \begin{split}
     z_t &amp; = Y_t - \mathbf{H}_t m_{t \mid t-1} \\
     \mathbf{S}_t &amp; = \mathbf{H}_t \mathbf{P}_{t \mid t-1} \mathbf{H}_t^T + \mathbf{R}_t \\
     \mathbf{K}_t &amp; = \mathbf{P}_{t \mid t-1} \mathbf{H}_t^T \mathbf{S}_t^{-1} \\
@@ -1850,7 +1688,7 @@ Gaussian latent state. We will demonstrate with a simple linear growth
 time series as the first example (see Chapter 3 of Bayesian Filtering
 and Smoothing <span id="id29">[<a class="reference internal" href="references.html#id129" title="S. Särkkä. Bayesian Filtering and Smoothing. Bayesian Filtering and Smoothing. Cambridge University Press, 2013. ISBN 9781107030657.">60</a>]</span>:</p>
 <div class="literal-block-wrapper docutils container" id="linear-growth-model">
-<div class="code-block-caption"><span class="caption-number">Listing 6.19 </span><span class="caption-text">linear_growth_model</span><a class="headerlink" href="#linear-growth-model" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 6.19 </span><span class="caption-text">linear_growth_model</span><a class="headerlink" href="#linear-growth-model" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">theta0</span><span class="p">,</span> <span class="n">theta1</span> <span class="o">=</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">2.6</span>
 <span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.4</span>
 <span class="n">num_timesteps</span> <span class="o">=</span> <span class="mi">100</span>
@@ -1869,7 +1707,7 @@ and the unknown parameters <span class="math notranslate nohighlight">\(\theta_0
 prior distribution.</p>
 <p>In a state space form, we have the latent states:</p>
 <div class="math notranslate nohighlight" id="equation-eq-linear-growth-state">
-<span class="eqno">(6.16)<a class="headerlink" href="#equation-eq-linear-growth-state" title="Permalink to this equation">¶</a></span>\[\begin{split}X_t = \left[\begin{array}{ccc}
+<span class="eqno">(6.16)<a class="headerlink" href="#equation-eq-linear-growth-state" title="Permalink to this equation">#</a></span>\[\begin{split}X_t = \left[\begin{array}{ccc}
   \theta_0 \\
   \theta_1 \\
 \end{array}\right]\end{split}\]</div>
@@ -1878,7 +1716,7 @@ operator <span class="math notranslate nohighlight">\(F_t\)</span> is an identit
 observation operator describes the “push-forward” from latent to
 measurement space, which is a matrix form of the linear function <a class="footnote-reference brackets" href="#id64" id="id30" role="doc-noteref"><span class="fn-bracket">[</span>13<span class="fn-bracket">]</span></a>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-linear-growth-observed-state">
-<span class="eqno">(6.17)<a class="headerlink" href="#equation-eq-linear-growth-observed-state" title="Permalink to this equation">¶</a></span>\[\begin{split}y_t = \theta_0 + \theta_1 * t = \left[\begin{array}{ccc}
+<span class="eqno">(6.17)<a class="headerlink" href="#equation-eq-linear-growth-observed-state" title="Permalink to this equation">#</a></span>\[\begin{split}y_t = \theta_0 + \theta_1 * t = \left[\begin{array}{ccc}
   1, t \\
 \end{array}\right]\left[\begin{array}{ccc}
   \theta_0 \\
@@ -1886,7 +1724,7 @@ measurement space, which is a matrix form of the linear function <a class="footn
 \end{array}\right]\end{split}\]</div>
 <p>Expressed with the <code class="docutils literal notranslate"><span class="pre">tfd.LinearGaussianStateSpaceModel</span></code> API, we have:</p>
 <div class="literal-block-wrapper docutils container" id="tfd-lgssm-linear-growth">
-<div class="code-block-caption"><span class="caption-number">Listing 6.20 </span><span class="caption-text">tfd_lgssm_linear_growth</span><a class="headerlink" href="#tfd-lgssm-linear-growth" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 6.20 </span><span class="caption-text">tfd_lgssm_linear_growth</span><a class="headerlink" href="#tfd-lgssm-linear-growth" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># X_0</span>
 <span class="n">initial_state_prior</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">MultivariateNormalDiag</span><span class="p">(</span>
     <span class="n">loc</span><span class="o">=</span><span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> <span class="n">scale_diag</span><span class="o">=</span><span class="p">[</span><span class="mf">5.</span><span class="p">,</span> <span class="mf">5.</span><span class="p">])</span>
@@ -1916,7 +1754,7 @@ measurement space, which is a matrix form of the linear function <a class="footn
 <p>we can apply the Kalman filter to obtain the posterior distribution of
 <span class="math notranslate nohighlight">\(\theta_0\)</span> and <span class="math notranslate nohighlight">\(\theta_1\)</span>:</p>
 <div class="literal-block-wrapper docutils container" id="tfd-lgssm-linear-growth-filter">
-<div class="code-block-caption"><span class="caption-number">Listing 6.21 </span><span class="caption-text">tfd_lgssm_linear_growth_filter</span><a class="headerlink" href="#tfd-lgssm-linear-growth-filter" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 6.21 </span><span class="caption-text">tfd_lgssm_linear_growth_filter</span><a class="headerlink" href="#tfd-lgssm-linear-growth-filter" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run the Kalman filter</span>
 <span class="p">(</span>
     <span class="n">log_likelihoods</span><span class="p">,</span>
@@ -1939,12 +1777,12 @@ and the one-step prediction from the Kalman filter (<span class="math notranslat
 in solid black line). The posterior distribution of the latent state
 <span class="math notranslate nohighlight">\(X_t\)</span> after observing each time step is compared with the closed form
 solution using all data (black solid line) in the middle and rightmost
-panel.</span><a class="headerlink" href="#fig-fig16-linear-growth-lgssm" title="Permalink to this image">¶</a></p>
+panel.</span><a class="headerlink" href="#fig-fig16-linear-growth-lgssm" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="arima-expressed-as-a-state-space-model">
-<span id="id31"></span><h3><span class="section-number">6.4.2. </span>ARIMA, Expressed as a State Space Model<a class="headerlink" href="#arima-expressed-as-a-state-space-model" title="Permalink to this heading">¶</a></h3>
+<span id="id31"></span><h3><span class="section-number">6.4.2. </span>ARIMA, Expressed as a State Space Model<a class="headerlink" href="#arima-expressed-as-a-state-space-model" title="Permalink to this heading">#</a></h3>
 <p>State space models are a unified methodology that generalized many
 classical time series models. However, it might not always be obvious
 how we can express a model in state space format. In this section we
@@ -1959,13 +1797,13 @@ noise. The only solution is to formulate it into the transition noise so
 it becomes part of the latent state <span class="math notranslate nohighlight">\(X_t\)</span>. First, we reformulate
 ARMA(p,q) Equation <a class="reference internal" href="#equation-eq-arma">(6.8)</a> into:</p>
 <div class="math notranslate nohighlight" id="equation-eq-arma-pre-lgssm">
-<span class="eqno">(6.18)<a class="headerlink" href="#equation-eq-arma-pre-lgssm" title="Permalink to this equation">¶</a></span>\[y_t = \sum_{i=1}^{r}\phi_i y_{t-i} + \sum_{i=1}^{r-1}\theta_i \epsilon_{t-i} + \epsilon_t\]</div>
+<span class="eqno">(6.18)<a class="headerlink" href="#equation-eq-arma-pre-lgssm" title="Permalink to this equation">#</a></span>\[y_t = \sum_{i=1}^{r}\phi_i y_{t-i} + \sum_{i=1}^{r-1}\theta_i \epsilon_{t-i} + \epsilon_t\]</div>
 <p>where the constant term <span class="math notranslate nohighlight">\(\alpha\)</span> from Equation <a class="reference internal" href="#equation-eq-arma">(6.8)</a> is omitted,
 and <span class="math notranslate nohighlight">\(r = max(p, q+1)\)</span>. We pad zeros to coefficient parameters <span class="math notranslate nohighlight">\(\phi\)</span> and
 <span class="math notranslate nohighlight">\(\theta\)</span> when needed so that they have the same size <span class="math notranslate nohighlight">\(r\)</span>. The component
 of the state equation for <span class="math notranslate nohighlight">\(X_t\)</span> is thus:</p>
 <div class="math notranslate nohighlight" id="equation-eq-arma-lgssm-state-fn">
-<span class="eqno">(6.19)<a class="headerlink" href="#equation-eq-arma-lgssm-state-fn" title="Permalink to this equation">¶</a></span>\[\begin{split}\mathbf{F}_t = \mathbf{F} = \left[\begin{array}{cccc}
+<span class="eqno">(6.19)<a class="headerlink" href="#equation-eq-arma-lgssm-state-fn" title="Permalink to this equation">#</a></span>\[\begin{split}\mathbf{F}_t = \mathbf{F} = \left[\begin{array}{cccc}
 \phi_1 &amp; 1 &amp; \cdots &amp; 0 \\
 \vdots  &amp; \vdots  &amp; \ddots &amp; \vdots  \\
 \phi_{r-1} &amp; 0 &amp; \cdots &amp; 1  \\
@@ -1980,7 +1818,7 @@ of the state equation for <span class="math notranslate nohighlight">\(X_t\)</sp
 \eta'_{t+1} \sim \mathcal{N}(0, \sigma^2), \eta_t = \mathbf{A} \eta'_{t+1}\end{split}\]</div>
 <p>With the latent state being:</p>
 <div class="math notranslate nohighlight" id="equation-eq-arma-lgssm-state">
-<span class="eqno">(6.20)<a class="headerlink" href="#equation-eq-arma-lgssm-state" title="Permalink to this equation">¶</a></span>\[\begin{split}X_t = \left[\begin{array}{ccc}
+<span class="eqno">(6.20)<a class="headerlink" href="#equation-eq-arma-lgssm-state" title="Permalink to this equation">#</a></span>\[\begin{split}X_t = \left[\begin{array}{ccc}
 y_t \\
 \phi_2 y_{t-1} + \dots + \phi_r y_{t-r+1} + \theta_1 \eta'_t + \dots + \theta_{r-1} \eta'_{t-r+2} \\
 \phi_3 y_{t-1} + \dots + \phi_r y_{t-r+2} + \theta_2 \eta'_t + \dots + \theta_{r-1} \eta'_{t-r+3} \\
@@ -1992,7 +1830,7 @@ y_t \\
 <span class="math notranslate nohighlight">\(y_t = \mathbf{H}_t X_t\)</span> <a class="footnote-reference brackets" href="#id65" id="id32" role="doc-noteref"><span class="fn-bracket">[</span>14<span class="fn-bracket">]</span></a>.</p>
 <p>For example, an ARMA(2,1) model in state space representation is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-arma-lgssm-state-full">
-<span class="eqno">(6.21)<a class="headerlink" href="#equation-eq-arma-lgssm-state-full" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(6.21)<a class="headerlink" href="#equation-eq-arma-lgssm-state-full" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{split}
 \left[\begin{array}{ccc}
 y_{t+1}\\
 \phi_2 y_t + \theta_1 \eta'_{t+1}\\
@@ -2020,7 +1858,7 @@ the model in TFP. For example, in Code Block
 defines a ARMA(2,1) model with <span class="math notranslate nohighlight">\(\phi = [-0.1, 0.5]\)</span>, <span class="math notranslate nohighlight">\(\theta = -0.25\)</span>,
 and <span class="math notranslate nohighlight">\(\sigma = 1.25\)</span>, and draw one random time series.</p>
 <div class="literal-block-wrapper docutils container" id="tfd-lgssm-arma-simulate">
-<div class="code-block-caption"><span class="caption-number">Listing 6.22 </span><span class="caption-text">tfd_lgssm_arma_simulate</span><a class="headerlink" href="#tfd-lgssm-arma-simulate" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 6.22 </span><span class="caption-text">tfd_lgssm_arma_simulate</span><a class="headerlink" href="#tfd-lgssm-arma-simulate" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">num_timesteps</span> <span class="o">=</span> <span class="mi">300</span>
 <span class="n">phi1</span> <span class="o">=</span> <span class="o">-</span><span class="mf">.1</span>
 <span class="n">phi2</span> <span class="o">=</span> <span class="mf">.5</span>
@@ -2069,7 +1907,7 @@ filter like Kalman filter, inference is done using standard MCMC method.
 We show the resulting trace plot of the posterior samples in
 <a class="reference internal" href="#fig-fig17-arma-lgssm-inference-result"><span class="std std-numref">Fig. 6.17</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="tfd-lgssm-arma-with-prior">
-<div class="code-block-caption"><span class="caption-number">Listing 6.23 </span><span class="caption-text">tfd_lgssm_arma_with_prior</span><a class="headerlink" href="#tfd-lgssm-arma-with-prior" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 6.23 </span><span class="caption-text">tfd_lgssm_arma_with_prior</span><a class="headerlink" href="#tfd-lgssm-arma-with-prior" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@tfd</span><span class="o">.</span><span class="n">JointDistributionCoroutine</span>
 <span class="k">def</span> <span class="nf">arma_lgssm</span><span class="p">():</span>
     <span class="n">sigma</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">HalfStudentT</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;sigma&quot;</span><span class="p">))</span>
@@ -2120,7 +1958,7 @@ Code Block
 conditioned on the simulated data <code class="docutils literal notranslate"><span class="pre">sim_ts</span></code> generated in Code Block
 <a class="reference internal" href="#tfd-lgssm-arma-simulate"><span class="std std-ref">tfd_lgssm_arma_simulate</span></a>. The
 true values of the parameters are plotted as vertical lines in the
-posterior density plot and horizontal lines in the trace plot.</span><a class="headerlink" href="#fig-fig17-arma-lgssm-inference-result" title="Permalink to this image">¶</a></p>
+posterior density plot and horizontal lines in the trace plot.</span><a class="headerlink" href="#fig-fig17-arma-lgssm-inference-result" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>We can already use this formulation for ARIMA modeling with <span class="math notranslate nohighlight">\(d&gt;0\)</span> by
@@ -2135,7 +1973,7 @@ have <span class="math notranslate nohighlight">\(\Delta y_t = y_t - y_{t-1}\)</
 <span class="math notranslate nohighlight">\(\mathbf{H}_t = [1, 1, 0]\)</span>, with the latent state <span class="math notranslate nohighlight">\(X_t\)</span> and state
 transition being:</p>
 <div class="math notranslate nohighlight" id="equation-eq-arima-lgssm-state-transition">
-<span class="eqno">(6.22)<a class="headerlink" href="#equation-eq-arima-lgssm-state-transition" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(6.22)<a class="headerlink" href="#equation-eq-arima-lgssm-state-transition" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{split}
 \left[\begin{array}{ccc}
 y_{t-1} + \Delta y_t \\
 \phi_1 \Delta y_t + \phi_2 \Delta y_{t-1} + \eta'_{t+1} + \theta_1 \eta'_t\\
@@ -2167,7 +2005,7 @@ mean). More discussion around this topic and an in depth introduction to
 state space models for time series problems could be found in <span id="id33">Durbin and Koopman [<a class="reference internal" href="references.html#id131" title="James Durbin and Siem Jan Koopman. Time series analysis by state space methods. Oxford university press, 2012.">61</a>]</span>.</p>
 </section>
 <section id="bayesian-structural-time-series">
-<span id="id34"></span><h3><span class="section-number">6.4.3. </span>Bayesian Structural Time Series<a class="headerlink" href="#bayesian-structural-time-series" title="Permalink to this heading">¶</a></h3>
+<span id="id34"></span><h3><span class="section-number">6.4.3. </span>Bayesian Structural Time Series<a class="headerlink" href="#bayesian-structural-time-series" title="Permalink to this heading">#</a></h3>
 <p>A linear Gaussian state space representation of a time series model has
 another advantage that it is easily extendable, especially with other
 linear Gaussian state space models. To combine two models, we follow the
@@ -2177,7 +2015,7 @@ matrix, concatenating the mean on the event axis. In the measurement
 space the operation is equivalent to summing two normal random
 variables. More concretely, we have:</p>
 <div class="math notranslate nohighlight" id="equation-eq-combining-lgssm">
-<span class="eqno">(6.23)<a class="headerlink" href="#equation-eq-combining-lgssm" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(6.23)<a class="headerlink" href="#equation-eq-combining-lgssm" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{split}
 \mathbf{F}_t &amp; = \left[\begin{array}{ccc}
 \mathbf{F}_{\mathbf{1}, t} &amp; 0 \\
 0 &amp; \mathbf{F}_{\mathbf{2}, t}\\
@@ -2218,9 +2056,9 @@ series with a local linear trend component and a seasonal component to
 account for the monthly pattern in Code Block
 <a class="reference internal" href="#tfp-sts-example2"><span class="std std-ref">tfp_sts_example2</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="tfp-sts-example2">
-<div class="code-block-caption"><span class="caption-number">Listing 6.24 </span><span class="caption-text">tfp_sts_example2</span><a class="headerlink" href="#tfp-sts-example2" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 6.24 </span><span class="caption-text">tfp_sts_example2</span><a class="headerlink" href="#tfp-sts-example2" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_bsts_model</span><span class="p">(</span><span class="n">observed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Args:</span>
 <span class="sd">        observed: Observed time series, tfp.sts use it to generate prior.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -2241,7 +2079,7 @@ account for the monthly pattern in Code Block
 </div>
 <p>We can inspect each component in <code class="docutils literal notranslate"><span class="pre">birth_model</span></code>:</p>
 <div class="literal-block-wrapper docutils container" id="tfp-sts-model">
-<div class="code-block-caption"><span class="caption-number">Listing 6.25 </span><span class="caption-text">tfp_sts_model</span><a class="headerlink" href="#tfp-sts-model" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 6.25 </span><span class="caption-text">tfp_sts_model</span><a class="headerlink" href="#tfp-sts-model" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">birth_model</span><span class="o">.</span><span class="n">components</span>
 </pre></div>
 </div>
@@ -2256,7 +2094,7 @@ part of the latent state <span class="math notranslate nohighlight">\(X_t\)</spa
 generates <span class="math notranslate nohighlight">\(X_t\)</span>. For example, we can check the parameters of the
 seasonal component:</p>
 <div class="literal-block-wrapper docutils container" id="tfp-sts-model-component">
-<div class="code-block-caption"><span class="caption-number">Listing 6.26 </span><span class="caption-text">tfp_sts_model_component</span><a class="headerlink" href="#tfp-sts-model-component" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 6.26 </span><span class="caption-text">tfp_sts_model_component</span><a class="headerlink" href="#tfp-sts-model-component" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">birth_model</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">parameters</span>
 </pre></div>
 </div>
@@ -2285,7 +2123,7 @@ found in the <a class="reference internal" href="#fig-fig18-bsts-lgssm"><span cl
 <p><span class="caption-number">Fig. 6.18 </span><span class="caption-text">Relationship between Bayesian Structural Time Series (blue box) and
 Linear Gaussian State Space Model (red box). The Linear Gaussian State
 Space Model shown here is an example containing a local linear trend
-component, a seasonal component, and an Autoregressive component.</span><a class="headerlink" href="#fig-fig18-bsts-lgssm" title="Permalink to this image">¶</a></p>
+component, a seasonal component, and an Autoregressive component.</span><a class="headerlink" href="#fig-fig18-bsts-lgssm" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Thus running inference on a structural time series model could
@@ -2303,7 +2141,7 @@ inspect each inferred component with Code Block
 <a class="reference internal" href="#tfp-sts-example2-result"><span class="std std-ref">tfp_sts_example2_result</span></a>. The
 result is shown in <a class="reference internal" href="#fig-fig19-bsts-lgssm-result"><span class="std std-numref">Fig. 6.19</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="tfp-sts-example2-result">
-<div class="code-block-caption"><span class="caption-number">Listing 6.27 </span><span class="caption-text">tfp_sts_example2_result</span><a class="headerlink" href="#tfp-sts-example2-result" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 6.27 </span><span class="caption-text">tfp_sts_example2_result</span><a class="headerlink" href="#tfp-sts-example2-result" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using a subset of posterior samples.</span>
 <span class="n">parameter_samples</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">100</span><span class="p">:,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">mcmc_samples</span><span class="p">]</span>
 
@@ -2360,13 +2198,13 @@ result is shown in <a class="reference internal" href="#fig-fig19-bsts-lgssm-res
 States (1948-1979) using the <code class="docutils literal notranslate"><span class="pre">tfp.sts</span></code> API with Code Block
 <a class="reference internal" href="#tfp-sts-example2-result"><span class="std std-ref">tfp_sts_example2_result</span></a>. Top
 panel: 36 months forecast; bottom 2 panels: decomposition of the
-structural time series.</span><a class="headerlink" href="#fig-fig19-bsts-lgssm-result" title="Permalink to this image">¶</a></p>
+structural time series.</span><a class="headerlink" href="#fig-fig19-bsts-lgssm-result" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 </section>
 <section id="other-time-series-models">
-<span id="id35"></span><h2><span class="section-number">6.5. </span>Other Time Series Models<a class="headerlink" href="#other-time-series-models" title="Permalink to this heading">¶</a></h2>
+<span id="id35"></span><h2><span class="section-number">6.5. </span>Other Time Series Models<a class="headerlink" href="#other-time-series-models" title="Permalink to this heading">#</a></h2>
 <p>While structural time series and linear Gaussian state space models are
 powerful and expressive classes of time series models, they certainly do
 not cover all our needs. For example, some interesting extensions
@@ -2390,7 +2228,7 @@ their treatment of stochasticity and time. While we are not going into
 details of these models, they are well studied subjects with easy to use
 implementations in the Python computing ecosystem.</p>
 <table class="table" id="table-ts-model-type">
-<caption><span class="caption-number">Table 6.2 </span><span class="caption-text">Various time series models categorized by treatment of stochasticity and time</span><a class="headerlink" href="#table-ts-model-type" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-number">Table 6.2 </span><span class="caption-text">Various time series models categorized by treatment of stochasticity and time</span><a class="headerlink" href="#table-ts-model-type" title="Permalink to this table">#</a></caption>
 <tbody>
 <tr class="row-odd"><td></td>
 <td><p><strong>Deterministic dynamics</strong></p></td>
@@ -2408,7 +2246,7 @@ implementations in the Python computing ecosystem.</p>
 </table>
 </section>
 <section id="model-criticism-and-choosing-priors">
-<span id="id39"></span><h2><span class="section-number">6.6. </span>Model Criticism and Choosing Priors<a class="headerlink" href="#model-criticism-and-choosing-priors" title="Permalink to this heading">¶</a></h2>
+<span id="id39"></span><h2><span class="section-number">6.6. </span>Model Criticism and Choosing Priors<a class="headerlink" href="#model-criticism-and-choosing-priors" title="Permalink to this heading">#</a></h2>
 <p>In the seminal time series book by  <span id="id40">Box <em>et al.</em> [<a class="reference internal" href="references.html#id130" title="G.E.P. Box, G.M. Jenkins, and G.C. Reinsel. Time Series Analysis: Forecasting and Control. Wiley Series in Probability and Statistics. Wiley, 2008. ISBN 9780470272848.">57</a>]</span>
 <a class="footnote-reference brackets" href="#id66" id="id41" role="doc-noteref"><span class="fn-bracket">[</span>15<span class="fn-bracket">]</span></a>, they outlined five important practical problems for time series
 modeling:</p>
@@ -2438,7 +2276,7 @@ dataset as we did in this Chapter for the CO₂ example, and compare the
 observation with the forecast using standard metrics. One of a popular
 choice is Mean Absolute Percentage Error (MAPE), which simply compute:</p>
 <div class="math notranslate nohighlight" id="equation-eq-mape">
-<span class="eqno">(6.24)<a class="headerlink" href="#equation-eq-mape" title="Permalink to this equation">¶</a></span>\[MAPE = \frac{1}{n} \sum_{i=1}^{n} \frac{|\text{forecast}_i - \text{observed}_i|}{\text{observed}_i}\]</div>
+<span class="eqno">(6.24)<a class="headerlink" href="#equation-eq-mape" title="Permalink to this equation">#</a></span>\[MAPE = \frac{1}{n} \sum_{i=1}^{n} \frac{|\text{forecast}_i - \text{observed}_i|}{\text{observed}_i}\]</div>
 <p>However, there are some known biases of MAPE, for example, large errors
 during low value observation periods will significantly impact MAPE.
 Also, it is difficult to compare MAPE across multiple time series when
@@ -2466,7 +2304,7 @@ prediction task but rather to various possible cross validation
 approaches that all involve some form of prediction of future time
 points.</p>
 <section id="priors-for-time-series-models">
-<span id="id45"></span><h3><span class="section-number">6.6.1. </span>Priors for Time Series Models<a class="headerlink" href="#priors-for-time-series-models" title="Permalink to this heading">¶</a></h3>
+<span id="id45"></span><h3><span class="section-number">6.6.1. </span>Priors for Time Series Models<a class="headerlink" href="#priors-for-time-series-models" title="Permalink to this heading">#</a></h3>
 <p>In Section <a class="reference internal" href="#chp4-gam"><span class="std std-ref">Basis Functions and Generalized Additive Model</span></a> we used a regularizing prior, the Laplace prior, for
 the slope of the step linear function. As we mentioned this is to
 express our prior knowledge that the change in slope is usually small
@@ -2479,7 +2317,7 @@ are just like any other ordinary day. We can formalize this intuition
 with a horseshoe prior <span id="id46">[<a class="reference internal" href="references.html#id166" title="Carlos M. Carvalho, Nicholas G. Polson, and James G. Scott. The horseshoe estimator for sparse signals. Biometrika, 97(2):465–480, 2010.">65</a>, <a class="reference internal" href="references.html#id168" title="Juho Piironen, Aki Vehtari, and others. Sparsity information and regularization in the horseshoe and other shrinkage priors. Electronic Journal of Statistics, 11(2):5018–5051, 2017.">66</a>]</span>
 as shown in Equation <a class="reference internal" href="#equation-eq-horse-shoe">(6.25)</a>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-horse-shoe">
-<span class="eqno">(6.25)<a class="headerlink" href="#equation-eq-horse-shoe" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(6.25)<a class="headerlink" href="#equation-eq-horse-shoe" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{split}
 \lambda_t^2 \sim&amp; \mathcal{H}\text{C}(1.) \\
 \beta_t \sim&amp; \mathcal{N}(0, \lambda_t^2 \tau^2)
 \end{split}\end{split}\]</div>
@@ -2514,7 +2352,7 @@ prior accordingly.</p>
 </section>
 </section>
 <section id="exercises">
-<span id="exercises6"></span><h2><span class="section-number">6.7. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">¶</a></h2>
+<span id="exercises6"></span><h2><span class="section-number">6.7. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <p><strong>6E1.</strong> As we explained in Box <em>Parsing timestamp to design
 matrix</em> above, date information could be formatted into a design matrix
 for regression model to account for the periodic pattern in a time
@@ -2522,7 +2360,7 @@ series. Try generating the following design matrix for the year 2021.
 Hint: use Code Block <a class="reference internal" href="#timerange-2021"><span class="std std-ref">timerange_2021</span></a> to
 generate all time stamps for 2021:</p>
 <div class="literal-block-wrapper docutils container" id="timerange-2021">
-<div class="code-block-caption"><span class="caption-number">Listing 6.28 </span><span class="caption-text">timerange_2021</span><a class="headerlink" href="#timerange-2021" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 6.28 </span><span class="caption-text">timerange_2021</span><a class="headerlink" href="#timerange-2021" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">datetime_index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="s2">&quot;2021-01-01&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;2021-12-31&quot;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -2579,7 +2417,7 @@ data monthly from 2019 January for 36 months, we can code the time index
 in 2 equivalent ways as shown below in Code Block
 <a class="reference internal" href="#exercise-chap4-e6"><span class="std std-ref">exercise_chap4_e6</span></a>:</p>
 <div class="literal-block-wrapper docutils container" id="exercise-chap4-e6">
-<div class="code-block-caption"><span class="caption-number">Listing 6.29 </span><span class="caption-text">exercise_chap4_e6</span><a class="headerlink" href="#exercise-chap4-e6" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 6.29 </span><span class="caption-text">exercise_chap4_e6</span><a class="headerlink" href="#exercise-chap4-e6" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nmonths</span> <span class="o">=</span> <span class="mi">36</span>
 <span class="n">day0</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2019-01-01&#39;</span><span class="p">)</span>
 <span class="n">time_index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span>
@@ -2621,7 +2459,7 @@ explicit <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> constr
 rely on a key regression coefficient <span class="math notranslate nohighlight">\(\delta\)</span>. Rewrite the definition so
 that it has a similar form compare to other linear regression:</p>
 <div class="math notranslate nohighlight" id="equation-eq-step-linear">
-<span class="eqno">(6.26)<a class="headerlink" href="#equation-eq-step-linear" title="Permalink to this equation">¶</a></span>\[g(t) = \mathbf{A}^\prime \delta^\prime\]</div>
+<span class="eqno">(6.26)<a class="headerlink" href="#equation-eq-step-linear" title="Permalink to this equation">#</a></span>\[g(t) = \mathbf{A}^\prime \delta^\prime\]</div>
 <p>Find the appropriate expression of design matrix <span class="math notranslate nohighlight">\(\mathbf{A}^\prime\)</span> and
 coefficient <span class="math notranslate nohighlight">\(\delta^\prime\)</span>.</p>
 <p><strong>6E9.</strong> As we have seen in past chapters, a great way to
@@ -2632,7 +2470,7 @@ trend that is <code class="docutils literal notranslate"><span class="pre">y</sp
 point draw from a <span class="math notranslate nohighlight">\(\mathcal{N}(0, 1)\)</span>. Assume that this time series
 starts on Sunday June 6 2021. Generate 4 synthetic datasets that
 include:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>An additive weekend effect where weekends have 2x more volume than
 weekdays.</p></li>
 <li><p>An additive sinusoidal effect of sin(2x).</p></li>
@@ -2754,7 +2592,7 @@ autocorrelation diagnostic introduced in Section <a class="reference internal" h
 <aside class="footnote brackets" id="id61" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id24">10</a><span class="fn-bracket">]</span></span>
 <p>The Stan implementation of SARIMA can be found in e.g.
-<a class="reference external" href="https://github.com/asael697/bayesforecast">https://github.com/asael697/bayesforecast</a>.</p>
+<a class="github reference external" href="https://github.com/asael697/bayesforecast">asael697/bayesforecast</a>.</p>
 </aside>
 <aside class="footnote brackets" id="id62" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id25">11</a><span class="fn-bracket">]</span></span>
@@ -2813,7 +2651,7 @@ through his seminal book and working on forecasting problems.</p>
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./markdown"
         },
         predefinedOutput: true
@@ -2821,44 +2659,124 @@ through his seminal book and working on forecasting problems.</p>
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="chp_05.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">5. </span>Splines</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chp_05.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Splines</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="chp_07.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="chp_07.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title"><span class="section-number">7. </span>Bayesian Additive Regression Trees</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
+                </footer>
+              
+            </div>
             
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Martin, Kumar, Lao<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-overview-of-time-series-problems">6.1. An Overview of Time Series Problems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-analysis-as-a-regression-problem">6.2. Time Series Analysis as a Regression Problem</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#design-matrices-for-time-series">6.2.1. Design Matrices for Time Series</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basis-functions-and-generalized-additive-model">6.2.2. Basis Functions and Generalized Additive Model</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autoregressive-models">6.3. Autoregressive Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#latent-ar-process-and-smoothing">6.3.1. Latent AR Process and Smoothing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#s-ar-i-ma-x">6.3.2. (S)AR(I)MA(X)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-space-models">6.4. State Space Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-gaussian-state-space-models-and-kalman-filter">6.4.1. Linear Gaussian State Space Models and Kalman filter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arima-expressed-as-a-state-space-model">6.4.2. ARIMA, Expressed as a State Space Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-structural-time-series">6.4.3. Bayesian Structural Time Series</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-time-series-models">6.5. Other Time Series Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-criticism-and-choosing-priors">6.6. Model Criticism and Choosing Priors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#priors-for-time-series-models">6.6.1. Priors for Time Series Models</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">6.7. Exercises</a></li>
+</ul>
+  </nav></div>
 
-      </div>
-    </div>
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Martin, Kumar, Lao
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

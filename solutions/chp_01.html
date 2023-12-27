@@ -1,39 +1,47 @@
 
+
 <!DOCTYPE html>
 
-<html lang="en">
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Solutions 1: Bayesian Inference &#8212; Bayesian Modeling and Computation in Python</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-codeautolink.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -42,12 +50,13 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -56,710 +65,343 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'solutions/chp_01';</script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Solutions 2: Exploratory Analysis of Bayesian models" href="chp_02.html" />
     <link rel="prev" title="Code 11: Appendiceal Topics" href="../notebooks/chp_11.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en">
-    
-
-    <!-- Google Analytics -->
-    
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-702QMHG8ST"></script>
-<script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){ dataLayer.push(arguments); }
-                    gtag('js', new Date());
-                    gtag('config', 'G-702QMHG8ST');
-                </script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-      
-      
-      <h1 class="site-logo" id="site-title">Bayesian Modeling and Computation in Python</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 0
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/dedication.html">
-   Dedication
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/foreword.html">
-   Foreword
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/preface.html">
-   Preface
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/symbollist.html">
-   Symbols
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 1
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_01.html">
-   1. Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_02.html">
-   2. Exploratory Analysis of Bayesian Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_03.html">
-   3. Linear Models and Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_04.html">
-   4. Extending Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_05.html">
-   5. Splines
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_06.html">
-   6. Time Series
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_07.html">
-   7. Bayesian Additive Regression Trees
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_08.html">
-   8. Approximate Bayesian Computation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_09.html">
-   9. End to End Bayesian Workflows
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_10.html">
-   10. Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/chp_11.html">
-   11. Appendiceal Topics
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/glossary.html">
-   12. Glossary
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/references.html">
-   13. References
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 2
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_01.html">
-   Code 1: Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_02.html">
-   Code 2: Exploratory Analysis of Bayesian Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_03.html">
-   Code 3: Linear Models and Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_04.html">
-   Code 4: Extending Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_05.html">
-   Code 5: Splines
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_06.html">
-   Code 6: Time Series
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_07.html">
-   Code 7: Bayesian Additive Regression Trees
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_08.html">
-   Code 8: Approximate Bayesian Computation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_09.html">
-   Code 9: End to End Bayesian Workflows
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_10.html">
-   Code 10: Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_11.html">
-   Code 11: Appendiceal Topics
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 3
- </span>
-</p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Solutions 1: Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_02.html">
-   Solutions 2: Exploratory Analysis of Bayesian models
-  </a>
- </li>
-</ul>
-
-    </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fsolutions/chp_01.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+      <div class="bd-sidebar-primary bd-sidebar">
         
-    </div>
-</div>
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
+  
 
-            <!-- Launch buttons -->
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#e1">
-   1E1
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#e2">
-   1E2.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#e3">
-   1E3.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#e4">
-   1E4.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#e5">
-   1E5.
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#solution-a">
-     Solution A
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#solution-b">
-     Solution B
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#solution-c">
-     Solution C
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#solution-d">
-     Solution D
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#e6">
-   1E6.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#e7">
-   1E7.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#e8">
-   1E8.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#e9">
-   1E9.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#e10">
-   1E10.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#e11">
-   1E11.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#e12">
-   1E12.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#e13">
-   1E13.
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
-     Solution A
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     Solution B
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
-     Solution C
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id4">
-     Solution D
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#solution-e">
-     Solution E
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#solution-f">
-     Solution F
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#m14">
-   1M14.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#m15">
-   1M15.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#m16">
-   1M16.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#m17">
-   1M17.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#m18">
-   1M18
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#h19">
-   1H19.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#m20">
-   1M20.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#m21">
-   1M21.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#h22">
-   1H22.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#h23">
-   1H23.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#h24">
-   1H24.
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id5">
-     Solution A
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id6">
-     Solution B
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id7">
-     Solution C
-    </a>
-   </li>
-  </ul>
- </li>
+<a class="navbar-brand logo" href="../welcome.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Bayesian Modeling and Computation in Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 0</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown/dedication.html">Dedication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/foreword.html">Foreword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/preface.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/symbollist.html">Symbols</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 1</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_01.html">1. Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_02.html">2. Exploratory Analysis of Bayesian Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_03.html">3. Linear Models and Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_04.html">4. Extending Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_05.html">5. Splines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_06.html">6. Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_07.html">7. Bayesian Additive Regression Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_08.html">8. Approximate Bayesian Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_09.html">9. End to End Bayesian Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_10.html">10. Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/chp_11.html">11. Appendiceal Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/glossary.html">12. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/references.html">13. References</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_01.html">Code 1: Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_02.html">Code 2: Exploratory Analysis of Bayesian Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_03.html">Code 3: Linear Models and Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_04.html">Code 4: Extending Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_05.html">Code 5: Splines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_06.html">Code 6: Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_07.html">Code 7: Bayesian Additive Regression Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_08.html">Code 8: Approximate Bayesian Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_09.html">Code 9: End to End Bayesian Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_10.html">Code 10: Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_11.html">Code 11: Appendiceal Topics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Solutions 1: Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_02.html">Solutions 2: Exploratory Analysis of Bayesian models</a></li>
 </ul>
 
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fsolutions/chp_01.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Solutions 1: Bayesian Inference</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#e1">1E1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#e2">1E2.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#e3">1E3.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#e4">1E4.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#e5">1E5.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-a">Solution A</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-b">Solution B</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-c">Solution C</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-d">Solution D</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#e6">1E6.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#e7">1E7.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#e8">1E8.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#e9">1E9.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#e10">1E10.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#e11">1E11.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#e12">1E12.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#e13">1E13.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Solution A</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Solution B</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Solution C</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Solution D</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-e">Solution E</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-f">Solution F</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#m14">1M14.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#m15">1M15.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#m16">1M16.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#m17">1M17.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#m18">1M18</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#h19">1H19.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#m20">1M20.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#m21">1M21.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#h22">1H22.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#h23">1H23.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#h24">1H24.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Solution A</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Solution B</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Solution C</a></li>
+</ul>
+</li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Solutions 1: Bayesian Inference</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#e1">
-   1E1
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#e2">
-   1E2.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#e3">
-   1E3.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#e4">
-   1E4.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#e5">
-   1E5.
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#solution-a">
-     Solution A
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#solution-b">
-     Solution B
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#solution-c">
-     Solution C
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#solution-d">
-     Solution D
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#e6">
-   1E6.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#e7">
-   1E7.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#e8">
-   1E8.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#e9">
-   1E9.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#e10">
-   1E10.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#e11">
-   1E11.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#e12">
-   1E12.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#e13">
-   1E13.
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
-     Solution A
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     Solution B
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
-     Solution C
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id4">
-     Solution D
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#solution-e">
-     Solution E
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#solution-f">
-     Solution F
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#m14">
-   1M14.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#m15">
-   1M15.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#m16">
-   1M16.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#m17">
-   1M17.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#m18">
-   1M18
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#h19">
-   1H19.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#m20">
-   1M20.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#m21">
-   1M21.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#h22">
-   1H22.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#h23">
-   1H23.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#h24">
-   1H24.
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id5">
-     Solution A
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id6">
-     Solution B
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id7">
-     Solution C
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="solutions-1-bayesian-inference">
-<h1>Solutions 1: Bayesian Inference<a class="headerlink" href="#solutions-1-bayesian-inference" title="Permalink to this heading">¶</a></h1>
+<h1>Solutions 1: Bayesian Inference<a class="headerlink" href="#solutions-1-bayesian-inference" title="Permalink to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
@@ -787,7 +429,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <section id="e1">
-<h2>1E1<a class="headerlink" href="#e1" title="Permalink to this heading">¶</a></h2>
+<h2>1E1<a class="headerlink" href="#e1" title="Permalink to this heading">#</a></h2>
 <p>As we discussed, models are artificial representations used to help define and understand an object or process. However no model is able to perfectly replicate what it represents, and thus is deficient in some way. In this book we focus on a particular type of models, statistical models. What are other types of models you can think of? How do they aid understanding of the thing that is being modeled? How are they deficient?</p>
 <p>This is just one possible answer. Use it as a guide.</p>
 <ul class="simple">
@@ -797,7 +439,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </section>
 <section id="e2">
-<h2>1E2.<a class="headerlink" href="#e2" title="Permalink to this heading">¶</a></h2>
+<h2>1E2.<a class="headerlink" href="#e2" title="Permalink to this heading">#</a></h2>
 <p>Match each of these verbal descriptions to their corresponding mathematical expression:</p>
 <p>(a) The probability of a parameter given the the observed data.</p>
 <p><span class="math notranslate nohighlight">\(p(\theta | Y)\)</span>, this is call the posterior</p>
@@ -811,7 +453,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p><span class="math notranslate nohighlight">\(\int_{\boldsymbol{\Theta}} p(\boldsymbol{Y^\ast} \mid \boldsymbol{\theta}) \; p(\boldsymbol{\theta}) \; d\boldsymbol{\theta}\)</span>, this is call the prior predictive distribution</p>
 </section>
 <section id="e3">
-<h2>1E3.<a class="headerlink" href="#e3" title="Permalink to this heading">¶</a></h2>
+<h2>1E3.<a class="headerlink" href="#e3" title="Permalink to this heading">#</a></h2>
 <p>From the following expressions, which one corresponds to the sentence, The probability of being sunny given that it is July 9th of 1816?</p>
 <p>(a) <span class="math notranslate nohighlight">\(p(\text{sunny})\)</span></p>
 <p>(b) <span class="math notranslate nohighlight">\(p(\text{sunny} \mid \text{July})\)</span></p>
@@ -821,7 +463,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p>The correct answer are <strong>c</strong> and <strong>e</strong>, the last one follows from the definition of conditional probability</p>
 </section>
 <section id="e4">
-<h2>1E4.<a class="headerlink" href="#e4" title="Permalink to this heading">¶</a></h2>
+<h2>1E4.<a class="headerlink" href="#e4" title="Permalink to this heading">#</a></h2>
 <p>Show that the probability of choosing a human at random and picking the Pope is not the same as the probability of the Pope being human. In the animated series Futurama, the (Space) Pope is a reptile. How does this change your previous calculations?</p>
 <p>Let’s assume there are 7.8x10⁸ humans and there is only 1 Pope, Pope Francis, at the time of this writing. If a human is picked at random from the entire human population, the chances of that human being the pope are 1 in 7.8x10⁸.
 $<span class="math notranslate nohighlight">\( p(\text{Pope} \mid \text{human}) = \frac{1}{7.8x10⁸} \)</span>$</p>
@@ -836,7 +478,7 @@ $<span class="math notranslate nohighlight">\( p(\text{Pope} \mid \text{human}) 
 \[ p(\text{human} \mid \text{Pope}) = 0 \]</div>
 </section>
 <section id="e5">
-<h2>1E5.<a class="headerlink" href="#e5" title="Permalink to this heading">¶</a></h2>
+<h2>1E5.<a class="headerlink" href="#e5" title="Permalink to this heading">#</a></h2>
 <p>Sketch what the distribution of possible observed values could be for the following
 cases:</p>
 <p>(a) The number of people visiting your local cafe assuming Poisson distribution</p>
@@ -845,7 +487,7 @@ cases:</p>
 <p>(d) The weight of adult humans in pounds assuming skew Normal distribution</p>
 <p>We’ll generate “sketches” using scipy for ease of use presentation in this solution manual. Have your students make hand sketches</p>
 <section id="solution-a">
-<h3>Solution A<a class="headerlink" href="#solution-a" title="Permalink to this heading">¶</a></h3>
+<h3>Solution A<a class="headerlink" href="#solution-a" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">visitors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
@@ -855,12 +497,12 @@ cases:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_01_10_0.png" src="../_images/chp_01_10_0.png" />
+<img alt="../_images/92b40d03fd3dc960db698fed76610a4b76962f7d2c1e2a9689316ca2c18ef4f6.png" src="../_images/92b40d03fd3dc960db698fed76610a4b76962f7d2c1e2a9689316ca2c18ef4f6.png" />
 </div>
 </div>
 </section>
 <section id="solution-b">
-<h3>Solution B<a class="headerlink" href="#solution-b" title="Permalink to this heading">¶</a></h3>
+<h3>Solution B<a class="headerlink" href="#solution-b" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dog_weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
@@ -874,12 +516,12 @@ cases:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_01_12_0.png" src="../_images/chp_01_12_0.png" />
+<img alt="../_images/4bf9f12315687aec560d9c3c829919f4bc2f308b02f0385cae4fc0134040ec1f.png" src="../_images/4bf9f12315687aec560d9c3c829919f4bc2f308b02f0385cae4fc0134040ec1f.png" />
 </div>
 </div>
 </section>
 <section id="solution-c">
-<h3>Solution C<a class="headerlink" href="#solution-c" title="Permalink to this heading">¶</a></h3>
+<h3>Solution C<a class="headerlink" href="#solution-c" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">elephant_weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15000</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
@@ -892,12 +534,12 @@ cases:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_01_14_0.png" src="../_images/chp_01_14_0.png" />
+<img alt="../_images/f5f72d5550274583d6859501d8864b45c67dbc9306df901fc34c348db18bcb37.png" src="../_images/f5f72d5550274583d6859501d8864b45c67dbc9306df901fc34c348db18bcb37.png" />
 </div>
 </div>
 </section>
 <section id="solution-d">
-<h3>Solution D<a class="headerlink" href="#solution-d" title="Permalink to this heading">¶</a></h3>
+<h3>Solution D<a class="headerlink" href="#solution-d" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">human_weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">400</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
@@ -911,13 +553,13 @@ cases:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_01_16_01.png" src="../_images/chp_01_16_01.png" />
+<img alt="../_images/bcffce646ae4f61dca5a2f554646fbc87817c5a54657d3a302ab3a13811800b4.png" src="../_images/bcffce646ae4f61dca5a2f554646fbc87817c5a54657d3a302ab3a13811800b4.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="e6">
-<h2>1E6.<a class="headerlink" href="#e6" title="Permalink to this heading">¶</a></h2>
+<h2>1E6.<a class="headerlink" href="#e6" title="Permalink to this heading">#</a></h2>
 <p>For each example in the previous exercise use SciPy to specify the distribution in
 Python. Pick parameters that you believe are reasonable, take a random sample of size
 1000, and plot the resulting distribution. Does this distribution look reasonable given your
@@ -933,7 +575,7 @@ reasonable.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_01_18_0.png" src="../_images/chp_01_18_0.png" />
+<img alt="../_images/3c3b8adcbe1fe642a786c69d100f19ba16147635266ab9059ee81e69a0d36654.png" src="../_images/3c3b8adcbe1fe642a786c69d100f19ba16147635266ab9059ee81e69a0d36654.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -946,7 +588,7 @@ reasonable.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_01_19_01.png" src="../_images/chp_01_19_01.png" />
+<img alt="../_images/ad8462a4818795f7be78c1e852581555b0892bb06d891a16c8de31169ea17201.png" src="../_images/ad8462a4818795f7be78c1e852581555b0892bb06d891a16c8de31169ea17201.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -959,7 +601,7 @@ reasonable.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_01_20_0.png" src="../_images/chp_01_20_0.png" />
+<img alt="../_images/7eed937e77eec13b03722a5aa42e5b62f7c7ccebf706dc0659dbcd71e61f3ccb.png" src="../_images/7eed937e77eec13b03722a5aa42e5b62f7c7ccebf706dc0659dbcd71e61f3ccb.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -973,12 +615,12 @@ reasonable.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_01_21_0.png" src="../_images/chp_01_21_0.png" />
+<img alt="../_images/8cbeec02362338c9ae079a2f95fd89eaf5953892e61ddd86bbf5ea29891b13dc.png" src="../_images/8cbeec02362338c9ae079a2f95fd89eaf5953892e61ddd86bbf5ea29891b13dc.png" />
 </div>
 </div>
 </section>
 <section id="e7">
-<h2>1E7.<a class="headerlink" href="#e7" title="Permalink to this heading">¶</a></h2>
+<h2>1E7.<a class="headerlink" href="#e7" title="Permalink to this heading">#</a></h2>
 <p>Compare priors Beta(0.5, 0.5), Beta(1, 1), Beta(1, 4). How do the priors differ in terms
 of shape?</p>
 <p>Beta(0.5, 0.5) is U-like shaped</p>
@@ -998,12 +640,12 @@ of shape?</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_01_23_0.png" src="../_images/chp_01_23_0.png" />
+<img alt="../_images/5e1096995693f15f73b09d8d145de2a8c01428144ca2f82ec940c6448f94ede0.png" src="../_images/5e1096995693f15f73b09d8d145de2a8c01428144ca2f82ec940c6448f94ede0.png" />
 </div>
 </div>
 </section>
 <section id="e8">
-<h2>1E8.<a class="headerlink" href="#e8" title="Permalink to this heading">¶</a></h2>
+<h2>1E8.<a class="headerlink" href="#e8" title="Permalink to this heading">#</a></h2>
 <p>Rerun Code block 1.8 but using two Beta-priors of your choice Hint: you may want
 to try priors with <span class="math notranslate nohighlight">\(\alpha \not = \beta\)</span> like Beta(2, 5).</p>
 <div class="cell docutils container">
@@ -1034,12 +676,12 @@ to try priors with <span class="math notranslate nohighlight">\(\alpha \not = \b
   axes[idx].plot(np.divide(y, N), 0, color=&quot;k&quot;, marker=&quot;o&quot;, ms=12)
 </pre></div>
 </div>
-<img alt="../_images/chp_01_25_1.png" src="../_images/chp_01_25_1.png" />
+<img alt="../_images/1f879770e96ea0db569f0cb93ac8ae51e00791832207790096ff3171a9b99f2d.png" src="../_images/1f879770e96ea0db569f0cb93ac8ae51e00791832207790096ff3171a9b99f2d.png" />
 </div>
 </div>
 </section>
 <section id="e9">
-<h2>1E9.<a class="headerlink" href="#e9" title="Permalink to this heading">¶</a></h2>
+<h2>1E9.<a class="headerlink" href="#e9" title="Permalink to this heading">#</a></h2>
 <p>Try to come up with new constraints in order to obtain new Max-Ent distributions (Code Block 1.9)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1061,12 +703,12 @@ to try priors with <span class="math notranslate nohighlight">\(\alpha \not = \b
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_01_27_0.png" src="../_images/chp_01_27_0.png" />
+<img alt="../_images/d72e7efdfb64216857b627adb2f5a89f0cdb4756229852e053deccc632bddef6.png" src="../_images/d72e7efdfb64216857b627adb2f5a89f0cdb4756229852e053deccc632bddef6.png" />
 </div>
 </div>
 </section>
 <section id="e10">
-<h2>1E10.<a class="headerlink" href="#e10" title="Permalink to this heading">¶</a></h2>
+<h2>1E10.<a class="headerlink" href="#e10" title="Permalink to this heading">#</a></h2>
 <p>In Code Block 1.3, change the value of <code class="docutils literal notranslate"><span class="pre">can_sd</span></code> and run the Metropolis-Hastings
 sampler. Try values like 0.01 and 1.</p>
 <p>(a) Compute the mean, sd and HDI and compare the values with those in the book
@@ -1137,7 +779,7 @@ sampler. Try values like 0.01 and 1.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_01_32_0.png" src="../_images/chp_01_32_0.png" />
+<img alt="../_images/30a6bddc82e310215635e591e050cba20d9cec4c17a63609db1cd7a749b7542c.png" src="../_images/30a6bddc82e310215635e591e050cba20d9cec4c17a63609db1cd7a749b7542c.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1149,12 +791,12 @@ sampler. Try values like 0.01 and 1.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_01_33_0.png" src="../_images/chp_01_33_0.png" />
+<img alt="../_images/598ddbccf718bd3bfb00f447a7f6e4945b102dd3e452dfb6f1739df055635b9c.png" src="../_images/598ddbccf718bd3bfb00f447a7f6e4945b102dd3e452dfb6f1739df055635b9c.png" />
 </div>
 </div>
 </section>
 <section id="e11">
-<h2>1E11.<a class="headerlink" href="#e11" title="Permalink to this heading">¶</a></h2>
+<h2>1E11.<a class="headerlink" href="#e11" title="Permalink to this heading">#</a></h2>
 <p>You need to estimate the weights of blue whales, humans and mice. You assume
 they are normally distributed and you set the same prior HN (200kg) for the variance.</p>
 <p>What type of prior is this for adult blue whales? Strongly informative, weakly informative, or non informative.</p>
@@ -1166,7 +808,7 @@ they are normally distributed and you set the same prior HN (200kg) for the vari
 <p>** As noted in the example above we use “common knowledge” as an indication for our priors. We know mice and humans typically weigh grams and sub 200 kg typically. We also know that whales are very large. So even though the prior distribution is exactly the same, the informativeness of the prior differs for different problems, as the informativeness of a prior is a function of our real world knowledge for a given problem.</p>
 </section>
 <section id="e12">
-<h2>1E12.<a class="headerlink" href="#e12" title="Permalink to this heading">¶</a></h2>
+<h2>1E12.<a class="headerlink" href="#e12" title="Permalink to this heading">#</a></h2>
 <p>Use the following function to explore different combinations of priors (change the
 parameters a and b) and data (change heads and trials). Summarize your observations.</p>
 <div class="cell docutils container">
@@ -1200,12 +842,12 @@ parameters a and b) and data (change heads and trials). Summarize your observati
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;function __main__.posterior_grid(grid=10, a=1, b=1, heads=6, trials=9)&gt;
 </pre></div>
 </div>
-<img alt="../_images/chp_01_36_1.png" src="../_images/chp_01_36_1.png" />
+<img alt="../_images/d938594f4c502f476a59ac8dcd3228499319c6ef7957713e5eba7fc8af512f99.png" src="../_images/d938594f4c502f476a59ac8dcd3228499319c6ef7957713e5eba7fc8af512f99.png" />
 </div>
 </div>
 </section>
 <section id="e13">
-<h2>1E13.<a class="headerlink" href="#e13" title="Permalink to this heading">¶</a></h2>
+<h2>1E13.<a class="headerlink" href="#e13" title="Permalink to this heading">#</a></h2>
 <p>Between the prior, prior predictive, posterior, and posterior predictive distributions
 which distribution would help answer each of these questions scenarios. Some items may have multiple
 answers.</p>
@@ -1216,32 +858,32 @@ answers.</p>
 <p>(e) Which can be used to calculate numerical summaries, such as the mean, of the parameters?</p>
 <p>(f) Which can can be used to visualize a Highest Density Interval?</p>
 <section id="id1">
-<h3>Solution A<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h3>
+<h3>Solution A<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
 <p>Prior distribution</p>
 </section>
 <section id="id2">
-<h3>Solution B<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h3>
+<h3>Solution B<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
 <p>Prior predictive distribution</p>
 </section>
 <section id="id3">
-<h3>Solution C<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h3>
+<h3>Solution C<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
 <p>Posterior predictive distribution</p>
 </section>
 <section id="id4">
-<h3>Solution D<a class="headerlink" href="#id4" title="Permalink to this heading">¶</a></h3>
+<h3>Solution D<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
 <p>Posterior distribution</p>
 </section>
 <section id="solution-e">
-<h3>Solution E<a class="headerlink" href="#solution-e" title="Permalink to this heading">¶</a></h3>
+<h3>Solution E<a class="headerlink" href="#solution-e" title="Permalink to this heading">#</a></h3>
 <p>Prior or Posteriors distribution. Both can represent our information about parameters so they can be used to calculate numerical summaries of parameters. The difference is whether those summaries represent information prior to conditioning on data or afterwards.</p>
 </section>
 <section id="solution-f">
-<h3>Solution F<a class="headerlink" href="#solution-f" title="Permalink to this heading">¶</a></h3>
+<h3>Solution F<a class="headerlink" href="#solution-f" title="Permalink to this heading">#</a></h3>
 <p>A HDI can be calculated from any distribution, but the meaning will differ depending on what kind of distribution it is</p>
 </section>
 </section>
 <section id="m14">
-<h2>1M14.<a class="headerlink" href="#m14" title="Permalink to this heading">¶</a></h2>
+<h2>1M14.<a class="headerlink" href="#m14" title="Permalink to this heading">#</a></h2>
 <p>Equation 1.1 contains the marginal likelihood in the denominator which is difficult
 to calculate. In Equation 1.3 we show that knowing the posterior up to a proportional
 constant is sufficient for inference. Show why the marginal likelihood is not needed for the
@@ -1271,7 +913,7 @@ q(x_i \mid x_{i + 1})} {p(x_i) \; q (x_{i + 1} \mid x_i)} \right)
 <p>We can see that the denonimator <span class="math notranslate nohighlight">\(p(\boldsymbol{Y})\)</span> cancels out</p>
 </section>
 <section id="m15">
-<h2>1M15.<a class="headerlink" href="#m15" title="Permalink to this heading">¶</a></h2>
+<h2>1M15.<a class="headerlink" href="#m15" title="Permalink to this heading">#</a></h2>
 <p>In the following definition of a probabilistic model, identify the prior, the likelihood and the posterior:</p>
 <p>\begin{equation*}
 \begin{split}
@@ -1283,13 +925,13 @@ Y \sim \mathcal{N}(\mu, \sigma) \text{ Likelihood}\
 <p>The posterior is not represented here as the posterior is the result of conditioning the model to the data</p>
 </section>
 <section id="m16">
-<h2>1M16.<a class="headerlink" href="#m16" title="Permalink to this heading">¶</a></h2>
+<h2>1M16.<a class="headerlink" href="#m16" title="Permalink to this heading">#</a></h2>
 <p>In the previous model, how many parameters will the posterior have? Compare your
 answer with that from the model in the coin-flipping problem in Equation 1.10.</p>
 <p>The posteriors will be bidimensional, as is representing the joint distribution of <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>. In the coin-flipping problem we only have one parameter, <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
 </section>
 <section id="m17">
-<h2>1M17.<a class="headerlink" href="#m17" title="Permalink to this heading">¶</a></h2>
+<h2>1M17.<a class="headerlink" href="#m17" title="Permalink to this heading">#</a></h2>
 <p>Suppose that we have two coins; when we toss the first coin, half of the time it lands
 tails and half of the time on heads. The other coin is a loaded coin that always lands on
 heads. If we choose one of the coins at random and observe a head, what is the probability
@@ -1323,7 +965,7 @@ p(\text{heads}) = p(\text{heads} \mid \text{fair coin})*p(\text{fair coin}) + p(
 </div>
 </section>
 <section id="m18">
-<h2>1M18<a class="headerlink" href="#m18" title="Permalink to this heading">¶</a></h2>
+<h2>1M18<a class="headerlink" href="#m18" title="Permalink to this heading">#</a></h2>
 <p>Modify Code Block 1.2 to generate random samples from a Poisson distribution with a parameter of your choosing.</p>
 <p>Then modify Code Blocks 1.1 and 1.3 to generate MCMC samples and see if you can recover your chosen parameter. Test how the number of samples, MCMC iterations, and initial starting point affect convergence to your true chosen parameter.</p>
 <div class="cell docutils container">
@@ -1389,12 +1031,12 @@ p(\text{heads}) = p(\text{heads} \mid \text{fair coin})*p(\text{fair coin}) + p(
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_01_61_0.png" src="../_images/chp_01_61_0.png" />
+<img alt="../_images/843e741824fa50329e1b2afc03a10591614dd5ba910e57367f6da6d00a43b144.png" src="../_images/843e741824fa50329e1b2afc03a10591614dd5ba910e57367f6da6d00a43b144.png" />
 </div>
 </div>
 </section>
 <section id="h19">
-<h2>1H19.<a class="headerlink" href="#h19" title="Permalink to this heading">¶</a></h2>
+<h2>1H19.<a class="headerlink" href="#h19" title="Permalink to this heading">#</a></h2>
 <p>Assume we are building a model to estimate the mean and standard deviation of adult human heights in centimeters. Build a model that will make this estimation. Start with Code Block 1.6  and change the likelihood and priors as needed. After doing so</p>
 <p>(a) Sample from the prior predictive. Generate a visualization and numerical summary of the prior predictive distribution.</p>
 <p>(b) Using the outputs from (a) justify your choices of priors and likelihoods</p>
@@ -1424,12 +1066,12 @@ p(\text{heads}) = p(\text{heads} \mid \text{fair coin})*p(\text{fair coin}) + p(
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_01_64_0.png" src="../_images/chp_01_64_0.png" />
+<img alt="../_images/3c75580118688c3115c9933eb4a46f528986ee07e110a29ce3eef2ecb780e4c3.png" src="../_images/3c75580118688c3115c9933eb4a46f528986ee07e110a29ce3eef2ecb780e4c3.png" />
 </div>
 </div>
 </section>
 <section id="m20">
-<h2>1M20.<a class="headerlink" href="#m20" title="Permalink to this heading">¶</a></h2>
+<h2>1M20.<a class="headerlink" href="#m20" title="Permalink to this heading">#</a></h2>
 <p>From domain knowledge you have that a given parameter can not be negative, and has a mean that is roughly between 3 and 10 units, and a standard deviation of around 2. Determine two prior distributions that satisfy these constraints using Python. This may require trial and error by drawing samples and verifying these criteria have been met using both plots and numerical summaries.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1447,7 +1089,7 @@ p(\text{heads}) = p(\text{heads} \mid \text{fair coin})*p(\text{fair coin}) + p(
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array(6.5), 2.2453655975512463)
 </pre></div>
 </div>
-<img alt="../_images/chp_01_66_1.png" src="../_images/chp_01_66_1.png" />
+<img alt="../_images/90b6c2de3343882bb682dc171cc3b54cf0eda2e36803a15d62140d63e33ac8ad.png" src="../_images/90b6c2de3343882bb682dc171cc3b54cf0eda2e36803a15d62140d63e33ac8ad.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1466,7 +1108,7 @@ p(\text{heads}) = p(\text{heads} \mid \text{fair coin})*p(\text{fair coin}) + p(
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array(5.88235294), 2.147931598059475, array([4.30765895, 7.28479991]))
 </pre></div>
 </div>
-<img alt="../_images/chp_01_67_1.png" src="../_images/chp_01_67_1.png" />
+<img alt="../_images/a93c40277b63c8e3624231cafcb7ac84b34928920a857f007efa74a64f995fab.png" src="../_images/a93c40277b63c8e3624231cafcb7ac84b34928920a857f007efa74a64f995fab.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1485,12 +1127,12 @@ p(\text{heads}) = p(\text{heads} \mid \text{fair coin})*p(\text{fair coin}) + p(
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array(6.5), 2.0554804791094465, array([5.0218264 , 7.74399991]))
 </pre></div>
 </div>
-<img alt="../_images/chp_01_68_1.png" src="../_images/chp_01_68_1.png" />
+<img alt="../_images/e669986cfb6ee89b6038dcb68e1cb59f63cee114d28d484103cff769576f3982.png" src="../_images/e669986cfb6ee89b6038dcb68e1cb59f63cee114d28d484103cff769576f3982.png" />
 </div>
 </div>
 </section>
 <section id="m21">
-<h2>1M21.<a class="headerlink" href="#m21" title="Permalink to this heading">¶</a></h2>
+<h2>1M21.<a class="headerlink" href="#m21" title="Permalink to this heading">#</a></h2>
 <p>A store is visited by n customers on a given day. The number of customers that
 make a purchase Y is distributed as Bin(n, θ) where θ is the probability that a customer
 makes a purchase. Assume we know θ and the prior for n is Pois(4.5).</p>
@@ -1522,23 +1164,23 @@ Metropolis: [n]
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [8000/8000 00:00<00:00 Sampling 4 chains, 0 divergences]
-</div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 1 seconds.
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [8000/8000 00:00<00:00 Sampling 4 chains, 0 divergences]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 1 seconds.
 The number of effective samples is smaller than 25% for some parameters.
 &lt;ipython-input-29-8882123ced4e&gt;:10: FutureWarning: In v4.0, pm.sample will return an `arviz.InferenceData` object instead of a `MultiTrace` by default. You can pass return_inferencedata=True or return_inferencedata=False to be safe and silence this warning.
   trace = pm.sample()
@@ -1547,23 +1189,23 @@ Metropolis: [n]
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [8000/8000 00:00<00:00 Sampling 4 chains, 0 divergences]
-</div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 1 seconds.
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [8000/8000 00:00<00:00 Sampling 4 chains, 0 divergences]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 1 seconds.
 The number of effective samples is smaller than 25% for some parameters.
 &lt;ipython-input-29-8882123ced4e&gt;:10: FutureWarning: In v4.0, pm.sample will return an `arviz.InferenceData` object instead of a `MultiTrace` by default. You can pass return_inferencedata=True or return_inferencedata=False to be safe and silence this warning.
   trace = pm.sample()
@@ -1572,23 +1214,23 @@ Metropolis: [n]
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [8000/8000 00:00<00:00 Sampling 4 chains, 0 divergences]
-</div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 1 seconds.
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [8000/8000 00:00<00:00 Sampling 4 chains, 0 divergences]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 1 seconds.
 The number of effective samples is smaller than 25% for some parameters.
 &lt;ipython-input-29-8882123ced4e&gt;:10: FutureWarning: In v4.0, pm.sample will return an `arviz.InferenceData` object instead of a `MultiTrace` by default. You can pass return_inferencedata=True or return_inferencedata=False to be safe and silence this warning.
   trace = pm.sample()
@@ -1597,23 +1239,23 @@ Metropolis: [n]
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [8000/8000 00:00<00:00 Sampling 4 chains, 0 divergences]
-</div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 1 seconds.
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [8000/8000 00:00<00:00 Sampling 4 chains, 0 divergences]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 1 seconds.
 The number of effective samples is smaller than 25% for some parameters.
 &lt;ipython-input-29-8882123ced4e&gt;:10: FutureWarning: In v4.0, pm.sample will return an `arviz.InferenceData` object instead of a `MultiTrace` by default. You can pass return_inferencedata=True or return_inferencedata=False to be safe and silence this warning.
   trace = pm.sample()
@@ -1622,23 +1264,23 @@ Metropolis: [n]
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [8000/8000 00:00<00:00 Sampling 4 chains, 0 divergences]
-</div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 1 seconds.
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [8000/8000 00:00<00:00 Sampling 4 chains, 0 divergences]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 1 seconds.
 The number of effective samples is smaller than 25% for some parameters.
 &lt;ipython-input-29-8882123ced4e&gt;:10: FutureWarning: In v4.0, pm.sample will return an `arviz.InferenceData` object instead of a `MultiTrace` by default. You can pass return_inferencedata=True or return_inferencedata=False to be safe and silence this warning.
   trace = pm.sample()
@@ -1647,23 +1289,23 @@ Metropolis: [n]
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [8000/8000 00:00<00:00 Sampling 4 chains, 0 divergences]
-</div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 1 seconds.
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [8000/8000 00:00<00:00 Sampling 4 chains, 0 divergences]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 1 seconds.
 The number of effective samples is smaller than 25% for some parameters.
 </pre></div>
 </div>
@@ -1695,12 +1337,12 @@ The number of effective samples is smaller than 25% for some parameters.
   warnings.warn(
 </pre></div>
 </div>
-<img alt="../_images/chp_01_71_1.png" src="../_images/chp_01_71_1.png" />
+<img alt="../_images/f6afcdc29ea7bf0d3175bf931c933a993d6f3a928eb7306ae326b710b8b0c975.png" src="../_images/f6afcdc29ea7bf0d3175bf931c933a993d6f3a928eb7306ae326b710b8b0c975.png" />
 </div>
 </div>
 </section>
 <section id="h22">
-<h2>1H22.<a class="headerlink" href="#h22" title="Permalink to this heading">¶</a></h2>
+<h2>1H22.<a class="headerlink" href="#h22" title="Permalink to this heading">#</a></h2>
 <p>Modify Code Block 1.2 to generate samples from a Normal Distribution, noting your choice of parameters for the mean and standard deviation. Then modify Code Blocks 1.1 and 1.3 to sample from a Normal model and see if you can recover your chosen parameters.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1723,7 +1365,7 @@ The number of effective samples is smaller than 25% for some parameters.
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fab8b7bfb80&gt;]
 </pre></div>
 </div>
-<img alt="../_images/chp_01_74_1.png" src="../_images/chp_01_74_1.png" />
+<img alt="../_images/b82858b171142533349b854ee0b1f02f23a935fa8004444a3dac3983245466ba.png" src="../_images/b82858b171142533349b854ee0b1f02f23a935fa8004444a3dac3983245466ba.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1785,7 +1427,7 @@ The number of effective samples is smaller than 25% for some parameters.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_01_77_0.png" src="../_images/chp_01_77_0.png" />
+<img alt="../_images/b1fa984e50956b43653d46edfea774995967c23d74486d3a27289e3f225b9214.png" src="../_images/b1fa984e50956b43653d46edfea774995967c23d74486d3a27289e3f225b9214.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1795,12 +1437,12 @@ The number of effective samples is smaller than 25% for some parameters.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_01_78_0.png" src="../_images/chp_01_78_0.png" />
+<img alt="../_images/4cf65da8e64c77e2b32c4981b70625ae48db80be3ac3a494975ce955648cea78.png" src="../_images/4cf65da8e64c77e2b32c4981b70625ae48db80be3ac3a494975ce955648cea78.png" />
 </div>
 </div>
 </section>
 <section id="h23">
-<h2>1H23.<a class="headerlink" href="#h23" title="Permalink to this heading">¶</a></h2>
+<h2>1H23.<a class="headerlink" href="#h23" title="Permalink to this heading">#</a></h2>
 <p>Make a model that estimates the proportion of the number of sunny versus cloudy days in your area. Use the past 5 days of data from your personal observations. Think through the data collection process. How hard is it to remember the past 5 days. What if needed the past 30 days of data? Past year? Justify your choice of priors. Obtain a posterior distribution that estimates the proportion of sunny versus cloudy days. Generate predictions for the next 10 days of weather. Communicate your answer using both numerical summaries and visualizations.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1828,43 +1470,43 @@ NUTS: [θ]
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [8000/8000 00:01<00:00 Sampling 4 chains, 0 divergences]
-</div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 2 seconds.
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [8000/8000 00:01<00:00 Sampling 4 chains, 0 divergences]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 2 seconds.
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='4000' class='' max='4000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [4000/4000 00:01<00:00]
-</div>
-</div></div>
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='4000' class='' max='4000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [4000/4000 00:01<00:00]
+    </div>
+    </div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1874,7 +1516,7 @@ NUTS: [θ]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/chp_01_81_0.png" src="../_images/chp_01_81_0.png" />
+<img alt="../_images/c1eee1fa79ba19fecbd10023fb01ccbd849354d37708df343adda71af224151f.png" src="../_images/c1eee1fa79ba19fecbd10023fb01ccbd849354d37708df343adda71af224151f.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1893,7 +1535,7 @@ NUTS: [θ]
 </div>
 </section>
 <section id="h24">
-<h2>1H24.<a class="headerlink" href="#h24" title="Permalink to this heading">¶</a></h2>
+<h2>1H24.<a class="headerlink" href="#h24" title="Permalink to this heading">#</a></h2>
 <p>You planted 12 seedlings and 3 germinate. Let us call θ the probability that a seedling
 germinates. Assuming Beta(1, 1) prior distribution for θ.</p>
 <p>(a) Use pen and paper to compute the posterior mean and standard deviation. Verify your calculation using SciPy</p>
@@ -1901,7 +1543,7 @@ germinates. Assuming Beta(1, 1) prior distribution for θ.</p>
 <p>(c) Use SciPy to compute the posterior predictive probability that at least one seedling will germinate if you plant another 12 seedlings.</p>
 <p>After obtaining your results with SciPy repeat this exercise using PyMC3 and ArviZ</p>
 <section id="id5">
-<h3>Solution A<a class="headerlink" href="#id5" title="Permalink to this heading">¶</a></h3>
+<h3>Solution A<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use a conjugate update to determine new posterior</span>
@@ -1940,7 +1582,7 @@ germinates. Assuming Beta(1, 1) prior distribution for θ.</p>
 </div>
 </section>
 <section id="id6">
-<h3>Solution B<a class="headerlink" href="#id6" title="Permalink to this heading">¶</a></h3>
+<h3>Solution B<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">post</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">post_beta_a</span><span class="p">,</span> <span class="n">post_beta_b</span><span class="p">)</span>
@@ -1991,7 +1633,7 @@ germinates. Assuming Beta(1, 1) prior distribution for θ.</p>
 </div>
 </section>
 <section id="id7">
-<h3>Solution C<a class="headerlink" href="#id7" title="Permalink to this heading">¶</a></h3>
+<h3>Solution C<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">samples</span> <span class="o">=</span> <span class="mi">10000</span>
@@ -2048,43 +1690,43 @@ NUTS: [θ]
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [8000/8000 00:01<00:00 Sampling 4 chains, 0 divergences]
-</div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 2 seconds.
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [8000/8000 00:01<00:00 Sampling 4 chains, 0 divergences]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 2 seconds.
 </pre></div>
 </div>
 <div class="output text_html">
-<div>
-    <style>
-        /* Turns off some styling */
-        progress {
-            /* gets rid of default border in Firefox and Opera. */
-            border: none;
-            /* Needs to be in here for Safari polyfill so background images work as expected. */
-            background-size: auto;
-        }
-        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-            background: #F44336;
-        }
-    </style>
-  <progress value='4000' class='' max='4000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [4000/4000 00:01<00:00]
-</div>
-</div></div>
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='4000' class='' max='4000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [4000/4000 00:01<00:00]
+    </div>
+    </div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2879,7 +2521,7 @@ Coordinates:
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./solutions"
         },
         predefinedOutput: true
@@ -2887,44 +2529,144 @@ Coordinates:
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="../notebooks/chp_11.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Code 11: Appendiceal Topics</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../notebooks/chp_11.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Code 11: Appendiceal Topics</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="chp_02.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="chp_02.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Solutions 2: Exploratory Analysis of Bayesian models</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
+                </footer>
+              
+            </div>
             
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Martin, Kumar, Lao<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#e1">1E1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#e2">1E2.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#e3">1E3.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#e4">1E4.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#e5">1E5.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-a">Solution A</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-b">Solution B</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-c">Solution C</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-d">Solution D</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#e6">1E6.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#e7">1E7.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#e8">1E8.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#e9">1E9.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#e10">1E10.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#e11">1E11.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#e12">1E12.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#e13">1E13.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Solution A</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Solution B</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Solution C</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Solution D</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-e">Solution E</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-f">Solution F</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#m14">1M14.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#m15">1M15.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#m16">1M16.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#m17">1M17.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#m18">1M18</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#h19">1H19.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#m20">1M20.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#m21">1M21.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#h22">1H22.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#h23">1H23.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#h24">1H24.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Solution A</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Solution B</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Solution C</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
 
-      </div>
-    </div>
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Martin, Kumar, Lao
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

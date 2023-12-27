@@ -1,8 +1,8 @@
 # Welcome
 
 Welcome to the online version
-[Bayesian Modeling and Computation in Python](https://www.routledge.com/Bayesian-Modeling-and-Computation-in-Python/Martin-Kumar-Lao/p/book/9780367894368). If you'd like a physical copy it can purchased 
-[from the publisher here](https://www.routledge.com/Bayesian-Modeling-and-Computation-in-Python/Martin-Kumar-Lao/p/book/9780367894368) or on Amazon.
+[Bayesian Modeling and Computation in Python]([https://www.routledge.com/Bayesian-Modeling-and-Computation-in-Python/Martin-Kumar-Lao/p/book/9780367894368](https://www.routledge.com/Bayesian-Modeling-and-Computation-in-Python/Martin-Kumar-Lao/p/book/9780367894368?utm_source=author&utm_medium=shared_link&utm_campaign=B043128_jm1_5ll_6rm_t081_1al_bayesianmodelingandcomputationinpythonauthorshare)). If you'd like a physical copy it can purchased 
+[from the publisher here]([https://www.routledge.com/Bayesian-Modeling-and-Computation-in-Python/Martin-Kumar-Lao/p/book/9780367894368](https://www.routledge.com/Bayesian-Modeling-and-Computation-in-Python/Martin-Kumar-Lao/p/book/9780367894368?utm_source=author&utm_medium=shared_link&utm_campaign=B043128_jm1_5ll_6rm_t081_1al_bayesianmodelingandcomputationinpythonauthorshare)) or on Amazon.
 <p align="center">
   <a href="https://www.amazon.com/Bayesian-Modeling-Computation-Chapman-Statistical/dp/036789436X?_encoding=UTF8&camp=1789&creative=9325&linkCode=ur2&tag=storypodca-20&linkId=2P4S6EY6B462X4AR" target="_blank" rel="noopener noreferrer" style="border:none;text-decoration:none"><img src="https://www.niftybuttons.com/amazon/amazon-button2.png"></a>
 
@@ -18,10 +18,8 @@ This site contains an online version of the book and all the code used to produc
 This includes the visible code, and all code used to generate figures, tables, etc.
 
 
-```{admonition} Work in Progress
-We're still working on this site. 
-File an [issue](https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues)
-if you notice anything broken
+```{admonition} Updated code
+For the most up-to-date code please check the folder [notebooks_updated](https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/tree/main/notebooks_updated). This code is updated to work with the latest versions of the libraries used in the book, which means that some of the code will be different from the one in the book.
 ```
 
 ## Citation
@@ -44,6 +42,9 @@ Here is the citation in BibTeX format
   isbn = {978-0-367-89436-8},
 }
 ```
+
+## See a mistake? 
+File an [issue](https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues) if you notice anything broken so we can fix it.
 
 ## Environment installation
 To run the code you will need to install the correct packages in a computational environment.

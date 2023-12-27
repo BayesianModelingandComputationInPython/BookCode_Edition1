@@ -1,39 +1,47 @@
 
+
 <!DOCTYPE html>
 
-<html lang="en">
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>2. Exploratory Analysis of Bayesian Models &#8212; Bayesian Modeling and Computation in Python</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-codeautolink.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -42,12 +50,13 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -56,550 +65,324 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'markdown/chp_02';</script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="3. Linear Models and Probabilistic Programming Languages" href="chp_03.html" />
     <link rel="prev" title="1. Bayesian Inference" href="chp_01.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en">
-    
-
-    <!-- Google Analytics -->
-    
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-702QMHG8ST"></script>
-<script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){ dataLayer.push(arguments); }
-                    gtag('js', new Date());
-                    gtag('config', 'G-702QMHG8ST');
-                </script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-      
-      
-      <h1 class="site-logo" id="site-title">Bayesian Modeling and Computation in Python</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 0
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="dedication.html">
-   Dedication
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="foreword.html">
-   Foreword
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="preface.html">
-   Preface
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="symbollist.html">
-   Symbols
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 1
- </span>
-</p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_01.html">
-   1. Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   2. Exploratory Analysis of Bayesian Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_03.html">
-   3. Linear Models and Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_04.html">
-   4. Extending Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_05.html">
-   5. Splines
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_06.html">
-   6. Time Series
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_07.html">
-   7. Bayesian Additive Regression Trees
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_08.html">
-   8. Approximate Bayesian Computation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_09.html">
-   9. End to End Bayesian Workflows
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_10.html">
-   10. Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_11.html">
-   11. Appendiceal Topics
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="glossary.html">
-   12. Glossary
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="references.html">
-   13. References
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 2
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_01.html">
-   Code 1: Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_02.html">
-   Code 2: Exploratory Analysis of Bayesian Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_03.html">
-   Code 3: Linear Models and Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_04.html">
-   Code 4: Extending Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_05.html">
-   Code 5: Splines
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_06.html">
-   Code 6: Time Series
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_07.html">
-   Code 7: Bayesian Additive Regression Trees
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_08.html">
-   Code 8: Approximate Bayesian Computation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_09.html">
-   Code 9: End to End Bayesian Workflows
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_10.html">
-   Code 10: Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_11.html">
-   Code 11: Appendiceal Topics
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 3
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../solutions/chp_01.html">
-   Solutions 1: Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../solutions/chp_02.html">
-   Solutions 2: Exploratory Analysis of Bayesian models
-  </a>
- </li>
-</ul>
-
-    </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_02.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+      <div class="bd-sidebar-primary bd-sidebar">
         
-    </div>
-</div>
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
+  
 
-            <!-- Launch buttons -->
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#there-is-life-after-inference-and-before-too">
-   2.1. There is Life After Inference, and Before Too!
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#understanding-your-assumptions">
-   2.2. Understanding Your Assumptions
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#understanding-your-predictions">
-   2.3. Understanding Your Predictions
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#diagnosing-numerical-inference">
-   2.4. Diagnosing Numerical Inference
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#effective-sample-size">
-     2.4.1. Effective Sample Size
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#potential-scale-reduction-factor-hat-r">
-     2.4.2. Potential Scale Reduction Factor
-     <span class="math notranslate nohighlight">
-      \(\hat R\)
-     </span>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#monte-carlo-standard-error">
-     2.4.3. Monte Carlo Standard Error
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#trace-plots">
-     2.4.4. Trace Plots
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#autocorrelation-plots">
-     2.4.5. Autocorrelation Plots
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#rank-plots">
-     2.4.6. Rank Plots
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#divergences">
-     2.4.7. Divergences
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sampler-parameters-and-other-diagnostics">
-     2.4.8. Sampler Parameters and Other Diagnostics
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#model-comparison">
-   2.5. Model Comparison
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#cross-validation-and-loo">
-     2.5.1. Cross-validation and LOO
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#expected-log-predictive-density">
-     2.5.2. Expected Log Predictive Density
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#pareto-shape-parameter">
-     2.5.3. Pareto Shape Parameter
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#interpreting-p-loo-when-pareto-hat-kappa-is-large">
-     2.5.4. Interpreting p_loo When Pareto
-     <span class="math notranslate nohighlight">
-      \(\hat \kappa\)
-     </span>
-     is Large
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#loo-pit">
-     2.5.5. LOO-PIT
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#model-averaging">
-     2.5.6. Model Averaging
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
-   2.6. Exercises
-  </a>
- </li>
+<a class="navbar-brand logo" href="../welcome.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Bayesian Modeling and Computation in Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 0</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="dedication.html">Dedication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="foreword.html">Foreword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preface.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="symbollist.html">Symbols</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 1</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chp_01.html">1. Bayesian Inference</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Exploratory Analysis of Bayesian Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_03.html">3. Linear Models and Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_04.html">4. Extending Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_05.html">5. Splines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_06.html">6. Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_07.html">7. Bayesian Additive Regression Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_08.html">8. Approximate Bayesian Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_09.html">9. End to End Bayesian Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_10.html">10. Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_11.html">11. Appendiceal Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">12. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">13. References</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_01.html">Code 1: Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_02.html">Code 2: Exploratory Analysis of Bayesian Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_03.html">Code 3: Linear Models and Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_04.html">Code 4: Extending Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_05.html">Code 5: Splines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_06.html">Code 6: Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_07.html">Code 7: Bayesian Additive Regression Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_08.html">Code 8: Approximate Bayesian Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_09.html">Code 9: End to End Bayesian Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_10.html">Code 10: Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_11.html">Code 11: Appendiceal Topics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../solutions/chp_01.html">Solutions 1: Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/chp_02.html">Solutions 2: Exploratory Analysis of Bayesian models</a></li>
 </ul>
 
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_02.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Exploratory Analysis of Bayesian Models</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#there-is-life-after-inference-and-before-too">2.1. There is Life After Inference, and Before Too!</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-your-assumptions">2.2. Understanding Your Assumptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-your-predictions">2.3. Understanding Your Predictions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagnosing-numerical-inference">2.4. Diagnosing Numerical Inference</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#effective-sample-size">2.4.1. Effective Sample Size</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#potential-scale-reduction-factor-hat-r">2.4.2. Potential Scale Reduction Factor <span class="math notranslate nohighlight">\(\hat R\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monte-carlo-standard-error">2.4.3. Monte Carlo Standard Error</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trace-plots">2.4.4. Trace Plots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autocorrelation-plots">2.4.5. Autocorrelation Plots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rank-plots">2.4.6. Rank Plots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#divergences">2.4.7. Divergences</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sampler-parameters-and-other-diagnostics">2.4.8. Sampler Parameters and Other Diagnostics</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-comparison">2.5. Model Comparison</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-validation-and-loo">2.5.1. Cross-validation and LOO</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-log-predictive-density">2.5.2. Expected Log Predictive Density</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pareto-shape-parameter">2.5.3. Pareto Shape Parameter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-p-loo-when-pareto-hat-kappa-is-large">2.5.4. Interpreting p_loo When Pareto <span class="math notranslate nohighlight">\(\hat \kappa\)</span> is Large</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loo-pit">2.5.5. LOO-PIT</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-averaging">2.5.6. Model Averaging</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">2.6. Exercises</a></li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Exploratory Analysis of Bayesian Models</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#there-is-life-after-inference-and-before-too">
-   2.1. There is Life After Inference, and Before Too!
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#understanding-your-assumptions">
-   2.2. Understanding Your Assumptions
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#understanding-your-predictions">
-   2.3. Understanding Your Predictions
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#diagnosing-numerical-inference">
-   2.4. Diagnosing Numerical Inference
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#effective-sample-size">
-     2.4.1. Effective Sample Size
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#potential-scale-reduction-factor-hat-r">
-     2.4.2. Potential Scale Reduction Factor
-     <span class="math notranslate nohighlight">
-      \(\hat R\)
-     </span>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#monte-carlo-standard-error">
-     2.4.3. Monte Carlo Standard Error
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#trace-plots">
-     2.4.4. Trace Plots
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#autocorrelation-plots">
-     2.4.5. Autocorrelation Plots
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#rank-plots">
-     2.4.6. Rank Plots
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#divergences">
-     2.4.7. Divergences
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sampler-parameters-and-other-diagnostics">
-     2.4.8. Sampler Parameters and Other Diagnostics
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#model-comparison">
-   2.5. Model Comparison
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#cross-validation-and-loo">
-     2.5.1. Cross-validation and LOO
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#expected-log-predictive-density">
-     2.5.2. Expected Log Predictive Density
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#pareto-shape-parameter">
-     2.5.3. Pareto Shape Parameter
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#interpreting-p-loo-when-pareto-hat-kappa-is-large">
-     2.5.4. Interpreting p_loo When Pareto
-     <span class="math notranslate nohighlight">
-      \(\hat \kappa\)
-     </span>
-     is Large
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#loo-pit">
-     2.5.5. LOO-PIT
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#model-averaging">
-     2.5.6. Model Averaging
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
-   2.6. Exercises
-  </a>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="exploratory-analysis-of-bayesian-models">
-<span id="chap1bis"></span><h1><span class="section-number">2. </span>Exploratory Analysis of Bayesian Models<a class="headerlink" href="#exploratory-analysis-of-bayesian-models" title="Permalink to this heading">¶</a></h1>
+<span id="chap1bis"></span><h1><span class="section-number">2. </span>Exploratory Analysis of Bayesian Models<a class="headerlink" href="#exploratory-analysis-of-bayesian-models" title="Permalink to this heading">#</a></h1>
 <p>As we saw in Chapter <a class="reference internal" href="chp_01.html#chap1"><span class="std std-ref">1</span></a>, Bayesian inference is about
 conditioning models to the available data and obtaining posterior
 distributions. We can do this using pen and paper, computers, or other
@@ -613,7 +396,7 @@ successful Bayesian data analysis. In this chapter we will discuss some
 of these tasks, including checking model assumptions, diagnosing
 inference results, and model comparison.</p>
 <section id="there-is-life-after-inference-and-before-too">
-<span id="id2"></span><h2><span class="section-number">2.1. </span>There is Life After Inference, and Before Too!<a class="headerlink" href="#there-is-life-after-inference-and-before-too" title="Permalink to this heading">¶</a></h2>
+<span id="id2"></span><h2><span class="section-number">2.1. </span>There is Life After Inference, and Before Too!<a class="headerlink" href="#there-is-life-after-inference-and-before-too" title="Permalink to this heading">#</a></h2>
 <p>A successful Bayesian modeling approach requires performing additional
 tasks beyond inference <a class="footnote-reference brackets" href="#id53" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>. Such as:</p>
 <ul class="simple">
@@ -659,7 +442,7 @@ certain areas so focus on other relevant aspects such as model details,
 computational features, or fundamental mathematics.</p>
 </section>
 <section id="understanding-your-assumptions">
-<span id="prior-predictive-checks"></span><h2><span class="section-number">2.2. </span>Understanding Your Assumptions<a class="headerlink" href="#understanding-your-assumptions" title="Permalink to this heading">¶</a></h2>
+<span id="prior-predictive-checks"></span><h2><span class="section-number">2.2. </span>Understanding Your Assumptions<a class="headerlink" href="#understanding-your-assumptions" title="Permalink to this heading">#</a></h2>
 <p>As we discussed in Section <a class="reference internal" href="chp_01.html#make-prior-count"><span class="std std-ref">A Few Options to Quantify Your Prior Information</span></a>, “what is
 the best-ever prior?” is a tempting question to ask. However, it is
 difficult to give a straight satisfying answer other than: “it
@@ -691,7 +474,7 @@ decide to use a geometric model <a class="footnote-reference brackets" href="#id
 <a class="reference internal" href="#fig-football-sketch"><span class="std std-numref">Fig. 2.1</span></a> and a little bit of trigonometry we come
 up with the following formula for the probability of scoring a goal:</p>
 <div class="math notranslate nohighlight" id="equation-eq-geometric-football">
-<span class="eqno">(2.1)<a class="headerlink" href="#equation-eq-geometric-football" title="Permalink to this equation">¶</a></span>\[p\left(|\alpha| &lt; \tan^{-1}\left(\frac{L}{x}\right)\right) = 2\Phi\left(\frac{\tan^{-1}\left(\frac{L}{x}\right)}{\sigma}\right) - 1\]</div>
+<span class="eqno">(2.1)<a class="headerlink" href="#equation-eq-geometric-football" title="Permalink to this equation">#</a></span>\[p\left(|\alpha| &lt; \tan^{-1}\left(\frac{L}{x}\right)\right) = 2\Phi\left(\frac{\tan^{-1}\left(\frac{L}{x}\right)}{\sigma}\right) - 1\]</div>
 <p>The intuition behind Equation <a class="reference internal" href="#equation-eq-geometric-football">(2.1)</a> is that we are
 assuming the probability of scoring a goal is given by the absolute
 value of the angle <span class="math notranslate nohighlight">\(\alpha\)</span> being less than a threshold
@@ -705,7 +488,7 @@ deviation <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
 <p><span class="caption-number">Fig. 2.1 </span><span class="caption-text">Sketch of a penalty shot. The dashed lines represent the angle <span class="math notranslate nohighlight">\(\alpha\)</span>
 within which the ball must be kicked to score a goal. <span class="math notranslate nohighlight">\(x\)</span> represents the
 reglementary distance for a penalty shot (11 meters) and <span class="math notranslate nohighlight">\(L\)</span> half the
-length of a reglementary goal mouth (3.66 meters).</span><a class="headerlink" href="#fig-football-sketch" title="Permalink to this image">¶</a></p>
+length of a reglementary goal mouth (3.66 meters).</span><a class="headerlink" href="#fig-football-sketch" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The only unknown quantity in Equation <a class="reference internal" href="#equation-eq-geometric-football">(2.1)</a> is
@@ -714,7 +497,7 @@ football. As good Bayesians, when we do not know a quantity, we assign a
 prior to it and then try to build a Bayesian model, for example, we
 could write:</p>
 <div class="math notranslate nohighlight" id="equation-eq-geometric-model">
-<span class="eqno">(2.2)<a class="headerlink" href="#equation-eq-geometric-model" title="Permalink to this equation">¶</a></span>\[ \begin{align}\begin{aligned}\begin{split}\begin{split}
+<span class="eqno">(2.2)<a class="headerlink" href="#equation-eq-geometric-model" title="Permalink to this equation">#</a></span>\[ \begin{align}\begin{aligned}\begin{split}\begin{split}
 \sigma &amp;\sim \mathcal{HN}(\sigma_{\sigma}) \\
 \text{p_goal} &amp;= 2\Phi\left(\frac{\tan^{-1}\left(\frac{L}{x}\right)}{\sigma}\right) - 1 \\
 Y &amp;\sim \text{Bin}(n=1, p=\text{p_goal})\end{split}\\\end{split}\end{aligned}\end{align} \]</div>
@@ -740,7 +523,7 @@ of the prior for <span class="math notranslate nohighlight">\(\sigma\)</span>. T
 plot represents the penalty point. The dots at the edges represent
 shots, the position is the value of the angle <span class="math notranslate nohighlight">\(\alpha\)</span> (see
 <a class="reference internal" href="#fig-football-sketch"><span class="std std-numref">Fig. 2.1</span></a>), and the color represents the probability
-of scoring a goal.</span><a class="headerlink" href="#fig-prior-predictive-check-00" title="Permalink to this image">¶</a></p>
+of scoring a goal.</span><a class="headerlink" href="#fig-prior-predictive-check-00" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>At this point we have a few alternatives: we can rethink our model to
@@ -768,7 +551,7 @@ the distributions of the mean of the simulated data over 10000
 simulations. Even when the prior for each coefficient,
 <span class="math notranslate nohighlight">\(\mathcal{N}(0, 1)\)</span>, is the same for all 3 panels, increasing the
 numbers of the predictor is effectively equivalent to using a prior
-favoring extreme values.</span><a class="headerlink" href="#fig-prior-predictive-check-01" title="Permalink to this image">¶</a></p>
+favoring extreme values.</span><a class="headerlink" href="#fig-prior-predictive-check-01" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Both previous examples show that priors can not be understood in
@@ -790,7 +573,7 @@ ensuring they are properly written and able to run in our computational
 environment.</p>
 </section>
 <section id="understanding-your-predictions">
-<span id="posterior-pd"></span><h2><span class="section-number">2.3. </span>Understanding Your Predictions<a class="headerlink" href="#understanding-your-predictions" title="Permalink to this heading">¶</a></h2>
+<span id="posterior-pd"></span><h2><span class="section-number">2.3. </span>Understanding Your Predictions<a class="headerlink" href="#understanding-your-predictions" title="Permalink to this heading">#</a></h2>
 <p>As we can use synthetic data, that is generated data, from the prior
 predictive distribution to help us inspect our model, we can perform a
 similar analysis with the posterior predictive distribution, introduced
@@ -828,14 +611,14 @@ information but represented in an alternative way. Instead of the number
 of success we are plotting the probability of getting 0’s or 1’s. We are
 using a line to represent that the probability of <span class="math notranslate nohighlight">\(p(y=0) = 1-p(y=1)\)</span>.
 the dashed black line is the mean predicted probability, and the blue
-line is the mean computed from the data.</span><a class="headerlink" href="#fig-posterior-predictive-check" title="Permalink to this image">¶</a></p>
+line is the mean computed from the data.</span><a class="headerlink" href="#fig-posterior-predictive-check" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Posterior predictive checks are not restricted to plots. We can also
 perform numerical tests <span id="id12">[<a class="reference internal" href="references.html#id3" title="A. Gelman, J.B. Carlin, H.S. Stern, D.B. Dunson, A. Vehtari, and D.B. Rubin. Bayesian Data Analysis, Third Edition. Chapman &amp; Hall/CRC Texts in Statistical Science. Taylor &amp; Francis, 2013. ISBN 9781439840955.">18</a>]</span>. One way of
 doing this is by computing:</p>
 <div class="math notranslate nohighlight" id="equation-eq-post-pred-test-quantity">
-<span class="eqno">(2.3)<a class="headerlink" href="#equation-eq-post-pred-test-quantity" title="Permalink to this equation">¶</a></span>\[p_{B} = p(T_{sim} \leq T_{obs} \mid \tilde Y)\]</div>
+<span class="eqno">(2.3)<a class="headerlink" href="#equation-eq-post-pred-test-quantity" title="Permalink to this equation">#</a></span>\[p_{B} = p(T_{sim} \leq T_{obs} \mid \tilde Y)\]</div>
 <p>where <span class="math notranslate nohighlight">\(p_{B}\)</span> is a Bayesian p-value and is defined as the probability
 the simulated test statistic <span class="math notranslate nohighlight">\(T_{sim}\)</span> is less or equal than the
 observed statistic <span class="math notranslate nohighlight">\(T_{obs}\)</span>. The statistic <span class="math notranslate nohighlight">\(T\)</span> is basically any metric
@@ -883,7 +666,7 @@ KDE for the proportion of predicted values that are less or equal than
 the observed computed per observation instead of over each simulation as
 in the first panel. The white line represents the ideal case, a standard
 Uniform distribution, and the gray band deviations of that Uniform
-distribution that we expect to see for a dataset of the same size.</span><a class="headerlink" href="#fig-posterior-predictive-check-pu-values" title="Permalink to this image">¶</a></p>
+distribution that we expect to see for a dataset of the same size.</span><a class="headerlink" href="#fig-posterior-predictive-check-pu-values" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>As we said before we can choose from many <span class="math notranslate nohighlight">\(T\)</span> statistics to summarize
@@ -901,7 +684,7 @@ first panel, the curve with the solid line is the KDE of the proportion
 of simulations of predicted values with mean values less or equal than
 the observed data. On the second panel, the same but for the standard
 deviation. The black dot represented the mean (first panel) or standard
-deviation (second panel) computed from the observed data.</span><a class="headerlink" href="#fig-posterior-predictive-check-tstat" title="Permalink to this image">¶</a></p>
+deviation (second panel) computed from the observed data.</span><a class="headerlink" href="#fig-posterior-predictive-check-tstat" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Before continue reading you should take a moment to carefully inspect
@@ -910,7 +693,7 @@ why the plots look like they do. In this figure we have a series of
 simple examples to help us gain intuition about how to interpret
 posterior predictive checks plots<a class="footnote-reference brackets" href="#id59" id="id13" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a>. In all these examples the
 observed data (in blue) follows a Gaussian distribution.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>On the first row, the model predicts observations that are
 systematically shifted to higher values with respect to the observed
 data.</p></li>
@@ -925,7 +708,7 @@ of Gaussians.</p></li>
 <a class="reference internal" href="#fig-posterior-predictive-many-examples"><span class="std std-numref">Fig. 2.7</span></a>. Plots in this column
 are very useful but at the same time they can be confusing at first.
 From top to bottom, you can read them as:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>The model is missing observations on the left tail (and making more
 on the right).</p></li>
 <li><p>The model is making less predictions at the middle (and more at the
@@ -940,7 +723,7 @@ try from a different perspective that is totally equivalent, but it may
 be more intuitive, as long as you remember that you can change the
 model, not the observations <a class="footnote-reference brackets" href="#id60" id="id14" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a>. From top to bottom, you can read them
 as:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>There are more observations on the left</p></li>
 <li><p>There are more observations on the middle</p></li>
 <li><p>There are more observations at the tails.</p></li>
@@ -966,7 +749,7 @@ each observation. The white lines represent the expected Uniform
 distribution and the gray band the expected deviations from uniformity
 for a dataset of the same size as the one used. This figure was made
 using the ArviZ’s functions <code class="docutils literal notranslate"><span class="pre">az.plot_ppc(.)</span></code>,
-<code class="docutils literal notranslate"><span class="pre">az.plot_bpv(.,</span> <span class="pre">kind=&quot;p_values&quot;)</span></code> and <code class="docutils literal notranslate"><span class="pre">az.plot_bpv(.,</span> <span class="pre">kind=&quot;u_values&quot;)</span></code>.</span><a class="headerlink" href="#fig-posterior-predictive-many-examples" title="Permalink to this image">¶</a></p>
+<code class="docutils literal notranslate"><span class="pre">az.plot_bpv(.,</span> <span class="pre">kind=&quot;p_values&quot;)</span></code> and <code class="docutils literal notranslate"><span class="pre">az.plot_bpv(.,</span> <span class="pre">kind=&quot;u_values&quot;)</span></code>.</span><a class="headerlink" href="#fig-posterior-predictive-many-examples" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Posterior predictive checks, either using plots or numerical summaries,
@@ -977,7 +760,7 @@ through their predictions and how well a model (or models) work for a
 particular problem.</p>
 </section>
 <section id="diagnosing-numerical-inference">
-<span id="diagnosing-inference"></span><h2><span class="section-number">2.4. </span>Diagnosing Numerical Inference<a class="headerlink" href="#diagnosing-numerical-inference" title="Permalink to this heading">¶</a></h2>
+<span id="diagnosing-inference"></span><h2><span class="section-number">2.4. </span>Diagnosing Numerical Inference<a class="headerlink" href="#diagnosing-numerical-inference" title="Permalink to this heading">#</a></h2>
 <p>Using numerical methods to approximate the posterior distribution allows
 us to solve Bayesian models that could be tedious to solve with pen and
 paper or that could be mathematically intractable. Unfortunately, they
@@ -1029,7 +812,7 @@ parameter) posterior distribution. This is enough for our current
 discussion as all the diagnostics we will see are computed per parameter
 in the model.</p>
 <section id="effective-sample-size">
-<span id="ess"></span><h3><span class="section-number">2.4.1. </span>Effective Sample Size<a class="headerlink" href="#effective-sample-size" title="Permalink to this heading">¶</a></h3>
+<span id="ess"></span><h3><span class="section-number">2.4.1. </span>Effective Sample Size<a class="headerlink" href="#effective-sample-size" title="Permalink to this heading">#</a></h3>
 <p>When using MCMC sampling methods, it is reasonable to wonder if a
 particular sample is large enough to confidently compute the quantities
 of interest, like a mean or an HDI. This is something we can not
@@ -1114,7 +897,7 @@ two quantiles <code class="docutils literal notranslate"><span class="pre">az.pl
 ESS estimates. The dashed lines represent the minimum suggested value of
 400 at which we would consider the effective sample size to be
 sufficient. Ideally, we want the local and quantile ESS to be high
-across all regions of the parameter space.</span><a class="headerlink" href="#fig-plot-ess" title="Permalink to this image">¶</a></p>
+across all regions of the parameter space.</span><a class="headerlink" href="#fig-plot-ess" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>As a general rule of thumb we recommend a value of ESS greater than 400,
@@ -1128,7 +911,7 @@ parameter space. Taking that detail into account, the intuition still
 seems useful.</p>
 </section>
 <section id="potential-scale-reduction-factor-hat-r">
-<span id="id18"></span><h3><span class="section-number">2.4.2. </span>Potential Scale Reduction Factor <span class="math notranslate nohighlight">\(\hat R\)</span><a class="headerlink" href="#potential-scale-reduction-factor-hat-r" title="Permalink to this heading">¶</a></h3>
+<span id="id18"></span><h3><span class="section-number">2.4.2. </span>Potential Scale Reduction Factor <span class="math notranslate nohighlight">\(\hat R\)</span><a class="headerlink" href="#potential-scale-reduction-factor-hat-r" title="Permalink to this heading">#</a></h3>
 <p>Under very general conditions Markov chain Monte Carlo methods have
 theoretical guarantees that they will get the right answer irrespective
 of the starting point. Unfortunately, the fine print says that the
@@ -1175,7 +958,7 @@ total disaster, <code class="docutils literal notranslate"><span class="pre">bad
 <em>ok-chain status</em>, but still off.</p>
 </section>
 <section id="monte-carlo-standard-error">
-<span id="id21"></span><h3><span class="section-number">2.4.3. </span>Monte Carlo Standard Error<a class="headerlink" href="#monte-carlo-standard-error" title="Permalink to this heading">¶</a></h3>
+<span id="id21"></span><h3><span class="section-number">2.4.3. </span>Monte Carlo Standard Error<a class="headerlink" href="#monte-carlo-standard-error" title="Permalink to this heading">#</a></h3>
 <p>When using MCMC methods we introduce an additional layer of uncertainty
 as we are approximating the posterior with a finite number of samples.
 We can estimate the amount of error introduced using the Monte Carlo
@@ -1216,7 +999,7 @@ once as in <a class="reference internal" href="#fig-plot-mcse"><span class="std 
 comparison between them. Ideally, we want the MCSE to be small across
 all regions of the parameter space. Note how the MCSE values for
 <code class="docutils literal notranslate"><span class="pre">good_chains</span></code> is relatively low across all values compared to MCSE of
-both bad chains.</span><a class="headerlink" href="#fig-plot-mcse" title="Permalink to this image">¶</a></p>
+both bad chains.</span><a class="headerlink" href="#fig-plot-mcse" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Finally, the ESS, <span class="math notranslate nohighlight">\(\hat R\)</span>, and MCSE can all be computed with a single
@@ -1262,7 +1045,7 @@ standard deviation <a class="footnote-reference brackets" href="#id62" id="id23"
 sample size and finally the <span class="math notranslate nohighlight">\(\hat R\)</span> diagnostic.</p>
 </section>
 <section id="trace-plots">
-<span id="id24"></span><h3><span class="section-number">2.4.4. </span>Trace Plots<a class="headerlink" href="#trace-plots" title="Permalink to this heading">¶</a></h3>
+<span id="id24"></span><h3><span class="section-number">2.4.4. </span>Trace Plots<a class="headerlink" href="#trace-plots" title="Permalink to this heading">#</a></h3>
 <p>Trace plots are probably the most popular plots in Bayesian literature.
 They are often the first plot we make after inference, to visually check
 <em>what we got</em>. A trace plot is made by drawing the sampled values at
@@ -1282,7 +1065,7 @@ continuous variables and a histogram for discrete ones on the left.</p>
 see the values of the sampled values per chain per step. Note the
 differences in the KDE and trace plots between each of the example
 chains, particularly the <em>fuzzy caterpillar</em> appearance in <code class="docutils literal notranslate"><span class="pre">good_chains</span></code>
-versus the irregularities in the other two.</span><a class="headerlink" href="#fig-trace-plots" title="Permalink to this image">¶</a></p>
+versus the irregularities in the other two.</span><a class="headerlink" href="#fig-trace-plots" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p><a class="reference internal" href="#fig-trace-plots"><span class="std std-numref">Fig. 2.10</span></a> shows the trace plots for <code class="docutils literal notranslate"><span class="pre">chains</span></code>. From it,
@@ -1311,7 +1094,7 @@ very low probability or perhaps because we have some regions of the
 parameter space with a curvature that is too different from the rest.</p>
 </section>
 <section id="autocorrelation-plots">
-<span id="autocorr-plot"></span><h3><span class="section-number">2.4.5. </span>Autocorrelation Plots<a class="headerlink" href="#autocorrelation-plots" title="Permalink to this heading">¶</a></h3>
+<span id="autocorr-plot"></span><h3><span class="section-number">2.4.5. </span>Autocorrelation Plots<a class="headerlink" href="#autocorrelation-plots" title="Permalink to this heading">#</a></h3>
 <p>As we saw when we discussed the effective sample size, autocorrelation
 decreases the actual amount of information contained in a sample and
 thus something we want to keep at a minimum. We can directly inspect the
@@ -1327,7 +1110,7 @@ height of the bars for <code class="docutils literal notranslate"><span class="p
 the gray band) for the entire plot, which indicates very low
 autocorrelation. The tall bars in <code class="docutils literal notranslate"><span class="pre">bad_chains0</span></code> and <code class="docutils literal notranslate"><span class="pre">bad_chains1</span></code>
 indicate large values of autocorrelation, which is undesirable. The gray
-band represents the 95% confidence interval.</span><a class="headerlink" href="#fig-autocorrelation-plot" title="Permalink to this image">¶</a></p>
+band represents the 95% confidence interval.</span><a class="headerlink" href="#fig-autocorrelation-plot" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>What we see in <a class="reference internal" href="#fig-autocorrelation-plot"><span class="std std-numref">Fig. 2.11</span></a> is at least
@@ -1337,7 +1120,7 @@ highly correlated and <code class="docutils literal notranslate"><span class="pr
 is still noticeable and is long-range, i.e. it does not drop quickly.</p>
 </section>
 <section id="rank-plots">
-<span id="id25"></span><h3><span class="section-number">2.4.6. </span>Rank Plots<a class="headerlink" href="#rank-plots" title="Permalink to this heading">¶</a></h3>
+<span id="id25"></span><h3><span class="section-number">2.4.6. </span>Rank Plots<a class="headerlink" href="#rank-plots" title="Permalink to this heading">#</a></h3>
 <p>Rank plots are another visual diagnostic we can use to compare the
 sampling behavior both within and between chains. Rank plots, simply
 put, are histograms of the ranked samples. The ranks are computed by
@@ -1354,7 +1137,7 @@ chains <span id="id26">[<a class="reference internal" href="references.html#id13
 <figcaption>
 <p><span class="caption-number">Fig. 2.12 </span><span class="caption-text">Rank plots using the <code class="docutils literal notranslate"><span class="pre">bar</span></code> representation. In particular, compare the
 height of the bar to the dashed line representing a Uniform
-distribution. Ideally, the bars should follow a Uniform distribution.</span><a class="headerlink" href="#fig-rank-plot-bars" title="Permalink to this image">¶</a></p>
+distribution. Ideally, the bars should follow a Uniform distribution.</span><a class="headerlink" href="#fig-rank-plot-bars" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>One alternative to the “bars” representation is vertical lines,
@@ -1368,7 +1151,7 @@ shortened to “vlines”.</p>
 <p><span class="caption-number">Fig. 2.13 </span><span class="caption-text">Rank plots using the <code class="docutils literal notranslate"><span class="pre">vline</span></code> representation. The shorter the vertical
 lines the better. vertical lines above the dashed line indicate an
 excess sampled values for a particular rank, vertical lines below
-indicate a lack of sampled values.</span><a class="headerlink" href="#fig-rank-plot-vlines" title="Permalink to this image">¶</a></p>
+indicate a lack of sampled values.</span><a class="headerlink" href="#fig-rank-plot-vlines" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>We can see in Figures <a class="reference internal" href="#fig-rank-plot-bars"><span class="std std-numref">Fig. 2.12</span></a> and
@@ -1396,7 +1179,7 @@ check that the ESS, <span class="math notranslate nohighlight">\(\hat R\)</span>
 that our model needs further refinements.</p>
 </section>
 <section id="divergences">
-<span id="id27"></span><h3><span class="section-number">2.4.7. </span>Divergences<a class="headerlink" href="#divergences" title="Permalink to this heading">¶</a></h3>
+<span id="id27"></span><h3><span class="section-number">2.4.7. </span>Divergences<a class="headerlink" href="#divergences" title="Permalink to this heading">#</a></h3>
 <p>So far we have been diagnosing how well a sampler works by studying the
 generated samples. Another way to perform a diagnostic is by monitoring
 the behavior of the inner workings of the sampling method. One prominent
@@ -1414,7 +1197,7 @@ Uniform distribution spanning a wide range, and when <span class="math notransla
 approaches zero, the width of <span class="math notranslate nohighlight">\(\theta2\)</span> will also approach zero. Using
 PyMC3 we can write this model as:</p>
 <div class="literal-block-wrapper docutils container" id="divm0">
-<div class="code-block-caption"><span class="caption-number">Listing 2.1 </span><span class="caption-text">divm0</span><a class="headerlink" href="#divm0" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 2.1 </span><span class="caption-text">divm0</span><a class="headerlink" href="#divm0" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_0</span><span class="p">:</span>
     <span class="n">θ1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;θ1&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
     <span class="n">θ2</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">&quot;θ2&quot;</span><span class="p">,</span> <span class="o">-</span><span class="n">θ1</span><span class="p">,</span> <span class="n">θ1</span><span class="p">)</span>
@@ -1462,7 +1245,7 @@ which are everywhere!</p>
 1 <a class="reference internal" href="#divm1"><span class="std std-ref">divm1</span></a> and Model 1bis, which is the same as
 Model 1 <a class="reference internal" href="#divm1"><span class="std std-ref">divm1</span></a> but with
 <code class="docutils literal notranslate"><span class="pre">pm.sample(.,</span> <span class="pre">target_accept=0.95)</span></code>. The black vertical bars represent
-divergences.</span><a class="headerlink" href="#fig-divergences-trace" title="Permalink to this image">¶</a></p>
+divergences.</span><a class="headerlink" href="#fig-divergences-trace" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="fig-divergences-pair">
@@ -1472,7 +1255,7 @@ divergences.</span><a class="headerlink" href="#fig-divergences-trace" title="Pe
 <a class="reference internal" href="#divm0"><span class="std std-ref">divm0</span></a>, Model 1 from Code Block
 <a class="reference internal" href="#divm1"><span class="std std-ref">divm1</span></a>, and Model 1bis, which is the same as Model
 1 in Code Block <a class="reference internal" href="#divm1"><span class="std std-ref">divm1</span></a> but with
-<code class="docutils literal notranslate"><span class="pre">pm.sample(.,</span> <span class="pre">target_accept=0.95)</span></code>. The blue dots represent divergences.</span><a class="headerlink" href="#fig-divergences-pair" title="Permalink to this image">¶</a></p>
+<code class="docutils literal notranslate"><span class="pre">pm.sample(.,</span> <span class="pre">target_accept=0.95)</span></code>. The blue dots represent divergences.</span><a class="headerlink" href="#fig-divergences-pair" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Something is definitely problematic with <code class="docutils literal notranslate"><span class="pre">model0</span></code>. Upon inspection of
@@ -1485,7 +1268,7 @@ So, let us try to <strong>reparameterize</strong> the model, i.e. express the mo
 in a different but mathematically equivalent way. For example, we can
 do:</p>
 <div class="literal-block-wrapper docutils container" id="divm1">
-<div class="code-block-caption"><span class="caption-number">Listing 2.2 </span><span class="caption-text">divm1</span><a class="headerlink" href="#divm1" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 2.2 </span><span class="caption-text">divm1</span><a class="headerlink" href="#divm1" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_1</span><span class="p">:</span>
     <span class="n">θ1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;θ1&quot;</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="mi">2</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span>
     <span class="n">θ2</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">&quot;θ2&quot;</span><span class="p">,</span> <span class="o">-</span><span class="n">θ1</span><span class="p">,</span> <span class="n">θ1</span><span class="p">)</span>
@@ -1509,7 +1292,7 @@ value of <code class="docutils literal notranslate"><span class="pre">target_acc
 <a class="reference internal" href="#divm2"><span class="std std-ref">divm2</span></a>, by default this value is 0.8 and the
 maximum valid value is 1 (see Section <a class="reference internal" href="chp_11.html#hmc"><span class="std std-ref">Hamiltonian Monte Carlo</span></a> for details).</p>
 <div class="literal-block-wrapper docutils container" id="divm2">
-<div class="code-block-caption"><span class="caption-number">Listing 2.3 </span><span class="caption-text">divm2</span><a class="headerlink" href="#divm2" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 2.3 </span><span class="caption-text">divm2</span><a class="headerlink" href="#divm2" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_1bis</span><span class="p">:</span>
     <span class="n">θ1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;θ1&quot;</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="mi">2</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span>
     <span class="n">θ2</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">&quot;θ2&quot;</span><span class="p">,</span> <span class="o">-</span><span class="n">θ1</span><span class="p">,</span> <span class="n">θ1</span><span class="p">)</span>
@@ -1537,7 +1320,7 @@ Bob example in Section <a class="reference internal" href="chp_01.html#conjugate
 </div>
 </section>
 <section id="sampler-parameters-and-other-diagnostics">
-<span id="id31"></span><h3><span class="section-number">2.4.8. </span>Sampler Parameters and Other Diagnostics<a class="headerlink" href="#sampler-parameters-and-other-diagnostics" title="Permalink to this heading">¶</a></h3>
+<span id="id31"></span><h3><span class="section-number">2.4.8. </span>Sampler Parameters and Other Diagnostics<a class="headerlink" href="#sampler-parameters-and-other-diagnostics" title="Permalink to this heading">#</a></h3>
 <p>Most sampler methods have hyperparameters that affect the sampler
 performance. While most PPLs try to use sensible defaults, in practice,
 they will not work for every possible combination of data and models. As
@@ -1572,7 +1355,7 @@ many more examples.</p>
 </section>
 </section>
 <section id="model-comparison">
-<span id="model-cmp"></span><h2><span class="section-number">2.5. </span>Model Comparison<a class="headerlink" href="#model-comparison" title="Permalink to this heading">¶</a></h2>
+<span id="model-cmp"></span><h2><span class="section-number">2.5. </span>Model Comparison<a class="headerlink" href="#model-comparison" title="Permalink to this heading">#</a></h2>
 <p>Usually we want to build models that are not too simple that they miss
 valuable information in our data nor too complex that they fit the noise
 in the data. Finding this <em>sweet spot</em> is a complex task. Partially
@@ -1595,7 +1378,7 @@ shown that the logarithmic scoring rule has very nice theoretical
 properties <span id="id33">[<a class="reference internal" href="references.html#id18" title="Tilmann Gneiting and Adrian E Raftery. Strictly proper scoring rules, prediction, and estimation. Journal of the American statistical Association, 102(477):359–378, 2007.">21</a>]</span>, and thus is widely used. Under a Bayesian
 setting the log scoring rule can be computed as.</p>
 <div class="math notranslate nohighlight" id="equation-eq-elpd">
-<span class="eqno">(2.4)<a class="headerlink" href="#equation-eq-elpd" title="Permalink to this equation">¶</a></span>\[\text{ELPD} = \sum_{i=1}^{n} \int p_t(\tilde y_i) \; \log p(\tilde y_i \mid y_i) \; d\tilde y_i\]</div>
+<span class="eqno">(2.4)<a class="headerlink" href="#equation-eq-elpd" title="Permalink to this equation">#</a></span>\[\text{ELPD} = \sum_{i=1}^{n} \int p_t(\tilde y_i) \; \log p(\tilde y_i \mid y_i) \; d\tilde y_i\]</div>
 <p>where <span class="math notranslate nohighlight">\(p_t(\tilde y_i)\)</span> is the distribution of the true data-generating
 process for <span class="math notranslate nohighlight">\(\tilde y_i\)</span> and <span class="math notranslate nohighlight">\(p(\tilde y_i \mid y_i)\)</span> is the posterior
 predictive distribution. The quantity defined in Equation <a class="reference internal" href="#equation-eq-elpd">(2.4)</a>
@@ -1609,7 +1392,7 @@ the term density for both continuous and discrete models <a class="footnote-refe
 defined in Equation <a class="reference internal" href="#equation-eq-elpd">(2.4)</a> is of no immediate use, in practice we
 can instead compute:</p>
 <div class="math notranslate nohighlight" id="equation-eq-elpd-practice">
-<span class="eqno">(2.5)<a class="headerlink" href="#equation-eq-elpd-practice" title="Permalink to this equation">¶</a></span>\[\sum_{i=1}^{n} \log \int \ p(y_i \mid \boldsymbol{\theta}) \; p(\boldsymbol{\theta} \mid y) d\boldsymbol{\theta}\]</div>
+<span class="eqno">(2.5)<a class="headerlink" href="#equation-eq-elpd-practice" title="Permalink to this equation">#</a></span>\[\sum_{i=1}^{n} \log \int \ p(y_i \mid \boldsymbol{\theta}) \; p(\boldsymbol{\theta} \mid y) d\boldsymbol{\theta}\]</div>
 <p>The quantity defined by Equation <a class="reference internal" href="#equation-eq-elpd-practice">(2.5)</a> (or that
 quantity multiplied by some constant) is usually known as the deviance,
 and it is used in both Bayesians and non-Bayesians contexts <a class="footnote-reference brackets" href="#id67" id="id35" role="doc-noteref"><span class="fn-bracket">[</span>15<span class="fn-bracket">]</span></a>. When
@@ -1622,7 +1405,7 @@ overfitting. Fortunately, there are a few ways to produce better
 estimations of the ELPD. One of them is cross-validation as we will see
 in the next section.</p>
 <section id="cross-validation-and-loo">
-<span id="cv-and-loo"></span><h3><span class="section-number">2.5.1. </span>Cross-validation and LOO<a class="headerlink" href="#cross-validation-and-loo" title="Permalink to this heading">¶</a></h3>
+<span id="cv-and-loo"></span><h3><span class="section-number">2.5.1. </span>Cross-validation and LOO<a class="headerlink" href="#cross-validation-and-loo" title="Permalink to this heading">#</a></h3>
 <p>Cross-validation (CV) is a method of estimating out-of-sample predictive
 accuracy. This method requires re-fitting a model many times, each time
 excluding a different portion of the data. The excluded portion is then
@@ -1636,7 +1419,7 @@ while still using all the data.</p>
 cross-validation when the data excluded is a single data-point. The ELPD
 computed using LOO-CV is <span class="math notranslate nohighlight">\(\text{ELPD}_\text{LOO-CV}\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-elpd-loo-cv">
-<span class="eqno">(2.6)<a class="headerlink" href="#equation-eq-elpd-loo-cv" title="Permalink to this equation">¶</a></span>\[\text{ELPD}_\text{LOO-CV} = \sum_{i=1}^{n} \log
+<span class="eqno">(2.6)<a class="headerlink" href="#equation-eq-elpd-loo-cv" title="Permalink to this equation">#</a></span>\[\text{ELPD}_\text{LOO-CV} = \sum_{i=1}^{n} \log
     \int \ p(y_i \mid \boldsymbol{\theta}) \; p(\boldsymbol{\theta} \mid y_{-i}) d\boldsymbol{\theta}\]</div>
 <p>Computing Equation <a class="reference internal" href="#equation-eq-elpd-loo-cv">(2.6)</a> can easily become too costly as
 in practice we do not know <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> and thus we need to
@@ -1656,7 +1439,7 @@ illustrate how to interpret the output of these functions we are going
 to use 3 simple models. The models are defined in Code Block
 <a class="reference internal" href="#pymc3-models-for-loo"><span class="std std-ref">pymc3_models_for_loo</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="pymc3-models-for-loo">
-<div class="code-block-caption"><span class="caption-number">Listing 2.4 </span><span class="caption-text">pymc3_models_for_loo</span><a class="headerlink" href="#pymc3-models-for-loo" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 2.4 </span><span class="caption-text">pymc3_models_for_loo</span><a class="headerlink" href="#pymc3-models-for-loo" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y_obs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">idatas_cmp</span> <span class="o">=</span> <span class="p">{}</span>
 
@@ -1703,7 +1486,7 @@ In practice it is common to compute LOO for two or more models, and thus
 a commonly used function is <code class="docutils literal notranslate"><span class="pre">az.compare(.)</span></code>.
 <a class="reference internal" href="#table-compare-00"><span class="std std-numref">Table 2.1</span></a> was generated using <code class="docutils literal notranslate"><span class="pre">az.compare(idatas_cmp)</span></code>.</p>
 <table class="table" id="table-compare-00">
-<caption><span class="caption-number">Table 2.1 </span><span class="caption-text">Summary of model comparison. Models are ranked from lowest to highest ELPD values (loo column).</span><a class="headerlink" href="#table-compare-00" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-number">Table 2.1 </span><span class="caption-text">Summary of model comparison. Models are ranked from lowest to highest ELPD values (loo column).</span><a class="headerlink" href="#table-compare-00" title="Permalink to this table">#</a></caption>
 <tbody>
 <tr class="row-odd"><td></td>
 <td><p><strong>rank</strong></p></td>
@@ -1752,7 +1535,7 @@ a commonly used function is <code class="docutils literal notranslate"><span cla
 </tbody>
 </table>
 <p>There are many columns in <a class="reference internal" href="#table-compare-00"><span class="std std-numref">Table 2.1</span></a>  so let us detail their meaning one by one:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>The first column is the index which lists the names of the models
 taken from the keys of the dictionary passed to <code class="docutils literal notranslate"><span class="pre">az.compare(.)</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">rank</span></code>: The ranking of the models starting from 0 (the model with
@@ -1823,12 +1606,12 @@ the black dots are the predictive accuracy without the <code class="docutils lit
 penalization term. The black segments represent the standard error for
 the LOO computations <code class="docutils literal notranslate"><span class="pre">se</span></code>. The grey segments, centered at the triangles,
 represent the standard errors of the difference <code class="docutils literal notranslate"><span class="pre">dse</span></code> between the values
-of LOO for each model and the best ranked model.</span><a class="headerlink" href="#fig-compare-dummy" title="Permalink to this image">¶</a></p>
+of LOO for each model and the best ranked model.</span><a class="headerlink" href="#fig-compare-dummy" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="expected-log-predictive-density">
-<span id="elpd-plots"></span><h3><span class="section-number">2.5.2. </span>Expected Log Predictive Density<a class="headerlink" href="#expected-log-predictive-density" title="Permalink to this heading">¶</a></h3>
+<span id="elpd-plots"></span><h3><span class="section-number">2.5.2. </span>Expected Log Predictive Density<a class="headerlink" href="#expected-log-predictive-density" title="Permalink to this heading">#</a></h3>
 <p>In the previous section we computed a value of the ELPD for each model.
 Since this is a <em>global</em> comparison it reduces a model, and data, to a
 single number. But from Equation <a class="reference internal" href="#equation-eq-elpd-practice">(2.5)</a> and
@@ -1855,12 +1638,12 @@ each other. <a class="reference internal" href="#fig-elpd-and-khat"><span class=
 with an ELPD difference 2 times the standard deviation of the computed
 ELPD differences. Differences are small in all 3 examples, especially
 between <code class="docutils literal notranslate"><span class="pre">mB</span></code> and <code class="docutils literal notranslate"><span class="pre">mC</span></code>. Positive values indicate that observations are
-better resolved for the first model than the second.</span><a class="headerlink" href="#fig-elpd-dummy" title="Permalink to this image">¶</a></p>
+better resolved for the first model than the second.</span><a class="headerlink" href="#fig-elpd-dummy" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="pareto-shape-parameter">
-<span id="k-paretto"></span><h3><span class="section-number">2.5.3. </span>Pareto Shape Parameter<a class="headerlink" href="#pareto-shape-parameter" title="Permalink to this heading">¶</a></h3>
+<span id="k-paretto"></span><h3><span class="section-number">2.5.3. </span>Pareto Shape Parameter<a class="headerlink" href="#pareto-shape-parameter" title="Permalink to this heading">#</a></h3>
 <p>As we already mentioned we use LOO to approximate
 <span class="math notranslate nohighlight">\(\text{ELPD}_\text{LOO-CV}\)</span>. This approximation involves the computation
 of a Pareto distribution (see details in Section <a class="reference internal" href="chp_11.html#loo-depth"><span class="std std-ref">LOO in Depth</span></a>),
@@ -1896,7 +1679,7 @@ with the highest values of ELPD or vice versa.</p>
 <a class="reference internal image-reference" href="../_images/loo_k_dummy.png"><img alt="../_images/loo_k_dummy.png" src="../_images/loo_k_dummy.png" style="width: 8.00in;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 2.18 </span><span class="caption-text"><span class="math notranslate nohighlight">\(\hat \kappa\)</span> values. Annotated points correspond to observations with
-<span class="math notranslate nohighlight">\(\hat \kappa &gt; 0.09\)</span>, a totally arbitrary threshold.</span><a class="headerlink" href="#fig-loo-k-dummy" title="Permalink to this image">¶</a></p>
+<span class="math notranslate nohighlight">\(\hat \kappa &gt; 0.09\)</span>, a totally arbitrary threshold.</span><a class="headerlink" href="#fig-loo-k-dummy" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="fig-elpd-and-khat">
@@ -1906,12 +1689,12 @@ with the highest values of ELPD or vice versa.</p>
 <code class="docutils literal notranslate"><span class="pre">mC</span></code>. The black lines represent the values of each observation. The
 annotated observations are the same one highlighted in
 <a class="reference internal" href="#fig-elpd-dummy"><span class="std std-numref">Fig. 2.17</span></a> except for the observation 78, annotated in
-boldface, which is only highlighted in <a class="reference internal" href="#fig-loo-k-dummy"><span class="std std-numref">Fig. 2.18</span></a>.</span><a class="headerlink" href="#fig-elpd-and-khat" title="Permalink to this image">¶</a></p>
+boldface, which is only highlighted in <a class="reference internal" href="#fig-loo-k-dummy"><span class="std std-numref">Fig. 2.18</span></a>.</span><a class="headerlink" href="#fig-elpd-and-khat" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="interpreting-p-loo-when-pareto-hat-kappa-is-large">
-<span id="id41"></span><h3><span class="section-number">2.5.4. </span>Interpreting p_loo When Pareto <span class="math notranslate nohighlight">\(\hat \kappa\)</span> is Large<a class="headerlink" href="#interpreting-p-loo-when-pareto-hat-kappa-is-large" title="Permalink to this heading">¶</a></h3>
+<span id="id41"></span><h3><span class="section-number">2.5.4. </span>Interpreting p_loo When Pareto <span class="math notranslate nohighlight">\(\hat \kappa\)</span> is Large<a class="headerlink" href="#interpreting-p-loo-when-pareto-hat-kappa-is-large" title="Permalink to this heading">#</a></h3>
 <p>As previously said p_loo can be loosely interpreted as the estimated
 effective number of parameters in a model. Nevertheless, for models with
 large values of <span class="math notranslate nohighlight">\(\hat \kappa\)</span> we can obtain some additional
@@ -1941,7 +1724,7 @@ overdispersed likelihood like a NegativeBinomial instead of a Poisson
 distribution, or using mixture likelihood.</p>
 </section>
 <section id="loo-pit">
-<span id="id44"></span><h3><span class="section-number">2.5.5. </span>LOO-PIT<a class="headerlink" href="#loo-pit" title="Permalink to this heading">¶</a></h3>
+<span id="id44"></span><h3><span class="section-number">2.5.5. </span>LOO-PIT<a class="headerlink" href="#loo-pit" title="Permalink to this heading">#</a></h3>
 <p>As we just saw in Sections <a class="reference internal" href="#elpd-plots"><span class="std std-ref">Expected Log Predictive Density</span></a> and <a class="reference internal" href="#k-paretto"><span class="std std-ref">Pareto Shape Parameter</span></a> model
 comparison, and LOO in particular, can be used for purposes other than
 declaring a model is <em>better</em> than another model. We can compare models
@@ -1970,7 +1753,7 @@ in <a class="reference internal" href="#posterior-pd"><span class="std std-ref">
 <p>LOO-PIT is obtained by comparing the observed data <span class="math notranslate nohighlight">\(y\)</span> to posterior
 predicted data <span class="math notranslate nohighlight">\(\tilde y\)</span>. The comparison is done point-wise. We have:</p>
 <div class="math notranslate nohighlight" id="equation-loo-pit">
-<span class="eqno">(2.7)<a class="headerlink" href="#equation-loo-pit" title="Permalink to this equation">¶</a></span>\[p_i = P(\tilde y_i \leq y_i \mid y_{-i})\]</div>
+<span class="eqno">(2.7)<a class="headerlink" href="#equation-loo-pit" title="Permalink to this equation">#</a></span>\[p_i = P(\tilde y_i \leq y_i \mid y_{-i})\]</div>
 <p>Intuitively, LOO-PIT is computing the probability that the posterior
 predicted data <span class="math notranslate nohighlight">\(\tilde y_i\)</span> has lower value than the observed data
 <span class="math notranslate nohighlight">\(y_i\)</span>, when we remove the <span class="math notranslate nohighlight">\(i\)</span> observation. Thus the difference between
@@ -1989,12 +1772,12 @@ seem to be very well calibrated.</p>
 values that are less or equal than the observed data, computed per each
 observation. The white lines represent the expected Uniform distribution
 and the gray band the expected deviation for a dataset of the same size
-as the one used.</span><a class="headerlink" href="#fig-loo-pit-dummy" title="Permalink to this image">¶</a></p>
+as the one used.</span><a class="headerlink" href="#fig-loo-pit-dummy" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="model-averaging">
-<span id="id46"></span><h3><span class="section-number">2.5.6. </span>Model Averaging<a class="headerlink" href="#model-averaging" title="Permalink to this heading">¶</a></h3>
+<span id="id46"></span><h3><span class="section-number">2.5.6. </span>Model Averaging<a class="headerlink" href="#model-averaging" title="Permalink to this heading">#</a></h3>
 <p>Model averaging can be justified as being Bayesian about model
 uncertainty as we are Bayesian about parameter uncertainty. If we can
 not absolutely be sure that <em>a</em> model is <em>the</em> model (and generally we
@@ -2009,7 +1792,7 @@ problematic in practice (see Section <a class="reference internal" href="chp_11.
 alternative is to use the values of LOO to estimate weights for each
 model. We can do this by using the following formula:</p>
 <div class="math notranslate nohighlight" id="equation-eq-pseudo-avg">
-<span class="eqno">(2.8)<a class="headerlink" href="#equation-eq-pseudo-avg" title="Permalink to this equation">¶</a></span>\[w_i = \frac {e^{-\Delta_i }} {\sum_j^k e^{-\Delta_j }}\]</div>
+<span class="eqno">(2.8)<a class="headerlink" href="#equation-eq-pseudo-avg" title="Permalink to this equation">#</a></span>\[w_i = \frac {e^{-\Delta_i }} {\sum_j^k e^{-\Delta_j }}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\Delta_i\)</span> is the difference between the <span class="math notranslate nohighlight">\(i\)</span> value of LOO and the
 highest one, assuming we are using the log- scale, which is the default
 in ArviZ.</p>
@@ -2030,7 +1813,7 @@ models in a meta-model in such a way that we minimize the divergence
 between the meta-model and the <em>true</em> generating model. When using a
 logarithmic scoring rule this is equivalent to computing:</p>
 <div class="math notranslate nohighlight" id="equation-eq-stacking">
-<span class="eqno">(2.9)<a class="headerlink" href="#equation-eq-stacking" title="Permalink to this equation">¶</a></span>\[\max_{w} \frac{1}{n} \sum_{i=1}^{n}log\sum_{j=1}^{k} w_j p(y_i \mid y_{-i}, M_j)\]</div>
+<span class="eqno">(2.9)<a class="headerlink" href="#equation-eq-stacking" title="Permalink to this equation">#</a></span>\[\max_{w} \frac{1}{n} \sum_{i=1}^{n}log\sum_{j=1}^{k} w_j p(y_i \mid y_{-i}, M_j)\]</div>
 <p>where <span class="math notranslate nohighlight">\(n\)</span> is the number of data points and <span class="math notranslate nohighlight">\(k\)</span> the number of models. To
 enforce a solution we constrain <span class="math notranslate nohighlight">\(w\)</span> to be <span class="math notranslate nohighlight">\(w_j \ge 0\)</span> and
 <span class="math notranslate nohighlight">\(\sum_{j=1}^{k} w_j = 1\)</span>. The quantity <span class="math notranslate nohighlight">\(p(y_i \mid y_{-i}, M_j)\)</span> is the
@@ -2059,7 +1842,7 @@ makes a lot of sense.</p>
 </section>
 </section>
 <section id="exercises">
-<span id="exercises2"></span><h2><span class="section-number">2.6. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">¶</a></h2>
+<span id="exercises2"></span><h2><span class="section-number">2.6. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <p><strong>2E1.</strong> Using your own words, what are the main
 differences between prior predictive checks and posterior predictive
 checks? How are these empirical evaluations related to Equations
@@ -2075,7 +1858,7 @@ from a classical example in Bayesian statistic, the eight schools model
 predictive samples and posterior samples. We can load the InferenceData
 object using the command <code class="docutils literal notranslate"><span class="pre">az.load_arviz_data(&quot;centered_eight&quot;)</span></code>. Use
 ArviZ to:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>List all the groups available on the InferenceData object.</p></li>
 <li><p>Identify the number of chains and the total number of posterior
 samples.</p></li>
@@ -2090,7 +1873,7 @@ Density Intervals.</p></li>
 which is a reparametrized version of the “centered_eight” model in the
 previous exercise. Use ArviZ to assess the MCMC sampling convergence for
 both models by using:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Autocorrelation plots</p></li>
 <li><p>Rank plots.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\hat R\)</span> values.</p></li>
@@ -2103,7 +1886,7 @@ models has better convergence diagnostics?</p>
 <p><strong>2E5.</strong> InferenceData object can store statistics related
 to the sampling algorithm. You will find them in the <code class="docutils literal notranslate"><span class="pre">sample_stats</span></code>
 group, including divergences (<code class="docutils literal notranslate"><span class="pre">diverging</span></code>):</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Count the number of divergences for “centered_eight” and
 “non_centered_eight” models.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">az.plot_parallel</span></code> to identify where the divergences tend to
@@ -2114,7 +1897,7 @@ InferenceData object with a Poisson model and one with a
 NegativeBinomial, both models are fitted to the same dataset. Use
 <code class="docutils literal notranslate"><span class="pre">az.from_netcdf(.)</span></code> to load them, and then use ArviZ functions to
 answer the following questions:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Which model provides a better fit to the data? Use the functions
 <code class="docutils literal notranslate"><span class="pre">az.compare(.)</span></code> and <code class="docutils literal notranslate"><span class="pre">az.plot_compare(.)</span></code></p></li>
 <li><p>Explain why one model provides a better fit than the other. Use
@@ -2150,7 +1933,7 @@ are useful at each step during the Bayesian workflow (shown visually in
 <a class="reference internal" href="chp_09.html#fig-bayesianworkflow"><span class="std std-numref">Fig. 9.1</span></a>). Explain how they work
 and what they are assessing. Feel free to use anything you have seen in
 this chapter or in the ArviZ documentation.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Prior selection.</p></li>
 <li><p>MCMC sampling.</p></li>
 <li><p>Posterior predictions.</p></li>
@@ -2162,7 +1945,7 @@ according to a scoring rate <span class="math notranslate nohighlight">\(\mu\)</
 <span class="math notranslate nohighlight">\(\text{Gamma}(0.5, 0.00001)\)</span> because this is sometimes recommend as an
 “objective” prior.</p>
 <div class="literal-block-wrapper docutils container" id="poisson-football">
-<div class="code-block-caption"><span class="caption-number">Listing 2.5 </span><span class="caption-text">poisson_football</span><a class="headerlink" href="#poisson-football" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 2.5 </span><span class="caption-text">poisson_football</span><a class="headerlink" href="#poisson-football" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
     <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Gamma</span><span class="p">(</span><span class="s2">&quot;μ&quot;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.00001</span><span class="p">)</span>
     <span class="n">score</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Poisson</span><span class="p">(</span><span class="s2">&quot;score&quot;</span><span class="p">,</span> <span class="n">μ</span><span class="p">)</span>
@@ -2170,7 +1953,7 @@ according to a scoring rate <span class="math notranslate nohighlight">\(\mu\)</
 </pre></div>
 </div>
 </div>
-<ol>
+<ol class="arabic">
 <li><p>Generate and plot the prior predictive distribution. How reasonable
 it looks to you?</p></li>
 <li><p>Use your knowledge of sports in order to refine the prior choice.</p></li>
@@ -2187,7 +1970,7 @@ using the mean and standard deviation.</p>
 <p><strong>2M12.</strong> In Code Block <a class="reference internal" href="chp_01.html#metropolis-hastings"><span class="std std-ref">metropolis_hastings</span></a> from
 Chapter <a class="reference internal" href="chp_01.html#chap1"><span class="std std-ref">1</span></a>, change the value of <code class="docutils literal notranslate"><span class="pre">can_sd</span></code> and run the
 Metropolis sampler. Try values like 0.2 and 1.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Use ArviZ to compare the sampled values using diagnostics such as
 the autocorrelation plot, trace plot and the ESS. Explain the
 observed differences.</p></li>
@@ -2205,7 +1988,7 @@ is your conclusion about this sampler performance compared to
 Metropolis-Hastings?</p>
 <p><strong>2M14.</strong> Generate your own example of a synthetic
 posterior with convergence issues, let us call it <code class="docutils literal notranslate"><span class="pre">bad_chains3</span></code>.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Explain why the synthetic posterior you generated is “bad”. What
 about it would we not want to see in an actual modeling scenario?</p></li>
 <li><p>Run the same diagnostics we run in the book for <code class="docutils literal notranslate"><span class="pre">bad_chains0</span></code> and
@@ -2217,7 +2000,7 @@ reconsider why <code class="docutils literal notranslate"><span class="pre">bad_
 <p><strong>2H15.</strong> Generate a random sample using
 <code class="docutils literal notranslate"><span class="pre">np.random.binomial(n=1,</span> <span class="pre">p=0.5,</span> <span class="pre">size=200)</span></code> and fit it using a
 Beta-Binomial model.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Check that LOO-PIT is approximately Uniform.</p></li>
 <li><p>Tweak the prior to make the model a bad fit and get a LOO-PIT that
 is low for values closer to zero and high for values closer to one.
@@ -2233,7 +2016,7 @@ and one. Could you do it? Explain why.</p></li>
 likelihood. Use the following random samples as data and the following
 priors for the mean. Fix the standard deviation parameter in the
 likelihood at 1.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>A random sample of size 200 from a <span class="math notranslate nohighlight">\(\mathcal{N}(0,1)\)</span> and prior
 distribution <span class="math notranslate nohighlight">\(\mathcal{N}(0,20)\)</span></p></li>
 <li><p>A random sample of size 2 from a <span class="math notranslate nohighlight">\(\mathcal{N}(0,1)\)</span> and prior
@@ -2381,7 +2164,7 @@ criteria</p>
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./markdown"
         },
         predefinedOutput: true
@@ -2389,44 +2172,125 @@ criteria</p>
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="chp_01.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">1. </span>Bayesian Inference</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chp_01.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Bayesian Inference</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="chp_03.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="chp_03.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title"><span class="section-number">3. </span>Linear Models and Probabilistic Programming Languages</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
+                </footer>
+              
+            </div>
             
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Martin, Kumar, Lao<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#there-is-life-after-inference-and-before-too">2.1. There is Life After Inference, and Before Too!</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-your-assumptions">2.2. Understanding Your Assumptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-your-predictions">2.3. Understanding Your Predictions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagnosing-numerical-inference">2.4. Diagnosing Numerical Inference</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#effective-sample-size">2.4.1. Effective Sample Size</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#potential-scale-reduction-factor-hat-r">2.4.2. Potential Scale Reduction Factor <span class="math notranslate nohighlight">\(\hat R\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monte-carlo-standard-error">2.4.3. Monte Carlo Standard Error</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trace-plots">2.4.4. Trace Plots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autocorrelation-plots">2.4.5. Autocorrelation Plots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rank-plots">2.4.6. Rank Plots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#divergences">2.4.7. Divergences</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sampler-parameters-and-other-diagnostics">2.4.8. Sampler Parameters and Other Diagnostics</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-comparison">2.5. Model Comparison</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-validation-and-loo">2.5.1. Cross-validation and LOO</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-log-predictive-density">2.5.2. Expected Log Predictive Density</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pareto-shape-parameter">2.5.3. Pareto Shape Parameter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-p-loo-when-pareto-hat-kappa-is-large">2.5.4. Interpreting p_loo When Pareto <span class="math notranslate nohighlight">\(\hat \kappa\)</span> is Large</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loo-pit">2.5.5. LOO-PIT</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-averaging">2.5.6. Model Averaging</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">2.6. Exercises</a></li>
+</ul>
+  </nav></div>
 
-      </div>
-    </div>
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Martin, Kumar, Lao
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

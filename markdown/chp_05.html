@@ -1,39 +1,47 @@
 
+
 <!DOCTYPE html>
 
-<html lang="en">
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>5. Splines &#8212; Bayesian Modeling and Computation in Python</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-codeautolink.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -42,12 +50,13 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -56,422 +65,311 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'markdown/chp_05';</script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="6. Time Series" href="chp_06.html" />
     <link rel="prev" title="4. Extending Linear Models" href="chp_04.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en">
-    
-
-    <!-- Google Analytics -->
-    
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-702QMHG8ST"></script>
-<script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){ dataLayer.push(arguments); }
-                    gtag('js', new Date());
-                    gtag('config', 'G-702QMHG8ST');
-                </script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-      
-      
-      <h1 class="site-logo" id="site-title">Bayesian Modeling and Computation in Python</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 0
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="dedication.html">
-   Dedication
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="foreword.html">
-   Foreword
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="preface.html">
-   Preface
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="symbollist.html">
-   Symbols
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 1
- </span>
-</p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_01.html">
-   1. Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_02.html">
-   2. Exploratory Analysis of Bayesian Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_03.html">
-   3. Linear Models and Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_04.html">
-   4. Extending Linear Models
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   5. Splines
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_06.html">
-   6. Time Series
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_07.html">
-   7. Bayesian Additive Regression Trees
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_08.html">
-   8. Approximate Bayesian Computation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_09.html">
-   9. End to End Bayesian Workflows
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_10.html">
-   10. Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chp_11.html">
-   11. Appendiceal Topics
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="glossary.html">
-   12. Glossary
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="references.html">
-   13. References
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 2
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_01.html">
-   Code 1: Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_02.html">
-   Code 2: Exploratory Analysis of Bayesian Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_03.html">
-   Code 3: Linear Models and Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_04.html">
-   Code 4: Extending Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_05.html">
-   Code 5: Splines
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_06.html">
-   Code 6: Time Series
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_07.html">
-   Code 7: Bayesian Additive Regression Trees
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_08.html">
-   Code 8: Approximate Bayesian Computation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_09.html">
-   Code 9: End to End Bayesian Workflows
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_10.html">
-   Code 10: Probabilistic Programming Languages
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/chp_11.html">
-   Code 11: Appendiceal Topics
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Part 3
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../solutions/chp_01.html">
-   Solutions 1: Bayesian Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../solutions/chp_02.html">
-   Solutions 2: Exploratory Analysis of Bayesian models
-  </a>
- </li>
-</ul>
-
-    </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_05.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+      <div class="bd-sidebar-primary bd-sidebar">
         
-    </div>
-</div>
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
+  
 
-            <!-- Launch buttons -->
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#polynomial-regression">
-   5.1. Polynomial Regression
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#expanding-the-feature-space">
-   5.2. Expanding the Feature Space
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introducing-splines">
-   5.3. Introducing Splines
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#building-the-design-matrix-using-patsy">
-   5.4. Building the Design Matrix using Patsy
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fitting-splines-in-pymc3">
-   5.5. Fitting Splines in PyMC3
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#choosing-knots-and-prior-for-splines">
-   5.6. Choosing Knots and Prior for Splines
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#regularizing-prior-for-splines">
-     5.6.1. Regularizing Prior for Splines
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#modeling-co2-uptake-with-splines">
-   5.7. Modeling CO₂ Uptake with Splines
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
-   5.8. Exercises
-  </a>
- </li>
+<a class="navbar-brand logo" href="../welcome.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Bayesian Modeling and Computation in Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 0</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="dedication.html">Dedication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="foreword.html">Foreword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preface.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="symbollist.html">Symbols</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 1</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chp_01.html">1. Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_02.html">2. Exploratory Analysis of Bayesian Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_03.html">3. Linear Models and Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_04.html">4. Extending Linear Models</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">5. Splines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_06.html">6. Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_07.html">7. Bayesian Additive Regression Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_08.html">8. Approximate Bayesian Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_09.html">9. End to End Bayesian Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_10.html">10. Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chp_11.html">11. Appendiceal Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">12. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">13. References</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_01.html">Code 1: Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_02.html">Code 2: Exploratory Analysis of Bayesian Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_03.html">Code 3: Linear Models and Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_04.html">Code 4: Extending Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_05.html">Code 5: Splines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_06.html">Code 6: Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_07.html">Code 7: Bayesian Additive Regression Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_08.html">Code 8: Approximate Bayesian Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_09.html">Code 9: End to End Bayesian Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_10.html">Code 10: Probabilistic Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/chp_11.html">Code 11: Appendiceal Topics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../solutions/chp_01.html">Solutions 1: Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/chp_02.html">Solutions 2: Exploratory Analysis of Bayesian models</a></li>
 </ul>
 
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_05.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Splines</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polynomial-regression">5.1. Polynomial Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expanding-the-feature-space">5.2. Expanding the Feature Space</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introducing-splines">5.3. Introducing Splines</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-design-matrix-using-patsy">5.4. Building the Design Matrix using Patsy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-splines-in-pymc3">5.5. Fitting Splines in PyMC3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-knots-and-prior-for-splines">5.6. Choosing Knots and Prior for Splines</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regularizing-prior-for-splines">5.6.1. Regularizing Prior for Splines</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-co2-uptake-with-splines">5.7. Modeling CO₂ Uptake with Splines</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">5.8. Exercises</a></li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Splines</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#polynomial-regression">
-   5.1. Polynomial Regression
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#expanding-the-feature-space">
-   5.2. Expanding the Feature Space
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introducing-splines">
-   5.3. Introducing Splines
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#building-the-design-matrix-using-patsy">
-   5.4. Building the Design Matrix using Patsy
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fitting-splines-in-pymc3">
-   5.5. Fitting Splines in PyMC3
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#choosing-knots-and-prior-for-splines">
-   5.6. Choosing Knots and Prior for Splines
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#regularizing-prior-for-splines">
-     5.6.1. Regularizing Prior for Splines
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#modeling-co2-uptake-with-splines">
-   5.7. Modeling CO₂ Uptake with Splines
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
-   5.8. Exercises
-  </a>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="splines">
-<span id="chap3-5"></span><h1><span class="section-number">5. </span>Splines<a class="headerlink" href="#splines" title="Permalink to this heading">¶</a></h1>
+<span id="chap3-5"></span><h1><span class="section-number">5. </span>Splines<a class="headerlink" href="#splines" title="Permalink to this heading">#</a></h1>
 <p>In this chapter we will discuss splines, which is an extension of
 concepts introduced into Chapter <a class="reference internal" href="chp_03.html#chap2"><span class="std std-ref">3</span></a> with the aim of
 adding more flexibility. In the models introduced in Chapter
@@ -480,17 +378,17 @@ independent variables was the same for their entire domain. Splines, in
 contrast, can split a problem into multiple local solutions, which can
 all be combined to produce a useful global solution. Let us see how.</p>
 <section id="polynomial-regression">
-<span id="id1"></span><h2><span class="section-number">5.1. </span>Polynomial Regression<a class="headerlink" href="#polynomial-regression" title="Permalink to this heading">¶</a></h2>
+<span id="id1"></span><h2><span class="section-number">5.1. </span>Polynomial Regression<a class="headerlink" href="#polynomial-regression" title="Permalink to this heading">#</a></h2>
 <p>As we already saw in Chapter <a class="reference internal" href="chp_03.html#chap2"><span class="std std-ref">3</span></a>, we can write a linear
 model as:</p>
 <div class="math notranslate nohighlight" id="equation-eq-lin-model">
-<span class="eqno">(5.1)<a class="headerlink" href="#equation-eq-lin-model" title="Permalink to this equation">¶</a></span>\[\mathbb{E}[Y]= \beta_0 + \beta_1 X\]</div>
+<span class="eqno">(5.1)<a class="headerlink" href="#equation-eq-lin-model" title="Permalink to this equation">#</a></span>\[\mathbb{E}[Y]= \beta_0 + \beta_1 X\]</div>
 <p>where <span class="math notranslate nohighlight">\(\beta_0\)</span> is the intercept, <span class="math notranslate nohighlight">\(\beta_1\)</span> the slope and
 <span class="math notranslate nohighlight">\(\mathbb{E}[Y]\)</span> is the expected value, or mean, of the response (random)
 variable <span class="math notranslate nohighlight">\(Y\)</span>. We can rewrite Equation <a class="reference internal" href="#equation-eq-lin-model">(5.1)</a> into the
 following form:</p>
 <div class="math notranslate nohighlight" id="equation-eq-polynomial-reg">
-<span class="eqno">(5.2)<a class="headerlink" href="#equation-eq-polynomial-reg" title="Permalink to this equation">¶</a></span>\[\mathbb{E}[Y]= \beta_0 + \beta_1 X + \beta_2 X^2 + \cdots + \beta_m X^m\]</div>
+<span class="eqno">(5.2)<a class="headerlink" href="#equation-eq-polynomial-reg" title="Permalink to this equation">#</a></span>\[\mathbb{E}[Y]= \beta_0 + \beta_1 X + \beta_2 X^2 + \cdots + \beta_m X^m\]</div>
 <p>This is known as polynomial regression. At first it may seem that
 Expression <a class="reference internal" href="#equation-eq-polynomial-reg">(5.2)</a> is representing a multiple linear
 regression of the covariates <span class="math notranslate nohighlight">\(X, X^2 \cdots + X^m\)</span>. And in a sense this
@@ -515,7 +413,7 @@ degree increases the fit gets more <em>wiggly</em>. The dashed lines are the
 fit when removing the observation indicated with a blue cross. The
 removal of a data point has a small effect when the degree of polynomial
 is 2 or 10, but larger when the degree is 15. The fit was calculated
-using the least squares method.</span><a class="headerlink" href="#fig-polynomial-regression" title="Permalink to this image">¶</a></p>
+using the least squares method.</span><a class="headerlink" href="#fig-polynomial-regression" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>One problem with polynomials is that they act <em>globally</em>, when we apply
@@ -539,7 +437,7 @@ single data point changes the model fit with effects even far away from
 the location of the point.</p>
 </section>
 <section id="expanding-the-feature-space">
-<span id="expanding-feature-space"></span><h2><span class="section-number">5.2. </span>Expanding the Feature Space<a class="headerlink" href="#expanding-the-feature-space" title="Permalink to this heading">¶</a></h2>
+<span id="expanding-feature-space"></span><h2><span class="section-number">5.2. </span>Expanding the Feature Space<a class="headerlink" href="#expanding-the-feature-space" title="Permalink to this heading">#</a></h2>
 <p>At a conceptual level we can think of polynomial regression as a recipe
 for creating new predictors, or in more formal terms to <strong>expanding the
 feature space</strong>. By performing this expansion we are able to fit a line
@@ -551,14 +449,14 @@ In fact, as we just saw applying polynomials is not problem-free.</p>
 <p>To generalize the idea of feature expansion, beyond polynomials we can
 expand Equation <a class="reference internal" href="#equation-eq-lin-model">(5.1)</a> into the following form:</p>
 <div class="math notranslate nohighlight" id="equation-eq-bfr">
-<span class="eqno">(5.3)<a class="headerlink" href="#equation-eq-bfr" title="Permalink to this equation">¶</a></span>\[\mathbb{E}[Y]= \beta_0 + \beta_1 B_{1}(X_{1}) + \beta_2 B_{2}(X_{2}) + \cdots + \beta_m B_{m}(X_{m})\]</div>
+<span class="eqno">(5.3)<a class="headerlink" href="#equation-eq-bfr" title="Permalink to this equation">#</a></span>\[\mathbb{E}[Y]= \beta_0 + \beta_1 B_{1}(X_{1}) + \beta_2 B_{2}(X_{2}) + \cdots + \beta_m B_{m}(X_{m})\]</div>
 <p>where the <span class="math notranslate nohighlight">\(B_i\)</span> are arbitrary functions. In this context we call these
 functions basis functions. A linear combination of them gives us a
 function <span class="math notranslate nohighlight">\(f\)</span> that is what we actually “see” as the fit of the model to
 the data. In this sense the <span class="math notranslate nohighlight">\(B_i\)</span> are an under the hood trick to build a
 flexible function <span class="math notranslate nohighlight">\(f\)</span>.</p>
 <div class="math notranslate nohighlight" id="equation-eq-bfr2">
-<span class="eqno">(5.4)<a class="headerlink" href="#equation-eq-bfr2" title="Permalink to this equation">¶</a></span>\[\mathbb{E}[Y]= \sum_i^m \beta_i B_{i}(X_{i}) = f(X)\]</div>
+<span class="eqno">(5.4)<a class="headerlink" href="#equation-eq-bfr2" title="Permalink to this equation">#</a></span>\[\mathbb{E}[Y]= \sum_i^m \beta_i B_{i}(X_{i}) = f(X)\]</div>
 <p>There are many choices for the <span class="math notranslate nohighlight">\(B_i\)</span> basis functions, we can use
 polynomials and thus obtain polynomial regression as we just saw, or
 maybe apply an arbitrary set of functions such as a power of two, a
@@ -582,7 +480,7 @@ fitting <strong>piecewise polynomials</strong> <a class="footnote-reference brac
 <p><span class="caption-number">Fig. 5.2 </span><span class="caption-text">The blue line is the <em>true</em> function we are trying to approximate. The
 black-solid lines are piecewise polynomials of increasing order (1, 2,
 3, and 4). The dashed vertical gray lines are marking the limits of each
-subdomain on the x-axis.</span><a class="headerlink" href="#fig-piecewise" title="Permalink to this image">¶</a></p>
+subdomain on the x-axis.</span><a class="headerlink" href="#fig-piecewise" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>In the four panels in <a class="reference internal" href="#fig-piecewise"><span class="std std-numref">Fig. 5.2</span></a> the goal is the same, to
@@ -620,7 +518,7 @@ we can even add an inverse link function <span class="math notranslate nohighlig
 are known as Generalized Additive Models (GAM):
 <span id="id7">[<a class="reference internal" href="references.html#id3" title="A. Gelman, J.B. Carlin, H.S. Stern, D.B. Dunson, A. Vehtari, and D.B. Rubin. Bayesian Data Analysis, Third Edition. Chapman &amp; Hall/CRC Texts in Statistical Science. Taylor &amp; Francis, 2013. ISBN 9781439840955.">18</a>, <a class="reference internal" href="references.html#id4" title="S.N. Wood. Generalized Additive Models: An Introduction with R, Second Edition. Chapman &amp; Hall/CRC Texts in Statistical Science. CRC Press, 2017. ISBN 9781498728379.">49</a>]</span>.</p>
 <div class="math notranslate nohighlight" id="equation-eq-gam">
-<span class="eqno">(5.5)<a class="headerlink" href="#equation-eq-gam" title="Permalink to this equation">¶</a></span>\[\mathbb{E}[Y]= \phi \left(\sum_i^p f(X_i)\right)\]</div>
+<span class="eqno">(5.5)<a class="headerlink" href="#equation-eq-gam" title="Permalink to this equation">#</a></span>\[\mathbb{E}[Y]= \phi \left(\sum_i^p f(X_i)\right)\]</div>
 <p>Recapitulating what we learn in this section, the <span class="math notranslate nohighlight">\(B_i\)</span> functions in
 Equation <a class="reference internal" href="#equation-eq-bfr">(5.3)</a> are a clever statistical device that allows us to
 fit more flexible models. In principle we are free to choose arbitrary
@@ -633,7 +531,7 @@ the next section and for the remainder of this chapter we will restrict
 the discussion to a family of basis functions known as B-splines <a class="footnote-reference brackets" href="#id30" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a>.</p>
 </section>
 <section id="introducing-splines">
-<span id="id9"></span><h2><span class="section-number">5.3. </span>Introducing Splines<a class="headerlink" href="#introducing-splines" title="Permalink to this heading">¶</a></h2>
+<span id="id9"></span><h2><span class="section-number">5.3. </span>Introducing Splines<a class="headerlink" href="#introducing-splines" title="Permalink to this heading">#</a></h2>
 <p>Splines can be seen as an attempt to use the flexibility of polynomials
 but keeping them under control and thus obtaining a model with overall
 good statistical properties. To define a spline we need to define knots
@@ -670,7 +568,7 @@ set of knots and a degree.</p>
 a step function, on second a triangular function and then increasingly
 Gaussian-like functions. The <em>stacked</em> knots at the boundary (smaller
 black dots) are added in order to be able to define the splines close to
-the borders.</span><a class="headerlink" href="#fig-splines-basis" title="Permalink to this image">¶</a></p>
+the borders.</span><a class="headerlink" href="#fig-splines-basis" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>From <a class="reference internal" href="#fig-splines-basis"><span class="std std-numref">Fig. 5.3</span></a> we can see that as we increase the
@@ -726,7 +624,7 @@ have the basis splines from the first row scaled by a set of
 coefficients. The thick black line represents the sum of these basis
 functions. Because the value of the coefficients was randomly chosen we
 can see each sub-panel in the second row as a random sample from a prior
-distribution over the <em>spline space</em>.</span><a class="headerlink" href="#fig-splines-weighted" title="Permalink to this image">¶</a></p>
+distribution over the <em>spline space</em>.</span><a class="headerlink" href="#fig-splines-weighted" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>In this example we generated the <span class="math notranslate nohighlight">\(\beta_i\)</span> coefficients by sampling from
@@ -744,7 +642,7 @@ realization of cubic splines.</p>
 <a class="reference internal image-reference" href="../_images/splines_realizations.png"><img alt="../_images/splines_realizations.png" src="../_images/splines_realizations.png" style="width: 8.00in;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 5.5 </span><span class="caption-text">Four realizations of cubic splines with <span class="math notranslate nohighlight">\(\beta_i\)</span> coefficients sampled
-from a Half Normal distribution.</span><a class="headerlink" href="#fig-splines-realizations" title="Permalink to this image">¶</a></p>
+from a Half Normal distribution.</span><a class="headerlink" href="#fig-splines-realizations" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="admonition-four-is-a-crowd-for-splines admonition">
@@ -769,7 +667,7 @@ defaults.</p>
 </div>
 </section>
 <section id="building-the-design-matrix-using-patsy">
-<span id="id13"></span><h2><span class="section-number">5.4. </span>Building the Design Matrix using Patsy<a class="headerlink" href="#building-the-design-matrix-using-patsy" title="Permalink to this heading">¶</a></h2>
+<span id="id13"></span><h2><span class="section-number">5.4. </span>Building the Design Matrix using Patsy<a class="headerlink" href="#building-the-design-matrix-using-patsy" title="Permalink to this heading">#</a></h2>
 <p>In Figures <a class="reference internal" href="#fig-splines-basis"><span class="std std-numref">Fig. 5.3</span></a> and
 <a class="reference internal" href="#fig-splines-weighted"><span class="std std-numref">Fig. 5.4</span></a> we plot the B-splines, but so far we have
 omitted how to compute them. The main reason is that computation can be
@@ -794,7 +692,7 @@ Block <a class="reference internal" href="#splines-patsy"><span class="std std-r
 matrices, one with degree 0 (piecewise constant), another with degree 1
 (piecewise linear) and finally one with degree 3 (cubic spline).</p>
 <div class="literal-block-wrapper docutils container" id="splines-patsy">
-<div class="code-block-caption"><span class="caption-number">Listing 5.1 </span><span class="caption-text">splines_patsy</span><a class="headerlink" href="#splines-patsy" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 5.1 </span><span class="caption-text">splines_patsy</span><a class="headerlink" href="#splines-patsy" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
 <span class="n">knots</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">]</span>
 
@@ -817,7 +715,7 @@ or your favorite IDE to inspect the objects <code class="docutils literal notran
 <p><span class="caption-number">Fig. 5.6 </span><span class="caption-text">Design matrices generated with Patsy in Code Block
 <a class="reference internal" href="#splines-patsy"><span class="std std-ref">splines_patsy</span></a>. The color goes from black
 (1) to light-gray (0), the number of columns is the number of B-splines
-and the number of rows the number of datapoints.</span><a class="headerlink" href="#fig-design-matrices" title="Permalink to this image">¶</a></p>
+and the number of rows the number of datapoints.</span><a class="headerlink" href="#fig-design-matrices" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The first subplot of <a class="reference internal" href="#fig-design-matrices"><span class="std std-numref">Fig. 5.6</span></a> corresponds to <code class="docutils literal notranslate"><span class="pre">B0</span></code>,
@@ -844,7 +742,7 @@ we used <code class="docutils literal notranslate"><span class="pre">x</span> <s
 we use <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">np.linspace(0.,</span> <span class="pre">1.,</span> <span class="pre">20)</span></code> in the later so the matrices are
 easier to understand.</p>
 <div class="literal-block-wrapper docutils container" id="splines-patsy-plot">
-<div class="code-block-caption"><span class="caption-number">Listing 5.2 </span><span class="caption-text">splines_patsy_plot</span><a class="headerlink" href="#splines-patsy-plot" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 5.2 </span><span class="caption-text">splines_patsy_plot</span><a class="headerlink" href="#splines-patsy-plot" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="s2">&quot;row&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">((</span><span class="n">B0</span><span class="p">,</span> <span class="n">B1</span><span class="p">,</span> <span class="n">B3</span><span class="p">),</span>
                                      <span class="p">(</span><span class="s2">&quot;Piecewise constant&quot;</span><span class="p">,</span>
@@ -876,7 +774,7 @@ We can now move forward into computing the weights. Let us see how we
 can do that in a Bayesian model with PyMC3.</p>
 </section>
 <section id="fitting-splines-in-pymc3">
-<span id="id16"></span><h2><span class="section-number">5.5. </span>Fitting Splines in PyMC3<a class="headerlink" href="#fitting-splines-in-pymc3" title="Permalink to this heading">¶</a></h2>
+<span id="id16"></span><h2><span class="section-number">5.5. </span>Fitting Splines in PyMC3<a class="headerlink" href="#fitting-splines-in-pymc3" title="Permalink to this heading">#</a></h2>
 <p>In this section we are going to use PyMC3 to obtain the values of the
 regression coefficients <span class="math notranslate nohighlight">\(\beta\)</span> by fitting a set of B-splines to the
 data.</p>
@@ -905,7 +803,7 @@ a 24 hour period. Let us load and plot the data:</p>
 <p><span class="caption-number">Fig. 5.7 </span><span class="caption-text">A visualization of the bikes data. Each point is the normalized number
 of bikes rented per hour of the day (on the interval 0, 23). The
 points are semi-transparent to avoid excessive overlapping of points and
-thus help see the distribution of the data.</span><a class="headerlink" href="#fig-bikes-data" title="Permalink to this image">¶</a></p>
+thus help see the distribution of the data.</span><a class="headerlink" href="#fig-bikes-data" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>A quick look at <a class="reference internal" href="#fig-bikes-data"><span class="std std-numref">Fig. 5.7</span></a> shows that the relationship
@@ -917,7 +815,7 @@ the number and position of the knots. We are going to use 6 knots and
 use the simplest option to position them, equal spacing between each
 knot.</p>
 <div class="literal-block-wrapper docutils container" id="knot-list">
-<div class="code-block-caption"><span class="caption-number">Listing 5.3 </span><span class="caption-text">knot_list</span><a class="headerlink" href="#knot-list" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 5.3 </span><span class="caption-text">knot_list</span><a class="headerlink" href="#knot-list" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">num_knots</span> <span class="o">=</span> <span class="mi">6</span>
 <span class="n">knot_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="n">num_knots</span><span class="o">+</span><span class="mi">2</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
@@ -931,7 +829,7 @@ the data is away from the borders this will be a good idea, also the
 larger the number of knots the less important their positions.</p>
 <p>Now we use Patsy to define and build the design matrix for us</p>
 <div class="literal-block-wrapper docutils container" id="bikes-dmatrix">
-<div class="code-block-caption"><span class="caption-number">Listing 5.4 </span><span class="caption-text">bikes_dmatrix</span><a class="headerlink" href="#bikes-dmatrix" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 5.4 </span><span class="caption-text">bikes_dmatrix</span><a class="headerlink" href="#bikes-dmatrix" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span>
     <span class="s2">&quot;bs(cnt, knots=knots, degree=3, include_intercept=True) - 1&quot;</span><span class="p">,</span>
     <span class="p">{</span><span class="s2">&quot;cnt&quot;</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">hour</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="s2">&quot;knots&quot;</span><span class="p">:</span> <span class="n">knot_list</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]})</span>
@@ -940,7 +838,7 @@ larger the number of knots the less important their positions.</p>
 </div>
 <p>The proposed statistical model is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-spline-model">
-<span class="eqno">(5.6)<a class="headerlink" href="#equation-eq-spline-model" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(5.6)<a class="headerlink" href="#equation-eq-spline-model" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{aligned}
 \begin{split}
     \tau \sim&amp; \; \mathcal{HC}(1) \\
     \boldsymbol{\beta} \sim&amp; \; \mathcal{N}(0, \tau) \\
@@ -957,7 +855,7 @@ instead of <span class="math notranslate nohighlight">\(\boldsymbol{\mu} = \sum_
 <p>As usual the statistical syntax is translated into PyMC3 in nearly a
 one-to-one fashion.</p>
 <div class="literal-block-wrapper docutils container" id="id18">
-<div class="code-block-caption"><span class="caption-number">Listing 5.5 </span><span class="caption-text">splines</span><a class="headerlink" href="#id18" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 5.5 </span><span class="caption-text">splines</span><a class="headerlink" href="#id18" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">splines</span><span class="p">:</span>
     <span class="n">τ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfCauchy</span><span class="p">(</span><span class="s2">&quot;τ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> 
     <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="n">τ</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
@@ -982,7 +880,7 @@ black dots represent the knots. The splines in this figure look very
 <em>jagged</em>, relative to the splines plotted in
 <a class="reference internal" href="#fig-splines-weighted"><span class="std std-numref">Fig. 5.4</span></a>. The reason is that we are evaluating the
 function in fewer points. 24 points here because the data is binned per
-hour compared to 500 in <a class="reference internal" href="#fig-splines-weighted"><span class="std std-numref">Fig. 5.4</span></a>.</span><a class="headerlink" href="#fig-bikes-spline-raw-data" title="Permalink to this image">¶</a></p>
+hour compared to 500 in <a class="reference internal" href="#fig-splines-weighted"><span class="std std-numref">Fig. 5.4</span></a>.</span><a class="headerlink" href="#fig-bikes-spline-raw-data" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>A more useful plot when we want to display the results of the model is
@@ -998,7 +896,7 @@ around hour 18, after which there a steady decline.</p>
 <figcaption>
 <p><span class="caption-number">Fig. 5.9 </span><span class="caption-text">Bikes data (black dots) fitted using splines. The shaded curve
 represents the 94% HDI interval (of the mean) and the blue curve
-represents the mean trend.</span><a class="headerlink" href="#fig-bikes-data2" title="Permalink to this image">¶</a></p>
+represents the mean trend.</span><a class="headerlink" href="#fig-bikes-data2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>In this bike rental example we are dealing with a circular variable,
@@ -1011,7 +909,7 @@ check the Patsy documentation for more details and explore using <code class="do
 the previous model and compare results.</p>
 </section>
 <section id="choosing-knots-and-prior-for-splines">
-<span id="id19"></span><h2><span class="section-number">5.6. </span>Choosing Knots and Prior for Splines<a class="headerlink" href="#choosing-knots-and-prior-for-splines" title="Permalink to this heading">¶</a></h2>
+<span id="id19"></span><h2><span class="section-number">5.6. </span>Choosing Knots and Prior for Splines<a class="headerlink" href="#choosing-knots-and-prior-for-splines" title="Permalink to this heading">#</a></h2>
 <p>One modeling decision we have to make when working with splines is to
 choose the number and location of the knots. This can be a little bit
 concerning, given that in general the number of knots and their spacing
@@ -1036,7 +934,7 @@ still has something new to contribute to the model averaging.
 <a class="reference internal" href="#fig-bikes-spline-loo-knots"><span class="std std-numref">Fig. 5.10</span></a> show the mean fitted spline for all
 these models.</p>
 <table class="table" id="tab-loo-splines">
-<caption><span class="caption-number">Table 5.1 </span><span class="caption-text">Summary of model comparison using LOO for splines models with different number of knots.</span><a class="headerlink" href="#tab-loo-splines" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-number">Table 5.1 </span><span class="caption-text">Summary of model comparison using LOO for splines models with different number of knots.</span><a class="headerlink" href="#tab-loo-splines" title="Permalink to this table">#</a></caption>
 <tbody>
 <tr class="row-odd"><td></td>
 <td><p><strong>rank</strong></p></td>
@@ -1114,7 +1012,7 @@ these models.</p>
 9, 12, 18) . Model <code class="docutils literal notranslate"><span class="pre">m_12k</span></code> is highlighted in blue as the top ranked
 model according to LOO. Model <code class="docutils literal notranslate"><span class="pre">m_3k</span></code> is highlighted in black, while the
 rest of the models are in grayed-out as they have being assigned a
-weight of zero (see <a class="reference internal" href="#tab-loo-splines"><span class="std std-numref">Table 5.1</span></a>).</span><a class="headerlink" href="#fig-bikes-spline-loo-knots" title="Permalink to this image">¶</a></p>
+weight of zero (see <a class="reference internal" href="#tab-loo-splines"><span class="std std-numref">Table 5.1</span></a>).</span><a class="headerlink" href="#fig-bikes-spline-loo-knots" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>One piece of advice that may help decide the locations of knots is to
@@ -1126,7 +1024,7 @@ this way we will be putting more knots where we have more data and less
 knots where less data. This translates into a more flexible
 approximation for data-richer portions.</p>
 <section id="regularizing-prior-for-splines">
-<span id="id20"></span><h3><span class="section-number">5.6.1. </span>Regularizing Prior for Splines<a class="headerlink" href="#regularizing-prior-for-splines" title="Permalink to this heading">¶</a></h3>
+<span id="id20"></span><h3><span class="section-number">5.6.1. </span>Regularizing Prior for Splines<a class="headerlink" href="#regularizing-prior-for-splines" title="Permalink to this heading">#</a></h3>
 <p>As choosing too few knots could lead to under-fitting and too many to
 overfitting, we may want to use a <em>rather large</em> number of knots and
 then choose a regularizing prior. From the definition of splines and
@@ -1142,7 +1040,7 @@ line by choosing a prior for the <span class="math notranslate nohighlight">\(\b
 such a way that the value of <span class="math notranslate nohighlight">\(\beta_{i+1}\)</span> is correlated with the value
 of <span class="math notranslate nohighlight">\(\beta_{i}\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-spline-regularized-prior">
-<span class="eqno">(5.7)<a class="headerlink" href="#equation-eq-spline-regularized-prior" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(5.7)<a class="headerlink" href="#equation-eq-spline-regularized-prior" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{aligned}
 \begin{split}
 \beta_i \sim&amp; \mathcal{N}(0, 1) \\
 \tau\sim&amp; \mathcal{N}(0,1) \\
@@ -1151,7 +1049,7 @@ of <span class="math notranslate nohighlight">\(\beta_{i}\)</span>:</p>
 <p>Using PyMC3 we can write an equivalent version using a Gaussian Random
 Walk prior distribution:</p>
 <div class="math notranslate nohighlight" id="equation-eq-spline-regularized-gw-prior">
-<span class="eqno">(5.8)<a class="headerlink" href="#equation-eq-spline-regularized-gw-prior" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(5.8)<a class="headerlink" href="#equation-eq-spline-regularized-gw-prior" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{aligned}
 \begin{split}
 \tau\sim&amp; \mathcal{N}(0, 1) \\
 \beta \sim&amp; \mathcal{G}RW(\beta, \tau) 
@@ -1160,7 +1058,7 @@ Walk prior distribution:</p>
 the bike dataset, but this time using <code class="docutils literal notranslate"><span class="pre">num_knots</span> <span class="pre">=</span> <span class="pre">12</span></code>. We refit the
 data using <code class="docutils literal notranslate"><span class="pre">splines</span></code> model and the following model:</p>
 <div class="literal-block-wrapper docutils container" id="splines-rw">
-<div class="code-block-caption"><span class="caption-number">Listing 5.6 </span><span class="caption-text">splines_rw</span><a class="headerlink" href="#splines-rw" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 5.6 </span><span class="caption-text">splines_rw</span><a class="headerlink" href="#splines-rw" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">splines_rw</span><span class="p">:</span>
     <span class="n">τ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfCauchy</span><span class="p">(</span><span class="s2">&quot;τ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> 
     <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">GaussianRandomWalk</span><span class="p">(</span><span class="s2">&quot;β&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">τ</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
@@ -1182,13 +1080,13 @@ we admit that the difference seems to be rather small.</p>
 Gaussian Random Walk Prior (blue). We use 22 knots for both cases. The
 black line corresponds to the mean spline function computed from
 <code class="docutils literal notranslate"><span class="pre">splines</span></code> model. The blue line is the mean function for the model
-<code class="docutils literal notranslate"><span class="pre">splines_rw</span></code>.</span><a class="headerlink" href="#fig-bikes-spline-data-grw" title="Permalink to this image">¶</a></p>
+<code class="docutils literal notranslate"><span class="pre">splines_rw</span></code>.</span><a class="headerlink" href="#fig-bikes-spline-data-grw" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 </section>
 <section id="modeling-co2-uptake-with-splines">
-<span id="id21"></span><h2><span class="section-number">5.7. </span>Modeling CO₂ Uptake with Splines<a class="headerlink" href="#modeling-co2-uptake-with-splines" title="Permalink to this heading">¶</a></h2>
+<span id="id21"></span><h2><span class="section-number">5.7. </span>Modeling CO₂ Uptake with Splines<a class="headerlink" href="#modeling-co2-uptake-with-splines" title="Permalink to this heading">#</a></h2>
 <p>For a final example of splines we are going to use data from an
 experimental study <span id="id22">[<a class="reference internal" href="references.html#id120" title="Catherine Potvin, Martin J Lechowicz, and Serge Tardif. The statistical analysis of ecophysiological response curves obtained from experiments involving repeated measures. Ecology, 71(4):1389–1400, 1990.">50</a>, <a class="reference internal" href="references.html#id121" title="Eric J Pedersen, David L Miller, Gavin L Simpson, and Noam Ross. Hierarchical generalized additive models in ecology: an introduction with mgcv. PeerJ, 7:e6876, 2019.">51</a>]</span>. The experiment consists
 of measuring the CO₂ uptake in 12 different plants under varying
@@ -1199,7 +1097,7 @@ was measured at seven CO₂ concentrations for each plant, the same
 seven values for each one of the 12 plants. Let us begin by loading and
 tidying up the data.</p>
 <div class="literal-block-wrapper docutils container" id="plants-co2-import">
-<div class="code-block-caption"><span class="caption-number">Listing 5.7 </span><span class="caption-text">plants_co2_import</span><a class="headerlink" href="#plants-co2-import" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 5.7 </span><span class="caption-text">plants_co2_import</span><a class="headerlink" href="#plants-co2-import" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plants_CO2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/CO2_uptake.csv&quot;</span><span class="p">)</span>
 <span class="n">plant_names</span> <span class="o">=</span> <span class="n">plants_CO2</span><span class="o">.</span><span class="n">Plant</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
 
@@ -1242,7 +1140,7 @@ advantages such as having better intuition of how to perform exploratory
 analysis of the model and then possible routes for making changes into
 the model either to simplify it or to make it more complex.</p>
 <div class="literal-block-wrapper docutils container" id="sp-global">
-<div class="code-block-caption"><span class="caption-number">Listing 5.8 </span><span class="caption-text">sp_global</span><a class="headerlink" href="#sp-global" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 5.8 </span><span class="caption-text">sp_global</span><a class="headerlink" href="#sp-global" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">sp_global</span><span class="p">:</span>
     <span class="n">τ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfCauchy</span><span class="p">(</span><span class="s2">&quot;τ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">τ</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">Bg</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
@@ -1264,7 +1162,7 @@ specific plants.</p>
 concentrations for each one of 12 plants (Qn1, Qn2, Qn3, Qc1, Qc2, Qc3,
 Mn1, Mn2, Mn3, Mc1, Mc2, Mc3). The black line is the mean spline fit
 from the model in Code Block <a class="reference internal" href="#sp-global"><span class="std std-ref">sp_global</span></a> and
-the gray shaded curve represents the 94% HDI interval for that fit.</span><a class="headerlink" href="#fig-sp-global" title="Permalink to this image">¶</a></p>
+the gray shaded curve represents the 94% HDI interval for that fit.</span><a class="headerlink" href="#fig-sp-global" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Let us try now with a model with a different response per plant, in
@@ -1273,7 +1171,7 @@ order to do this we define the design matrix <code class="docutils literal notra
 <code class="docutils literal notranslate"><span class="pre">CO2_conc</span> <span class="pre">=</span> <span class="pre">[95,</span>&#160; <span class="pre">175,</span>&#160; <span class="pre">250,</span>&#160; <span class="pre">350,</span>&#160; <span class="pre">500,</span>&#160; <span class="pre">675,</span> <span class="pre">1000]</span></code>, thus <code class="docutils literal notranslate"><span class="pre">Bi</span></code> is a
 <span class="math notranslate nohighlight">\(7 \times 7\)</span> matrix while <code class="docutils literal notranslate"><span class="pre">Bg</span></code> is a <span class="math notranslate nohighlight">\(84 \times 7\)</span> matrix.</p>
 <div class="literal-block-wrapper docutils container" id="bi-matrix">
-<div class="code-block-caption"><span class="caption-number">Listing 5.9 </span><span class="caption-text">Bi_matrix</span><a class="headerlink" href="#bi-matrix" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 5.9 </span><span class="caption-text">Bi_matrix</span><a class="headerlink" href="#bi-matrix" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Bi</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span>
     <span class="s2">&quot;bs(conc, knots=knots, degree=3, include_intercept=True) - 1&quot;</span><span class="p">,</span>
     <span class="p">{</span><span class="s2">&quot;conc&quot;</span><span class="p">:</span> <span class="n">CO2_conc</span><span class="p">,</span> <span class="s2">&quot;knots&quot;</span><span class="p">:</span> <span class="n">knot_list</span><span class="p">})</span>
@@ -1285,7 +1183,7 @@ order to do this we define the design matrix <code class="docutils literal notra
 <code class="docutils literal notranslate"><span class="pre">shape=(Bi.shape[1],</span> <span class="pre">groups))</span></code> (instead of <code class="docutils literal notranslate"><span class="pre">shape=(Bg.shape[1]))</span></code>) and
 we reshape <code class="docutils literal notranslate"><span class="pre">μi[:,index].T.ravel()</span></code></p>
 <div class="literal-block-wrapper docutils container" id="sp-individual">
-<div class="code-block-caption"><span class="caption-number">Listing 5.10 </span><span class="caption-text">sp_individual</span><a class="headerlink" href="#sp-individual" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 5.10 </span><span class="caption-text">sp_individual</span><a class="headerlink" href="#sp-individual" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">sp_individual</span><span class="p">:</span>
     <span class="n">τ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfCauchy</span><span class="p">(</span><span class="s2">&quot;τ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">τ</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">Bi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">groups</span><span class="p">))</span>
@@ -1304,7 +1202,7 @@ better fit for each one of the 12 plants.</p>
 <p><span class="caption-number">Fig. 5.13 </span><span class="caption-text">CO₂ uptake measured at seven CO₂ concentrations for 12 plants. The
 black line is the mean spline fit from the model in Code Block
 <a class="reference internal" href="#sp-individual"><span class="std std-ref">sp_individual</span></a> and the gray shaded curve
-represents the 94% HDI interval for that fit.</span><a class="headerlink" href="#fig-sp-individual" title="Permalink to this image">¶</a></p>
+represents the 94% HDI interval for that fit.</span><a class="headerlink" href="#fig-sp-individual" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>We can also mix both previous models <a class="footnote-reference brackets" href="#id37" id="id24" role="doc-noteref"><span class="fn-bracket">[</span>13<span class="fn-bracket">]</span></a>. This may be interesting if
@@ -1312,7 +1210,7 @@ we want to estimate a global trend for the 12 plants plus individual
 fits. Model <code class="docutils literal notranslate"><span class="pre">sp_mix</span></code> in Code Block <a class="reference internal" href="#sp-mix"><span class="std std-ref">sp_mix</span></a> use
 both previously defined design matrices <code class="docutils literal notranslate"><span class="pre">Bg</span></code> and <code class="docutils literal notranslate"><span class="pre">Bi</span></code>.</p>
 <div class="literal-block-wrapper docutils container" id="sp-mix">
-<div class="code-block-caption"><span class="caption-number">Listing 5.11 </span><span class="caption-text">sp_mix</span><a class="headerlink" href="#sp-mix" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 5.11 </span><span class="caption-text">sp_mix</span><a class="headerlink" href="#sp-mix" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">sp_mix</span><span class="p">:</span>
     <span class="n">τ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfCauchy</span><span class="p">(</span><span class="s2">&quot;τ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">βg</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;βg&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">τ</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">Bg</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
@@ -1343,7 +1241,7 @@ blue line is the mean spline fit from model in Code Block
 black, and a dark gray band, the global contribution and in gray, and a
 light gray band, the deviations from that global contribution. The blue
 line, and blue band, is the sum of the global trend and deviations from
-it.</span><a class="headerlink" href="#fig-sp-mix-decomposed" title="Permalink to this image">¶</a></p>
+it.</span><a class="headerlink" href="#fig-sp-mix-decomposed" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p><a class="reference internal" href="#fig-sp-compare"><span class="std std-numref">Fig. 5.15</span></a> shows that according to LOO <code class="docutils literal notranslate"><span class="pre">sp_mix</span></code> is a
@@ -1372,16 +1270,16 @@ dots represent the values of LOO, the black dots are the in-sample
 predictive accuracy. The black segments represent the standard error for
 the LOO computations. The gray segments, centered at the triangles,
 represent the standard errors of the difference between the values of
-LOO for each model and the best ranked model.</span><a class="headerlink" href="#fig-sp-compare" title="Permalink to this image">¶</a></p>
+LOO for each model and the best ranked model.</span><a class="headerlink" href="#fig-sp-compare" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="exercises">
-<span id="exercises5"></span><h2><span class="section-number">5.8. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">¶</a></h2>
+<span id="exercises5"></span><h2><span class="section-number">5.8. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <p><strong>5E1.</strong>. Splines are quite powerful so its good to know
 when and where to use them. To reinforce this explain each of the
 following</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>The differences between linear regression and splines.</p></li>
 <li><p>When you may want to use linear regression over splines</p></li>
 <li><p>Why splines is usually preferred over polynomial regression of high
@@ -1397,7 +1295,7 @@ fit? You will find the code in the GitHub repository.</p>
 <p><strong>5E4.</strong> Below we provide some data. To each data fit a 0,
 1, and 3 degree spline. Plot the fit, including the data and position of
 the knots. Use <code class="docutils literal notranslate"><span class="pre">knots</span> <span class="pre">=</span> <span class="pre">np.linspace(-0.8,</span> <span class="pre">0.8,</span> <span class="pre">4)</span></code>. Describe the fit.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">np.linspace(-1,</span> <span class="pre">1.,</span> <span class="pre">200)</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">np.random.normal(2*x,</span> <span class="pre">0.25)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">np.linspace(-1,</span> <span class="pre">1.,</span> <span class="pre">200)</span></code> and
 <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">np.random.normal(x**2,</span> <span class="pre">0.25)</span></code></p></li>
@@ -1422,7 +1320,7 @@ Patsy.</p>
             <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="s2">&quot;knots&quot;</span><span class="p">:</span><span class="n">knots</span><span class="p">})</span>
 </pre></div>
 </div>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>What is the shape of each one of the matrices? Can you justify the
 values for the shapes?</p></li>
 <li><p>Could you explain what the arguments <code class="docutils literal notranslate"><span class="pre">include_intercept=True/False</span></code>
@@ -1433,7 +1331,7 @@ help you answer this question</p></li>
 <p><strong>5E7.</strong> Refit the bike rental example using the options
 listed below. Visually compare the results and try to explain the
 results:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Code Block <a class="reference internal" href="#knot-list"><span class="std std-ref">knot_list</span></a> but do not remove
 the first and last knots (i.e. without using 1:-1)</p></li>
 <li><p>Use quantiles to set the knots instead of spacing them linearly.</p></li>
@@ -1441,7 +1339,7 @@ the first and last knots (i.e. without using 1:-1)</p></li>
 </ol>
 <p><strong>5E8.</strong> In the GitHub repository you will find the spectra
 dataset use it to:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Fit a cubic spline with knots
 <code class="docutils literal notranslate"><span class="pre">np.quantile(X,</span> <span class="pre">np.arange(0.1,</span> <span class="pre">1,</span> <span class="pre">0.02))</span></code> and a Gaussian prior (like
 in Code Block <a class="reference internal" href="#id18"><span class="std std-ref">splines</span></a>)</p></li>
@@ -1455,7 +1353,7 @@ in Code Block <a class="reference internal" href="#id18"><span class="std std-re
 </ol>
 <p><strong>5M9.</strong> Redo <a class="reference internal" href="#fig-piecewise"><span class="std std-numref">Fig. 5.2</span></a> extending <code class="docutils literal notranslate"><span class="pre">x_max</span></code>
 from 6 to 12.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>How this change affects the fit?</p></li>
 <li><p>What are the implications for extrapolation?</p></li>
 <li><p>add one more knot and make the necessary changes in the code so the
@@ -1476,7 +1374,7 @@ want to use cyclic splines. However, there is one wrinkle. In the
 original dataset the hours range from 0 to 23, so using a circular
 spline patsy would treat 0 and 23 are the same. Still, we want a
 circular spline regression so perform the following steps.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Duplicate the 0 hour data label it as 24.</p></li>
 <li><p>Generate a circular design matrix and a non-circular design matrix
 with this modified dataset. Plot the results and compare.</p></li>
@@ -1490,7 +1388,7 @@ number of counts is large, but still brings some problems, like
 predicting negative number of rented bikes (for example, at night when
 the observed number of rented bikes is close to zero). To fix this issue
 and improve our models we can try with other likelihoods:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>use a Poisson likelihood (hint you may need to restrict the <span class="math notranslate nohighlight">\(\beta\)</span>
 coefficients to be positive, and you can not normalize the data as
 we did in the example). How the fit differs from the example in the
@@ -1509,7 +1407,7 @@ performance?</p></li>
 <p><strong>5M14.</strong> Using the model in Code Block
 <a class="reference internal" href="#id18"><span class="std std-ref">splines</span></a> as a guide and for <span class="math notranslate nohighlight">\(X \in [0, 1]\)</span>, set
 <span class="math notranslate nohighlight">\(\tau \sim \text{Laplace}(0, 1)\)</span>:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Sample and plot realizations from the prior for <span class="math notranslate nohighlight">\(\mu\)</span>. Use different
 number and locations for the knots</p></li>
 <li><p>What is the prior expectation for <span class="math notranslate nohighlight">\(\mu(x_i)\)</span> and how does it depend
@@ -1522,7 +1420,7 @@ on the knots and X?</p></li>
 <p><strong>5M15.</strong> Fit the following data. Notice that the response
 variable is binary so you will need to adjust the likelihood accordingly
 and use a link function.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>a logistic regression from a previous chapter. Visually compare the
 results between both models.</p></li>
 <li><p>Space Influenza is a disease which affects mostly young and old
@@ -1536,7 +1434,7 @@ you have solved this problem using logistic regression?</p></li>
 covariates, like “temperature”. Fit a splines using both covariates. The
 simplest way to do this is by defining a separated spline/design matrix
 for each covariate. Fit a model with a NegativeBinomial likelihood.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Run diagnostics to check the sampling is correct and modify the
 model and or sample hyperparameters accordingly.</p></li>
 <li><p>How the rented bikes depend on the hours of the day and how on the
@@ -1600,7 +1498,7 @@ for further intuition</p>
 <aside class="footnote brackets" id="id34" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id14">10</a><span class="fn-bracket">]</span></span>
 <p>If interested you can check
-<a class="reference external" href="https://en.wikipedia.org/wiki/De_Boor%27s_algorithm">https://en.wikipedia.org/wiki/De_Boor%27s_algorithm</a>.</p>
+<a class="reference external" href="https://en.wikipedia.org/wiki/De_Boor's_algorithm">https://en.wikipedia.org/wiki/De_Boor’s_algorithm</a>.</p>
 </aside>
 <aside class="footnote brackets" id="id35" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id15">11</a><span class="fn-bracket">]</span></span>
@@ -1630,7 +1528,7 @@ the related concept we discussed in Chapter <a class="reference internal" href="
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./markdown"
         },
         predefinedOutput: true
@@ -1638,44 +1536,112 @@ the related concept we discussed in Chapter <a class="reference internal" href="
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="chp_04.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">4. </span>Extending Linear Models</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chp_04.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Extending Linear Models</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="chp_06.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="chp_06.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title"><span class="section-number">6. </span>Time Series</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
+                </footer>
+              
+            </div>
             
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Martin, Kumar, Lao<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polynomial-regression">5.1. Polynomial Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expanding-the-feature-space">5.2. Expanding the Feature Space</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introducing-splines">5.3. Introducing Splines</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-design-matrix-using-patsy">5.4. Building the Design Matrix using Patsy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-splines-in-pymc3">5.5. Fitting Splines in PyMC3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-knots-and-prior-for-splines">5.6. Choosing Knots and Prior for Splines</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regularizing-prior-for-splines">5.6.1. Regularizing Prior for Splines</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-co2-uptake-with-splines">5.7. Modeling CO₂ Uptake with Splines</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">5.8. Exercises</a></li>
+</ul>
+  </nav></div>
 
-      </div>
-    </div>
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Martin, Kumar, Lao
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
