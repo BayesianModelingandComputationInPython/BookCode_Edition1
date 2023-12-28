@@ -1,164 +1,101 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
-    <title>8. Approximate Bayesian Computation &#8212; Bayesian Modeling and Computation in Python</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="Docutils 0.18.1: http://docutils.sourceforge.net/" name="generator"/>
+<title>8. Approximate Bayesian Computation — Bayesian Modeling and Computation in Python</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-
-  
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-codeautolink.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
-  
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
-  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
-
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet"/>
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet"/>
+<link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" rel="stylesheet" type="text/css"/>
+<link href="../_static/togglebutton.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-thebe.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-codeautolink.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" rel="stylesheet" type="text/css"/>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" rel="preload"/>
+<script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+<script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+<script src="../_static/jquery.js"></script>
+<script src="../_static/underscore.js"></script>
+<script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+<script src="../_static/doctools.js"></script>
+<script src="../_static/clipboard.min.js"></script>
+<script src="../_static/copybutton.js"></script>
+<script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../_static/togglebutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<script src="../_static/design-tabs.js"></script>
+<script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'markdown/chp_08';</script>
-    <link rel="shortcut icon" href="../_static/favicon.ico"/>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="9. End to End Bayesian Workflows" href="chp_09.html" />
-    <link rel="prev" title="7. Bayesian Additive Regression Trees" href="chp_07.html" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
-  
-  
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  
-  <div id="pst-scroll-pixel-helper"></div>
-
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
+<script async="async" src="../_static/sphinx-thebe.js"></script>
+<script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+<script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'markdown/chp_08';</script>
+<link href="../_static/favicon.ico" rel="shortcut icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="chp_09.html" rel="next" title="9. End to End Bayesian Workflows"/>
+<link href="chp_07.html" rel="prev" title="7. Bayesian Additive Regression Trees"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</head>
+<body data-bs-root-margin="0px 0px -60%" data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-default-mode="" data-offset="180">
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>
     Back to top
   </button>
-
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         id="search-input"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+<input class="sidebar-toggle" id="__primary" name="__primary" type="checkbox"/>
+<label class="overlay overlay-primary" for="__primary"></label>
+<input class="sidebar-toggle" id="__secondary" name="__secondary" type="checkbox"/>
+<label class="overlay overlay-secondary" for="__secondary"></label>
+<div class="search-button__wrapper">
+<div class="search-button__overlay"></div>
+<div class="search-button__search-container">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search this book..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" id="search-input" name="q" placeholder="Search this book..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
-  </div>
-  
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
-  
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      <div class="bd-sidebar-primary bd-sidebar">
-        
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-    
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-  
-
+</div>
+<nav class="bd-header navbar navbar-expand-lg bd-navbar">
+</nav>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<div class="bd-sidebar-primary bd-sidebar">
+<div class="sidebar-header-items sidebar-primary__section">
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
 <a class="navbar-brand logo" href="../welcome.html">
-  
-  
-  
-  
-  
-  
-    <p class="title logo__title">Bayesian Modeling and Computation in Python</p>
-  
+<p class="title logo__title">Bayesian Modeling and Computation in Python</p>
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item navbar-nav active">
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 0</span></p>
+<div class="sidebar-primary-item"><nav aria-label="Main" class="bd-links" id="bd-docs-nav">
+<div class="bd-toc-item navbar-nav active">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 0</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="dedication.html">Dedication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="foreword.html">Foreword</a></li>
@@ -200,111 +137,53 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../solutions/chp_01.html">Solutions 1: Bayesian Inference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../solutions/chp_02.html">Solutions 2: Exploratory Analysis of Bayesian models</a></li>
 </ul>
-
-    </div>
+</div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-  
-  <div id="rtd-footer-container"></div>
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main">
-        
-        
-
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+<div id="rtd-footer-container"></div>
+</div>
+<main class="bd-main" id="main-content">
 <div class="sbt-scroll-pixel-helper"></div>
-
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <span class="fa-solid fa-bars"></span>
+<div class="header-article-items__start">
+<div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" data-bs-placement="bottom" data-bs-toggle="tooltip" for="__primary" title="Toggle primary sidebar">
+<span class="fa-solid fa-bars"></span>
 </label></div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
-
+</div>
+<div class="header-article-items__end">
+<div class="header-article-item">
 <div class="article-header-buttons">
-
-
-
-
-
 <div class="dropdown dropdown-source-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
-    <i class="fab fa-github"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1" target="_blank"
-   class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
+<button aria-expanded="false" aria-label="Source repositories" class="btn dropdown-toggle" data-bs-toggle="dropdown" type="button">
+<i class="fab fa-github"></i>
+</button>
+<ul class="dropdown-menu">
+<li><a class="btn btn-sm btn-source-repository-button dropdown-item" data-bs-placement="left" data-bs-toggle="tooltip" href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1" target="_blank" title="Source repository">
 <span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
+<i class="fab fa-github"></i>
+</span>
 <span class="btn__text-container">Repository</span>
 </a>
 </li>
-      
-      
-      
-      
-      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_08.html&body=Your%20issue%20content%20here." target="_blank"
-   class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
+<li><a class="btn btn-sm btn-source-issues-button dropdown-item" data-bs-placement="left" data-bs-toggle="tooltip" href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_08.html&amp;body=Your%20issue%20content%20here." target="_blank" title="Open an issue">
 <span class="btn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
+<i class="fas fa-lightbulb"></i>
+</span>
 <span class="btn__text-container">Open issue</span>
 </a>
 </li>
-      
-  </ul>
+</ul>
 </div>
-
-
-
-
-<button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
-  title="Fullscreen mode"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
+<button class="btn btn-sm btn-fullscreen-button" data-bs-placement="bottom" data-bs-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode">
 <span class="btn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
+<i class="fas fa-expand"></i>
+</span>
 </button>
-
-
-
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -314,8 +193,6 @@ document.write(`
   </button>
 `);
 </script>
-
-
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -323,29 +200,23 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" data-bs-placement="bottom" data-bs-toggle="tooltip" for="__secondary" title="Toggle secondary sidebar">
+<span class="fa-solid fa-list"></span>
 </label>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-
-<div id="jb-print-docs-body" class="onlyprint">
-    <h1>Approximate Bayesian Computation</h1>
-    <!-- Table of contents -->
-    <div id="print-main-content">
-        <div id="jb-print-toc">
-            
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+</div>
+<div class="onlyprint" id="jb-print-docs-body">
+<h1>Approximate Bayesian Computation</h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+<div>
+<h2> Contents </h2>
+</div>
+<nav aria-label="Page">
+<ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#life-beyond-likelihood">8.1. Life Beyond Likelihood</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approximating-the-approximated-posterior">8.2. Approximating the Approximated Posterior</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-a-gaussian-the-abc-way">8.3. Fitting a Gaussian the ABC-way</a></li>
@@ -366,17 +237,13 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-priors-for-abc">8.8. Choosing Priors for ABC</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">8.9. Exercises</a></li>
 </ul>
-            </nav>
-        </div>
-    </div>
+</nav>
 </div>
-
-              
-                
+</div>
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
-                  
-  <section class="tex2jax_ignore mathjax_ignore" id="approximate-bayesian-computation">
+<article class="bd-article" role="main">
+<section class="tex2jax_ignore mathjax_ignore" id="approximate-bayesian-computation">
 <span id="chap8"></span><h1><span class="section-number">8. </span>Approximate Bayesian Computation<a class="headerlink" href="#approximate-bayesian-computation" title="Permalink to this heading">#</a></h1>
 <p>In this chapter we discuss Approximate Bayesian Computation (ABC). The
 “approximate” in ABC refers to the lack of explicit likelihood, but not
@@ -494,7 +361,7 @@ description of the algorithm as follows.</p>
 <li><p>Repeat until having the desired number of samples.</p></li>
 </ol>
 <figure class="align-default" id="fig-abc-rejection">
-<a class="reference internal image-reference" href="../_images/ABC_rejection.png"><img alt="../_images/ABC_rejection.png" src="../_images/ABC_rejection.png" style="width: 4.5in;" /></a>
+<a class="reference internal image-reference" href="../_images/ABC_rejection.png"><img alt="../_images/ABC_rejection.png" src="../_images/ABC_rejection.png" style="width: 4.5in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 8.1 </span><span class="caption-text">One step of an ABC-rejection sampler. We sample a set of <span class="math notranslate nohighlight">\(\theta\)</span> values
 from the prior distribution (at the top). Each value is passed to the
@@ -531,7 +398,7 @@ the geometry of the posterior the more intermediate steps SMC will take.
 intermediate distributions from the prior in light grey to the posterior
 in blue.</p>
 <figure class="align-default" id="fig-smc-tempering">
-<a class="reference internal image-reference" href="../_images/smc_tempering.png"><img alt="../_images/smc_tempering.png" src="../_images/smc_tempering.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/smc_tempering.png"><img alt="../_images/smc_tempering.png" src="../_images/smc_tempering.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 8.2 </span><span class="caption-text">Hypothetical sequence of tempered posteriors explored by an SMC sampler,
 from the prior (<span class="math notranslate nohighlight">\(\beta = 0\)</span>), light gray, to the actual posterior
@@ -555,9 +422,9 @@ Block <a class="reference internal" href="#gauss-nuts"><span class="std std-ref"
 <div class="literal-block-wrapper docutils container" id="gauss-nuts">
 <div class="code-block-caption"><span class="caption-number">Listing 8.1 </span><span class="caption-text">gauss_nuts</span><a class="headerlink" href="#gauss-nuts" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">gauss</span><span class="p">:</span>
-    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;μ&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">s</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"μ"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">"σ"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"s"</span><span class="p">,</span> <span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
     <span class="n">trace_g</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -567,14 +434,14 @@ Block <a class="reference internal" href="#gauss-nuts"><span class="std std-ref"
 <div class="literal-block-wrapper docutils container" id="gauss-abc">
 <div class="code-block-caption"><span class="caption-number">Listing 8.2 </span><span class="caption-text">gauss_abc</span><a class="headerlink" href="#gauss-abc" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">gauss</span><span class="p">:</span>
-    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;μ&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">s</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Simulator</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="n">normal_simulator</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">],</span>
-                     <span class="n">distance</span><span class="o">=</span><span class="s2">&quot;gaussian&quot;</span><span class="p">,</span>
-                     <span class="n">sum_stat</span><span class="o">=</span><span class="s2">&quot;sort&quot;</span><span class="p">,</span>  
+    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"μ"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">"σ"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Simulator</span><span class="p">(</span><span class="s2">"s"</span><span class="p">,</span> <span class="n">normal_simulator</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">],</span>
+                     <span class="n">distance</span><span class="o">=</span><span class="s2">"gaussian"</span><span class="p">,</span>
+                     <span class="n">sum_stat</span><span class="o">=</span><span class="s2">"sort"</span><span class="p">,</span>  
                      <span class="n">epsilon</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                      <span class="n">observed</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-    <span class="n">trace_g</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample_smc</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s2">&quot;ABC&quot;</span><span class="p">)</span>
+    <span class="n">trace_g</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample_smc</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s2">"ABC"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -583,7 +450,7 @@ Block <a class="reference internal" href="#gauss-nuts"><span class="std std-ref"
 <a class="reference internal" href="#gauss-abc"><span class="std std-ref">gauss_abc</span></a>:</p>
 <ul class="simple">
 <li><p>The use of the <code class="docutils literal notranslate"><span class="pre">pm.Simulator</span></code> <em>distribution</em></p></li>
-<li><p>The use of <code class="docutils literal notranslate"><span class="pre">pm.sample_smc(kernel=&quot;ABC&quot;)</span></code> instead of <code class="docutils literal notranslate"><span class="pre">pm.sample()</span></code>.</p></li>
+<li><p>The use of <code class="docutils literal notranslate"><span class="pre">pm.sample_smc(kernel="ABC")</span></code> instead of <code class="docutils literal notranslate"><span class="pre">pm.sample()</span></code>.</p></li>
 </ul>
 <p>By using <code class="docutils literal notranslate"><span class="pre">pm.Simulator</span></code> we are telling PyMC3 that we are not going to
 use a closed form expression for the likelihood, and instead we are
@@ -596,7 +463,7 @@ and <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
 <div class="literal-block-wrapper docutils container" id="normal-simulator">
 <div class="code-block-caption"><span class="caption-number">Listing 8.3 </span><span class="caption-text">normal_simulator</span><a class="headerlink" href="#normal-simulator" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">normal_simulator</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+    <span class="k">return</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.normal.html#numpy.random.normal" title="numpy.random.normal"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span></a><span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -606,7 +473,7 @@ including the distance function <code class="docutils literal notranslate"><span
 <code class="docutils literal notranslate"><span class="pre">epsilon</span></code>. We will discuss these arguments in detail later. We also pass
 the observed data to the simulator distribution as with a regular
 likelihood.</p>
-<p>By using <code class="docutils literal notranslate"><span class="pre">pm.sample_smc(kernel=&quot;ABC&quot;)</span></code><a class="footnote-reference brackets" href="#id56" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> we are telling PyMC3 to look
+<p>By using <code class="docutils literal notranslate"><span class="pre">pm.sample_smc(kernel="ABC")</span></code><a class="footnote-reference brackets" href="#id56" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> we are telling PyMC3 to look
 for a <code class="docutils literal notranslate"><span class="pre">pm.Simulator</span></code> in the model and use it to define a
 pseudo-likelihood, the rest of the sampling process is the same as the
 one described for the SMC algorithm. Other samplers will fail to run
@@ -623,7 +490,7 @@ running Code Block <a class="reference internal" href="#gauss-abc"><span class="
 We can see that we were able to recover the true parameters and that the
 sampler is not showing any evident sampling issue.</p>
 <figure class="align-default" id="fig-trace-g">
-<a class="reference internal image-reference" href="../_images/trace_g.png"><img alt="../_images/trace_g.png" src="../_images/trace_g.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/trace_g.png"><img alt="../_images/trace_g.png" src="../_images/trace_g.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 8.3 </span><span class="caption-text">As expected <span class="math notranslate nohighlight">\(\mu \approx 0\)</span> and <span class="math notranslate nohighlight">\(\sigma \approx 1\)</span>, both chains agree
 about the posterior as reflected by the KDEs and also by the rank plots.
@@ -645,7 +512,7 @@ we will discuss a few general guidelines.</p>
 <section id="choosing-the-distance">
 <span id="id11"></span><h3><span class="section-number">8.4.1. </span>Choosing the Distance<a class="headerlink" href="#choosing-the-distance" title="Permalink to this heading">#</a></h3>
 <p>We run Code Block <a class="reference internal" href="#gauss-abc"><span class="std std-ref">gauss_abc</span></a> with the default
-distance function <code class="docutils literal notranslate"><span class="pre">distance=&quot;gaussian&quot;</span></code>, which is defined as:</p>
+distance function <code class="docutils literal notranslate"><span class="pre">distance="gaussian"</span></code>, which is defined as:</p>
 <div class="math notranslate nohighlight" id="equation-eq-euclidean-abc">
 <span class="eqno">(8.6)<a class="headerlink" href="#equation-eq-euclidean-abc" title="Permalink to this equation">#</a></span>\[\sum_i - \frac{||X_{oi} - X_{si}||^2}{2 \epsilon_i^2}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(X_{o}\)</span> is the observed data, <span class="math notranslate nohighlight">\(X_{s}\)</span> is the simulated data and
@@ -667,7 +534,7 @@ the need of summary statistics and still provide good results
 <span id="id14">[<a class="reference internal" href="references.html#id48" title="Fernando Pérez-Cruz. Kullback-leibler divergence estimation of continuous distributions. In 2008 IEEE international symposium on information theory, 1666–1670. IEEE, 2008.">92</a>, <a class="reference internal" href="references.html#id47" title="Bai Jiang. Approximate bayesian computation with kullback-leibler divergence as data discrepancy. In International conference on artificial intelligence and statistics, 1711–1721. PMLR, 2018.">93</a>, <a class="reference internal" href="references.html#id46" title="Espen Bernton, Pierre E Jacob, Mathieu Gerber, and Christian P Robert. Approximate bayesian computation with the wasserstein distance. Journal of the Royal Statistical Society: Series B (Statistical Methodology), 81(2):235–269, 2019.">94</a>]</span>. We are going to discuss two of
 them, the Wasserstein distances and the KL divergence.</p>
 <p>In Code Block <a class="reference internal" href="#gauss-abc"><span class="std std-ref">gauss_abc</span></a> we use
-<code class="docutils literal notranslate"><span class="pre">sum_stat=&quot;sort&quot;</span></code> <a class="footnote-reference brackets" href="#id59" id="id15" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a>, this tells PyMC3 to sort the data before
+<code class="docutils literal notranslate"><span class="pre">sum_stat="sort"</span></code> <a class="footnote-reference brackets" href="#id59" id="id15" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a>, this tells PyMC3 to sort the data before
 computing Equation <a class="reference internal" href="#equation-eq-euclidean-abc">(8.6)</a>. Doing this is equivalent to
 computing the 1D 2-Wasserstein distance and if we do the same but we use
 the L1 norm we get the 1D 1-Wasserstein distance. It is possible to
@@ -733,7 +600,7 @@ the lower the value of <span class="math notranslate nohighlight">\(\epsilon\)</
 <span class="math notranslate nohighlight">\(\sigma\)</span> for several values of <span class="math notranslate nohighlight">\(\epsilon\)</span> and also for the “NUTS”
 sampler (using a normal likelihood instead of a simulator).</p>
 <figure class="align-default" id="fig-trace-g-many-eps">
-<a class="reference internal image-reference" href="../_images/trace_g_many_eps.png"><img alt="../_images/trace_g_many_eps.png" src="../_images/trace_g_many_eps.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/trace_g_many_eps.png"><img alt="../_images/trace_g_many_eps.png" src="../_images/trace_g_many_eps.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 8.4 </span><span class="caption-text">Forest plot for <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>, obtained using NUTS or ABC with
 increasing values of <span class="math notranslate nohighlight">\(\epsilon\)</span>, 1, 5, and 10.</span><a class="headerlink" href="#fig-trace-g-many-eps" title="Permalink to this image">#</a></p>
@@ -747,7 +614,7 @@ converge when the model from Code Block
 <a class="reference internal" href="#gauss-abc"><span class="std std-ref">gauss_abc</span></a> is sampled with a value of
 <code class="docutils literal notranslate"><span class="pre">epsilon=0.1</span></code>. As we can see the sampler fails spectacularly.</p>
 <figure class="align-default" id="fig-trace-g-eps-too-low">
-<a class="reference internal image-reference" href="../_images/trace_g_eps_too_low.png"><img alt="../_images/trace_g_eps_too_low.png" src="../_images/trace_g_eps_too_low.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/trace_g_eps_too_low.png"><img alt="../_images/trace_g_eps_too_low.png" src="../_images/trace_g_eps_too_low.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 8.5 </span><span class="caption-text">KDE and rank plot for model <code class="docutils literal notranslate"><span class="pre">trace_g_001</span></code>, failure of convergence could
 indicate that the value <span class="math notranslate nohighlight">\(\epsilon=0.1\)</span> is too low for this problem.</span><a class="headerlink" href="#fig-trace-g-eps-too-low" title="Permalink to this image">#</a></p>
@@ -767,7 +634,7 @@ Additionally, for ABC methods, we should also inspect the value of the
 hyperparameter <span class="math notranslate nohighlight">\(\epsilon\)</span>, the summary statistics we have chosen or the
 distance function.</p>
 <figure class="align-default" id="fig-bpv-g-many-eps-00">
-<a class="reference internal image-reference" href="../_images/bpv_g_many_eps_00.png"><img alt="../_images/bpv_g_many_eps_00.png" src="../_images/bpv_g_many_eps_00.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/bpv_g_many_eps_00.png"><img alt="../_images/bpv_g_many_eps_00.png" src="../_images/bpv_g_many_eps_00.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 8.6 </span><span class="caption-text">Distribution of marginal Bayesian p-values for increasing values of
 <span class="math notranslate nohighlight">\(\epsilon\)</span>. For a well calibrated model we should expect a Uniform
@@ -780,7 +647,7 @@ expected Uniform distribution and the computed KDEs.</span><a class="headerlink"
 </figcaption>
 </figure>
 <figure class="align-default" id="fig-bpv-g-many-eps-01">
-<a class="reference internal image-reference" href="../_images/bpv_g_many_eps_01.png"><img alt="../_images/bpv_g_many_eps_01.png" src="../_images/bpv_g_many_eps_01.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/bpv_g_many_eps_01.png"><img alt="../_images/bpv_g_many_eps_01.png" src="../_images/bpv_g_many_eps_01.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 8.7 </span><span class="caption-text">Bayesian p-values for increasing values of epsilon. The blue curve is
 the observed distribution and the gray curves the expected ones. For a
@@ -791,7 +658,7 @@ We can see that <span class="math notranslate nohighlight">\(\epsilon=1\)</span>
 </figcaption>
 </figure>
 <figure class="align-default" id="fig-ppc-g-many-eps">
-<a class="reference internal image-reference" href="../_images/ppc_g_many_eps.png"><img alt="../_images/ppc_g_many_eps.png" src="../_images/ppc_g_many_eps.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/ppc_g_many_eps.png"><img alt="../_images/ppc_g_many_eps.png" src="../_images/ppc_g_many_eps.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 8.8 </span><span class="caption-text">Posterior predictive checks for increasing values of <span class="math notranslate nohighlight">\(\epsilon\)</span>. The
 blue curve is the observed distribution and the gray curves the expected
@@ -851,7 +718,7 @@ As we can see the data seems to be slightly right skewed.
 Additionally the data present a few observations with very high values.
 The bottom panel omits 8 observations between 3 and 30.</p>
 <figure class="align-default" id="fig-co-ppm-bsas">
-<a class="reference internal image-reference" href="../_images/co_ppm_bsas.png"><img alt="../_images/co_ppm_bsas.png" src="../_images/co_ppm_bsas.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/co_ppm_bsas.png"><img alt="../_images/co_ppm_bsas.png" src="../_images/co_ppm_bsas.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 8.9 </span><span class="caption-text">Histogram of CO levels. The top panel shows the entire data and the
 bottom one omits values larger than 3.</span><a class="headerlink" href="#fig-co-ppm-bsas" title="Permalink to this image">#</a></p>
@@ -895,20 +762,20 @@ examples of g-and-k distributions.</p>
 <div class="code-block-caption"><span class="caption-number">Listing 8.4 </span><span class="caption-text">gk_quantile</span><a class="headerlink" href="#gk-quantile" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">g_and_k_quantile</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">quantile_normal</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">ppf</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">quantile_normal</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html#scipy.stats.norm" title="scipy.stats.norm"><span class="n">stats</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">ppf</span>
 
     <span class="k">def</span> <span class="nf">ppf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
         <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">quantile_normal</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.8</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">g</span><span class="o">*</span><span class="n">z</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span> <span class="o">*</span> <span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="n">k</span><span class="p">)</span> <span class="o">*</span> <span class="n">z</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.8</span> <span class="o">*</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.tanh.html#numpy.tanh" title="numpy.tanh"><span class="n">np</span><span class="o">.</span><span class="n">tanh</span></a><span class="p">(</span><span class="n">g</span><span class="o">*</span><span class="n">z</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span> <span class="o">*</span> <span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="n">k</span><span class="p">)</span> <span class="o">*</span> <span class="n">z</span>
 
     <span class="k">def</span> <span class="nf">rvs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">samples</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">samples</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.normal.html#numpy.random.normal" title="numpy.random.normal"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">samples</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ppf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <figure class="align-default" id="fig-gk-quantile">
-<a class="reference internal image-reference" href="../_images/gk_quantile.png"><img alt="../_images/gk_quantile.png" src="../_images/gk_quantile.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/gk_quantile.png"><img alt="../_images/gk_quantile.png" src="../_images/gk_quantile.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 8.10 </span><span class="caption-text">The first row shows the quantile function, also known as the inverse of
 the cumulative distribution function. You feed it with a quantile value
@@ -921,7 +788,7 @@ estimation from the random samples generated with Code Block
 </figcaption>
 </figure>
 <p>To fit a g-and-k distribution using SMC-ABC, we can use the Gaussian
-distance and <code class="docutils literal notranslate"><span class="pre">sum_stat=&quot;sort&quot;</span></code> as we did for the Gaussian example.
+distance and <code class="docutils literal notranslate"><span class="pre">sum_stat="sort"</span></code> as we did for the Gaussian example.
 Alternative, we can also think of a summary statistic tailored for this
 problem. As we know, the parameters <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(b\)</span>, <span class="math notranslate nohighlight">\(g\)</span> and <span class="math notranslate nohighlight">\(k\)</span> are associated
 with location, scale, skewness and kurtosis respectively. Thus, we can
@@ -951,13 +818,13 @@ both <span class="math notranslate nohighlight">\(sg\)</span> and <span class="m
 <p>With this idea in mind we can use Python to create a summary statistic
 for our problem as specified in the following code block.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">octo_summary</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">,</span> <span class="n">e3</span><span class="p">,</span> <span class="n">e4</span><span class="p">,</span> <span class="n">e5</span><span class="p">,</span> <span class="n">e6</span><span class="p">,</span> <span class="n">e7</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span>
+    <span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">,</span> <span class="n">e3</span><span class="p">,</span> <span class="n">e4</span><span class="p">,</span> <span class="n">e5</span><span class="p">,</span> <span class="n">e6</span><span class="p">,</span> <span class="n">e7</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.quantile.html#numpy.quantile" title="numpy.quantile"><span class="n">np</span><span class="o">.</span><span class="n">quantile</span></a><span class="p">(</span>
         <span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="mf">.125</span><span class="p">,</span> <span class="mf">.25</span><span class="p">,</span> <span class="mf">.375</span><span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> <span class="mf">.625</span><span class="p">,</span> <span class="mf">.75</span><span class="p">,</span> <span class="mf">.875</span><span class="p">])</span>
     <span class="n">sa</span> <span class="o">=</span> <span class="n">e4</span>
     <span class="n">sb</span> <span class="o">=</span> <span class="n">e6</span> <span class="o">-</span> <span class="n">e2</span>
     <span class="n">sg</span> <span class="o">=</span> <span class="p">(</span><span class="n">e6</span> <span class="o">+</span> <span class="n">e2</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">e4</span><span class="p">)</span><span class="o">/</span><span class="n">sb</span>
     <span class="n">sk</span> <span class="o">=</span> <span class="p">(</span><span class="n">e7</span> <span class="o">-</span> <span class="n">e5</span> <span class="o">+</span> <span class="n">e3</span> <span class="o">-</span> <span class="n">e1</span><span class="p">)</span><span class="o">/</span><span class="n">sb</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">sa</span><span class="p">,</span> <span class="n">sb</span><span class="p">,</span> <span class="n">sg</span><span class="p">,</span> <span class="n">sk</span><span class="p">])</span>
+    <span class="k">return</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.array.html#numpy.array" title="numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">([</span><span class="n">sa</span><span class="p">,</span> <span class="n">sb</span><span class="p">,</span> <span class="n">sg</span><span class="p">,</span> <span class="n">sk</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>Now we need to define a simulator, we can just wrap the <code class="docutils literal notranslate"><span class="pre">rvs</span></code> method
@@ -977,23 +844,23 @@ levels are expected to be “low”, with some measurement taking larger
 values. We also have reasons to assume that the parameters are most
 likely to be below 1.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">gkm</span><span class="p">:</span>
-    <span class="n">a</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">b</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">g</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">k</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">"a"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">"b"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">"g"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">"k"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     
-    <span class="n">s</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Simulator</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="n">gk_simulator</span><span class="p">,</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Simulator</span><span class="p">(</span><span class="s2">"s"</span><span class="p">,</span> <span class="n">gk_simulator</span><span class="p">,</span>
     <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">k</span><span class="p">],</span>        
                      <span class="n">sum_stat</span><span class="o">=</span><span class="n">octo_summary</span><span class="p">,</span>
                      <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
                      <span class="n">observed</span><span class="o">=</span><span class="n">bsas_co</span><span class="p">)</span>
     
-    <span class="n">trace_gk</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample_smc</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s2">&quot;ABC&quot;</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">trace_gk</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample_smc</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s2">"ABC"</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><a class="reference internal" href="#fig-plot-pair"><span class="std std-numref">Fig. 8.11</span></a> shows a pair plot of the fitted <code class="docutils literal notranslate"><span class="pre">gkm</span></code> model.</p>
 <figure class="align-default" id="fig-plot-pair">
-<a class="reference internal image-reference" href="../_images/pair_gk.png"><img alt="../_images/pair_gk.png" src="../_images/pair_gk.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/pair_gk.png"><img alt="../_images/pair_gk.png" src="../_images/pair_gk.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 8.11 </span><span class="caption-text">The distribution is slightly skewed and with some degree of kurtosis as
 expected from the few CO levels with values one or two orders of
@@ -1028,14 +895,14 @@ we can see two realizations from that simulator for the values
 <div class="literal-block-wrapper docutils container" id="ma2-simulator-abc">
 <div class="code-block-caption"><span class="caption-number">Listing 8.5 </span><span class="caption-text">ma2_simulator_abc</span><a class="headerlink" href="#ma2-simulator-abc" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">moving_average_2</span><span class="p">(</span><span class="n">θ1</span><span class="p">,</span> <span class="n">θ2</span><span class="p">,</span> <span class="n">n_obs</span><span class="o">=</span><span class="mi">200</span><span class="p">):</span>
-    <span class="n">λ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n_obs</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">λ</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.normal.html#numpy.random.normal" title="numpy.random.normal"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n_obs</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">λ</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span> <span class="o">+</span> <span class="n">θ1</span><span class="o">*</span><span class="n">λ</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">θ2</span><span class="o">*</span><span class="n">λ</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">y</span>
 </pre></div>
 </div>
 </div>
 <figure class="align-default" id="fig-ma2-simulator-abc">
-<a class="reference internal image-reference" href="../_images/ma2_simulator_abc.png"><img alt="../_images/ma2_simulator_abc.png" src="../_images/ma2_simulator_abc.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/ma2_simulator_abc.png"><img alt="../_images/ma2_simulator_abc.png" src="../_images/ma2_simulator_abc.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 8.12 </span><span class="caption-text">Two realizations of a MA(2) model, one with <span class="math notranslate nohighlight">\(\theta1=0.6, \theta2 =0.2\)</span>.
 On the left column the kernel density estimation on the right column the
@@ -1052,7 +919,7 @@ autocorrelation function for lag 1 and lag 2. Additionally, and just to
 avoid computing the variance of the data, we will use the
 auto-covariance function instead of the auto-correlation function.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">autocov</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span> <span class="o">*</span> <span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)])</span>
+    <span class="k">return</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.array.html#numpy.array" title="numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">([</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.mean.html#numpy.mean" title="numpy.mean"><span class="n">np</span><span class="o">.</span><span class="n">mean</span></a><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span> <span class="o">*</span> <span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)])</span>
 </pre></div>
 </div>
 <p>Additionally MA(q) models are non-identifiable unless we introduce a few
@@ -1066,18 +933,18 @@ restrictions we have that the ABC model is specified as in Code Block
 <div class="literal-block-wrapper docutils container" id="ma2-abc">
 <div class="code-block-caption"><span class="caption-number">Listing 8.6 </span><span class="caption-text">MA2_abc</span><a class="headerlink" href="#ma2-abc" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">m_ma2</span><span class="p">:</span>
-    <span class="n">θ1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">&quot;θ1&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-    <span class="n">θ2</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">&quot;θ2&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">p1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Potential</span><span class="p">(</span><span class="s2">&quot;p1&quot;</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">switch</span><span class="p">(</span><span class="n">θ1</span><span class="o">+</span><span class="n">θ2</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">))</span>
-    <span class="n">p2</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Potential</span><span class="p">(</span><span class="s2">&quot;p2&quot;</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">switch</span><span class="p">(</span><span class="n">θ1</span><span class="o">-</span><span class="n">θ2</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">))</span>
+    <span class="n">θ1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">"θ1"</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">θ2</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">"θ2"</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">p1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Potential</span><span class="p">(</span><span class="s2">"p1"</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">switch</span><span class="p">(</span><span class="n">θ1</span><span class="o">+</span><span class="n">θ2</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/constants.html#numpy.inf" title="numpy.inf"><span class="n">np</span><span class="o">.</span><span class="n">inf</span></a><span class="p">))</span>
+    <span class="n">p2</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Potential</span><span class="p">(</span><span class="s2">"p2"</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">switch</span><span class="p">(</span><span class="n">θ1</span><span class="o">-</span><span class="n">θ2</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/constants.html#numpy.inf" title="numpy.inf"><span class="n">np</span><span class="o">.</span><span class="n">inf</span></a><span class="p">))</span>
 
-    <span class="n">y</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Simulator</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">moving_average_2</span><span class="p">,</span> 
+    <span class="n">y</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Simulator</span><span class="p">(</span><span class="s2">"y"</span><span class="p">,</span> <span class="n">moving_average_2</span><span class="p">,</span> 
                      <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="n">θ1</span><span class="p">,</span> <span class="n">θ2</span><span class="p">],</span>
                      <span class="n">sum_stat</span><span class="o">=</span><span class="n">autocov</span><span class="p">,</span>
                      <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
                      <span class="n">observed</span><span class="o">=</span><span class="n">y_obs</span><span class="p">)</span>
 
-    <span class="n">trace_ma2</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample_smc</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="n">kernel</span><span class="o">=</span><span class="s2">&quot;ABC&quot;</span><span class="p">)</span>
+    <span class="n">trace_ma2</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample_smc</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="n">kernel</span><span class="o">=</span><span class="s2">"ABC"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1088,14 +955,14 @@ Code Block <a class="reference internal" href="#ma2-abc"><span class="std std-re
 if the first argument in <code class="docutils literal notranslate"><span class="pre">pm.math.switch</span></code> is true or <span class="math notranslate nohighlight">\(-\infty\)</span>
 otherwise.</p>
 <figure class="align-default" id="fig-ma2-trace">
-<a class="reference internal image-reference" href="../_images/ma2_trace.png"><img alt="../_images/ma2_trace.png" src="../_images/ma2_trace.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/ma2_trace.png"><img alt="../_images/ma2_trace.png" src="../_images/ma2_trace.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 8.13 </span><span class="caption-text">ABC trace plot for the MA(2) model. As expected the true parameters are
 recovered and the rank plots look satisfactorily flat.</span><a class="headerlink" href="#fig-ma2-trace" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="fig-ma2-triangle">
-<a class="reference internal image-reference" href="../_images/ma2_triangle.png"><img alt="../_images/ma2_triangle.png" src="../_images/ma2_triangle.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/ma2_triangle.png"><img alt="../_images/ma2_triangle.png" src="../_images/ma2_triangle.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 8.14 </span><span class="caption-text">ABC posterior for the MA(2) model as defined in Code Block
 <a class="reference internal" href="#ma2-abc"><span class="std std-ref">MA2_abc</span></a>. In the center subplot the joint
@@ -1135,7 +1002,7 @@ by doing <code class="docutils literal notranslate"><span class="pre">trace.repo
 log scale, to compute a Bayes factor we can do:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ml1</span> <span class="o">=</span> <span class="n">trace_1</span><span class="o">.</span><span class="n">report</span><span class="o">.</span><span class="n">log_marginal_likelihood</span>
 <span class="n">ml2</span> <span class="o">=</span> <span class="n">trace_2</span><span class="o">.</span><span class="n">report</span><span class="o">.</span><span class="n">log_marginal_likelihood</span>
-<span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">ml1</span> <span class="o">-</span> <span class="n">ml2</span><span class="p">)</span>
+<a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.exp.html#numpy.exp" title="numpy.exp"><span class="n">np</span><span class="o">.</span><span class="n">exp</span></a><span class="p">(</span><span class="n">ml1</span> <span class="o">-</span> <span class="n">ml2</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>When using summary statistics the marginal likelihood computed from ABC
@@ -1184,7 +1051,7 @@ marginal likelihood reflects a larger difference. Once again the reason
 is that LOO is computed just from the posterior while the marginal
 likelihood directly takes the prior into account.</p>
 <figure class="align-default" id="fig-model-comp-normal-0">
-<a class="reference internal image-reference" href="../_images/model_comp_normal_00.png"><img alt="../_images/model_comp_normal_00.png" src="../_images/model_comp_normal_00.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/model_comp_normal_00.png"><img alt="../_images/model_comp_normal_00.png" src="../_images/model_comp_normal_00.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 8.15 </span><span class="caption-text">Model <code class="docutils literal notranslate"><span class="pre">m_0</span></code> is similar as the model described in Equation
 <a class="reference internal" href="#equation-eq-gauss-model">(8.5)</a> but with <span class="math notranslate nohighlight">\(\sigma \sim \mathcal{HN}(0.1)\)</span>. <code class="docutils literal notranslate"><span class="pre">model_1</span></code>
@@ -1247,7 +1114,7 @@ observed when we use <code class="docutils literal notranslate"><span class="pre
 standard deviation <code class="docutils literal notranslate"><span class="pre">SMC-ABC_sq</span></code> as summary statistics we partially
 recover the behavior of using the whole data-set <code class="docutils literal notranslate"><span class="pre">SMC-ABC</span></code>.</p>
 <figure class="align-default" id="fig-model-comp-normal-forest">
-<a class="reference internal image-reference" href="../_images/model_comp_normal_forest.png"><img alt="../_images/model_comp_normal_forest.png" src="../_images/model_comp_normal_forest.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/model_comp_normal_forest.png"><img alt="../_images/model_comp_normal_forest.png" src="../_images/model_comp_normal_forest.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 8.16 </span><span class="caption-text">Model <code class="docutils literal notranslate"><span class="pre">m_0</span></code> is similar as the model described in Equation
 <a class="reference internal" href="#equation-eq-gauss-model">(8.5)</a> but with <span class="math notranslate nohighlight">\(\sigma \sim \mathcal{HN}(0.1)\)</span>. <code class="docutils literal notranslate"><span class="pre">model_1</span></code>
@@ -1268,7 +1135,7 @@ data follows a shifted Poisson distribution
 <span class="math notranslate nohighlight">\(\mu \sim 1 + \text{Pois}(2.5)\)</span>. We leave the analysis of these figures
 as an exercise for the readers.</p>
 <figure class="align-default" id="fig-model-comp-pois-geom-0">
-<a class="reference internal image-reference" href="../_images/model_comp_pois_geom_00.png"><img alt="../_images/model_comp_pois_geom_00.png" src="../_images/model_comp_pois_geom_00.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/model_comp_pois_geom_00.png"><img alt="../_images/model_comp_pois_geom_00.png" src="../_images/model_comp_pois_geom_00.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 8.17 </span><span class="caption-text">Model <code class="docutils literal notranslate"><span class="pre">m_0</span></code> is a geometric distribution with prior
 <span class="math notranslate nohighlight">\(p \sim \mathcal{U}(0, 1)\)</span> and <code class="docutils literal notranslate"><span class="pre">model_1</span></code> is a Poisson distribution with
@@ -1281,7 +1148,7 @@ sample size 50.</span><a class="headerlink" href="#fig-model-comp-pois-geom-0" t
 </figcaption>
 </figure>
 <figure class="align-default" id="fig-model-comp-pois-geom-forest">
-<a class="reference internal image-reference" href="../_images/model_comp_pois_geom_forest.png"><img alt="../_images/model_comp_pois_geom_forest.png" src="../_images/model_comp_pois_geom_forest.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/model_comp_pois_geom_forest.png"><img alt="../_images/model_comp_pois_geom_forest.png" src="../_images/model_comp_pois_geom_forest.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 8.18 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">model_0</span></code> a geometric model/simulator with prior
 <span class="math notranslate nohighlight">\(p \sim \mathcal{U}(0, 1)\)</span> <code class="docutils literal notranslate"><span class="pre">model_1</span></code> A Poisson model/simulator with
@@ -1407,10 +1274,10 @@ values) and random forest. The MA(1) models looks like this</p>
 <div class="literal-block-wrapper docutils container" id="ma1-abc">
 <div class="code-block-caption"><span class="caption-number">Listing 8.7 </span><span class="caption-text">MA1_abc</span><a class="headerlink" href="#ma1-abc" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">m_ma1</span><span class="p">:</span>
-    <span class="n">θ1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">&quot;θ1&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Simulator</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">moving_average_1</span><span class="p">,</span>
+    <span class="n">θ1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">"θ1"</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Simulator</span><span class="p">(</span><span class="s2">"y"</span><span class="p">,</span> <span class="n">moving_average_1</span><span class="p">,</span>
                      <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="n">θ1</span><span class="p">],</span> <span class="n">sum_stat</span><span class="o">=</span><span class="n">autocov</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">y_obs</span><span class="p">)</span>
-    <span class="n">trace_ma1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample_smc</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="n">kernel</span><span class="o">=</span><span class="s2">&quot;ABC&quot;</span><span class="p">)</span>
+    <span class="n">trace_ma1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample_smc</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="n">kernel</span><span class="o">=</span><span class="s2">"ABC"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1423,14 +1290,14 @@ expected, we can see that the MA(2) model is preferred.</p>
 <div class="literal-block-wrapper docutils container" id="idata-pseudo">
 <div class="code-block-caption"><span class="caption-number">Listing 8.8 </span><span class="caption-text">idata_pseudo</span><a class="headerlink" href="#idata-pseudo" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">idata_ma1</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">from_pymc3</span><span class="p">(</span><span class="n">trace_ma1</span><span class="p">)</span>
-<span class="n">lpll</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;s&quot;</span><span class="p">:</span> <span class="n">trace_ma2</span><span class="o">.</span><span class="n">report</span><span class="o">.</span><span class="n">log_pseudolikelihood</span><span class="p">}</span>
+<span class="n">lpll</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"s"</span><span class="p">:</span> <span class="n">trace_ma2</span><span class="o">.</span><span class="n">report</span><span class="o">.</span><span class="n">log_pseudolikelihood</span><span class="p">}</span>
 <span class="n">idata_ma1</span><span class="o">.</span><span class="n">log_likelihood</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">dict_to_dataset</span><span class="p">(</span><span class="n">lpll</span><span class="p">)</span>
 
 <span class="n">idata_ma2</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">from_pymc3</span><span class="p">(</span><span class="n">trace_ma2</span><span class="p">)</span>
-<span class="n">lpll</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;s&quot;</span><span class="p">:</span> <span class="n">trace_ma2</span><span class="o">.</span><span class="n">report</span><span class="o">.</span><span class="n">log_pseudolikelihood</span><span class="p">}</span>
+<span class="n">lpll</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"s"</span><span class="p">:</span> <span class="n">trace_ma2</span><span class="o">.</span><span class="n">report</span><span class="o">.</span><span class="n">log_pseudolikelihood</span><span class="p">}</span>
 <span class="n">idata_ma2</span><span class="o">.</span><span class="n">log_likelihood</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">dict_to_dataset</span><span class="p">(</span><span class="n">lpll</span><span class="p">)</span>
 
-<span class="n">az</span><span class="o">.</span><span class="n">compare</span><span class="p">({</span><span class="s2">&quot;m_ma1&quot;</span><span class="p">:</span><span class="n">idata_ma1</span><span class="p">,</span> <span class="s2">&quot;m_ma2&quot;</span><span class="p">:</span><span class="n">idata_ma2</span><span class="p">})</span>
+<a class="sphinx-codeautolink-a" href="https://python.arviz.org/en/stable/api/generated/arviz.compare.html#arviz.compare" title="arviz.compare"><span class="n">az</span><span class="o">.</span><span class="n">compare</span></a><span class="p">({</span><span class="s2">"m_ma1"</span><span class="p">:</span><span class="n">idata_ma1</span><span class="p">,</span> <span class="s2">"m_ma2"</span><span class="p">:</span><span class="n">idata_ma2</span><span class="p">})</span>
 </pre></div>
 </div>
 </div>
@@ -1546,9 +1413,9 @@ the differences using a KDE plot, the mean and the standard deviation.</p>
 <p><strong>8E4.</strong> What do you expect to the results to be in terms of
 accuracy and convergence of the sampler if in model <code class="docutils literal notranslate"><span class="pre">gauss</span></code> model from
 Code Block <a class="reference internal" href="#gauss-abc"><span class="std std-ref">gauss_abc</span></a> we would have used
-<code class="docutils literal notranslate"><span class="pre">sum_stat=&quot;identity&quot;</span></code>. Justify.</p>
+<code class="docutils literal notranslate"><span class="pre">sum_stat="identity"</span></code>. Justify.</p>
 <p><strong>8E5.</strong> Refit the <code class="docutils literal notranslate"><span class="pre">gauss</span></code> model from Code Block
-<a class="reference internal" href="#gauss-abc"><span class="std std-ref">gauss_abc</span></a> using <code class="docutils literal notranslate"><span class="pre">sum_stat=&quot;identity&quot;</span></code>.
+<a class="reference internal" href="#gauss-abc"><span class="std std-ref">gauss_abc</span></a> using <code class="docutils literal notranslate"><span class="pre">sum_stat="identity"</span></code>.
 Evaluate the results using:</p>
 <ol class="arabic simple">
 <li><p>Trace Plot</p></li>
@@ -1557,7 +1424,7 @@ Evaluate the results using:</p>
 <li><p>The mean and HDI for the parameters <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>.</p></li>
 </ol>
 <p>Compare the results with those from the example in the book (i.e. using
-<code class="docutils literal notranslate"><span class="pre">sum_stat=&quot;sort&quot;</span></code>).</p>
+<code class="docutils literal notranslate"><span class="pre">sum_stat="sort"</span></code>).</p>
 <p><strong>8E6.</strong> Refit the <code class="docutils literal notranslate"><span class="pre">gauss</span></code> model from Code Block
 <a class="reference internal" href="#gauss-abc"><span class="std std-ref">gauss_abc</span></a> using quintiles as summary
 statistics.</p>
@@ -1574,13 +1441,13 @@ answer this question.</p>
 <p><strong>8E8.</strong> Use the sample from the previous exercise and the
 <code class="docutils literal notranslate"><span class="pre">gkm</span></code> model. Fit the using the summary statistics <code class="docutils literal notranslate"><span class="pre">octo_summary</span></code>, the
 <code class="docutils literal notranslate"><span class="pre">octile-vector</span></code> (i.e. the quantiles 0.125, 0.25, 0.375, 0.5, 0.625,
-0.75, 0.875) and <code class="docutils literal notranslate"><span class="pre">sum_stat=&quot;sorted&quot;</span></code>. Compare the results with the known
+0.75, 0.875) and <code class="docutils literal notranslate"><span class="pre">sum_stat="sorted"</span></code>. Compare the results with the known
 parameter values, which option provides higher accuracy and lower
 uncertainty?</p>
 <p><strong>8M9.</strong> In the GitHub repository you will find a dataset of
 the distribution of citations of scientific papers. Use SMC-ABC to fit a
 g-and-k distribution to this dataset. Perform all the necessary steps to
-find a suitable value for <code class="docutils literal notranslate"><span class="pre">&quot;epsilon&quot;</span></code> and ensuring the model converge
+find a suitable value for <code class="docutils literal notranslate"><span class="pre">"epsilon"</span></code> and ensuring the model converge
 and results provides a suitable fit.</p>
 <p><strong>8M10.</strong> The Lotka-Volterra is well-know biological model
 describing how the number of individuals of two species change when
@@ -1612,70 +1479,69 @@ proportion of unpaired socks follows a <span class="math notranslate nohighlight
 <p>Generate a simulator suitable for this problem and create a SMC-ABC
 model to compute the posterior distribution of the number of socks, the
 proportion of unpaired socks, and the number of pairs.</p>
-<hr class="footnotes docutils" />
+<hr class="footnotes docutils"/>
 <aside class="footnote brackets" id="id54" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">1</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id4" role="doc-backlink">1</a><span class="fn-bracket">]</span></span>
 <p>It can work for discrete variables, especially if they take only a
 few possible values.</p>
 </aside>
 <aside class="footnote brackets" id="id55" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">2</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id5" role="doc-backlink">2</a><span class="fn-bracket">]</span></span>
 <p>This is another manifestation of the curse of dimensionality. See
 Section <a class="reference internal" href="chp_11.html#high-dimensions"><span class="std std-ref">Moving out of Flatland</span></a> for a full explanation.</p>
 </aside>
 <aside class="footnote brackets" id="id56" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">3</a><span class="fn-bracket">]</span></span>
-<p>The default SMC <code class="docutils literal notranslate"><span class="pre">kernel</span></code> is <code class="docutils literal notranslate"><span class="pre">&quot;metropolis&quot;</span></code>. See <a class="reference internal" href="chp_11.html#inference-methods"><span class="std std-ref">Inference Methods</span></a> for details.</p>
+<span class="label"><span class="fn-bracket">[</span><a href="#id9" role="doc-backlink">3</a><span class="fn-bracket">]</span></span>
+<p>The default SMC <code class="docutils literal notranslate"><span class="pre">kernel</span></code> is <code class="docutils literal notranslate"><span class="pre">"metropolis"</span></code>. See <a class="reference internal" href="chp_11.html#inference-methods"><span class="std std-ref">Inference Methods</span></a> for details.</p>
 </aside>
 <aside class="footnote brackets" id="id57" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id12">4</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id12" role="doc-backlink">4</a><span class="fn-bracket">]</span></span>
 <p>Is similar to the Gaussian distribution but without the
 normalization term <span class="math notranslate nohighlight">\(\frac{1}{\sigma\sqrt{2\pi}}\)</span>.</p>
 </aside>
 <aside class="footnote brackets" id="id58" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id13">5</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id13" role="doc-backlink">5</a><span class="fn-bracket">]</span></span>
 <p>This is something PyMC3 does, other packages could be different</p>
 </aside>
 <aside class="footnote brackets" id="id59" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id15">6</a><span class="fn-bracket">]</span></span>
-<p>Even when PyMC3 uses <code class="docutils literal notranslate"><span class="pre">sum_stat=&quot;sort&quot;</span></code> as summary statistic,
+<span class="label"><span class="fn-bracket">[</span><a href="#id15" role="doc-backlink">6</a><span class="fn-bracket">]</span></span>
+<p>Even when PyMC3 uses <code class="docutils literal notranslate"><span class="pre">sum_stat="sort"</span></code> as summary statistic,
 sorting is not a true summary as we are still using the whole data</p>
 </aside>
 <aside class="footnote brackets" id="id60" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id20">7</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id20" role="doc-backlink">7</a><span class="fn-bracket">]</span></span>
 <p>In a similar fashion as the <span class="math notranslate nohighlight">\(\beta\)</span> parameters in the description
 of the SMC/SMC-ABC algorithm explained before</p>
 </aside>
 <aside class="footnote brackets" id="id61" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id29">8</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id29" role="doc-backlink">8</a><span class="fn-bracket">]</span></span>
 <p>In Prangle <span id="id62">[<a class="reference internal" href="references.html#id45" title="Dennis Prangle. Gk: an r package for the g-and-k and generalised g-and-h distributions. arXiv preprint arXiv:1706.06889, 2017.">102</a>]</span> you will find a description of an R
 package with a lot of functions to work with g-and-k distributions.</p>
 </aside>
 <aside class="footnote brackets" id="id63" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id35">9</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id35" role="doc-backlink">9</a><span class="fn-bracket">]</span></span>
 <p>In the literature is common to use <span class="math notranslate nohighlight">\(\varepsilon\)</span> to denote these
 terms, but we want to avoid confusion with the <span class="math notranslate nohighlight">\(\epsilon\)</span> parameter
 in the SMC-ABC sampler</p>
 </aside>
 <aside class="footnote brackets" id="id64" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id43">10</a><span class="fn-bracket">]</span></span>
-<p>Good moment to remember that <code class="docutils literal notranslate"><span class="pre">sum_stat=&quot;sort&quot;</span></code> is not actually a
+<span class="label"><span class="fn-bracket">[</span><a href="#id43" role="doc-backlink">10</a><span class="fn-bracket">]</span></span>
+<p>Good moment to remember that <code class="docutils literal notranslate"><span class="pre">sum_stat="sort"</span></code> is not actually a
 summary statistic as we are using the entire dataset</p>
 </aside>
 <aside class="footnote brackets" id="id65" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id46">11</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id46" role="doc-backlink">11</a><span class="fn-bracket">]</span></span>
 <p>Other classifiers could have been chosen, but the authors decided
 to use a random forest.</p>
 </aside>
 <aside class="footnote brackets" id="id66" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id49">12</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id49" role="doc-backlink">12</a><span class="fn-bracket">]</span></span>
 <p>In future versions of PyMC <code class="docutils literal notranslate"><span class="pre">pm.sample_smc</span></code> will return and
 InferenceData object with the proper groups.</p>
 </aside>
 </section>
 </section>
-
-    <script type="text/x-thebe-config">
+<script type="text/x-thebe-config">
     {
         requestKernel: true,
         binderOptions: {
@@ -1693,51 +1559,34 @@ InferenceData object with the proper groups.</p>
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
-
-                </article>
-              
-
-              
-              
-              
-              
-                <footer class="prev-next-footer">
-                  
+<script>kernelName = 'python3'</script>
+</article>
+<footer class="prev-next-footer">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="chp_07.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">7. </span>Bayesian Additive Regression Trees</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="chp_09.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">9. </span>End to End Bayesian Workflows</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="chp_07.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title"><span class="section-number">7. </span>Bayesian Additive Regression Trees</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
+</a>
+<a class="right-next" href="chp_09.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title"><span class="section-number">9. </span>End to End Bayesian Workflows</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage">
+<i class="fa-solid fa-list"></i> Contents
   </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
+<nav class="bd-toc-nav page-toc">
+<ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#life-beyond-likelihood">8.1. Life Beyond Likelihood</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approximating-the-approximated-posterior">8.2. Approximating the Approximated Posterior</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-a-gaussian-the-abc-way">8.3. Fitting a Gaussian the ABC-way</a></li>
@@ -1758,57 +1607,36 @@ InferenceData object with the proper groups.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-priors-for-abc">8.8. Choosing Priors for ABC</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">8.9. Exercises</a></li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-          </div>
-          <footer class="bd-footer-content">
-            
+</div>
+<footer class="bd-footer-content">
 <div class="bd-footer-content__inner container">
-  
-  <div class="footer-item">
-    
+<div class="footer-item">
 <p class="component-author">
 By Martin, Kumar, Lao
 </p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-
-  <p class="copyright">
+</div>
+<div class="footer-item">
+<p class="copyright">
     
       © Copyright 2022.
       <br/>
-    
-  </p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
+</p>
 </div>
-          </footer>
-        
-
-      </main>
-    </div>
-  </div>
-  
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<div class="footer-item">
+</div>
+<div class="footer-item">
+</div>
+</div>
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
 <script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
-
-  <footer class="bd-footer">
-  </footer>
-  </body>
+<footer class="bd-footer">
+</footer>
+</body>
 </html>

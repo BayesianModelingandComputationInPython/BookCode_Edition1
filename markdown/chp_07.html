@@ -1,164 +1,101 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
-    <title>7. Bayesian Additive Regression Trees &#8212; Bayesian Modeling and Computation in Python</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="Docutils 0.18.1: http://docutils.sourceforge.net/" name="generator"/>
+<title>7. Bayesian Additive Regression Trees — Bayesian Modeling and Computation in Python</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-
-  
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-codeautolink.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
-  
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
-  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
-
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet"/>
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet"/>
+<link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" rel="stylesheet" type="text/css"/>
+<link href="../_static/togglebutton.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-thebe.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-codeautolink.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" rel="stylesheet" type="text/css"/>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" rel="preload"/>
+<script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+<script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+<script src="../_static/jquery.js"></script>
+<script src="../_static/underscore.js"></script>
+<script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+<script src="../_static/doctools.js"></script>
+<script src="../_static/clipboard.min.js"></script>
+<script src="../_static/copybutton.js"></script>
+<script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../_static/togglebutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<script src="../_static/design-tabs.js"></script>
+<script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'markdown/chp_07';</script>
-    <link rel="shortcut icon" href="../_static/favicon.ico"/>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="8. Approximate Bayesian Computation" href="chp_08.html" />
-    <link rel="prev" title="6. Time Series" href="chp_06.html" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
-  
-  
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  
-  <div id="pst-scroll-pixel-helper"></div>
-
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
+<script async="async" src="../_static/sphinx-thebe.js"></script>
+<script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+<script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'markdown/chp_07';</script>
+<link href="../_static/favicon.ico" rel="shortcut icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="chp_08.html" rel="next" title="8. Approximate Bayesian Computation"/>
+<link href="chp_06.html" rel="prev" title="6. Time Series"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</head>
+<body data-bs-root-margin="0px 0px -60%" data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-default-mode="" data-offset="180">
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>
     Back to top
   </button>
-
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         id="search-input"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+<input class="sidebar-toggle" id="__primary" name="__primary" type="checkbox"/>
+<label class="overlay overlay-primary" for="__primary"></label>
+<input class="sidebar-toggle" id="__secondary" name="__secondary" type="checkbox"/>
+<label class="overlay overlay-secondary" for="__secondary"></label>
+<div class="search-button__wrapper">
+<div class="search-button__overlay"></div>
+<div class="search-button__search-container">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search this book..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" id="search-input" name="q" placeholder="Search this book..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
-  </div>
-  
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
-  
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      <div class="bd-sidebar-primary bd-sidebar">
-        
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-    
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-  
-
+</div>
+<nav class="bd-header navbar navbar-expand-lg bd-navbar">
+</nav>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<div class="bd-sidebar-primary bd-sidebar">
+<div class="sidebar-header-items sidebar-primary__section">
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
 <a class="navbar-brand logo" href="../welcome.html">
-  
-  
-  
-  
-  
-  
-    <p class="title logo__title">Bayesian Modeling and Computation in Python</p>
-  
+<p class="title logo__title">Bayesian Modeling and Computation in Python</p>
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item navbar-nav active">
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 0</span></p>
+<div class="sidebar-primary-item"><nav aria-label="Main" class="bd-links" id="bd-docs-nav">
+<div class="bd-toc-item navbar-nav active">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 0</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="dedication.html">Dedication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="foreword.html">Foreword</a></li>
@@ -200,111 +137,53 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../solutions/chp_01.html">Solutions 1: Bayesian Inference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../solutions/chp_02.html">Solutions 2: Exploratory Analysis of Bayesian models</a></li>
 </ul>
-
-    </div>
+</div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-  
-  <div id="rtd-footer-container"></div>
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main">
-        
-        
-
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+<div id="rtd-footer-container"></div>
+</div>
+<main class="bd-main" id="main-content">
 <div class="sbt-scroll-pixel-helper"></div>
-
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <span class="fa-solid fa-bars"></span>
+<div class="header-article-items__start">
+<div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" data-bs-placement="bottom" data-bs-toggle="tooltip" for="__primary" title="Toggle primary sidebar">
+<span class="fa-solid fa-bars"></span>
 </label></div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
-
+</div>
+<div class="header-article-items__end">
+<div class="header-article-item">
 <div class="article-header-buttons">
-
-
-
-
-
 <div class="dropdown dropdown-source-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
-    <i class="fab fa-github"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1" target="_blank"
-   class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
+<button aria-expanded="false" aria-label="Source repositories" class="btn dropdown-toggle" data-bs-toggle="dropdown" type="button">
+<i class="fab fa-github"></i>
+</button>
+<ul class="dropdown-menu">
+<li><a class="btn btn-sm btn-source-repository-button dropdown-item" data-bs-placement="left" data-bs-toggle="tooltip" href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1" target="_blank" title="Source repository">
 <span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
+<i class="fab fa-github"></i>
+</span>
 <span class="btn__text-container">Repository</span>
 </a>
 </li>
-      
-      
-      
-      
-      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_07.html&body=Your%20issue%20content%20here." target="_blank"
-   class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
+<li><a class="btn btn-sm btn-source-issues-button dropdown-item" data-bs-placement="left" data-bs-toggle="tooltip" href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_07.html&amp;body=Your%20issue%20content%20here." target="_blank" title="Open an issue">
 <span class="btn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
+<i class="fas fa-lightbulb"></i>
+</span>
 <span class="btn__text-container">Open issue</span>
 </a>
 </li>
-      
-  </ul>
+</ul>
 </div>
-
-
-
-
-<button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
-  title="Fullscreen mode"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
+<button class="btn btn-sm btn-fullscreen-button" data-bs-placement="bottom" data-bs-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode">
 <span class="btn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
+<i class="fas fa-expand"></i>
+</span>
 </button>
-
-
-
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -314,8 +193,6 @@ document.write(`
   </button>
 `);
 </script>
-
-
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -323,29 +200,23 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" data-bs-placement="bottom" data-bs-toggle="tooltip" for="__secondary" title="Toggle secondary sidebar">
+<span class="fa-solid fa-list"></span>
 </label>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-
-<div id="jb-print-docs-body" class="onlyprint">
-    <h1>Bayesian Additive Regression Trees</h1>
-    <!-- Table of contents -->
-    <div id="print-main-content">
-        <div id="jb-print-toc">
-            
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+</div>
+<div class="onlyprint" id="jb-print-docs-body">
+<h1>Bayesian Additive Regression Trees</h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+<div>
+<h2> Contents </h2>
+</div>
+<nav aria-label="Page">
+<ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-trees">7.1. Decision Trees</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensembles-of-decision-trees">7.1.1. Ensembles of Decision Trees</a></li>
 </ul>
@@ -369,17 +240,13 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#priors-for-bart-in-pymc3">7.9. Priors for BART in PyMC3</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">7.10. Exercises</a></li>
 </ul>
-            </nav>
-        </div>
-    </div>
+</nav>
 </div>
-
-              
-                
+</div>
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
-                  
-  <section class="tex2jax_ignore mathjax_ignore" id="bayesian-additive-regression-trees">
+<article class="bd-article" role="main">
+<section class="tex2jax_ignore mathjax_ignore" id="bayesian-additive-regression-trees">
 <span id="chap6"></span><h1><span class="section-number">7. </span>Bayesian Additive Regression Trees<a class="headerlink" href="#bayesian-additive-regression-trees" title="Permalink to this heading">#</a></h1>
 <p>In Chapter <a class="reference internal" href="chp_05.html#chap3-5"><span class="std std-ref">5</span></a> we saw how we can approximate a
 function by summing up a series of (simple) basis functions. We showed
@@ -459,7 +326,7 @@ than <span class="math notranslate nohighlight">\(c_2\)</span>.</p>
 <span class="math notranslate nohighlight">\(g(\mathcal{T}, \mathcal{M})\)</span>, will become very useful in a moment when
 we discuss priors over trees.</p>
 <figure class="align-default" id="fig-decision-tree">
-<a class="reference internal image-reference" href="../_images/decision_tree.png"><img alt="../_images/decision_tree.png" src="../_images/decision_tree.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/decision_tree.png"><img alt="../_images/decision_tree.png" src="../_images/decision_tree.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 7.1 </span><span class="caption-text">A binary tree (left) and the corresponding partition space (right). The
 internal nodes of the tree are those having children. They have a link
@@ -486,7 +353,7 @@ particular noting how instead of a continuous function approximation the
 data been split into three blocks, and the average is approximating each
 one of those blocks.</p>
 <figure class="align-default" id="fig-decision-tree-reg">
-<a class="reference internal image-reference" href="../_images/decision_tree_reg.png"><img alt="../_images/decision_tree_reg.png" src="../_images/decision_tree_reg.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/decision_tree_reg.png"><img alt="../_images/decision_tree_reg.png" src="../_images/decision_tree_reg.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 7.2 </span><span class="caption-text">A binary tree (left) and the corresponding partition space (right). The
 internal nodes of the tree are those having children (they have a link
@@ -524,7 +391,7 @@ data points, and then creating a partition that isolates each of them
 individually. While doing this exercise you may also notice that in fact
 there is more than one tree that can fit the data equally well.</p>
 <figure class="align-default" id="fig-decision-tree-overfitting">
-<a class="reference internal image-reference" href="../_images/decision_tree_overfitting.png"><img alt="../_images/decision_tree_overfitting.png" src="../_images/decision_tree_overfitting.png" style="width: 4.5in;" /></a>
+<a class="reference internal image-reference" href="../_images/decision_tree_overfitting.png"><img alt="../_images/decision_tree_overfitting.png" src="../_images/decision_tree_overfitting.png" style="width: 4.5in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 7.3 </span><span class="caption-text">An overly complex partition of the sample space. Each data point is
 assigned to a separate block. We say this is an <em>overcomplex</em> partition
@@ -730,9 +597,9 @@ follows:</p>
 <div class="literal-block-wrapper docutils container" id="bart-model-gauss">
 <div class="code-block-caption"><span class="caption-number">Listing 7.1 </span><span class="caption-text">bart_model_gauss</span><a class="headerlink" href="#bart-model-gauss" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">bart_g</span><span class="p">:</span>
-    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="n">Y</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
-    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">BART</span><span class="p">(</span><span class="s2">&quot;μ&quot;</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">Y</span><span class="p">)</span>
+    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">"σ"</span><span class="p">,</span> <span class="n">Y</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
+    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">BART</span><span class="p">(</span><span class="s2">"μ"</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"y"</span><span class="p">,</span> <span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">Y</span><span class="p">)</span>
     <span class="n">idata_bart_g</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="n">return_inferencedata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -754,7 +621,7 @@ values are allowed by the model.</p>
 <p>On the bottom panel we have samples from the posterior, each one is a
 sum over <span class="math notranslate nohighlight">\(m\)</span> trees.</p>
 <figure class="align-default" id="fig-bart-bikes-samples">
-<a class="reference internal image-reference" href="../_images/BART_bikes_samples.png"><img alt="../_images/BART_bikes_samples.png" src="../_images/BART_bikes_samples.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/BART_bikes_samples.png"><img alt="../_images/BART_bikes_samples.png" src="../_images/BART_bikes_samples.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 7.4 </span><span class="caption-text">Posterior tree realizations. Top panel, three individuals trees sampled
 from the posterior. Bottom panel, three posterior samples, each one is a
@@ -771,7 +638,7 @@ aspect of the BART’s fit compared to the one obtained using splines.
 This is not to say there are not other differences like the width of the
 HDI.</p>
 <figure class="align-default" id="fig-bart-bikes">
-<a class="reference internal image-reference" href="../_images/BART_bikes.png"><img alt="../_images/BART_bikes.png" src="../_images/BART_bikes.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/BART_bikes.png"><img alt="../_images/BART_bikes.png" src="../_images/BART_bikes.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 7.5 </span><span class="caption-text">Bikes data (black dots) fitted using BARTs (specifically <code class="docutils literal notranslate"><span class="pre">bart_model</span></code>).
 The shaded curve represents the 94% HDI interval (of the mean) and the
@@ -803,9 +670,9 @@ that differences are small:</p>
 <div class="literal-block-wrapper docutils container" id="bart-model-bern">
 <div class="code-block-caption"><span class="caption-number">Listing 7.2 </span><span class="caption-text">bart_model_bern</span><a class="headerlink" href="#bart-model-bern" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
-    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">BART</span><span class="p">(</span><span class="s2">&quot;μ&quot;</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
-                <span class="n">inv_link</span><span class="o">=</span><span class="s2">&quot;logistic&quot;</span><span class="p">)</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Bernoulli</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">μ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">Y</span><span class="p">)</span>
+    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">BART</span><span class="p">(</span><span class="s2">"μ"</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+                <span class="n">inv_link</span><span class="o">=</span><span class="s2">"logistic"</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Bernoulli</span><span class="p">(</span><span class="s2">"y"</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">μ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">Y</span><span class="p">)</span>
     <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="n">return_inferencedata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -829,7 +696,7 @@ that large) and <span class="math notranslate nohighlight">\(m=50\)</span> seems
 low and the difference between the in-sample and out-of-sample ELPD is
 large).</p>
 <figure class="align-default" id="fig-bart-space-flu-comp">
-<a class="reference internal image-reference" href="../_images/BART_space_flu_comp.png"><img alt="../_images/BART_space_flu_comp.png" src="../_images/BART_space_flu_comp.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/BART_space_flu_comp.png"><img alt="../_images/BART_space_flu_comp.png" src="../_images/BART_space_flu_comp.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 7.6 </span><span class="caption-text">LOO comparison of the model in Code Block
 <a class="reference internal" href="#bart-model-bern"><span class="std std-ref">bart_model_bern</span></a> with <span class="math notranslate nohighlight">\(m\)</span> values (2, 10,
@@ -837,7 +704,7 @@ large).</p>
 </figcaption>
 </figure>
 <figure class="align-default" id="fig-bart-space-flu-fit">
-<a class="reference internal image-reference" href="../_images/BART_space_flu_fit.png"><img alt="../_images/BART_space_flu_fit.png" src="../_images/BART_space_flu_fit.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/BART_space_flu_fit.png"><img alt="../_images/BART_space_flu_fit.png" src="../_images/BART_space_flu_fit.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 7.7 </span><span class="caption-text">BART fit to the Space Influenza dataset with 4 values for <span class="math notranslate nohighlight">\(m\)</span> (2, 10,
 20, 50). In line with LOO, the model with <span class="math notranslate nohighlight">\(m\)</span> is underfitting and with
@@ -900,7 +767,7 @@ already discussed regarding counterfactuals plots introduced in Chapter
 <a class="reference internal" href="chp_03.html#chap2"><span class="std std-ref">3</span></a>. In fact partial dependence plots are one kind of
 counterfactual device.</p>
 <figure class="align-default" id="fig-pdp-fake-example">
-<a class="reference internal image-reference" href="../_images/partial_dependence_plot.png"><img alt="../_images/partial_dependence_plot.png" src="../_images/partial_dependence_plot.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/partial_dependence_plot.png"><img alt="../_images/partial_dependence_plot.png" src="../_images/partial_dependence_plot.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 7.8 </span><span class="caption-text">Partial dependence plot. Partial contribution to <span class="math notranslate nohighlight">\(Y\)</span> from each variable
 <span class="math notranslate nohighlight">\(X_i\)</span> while marginalizing the contributions from the rest of the
@@ -940,7 +807,7 @@ shows an even flatter contribution, but still we see an effect, as it
 seems that less people are prone to rent a bike under windier
 conditions.</p>
 <figure class="align-default" id="fig-partial-dependence-plot-bikes">
-<a class="reference internal image-reference" href="../_images/partial_dependence_plot_bikes.png"><img alt="../_images/partial_dependence_plot_bikes.png" src="../_images/partial_dependence_plot_bikes.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/partial_dependence_plot_bikes.png"><img alt="../_images/partial_dependence_plot_bikes.png" src="../_images/partial_dependence_plot_bikes.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 7.9 </span><span class="caption-text">Partial dependence plot. Partial contribution to the number of rented
 bikes from the variables, hour, temperature, humidity and windspeed
@@ -991,7 +858,7 @@ value we get the blue curve, which is the same curve that we should have
 obtained if we have computed the mean partial dependence in
 <a class="reference internal" href="#fig-partial-dependence-plot-bikes"><span class="std std-numref">Fig. 7.9</span></a>.</p>
 <figure class="align-default" id="fig-individual-conditional-expectation-plot-bikes">
-<a class="reference internal image-reference" href="../_images/individual_conditional_expectation_plot_bikes.png"><img alt="../_images/individual_conditional_expectation_plot_bikes.png" src="../_images/individual_conditional_expectation_plot_bikes.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/individual_conditional_expectation_plot_bikes.png"><img alt="../_images/individual_conditional_expectation_plot_bikes.png" src="../_images/individual_conditional_expectation_plot_bikes.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 7.10 </span><span class="caption-text">Individual conditional expectation plot. Partial contribution to the
 number of rented bikes from the variables; hour, temperature, humidity
@@ -1013,7 +880,7 @@ data: <span class="math notranslate nohighlight">\(Y = 0.2X_0 - 5X_1 + 10X_1 \un
 where <span class="math notranslate nohighlight">\(X \sim \mathcal{U}(-1, 1)\)</span> <span class="math notranslate nohighlight">\(\epsilon \sim \mathcal{N}(0, 0.5)\)</span>.
 Notice how the value of <span class="math notranslate nohighlight">\(X_1\)</span> depends on the value of <span class="math notranslate nohighlight">\(X_2\)</span>.</p>
 <figure class="align-default" id="fig-pdp-vs-ice-toy">
-<a class="reference internal image-reference" href="../_images/pdp_vs_ice_toy.png"><img alt="../_images/pdp_vs_ice_toy.png" src="../_images/pdp_vs_ice_toy.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/pdp_vs_ice_toy.png"><img alt="../_images/pdp_vs_ice_toy.png" src="../_images/pdp_vs_ice_toy.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 7.11 </span><span class="caption-text">Partial dependence plot vs individual conditional expectation plot.
 First panel, scatter plot between <span class="math notranslate nohighlight">\(X_1\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>, middle panel partial
@@ -1087,7 +954,7 @@ Notice that while the first five random variables are related to <span class="ma
 response variable.</p></li>
 </ul>
 <figure class="align-default" id="fig-bart-vi-toy">
-<a class="reference internal image-reference" href="../_images/bart_vi_toy.png"><img alt="../_images/bart_vi_toy.png" src="../_images/bart_vi_toy.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/bart_vi_toy.png"><img alt="../_images/bart_vi_toy.png" src="../_images/bart_vi_toy.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 7.12 </span><span class="caption-text">Relative variable importance. Left panel, the first 2 input variables
 contribute to the predictor variable and the rest are noise. Middle
@@ -1153,7 +1020,7 @@ results from partial dependence plots (Figure
 expectation plots (Figure
 <a class="reference internal" href="#fig-individual-conditional-expectation-plot-bikes"><span class="std std-numref">Fig. 7.10</span></a>).</p>
 <figure class="align-default" id="fig-bart-vi-bikes">
-<a class="reference internal image-reference" href="../_images/bart_vi_bikes.png"><img alt="../_images/bart_vi_bikes.png" src="../_images/bart_vi_bikes.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/bart_vi_bikes.png"><img alt="../_images/bart_vi_bikes.png" src="../_images/bart_vi_bikes.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 7.13 </span><span class="caption-text">Relative variable importance from fitted BARTs with different number of
 trees. Hour is the most important covariate followed by the temperature.
@@ -1284,47 +1151,47 @@ model with the covariates “bill_length_mm”, “bill_depth_mm”,
 “flipper_length_mm”, and “body_mass_g” and assess their relative
 variable importance. Compare the results with the PDPs from the previous
 exercise.</p>
-<hr class="footnotes docutils" />
+<hr class="footnotes docutils"/>
 <aside class="footnote brackets" id="id38" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id1" role="doc-backlink">1</a><span class="fn-bracket">]</span></span>
 <p>Maybe you have heard about its non-Bayesian cousin: Random Forest
 <span id="id39">[<a class="reference internal" href="references.html#id149" title="Leo Breiman. Random forests. Machine learning, 45(1):5–32, 2001.">81</a>]</span></p>
 </aside>
 <aside class="footnote brackets" id="id40" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">2</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id10" role="doc-backlink">2</a><span class="fn-bracket">]</span></span>
 <p>for alternatives see
 <span id="id41">[<a class="reference internal" href="references.html#id8" title="Matej Balog and Yee Whye Teh. The mondrian process for machine learning. arXiv preprint arXiv:1507.05181, 2015.">82</a>, <a class="reference internal" href="references.html#id7" title="Daniel M Roy and Yee Whye Teh. The mondrian process. In Proceedings of the 21st International Conference on Neural Information Processing Systems, 1377–1384. 2008.">83</a>]</span></p>
 </aside>
 <aside class="footnote brackets" id="id42" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id12">3</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id12" role="doc-backlink">3</a><span class="fn-bracket">]</span></span>
 <p>Node depth is defined as distance from the root. Thus, the root
 itself has depth 0, its first child node has depth 1, etc.</p>
 </aside>
 <aside class="footnote brackets" id="id43" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id13">4</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id13" role="doc-backlink">4</a><span class="fn-bracket">]</span></span>
 <p>In principle we can go fully Bayesian and estimate the number of
 tree <span class="math notranslate nohighlight">\(m\)</span> from the data, but there are reports showing this is not
 always the best approach. More research is likely needed in this
 area.</p>
 </aside>
 <aside class="footnote brackets" id="id44" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id16">5</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id16" role="doc-backlink">5</a><span class="fn-bracket">]</span></span>
 <p>The same literature generally shows that using cross-validation to
 tune the number of trees and/or the prior over the depth of the tree
 can be further beneficial.</p>
 </aside>
 <aside class="footnote brackets" id="id45" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id18">6</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id18" role="doc-backlink">6</a><span class="fn-bracket">]</span></span>
 <p>Other implementations are less flexible or require adjustments
 under the hood to make this work.</p>
 </aside>
 <aside class="footnote brackets" id="id46" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id27">7</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id27" role="doc-backlink">7</a><span class="fn-bracket">]</span></span>
 <p>This notation means the variables (<span class="math notranslate nohighlight">\(X_0\)</span>, <span class="math notranslate nohighlight">\(X_2\)</span>), that is,
 excluding <span class="math notranslate nohighlight">\(X_1\)</span></p>
 </aside>
 <aside class="footnote brackets" id="id47" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id28">8</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id28" role="doc-backlink">8</a><span class="fn-bracket">]</span></span>
 <p>The mean of the ICE curves and the mean partial dependence curve
 are slightly different. This is due to internal details on how these
 plots were made including the order in which we average over the
@@ -1336,19 +1203,18 @@ subsample <span class="math notranslate nohighlight">\(X_{0,2}\)</span> for comp
 expectation plot</p>
 </aside>
 <aside class="footnote brackets" id="id48" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id33">9</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id33" role="doc-backlink">9</a><span class="fn-bracket">]</span></span>
 <p>The original proposal suggests 10, but our experience with the
 BART implementation in PyMC3 is that values of <span class="math notranslate nohighlight">\(m\)</span> below 20 or 25
 could be problematic.</p>
 </aside>
 <aside class="footnote brackets" id="id49" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id37">10</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id37" role="doc-backlink">10</a><span class="fn-bracket">]</span></span>
 <p>This is likely to be added in the future versions of PyMC3.</p>
 </aside>
 </section>
 </section>
-
-    <script type="text/x-thebe-config">
+<script type="text/x-thebe-config">
     {
         requestKernel: true,
         binderOptions: {
@@ -1366,51 +1232,34 @@ could be problematic.</p>
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
-
-                </article>
-              
-
-              
-              
-              
-              
-                <footer class="prev-next-footer">
-                  
+<script>kernelName = 'python3'</script>
+</article>
+<footer class="prev-next-footer">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="chp_06.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">6. </span>Time Series</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="chp_08.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">8. </span>Approximate Bayesian Computation</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="chp_06.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title"><span class="section-number">6. </span>Time Series</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
+</a>
+<a class="right-next" href="chp_08.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title"><span class="section-number">8. </span>Approximate Bayesian Computation</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage">
+<i class="fa-solid fa-list"></i> Contents
   </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
+<nav class="bd-toc-nav page-toc">
+<ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-trees">7.1. Decision Trees</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensembles-of-decision-trees">7.1.1. Ensembles of Decision Trees</a></li>
 </ul>
@@ -1434,57 +1283,36 @@ could be problematic.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#priors-for-bart-in-pymc3">7.9. Priors for BART in PyMC3</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">7.10. Exercises</a></li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-          </div>
-          <footer class="bd-footer-content">
-            
+</div>
+<footer class="bd-footer-content">
 <div class="bd-footer-content__inner container">
-  
-  <div class="footer-item">
-    
+<div class="footer-item">
 <p class="component-author">
 By Martin, Kumar, Lao
 </p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-
-  <p class="copyright">
+</div>
+<div class="footer-item">
+<p class="copyright">
     
       © Copyright 2022.
       <br/>
-    
-  </p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
+</p>
 </div>
-          </footer>
-        
-
-      </main>
-    </div>
-  </div>
-  
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<div class="footer-item">
+</div>
+<div class="footer-item">
+</div>
+</div>
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
 <script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
-
-  <footer class="bd-footer">
-  </footer>
-  </body>
+<footer class="bd-footer">
+</footer>
+</body>
 </html>

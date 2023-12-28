@@ -1,164 +1,101 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
-    <title>5. Splines &#8212; Bayesian Modeling and Computation in Python</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="Docutils 0.18.1: http://docutils.sourceforge.net/" name="generator"/>
+<title>5. Splines — Bayesian Modeling and Computation in Python</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-
-  
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-codeautolink.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
-  
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
-  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
-
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet"/>
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet"/>
+<link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" rel="stylesheet" type="text/css"/>
+<link href="../_static/togglebutton.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-thebe.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-codeautolink.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" rel="stylesheet" type="text/css"/>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" rel="preload"/>
+<script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+<script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+<script src="../_static/jquery.js"></script>
+<script src="../_static/underscore.js"></script>
+<script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+<script src="../_static/doctools.js"></script>
+<script src="../_static/clipboard.min.js"></script>
+<script src="../_static/copybutton.js"></script>
+<script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../_static/togglebutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<script src="../_static/design-tabs.js"></script>
+<script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'markdown/chp_05';</script>
-    <link rel="shortcut icon" href="../_static/favicon.ico"/>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="6. Time Series" href="chp_06.html" />
-    <link rel="prev" title="4. Extending Linear Models" href="chp_04.html" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
-  
-  
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  
-  <div id="pst-scroll-pixel-helper"></div>
-
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
+<script async="async" src="../_static/sphinx-thebe.js"></script>
+<script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+<script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'markdown/chp_05';</script>
+<link href="../_static/favicon.ico" rel="shortcut icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="chp_06.html" rel="next" title="6. Time Series"/>
+<link href="chp_04.html" rel="prev" title="4. Extending Linear Models"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</head>
+<body data-bs-root-margin="0px 0px -60%" data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-default-mode="" data-offset="180">
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>
     Back to top
   </button>
-
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         id="search-input"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+<input class="sidebar-toggle" id="__primary" name="__primary" type="checkbox"/>
+<label class="overlay overlay-primary" for="__primary"></label>
+<input class="sidebar-toggle" id="__secondary" name="__secondary" type="checkbox"/>
+<label class="overlay overlay-secondary" for="__secondary"></label>
+<div class="search-button__wrapper">
+<div class="search-button__overlay"></div>
+<div class="search-button__search-container">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search this book..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" id="search-input" name="q" placeholder="Search this book..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
-  </div>
-  
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
-  
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      <div class="bd-sidebar-primary bd-sidebar">
-        
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-    
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-  
-
+</div>
+<nav class="bd-header navbar navbar-expand-lg bd-navbar">
+</nav>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<div class="bd-sidebar-primary bd-sidebar">
+<div class="sidebar-header-items sidebar-primary__section">
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
 <a class="navbar-brand logo" href="../welcome.html">
-  
-  
-  
-  
-  
-  
-    <p class="title logo__title">Bayesian Modeling and Computation in Python</p>
-  
+<p class="title logo__title">Bayesian Modeling and Computation in Python</p>
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item navbar-nav active">
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 0</span></p>
+<div class="sidebar-primary-item"><nav aria-label="Main" class="bd-links" id="bd-docs-nav">
+<div class="bd-toc-item navbar-nav active">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 0</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="dedication.html">Dedication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="foreword.html">Foreword</a></li>
@@ -200,111 +137,53 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../solutions/chp_01.html">Solutions 1: Bayesian Inference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../solutions/chp_02.html">Solutions 2: Exploratory Analysis of Bayesian models</a></li>
 </ul>
-
-    </div>
+</div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-  
-  <div id="rtd-footer-container"></div>
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main">
-        
-        
-
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+<div id="rtd-footer-container"></div>
+</div>
+<main class="bd-main" id="main-content">
 <div class="sbt-scroll-pixel-helper"></div>
-
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <span class="fa-solid fa-bars"></span>
+<div class="header-article-items__start">
+<div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" data-bs-placement="bottom" data-bs-toggle="tooltip" for="__primary" title="Toggle primary sidebar">
+<span class="fa-solid fa-bars"></span>
 </label></div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
-
+</div>
+<div class="header-article-items__end">
+<div class="header-article-item">
 <div class="article-header-buttons">
-
-
-
-
-
 <div class="dropdown dropdown-source-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
-    <i class="fab fa-github"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1" target="_blank"
-   class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
+<button aria-expanded="false" aria-label="Source repositories" class="btn dropdown-toggle" data-bs-toggle="dropdown" type="button">
+<i class="fab fa-github"></i>
+</button>
+<ul class="dropdown-menu">
+<li><a class="btn btn-sm btn-source-repository-button dropdown-item" data-bs-placement="left" data-bs-toggle="tooltip" href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1" target="_blank" title="Source repository">
 <span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
+<i class="fab fa-github"></i>
+</span>
 <span class="btn__text-container">Repository</span>
 </a>
 </li>
-      
-      
-      
-      
-      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_05.html&body=Your%20issue%20content%20here." target="_blank"
-   class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
+<li><a class="btn btn-sm btn-source-issues-button dropdown-item" data-bs-placement="left" data-bs-toggle="tooltip" href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_05.html&amp;body=Your%20issue%20content%20here." target="_blank" title="Open an issue">
 <span class="btn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
+<i class="fas fa-lightbulb"></i>
+</span>
 <span class="btn__text-container">Open issue</span>
 </a>
 </li>
-      
-  </ul>
+</ul>
 </div>
-
-
-
-
-<button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
-  title="Fullscreen mode"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
+<button class="btn btn-sm btn-fullscreen-button" data-bs-placement="bottom" data-bs-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode">
 <span class="btn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
+<i class="fas fa-expand"></i>
+</span>
 </button>
-
-
-
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -314,8 +193,6 @@ document.write(`
   </button>
 `);
 </script>
-
-
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -323,29 +200,23 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" data-bs-placement="bottom" data-bs-toggle="tooltip" for="__secondary" title="Toggle secondary sidebar">
+<span class="fa-solid fa-list"></span>
 </label>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-
-<div id="jb-print-docs-body" class="onlyprint">
-    <h1>Splines</h1>
-    <!-- Table of contents -->
-    <div id="print-main-content">
-        <div id="jb-print-toc">
-            
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+</div>
+<div class="onlyprint" id="jb-print-docs-body">
+<h1>Splines</h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+<div>
+<h2> Contents </h2>
+</div>
+<nav aria-label="Page">
+<ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polynomial-regression">5.1. Polynomial Regression</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expanding-the-feature-space">5.2. Expanding the Feature Space</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introducing-splines">5.3. Introducing Splines</a></li>
@@ -358,17 +229,13 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-co2-uptake-with-splines">5.7. Modeling CO₂ Uptake with Splines</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">5.8. Exercises</a></li>
 </ul>
-            </nav>
-        </div>
-    </div>
+</nav>
 </div>
-
-              
-                
+</div>
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
-                  
-  <section class="tex2jax_ignore mathjax_ignore" id="splines">
+<article class="bd-article" role="main">
+<section class="tex2jax_ignore mathjax_ignore" id="splines">
 <span id="chap3-5"></span><h1><span class="section-number">5. </span>Splines<a class="headerlink" href="#splines" title="Permalink to this heading">#</a></h1>
 <p>In this chapter we will discuss splines, which is an extension of
 concepts introduced into Chapter <a class="reference internal" href="chp_03.html#chap2"><span class="std std-ref">3</span></a> with the aim of
@@ -406,7 +273,7 @@ variance example in Section
 regression using degrees 2, 10, and 15. As we increase the order of the
 polynomial, we get a more flexible curve.</p>
 <figure class="align-default" id="fig-polynomial-regression">
-<a class="reference internal image-reference" href="../_images/polynomial_regression.png"><img alt="../_images/polynomial_regression.png" src="../_images/polynomial_regression.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/polynomial_regression.png"><img alt="../_images/polynomial_regression.png" src="../_images/polynomial_regression.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 5.1 </span><span class="caption-text">An example of polynomial regression with degrees 2, 10 and 15. As the
 degree increases the fit gets more <em>wiggly</em>. The dashed lines are the
@@ -475,7 +342,7 @@ predictor into (non-overlapping) subsets. And then fit polynomial
 fitting <strong>piecewise polynomials</strong> <a class="footnote-reference brackets" href="#id26" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> as shown in
 <a class="reference internal" href="#fig-piecewise"><span class="std std-numref">Fig. 5.2</span></a>.</p>
 <figure class="align-default" id="fig-piecewise">
-<a class="reference internal image-reference" href="../_images/piecewise.png"><img alt="../_images/piecewise.png" src="../_images/piecewise.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/piecewise.png"><img alt="../_images/piecewise.png" src="../_images/piecewise.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 5.2 </span><span class="caption-text">The blue line is the <em>true</em> function we are trying to approximate. The
 black-solid lines are piecewise polynomials of increasing order (1, 2,
@@ -562,7 +429,7 @@ all B-splines are equally important. In fact, each subplots in
 the given knots. In other words B-splines are completely defined by a
 set of knots and a degree.</p>
 <figure class="align-default" id="fig-splines-basis">
-<a class="reference internal image-reference" href="../_images/splines_basis.png"><img alt="../_images/splines_basis.png" src="../_images/splines_basis.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/splines_basis.png"><img alt="../_images/splines_basis.png" src="../_images/splines_basis.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 5.3 </span><span class="caption-text">B-splines of increasing degree, from 0 to 3. On the top subplot we have
 a step function, on second a triangular function and then increasingly
@@ -614,7 +481,7 @@ see the same basis functions from the first row scaled by a set of
 spline that is obtained by a weighted sum of the B-splines with the
 weights given by the <span class="math notranslate nohighlight">\(\beta\)</span> coefficients.</p>
 <figure class="align-default" id="fig-splines-weighted">
-<a class="reference internal image-reference" href="../_images/splines_weighted.png"><img alt="../_images/splines_weighted.png" src="../_images/splines_weighted.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/splines_weighted.png"><img alt="../_images/splines_weighted.png" src="../_images/splines_weighted.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 5.4 </span><span class="caption-text">B-splines defined using Patsy. On the first row we can see splines of
 increasing order 1 (piecewise constant), 2 (piecewise linear) and 4
@@ -639,7 +506,7 @@ replacing the Half Normal distribution, with another one like the
 Normal, Exponential, etc. <a class="reference internal" href="#fig-splines-realizations"><span class="std std-numref">Fig. 5.5</span></a> shows four
 realization of cubic splines.</p>
 <figure class="align-default" id="fig-splines-realizations">
-<a class="reference internal image-reference" href="../_images/splines_realizations.png"><img alt="../_images/splines_realizations.png" src="../_images/splines_realizations.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/splines_realizations.png"><img alt="../_images/splines_realizations.png" src="../_images/splines_realizations.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 5.5 </span><span class="caption-text">Four realizations of cubic splines with <span class="math notranslate nohighlight">\(\beta_i\)</span> coefficients sampled
 from a Half Normal distribution.</span><a class="headerlink" href="#fig-splines-realizations" title="Permalink to this image">#</a></p>
@@ -679,8 +546,8 @@ that have a linear component, and building design matrices. It is
 closely inspired by the <em>formula mini-language</em> widely used in many
 packages from the R programming language ecosystem. Just for you to get
 a taste of the formula language, a linear model with two covariates
-looks like <code class="docutils literal notranslate"><span class="pre">&quot;y</span> <span class="pre">~</span> <span class="pre">x1</span> <span class="pre">+</span> <span class="pre">x2&quot;</span></code> and if we want to add an interaction we can
-write <code class="docutils literal notranslate"><span class="pre">&quot;y</span> <span class="pre">~</span> <span class="pre">x1</span> <span class="pre">+</span> <span class="pre">x2</span> <span class="pre">+</span> <span class="pre">x1:x2&quot;</span></code>. This is a similar syntax as the one shown
+looks like <code class="docutils literal notranslate"><span class="pre">"y</span> <span class="pre">~</span> <span class="pre">x1</span> <span class="pre">+</span> <span class="pre">x2"</span></code> and if we want to add an interaction we can
+write <code class="docutils literal notranslate"><span class="pre">"y</span> <span class="pre">~</span> <span class="pre">x1</span> <span class="pre">+</span> <span class="pre">x2</span> <span class="pre">+</span> <span class="pre">x1:x2"</span></code>. This is a similar syntax as the one shown
 in Chapter <a class="reference internal" href="chp_03.html#chap2"><span class="std std-ref">3</span></a> in the box highlighting Bambi. For more
 details please check the patsy documentation <a class="footnote-reference brackets" href="#id35" id="id15" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a>.</p>
 <p>To define a basis spline design matrix in Patsy we need to pass a string
@@ -693,15 +560,15 @@ matrices, one with degree 0 (piecewise constant), another with degree 1
 (piecewise linear) and finally one with degree 3 (cubic spline).</p>
 <div class="literal-block-wrapper docutils container" id="splines-patsy">
 <div class="code-block-caption"><span class="caption-number">Listing 5.1 </span><span class="caption-text">splines_patsy</span><a class="headerlink" href="#splines-patsy" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.linspace.html#numpy.linspace" title="numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
 <span class="n">knots</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">]</span>
 
-<span class="n">B0</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;bs(x, knots=knots, degree=0, include_intercept=True) - 1&quot;</span><span class="p">,</span> 
-             <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="s2">&quot;knots&quot;</span><span class="p">:</span><span class="n">knots</span><span class="p">})</span>
-<span class="n">B1</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;bs(x, knots=knots, degree=1, include_intercept=True) - 1&quot;</span><span class="p">,</span>
-             <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="s2">&quot;knots&quot;</span><span class="p">:</span><span class="n">knots</span><span class="p">})</span>
-<span class="n">B3</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;bs(x, knots=knots, degree=3,include_intercept=True) - 1&quot;</span><span class="p">,</span>
-             <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="s2">&quot;knots&quot;</span><span class="p">:</span><span class="n">knots</span><span class="p">})</span>
+<span class="n">B0</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span><span class="s2">"bs(x, knots=knots, degree=0, include_intercept=True) - 1"</span><span class="p">,</span> 
+             <span class="p">{</span><span class="s2">"x"</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="s2">"knots"</span><span class="p">:</span><span class="n">knots</span><span class="p">})</span>
+<span class="n">B1</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span><span class="s2">"bs(x, knots=knots, degree=1, include_intercept=True) - 1"</span><span class="p">,</span>
+             <span class="p">{</span><span class="s2">"x"</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="s2">"knots"</span><span class="p">:</span><span class="n">knots</span><span class="p">})</span>
+<span class="n">B3</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span><span class="s2">"bs(x, knots=knots, degree=3,include_intercept=True) - 1"</span><span class="p">,</span>
+             <span class="p">{</span><span class="s2">"x"</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="s2">"knots"</span><span class="p">:</span><span class="n">knots</span><span class="p">})</span>
 </pre></div>
 </div>
 </div>
@@ -710,7 +577,7 @@ with Code Block <a class="reference internal" href="#splines-patsy"><span class=
 grasp what Patsy is doing we also recommend you use Jupyter notebook/lab
 or your favorite IDE to inspect the objects <code class="docutils literal notranslate"><span class="pre">B0</span></code>, <code class="docutils literal notranslate"><span class="pre">B1</span></code> and <code class="docutils literal notranslate"><span class="pre">B2</span></code>.</p>
 <figure class="align-default" id="fig-design-matrices">
-<a class="reference internal image-reference" href="../_images/design_matrices.png"><img alt="../_images/design_matrices.png" src="../_images/design_matrices.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/design_matrices.png"><img alt="../_images/design_matrices.png" src="../_images/design_matrices.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 5.6 </span><span class="caption-text">Design matrices generated with Patsy in Code Block
 <a class="reference internal" href="#splines-patsy"><span class="std std-ref">splines_patsy</span></a>. The color goes from black
@@ -743,27 +610,27 @@ we use <code class="docutils literal notranslate"><span class="pre">x</span> <sp
 easier to understand.</p>
 <div class="literal-block-wrapper docutils container" id="splines-patsy-plot">
 <div class="code-block-caption"><span class="caption-number">Listing 5.2 </span><span class="caption-text">splines_patsy_plot</span><a class="headerlink" href="#splines-patsy-plot" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="s2">&quot;row&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html#matplotlib.pyplot.subplots" title="matplotlib.pyplot.subplots"><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span></a><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="s2">"row"</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">((</span><span class="n">B0</span><span class="p">,</span> <span class="n">B1</span><span class="p">,</span> <span class="n">B3</span><span class="p">),</span>
-                                     <span class="p">(</span><span class="s2">&quot;Piecewise constant&quot;</span><span class="p">,</span>
-                                      <span class="s2">&quot;Piecewise linear&quot;</span><span class="p">,</span>
-                                      <span class="s2">&quot;Cubic spline&quot;</span><span class="p">))):</span>
+                                     <span class="p">(</span><span class="s2">"Piecewise constant"</span><span class="p">,</span>
+                                      <span class="s2">"Piecewise linear"</span><span class="p">,</span>
+                                      <span class="s2">"Cubic spline"</span><span class="p">))):</span>
     <span class="c1"># plot spline basis functions</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
         <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">B</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span>
-                          <span class="n">color</span><span class="o">=</span><span class="n">viridish</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+                          <span class="n">color</span><span class="o">=</span><span class="n">viridish</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">"--"</span><span class="p">)</span>
     <span class="c1"># we generate some positive random coefficients </span>
     <span class="c1"># there is nothing wrong with negative values</span>
-    <span class="n">β</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="n">β</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.normal.html#numpy.random.normal" title="numpy.random.normal"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
     <span class="c1"># plot spline basis functions scaled by its β</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
         <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">B</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">β</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
-                          <span class="n">color</span><span class="o">=</span><span class="n">viridish</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+                          <span class="n">color</span><span class="o">=</span><span class="n">viridish</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">"--"</span><span class="p">)</span>
     <span class="c1"># plot the sum of the basis functions</span>
-    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">β</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.dot.html#numpy.dot" title="numpy.dot"><span class="n">np</span><span class="o">.</span><span class="n">dot</span></a><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">β</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">"k"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
     <span class="c1"># plot the knots</span>
-    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">knots</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">knots</span><span class="p">),</span> <span class="s2">&quot;ko&quot;</span><span class="p">)</span>
-    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">knots</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">knots</span><span class="p">),</span> <span class="s2">&quot;ko&quot;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">knots</span><span class="p">,</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.zeros_like.html#numpy.zeros_like" title="numpy.zeros_like"><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span></a><span class="p">(</span><span class="n">knots</span><span class="p">),</span> <span class="s2">"ko"</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">knots</span><span class="p">,</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.zeros_like.html#numpy.zeros_like" title="numpy.zeros_like"><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span></a><span class="p">(</span><span class="n">knots</span><span class="p">),</span> <span class="s2">"ko"</span><span class="p">)</span>
     <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -786,19 +653,19 @@ dataset from such a bike sharing system from the University of
 California Irvine’s Machine Learning Repository <a class="footnote-reference brackets" href="#id36" id="id17" role="doc-noteref"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></a>. For our example
 we are going to estimate the number of rental bikes rented per hour over
 a 24 hour period. Let us load and plot the data:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/bikes_hour.csv&quot;</span><span class="p">)</span>
-<span class="n">data</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;hour&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"../data/bikes_hour.csv"</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">"hour"</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># We standardize the response variable</span>
-<span class="n">data_cnt_om</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="n">data_cnt_os</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
-<span class="n">data</span><span class="p">[</span><span class="s2">&quot;count_normalized&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">data_cnt_om</span><span class="p">)</span> <span class="o">/</span> <span class="n">data_cnt_os</span>
+<span class="n">data_cnt_om</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"count"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">data_cnt_os</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"count"</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">data</span><span class="p">[</span><span class="s2">"count_normalized"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"count"</span><span class="p">]</span> <span class="o">-</span> <span class="n">data_cnt_om</span><span class="p">)</span> <span class="o">/</span> <span class="n">data_cnt_os</span>
 <span class="c1"># Remove data, you may later try to refit the model to the whole data</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[::</span><span class="mi">50</span><span class="p">]</span>
 </pre></div>
 </div>
 <figure class="align-default" id="fig-bikes-data">
-<a class="reference internal image-reference" href="../_images/bikes_data.png"><img alt="../_images/bikes_data.png" src="../_images/bikes_data.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/bikes_data.png"><img alt="../_images/bikes_data.png" src="../_images/bikes_data.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 5.7 </span><span class="caption-text">A visualization of the bikes data. Each point is the normalized number
 of bikes rented per hour of the day (on the interval 0, 23). The
@@ -817,7 +684,7 @@ knot.</p>
 <div class="literal-block-wrapper docutils container" id="knot-list">
 <div class="code-block-caption"><span class="caption-number">Listing 5.3 </span><span class="caption-text">knot_list</span><a class="headerlink" href="#knot-list" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">num_knots</span> <span class="o">=</span> <span class="mi">6</span>
-<span class="n">knot_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="n">num_knots</span><span class="o">+</span><span class="mi">2</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">knot_list</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.linspace.html#numpy.linspace" title="numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="n">num_knots</span><span class="o">+</span><span class="mi">2</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -831,8 +698,8 @@ larger the number of knots the less important their positions.</p>
 <div class="literal-block-wrapper docutils container" id="bikes-dmatrix">
 <div class="code-block-caption"><span class="caption-number">Listing 5.4 </span><span class="caption-text">bikes_dmatrix</span><a class="headerlink" href="#bikes-dmatrix" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span>
-    <span class="s2">&quot;bs(cnt, knots=knots, degree=3, include_intercept=True) - 1&quot;</span><span class="p">,</span>
-    <span class="p">{</span><span class="s2">&quot;cnt&quot;</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">hour</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="s2">&quot;knots&quot;</span><span class="p">:</span> <span class="n">knot_list</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]})</span>
+    <span class="s2">"bs(cnt, knots=knots, degree=3, include_intercept=True) - 1"</span><span class="p">,</span>
+    <span class="p">{</span><span class="s2">"cnt"</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">hour</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="s2">"knots"</span><span class="p">:</span> <span class="n">knot_list</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]})</span>
 </pre></div>
 </div>
 </div>
@@ -857,11 +724,11 @@ one-to-one fashion.</p>
 <div class="literal-block-wrapper docutils container" id="id18">
 <div class="code-block-caption"><span class="caption-number">Listing 5.5 </span><span class="caption-text">splines</span><a class="headerlink" href="#id18" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">splines</span><span class="p">:</span>
-    <span class="n">τ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfCauchy</span><span class="p">(</span><span class="s2">&quot;τ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> 
-    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="n">τ</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;μ&quot;</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">β</span><span class="p">))</span>
-    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">c</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;count_normalized&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+    <span class="n">τ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfCauchy</span><span class="p">(</span><span class="s2">"τ"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> 
+    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"β"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="n">τ</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">"μ"</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">β</span><span class="p">))</span>
+    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">"σ"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"c"</span><span class="p">,</span> <span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">"count_normalized"</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
     <span class="n">idata_s</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">return_inferencedata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -871,7 +738,7 @@ prediction as a solid black line and each weighted B-spline as a dashed
 line. It is a nice representation as we can see how the B-splines are
 contributing to the final result.</p>
 <figure class="align-default" id="fig-bikes-spline-raw-data">
-<a class="reference internal image-reference" href="../_images/bikes_spline_raw_data.png"><img alt="../_images/bikes_spline_raw_data.png" src="../_images/bikes_spline_raw_data.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/bikes_spline_raw_data.png"><img alt="../_images/bikes_spline_raw_data.png" src="../_images/bikes_spline_raw_data.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 5.8 </span><span class="caption-text">Bikes data fitted using splines. The B-splines are represented with
 dashed lines. The sum of them generates the thicker solid black line.
@@ -892,7 +759,7 @@ first peak at around hour 10, which levels-off, or perhaps slightly
 declines, then followed by a second peak as people commute back home at
 around hour 18, after which there a steady decline.</p>
 <figure class="align-default" id="fig-bikes-data2">
-<a class="reference internal image-reference" href="../_images/bikes_spline_data.png"><img alt="../_images/bikes_spline_data.png" src="../_images/bikes_spline_data.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/bikes_spline_data.png"><img alt="../_images/bikes_spline_data.png" src="../_images/bikes_spline_data.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 5.9 </span><span class="caption-text">Bikes data (black dots) fitted using splines. The shaded curve
 represents the 94% HDI interval (of the mean) and the blue curve
@@ -1005,7 +872,7 @@ these models.</p>
 </tbody>
 </table>
 <figure class="align-default" id="fig-bikes-spline-loo-knots">
-<a class="reference internal image-reference" href="../_images/bikes_spline_loo_knots.png"><img alt="../_images/bikes_spline_loo_knots.png" src="../_images/bikes_spline_loo_knots.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/bikes_spline_loo_knots.png"><img alt="../_images/bikes_spline_loo_knots.png" src="../_images/bikes_spline_loo_knots.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 5.10 </span><span class="caption-text">Mean posterior spline for the model described in Code Block
 <a class="reference internal" href="#id18"><span class="std std-ref">splines</span></a> with different number of knots (3, 6,
@@ -1060,11 +927,11 @@ data using <code class="docutils literal notranslate"><span class="pre">splines<
 <div class="literal-block-wrapper docutils container" id="splines-rw">
 <div class="code-block-caption"><span class="caption-number">Listing 5.6 </span><span class="caption-text">splines_rw</span><a class="headerlink" href="#splines-rw" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">splines_rw</span><span class="p">:</span>
-    <span class="n">τ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfCauchy</span><span class="p">(</span><span class="s2">&quot;τ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> 
-    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">GaussianRandomWalk</span><span class="p">(</span><span class="s2">&quot;β&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">τ</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;μ&quot;</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">β</span><span class="p">))</span>
-    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">c</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;count_normalized&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+    <span class="n">τ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfCauchy</span><span class="p">(</span><span class="s2">"τ"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> 
+    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">GaussianRandomWalk</span><span class="p">(</span><span class="s2">"β"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">τ</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">"μ"</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">β</span><span class="p">))</span>
+    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">"σ"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"c"</span><span class="p">,</span> <span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">"count_normalized"</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
     <span class="n">trace_splines_rw</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1074,7 +941,7 @@ function for the model <code class="docutils literal notranslate"><span class="p
 spline mean function without smoothing prior (gray thick line), although
 we admit that the difference seems to be rather small.</p>
 <figure class="align-default" id="fig-bikes-spline-data-grw">
-<a class="reference internal image-reference" href="../_images/bikes_spline_data_grw.png"><img alt="../_images/bikes_spline_data_grw.png" src="../_images/bikes_spline_data_grw.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/bikes_spline_data_grw.png"><img alt="../_images/bikes_spline_data_grw.png" src="../_images/bikes_spline_data_grw.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 5.11 </span><span class="caption-text">Bikes data fitted with either a Gaussian prior (black) or a regularizing
 Gaussian Random Walk Prior (blue). We use 22 knots for both cases. The
@@ -1098,7 +965,7 @@ seven values for each one of the 12 plants. Let us begin by loading and
 tidying up the data.</p>
 <div class="literal-block-wrapper docutils container" id="plants-co2-import">
 <div class="code-block-caption"><span class="caption-number">Listing 5.7 </span><span class="caption-text">plants_co2_import</span><a class="headerlink" href="#plants-co2-import" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plants_CO2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/CO2_uptake.csv&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plants_CO2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"../data/CO2_uptake.csv"</span><span class="p">)</span>
 <span class="n">plant_names</span> <span class="o">=</span> <span class="n">plants_CO2</span><span class="o">.</span><span class="n">Plant</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
 
 <span class="c1"># Index the first 7 CO2 measurements per plant</span>
@@ -1122,11 +989,11 @@ relatively low number of knots should work fine. In Code Block
 list with the values <code class="docutils literal notranslate"><span class="pre">[95,</span> <span class="pre">175,</span> <span class="pre">250,</span> <span class="pre">350,</span> <span class="pre">500,</span> <span class="pre">675,</span> <span class="pre">1000]</span></code> repeated 12
 times, one time per plant.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">num_knots</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">knot_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">CO2_conc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">CO2_conc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">num_knots</span><span class="o">+</span><span class="mi">2</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">knot_list</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.linspace.html#numpy.linspace" title="numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="n">CO2_conc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">CO2_conc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">num_knots</span><span class="o">+</span><span class="mi">2</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
 <span class="n">Bg</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span>
-    <span class="s2">&quot;bs(conc, knots=knots, degree=3, include_intercept=True) - 1&quot;</span><span class="p">,</span>
-    <span class="p">{</span><span class="s2">&quot;conc&quot;</span><span class="p">:</span> <span class="n">CO2_concs</span><span class="p">,</span> <span class="s2">&quot;knots&quot;</span><span class="p">:</span> <span class="n">knot_list</span><span class="p">})</span>
+    <span class="s2">"bs(conc, knots=knots, degree=3, include_intercept=True) - 1"</span><span class="p">,</span>
+    <span class="p">{</span><span class="s2">"conc"</span><span class="p">:</span> <span class="n">CO2_concs</span><span class="p">,</span> <span class="s2">"knots"</span><span class="p">:</span> <span class="n">knot_list</span><span class="p">})</span>
 </pre></div>
 </div>
 <p>This problem looks similar to the bike rental problem from previous
@@ -1142,11 +1009,11 @@ the model either to simplify it or to make it more complex.</p>
 <div class="literal-block-wrapper docutils container" id="sp-global">
 <div class="code-block-caption"><span class="caption-number">Listing 5.8 </span><span class="caption-text">sp_global</span><a class="headerlink" href="#sp-global" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">sp_global</span><span class="p">:</span>
-    <span class="n">τ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfCauchy</span><span class="p">(</span><span class="s2">&quot;τ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">τ</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">Bg</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="n">μg</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;μg&quot;</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Bg</span><span class="p">,</span> <span class="n">β</span><span class="p">))</span>
-    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">up</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;up&quot;</span><span class="p">,</span> <span class="n">μg</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">uptake</span><span class="p">)</span>
+    <span class="n">τ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfCauchy</span><span class="p">(</span><span class="s2">"τ"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"β"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">τ</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">Bg</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">μg</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">"μg"</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Bg</span><span class="p">,</span> <span class="n">β</span><span class="p">))</span>
+    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">"σ"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">up</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"up"</span><span class="p">,</span> <span class="n">μg</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">uptake</span><span class="p">)</span>
     <span class="n">idata_sp_global</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="n">return_inferencedata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1156,7 +1023,7 @@ providing a good fit for some of the plants. The model is good on
 average, i.e. if we pool all the species together, but not very good for
 specific plants.</p>
 <figure class="align-default" id="fig-sp-global">
-<a class="reference internal image-reference" href="../_images/sp_global.png"><img alt="../_images/sp_global.png" src="../_images/sp_global.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/sp_global.png"><img alt="../_images/sp_global.png" src="../_images/sp_global.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 5.12 </span><span class="caption-text">The black dots represents the CO₂ uptake measured at seven CO₂
 concentrations for each one of 12 plants (Qn1, Qn2, Qn3, Qc1, Qc2, Qc3,
@@ -1168,13 +1035,13 @@ the gray shaded curve represents the 94% HDI interval for that fit.</span><a cla
 <p>Let us try now with a model with a different response per plant, in
 order to do this we define the design matrix <code class="docutils literal notranslate"><span class="pre">Bi</span></code> in Code Block
 <a class="reference internal" href="#bi-matrix"><span class="std std-ref">Bi_matrix</span></a>. To define <code class="docutils literal notranslate"><span class="pre">Bi</span></code> we use the list
-<code class="docutils literal notranslate"><span class="pre">CO2_conc</span> <span class="pre">=</span> <span class="pre">[95,</span>&#160; <span class="pre">175,</span>&#160; <span class="pre">250,</span>&#160; <span class="pre">350,</span>&#160; <span class="pre">500,</span>&#160; <span class="pre">675,</span> <span class="pre">1000]</span></code>, thus <code class="docutils literal notranslate"><span class="pre">Bi</span></code> is a
+<code class="docutils literal notranslate"><span class="pre">CO2_conc</span> <span class="pre">=</span> <span class="pre">[95,</span>  <span class="pre">175,</span>  <span class="pre">250,</span>  <span class="pre">350,</span>  <span class="pre">500,</span>  <span class="pre">675,</span> <span class="pre">1000]</span></code>, thus <code class="docutils literal notranslate"><span class="pre">Bi</span></code> is a
 <span class="math notranslate nohighlight">\(7 \times 7\)</span> matrix while <code class="docutils literal notranslate"><span class="pre">Bg</span></code> is a <span class="math notranslate nohighlight">\(84 \times 7\)</span> matrix.</p>
 <div class="literal-block-wrapper docutils container" id="bi-matrix">
 <div class="code-block-caption"><span class="caption-number">Listing 5.9 </span><span class="caption-text">Bi_matrix</span><a class="headerlink" href="#bi-matrix" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Bi</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span>
-    <span class="s2">&quot;bs(conc, knots=knots, degree=3, include_intercept=True) - 1&quot;</span><span class="p">,</span>
-    <span class="p">{</span><span class="s2">&quot;conc&quot;</span><span class="p">:</span> <span class="n">CO2_conc</span><span class="p">,</span> <span class="s2">&quot;knots&quot;</span><span class="p">:</span> <span class="n">knot_list</span><span class="p">})</span>
+    <span class="s2">"bs(conc, knots=knots, degree=3, include_intercept=True) - 1"</span><span class="p">,</span>
+    <span class="p">{</span><span class="s2">"conc"</span><span class="p">:</span> <span class="n">CO2_conc</span><span class="p">,</span> <span class="s2">"knots"</span><span class="p">:</span> <span class="n">knot_list</span><span class="p">})</span>
 </pre></div>
 </div>
 </div>
@@ -1185,11 +1052,11 @@ we reshape <code class="docutils literal notranslate"><span class="pre">μi[:,in
 <div class="literal-block-wrapper docutils container" id="sp-individual">
 <div class="code-block-caption"><span class="caption-number">Listing 5.10 </span><span class="caption-text">sp_individual</span><a class="headerlink" href="#sp-individual" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">sp_individual</span><span class="p">:</span>
-    <span class="n">τ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfCauchy</span><span class="p">(</span><span class="s2">&quot;τ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">τ</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">Bi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">groups</span><span class="p">))</span>
-    <span class="n">μi</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;μi&quot;</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Bi</span><span class="p">,</span> <span class="n">β</span><span class="p">))</span>
-    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">up</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;up&quot;</span><span class="p">,</span> <span class="n">μi</span><span class="p">[:,</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">uptake</span><span class="p">)</span>
+    <span class="n">τ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfCauchy</span><span class="p">(</span><span class="s2">"τ"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"β"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">τ</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">Bi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">groups</span><span class="p">))</span>
+    <span class="n">μi</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">"μi"</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Bi</span><span class="p">,</span> <span class="n">β</span><span class="p">))</span>
+    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">"σ"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">up</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"up"</span><span class="p">,</span> <span class="n">μi</span><span class="p">[:,</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">uptake</span><span class="p">)</span>
     <span class="n">idata_sp_individual</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="n">return_inferencedata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1197,7 +1064,7 @@ we reshape <code class="docutils literal notranslate"><span class="pre">μi[:,in
 <p>From <a class="reference internal" href="#fig-sp-individual"><span class="std std-numref">Fig. 5.13</span></a> we can now see that we have a much
 better fit for each one of the 12 plants.</p>
 <figure class="align-default" id="fig-sp-individual">
-<a class="reference internal image-reference" href="../_images/sp_individual.png"><img alt="../_images/sp_individual.png" src="../_images/sp_individual.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/sp_individual.png"><img alt="../_images/sp_individual.png" src="../_images/sp_individual.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 5.13 </span><span class="caption-text">CO₂ uptake measured at seven CO₂ concentrations for 12 plants. The
 black line is the mean spline fit from the model in Code Block
@@ -1212,13 +1079,13 @@ both previously defined design matrices <code class="docutils literal notranslat
 <div class="literal-block-wrapper docutils container" id="sp-mix">
 <div class="code-block-caption"><span class="caption-number">Listing 5.11 </span><span class="caption-text">sp_mix</span><a class="headerlink" href="#sp-mix" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">sp_mix</span><span class="p">:</span>
-    <span class="n">τ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfCauchy</span><span class="p">(</span><span class="s2">&quot;τ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">βg</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;βg&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">τ</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">Bg</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="n">μg</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;μg&quot;</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Bg</span><span class="p">,</span> <span class="n">βg</span><span class="p">))</span>
-    <span class="n">βi</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;βi&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">τ</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">Bi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">groups</span><span class="p">))</span>
-    <span class="n">μi</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;μi&quot;</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Bi</span><span class="p">,</span> <span class="n">βi</span><span class="p">))</span>
-    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">up</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;up&quot;</span><span class="p">,</span> <span class="n">μg</span><span class="o">+</span><span class="n">μi</span><span class="p">[:,</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">uptake</span><span class="p">)</span>
+    <span class="n">τ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfCauchy</span><span class="p">(</span><span class="s2">"τ"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">βg</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"βg"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">τ</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">Bg</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">μg</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">"μg"</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Bg</span><span class="p">,</span> <span class="n">βg</span><span class="p">))</span>
+    <span class="n">βi</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"βi"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">τ</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">Bi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">groups</span><span class="p">))</span>
+    <span class="n">μi</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">"μi"</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Bi</span><span class="p">,</span> <span class="n">βi</span><span class="p">))</span>
+    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">"σ"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">up</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"up"</span><span class="p">,</span> <span class="n">μg</span><span class="o">+</span><span class="n">μi</span><span class="p">[:,</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">uptake</span><span class="p">)</span>
     <span class="n">idata_sp_mix</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="n">return_inferencedata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1232,7 +1099,7 @@ different not only in the average uptake, i.e. they are not flat
 straight lines, but they are also different, to various extents, in the
 shape of their functional responses.</p>
 <figure class="align-default" id="fig-sp-mix-decomposed">
-<a class="reference internal image-reference" href="../_images/sp_mix_decomposed.png"><img alt="../_images/sp_mix_decomposed.png" src="../_images/sp_mix_decomposed.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/sp_mix_decomposed.png"><img alt="../_images/sp_mix_decomposed.png" src="../_images/sp_mix_decomposed.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 5.14 </span><span class="caption-text">CO₂ uptake measured at seven CO₂ concentrations for 12 plants. The
 blue line is the mean spline fit from model in Code Block
@@ -1255,13 +1122,13 @@ about the estimated shape parameter of Pareto distribution being greater
 than 0.7. For this example we are going to stop here, but for a real
 analysis, we should pay further attention to these warnings and try to
 follow some of the actions described in Section <a class="reference internal" href="chp_02.html#k-paretto"><span class="std std-ref">Pareto Shape Parameter</span></a>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cmp</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">compare</span><span class="p">({</span><span class="s2">&quot;global&quot;</span><span class="p">:</span><span class="n">idata_sp_global</span><span class="p">,</span> 
-                  <span class="s2">&quot;individual&quot;</span><span class="p">:</span><span class="n">idata_sp_individual</span><span class="p">,</span> 
-                  <span class="s2">&quot;mix&quot;</span><span class="p">:</span><span class="n">idata_sp_mix</span><span class="p">})</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cmp</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://python.arviz.org/en/stable/api/generated/arviz.compare.html#arviz.compare" title="arviz.compare"><span class="n">az</span><span class="o">.</span><span class="n">compare</span></a><span class="p">({</span><span class="s2">"global"</span><span class="p">:</span><span class="n">idata_sp_global</span><span class="p">,</span> 
+                  <span class="s2">"individual"</span><span class="p">:</span><span class="n">idata_sp_individual</span><span class="p">,</span> 
+                  <span class="s2">"mix"</span><span class="p">:</span><span class="n">idata_sp_mix</span><span class="p">})</span>
 </pre></div>
 </div>
 <figure class="align-default" id="fig-sp-compare">
-<a class="reference internal image-reference" href="../_images/sp_compare.png"><img alt="../_images/sp_compare.png" src="../_images/sp_compare.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/sp_compare.png"><img alt="../_images/sp_compare.png" src="../_images/sp_compare.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 5.15 </span><span class="caption-text">Model comparison using LOO for the 3 different CO₂ uptake models
 discussed in this chapter (<code class="docutils literal notranslate"><span class="pre">sp_global</span></code>, <code class="docutils literal notranslate"><span class="pre">sp_individual</span></code>, <code class="docutils literal notranslate"><span class="pre">sp_mix</span></code>).
@@ -1307,17 +1174,17 @@ design matrix. Plot this design matrix. Then generate a cyclic design
 matrix. Plot this one too what is the difference?</p>
 <p><strong>5E6.</strong> Generate the following design matrices using
 Patsy.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.linspace.html#numpy.linspace" title="numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 <span class="n">knots</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">]</span>
 
-<span class="n">B0</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;bs(x, knots=knots, degree=3, include_intercept=False) +1&quot;</span><span class="p">,</span>
-            <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="s2">&quot;knots&quot;</span><span class="p">:</span><span class="n">knots</span><span class="p">})</span>
-<span class="n">B1</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;bs(x, knots=knots, degree=3, include_intercept=True) +1&quot;</span><span class="p">,</span>
-            <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="s2">&quot;knots&quot;</span><span class="p">:</span><span class="n">knots</span><span class="p">})</span>
-<span class="n">B2</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;bs(x, knots=knots, degree=3, include_intercept=False) -1&quot;</span><span class="p">,</span>
-            <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="s2">&quot;knots&quot;</span><span class="p">:</span><span class="n">knots</span><span class="p">})</span>
-<span class="n">B3</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;bs(x, knots=knots, degree=3, include_intercept=True) -1&quot;</span><span class="p">,</span>
-            <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="s2">&quot;knots&quot;</span><span class="p">:</span><span class="n">knots</span><span class="p">})</span>
+<span class="n">B0</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span><span class="s2">"bs(x, knots=knots, degree=3, include_intercept=False) +1"</span><span class="p">,</span>
+            <span class="p">{</span><span class="s2">"x"</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="s2">"knots"</span><span class="p">:</span><span class="n">knots</span><span class="p">})</span>
+<span class="n">B1</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span><span class="s2">"bs(x, knots=knots, degree=3, include_intercept=True) +1"</span><span class="p">,</span>
+            <span class="p">{</span><span class="s2">"x"</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="s2">"knots"</span><span class="p">:</span><span class="n">knots</span><span class="p">})</span>
+<span class="n">B2</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span><span class="s2">"bs(x, knots=knots, degree=3, include_intercept=False) -1"</span><span class="p">,</span>
+            <span class="p">{</span><span class="s2">"x"</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="s2">"knots"</span><span class="p">:</span><span class="n">knots</span><span class="p">})</span>
+<span class="n">B3</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span><span class="s2">"bs(x, knots=knots, degree=3, include_intercept=True) -1"</span><span class="p">,</span>
+            <span class="p">{</span><span class="s2">"x"</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="s2">"knots"</span><span class="p">:</span><span class="n">knots</span><span class="p">})</span>
 </pre></div>
 </div>
 <ol class="arabic simple">
@@ -1444,9 +1311,9 @@ temperature?</p></li>
 posterior predictive checks.</p></li>
 <li><p>Summarize all your findings</p></li>
 </ol>
-<hr class="footnotes docutils" />
+<hr class="footnotes docutils"/>
 <aside class="footnote brackets" id="id25" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">1</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id2" role="doc-backlink">1</a><span class="fn-bracket">]</span></span>
 <p>See Runge’s phenomenon for details. This can also be seen from
 Taylor’s theorem, polynomials will be useful to approximate a
 function close to a single given point, but it will not be good over
@@ -1454,69 +1321,68 @@ its whole domain. If you got lost try watching this video
 <a class="reference external" href="https://www.youtube.com/watch?v=3d6DsjIBzJ4">https://www.youtube.com/watch?v=3d6DsjIBzJ4</a>.</p>
 </aside>
 <aside class="footnote brackets" id="id26" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">2</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id3" role="doc-backlink">2</a><span class="fn-bracket">]</span></span>
 <p>A piecewise function is a function that is defined using
 sub-functions, where each sub-function applies to a different
 interval in the domain.</p>
 </aside>
 <aside class="footnote brackets" id="id27" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">3</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id4" role="doc-backlink">3</a><span class="fn-bracket">]</span></span>
 <p>In Chapter <a class="reference internal" href="chp_07.html#chap6"><span class="std std-ref">7</span></a> we explore how step-functions have a
 central role in Bayesian Additive Regression Trees.</p>
 </aside>
 <aside class="footnote brackets" id="id28" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">4</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id5" role="doc-backlink">4</a><span class="fn-bracket">]</span></span>
 <p>This can also be justified numerically as this reduces the number
 of coefficients we need to find to compute a solution.</p>
 </aside>
 <aside class="footnote brackets" id="id29" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">5</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id6" role="doc-backlink">5</a><span class="fn-bracket">]</span></span>
 <p>As usual the identity function is a valid choice.</p>
 </aside>
 <aside class="footnote brackets" id="id30" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">6</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id8" role="doc-backlink">6</a><span class="fn-bracket">]</span></span>
 <p>Other basis functions could be wavelets or Fourier series as we
 will see in Chapter <a class="reference internal" href="chp_06.html#chap4"><span class="std std-ref">6</span></a>.</p>
 </aside>
 <aside class="footnote brackets" id="id31" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">7</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id10" role="doc-backlink">7</a><span class="fn-bracket">]</span></span>
 <p>Also known as break points, which is arguably a more memorable
 name, but still knots is widely used in the literature.</p>
 </aside>
 <aside class="footnote brackets" id="id32" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id11">8</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id11" role="doc-backlink">8</a><span class="fn-bracket">]</span></span>
 <p>In the limit of infinite degree a B-spline will span the entire
 real line and not only that, it will converge to a Gaussian
 <a class="reference external" href="https://www.youtube.com/watch/9CS7j5I6aOc">https://www.youtube.com/watch/9CS7j5I6aOc</a>.</p>
 </aside>
 <aside class="footnote brackets" id="id33" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id12">9</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id12" role="doc-backlink">9</a><span class="fn-bracket">]</span></span>
 <p>Check
 <a class="reference external" href="https://pclambert.net/interactivegraphs/spline_continuity/spline_continuity">https://pclambert.net/interactivegraphs/spline_continuity/spline_continuity</a>
 for further intuition</p>
 </aside>
 <aside class="footnote brackets" id="id34" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id14">10</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id14" role="doc-backlink">10</a><span class="fn-bracket">]</span></span>
 <p>If interested you can check
 <a class="reference external" href="https://en.wikipedia.org/wiki/De_Boor's_algorithm">https://en.wikipedia.org/wiki/De_Boor’s_algorithm</a>.</p>
 </aside>
 <aside class="footnote brackets" id="id35" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id15">11</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id15" role="doc-backlink">11</a><span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://patsy.readthedocs.io">https://patsy.readthedocs.io</a></p>
 </aside>
 <aside class="footnote brackets" id="id36" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id17">12</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id17" role="doc-backlink">12</a><span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/bike+sharing+dataset">https://archive.ics.uci.edu/ml/datasets/bike+sharing+dataset</a></p>
 </aside>
 <aside class="footnote brackets" id="id37" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id24">13</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id24" role="doc-backlink">13</a><span class="fn-bracket">]</span></span>
 <p>Yes, this is also known as a mixed-effect model, you might recall
 the related concept we discussed in Chapter <a class="reference internal" href="chp_04.html#chap3"><span class="std std-ref">4</span></a>.</p>
 </aside>
 </section>
 </section>
-
-    <script type="text/x-thebe-config">
+<script type="text/x-thebe-config">
     {
         requestKernel: true,
         binderOptions: {
@@ -1534,51 +1400,34 @@ the related concept we discussed in Chapter <a class="reference internal" href="
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
-
-                </article>
-              
-
-              
-              
-              
-              
-                <footer class="prev-next-footer">
-                  
+<script>kernelName = 'python3'</script>
+</article>
+<footer class="prev-next-footer">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="chp_04.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">4. </span>Extending Linear Models</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="chp_06.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">6. </span>Time Series</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="chp_04.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title"><span class="section-number">4. </span>Extending Linear Models</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
+</a>
+<a class="right-next" href="chp_06.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title"><span class="section-number">6. </span>Time Series</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage">
+<i class="fa-solid fa-list"></i> Contents
   </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
+<nav class="bd-toc-nav page-toc">
+<ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polynomial-regression">5.1. Polynomial Regression</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expanding-the-feature-space">5.2. Expanding the Feature Space</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introducing-splines">5.3. Introducing Splines</a></li>
@@ -1591,57 +1440,36 @@ the related concept we discussed in Chapter <a class="reference internal" href="
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-co2-uptake-with-splines">5.7. Modeling CO₂ Uptake with Splines</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">5.8. Exercises</a></li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-          </div>
-          <footer class="bd-footer-content">
-            
+</div>
+<footer class="bd-footer-content">
 <div class="bd-footer-content__inner container">
-  
-  <div class="footer-item">
-    
+<div class="footer-item">
 <p class="component-author">
 By Martin, Kumar, Lao
 </p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-
-  <p class="copyright">
+</div>
+<div class="footer-item">
+<p class="copyright">
     
       © Copyright 2022.
       <br/>
-    
-  </p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
+</p>
 </div>
-          </footer>
-        
-
-      </main>
-    </div>
-  </div>
-  
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<div class="footer-item">
+</div>
+<div class="footer-item">
+</div>
+</div>
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
 <script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
-
-  <footer class="bd-footer">
-  </footer>
-  </body>
+<footer class="bd-footer">
+</footer>
+</body>
 </html>

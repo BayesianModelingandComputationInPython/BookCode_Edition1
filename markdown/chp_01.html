@@ -1,164 +1,101 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
-    <title>1. Bayesian Inference &#8212; Bayesian Modeling and Computation in Python</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="Docutils 0.18.1: http://docutils.sourceforge.net/" name="generator"/>
+<title>1. Bayesian Inference — Bayesian Modeling and Computation in Python</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-
-  
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-codeautolink.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
-  
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
-  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
-
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet"/>
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet"/>
+<link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" rel="stylesheet" type="text/css"/>
+<link href="../_static/togglebutton.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-thebe.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-codeautolink.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" rel="stylesheet" type="text/css"/>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" rel="preload"/>
+<script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+<script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+<script src="../_static/jquery.js"></script>
+<script src="../_static/underscore.js"></script>
+<script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+<script src="../_static/doctools.js"></script>
+<script src="../_static/clipboard.min.js"></script>
+<script src="../_static/copybutton.js"></script>
+<script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../_static/togglebutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<script src="../_static/design-tabs.js"></script>
+<script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'markdown/chp_01';</script>
-    <link rel="shortcut icon" href="../_static/favicon.ico"/>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2. Exploratory Analysis of Bayesian Models" href="chp_02.html" />
-    <link rel="prev" title="Symbols" href="symbollist.html" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
-  
-  
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  
-  <div id="pst-scroll-pixel-helper"></div>
-
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
+<script async="async" src="../_static/sphinx-thebe.js"></script>
+<script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+<script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'markdown/chp_01';</script>
+<link href="../_static/favicon.ico" rel="shortcut icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="chp_02.html" rel="next" title="2. Exploratory Analysis of Bayesian Models"/>
+<link href="symbollist.html" rel="prev" title="Symbols"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</head>
+<body data-bs-root-margin="0px 0px -60%" data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-default-mode="" data-offset="180">
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>
     Back to top
   </button>
-
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         id="search-input"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+<input class="sidebar-toggle" id="__primary" name="__primary" type="checkbox"/>
+<label class="overlay overlay-primary" for="__primary"></label>
+<input class="sidebar-toggle" id="__secondary" name="__secondary" type="checkbox"/>
+<label class="overlay overlay-secondary" for="__secondary"></label>
+<div class="search-button__wrapper">
+<div class="search-button__overlay"></div>
+<div class="search-button__search-container">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search this book..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" id="search-input" name="q" placeholder="Search this book..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
-  </div>
-  
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
-  
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      <div class="bd-sidebar-primary bd-sidebar">
-        
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-    
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-  
-
+</div>
+<nav class="bd-header navbar navbar-expand-lg bd-navbar">
+</nav>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<div class="bd-sidebar-primary bd-sidebar">
+<div class="sidebar-header-items sidebar-primary__section">
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
 <a class="navbar-brand logo" href="../welcome.html">
-  
-  
-  
-  
-  
-  
-    <p class="title logo__title">Bayesian Modeling and Computation in Python</p>
-  
+<p class="title logo__title">Bayesian Modeling and Computation in Python</p>
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item navbar-nav active">
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 0</span></p>
+<div class="sidebar-primary-item"><nav aria-label="Main" class="bd-links" id="bd-docs-nav">
+<div class="bd-toc-item navbar-nav active">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 0</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="dedication.html">Dedication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="foreword.html">Foreword</a></li>
@@ -200,111 +137,53 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../solutions/chp_01.html">Solutions 1: Bayesian Inference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../solutions/chp_02.html">Solutions 2: Exploratory Analysis of Bayesian models</a></li>
 </ul>
-
-    </div>
+</div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-  
-  <div id="rtd-footer-container"></div>
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main">
-        
-        
-
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+<div id="rtd-footer-container"></div>
+</div>
+<main class="bd-main" id="main-content">
 <div class="sbt-scroll-pixel-helper"></div>
-
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <span class="fa-solid fa-bars"></span>
+<div class="header-article-items__start">
+<div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" data-bs-placement="bottom" data-bs-toggle="tooltip" for="__primary" title="Toggle primary sidebar">
+<span class="fa-solid fa-bars"></span>
 </label></div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
-
+</div>
+<div class="header-article-items__end">
+<div class="header-article-item">
 <div class="article-header-buttons">
-
-
-
-
-
 <div class="dropdown dropdown-source-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
-    <i class="fab fa-github"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1" target="_blank"
-   class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
+<button aria-expanded="false" aria-label="Source repositories" class="btn dropdown-toggle" data-bs-toggle="dropdown" type="button">
+<i class="fab fa-github"></i>
+</button>
+<ul class="dropdown-menu">
+<li><a class="btn btn-sm btn-source-repository-button dropdown-item" data-bs-placement="left" data-bs-toggle="tooltip" href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1" target="_blank" title="Source repository">
 <span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
+<i class="fab fa-github"></i>
+</span>
 <span class="btn__text-container">Repository</span>
 </a>
 </li>
-      
-      
-      
-      
-      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_01.html&body=Your%20issue%20content%20here." target="_blank"
-   class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
+<li><a class="btn btn-sm btn-source-issues-button dropdown-item" data-bs-placement="left" data-bs-toggle="tooltip" href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_01.html&amp;body=Your%20issue%20content%20here." target="_blank" title="Open an issue">
 <span class="btn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
+<i class="fas fa-lightbulb"></i>
+</span>
 <span class="btn__text-container">Open issue</span>
 </a>
 </li>
-      
-  </ul>
+</ul>
 </div>
-
-
-
-
-<button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
-  title="Fullscreen mode"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
+<button class="btn btn-sm btn-fullscreen-button" data-bs-placement="bottom" data-bs-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode">
 <span class="btn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
+<i class="fas fa-expand"></i>
+</span>
 </button>
-
-
-
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -314,8 +193,6 @@ document.write(`
   </button>
 `);
 </script>
-
-
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -323,29 +200,23 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" data-bs-placement="bottom" data-bs-toggle="tooltip" for="__secondary" title="Toggle secondary sidebar">
+<span class="fa-solid fa-list"></span>
 </label>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-
-<div id="jb-print-docs-body" class="onlyprint">
-    <h1>Bayesian Inference</h1>
-    <!-- Table of contents -->
-    <div id="print-main-content">
-        <div id="jb-print-toc">
-            
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+</div>
+<div class="onlyprint" id="jb-print-docs-body">
+<h1>Bayesian Inference</h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+<div>
+<h2> Contents </h2>
+</div>
+<nav aria-label="Page">
+<ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-modeling">1.1. Bayesian Modeling</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-models">1.1.1. Bayesian Models</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">1.1.2. Bayesian Inference</a></li>
@@ -363,17 +234,13 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">1.5. Exercises</a></li>
 </ul>
-            </nav>
-        </div>
-    </div>
+</nav>
 </div>
-
-              
-                
+</div>
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
-                  
-  <section class="tex2jax_ignore mathjax_ignore" id="bayesian-inference">
+<article class="bd-article" role="main">
+<section class="tex2jax_ignore mathjax_ignore" id="bayesian-inference">
 <span id="chap1"></span><h1><span class="section-number">1. </span>Bayesian Inference<a class="headerlink" href="#bayesian-inference" title="Permalink to this heading">#</a></h1>
 <p>Modern Bayesian statistics is mostly performed using computer code. This
 has dramatically changed how Bayesian statistics was performed from even
@@ -495,7 +362,7 @@ distribution over all the parameters in the model (conditioned on the
 observed data). <a class="reference internal" href="#fig-bayesian-triad"><span class="std std-numref">Fig. 1.1</span></a> shows an example of an
 arbitrary prior, likelihood and the resulting posterior <a class="footnote-reference brackets" href="#id43" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>.</p>
 <figure class="align-default" id="fig-bayesian-triad">
-<a class="reference internal image-reference" href="../_images/bayesian_triad.png"><img alt="../_images/bayesian_triad.png" src="../_images/bayesian_triad.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/bayesian_triad.png"><img alt="../_images/bayesian_triad.png" src="../_images/bayesian_triad.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.1 </span><span class="caption-text">Left panel. A hypothetical prior indicating that the value
 <span class="math notranslate nohighlight">\(\theta = 0.5\)</span> is more likely and the plausibility of the rest of the
@@ -747,11 +614,11 @@ functions:</p>
 <div class="code-block-caption"><span class="caption-number">Listing 1.1 </span><span class="caption-text">metropolis_hastings_sampler</span><a class="headerlink" href="#metropolis-hastings-sampler" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">α</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">β</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">θ</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">prior</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">α</span><span class="p">,</span> <span class="n">β</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">θ</span><span class="p">)</span>
-        <span class="n">like</span>  <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">bernoulli</span><span class="p">(</span><span class="n">θ</span><span class="p">)</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">prod</span><span class="p">()</span>
+        <span class="n">prior</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.beta.html#scipy.stats.beta" title="scipy.stats.beta"><span class="n">stats</span><span class="o">.</span><span class="n">beta</span></a><span class="p">(</span><span class="n">α</span><span class="p">,</span> <span class="n">β</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">θ</span><span class="p">)</span>
+        <span class="n">like</span>  <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bernoulli.html#scipy.stats.bernoulli" title="scipy.stats.bernoulli"><span class="n">stats</span><span class="o">.</span><span class="n">bernoulli</span></a><span class="p">(</span><span class="n">θ</span><span class="p">)</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">prod</span><span class="p">()</span>
         <span class="n">prob</span> <span class="o">=</span> <span class="n">like</span> <span class="o">*</span> <span class="n">prior</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">prob</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+        <span class="n">prob</span> <span class="o">=</span> <span class="o">-</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/constants.html#numpy.inf" title="numpy.inf"><span class="n">np</span><span class="o">.</span><span class="n">inf</span></a>
     <span class="k">return</span> <span class="n">prob</span>
 </pre></div>
 </div>
@@ -760,7 +627,7 @@ functions:</p>
 purpose.</p>
 <div class="literal-block-wrapper docutils container" id="metropolis-hastings-sampler-rvs">
 <div class="code-block-caption"><span class="caption-number">Listing 1.2 </span><span class="caption-text">metropolis_hastings_sampler_rvs</span><a class="headerlink" href="#metropolis-hastings-sampler-rvs" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">bernoulli</span><span class="p">(</span><span class="mf">0.7</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bernoulli.html#scipy.stats.bernoulli" title="scipy.stats.bernoulli"><span class="n">stats</span><span class="o">.</span><span class="n">bernoulli</span></a><span class="p">(</span><span class="mf">0.7</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -772,7 +639,7 @@ algorithm:</p>
 <span class="linenos"> 2</span><span class="n">can_sd</span> <span class="o">=</span> <span class="mf">0.05</span>
 <span class="linenos"> 3</span><span class="n">α</span> <span class="o">=</span> <span class="n">β</span> <span class="o">=</span>  <span class="mi">1</span>
 <span class="linenos"> 4</span><span class="n">θ</span> <span class="o">=</span> <span class="mf">0.5</span>
-<span class="linenos"> 5</span><span class="n">trace</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;θ&quot;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_iters</span><span class="p">)}</span>
+<span class="linenos"> 5</span><span class="n">trace</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"θ"</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_iters</span><span class="p">)}</span>
 <span class="linenos"> 6</span><span class="n">p2</span> <span class="o">=</span> <span class="n">post</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">α</span><span class="p">,</span> <span class="n">β</span><span class="p">)</span>
 <span class="linenos"> 7</span>
 <span class="linenos"> 8</span><span class="k">for</span> <span class="nb">iter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_iters</span><span class="p">):</span>
@@ -784,7 +651,7 @@ algorithm:</p>
 <span class="linenos">14</span>        <span class="n">θ</span> <span class="o">=</span> <span class="n">θ_can</span>
 <span class="linenos">15</span>        <span class="n">p2</span> <span class="o">=</span> <span class="n">p1</span>
 <span class="linenos">16</span>
-<span class="linenos">17</span>    <span class="n">trace</span><span class="p">[</span><span class="s2">&quot;θ&quot;</span><span class="p">][</span><span class="nb">iter</span><span class="p">]</span> <span class="o">=</span> <span class="n">θ</span>
+<span class="linenos">17</span>    <span class="n">trace</span><span class="p">[</span><span class="s2">"θ"</span><span class="p">][</span><span class="nb">iter</span><span class="p">]</span> <span class="o">=</span> <span class="n">θ</span>
 </pre></div>
 </div>
 </div>
@@ -833,16 +700,16 @@ distributions. For example, we can use the code in Code Block
 <a class="reference internal" href="#fig-traceplot"><span class="std std-numref">Fig. 1.2</span></a> <a class="footnote-reference brackets" href="#id50" id="id18" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a>:</p>
 <div class="literal-block-wrapper docutils container" id="diy-trace-plot">
 <div class="code-block-caption"><span class="caption-number">Listing 1.4 </span><span class="caption-text">diy_trace_plot</span><a class="headerlink" href="#diy-trace-plot" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">trace</span><span class="p">[</span><span class="s1">&#39;θ&#39;</span><span class="p">],</span> <span class="s1">&#39;0.5&#39;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;θ&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">trace</span><span class="p">[</span><span class="s1">&#39;θ&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;0.5&#39;</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html#matplotlib.pyplot.subplots" title="matplotlib.pyplot.subplots"><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">trace</span><span class="p">[</span><span class="s1">'θ'</span><span class="p">],</span> <span class="s1">'0.5'</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'θ'</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">trace</span><span class="p">[</span><span class="s1">'θ'</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">'0.5'</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s2">"horizontal"</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
 </pre></div>
 </div>
 </div>
 <figure class="align-default" id="fig-traceplot">
-<a class="reference internal image-reference" href="../_images/traceplot.png"><img alt="../_images/traceplot.png" src="../_images/traceplot.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/traceplot.png"><img alt="../_images/traceplot.png" src="../_images/traceplot.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.2 </span><span class="caption-text">On the left, we have the sampled values of the parameter <span class="math notranslate nohighlight">\(\theta\)</span> at
 each iteration. On the right, we have the histogram of the sampled
@@ -855,7 +722,7 @@ plot on the right shows the distribution of the sampled values.</span><a class="
 <p>Generally it is also useful to compute some numerical summaries. Here we
 will use the Python package ArviZ <span id="id19">[<a class="reference internal" href="references.html#id11" title="Ravin Kumar, Colin Carroll, Ari Hartikainen, and Osvaldo Martin. Arviz a unified library for exploratory analysis of bayesian models in python. Journal of Open Source Software, 4(33):1143, 2019.">3</a>]</span> to compute these
 statistics:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;stats&quot;</span><span class="p">,</span> <span class="n">round_to</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><a class="sphinx-codeautolink-a" href="https://python.arviz.org/en/stable/api/generated/arviz.summary.html#arviz.summary" title="arviz.summary"><span class="n">az</span><span class="o">.</span><span class="n">summary</span></a><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"stats"</span><span class="p">,</span> <span class="n">round_to</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 <table class="table" id="tab-posterior-summary">
@@ -887,7 +754,7 @@ estimator (KDE)</strong>, which is like the smooth version of a histogram.
 ArviZ uses KDEs in many of its plots, and even internally for a few
 computations.</p>
 <figure class="align-default" id="fig-plot-posterior">
-<a class="reference internal image-reference" href="../_images/plot_posterior.png"><img alt="../_images/plot_posterior.png" src="../_images/plot_posterior.png" style="width: 4in;" /></a>
+<a class="reference internal image-reference" href="../_images/plot_posterior.png"><img alt="../_images/plot_posterior.png" src="../_images/plot_posterior.png" style="width: 4in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.3 </span><span class="caption-text">Posterior plot visualizing the samples generated from Code Block
 <a class="reference internal" href="#metropolis-hastings"><span class="std std-ref">metropolis_hastings</span></a>. The posterior distribution is represented using
@@ -929,10 +796,10 @@ Equation <a class="reference internal" href="#equation-eq-beta-binomial">(1.10)<
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Declare a model in PyMC3</span>
 <span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
     <span class="c1"># Specify the prior distribution of unknown parameter</span>
-    <span class="n">θ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Beta</span><span class="p">(</span><span class="s2">&quot;θ&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">θ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Beta</span><span class="p">(</span><span class="s2">"θ"</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="c1"># Specify the likelihood distribution and condition on the observed data</span>
-    <span class="n">y_obs</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Binomial</span><span class="p">(</span><span class="s2">&quot;y_obs&quot;</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">θ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">Y</span><span class="p">)</span>
+    <span class="n">y_obs</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Binomial</span><span class="p">(</span><span class="s2">"y_obs"</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">θ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">Y</span><span class="p">)</span>
 
     <span class="c1"># Sample from the posterior distribution</span>
     <span class="n">idata</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">return_inferencedata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -948,7 +815,7 @@ Since we have defined our model in PyMC3 syntax we can also utilize
 the model in Code Block <a class="reference internal" href="#beta-binom"><span class="std std-ref">beta_binom</span></a> (see
 <a class="reference internal" href="#fig-betabinommodelgraphviz"><span class="std std-numref">Fig. 1.4</span></a>).</p>
 <figure class="align-default" id="fig-betabinommodelgraphviz">
-<a class="reference internal image-reference" href="../_images/BetaBinomModelGraphViz.png"><img alt="../_images/BetaBinomModelGraphViz.png" src="../_images/BetaBinomModelGraphViz.png" style="width: 2in;" /></a>
+<a class="reference internal image-reference" href="../_images/BetaBinomModelGraphViz.png"><img alt="../_images/BetaBinomModelGraphViz.png" src="../_images/BetaBinomModelGraphViz.png" style="width: 2in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.4 </span><span class="caption-text">A graphical representation of the model defined in Equation
 <a class="reference internal" href="#equation-eq-beta-binomial">(1.10)</a> and Code Block
@@ -976,8 +843,8 @@ represented in the top and bottom panel, respectively, from
 <a class="reference internal" href="#fig-quartet"><span class="std std-numref">Fig. 1.5</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="predictive-distributions">
 <div class="code-block-caption"><span class="caption-number">Listing 1.6 </span><span class="caption-text">predictive_distributions</span><a class="headerlink" href="#predictive-distributions" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pred_dists</span> <span class="o">=</span> <span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">sample_prior_predictive</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">model</span><span class="p">)[</span><span class="s2">&quot;y_obs&quot;</span><span class="p">],</span>
-              <span class="n">pm</span><span class="o">.</span><span class="n">sample_posterior_predictive</span><span class="p">(</span><span class="n">idata</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">model</span><span class="p">)[</span><span class="s2">&quot;y_obs&quot;</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pred_dists</span> <span class="o">=</span> <span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">sample_prior_predictive</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">model</span><span class="p">)[</span><span class="s2">"y_obs"</span><span class="p">],</span>
+              <span class="n">pm</span><span class="o">.</span><span class="n">sample_posterior_predictive</span><span class="p">(</span><span class="n">idata</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">model</span><span class="p">)[</span><span class="s2">"y_obs"</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -1011,7 +878,7 @@ Ultimately this helps achieve what general statistics community always
 strives for a better shared understanding of the world.</p>
 </div>
 <figure class="align-default" id="fig-quartet">
-<a class="reference internal image-reference" href="../_images/Bayesian_quartet_distributions.png"><img alt="../_images/Bayesian_quartet_distributions.png" src="../_images/Bayesian_quartet_distributions.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Bayesian_quartet_distributions.png"><img alt="../_images/Bayesian_quartet_distributions.png" src="../_images/Bayesian_quartet_distributions.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.5 </span><span class="caption-text">From top plot to bottom plot we show: (1) samples from the prior
 distribution of the parameter <span class="math notranslate nohighlight">\(\theta\)</span>; (2) samples from the prior
@@ -1030,7 +897,7 @@ the mean are less spread than predictions from the posterior predictive
 distribution. This result is not only valid for the mean, we would get a
 similar picture if we change the mean to any other point-estimate.</p>
 <figure class="align-default" id="fig-predictions-distributions">
-<a class="reference internal image-reference" href="../_images/predictions_distributions.png"><img alt="../_images/predictions_distributions.png" src="../_images/predictions_distributions.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/predictions_distributions.png"><img alt="../_images/predictions_distributions.png" src="../_images/predictions_distributions.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.6 </span><span class="caption-text">Predictions for the Beta-Binomial model, using the posterior mean (gray
 histogram) vs predictions using the entire posterior, i.e. the posterior
@@ -1127,30 +994,30 @@ used to compute those posteriors) will have all its density at
 <span class="math notranslate nohighlight">\(\hat \theta = \frac{y}{n}\)</span>.</p>
 <div class="literal-block-wrapper docutils container" id="binomial-update">
 <div class="code-block-caption"><span class="caption-number">Listing 1.7 </span><span class="caption-text">binomial_update</span><a class="headerlink" href="#binomial-update" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">axes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">axes</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html#matplotlib.pyplot.subplots" title="matplotlib.pyplot.subplots"><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span></a><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">axes</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.ravel.html#numpy.ravel" title="numpy.ravel"><span class="n">np</span><span class="o">.</span><span class="n">ravel</span></a><span class="p">(</span><span class="n">axes</span><span class="p">)</span>
 
 <span class="n">n_trials</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">180</span><span class="p">]</span>
 <span class="n">success</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">59</span><span class="p">]</span>
 <span class="n">data</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">n_trials</span><span class="p">,</span> <span class="n">success</span><span class="p">)</span>
 
 <span class="n">beta_params</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span>
-<span class="n">θ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1500</span><span class="p">)</span>
+<span class="n">θ</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.linspace.html#numpy.linspace" title="numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1500</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-    <span class="n">s_n</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;s&quot;</span> <span class="k">if</span> <span class="p">(</span><span class="n">N</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">s_n</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"s"</span> <span class="k">if</span> <span class="p">(</span><span class="n">N</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="k">else</span> <span class="s2">""</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">jdx</span><span class="p">,</span> <span class="p">(</span><span class="n">a_prior</span><span class="p">,</span> <span class="n">b_prior</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">beta_params</span><span class="p">):</span>
         <span class="n">p_theta_given_y</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">a_prior</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="n">b_prior</span> <span class="o">+</span> <span class="n">N</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span>
 
         <span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">p_theta_given_y</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">viridish</span><span class="p">[</span><span class="n">jdx</span><span class="p">])</span>
         <span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
         <span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
-        <span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">N</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-        <span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">N</span><span class="si">:</span><span class="s2">4d</span><span class="si">}</span><span class="s2"> trial</span><span class="si">{</span><span class="n">s_n</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">y</span><span class="si">:</span><span class="s2">4d</span><span class="si">}</span><span class="s2"> success&quot;</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.divide.html#numpy.divide" title="numpy.divide"><span class="n">np</span><span class="o">.</span><span class="n">divide</span></a><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">N</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"k"</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">"o"</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">N</span><span class="si">:</span><span class="s2">4d</span><span class="si">}</span><span class="s2"> trial</span><span class="si">{</span><span class="n">s_n</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">y</span><span class="si">:</span><span class="s2">4d</span><span class="si">}</span><span class="s2"> success"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <figure class="align-default" id="fig-beta-binomial-update">
-<a class="reference internal image-reference" href="../_images/beta_binomial_update.png"><img alt="../_images/beta_binomial_update.png" src="../_images/beta_binomial_update.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/beta_binomial_update.png"><img alt="../_images/beta_binomial_update.png" src="../_images/beta_binomial_update.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.7 </span><span class="caption-text">Successive prior updating starting from 3 different priors and
 increasing the number of trials (and possible the number of successes
@@ -1261,7 +1128,7 @@ that weird when we find that this is the kernel of a close cousin of the
 Beta distribution, the Beta-prime distribution with parameters
 <span class="math notranslate nohighlight">\(\alpha=\beta=0.5\)</span>.</p>
 <figure class="align-default" id="fig-jeffrey-priors">
-<a class="reference internal image-reference" href="../_images/Jeffrey_priors.png"><img alt="../_images/Jeffrey_priors.png" src="../_images/Jeffrey_priors.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Jeffrey_priors.png"><img alt="../_images/Jeffrey_priors.png" src="../_images/Jeffrey_priors.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.8 </span><span class="caption-text">Top: Jeffreys’ prior (unnormalized) for the binomial likelihood
 parameterized in term of the number of success <span class="math notranslate nohighlight">\(\theta\)</span> (left) or in
@@ -1335,25 +1202,25 @@ constraints. For that reason we say that the purple distribution in
 <a class="reference internal" href="#fig-max-entropy"><span class="std std-numref">Fig. 1.9</span></a> was obtained under no-constraint.</p>
 <div class="literal-block-wrapper docutils container" id="max-ent-priors">
 <div class="code-block-caption"><span class="caption-number">Listing 1.8 </span><span class="caption-text">max_ent_priors</span><a class="headerlink" href="#max-ent-priors" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cons</span> <span class="o">=</span> <span class="p">[[{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;eq&quot;</span><span class="p">,</span> <span class="s2">&quot;fun&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">}],</span>
-        <span class="p">[{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;eq&quot;</span><span class="p">,</span> <span class="s2">&quot;fun&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">},</span>
-         <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;eq&quot;</span><span class="p">,</span> <span class="s2">&quot;fun&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">1.5</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">))}],</span>
-        <span class="p">[{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;eq&quot;</span><span class="p">,</span> <span class="s2">&quot;fun&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">},</span>
-         <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;eq&quot;</span><span class="p">,</span> <span class="s2">&quot;fun&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">[[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span> <span class="o">-</span> <span class="mf">0.8</span><span class="p">}]]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cons</span> <span class="o">=</span> <span class="p">[[{</span><span class="s2">"type"</span><span class="p">:</span> <span class="s2">"eq"</span><span class="p">,</span> <span class="s2">"fun"</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.sum.html#numpy.sum" title="numpy.sum"><span class="n">np</span><span class="o">.</span><span class="n">sum</span></a><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">}],</span>
+        <span class="p">[{</span><span class="s2">"type"</span><span class="p">:</span> <span class="s2">"eq"</span><span class="p">,</span> <span class="s2">"fun"</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.sum.html#numpy.sum" title="numpy.sum"><span class="n">np</span><span class="o">.</span><span class="n">sum</span></a><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">},</span>
+         <span class="p">{</span><span class="s2">"type"</span><span class="p">:</span> <span class="s2">"eq"</span><span class="p">,</span> <span class="s2">"fun"</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">1.5</span> <span class="o">-</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.sum.html#numpy.sum" title="numpy.sum"><span class="n">np</span><span class="o">.</span><span class="n">sum</span></a><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.arange.html#numpy.arange" title="numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">))}],</span>
+        <span class="p">[{</span><span class="s2">"type"</span><span class="p">:</span> <span class="s2">"eq"</span><span class="p">,</span> <span class="s2">"fun"</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.sum.html#numpy.sum" title="numpy.sum"><span class="n">np</span><span class="o">.</span><span class="n">sum</span></a><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">},</span>
+         <span class="p">{</span><span class="s2">"type"</span><span class="p">:</span> <span class="s2">"eq"</span><span class="p">,</span> <span class="s2">"fun"</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.sum.html#numpy.sum" title="numpy.sum"><span class="n">np</span><span class="o">.</span><span class="n">sum</span></a><span class="p">(</span><span class="n">x</span><span class="p">[[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span> <span class="o">-</span> <span class="mf">0.8</span><span class="p">}]]</span>
 
 <span class="n">max_ent</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cons</span><span class="p">):</span>
     <span class="n">val</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">entropy</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x0</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="mi">6</span><span class="p">]</span><span class="o">*</span><span class="mi">6</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">[(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)]</span> <span class="o">*</span> <span class="mi">6</span><span class="p">,</span>
-                   <span class="n">constraints</span><span class="o">=</span><span class="n">c</span><span class="p">)[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span>
+                   <span class="n">constraints</span><span class="o">=</span><span class="n">c</span><span class="p">)[</span><span class="s1">'x'</span><span class="p">]</span>
     <span class="n">max_ent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entropy</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">val</span><span class="p">,</span> <span class="s1">&#39;o--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">viridish</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">lw</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$t$&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$p(t)$&quot;</span><span class="p">)</span>
+    <a class="sphinx-codeautolink-a" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot" title="matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.arange.html#numpy.arange" title="numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">val</span><span class="p">,</span> <span class="s1">'o--'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">viridish</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">lw</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
+<a class="sphinx-codeautolink-a" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.xlabel.html#matplotlib.pyplot.xlabel" title="matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s2">"$t$"</span><span class="p">)</span>
+<a class="sphinx-codeautolink-a" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.ylabel.html#matplotlib.pyplot.ylabel" title="matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s2">"$p(t)$"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <figure class="align-default" id="fig-max-entropy">
-<a class="reference internal image-reference" href="../_images/max_entropy.png"><img alt="../_images/max_entropy.png" src="../_images/max_entropy.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/max_entropy.png"><img alt="../_images/max_entropy.png" src="../_images/max_entropy.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.9 </span><span class="caption-text">Discrete distributions obtained by maximizing the entropy under
 different constraints. We are using the function <code class="docutils literal notranslate"><span class="pre">entropy</span></code> from
@@ -1378,21 +1245,21 @@ choices will be less flat and more concentrated, for example, obtaining
 1 and 2 with 50% chance each (and thus zero change for the values 3 to
 6), which will also have 1.5 as the expected value.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ite</span> <span class="o">=</span> <span class="mi">100_000</span>
-<span class="n">entropies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="n">ite</span><span class="p">))</span>
+<span class="n">entropies</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.zeros.html#numpy.zeros" title="numpy.zeros"><span class="n">np</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="n">ite</span><span class="p">))</span>
 <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ite</span><span class="p">):</span>
-    <span class="n">rnds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+    <span class="n">rnds</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.zeros.html#numpy.zeros" title="numpy.zeros"><span class="n">np</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
     <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">x_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">x_</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.choice.html#numpy.random.choice" title="numpy.random.choice"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span></a><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.arange.html#numpy.arange" title="numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x_</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
-        <span class="n">rnd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">total</span><span class="p">)</span>
+        <span class="n">rnd</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.uniform.html#numpy.random.uniform" title="numpy.random.uniform"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">total</span><span class="p">)</span>
         <span class="n">rnds</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">rnd</span>
         <span class="n">total</span> <span class="o">=</span> <span class="n">rnds</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
     <span class="n">rnds</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">rnds</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
     <span class="n">H</span> <span class="o">=</span> <span class="n">entropy</span><span class="p">(</span><span class="n">rnds</span><span class="p">)</span>
     <span class="n">entropies</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">H</span>
-    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="mf">1.5</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">rnds</span> <span class="o">*</span> <span class="n">x_</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">0.01</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="mf">1.5</span> <span class="o">-</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.sum.html#numpy.sum" title="numpy.sum"><span class="n">np</span><span class="o">.</span><span class="n">sum</span></a><span class="p">(</span><span class="n">rnds</span> <span class="o">*</span> <span class="n">x_</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">0.01</span><span class="p">:</span>
         <span class="n">entropies</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">H</span>
-    <span class="n">prob_34</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">rnds</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">((</span><span class="n">x_</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">x_</span> <span class="o">==</span> <span class="mi">4</span><span class="p">))</span><span class="o">.</span><span class="n">ravel</span><span class="p">()])</span>
+    <span class="n">prob_34</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">rnds</span><span class="p">[</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.argwhere.html#numpy.argwhere" title="numpy.argwhere"><span class="n">np</span><span class="o">.</span><span class="n">argwhere</span></a><span class="p">((</span><span class="n">x_</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">x_</span> <span class="o">==</span> <span class="mi">4</span><span class="p">))</span><span class="o">.</span><span class="n">ravel</span><span class="p">()])</span>
     <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="mf">0.8</span> <span class="o">-</span> <span class="n">prob_34</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.01</span><span class="p">:</span>
         <span class="n">entropies</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">H</span>
 </pre></div>
@@ -1407,7 +1274,7 @@ higher entropy than the distributions in
 <a class="reference internal" href="#fig-max-entropy-vs-random-dist"><span class="std std-numref">Fig. 1.10</span></a>, which is in total agreement
 with what the theory tells us.</p>
 <figure class="align-default" id="fig-max-entropy-vs-random-dist">
-<a class="reference internal image-reference" href="../_images/max_entropy_vs_random_dist.png"><img alt="../_images/max_entropy_vs_random_dist.png" src="../_images/max_entropy_vs_random_dist.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/max_entropy_vs_random_dist.png"><img alt="../_images/max_entropy_vs_random_dist.png" src="../_images/max_entropy_vs_random_dist.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.10 </span><span class="caption-text">The distribution of entropy for a set of randomly generated
 distributions. The dotted vertical line indicates the value for the
@@ -1487,7 +1354,7 @@ if modeling the mean height of adult humans in meters, a prior of
 the height of giraffes that same prior becomes highly informative as in
 reality giraffe heights differ greatly than human heights.</p>
 <figure class="align-default" id="fig-prior-informativeness-spectrum">
-<a class="reference internal image-reference" href="../_images/prior_informativeness_spectrum.png"><img alt="../_images/prior_informativeness_spectrum.png" src="../_images/prior_informativeness_spectrum.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/prior_informativeness_spectrum.png"><img alt="../_images/prior_informativeness_spectrum.png" src="../_images/prior_informativeness_spectrum.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.11 </span><span class="caption-text">Prior informativeness spectrum: While Jeffreys and MaxEnt priors are
 uniquely defined for a binomial likelihood, weakly informative and
@@ -1621,18 +1488,18 @@ intuitions about these animals?</p>
 combinations of priors (change the parameters <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code>) and data
 (change heads and trials). Summarize your observations.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">posterior_grid</span><span class="p">(</span><span class="n">grid</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">heads</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">trials</span><span class="o">=</span><span class="mi">9</span><span class="p">):</span>
-    <span class="n">grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">grid</span><span class="p">)</span>
-    <span class="n">prior</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+    <span class="n">grid</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.linspace.html#numpy.linspace" title="numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">grid</span><span class="p">)</span>
+    <span class="n">prior</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.beta.html#scipy.stats.beta" title="scipy.stats.beta"><span class="n">stats</span><span class="o">.</span><span class="n">beta</span></a><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
     <span class="n">likelihood</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">heads</span><span class="p">,</span> <span class="n">trials</span><span class="p">,</span> <span class="n">grid</span><span class="p">)</span>
     <span class="n">posterior</span> <span class="o">=</span> <span class="n">likelihood</span> <span class="o">*</span> <span class="n">prior</span>
     <span class="n">posterior</span> <span class="o">/=</span> <span class="n">posterior</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-    <span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;heads = </span><span class="si">{</span><span class="n">heads</span><span class="si">}</span><span class="se">\n</span><span class="s2">trials = </span><span class="si">{</span><span class="n">trials</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html#matplotlib.pyplot.subplots" title="matplotlib.pyplot.subplots"><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"heads = </span><span class="si">{</span><span class="n">heads</span><span class="si">}</span><span class="se">\n</span><span class="s2">trials = </span><span class="si">{</span><span class="n">trials</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">e_n</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span>
             <span class="p">[</span><span class="n">prior</span><span class="p">,</span> <span class="n">likelihood</span><span class="p">,</span> <span class="n">posterior</span><span class="p">],</span>
-            <span class="p">[</span><span class="s2">&quot;prior&quot;</span><span class="p">,</span> <span class="s2">&quot;likelihood&quot;</span><span class="p">,</span> <span class="s2">&quot;posterior&quot;</span><span class="p">])):</span>
+            <span class="p">[</span><span class="s2">"prior"</span><span class="p">,</span> <span class="s2">"likelihood"</span><span class="p">,</span> <span class="s2">"posterior"</span><span class="p">])):</span>
         <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
-        <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="s2">&quot;o-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">e_n</span><span class="p">)</span>
+        <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="s2">"o-"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">e_n</span><span class="p">)</span>
         <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
 
 
@@ -1747,112 +1614,111 @@ least one seedling will germinate if you plant another 12 seedlings.</p></li>
 </ol>
 <p>After obtaining your results with SciPy repeat this exercise using PyMC3
 and ArviZ</p>
-<hr class="footnotes docutils" />
+<hr class="footnotes docutils"/>
 <aside class="footnote brackets" id="id40" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">1</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id4" role="doc-backlink">1</a><span class="fn-bracket">]</span></span>
 <p>If you want to be more general you can even say that everything is
 a probability distribution as a quantity you assume to know with
 arbitrary precision that can be described by a Dirac delta function.</p>
 </aside>
 <aside class="footnote brackets" id="id41" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">2</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id5" role="doc-backlink">2</a><span class="fn-bracket">]</span></span>
 <p>Some authors call these quantities latent variables and reserve
 the name parameter to identify fixed, but unknown, quantities.</p>
 </aside>
 <aside class="footnote brackets" id="id42" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">3</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id8" role="doc-backlink">3</a><span class="fn-bracket">]</span></span>
 <p>Alternatively you can think of this in terms of certainty or
 information, depending if you are a glass half empty or glass half
 full person.</p>
 </aside>
 <aside class="footnote brackets" id="id43" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">4</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id9" role="doc-backlink">4</a><span class="fn-bracket">]</span></span>
 <p>Sometimes the word <em>distribution</em> will be implicit, this commonly
 occurs when discussing these topics.</p>
 </aside>
 <aside class="footnote brackets" id="id44" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">5</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id10" role="doc-backlink">5</a><span class="fn-bracket">]</span></span>
 <p>Here we are using experiment in the broad sense of any procedure
 to collect or generate data.</p>
 </aside>
 <aside class="footnote brackets" id="id45" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id11">6</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id11" role="doc-backlink">6</a><span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://xkcd.com/2117/">https://xkcd.com/2117/</a></p>
 </aside>
 <aside class="footnote brackets" id="id46" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id12">7</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id12" role="doc-backlink">7</a><span class="fn-bracket">]</span></span>
 <p>Technically we should talk about the expectation of a random
 variable. See Section <a class="reference internal" href="chp_11.html#expectations"><span class="std std-ref">Expectations</span></a> for details.</p>
 </aside>
 <aside class="footnote brackets" id="id47" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id14">8</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id14" role="doc-backlink">8</a><span class="fn-bracket">]</span></span>
 <p>See detailed balance at Sections <a class="reference internal" href="chp_11.html#markov-chains"><span class="std std-ref">Markov Chains</span></a> and <a class="reference internal" href="chp_11.html#sec-metropolis-hastings"><span class="std std-ref">Metropolis-Hastings</span></a>.</p>
 </aside>
 <aside class="footnote brackets" id="id48" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id16">9</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id16" role="doc-backlink">9</a><span class="fn-bracket">]</span></span>
 <p>For a more extensive discussion about inference methods you should
 read Section [<a class="reference internal" href="chp_11.html#inference-methods"><span class="std std-ref">Inference Methods</span></a> and references
 therein.</p>
 </aside>
 <aside class="footnote brackets" id="id49" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id17">10</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id17" role="doc-backlink">10</a><span class="fn-bracket">]</span></span>
 <p>This is sometimes referred to as a kernel in other Universal
 Inference Engines.</p>
 </aside>
 <aside class="footnote brackets" id="id50" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id18">11</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id18" role="doc-backlink">11</a><span class="fn-bracket">]</span></span>
 <p>You can use ArviZ <code class="docutils literal notranslate"><span class="pre">plot_trace</span></code> function to get a similar plot.
 This is how we will do in the rest of the book.</p>
 </aside>
 <aside class="footnote brackets" id="id51" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id20">12</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id20" role="doc-backlink">12</a><span class="fn-bracket">]</span></span>
 <p>Notice that in principle the number of possible intervals
 containing a given proportion of the total density is infinite.</p>
 </aside>
 <aside class="footnote brackets" id="id52" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id26">13</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id26" role="doc-backlink">13</a><span class="fn-bracket">]</span></span>
 <p>For more examples check
 <a class="reference external" href="https://en.wikipedia.org/wiki/Conjugate_prior#Table_of_conjugate_distributions">https://en.wikipedia.org/wiki/Conjugate_prior#Table_of_conjugate_distributions</a></p>
 </aside>
 <aside class="footnote brackets" id="id53" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id27">14</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id27" role="doc-backlink">14</a><span class="fn-bracket">]</span></span>
 <p>Except, the ones happening in your brain.</p>
 </aside>
 <aside class="footnote brackets" id="id54" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id28">15</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id28" role="doc-backlink">15</a><span class="fn-bracket">]</span></span>
 <p>For example, a regularized linear regression with a L2
 regularization is the same as using a Gaussian prior on the
 coefficient.</p>
 </aside>
 <aside class="footnote brackets" id="id55" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id30">16</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id30" role="doc-backlink">16</a><span class="fn-bracket">]</span></span>
 <p>For example, if we have samples from the posterior, then we can
 plug those samples of <span class="math notranslate nohighlight">\(\theta\)</span> into
 <span class="math notranslate nohighlight">\(\kappa = \frac{\theta}{1-\theta}\)</span>.</p>
 </aside>
 <aside class="footnote brackets" id="id56" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id31">17</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id31" role="doc-backlink">17</a><span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Likelihood_principle">https://en.wikipedia.org/wiki/Likelihood_principle</a></p>
 </aside>
 <aside class="footnote brackets" id="id57" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id33">18</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id33" role="doc-backlink">18</a><span class="fn-bracket">]</span></span>
 <p>See Section <a class="reference internal" href="chp_11.html#entropy"><span class="std std-ref">Entropy</span></a> for more details.</p>
 </aside>
 <aside class="footnote brackets" id="id58" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id34">19</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id34" role="doc-backlink">19</a><span class="fn-bracket">]</span></span>
 <p>Wikipedia has a longer list at
 <a class="reference external" href="https://en.wikipedia.org/wiki/Maximum_entropy_probability_distribution#Other_examples">https://en.wikipedia.org/wiki/Maximum_entropy_probability_distribution#Other_examples</a></p>
 </aside>
 <aside class="footnote brackets" id="id59" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id36">20</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id36" role="doc-backlink">20</a><span class="fn-bracket">]</span></span>
 <p>Even when the definition of such priors will require more context
 than the one provided, we still think the example conveys a useful
 intuition, that will be refined as we progress through this book.</p>
 </aside>
 </section>
 </section>
-
-    <script type="text/x-thebe-config">
+<script type="text/x-thebe-config">
     {
         requestKernel: true,
         binderOptions: {
@@ -1870,51 +1736,34 @@ intuition, that will be refined as we progress through this book.</p>
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
-
-                </article>
-              
-
-              
-              
-              
-              
-                <footer class="prev-next-footer">
-                  
+<script>kernelName = 'python3'</script>
+</article>
+<footer class="prev-next-footer">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="symbollist.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Symbols</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="chp_02.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">2. </span>Exploratory Analysis of Bayesian Models</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="symbollist.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Symbols</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
+</a>
+<a class="right-next" href="chp_02.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title"><span class="section-number">2. </span>Exploratory Analysis of Bayesian Models</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage">
+<i class="fa-solid fa-list"></i> Contents
   </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
+<nav class="bd-toc-nav page-toc">
+<ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-modeling">1.1. Bayesian Modeling</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-models">1.1.1. Bayesian Models</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">1.1.2. Bayesian Inference</a></li>
@@ -1932,57 +1781,36 @@ intuition, that will be refined as we progress through this book.</p>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">1.5. Exercises</a></li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-          </div>
-          <footer class="bd-footer-content">
-            
+</div>
+<footer class="bd-footer-content">
 <div class="bd-footer-content__inner container">
-  
-  <div class="footer-item">
-    
+<div class="footer-item">
 <p class="component-author">
 By Martin, Kumar, Lao
 </p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-
-  <p class="copyright">
+</div>
+<div class="footer-item">
+<p class="copyright">
     
       © Copyright 2022.
       <br/>
-    
-  </p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
+</p>
 </div>
-          </footer>
-        
-
-      </main>
-    </div>
-  </div>
-  
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<div class="footer-item">
+</div>
+<div class="footer-item">
+</div>
+</div>
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
 <script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
-
-  <footer class="bd-footer">
-  </footer>
-  </body>
+<footer class="bd-footer">
+</footer>
+</body>
 </html>

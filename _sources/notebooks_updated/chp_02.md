@@ -15,13 +15,14 @@ jupyter:
 
 # Code 2: Exploratory Analysis of Bayesian Models
 
-
+```python
 %matplotlib inline
 import arviz as az
 import matplotlib.pyplot as plt
 import numpy as np
 import pymc as pm
 from scipy import stats
+```
 
 ```python
 az.style.use("arviz-grayscale")

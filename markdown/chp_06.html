@@ -1,164 +1,101 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
-    <title>6. Time Series &#8212; Bayesian Modeling and Computation in Python</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="Docutils 0.18.1: http://docutils.sourceforge.net/" name="generator"/>
+<title>6. Time Series — Bayesian Modeling and Computation in Python</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-
-  
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-codeautolink.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
-  
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
-  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
-
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet"/>
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet"/>
+<link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" rel="stylesheet" type="text/css"/>
+<link href="../_static/togglebutton.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-thebe.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-codeautolink.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" rel="stylesheet" type="text/css"/>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" rel="preload"/>
+<script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+<script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+<script src="../_static/jquery.js"></script>
+<script src="../_static/underscore.js"></script>
+<script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+<script src="../_static/doctools.js"></script>
+<script src="../_static/clipboard.min.js"></script>
+<script src="../_static/copybutton.js"></script>
+<script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../_static/togglebutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<script src="../_static/design-tabs.js"></script>
+<script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'markdown/chp_06';</script>
-    <link rel="shortcut icon" href="../_static/favicon.ico"/>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="7. Bayesian Additive Regression Trees" href="chp_07.html" />
-    <link rel="prev" title="5. Splines" href="chp_05.html" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
-  
-  
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  
-  <div id="pst-scroll-pixel-helper"></div>
-
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
+<script async="async" src="../_static/sphinx-thebe.js"></script>
+<script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+<script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'markdown/chp_06';</script>
+<link href="../_static/favicon.ico" rel="shortcut icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="chp_07.html" rel="next" title="7. Bayesian Additive Regression Trees"/>
+<link href="chp_05.html" rel="prev" title="5. Splines"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</head>
+<body data-bs-root-margin="0px 0px -60%" data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-default-mode="" data-offset="180">
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>
     Back to top
   </button>
-
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         id="search-input"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+<input class="sidebar-toggle" id="__primary" name="__primary" type="checkbox"/>
+<label class="overlay overlay-primary" for="__primary"></label>
+<input class="sidebar-toggle" id="__secondary" name="__secondary" type="checkbox"/>
+<label class="overlay overlay-secondary" for="__secondary"></label>
+<div class="search-button__wrapper">
+<div class="search-button__overlay"></div>
+<div class="search-button__search-container">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search this book..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" id="search-input" name="q" placeholder="Search this book..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
-  </div>
-  
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
-  
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      <div class="bd-sidebar-primary bd-sidebar">
-        
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-    
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-  
-
+</div>
+<nav class="bd-header navbar navbar-expand-lg bd-navbar">
+</nav>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<div class="bd-sidebar-primary bd-sidebar">
+<div class="sidebar-header-items sidebar-primary__section">
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
 <a class="navbar-brand logo" href="../welcome.html">
-  
-  
-  
-  
-  
-  
-    <p class="title logo__title">Bayesian Modeling and Computation in Python</p>
-  
+<p class="title logo__title">Bayesian Modeling and Computation in Python</p>
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item navbar-nav active">
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 0</span></p>
+<div class="sidebar-primary-item"><nav aria-label="Main" class="bd-links" id="bd-docs-nav">
+<div class="bd-toc-item navbar-nav active">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 0</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="dedication.html">Dedication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="foreword.html">Foreword</a></li>
@@ -200,111 +137,53 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../solutions/chp_01.html">Solutions 1: Bayesian Inference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../solutions/chp_02.html">Solutions 2: Exploratory Analysis of Bayesian models</a></li>
 </ul>
-
-    </div>
+</div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-  
-  <div id="rtd-footer-container"></div>
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main">
-        
-        
-
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+<div id="rtd-footer-container"></div>
+</div>
+<main class="bd-main" id="main-content">
 <div class="sbt-scroll-pixel-helper"></div>
-
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <span class="fa-solid fa-bars"></span>
+<div class="header-article-items__start">
+<div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" data-bs-placement="bottom" data-bs-toggle="tooltip" for="__primary" title="Toggle primary sidebar">
+<span class="fa-solid fa-bars"></span>
 </label></div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
-
+</div>
+<div class="header-article-items__end">
+<div class="header-article-item">
 <div class="article-header-buttons">
-
-
-
-
-
 <div class="dropdown dropdown-source-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
-    <i class="fab fa-github"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1" target="_blank"
-   class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
+<button aria-expanded="false" aria-label="Source repositories" class="btn dropdown-toggle" data-bs-toggle="dropdown" type="button">
+<i class="fab fa-github"></i>
+</button>
+<ul class="dropdown-menu">
+<li><a class="btn btn-sm btn-source-repository-button dropdown-item" data-bs-placement="left" data-bs-toggle="tooltip" href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1" target="_blank" title="Source repository">
 <span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
+<i class="fab fa-github"></i>
+</span>
 <span class="btn__text-container">Repository</span>
 </a>
 </li>
-      
-      
-      
-      
-      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_06.html&body=Your%20issue%20content%20here." target="_blank"
-   class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
+<li><a class="btn btn-sm btn-source-issues-button dropdown-item" data-bs-placement="left" data-bs-toggle="tooltip" href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_06.html&amp;body=Your%20issue%20content%20here." target="_blank" title="Open an issue">
 <span class="btn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
+<i class="fas fa-lightbulb"></i>
+</span>
 <span class="btn__text-container">Open issue</span>
 </a>
 </li>
-      
-  </ul>
+</ul>
 </div>
-
-
-
-
-<button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
-  title="Fullscreen mode"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
+<button class="btn btn-sm btn-fullscreen-button" data-bs-placement="bottom" data-bs-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode">
 <span class="btn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
+<i class="fas fa-expand"></i>
+</span>
 </button>
-
-
-
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -314,8 +193,6 @@ document.write(`
   </button>
 `);
 </script>
-
-
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -323,29 +200,23 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" data-bs-placement="bottom" data-bs-toggle="tooltip" for="__secondary" title="Toggle secondary sidebar">
+<span class="fa-solid fa-list"></span>
 </label>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-
-<div id="jb-print-docs-body" class="onlyprint">
-    <h1>Time Series</h1>
-    <!-- Table of contents -->
-    <div id="print-main-content">
-        <div id="jb-print-toc">
-            
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+</div>
+<div class="onlyprint" id="jb-print-docs-body">
+<h1>Time Series</h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+<div>
+<h2> Contents </h2>
+</div>
+<nav aria-label="Page">
+<ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-overview-of-time-series-problems">6.1. An Overview of Time Series Problems</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-analysis-as-a-regression-problem">6.2. Time Series Analysis as a Regression Problem</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#design-matrices-for-time-series">6.2.1. Design Matrices for Time Series</a></li>
@@ -370,17 +241,13 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">6.7. Exercises</a></li>
 </ul>
-            </nav>
-        </div>
-    </div>
+</nav>
 </div>
-
-              
-                
+</div>
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
-                  
-  <section class="tex2jax_ignore mathjax_ignore" id="time-series">
+<article class="bd-article" role="main">
+<section class="tex2jax_ignore mathjax_ignore" id="time-series">
 <span id="chap4"></span><h1><span class="section-number">6. </span>Time Series<a class="headerlink" href="#time-series" title="Permalink to this heading">#</a></h1>
 <p>“It is difficult to make predictions, especially about the future”.
 This is true when dutch politician Karl Kristian Steincke allegedly said
@@ -448,7 +315,7 @@ data into Python with Code Block
 set into training and testing set. We will fit the model using the
 training set only, and evaluate the forecast against the testing set.</p>
 <figure class="align-default" id="fig-fig1-co2-by-month">
-<a class="reference internal image-reference" href="../_images/fig1_co2_by_month.png"><img alt="../_images/fig1_co2_by_month.png" src="../_images/fig1_co2_by_month.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/fig1_co2_by_month.png"><img alt="../_images/fig1_co2_by_month.png" src="../_images/fig1_co2_by_month.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 6.1 </span><span class="caption-text">Monthly CO₂ measurements in Mauna Loa from 1966 January to 2019
 February, split into training (shown in black) and testing (shown in
@@ -458,10 +325,10 @@ the data.</span><a class="headerlink" href="#fig-fig1-co2-by-month" title="Perma
 </figure>
 <div class="literal-block-wrapper docutils container" id="load-co2-data">
 <div class="code-block-caption"><span class="caption-number">Listing 6.1 </span><span class="caption-text">load_co2_data</span><a class="headerlink" href="#load-co2-data" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">co2_by_month</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/monthly_mauna_loa_co2.csv&quot;</span><span class="p">)</span>
-<span class="n">co2_by_month</span><span class="p">[</span><span class="s2">&quot;date_month&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">co2_by_month</span><span class="p">[</span><span class="s2">&quot;date_month&quot;</span><span class="p">])</span>
-<span class="n">co2_by_month</span><span class="p">[</span><span class="s2">&quot;CO2&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">co2_by_month</span><span class="p">[</span><span class="s2">&quot;CO2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-<span class="n">co2_by_month</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;date_month&quot;</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">co2_by_month</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"../data/monthly_mauna_loa_co2.csv"</span><span class="p">)</span>
+<span class="n">co2_by_month</span><span class="p">[</span><span class="s2">"date_month"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">co2_by_month</span><span class="p">[</span><span class="s2">"date_month"</span><span class="p">])</span>
+<span class="n">co2_by_month</span><span class="p">[</span><span class="s2">"CO2"</span><span class="p">]</span> <span class="o">=</span> <span class="n">co2_by_month</span><span class="p">[</span><span class="s2">"CO2"</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float32" title="numpy.float32"><span class="n">np</span><span class="o">.</span><span class="n">float32</span></a><span class="p">)</span>
+<span class="n">co2_by_month</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"date_month"</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">num_forecast_steps</span> <span class="o">=</span> <span class="mi">12</span> <span class="o">*</span> <span class="mi">10</span>  <span class="c1"># Forecast the final ten years, given previous data</span>
 <span class="n">co2_by_month_training_data</span> <span class="o">=</span> <span class="n">co2_by_month</span><span class="p">[:</span><span class="o">-</span><span class="n">num_forecast_steps</span><span class="p">]</span>
@@ -486,7 +353,7 @@ trend we see in the data, we get the design matrix for the time series.
 You can see a subset of the design matrix in
 <a class="reference internal" href="#fig-fig2-sparse-design-matrix"><span class="std std-numref">Fig. 6.2</span></a>.</p>
 <figure class="align-default" id="fig-fig2-sparse-design-matrix">
-<a class="reference internal image-reference" href="../_images/fig2_sparse_design_matrix.png"><img alt="../_images/fig2_sparse_design_matrix.png" src="../_images/fig2_sparse_design_matrix.png" style="width: 5.2in;" /></a>
+<a class="reference internal image-reference" href="../_images/fig2_sparse_design_matrix.png"><img alt="../_images/fig2_sparse_design_matrix.png" src="../_images/fig2_sparse_design_matrix.png" style="width: 5.2in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 6.2 </span><span class="caption-text">Design matrix with a linear component and month of the year component
 for a simple regression model for time series. The design matrix is
@@ -499,16 +366,16 @@ goes from black for 1 to light gray for 0.</span><a class="headerlink" href="#fi
 </figure>
 <div class="literal-block-wrapper docutils container" id="generate-design-matrix">
 <div class="code-block-caption"><span class="caption-number">Listing 6.2 </span><span class="caption-text">generate_design_matrix</span><a class="headerlink" href="#generate-design-matrix" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">trend_all</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">co2_by_month</span><span class="p">))[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
-<span class="n">trend_all</span> <span class="o">=</span> <span class="n">trend_all</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">trend_all</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.linspace.html#numpy.linspace" title="numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">co2_by_month</span><span class="p">))[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+<span class="n">trend_all</span> <span class="o">=</span> <span class="n">trend_all</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float32" title="numpy.float32"><span class="n">np</span><span class="o">.</span><span class="n">float32</span></a><span class="p">)</span>
 <span class="n">trend</span> <span class="o">=</span> <span class="n">trend_all</span><span class="p">[:</span><span class="o">-</span><span class="n">num_forecast_steps</span><span class="p">,</span> <span class="p">:]</span>
 
 <span class="n">seasonality_all</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span>
-   <span class="n">co2_by_month</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+   <span class="n">co2_by_month</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float32" title="numpy.float32"><span class="n">np</span><span class="o">.</span><span class="n">float32</span></a><span class="p">)</span>
 <span class="n">seasonality</span> <span class="o">=</span> <span class="n">seasonality_all</span><span class="p">[:</span><span class="o">-</span><span class="n">num_forecast_steps</span><span class="p">,</span> <span class="p">:]</span>
 
-<span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">X_subset</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">trend</span><span class="p">,</span> <span class="n">seasonality</span><span class="p">],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)[</span><span class="o">-</span><span class="mi">50</span><span class="p">:]</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html#matplotlib.pyplot.subplots" title="matplotlib.pyplot.subplots"><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">X_subset</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.concatenate.html#numpy.concatenate" title="numpy.concatenate"><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span></a><span class="p">([</span><span class="n">trend</span><span class="p">,</span> <span class="n">seasonality</span><span class="p">],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)[</span><span class="o">-</span><span class="mi">50</span><span class="p">:]</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">X_subset</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -546,20 +413,20 @@ we introduced in Chapter <a class="reference internal" href="chp_03.html#chap2">
 
 <span class="nd">@tfd</span><span class="o">.</span><span class="n">JointDistributionCoroutine</span>
 <span class="k">def</span> <span class="nf">ts_regression_model</span><span class="p">():</span>
-    <span class="n">intercept</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">100.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;intercept&quot;</span><span class="p">))</span>
-    <span class="n">trend_coeff</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">10.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;trend_coeff&quot;</span><span class="p">))</span>
+    <span class="n">intercept</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">100.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"intercept"</span><span class="p">))</span>
+    <span class="n">trend_coeff</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">10.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"trend_coeff"</span><span class="p">))</span>
     <span class="n">seasonality_coeff</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span>
         <span class="n">tfd</span><span class="o">.</span><span class="n">Sample</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">),</span>
                    <span class="n">sample_shape</span><span class="o">=</span><span class="n">seasonality</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
-                   <span class="n">name</span><span class="o">=</span><span class="s2">&quot;seasonality_coeff&quot;</span><span class="p">))</span>
-    <span class="n">noise</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">HalfCauchy</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">5.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;noise_sigma&quot;</span><span class="p">))</span>
+                   <span class="n">name</span><span class="o">=</span><span class="s2">"seasonality_coeff"</span><span class="p">))</span>
+    <span class="n">noise</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">HalfCauchy</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">5.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"noise_sigma"</span><span class="p">))</span>
     <span class="n">y_hat</span> <span class="o">=</span> <span class="p">(</span><span class="n">intercept</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">+</span>
-             <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;ij,...-&gt;...i&quot;</span><span class="p">,</span> <span class="n">trend</span><span class="p">,</span> <span class="n">trend_coeff</span><span class="p">)</span> <span class="o">+</span>
-             <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;ij,...j-&gt;...i&quot;</span><span class="p">,</span> <span class="n">seasonality</span><span class="p">,</span> <span class="n">seasonality_coeff</span><span class="p">))</span>
+             <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">"ij,...-&gt;...i"</span><span class="p">,</span> <span class="n">trend</span><span class="p">,</span> <span class="n">trend_coeff</span><span class="p">)</span> <span class="o">+</span>
+             <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">"ij,...j-&gt;...i"</span><span class="p">,</span> <span class="n">seasonality</span><span class="p">,</span> <span class="n">seasonality_coeff</span><span class="p">))</span>
     <span class="n">observed</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Independent</span><span class="p">(</span>
         <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">noise</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]),</span>
         <span class="n">reinterpreted_batch_ndims</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;observed&quot;</span><span class="p">)</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">"observed"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -587,16 +454,16 @@ shown in <a class="reference internal" href="#fig-fig3-prior-predictive1"><span 
 <span class="n">prior_samples</span> <span class="o">=</span> <span class="n">ts_regression_model</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>  
 <span class="n">prior_predictive_timeseries</span> <span class="o">=</span> <span class="n">prior_samples</span><span class="o">.</span><span class="n">observed</span>
 
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html#matplotlib.pyplot.subplots" title="matplotlib.pyplot.subplots"><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">co2_by_month</span><span class="o">.</span><span class="n">index</span><span class="p">[:</span><span class="o">-</span><span class="n">num_forecast_steps</span><span class="p">],</span>
         <span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">prior_predictive_timeseries</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Year&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Year"</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">autofmt_xdate</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <figure class="align-default" id="fig-fig3-prior-predictive1">
-<a class="reference internal image-reference" href="../_images/fig3_prior_predictive1.png"><img alt="../_images/fig3_prior_predictive1.png" src="../_images/fig3_prior_predictive1.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/fig3_prior_predictive1.png"><img alt="../_images/fig3_prior_predictive1.png" src="../_images/fig3_prior_predictive1.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 6.3 </span><span class="caption-text">Prior predictive samples from a simple regression model for modeling the
 Monthly CO₂ measurements in Mauna Loa time series. Each line plot is
@@ -614,18 +481,18 @@ into an <code class="docutils literal notranslate"><span class="pre">az.Inferenc
     <span class="n">autograph</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">jit_compile</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">mcmc_samples</span><span class="p">,</span> <span class="n">sampler_stats</span> <span class="o">=</span> <span class="n">run_mcmc</span><span class="p">(</span>
     <span class="mi">1000</span><span class="p">,</span> <span class="n">ts_regression_model</span><span class="p">,</span> <span class="n">n_chains</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">num_adaptation_steps</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
-    <span class="n">observed</span><span class="o">=</span><span class="n">co2_by_month_training_data</span><span class="p">[</span><span class="s2">&quot;CO2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="o">...</span><span class="p">])</span>
+    <span class="n">observed</span><span class="o">=</span><span class="n">co2_by_month_training_data</span><span class="p">[</span><span class="s2">"CO2"</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="o">...</span><span class="p">])</span>
 
-<span class="n">regression_idata</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span>
+<span class="n">regression_idata</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://python.arviz.org/en/stable/api/generated/arviz.from_dict.html#arviz.from_dict" title="arviz.from_dict"><span class="n">az</span><span class="o">.</span><span class="n">from_dict</span></a><span class="p">(</span>
     <span class="n">posterior</span><span class="o">=</span><span class="p">{</span>
         <span class="c1"># TFP mcmc returns (num_samples, num_chains, ...), we swap</span>
         <span class="c1"># the first and second axis below for each RV so the shape</span>
         <span class="c1"># is what ArviZ expects.</span>
-        <span class="n">k</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">k</span><span class="p">:</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.swapaxes.html#numpy.swapaxes" title="numpy.swapaxes"><span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span></a><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">mcmc_samples</span><span class="o">.</span><span class="n">_asdict</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()},</span>
     <span class="n">sample_stats</span><span class="o">=</span><span class="p">{</span>
-        <span class="n">k</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="n">sampler_stats</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;target_log_prob&quot;</span><span class="p">,</span> <span class="s2">&quot;diverging&quot;</span><span class="p">,</span> <span class="s2">&quot;accept_ratio&quot;</span><span class="p">,</span> <span class="s2">&quot;n_steps&quot;</span><span class="p">]})</span>
+        <span class="n">k</span><span class="p">:</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.swapaxes.html#numpy.swapaxes" title="numpy.swapaxes"><span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span></a><span class="p">(</span><span class="n">sampler_stats</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"target_log_prob"</span><span class="p">,</span> <span class="s2">"diverging"</span><span class="p">,</span> <span class="s2">"accept_ratio"</span><span class="p">,</span> <span class="s2">"n_steps"</span><span class="p">]})</span>
 </pre></div>
 </div>
 </div>
@@ -647,12 +514,12 @@ for the overall model fit and forecast.</p>
 <span class="c1"># But since we want to also plot the posterior predictive distribution for </span>
 <span class="c1"># each components, conditioned on both training and testing data, we</span>
 <span class="c1"># construct the posterior predictive distribution as below:</span>
-<span class="n">nchains</span> <span class="o">=</span> <span class="n">regression_idata</span><span class="o">.</span><span class="n">posterior</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="s2">&quot;chain&quot;</span><span class="p">]</span>
+<span class="n">nchains</span> <span class="o">=</span> <span class="n">regression_idata</span><span class="o">.</span><span class="n">posterior</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="s2">"chain"</span><span class="p">]</span>
 
 <span class="n">trend_posterior</span> <span class="o">=</span> <span class="n">mcmc_samples</span><span class="o">.</span><span class="n">intercept</span> <span class="o">+</span> \
-    <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;ij,...-&gt;i...&quot;</span><span class="p">,</span> <span class="n">trend_all</span><span class="p">,</span> <span class="n">mcmc_samples</span><span class="o">.</span><span class="n">trend_coeff</span><span class="p">)</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">"ij,...-&gt;i..."</span><span class="p">,</span> <span class="n">trend_all</span><span class="p">,</span> <span class="n">mcmc_samples</span><span class="o">.</span><span class="n">trend_coeff</span><span class="p">)</span>
 <span class="n">seasonality_posterior</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span>
-    <span class="s2">&quot;ij,...j-&gt;i...&quot;</span><span class="p">,</span> <span class="n">seasonality_all</span><span class="p">,</span> <span class="n">mcmc_samples</span><span class="o">.</span><span class="n">seasonality_coeff</span><span class="p">)</span>
+    <span class="s2">"ij,...j-&gt;i..."</span><span class="p">,</span> <span class="n">seasonality_all</span><span class="p">,</span> <span class="n">mcmc_samples</span><span class="o">.</span><span class="n">seasonality_coeff</span><span class="p">)</span>
 
 <span class="n">y_hat</span> <span class="o">=</span> <span class="n">trend_posterior</span> <span class="o">+</span> <span class="n">seasonality_posterior</span>
 <span class="n">posterior_predictive_dist</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">mcmc_samples</span><span class="o">.</span><span class="n">noise_sigma</span><span class="p">)</span>
@@ -661,14 +528,14 @@ for the overall model fit and forecast.</p>
 </div>
 </div>
 <figure class="align-default" id="fig-fig4-posterior-predictive-components1">
-<a class="reference internal image-reference" href="../_images/fig4_posterior_predictive_components1.png"><img alt="../_images/fig4_posterior_predictive_components1.png" src="../_images/fig4_posterior_predictive_components1.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/fig4_posterior_predictive_components1.png"><img alt="../_images/fig4_posterior_predictive_components1.png" src="../_images/fig4_posterior_predictive_components1.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 6.4 </span><span class="caption-text">Posterior predictive samples of the trend component and seasonality
 component of a regression model for time series.</span><a class="headerlink" href="#fig-fig4-posterior-predictive-components1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="fig-fig5-posterior-predictive1">
-<a class="reference internal image-reference" href="../_images/fig5_posterior_predictive1.png"><img alt="../_images/fig5_posterior_predictive1.png" src="../_images/fig5_posterior_predictive1.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/fig5_posterior_predictive1.png"><img alt="../_images/fig5_posterior_predictive1.png" src="../_images/fig5_posterior_predictive1.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 6.5 </span><span class="caption-text">Posterior predictive samples from a simple regression model for time
 series in gray, with the actual data plotted in black and blue. While
@@ -729,12 +596,12 @@ breakdown in <a class="reference internal" href="#fig-fig6-step-linear-function"
 <div class="code-block-caption"><span class="caption-number">Listing 6.7 </span><span class="caption-text">step_linear_function_for_trend</span><a class="headerlink" href="#step-linear-function-for-trend" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n_changepoints</span> <span class="o">=</span> <span class="mi">8</span>
 <span class="n">n_tp</span> <span class="o">=</span> <span class="mi">500</span>
-<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n_tp</span><span class="p">)</span>
-<span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n_changepoints</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">t</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.linspace.html#numpy.linspace" title="numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n_tp</span><span class="p">)</span>
+<span class="n">s</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.linspace.html#numpy.linspace" title="numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n_changepoints</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">A</span> <span class="o">=</span> <span class="p">(</span><span class="n">t</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">s</span><span class="p">)</span>
 
 <span class="n">k</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mi">40</span>
-<span class="n">delta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">laplace</span><span class="p">(</span><span class="mf">.1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n_changepoints</span><span class="p">)</span>
+<span class="n">delta</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.laplace.html#numpy.random.laplace" title="numpy.random.laplace"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">laplace</span></a><span class="p">(</span><span class="mf">.1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n_changepoints</span><span class="p">)</span>
 <span class="n">growth</span> <span class="o">=</span> <span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="n">A</span> <span class="o">@</span> <span class="n">delta</span><span class="p">)</span> <span class="o">*</span> <span class="n">t</span>
 <span class="n">offset</span> <span class="o">=</span> <span class="n">m</span> <span class="o">+</span> <span class="n">A</span> <span class="o">@</span> <span class="p">(</span><span class="o">-</span><span class="n">s</span> <span class="o">*</span> <span class="n">delta</span><span class="p">)</span>
 <span class="n">trend</span> <span class="o">=</span> <span class="n">growth</span> <span class="o">+</span> <span class="n">offset</span>
@@ -742,7 +609,7 @@ breakdown in <a class="reference internal" href="#fig-fig6-step-linear-function"
 </div>
 </div>
 <figure class="align-default" id="fig-fig6-step-linear-function">
-<a class="reference internal image-reference" href="../_images/fig6_step_linear_function.png"><img alt="../_images/fig6_step_linear_function.png" src="../_images/fig6_step_linear_function.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/fig6_step_linear_function.png"><img alt="../_images/fig6_step_linear_function.png" src="../_images/fig6_step_linear_function.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 6.6 </span><span class="caption-text">A step linear function as trend component for a time series model,
 generated with Code Block
@@ -789,18 +656,18 @@ and visualize it in <a class="reference internal" href="#fig-fig7-fourier-basis"
 <div class="code-block-caption"><span class="caption-number">Listing 6.8 </span><span class="caption-text">fourier_basis_as_seasonality</span><a class="headerlink" href="#fourier-basis-as-seasonality" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="k">def</span> <span class="nf">gen_fourier_basis</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">365.25</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">t</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">/</span> <span class="n">p</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/constants.html#numpy.pi" title="numpy.pi"><span class="n">np</span><span class="o">.</span><span class="n">pi</span></a> <span class="o">*</span> <span class="p">(</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.arange.html#numpy.arange" title="numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">t</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">/</span> <span class="n">p</span>
+    <span class="k">return</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.concatenate.html#numpy.concatenate" title="numpy.concatenate"><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span></a><span class="p">((</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.cos.html#numpy.cos" title="numpy.cos"><span class="n">np</span><span class="o">.</span><span class="n">cos</span></a><span class="p">(</span><span class="n">x</span><span class="p">),</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.sin.html#numpy.sin" title="numpy.sin"><span class="n">np</span><span class="o">.</span><span class="n">sin</span></a><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">n_tp</span> <span class="o">=</span> <span class="mi">500</span>
 <span class="n">p</span> <span class="o">=</span> <span class="mi">12</span>
-<span class="n">t_monthly</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">i</span> <span class="o">%</span> <span class="n">p</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_tp</span><span class="p">)])</span>
+<span class="n">t_monthly</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.asarray.html#numpy.asarray" title="numpy.asarray"><span class="n">np</span><span class="o">.</span><span class="n">asarray</span></a><span class="p">([</span><span class="n">i</span> <span class="o">%</span> <span class="n">p</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_tp</span><span class="p">)])</span>
 <span class="n">monthly_X</span> <span class="o">=</span> <span class="n">gen_fourier_basis</span><span class="p">(</span><span class="n">t_monthly</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <figure class="align-default" id="fig-fig7-fourier-basis">
-<a class="reference internal image-reference" href="../_images/fig7_fourier_basis.png"><img alt="../_images/fig7_fourier_basis.png" src="../_images/fig7_fourier_basis.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/fig7_fourier_basis.png"><img alt="../_images/fig7_fourier_basis.png" src="../_images/fig7_fourier_basis.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 6.7 </span><span class="caption-text">Fourier basis function with n=3. There are in total 6 predictors, where
 we highlighted the first one by setting the rest semi-transparent.</span><a class="headerlink" href="#fig-fig7-fourier-basis" title="Permalink to this image">#</a></p>
@@ -841,12 +708,12 @@ samples in a similar range of what is actually being observed (see
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate trend design matrix</span>
 <span class="n">n_changepoints</span> <span class="o">=</span> <span class="mi">12</span>
 <span class="n">n_tp</span> <span class="o">=</span> <span class="n">seasonality_all</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n_tp</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-<span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">n_changepoints</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">A</span> <span class="o">=</span> <span class="p">(</span><span class="n">t</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">t</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.linspace.html#numpy.linspace" title="numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n_tp</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float32" title="numpy.float32"><span class="n">np</span><span class="o">.</span><span class="n">float32</span></a><span class="p">)</span>
+<span class="n">s</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.linspace.html#numpy.linspace" title="numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">n_changepoints</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float32" title="numpy.float32"><span class="n">np</span><span class="o">.</span><span class="n">float32</span></a><span class="p">)[</span><span class="mi">1</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">A</span> <span class="o">=</span> <span class="p">(</span><span class="n">t</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float32" title="numpy.float32"><span class="n">np</span><span class="o">.</span><span class="n">float32</span></a><span class="p">)</span>
 <span class="c1"># Generate seasonality design matrix</span>
 <span class="c1"># Set n=6 here so that there are 12 columns (same as `seasonality_all`)</span>
-<span class="n">X_pred</span> <span class="o">=</span> <span class="n">gen_fourier_basis</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">seasonality_all</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span>
+<span class="n">X_pred</span> <span class="o">=</span> <span class="n">gen_fourier_basis</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.where.html#numpy.where" title="numpy.where"><span class="n">np</span><span class="o">.</span><span class="n">where</span></a><span class="p">(</span><span class="n">seasonality_all</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span>
                            <span class="n">p</span><span class="o">=</span><span class="n">seasonality_all</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
                            <span class="n">n</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
 <span class="n">n_pred</span> <span class="o">=</span> <span class="n">X_pred</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -854,33 +721,33 @@ samples in a similar range of what is actually being observed (see
 <span class="nd">@tfd</span><span class="o">.</span><span class="n">JointDistributionCoroutine</span>
 <span class="k">def</span> <span class="nf">gam</span><span class="p">():</span>
     <span class="n">beta</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Sample</span><span class="p">(</span>
-        <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">),</span> <span class="n">sample_shape</span><span class="o">=</span><span class="n">n_pred</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;beta&quot;</span><span class="p">))</span>
-    <span class="n">seasonality</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;ij,...j-&gt;...i&quot;</span><span class="p">,</span> <span class="n">X_pred</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span>
+        <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">),</span> <span class="n">sample_shape</span><span class="o">=</span><span class="n">n_pred</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"beta"</span><span class="p">))</span>
+    <span class="n">seasonality</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">"ij,...j-&gt;...i"</span><span class="p">,</span> <span class="n">X_pred</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span>
 
-    <span class="n">k</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="mf">10.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">))</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="mf">10.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"k"</span><span class="p">))</span>
     <span class="n">m</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span>
-        <span class="n">co2_by_month_training_data</span><span class="p">[</span><span class="s2">&quot;CO2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">scale</span><span class="o">=</span><span class="mf">5.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;m&quot;</span><span class="p">))</span>
-    <span class="n">tau</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="mf">10.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;tau&quot;</span><span class="p">))</span>
+        <span class="n">co2_by_month_training_data</span><span class="p">[</span><span class="s2">"CO2"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">scale</span><span class="o">=</span><span class="mf">5.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"m"</span><span class="p">))</span>
+    <span class="n">tau</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="mf">10.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"tau"</span><span class="p">))</span>
     <span class="n">delta</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Sample</span><span class="p">(</span>
-        <span class="n">tfd</span><span class="o">.</span><span class="n">Laplace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">tau</span><span class="p">),</span> <span class="n">sample_shape</span><span class="o">=</span><span class="n">n_changepoints</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;delta&quot;</span><span class="p">)</span>
+        <span class="n">tfd</span><span class="o">.</span><span class="n">Laplace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">tau</span><span class="p">),</span> <span class="n">sample_shape</span><span class="o">=</span><span class="n">n_changepoints</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"delta"</span><span class="p">)</span>
 
-    <span class="n">growth_rate</span> <span class="o">=</span> <span class="n">k</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;ij,...j-&gt;...i&quot;</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">delta</span><span class="p">)</span>
-    <span class="n">offset</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;ij,...j-&gt;...i&quot;</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="o">-</span><span class="n">s</span> <span class="o">*</span> <span class="n">delta</span><span class="p">)</span>
+    <span class="n">growth_rate</span> <span class="o">=</span> <span class="n">k</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">"ij,...j-&gt;...i"</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">delta</span><span class="p">)</span>
+    <span class="n">offset</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">"ij,...j-&gt;...i"</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="o">-</span><span class="n">s</span> <span class="o">*</span> <span class="n">delta</span><span class="p">)</span>
     <span class="n">trend</span> <span class="o">=</span> <span class="n">growth_rate</span> <span class="o">*</span> <span class="n">t</span> <span class="o">+</span> <span class="n">offset</span>
 
     <span class="n">y_hat</span> <span class="o">=</span> <span class="n">seasonality</span> <span class="o">+</span> <span class="n">trend</span>
     <span class="n">y_hat</span> <span class="o">=</span> <span class="n">y_hat</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="p">:</span><span class="n">co2_by_month_training_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
 
-    <span class="n">noise_sigma</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mf">5.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;noise_sigma&quot;</span><span class="p">))</span>
+    <span class="n">noise_sigma</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mf">5.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"noise_sigma"</span><span class="p">))</span>
     <span class="n">observed</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Independent</span><span class="p">(</span>
         <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">noise_sigma</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]),</span>
         <span class="n">reinterpreted_batch_ndims</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;observed&quot;</span><span class="p">)</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">"observed"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <figure class="align-default" id="fig-fig8-prior-predictive2">
-<a class="reference internal image-reference" href="../_images/fig8_prior_predictive2.png"><img alt="../_images/fig8_prior_predictive2.png" src="../_images/fig8_prior_predictive2.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/fig8_prior_predictive2.png"><img alt="../_images/fig8_prior_predictive2.png" src="../_images/fig8_prior_predictive2.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 6.8 </span><span class="caption-text">Prior predictive samples from a Facebook Prophet-like GAM with a weakly
 informative prior on trend related parameters generated from Code Block
@@ -905,7 +772,7 @@ distribution <span class="math notranslate nohighlight">\(\delta_{new} \sim \tex
 to simplify the generative process we simply use the linear trend from
 the last period.</p>
 <figure class="align-default" id="fig-fig9-posterior-predictive2">
-<a class="reference internal image-reference" href="../_images/fig9_posterior_predictive2.png"><img alt="../_images/fig9_posterior_predictive2.png" src="../_images/fig9_posterior_predictive2.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/fig9_posterior_predictive2.png"><img alt="../_images/fig9_posterior_predictive2.png" src="../_images/fig9_posterior_predictive2.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 6.9 </span><span class="caption-text">Posterior predictive samples from a Facebook Prophet-like from Code
 Block <a class="reference internal" href="#gam"><span class="std std-ref">gam</span></a> in gray, with the actual data plotted in
@@ -949,18 +816,18 @@ values of <span class="math notranslate nohighlight">\(\rho\)</span>. The result
         <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_i</span><span class="p">)</span>
 
 <span class="n">nplot</span> <span class="o">=</span> <span class="mi">4</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nplot</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">rho</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">1.01</span><span class="p">,</span> <span class="mf">1.01</span><span class="p">,</span> <span class="n">nplot</span><span class="p">)):</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html#matplotlib.pyplot.subplots" title="matplotlib.pyplot.subplots"><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span></a><span class="p">(</span><span class="n">nplot</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">rho</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.linspace.html#numpy.linspace" title="numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="o">-</span><span class="mf">1.01</span><span class="p">,</span> <span class="mf">1.01</span><span class="p">,</span> <span class="n">nplot</span><span class="p">)):</span>
     <span class="n">test_samples</span> <span class="o">=</span> <span class="n">ar1_with_forloop</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="n">rho</span><span class="p">))</span>
     <span class="n">ar1_samples</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">test_samples</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ar1_samples</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\rho$=</span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">rho</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ar1_samples</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">"$\rho$=</span><span class="si">%.2f</span><span class="s2">"</span> <span class="o">%</span> <span class="n">rho</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s2">"upper left"</span><span class="p">,</span>
               <span class="n">borderaxespad</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <figure class="align-default" id="fig-fig10-ar1-process">
-<a class="reference internal image-reference" href="../_images/fig10_ar1_process.png"><img alt="../_images/fig10_ar1_process.png" src="../_images/fig10_ar1_process.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/fig10_ar1_process.png"><img alt="../_images/fig10_ar1_process.png" src="../_images/fig10_ar1_process.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 6.10 </span><span class="caption-text">Random sample of an AR(1) process with <span class="math notranslate nohighlight">\(\sigma = 1\)</span> and different
 <span class="math notranslate nohighlight">\(\rho\)</span>. Note that the AR(1) process is not stationary when
@@ -1023,20 +890,20 @@ Code Block <a class="reference internal" href="#gam-alternative"><span class="st
 <div class="code-block-caption"><span class="caption-number">Listing 6.12 </span><span class="caption-text">gam_alternative</span><a class="headerlink" href="#gam-alternative" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gam_trend_seasonality</span><span class="p">():</span>
     <span class="n">beta</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Sample</span><span class="p">(</span>
-        <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">),</span> <span class="n">sample_shape</span><span class="o">=</span><span class="n">n_pred</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;beta&quot;</span><span class="p">))</span>
-    <span class="n">seasonality</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;ij,...j-&gt;...i&quot;</span><span class="p">,</span> <span class="n">X_pred</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span>
+        <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">),</span> <span class="n">sample_shape</span><span class="o">=</span><span class="n">n_pred</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"beta"</span><span class="p">))</span>
+    <span class="n">seasonality</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">"ij,...j-&gt;...i"</span><span class="p">,</span> <span class="n">X_pred</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span>
 
-    <span class="n">k</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="mf">10.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">))</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="mf">10.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"k"</span><span class="p">))</span>
     <span class="n">m</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span>
-        <span class="n">co2_by_month_training_data</span><span class="p">[</span><span class="s2">&quot;CO2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">scale</span><span class="o">=</span><span class="mf">5.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;m&quot;</span><span class="p">))</span>
-    <span class="n">tau</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="mf">10.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;tau&quot;</span><span class="p">))</span>
+        <span class="n">co2_by_month_training_data</span><span class="p">[</span><span class="s2">"CO2"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">scale</span><span class="o">=</span><span class="mf">5.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"m"</span><span class="p">))</span>
+    <span class="n">tau</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="mf">10.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"tau"</span><span class="p">))</span>
     <span class="n">delta</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Sample</span><span class="p">(</span>
-        <span class="n">tfd</span><span class="o">.</span><span class="n">Laplace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">tau</span><span class="p">),</span> <span class="n">sample_shape</span><span class="o">=</span><span class="n">n_changepoints</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;delta&quot;</span><span class="p">)</span>
+        <span class="n">tfd</span><span class="o">.</span><span class="n">Laplace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">tau</span><span class="p">),</span> <span class="n">sample_shape</span><span class="o">=</span><span class="n">n_changepoints</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"delta"</span><span class="p">)</span>
 
-    <span class="n">growth_rate</span> <span class="o">=</span> <span class="n">k</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;ij,...j-&gt;...i&quot;</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">delta</span><span class="p">)</span>
-    <span class="n">offset</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;ij,...j-&gt;...i&quot;</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="o">-</span><span class="n">s</span> <span class="o">*</span> <span class="n">delta</span><span class="p">)</span>
+    <span class="n">growth_rate</span> <span class="o">=</span> <span class="n">k</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">"ij,...j-&gt;...i"</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">delta</span><span class="p">)</span>
+    <span class="n">offset</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">"ij,...j-&gt;...i"</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="o">-</span><span class="n">s</span> <span class="o">*</span> <span class="n">delta</span><span class="p">)</span>
     <span class="n">trend</span> <span class="o">=</span> <span class="n">growth_rate</span> <span class="o">*</span> <span class="n">t</span> <span class="o">+</span> <span class="n">offset</span>
-    <span class="n">noise_sigma</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mf">5.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;noise_sigma&quot;</span><span class="p">))</span>
+    <span class="n">noise_sigma</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mf">5.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"noise_sigma"</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">seasonality</span><span class="p">,</span> <span class="n">trend</span><span class="p">,</span> <span class="n">noise_sigma</span>
 
 <span class="k">def</span> <span class="nf">generate_gam</span><span class="p">(</span><span class="n">training</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -1052,7 +919,7 @@ Code Block <a class="reference internal" href="#gam-alternative"><span class="st
         <span class="n">observed</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Independent</span><span class="p">(</span>
             <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">noise_sigma</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]),</span>
             <span class="n">reinterpreted_batch_ndims</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;observed&quot;</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">"observed"</span>
         <span class="p">)</span>
 
     <span class="k">return</span> <span class="n">gam</span>
@@ -1089,7 +956,7 @@ by just changing the likelihood part. This is what we do in Code Block
             <span class="n">y_hat</span> <span class="o">=</span> <span class="n">y_hat</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="p">:</span><span class="n">co2_by_month_training_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
 
         <span class="c1"># Likelihood</span>
-        <span class="n">rho</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;rho&quot;</span><span class="p">))</span>
+        <span class="n">rho</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"rho"</span><span class="p">))</span>
         <span class="k">def</span> <span class="nf">ar_fun</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
             <span class="n">loc</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">tf</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="p">:</span><span class="mi">1</span><span class="p">]),</span> <span class="n">y</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span>
                             <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">rho</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">+</span> <span class="n">y_hat</span>
@@ -1100,7 +967,7 @@ by just changing the likelihood part. This is what we do in Code Block
             <span class="n">distribution_fn</span><span class="o">=</span><span class="n">ar_fun</span><span class="p">,</span>
             <span class="n">sample0</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">y_hat</span><span class="p">),</span>
             <span class="n">num_steps</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;observed&quot;</span><span class="p">)</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">"observed"</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">gam_with_ar_likelihood</span>
 
@@ -1118,7 +985,7 @@ the current observation <a class="footnote-reference brackets" href="#id59" id="
 almost negligible by inspecting the posterior distribution of <span class="math notranslate nohighlight">\(\rho\)</span>
 (see <a class="reference internal" href="#fig-fig11-ar1-likelihood-rho"><span class="std std-numref">Fig. 6.11</span></a>):</p>
 <figure class="align-default" id="fig-fig11-ar1-likelihood-rho">
-<a class="reference internal image-reference" href="../_images/fig11_ar1_likelihood_rho.png"><img alt="../_images/fig11_ar1_likelihood_rho.png" src="../_images/fig11_ar1_likelihood_rho.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/fig11_ar1_likelihood_rho.png"><img alt="../_images/fig11_ar1_likelihood_rho.png" src="../_images/fig11_ar1_likelihood_rho.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 6.11 </span><span class="caption-text">Posterior distribution of the parameters in the likelihood for the
 Facebook Prophet -like GAM defined in Code Block
@@ -1142,8 +1009,8 @@ This is the <code class="docutils literal notranslate"><span class="pre">gam_wit
         <span class="n">seasonality</span><span class="p">,</span> <span class="n">trend</span><span class="p">,</span> <span class="n">noise_sigma</span> <span class="o">=</span> <span class="k">yield from</span> <span class="n">gam_trend_seasonality</span><span class="p">()</span>
         
         <span class="c1"># Latent AR(1)</span>
-        <span class="n">ar_sigma</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="mf">.1</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ar_sigma&quot;</span><span class="p">))</span>
-        <span class="n">rho</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;rho&quot;</span><span class="p">))</span>
+        <span class="n">ar_sigma</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="mf">.1</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"ar_sigma"</span><span class="p">))</span>
+        <span class="n">rho</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"rho"</span><span class="p">))</span>
         <span class="k">def</span> <span class="nf">ar_fun</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
             <span class="n">loc</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">tf</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="p">:</span><span class="mi">1</span><span class="p">]),</span> <span class="n">y</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span>
                             <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">rho</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
@@ -1154,7 +1021,7 @@ This is the <code class="docutils literal notranslate"><span class="pre">gam_wit
             <span class="n">distribution_fn</span><span class="o">=</span><span class="n">ar_fun</span><span class="p">,</span>
             <span class="n">sample0</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">trend</span><span class="p">),</span>
             <span class="n">num_steps</span><span class="o">=</span><span class="n">trend</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
-            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;temporal_error&quot;</span><span class="p">)</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">"temporal_error"</span><span class="p">)</span>
 
         <span class="c1"># Linear prediction</span>
         <span class="n">y_hat</span> <span class="o">=</span> <span class="n">seasonality</span> <span class="o">+</span> <span class="n">trend</span> <span class="o">+</span> <span class="n">temporal_error</span>
@@ -1165,7 +1032,7 @@ This is the <code class="docutils literal notranslate"><span class="pre">gam_wit
         <span class="n">observed</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Independent</span><span class="p">(</span>
             <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">noise_sigma</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]),</span>
             <span class="n">reinterpreted_batch_ndims</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;observed&quot;</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">"observed"</span>
         <span class="p">)</span>
 
     <span class="k">return</span> <span class="n">gam_with_latent_ar</span>
@@ -1182,7 +1049,7 @@ trend component. We can visualize the latent AR component after
 inference similar to the trend and seasonality components of a time
 series model (see <a class="reference internal" href="#fig-fig12-posterior-predictive-ar1"><span class="std std-numref">Fig. 6.12</span></a>).</p>
 <figure class="align-default" id="fig-fig12-posterior-predictive-ar1">
-<a class="reference internal image-reference" href="../_images/fig12_posterior_predictive_ar1.png"><img alt="../_images/fig12_posterior_predictive_ar1.png" src="../_images/fig12_posterior_predictive_ar1.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/fig12_posterior_predictive_ar1.png"><img alt="../_images/fig12_posterior_predictive_ar1.png" src="../_images/fig12_posterior_predictive_ar1.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 6.12 </span><span class="caption-text">Posterior predictive samples of the trend, seasonality, and AR(1)
 components of the GAM based time series model <code class="docutils literal notranslate"><span class="pre">gam_with_latent_ar</span></code>
@@ -1200,7 +1067,7 @@ distribution of <span class="math notranslate nohighlight">\(\sigma_{noise}\)</s
 we indeed get a lower estimation of <span class="math notranslate nohighlight">\(\sigma_{noise}\)</span>, with a much higher
 estimation of <span class="math notranslate nohighlight">\(\rho\)</span>.</p>
 <figure class="align-default" id="fig-fig13-ar1-likelihood-rho2">
-<a class="reference internal image-reference" href="../_images/fig13_ar1_likelihood_rho2.png"><img alt="../_images/fig13_ar1_likelihood_rho2.png" src="../_images/fig13_ar1_likelihood_rho2.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/fig13_ar1_likelihood_rho2.png"><img alt="../_images/fig13_ar1_likelihood_rho2.png" src="../_images/fig13_ar1_likelihood_rho2.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 6.13 </span><span class="caption-text">Posterior distribution of <span class="math notranslate nohighlight">\(\sigma_{noise}\)</span>, <span class="math notranslate nohighlight">\(\sigma_{AR}\)</span>, and <span class="math notranslate nohighlight">\(\rho\)</span> of
 the AR(1) latent component for <code class="docutils literal notranslate"><span class="pre">gam_with_latent_ar</span></code> specified in Code
@@ -1260,7 +1127,7 @@ we can approximate the underlying function pretty well.</p>
 </div>
 </div>
 <figure class="align-default" id="fig-fig14-smoothing-with-gw">
-<a class="reference internal image-reference" href="../_images/fig14_smoothing_with_gw.png"><img alt="../_images/fig14_smoothing_with_gw.png" src="../_images/fig14_smoothing_with_gw.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/fig14_smoothing_with_gw.png"><img alt="../_images/fig14_smoothing_with_gw.png" src="../_images/fig14_smoothing_with_gw.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 6.14 </span><span class="caption-text">Simulated observations from <span class="math notranslate nohighlight">\(y \sim \text{Normal}(f(x), 1)\)</span> with
 <span class="math notranslate nohighlight">\(f(x) = e^{1 + x^{0.5} - e^{\frac{x}{15}}}\)</span>, and the inferred latent
@@ -1350,7 +1217,7 @@ model the time series of the monthly live births in the United States
 from 1948 to 1979 <span id="id22">[<a class="reference internal" href="references.html#id132" title="R. Shumway and D. Stoffer. Time Series: A Data Analysis Approach Using R. Chapman &amp; Hall/CRC Texts in Statistical Science. CRC Press, 2019. ISBN 9781000001563.">58</a>]</span>. The data is shown in
 <a class="reference internal" href="#fig-fig15-birth-by-month"><span class="std std-numref">Fig. 6.15</span></a>.</p>
 <figure class="align-default" id="fig-fig15-birth-by-month">
-<a class="reference internal image-reference" href="../_images/fig15_birth_by_month.png"><img alt="../_images/fig15_birth_by_month.png" src="../_images/fig15_birth_by_month.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/fig15_birth_by_month.png"><img alt="../_images/fig15_birth_by_month.png" src="../_images/fig15_birth_by_month.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 6.15 </span><span class="caption-text">Monthly live births in the United States (1948-1979). Y-axis shows the
 number of births in thousands.</span><a class="headerlink" href="#fig-fig15-birth-by-month" title="Permalink to this image">#</a></p>
@@ -1361,20 +1228,20 @@ we load and pre-process the observed time series in Code Block
 <a class="reference internal" href="#sarima-preprocess"><span class="std std-ref">sarima_preprocess</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="sarima-preprocess">
 <div class="code-block-caption"><span class="caption-number">Listing 6.16 </span><span class="caption-text">sarima_preprocess</span><a class="headerlink" href="#sarima-preprocess" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">us_monthly_birth</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/monthly_birth_usa.csv&quot;</span><span class="p">)</span>
-<span class="n">us_monthly_birth</span><span class="p">[</span><span class="s2">&quot;date_month&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">us_monthly_birth</span><span class="p">[</span><span class="s2">&quot;date_month&quot;</span><span class="p">])</span>
-<span class="n">us_monthly_birth</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;date_month&quot;</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">us_monthly_birth</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"../data/monthly_birth_usa.csv"</span><span class="p">)</span>
+<span class="n">us_monthly_birth</span><span class="p">[</span><span class="s2">"date_month"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">us_monthly_birth</span><span class="p">[</span><span class="s2">"date_month"</span><span class="p">])</span>
+<span class="n">us_monthly_birth</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"date_month"</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># y ~ Sarima(1,1,1)(1,1,1)[12]</span>
 <span class="n">p</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">P</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">period</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
 <span class="c1"># Time series data: us_monthly_birth.shape = (372,)</span>
-<span class="n">observed</span> <span class="o">=</span> <span class="n">us_monthly_birth</span><span class="p">[</span><span class="s2">&quot;birth_in_thousands&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">observed</span> <span class="o">=</span> <span class="n">us_monthly_birth</span><span class="p">[</span><span class="s2">"birth_in_thousands"</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
 <span class="c1"># Integrated to seasonal order $D$</span>
 <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">D</span><span class="p">):</span>
     <span class="n">observed</span> <span class="o">=</span> <span class="n">observed</span><span class="p">[</span><span class="n">period</span><span class="p">:]</span> <span class="o">-</span> <span class="n">observed</span><span class="p">[:</span><span class="o">-</span><span class="n">period</span><span class="p">]</span>
 <span class="c1"># Integrated to order $d$</span>
-<span class="n">observed</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">observed</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">d</span><span class="p">),</span> <span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">observed</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.diff.html#numpy.diff" title="numpy.diff"><span class="n">np</span><span class="o">.</span><span class="n">diff</span></a><span class="p">(</span><span class="n">observed</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">d</span><span class="p">),</span> <span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1399,7 +1266,7 @@ zeros.</p>
     <span class="n">batch_shape</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">mu0</span><span class="p">)</span>
     <span class="n">y_extended</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
         <span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">concat</span><span class="p">([[</span><span class="n">r</span><span class="p">],</span> <span class="n">batch_shape</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">mu0</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span>
-        <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;...,j-&gt;j...&quot;</span><span class="p">,</span>
+        <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">"...,j-&gt;j..."</span><span class="p">,</span>
                   <span class="n">tf</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">mu0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">observed</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span>
                   <span class="n">observed</span><span class="p">)],</span>
         <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -1408,17 +1275,17 @@ zeros.</p>
     <span class="k">def</span> <span class="nf">arma_onestep</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">eps_t</span><span class="p">):</span>
         <span class="n">t_shift</span> <span class="o">=</span> <span class="n">t</span> <span class="o">+</span> <span class="n">r</span>
         <span class="c1"># AR</span>
-        <span class="n">y_past</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">y_extended</span><span class="p">,</span> <span class="n">t_shift</span> <span class="o">-</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
-        <span class="n">ar</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;...p,p...-&gt;...&quot;</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">y_past</span><span class="p">)</span>
+        <span class="n">y_past</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">y_extended</span><span class="p">,</span> <span class="n">t_shift</span> <span class="o">-</span> <span class="p">(</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.arange.html#numpy.arange" title="numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">ar</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">"...p,p...-&gt;..."</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">y_past</span><span class="p">)</span>
         <span class="c1"># MA</span>
-        <span class="n">eps_past</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">eps_t</span><span class="p">,</span> <span class="n">t_shift</span> <span class="o">-</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">q</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
-        <span class="n">ma</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;...q,q...-&gt;...&quot;</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">eps_past</span><span class="p">)</span>
+        <span class="n">eps_past</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">eps_t</span><span class="p">,</span> <span class="n">t_shift</span> <span class="o">-</span> <span class="p">(</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.arange.html#numpy.arange" title="numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="n">q</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">ma</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">"...q,q...-&gt;..."</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">eps_past</span><span class="p">)</span>
         <span class="c1"># Seasonal AR</span>
-        <span class="n">sy_past</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">y_extended</span><span class="p">,</span> <span class="n">t_shift</span> <span class="o">-</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">P</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">period</span><span class="p">)</span>
-        <span class="n">sar</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;...p,p...-&gt;...&quot;</span><span class="p">,</span> <span class="n">sphi</span><span class="p">,</span> <span class="n">sy_past</span><span class="p">)</span>
+        <span class="n">sy_past</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">y_extended</span><span class="p">,</span> <span class="n">t_shift</span> <span class="o">-</span> <span class="p">(</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.arange.html#numpy.arange" title="numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="n">P</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">period</span><span class="p">)</span>
+        <span class="n">sar</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">"...p,p...-&gt;..."</span><span class="p">,</span> <span class="n">sphi</span><span class="p">,</span> <span class="n">sy_past</span><span class="p">)</span>
         <span class="c1"># Seasonal MA</span>
-        <span class="n">seps_past</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">eps_t</span><span class="p">,</span> <span class="n">t_shift</span> <span class="o">-</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">period</span><span class="p">)</span>
-        <span class="n">sma</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;...q,q...-&gt;...&quot;</span><span class="p">,</span> <span class="n">stheta</span><span class="p">,</span> <span class="n">seps_past</span><span class="p">)</span>
+        <span class="n">seps_past</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">eps_t</span><span class="p">,</span> <span class="n">t_shift</span> <span class="o">-</span> <span class="p">(</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.arange.html#numpy.arange" title="numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="n">Q</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">period</span><span class="p">)</span>
+        <span class="n">sma</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">"...q,q...-&gt;..."</span><span class="p">,</span> <span class="n">stheta</span><span class="p">,</span> <span class="n">seps_past</span><span class="p">)</span>
 
         <span class="n">mu_at_t</span> <span class="o">=</span> <span class="n">ar</span> <span class="o">+</span> <span class="n">ma</span> <span class="o">+</span> <span class="n">sar</span> <span class="o">+</span> <span class="n">sma</span> <span class="o">+</span> <span class="n">mu0</span>
         <span class="n">eps_update</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">y_extended</span><span class="p">,</span> <span class="n">t_shift</span><span class="p">)</span> <span class="o">-</span> <span class="n">mu_at_t</span>
@@ -1447,13 +1314,13 @@ posterior density function for inference. This is shown in Code Block
 <div class="code-block-caption"><span class="caption-number">Listing 6.18 </span><span class="caption-text">sarima_posterior</span><a class="headerlink" href="#sarima-posterior" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@tfd</span><span class="o">.</span><span class="n">JointDistributionCoroutine</span>
 <span class="k">def</span> <span class="nf">sarima_priors</span><span class="p">():</span>
-    <span class="n">mu0</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">StudentT</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;mu0&#39;</span><span class="p">))</span>
-    <span class="n">sigma</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">HalfStudentT</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;sigma&#39;</span><span class="p">))</span>
+    <span class="n">mu0</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">StudentT</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'mu0'</span><span class="p">))</span>
+    <span class="n">sigma</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">HalfStudentT</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'sigma'</span><span class="p">))</span>
 
-    <span class="n">phi</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Sample</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="n">p</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;phi&#39;</span><span class="p">))</span>
-    <span class="n">theta</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Sample</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="n">q</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;theta&#39;</span><span class="p">))</span>
-    <span class="n">sphi</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Sample</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="n">P</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;sphi&#39;</span><span class="p">))</span>
-    <span class="n">stheta</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Sample</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="n">Q</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;stheta&#39;</span><span class="p">))</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Sample</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="n">p</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'phi'</span><span class="p">))</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Sample</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="n">q</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'theta'</span><span class="p">))</span>
+    <span class="n">sphi</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Sample</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="n">P</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'sphi'</span><span class="p">))</span>
+    <span class="n">stheta</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Sample</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="n">Q</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'stheta'</span><span class="p">))</span>
 
 <span class="n">target_log_prob_fn</span> <span class="o">=</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">x</span><span class="p">:</span> <span class="n">sarima_priors</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">likelihood</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
@@ -1769,7 +1636,7 @@ measurement space, which is a matrix form of the linear function <a class="footn
 observing each time steps) with the analytic result (i.e., observing the
 full time series) in <a class="reference internal" href="#fig-fig16-linear-growth-lgssm"><span class="std std-numref">Fig. 6.16</span></a>.</p>
 <figure class="align-default" id="fig-fig16-linear-growth-lgssm">
-<a class="reference internal image-reference" href="../_images/fig16_linear_growth_lgssm.png"><img alt="../_images/fig16_linear_growth_lgssm.png" src="../_images/fig16_linear_growth_lgssm.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/fig16_linear_growth_lgssm.png"><img alt="../_images/fig16_linear_growth_lgssm.png" src="../_images/fig16_linear_growth_lgssm.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 6.16 </span><span class="caption-text">Linear Growth time series model, inference using a Kalman filter. In the
 first panel we show the observed data (gray dot connected by dash line)
@@ -1910,9 +1777,9 @@ We show the resulting trace plot of the posterior samples in
 <div class="code-block-caption"><span class="caption-number">Listing 6.23 </span><span class="caption-text">tfd_lgssm_arma_with_prior</span><a class="headerlink" href="#tfd-lgssm-arma-with-prior" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@tfd</span><span class="o">.</span><span class="n">JointDistributionCoroutine</span>
 <span class="k">def</span> <span class="nf">arma_lgssm</span><span class="p">():</span>
-    <span class="n">sigma</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">HalfStudentT</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;sigma&quot;</span><span class="p">))</span>
-    <span class="n">phi</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Sample</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="mi">2</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;phi&quot;</span><span class="p">))</span>
-    <span class="n">theta</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Sample</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;theta&quot;</span><span class="p">))</span>
+    <span class="n">sigma</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">HalfStudentT</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"sigma"</span><span class="p">))</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Sample</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="mi">2</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"phi"</span><span class="p">))</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Sample</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"theta"</span><span class="p">))</span>
     <span class="c1"># Prior for initial state</span>
     <span class="n">init_scale_diag</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">sigma</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">sigma</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">initial_state_prior</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">MultivariateNormalDiag</span><span class="p">(</span>
@@ -1945,12 +1812,12 @@ We show the resulting trace plot of the posterior samples in
             <span class="n">observation_matrix</span><span class="o">=</span><span class="n">observation_matrix</span><span class="p">,</span>
             <span class="n">observation_noise</span><span class="o">=</span><span class="n">observation_noise</span><span class="p">,</span>
             <span class="n">initial_state_prior</span><span class="o">=</span><span class="n">initial_state_prior</span><span class="p">,</span>
-            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;arma&quot;</span><span class="p">)</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">"arma"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <figure class="align-default" id="fig-fig17-arma-lgssm-inference-result">
-<a class="reference internal image-reference" href="../_images/fig17_arma_lgssm_inference_result.png"><img alt="../_images/fig17_arma_lgssm_inference_result.png" src="../_images/fig17_arma_lgssm_inference_result.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/fig17_arma_lgssm_inference_result.png"><img alt="../_images/fig17_arma_lgssm_inference_result.png" src="../_images/fig17_arma_lgssm_inference_result.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 6.17 </span><span class="caption-text">MCMC sampling result from the ARMA(2,1) model <code class="docutils literal notranslate"><span class="pre">arma_lgssm</span></code> defined in
 Code Block
@@ -2058,10 +1925,10 @@ account for the monthly pattern in Code Block
 <div class="literal-block-wrapper docutils container" id="tfp-sts-example2">
 <div class="code-block-caption"><span class="caption-number">Listing 6.24 </span><span class="caption-text">tfp_sts_example2</span><a class="headerlink" href="#tfp-sts-example2" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_bsts_model</span><span class="p">(</span><span class="n">observed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Args:</span>
 <span class="sd">        observed: Observed time series, tfp.sts use it to generate prior.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1"># Trend</span>
     <span class="n">trend</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">sts</span><span class="o">.</span><span class="n">LocalLinearTrend</span><span class="p">(</span><span class="n">observed_time_series</span><span class="o">=</span><span class="n">observed</span><span class="p">)</span>
     <span class="c1"># Seasonal</span>
@@ -2069,7 +1936,7 @@ account for the monthly pattern in Code Block
     <span class="c1"># Full model</span>
     <span class="k">return</span> <span class="n">tfp</span><span class="o">.</span><span class="n">sts</span><span class="o">.</span><span class="n">Sum</span><span class="p">([</span><span class="n">trend</span><span class="p">,</span> <span class="n">seasonal</span><span class="p">],</span> <span class="n">observed_time_series</span><span class="o">=</span><span class="n">observed</span><span class="p">)</span>
 
-<span class="n">observed</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">us_monthly_birth</span><span class="p">[</span><span class="s2">&quot;birth_in_thousands&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">observed</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">us_monthly_birth</span><span class="p">[</span><span class="s2">"birth_in_thousands"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 <span class="n">birth_model</span> <span class="o">=</span> <span class="n">generate_bsts_model</span><span class="p">(</span><span class="n">observed</span><span class="o">=</span><span class="n">observed</span><span class="p">)</span>
 
 <span class="c1"># Generate the posterior distribution conditioned on the observed</span>
@@ -2099,8 +1966,8 @@ seasonal component:</p>
 </pre></div>
 </div>
 </div>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[Parameter(name=&#39;drift_scale&#39;, prior=&lt;tfp.distributions.LogNormal 
-&#39;Seasonal_LogNormal&#39; batch_shape=[] event_shape=[] dtype=float32&gt;,
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[Parameter(name='drift_scale', prior=&lt;tfp.distributions.LogNormal 
+'Seasonal_LogNormal' batch_shape=[] event_shape=[] dtype=float32&gt;,
 bijector=&lt;tensorflow_probability.python.bijectors.chain.Chain object at ...&gt;)]
 </pre></div>
 </div>
@@ -2118,7 +1985,7 @@ conditioned on the posterior distribution (represented as Monte Carlo
 Samples). A conceptual description of the parameterization could be
 found in the <a class="reference internal" href="#fig-fig18-bsts-lgssm"><span class="std std-numref">Fig. 6.18</span></a>:</p>
 <figure class="align-default" id="fig-fig18-bsts-lgssm">
-<a class="reference internal image-reference" href="../_images/fig18_bsts_lgssm.png"><img alt="../_images/fig18_bsts_lgssm.png" src="../_images/fig18_bsts_lgssm.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/fig18_bsts_lgssm.png"><img alt="../_images/fig18_bsts_lgssm.png" src="../_images/fig18_bsts_lgssm.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 6.18 </span><span class="caption-text">Relationship between Bayesian Structural Time Series (blue box) and
 Linear Gaussian State Space Model (red box). The Linear Gaussian State
@@ -2160,28 +2027,28 @@ result is shown in <a class="reference internal" href="#fig-fig19-bsts-lgssm-res
     <span class="n">num_steps_forecast</span><span class="o">=</span><span class="n">n_steps</span><span class="p">)</span>
 <span class="n">birth_dates</span> <span class="o">=</span> <span class="n">us_monthly_birth</span><span class="o">.</span><span class="n">index</span>
 <span class="n">forecast_date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span>
-    <span class="n">start</span><span class="o">=</span><span class="n">birth_dates</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;M&quot;</span><span class="p">),</span>
-    <span class="n">end</span><span class="o">=</span><span class="n">birth_dates</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">n_steps</span><span class="p">,</span> <span class="s2">&quot;M&quot;</span><span class="p">),</span>
-    <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;M&quot;</span><span class="p">)</span>
+    <span class="n">start</span><span class="o">=</span><span class="n">birth_dates</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.timedelta64" title="numpy.timedelta64"><span class="n">np</span><span class="o">.</span><span class="n">timedelta64</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">"M"</span><span class="p">),</span>
+    <span class="n">end</span><span class="o">=</span><span class="n">birth_dates</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.timedelta64" title="numpy.timedelta64"><span class="n">np</span><span class="o">.</span><span class="n">timedelta64</span></a><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">n_steps</span><span class="p">,</span> <span class="s2">"M"</span><span class="p">),</span>
+    <span class="n">freq</span><span class="o">=</span><span class="s2">"M"</span><span class="p">)</span>
 
-<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html#matplotlib.pyplot.subplots" title="matplotlib.pyplot.subplots"><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span></a><span class="p">(</span>
     <span class="mi">1</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">component_dists</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">us_monthly_birth</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;observed&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">us_monthly_birth</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"observed"</span><span class="p">)</span>
 
-<span class="n">forecast_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">forecast_dist</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="n">forecast_mean</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.squeeze.html#numpy.squeeze" title="numpy.squeeze"><span class="n">np</span><span class="o">.</span><span class="n">squeeze</span></a><span class="p">(</span><span class="n">forecast_dist</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
 <span class="n">line</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">forecast_date</span><span class="p">,</span> <span class="n">forecast_mean</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
-               <span class="n">label</span><span class="o">=</span><span class="s2">&quot;forecast mean&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C4&quot;</span><span class="p">)</span>
+               <span class="n">label</span><span class="o">=</span><span class="s2">"forecast mean"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"C4"</span><span class="p">)</span>
 
-<span class="n">forecast_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">forecast_dist</span><span class="o">.</span><span class="n">stddev</span><span class="p">())</span>
+<span class="n">forecast_std</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.squeeze.html#numpy.squeeze" title="numpy.squeeze"><span class="n">np</span><span class="o">.</span><span class="n">squeeze</span></a><span class="p">(</span><span class="n">forecast_dist</span><span class="o">.</span><span class="n">stddev</span><span class="p">())</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">forecast_date</span><span class="p">,</span>
                 <span class="n">forecast_mean</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">forecast_std</span><span class="p">,</span>
                 <span class="n">forecast_mean</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">forecast_std</span><span class="p">,</span>
                 <span class="n">color</span><span class="o">=</span><span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_color</span><span class="p">(),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">ax_</span><span class="p">,</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">dist</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">component_dists</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
-    <span class="n">comp_mean</span><span class="p">,</span> <span class="n">comp_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">stddev</span><span class="p">())</span>
+    <span class="n">comp_mean</span><span class="p">,</span> <span class="n">comp_std</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.squeeze.html#numpy.squeeze" title="numpy.squeeze"><span class="n">np</span><span class="o">.</span><span class="n">squeeze</span></a><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.squeeze.html#numpy.squeeze" title="numpy.squeeze"><span class="n">np</span><span class="o">.</span><span class="n">squeeze</span></a><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">stddev</span><span class="p">())</span>
     <span class="n">line</span> <span class="o">=</span> <span class="n">ax_</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">birth_dates</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">lw</span><span class="o">=</span><span class="mf">2.</span><span class="p">)</span>
     <span class="n">ax_</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">birth_dates</span><span class="p">,</span>
                      <span class="n">comp_mean</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">comp_std</span><span class="p">,</span>
@@ -2192,7 +2059,7 @@ result is shown in <a class="reference internal" href="#fig-fig19-bsts-lgssm-res
 </div>
 </div>
 <figure class="align-default" id="fig-fig19-bsts-lgssm-result">
-<a class="reference internal image-reference" href="../_images/fig19_bsts_lgssm_result.png"><img alt="../_images/fig19_bsts_lgssm_result.png" src="../_images/fig19_bsts_lgssm_result.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/fig19_bsts_lgssm_result.png"><img alt="../_images/fig19_bsts_lgssm_result.png" src="../_images/fig19_bsts_lgssm_result.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 6.19 </span><span class="caption-text">Inference result and forecast of monthly live births in the United
 States (1948-1979) using the <code class="docutils literal notranslate"><span class="pre">tfp.sts</span></code> API with Code Block
@@ -2361,7 +2228,7 @@ Hint: use Code Block <a class="reference internal" href="#timerange-2021"><span 
 generate all time stamps for 2021:</p>
 <div class="literal-block-wrapper docutils container" id="timerange-2021">
 <div class="code-block-caption"><span class="caption-number">Listing 6.28 </span><span class="caption-text">timerange_2021</span><a class="headerlink" href="#timerange-2021" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">datetime_index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="s2">&quot;2021-01-01&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;2021-12-31&quot;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">datetime_index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="s2">"2021-01-01"</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">"2021-12-31"</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'D'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2381,7 +2248,7 @@ holiday effects to be the same? What is the shape of the design matrix
 if we do so? Reason about how does it affects the fit of the regression
 time series model.</p>
 <p><strong>6E3.</strong> Fit a linear regression to the
-<code class="docutils literal notranslate"><span class="pre">&quot;monthly_mauna_loa_co2.csv&quot;</span></code> dataset:</p>
+<code class="docutils literal notranslate"><span class="pre">"monthly_mauna_loa_co2.csv"</span></code> dataset:</p>
 <ul class="simple">
 <li><p>A plain regression with an intercept and slope, using linear time as
 predictor.</p></li>
@@ -2419,17 +2286,17 @@ in 2 equivalent ways as shown below in Code Block
 <div class="literal-block-wrapper docutils container" id="exercise-chap4-e6">
 <div class="code-block-caption"><span class="caption-number">Listing 6.29 </span><span class="caption-text">exercise_chap4_e6</span><a class="headerlink" href="#exercise-chap4-e6" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nmonths</span> <span class="o">=</span> <span class="mi">36</span>
-<span class="n">day0</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2019-01-01&#39;</span><span class="p">)</span>
+<span class="n">day0</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">'2019-01-01'</span><span class="p">)</span>
 <span class="n">time_index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span>
-    <span class="n">start</span><span class="o">=</span><span class="n">day0</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">day0</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="n">nmonths</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">),</span> 
-    <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;M&#39;</span><span class="p">)</span>
+    <span class="n">start</span><span class="o">=</span><span class="n">day0</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">day0</span> <span class="o">+</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.timedelta64" title="numpy.timedelta64"><span class="n">np</span><span class="o">.</span><span class="n">timedelta64</span></a><span class="p">(</span><span class="n">nmonths</span><span class="p">,</span> <span class="s1">'M'</span><span class="p">),</span> 
+    <span class="n">freq</span><span class="o">=</span><span class="s1">'M'</span><span class="p">)</span>
 
-<span class="n">t0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">time_index</span><span class="p">))</span>
+<span class="n">t0</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.arange.html#numpy.arange" title="numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">time_index</span><span class="p">))</span>
 <span class="n">design_matrix0</span> <span class="o">=</span> <span class="n">gen_fourier_basis</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
 <span class="n">t1</span> <span class="o">=</span> <span class="n">time_index</span><span class="o">.</span><span class="n">month</span> <span class="o">-</span> <span class="mi">1</span>
 <span class="n">design_matrix1</span> <span class="o">=</span> <span class="n">gen_fourier_basis</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
 
-<span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_almost_equal</span><span class="p">(</span><span class="n">design_matrix0</span><span class="p">,</span> <span class="n">design_matrix1</span><span class="p">)</span>
+<a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.testing.assert_array_almost_equal.html#numpy.testing.assert_array_almost_equal" title="numpy.testing.assert_array_almost_equal"><span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_almost_equal</span></a><span class="p">(</span><span class="n">design_matrix0</span><span class="p">,</span> <span class="n">design_matrix1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2543,103 +2410,102 @@ the latent states?</p></li>
 <li><p>How is the model fit different between the two SSMs? Validate your
 reasoning with simulations.</p></li>
 </ul>
-<hr class="footnotes docutils" />
+<hr class="footnotes docutils"/>
 <aside class="footnote brackets" id="id52" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id1" role="doc-backlink">1</a><span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://quoteinvestigator.com/2013/10/20/no-predict/">https://quoteinvestigator.com/2013/10/20/no-predict/</a></p>
 </aside>
 <aside class="footnote brackets" id="id53" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">2</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id3" role="doc-backlink">2</a><span class="fn-bracket">]</span></span>
 <p>There is also a subtlety that not all periodic patterns in the
 time series should be considered seasonal. A useful distinction to
 make is between cyclic and seasonal behavior. You can find a nice
 summary in <a class="reference external" href="https://robjhyndman.com/hyndsight/cyclicts/">https://robjhyndman.com/hyndsight/cyclicts/</a>.</p>
 </aside>
 <aside class="footnote brackets" id="id54" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">3</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id4" role="doc-backlink">3</a><span class="fn-bracket">]</span></span>
 <p>This makes the observation not iid and not exchangeable. You can
 also see in Chapter <a class="reference internal" href="chp_04.html#chap3"><span class="std std-ref">4</span></a> where we define residuals</p>
 </aside>
 <aside class="footnote brackets" id="id55" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">4</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id7" role="doc-backlink">4</a><span class="fn-bracket">]</span></span>
 <p>Which, it is unfortunate for our model and for our planet.</p>
 </aside>
 <aside class="footnote brackets" id="id56" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">5</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id9" role="doc-backlink">5</a><span class="fn-bracket">]</span></span>
 <p>A series is stationary if its characteristic properties such as
 means and covariances remain invariant across time.</p>
 </aside>
 <aside class="footnote brackets" id="id57" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">6</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id10" role="doc-backlink">6</a><span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://facebook.github.io/prophet/">https://facebook.github.io/prophet/</a>.</p>
 </aside>
 <aside class="footnote brackets" id="id58" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id15">7</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id15" role="doc-backlink">7</a><span class="fn-bracket">]</span></span>
 <p>A demo of the design matrix used in Facebook Prophet could be
 found in <a class="reference external" href="http://prophet.mbrouns.com">http://prophet.mbrouns.com</a> from a PyMCon 2020
 presentation.</p>
 </aside>
 <aside class="footnote brackets" id="id59" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id17">8</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id17" role="doc-backlink">8</a><span class="fn-bracket">]</span></span>
 <p>That is why is called autoregressive, it applies a linear
 regression to itself. Hence the similar naming to the
 autocorrelation diagnostic introduced in Section <a class="reference internal" href="chp_02.html#autocorr-plot"><span class="std std-ref">Autocorrelation Plots</span></a>.</p>
 </aside>
 <aside class="footnote brackets" id="id60" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id20">9</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id20" role="doc-backlink">9</a><span class="fn-bracket">]</span></span>
 <p>Actually, the AR example in this section <em>is</em> a Gaussian Process.</p>
 </aside>
 <aside class="footnote brackets" id="id61" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id24">10</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id24" role="doc-backlink">10</a><span class="fn-bracket">]</span></span>
 <p>The Stan implementation of SARIMA can be found in e.g.
 <a class="github reference external" href="https://github.com/asael697/bayesforecast">asael697/bayesforecast</a>.</p>
 </aside>
 <aside class="footnote brackets" id="id62" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id25">11</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id25" role="doc-backlink">11</a><span class="fn-bracket">]</span></span>
 <p>For brevity, we omitted the MCMC sampling code here. You can find
 the details in the accompanying Jupyter Notebook.</p>
 </aside>
 <aside class="footnote brackets" id="id63" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id27">12</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id27" role="doc-backlink">12</a><span class="fn-bracket">]</span></span>
 <p>It might be useful to first consider “space” here being some
 multi-dimensional Euclidean spaces, so <span class="math notranslate nohighlight">\(X_t\)</span> and <span class="math notranslate nohighlight">\(Y_t\)</span> is some
 multi-dimensional array/tensor when we do computations in Python.</p>
 </aside>
 <aside class="footnote brackets" id="id64" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id30">13</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id30" role="doc-backlink">13</a><span class="fn-bracket">]</span></span>
 <p>This also gives a nice example of a non-stationary observation
 matrix <span class="math notranslate nohighlight">\(\mathbf{H}\)</span>.</p>
 </aside>
 <aside class="footnote brackets" id="id65" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id32">14</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id32" role="doc-backlink">14</a><span class="fn-bracket">]</span></span>
 <p>Note that this is not the only way to express ARMA model in a
 state-space form, for more detail see lecture note
 <a class="reference external" href="http://www-stat.wharton.upenn.edu/~stine/stat910/lectures/14_state_space.pdf">http://www-stat.wharton.upenn.edu/~stine/stat910/lectures/14_state_space.pdf</a>.</p>
 </aside>
 <aside class="footnote brackets" id="id66" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id41">15</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id41" role="doc-backlink">15</a><span class="fn-bracket">]</span></span>
 <p>Nothing more puts George E. P. Box’s famous quote: “All models
 are wrong, but some are useful” into perspective, than reading
 through his seminal book and working on forecasting problems.</p>
 </aside>
 <aside class="footnote brackets" id="id67" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id44">16</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id44" role="doc-backlink">16</a><span class="fn-bracket">]</span></span>
 <p>For a demonstration see
 <a class="reference external" href="https://mc-stan.org/loo/articles/loo2-lfo.html">https://mc-stan.org/loo/articles/loo2-lfo.html</a>.</p>
 </aside>
 <aside class="footnote brackets" id="id68" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id48">17</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id48" role="doc-backlink">17</a><span class="fn-bracket">]</span></span>
 <p>Note that in practice we usually parameterize Equation
 <a class="reference internal" href="#equation-eq-horse-shoe">(6.25)</a> a little bit differently.</p>
 </aside>
 <aside class="footnote brackets" id="id69" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id50">18</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id50" role="doc-backlink">18</a><span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Federal_holidays_in_the_United_States#List_of_federal_holidays">https://en.wikipedia.org/wiki/Federal_holidays_in_the_United_States#List_of_federal_holidays</a></p>
 </aside>
 </section>
 </section>
-
-    <script type="text/x-thebe-config">
+<script type="text/x-thebe-config">
     {
         requestKernel: true,
         binderOptions: {
@@ -2657,51 +2523,34 @@ through his seminal book and working on forecasting problems.</p>
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
-
-                </article>
-              
-
-              
-              
-              
-              
-                <footer class="prev-next-footer">
-                  
+<script>kernelName = 'python3'</script>
+</article>
+<footer class="prev-next-footer">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="chp_05.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">5. </span>Splines</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="chp_07.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">7. </span>Bayesian Additive Regression Trees</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="chp_05.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title"><span class="section-number">5. </span>Splines</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
+</a>
+<a class="right-next" href="chp_07.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title"><span class="section-number">7. </span>Bayesian Additive Regression Trees</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage">
+<i class="fa-solid fa-list"></i> Contents
   </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
+<nav class="bd-toc-nav page-toc">
+<ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-overview-of-time-series-problems">6.1. An Overview of Time Series Problems</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-analysis-as-a-regression-problem">6.2. Time Series Analysis as a Regression Problem</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#design-matrices-for-time-series">6.2.1. Design Matrices for Time Series</a></li>
@@ -2726,57 +2575,36 @@ through his seminal book and working on forecasting problems.</p>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">6.7. Exercises</a></li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-          </div>
-          <footer class="bd-footer-content">
-            
+</div>
+<footer class="bd-footer-content">
 <div class="bd-footer-content__inner container">
-  
-  <div class="footer-item">
-    
+<div class="footer-item">
 <p class="component-author">
 By Martin, Kumar, Lao
 </p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-
-  <p class="copyright">
+</div>
+<div class="footer-item">
+<p class="copyright">
     
       © Copyright 2022.
       <br/>
-    
-  </p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
+</p>
 </div>
-          </footer>
-        
-
-      </main>
-    </div>
-  </div>
-  
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<div class="footer-item">
+</div>
+<div class="footer-item">
+</div>
+</div>
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
 <script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
-
-  <footer class="bd-footer">
-  </footer>
-  </body>
+<footer class="bd-footer">
+</footer>
+</body>
 </html>

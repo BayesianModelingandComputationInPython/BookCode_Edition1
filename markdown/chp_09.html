@@ -1,164 +1,101 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
-    <title>9. End to End Bayesian Workflows &#8212; Bayesian Modeling and Computation in Python</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="Docutils 0.18.1: http://docutils.sourceforge.net/" name="generator"/>
+<title>9. End to End Bayesian Workflows — Bayesian Modeling and Computation in Python</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-
-  
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-codeautolink.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
-  
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
-  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
-
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet"/>
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet"/>
+<link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" rel="stylesheet" type="text/css"/>
+<link href="../_static/togglebutton.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-thebe.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-codeautolink.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" rel="stylesheet" type="text/css"/>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" rel="preload"/>
+<script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+<script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+<script src="../_static/jquery.js"></script>
+<script src="../_static/underscore.js"></script>
+<script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+<script src="../_static/doctools.js"></script>
+<script src="../_static/clipboard.min.js"></script>
+<script src="../_static/copybutton.js"></script>
+<script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../_static/togglebutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<script src="../_static/design-tabs.js"></script>
+<script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'markdown/chp_09';</script>
-    <link rel="shortcut icon" href="../_static/favicon.ico"/>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="10. Probabilistic Programming Languages" href="chp_10.html" />
-    <link rel="prev" title="8. Approximate Bayesian Computation" href="chp_08.html" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
-  
-  
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  
-  <div id="pst-scroll-pixel-helper"></div>
-
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
+<script async="async" src="../_static/sphinx-thebe.js"></script>
+<script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+<script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'markdown/chp_09';</script>
+<link href="../_static/favicon.ico" rel="shortcut icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="chp_10.html" rel="next" title="10. Probabilistic Programming Languages"/>
+<link href="chp_08.html" rel="prev" title="8. Approximate Bayesian Computation"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</head>
+<body data-bs-root-margin="0px 0px -60%" data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-default-mode="" data-offset="180">
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>
     Back to top
   </button>
-
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         id="search-input"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+<input class="sidebar-toggle" id="__primary" name="__primary" type="checkbox"/>
+<label class="overlay overlay-primary" for="__primary"></label>
+<input class="sidebar-toggle" id="__secondary" name="__secondary" type="checkbox"/>
+<label class="overlay overlay-secondary" for="__secondary"></label>
+<div class="search-button__wrapper">
+<div class="search-button__overlay"></div>
+<div class="search-button__search-container">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search this book..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" id="search-input" name="q" placeholder="Search this book..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
-  </div>
-  
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
-  
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      <div class="bd-sidebar-primary bd-sidebar">
-        
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-    
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-  
-
+</div>
+<nav class="bd-header navbar navbar-expand-lg bd-navbar">
+</nav>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<div class="bd-sidebar-primary bd-sidebar">
+<div class="sidebar-header-items sidebar-primary__section">
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
 <a class="navbar-brand logo" href="../welcome.html">
-  
-  
-  
-  
-  
-  
-    <p class="title logo__title">Bayesian Modeling and Computation in Python</p>
-  
+<p class="title logo__title">Bayesian Modeling and Computation in Python</p>
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item navbar-nav active">
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 0</span></p>
+<div class="sidebar-primary-item"><nav aria-label="Main" class="bd-links" id="bd-docs-nav">
+<div class="bd-toc-item navbar-nav active">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 0</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="dedication.html">Dedication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="foreword.html">Foreword</a></li>
@@ -200,111 +137,53 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../solutions/chp_01.html">Solutions 1: Bayesian Inference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../solutions/chp_02.html">Solutions 2: Exploratory Analysis of Bayesian models</a></li>
 </ul>
-
-    </div>
+</div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-  
-  <div id="rtd-footer-container"></div>
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main">
-        
-        
-
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+<div id="rtd-footer-container"></div>
+</div>
+<main class="bd-main" id="main-content">
 <div class="sbt-scroll-pixel-helper"></div>
-
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <span class="fa-solid fa-bars"></span>
+<div class="header-article-items__start">
+<div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" data-bs-placement="bottom" data-bs-toggle="tooltip" for="__primary" title="Toggle primary sidebar">
+<span class="fa-solid fa-bars"></span>
 </label></div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
-
+</div>
+<div class="header-article-items__end">
+<div class="header-article-item">
 <div class="article-header-buttons">
-
-
-
-
-
 <div class="dropdown dropdown-source-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
-    <i class="fab fa-github"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1" target="_blank"
-   class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
+<button aria-expanded="false" aria-label="Source repositories" class="btn dropdown-toggle" data-bs-toggle="dropdown" type="button">
+<i class="fab fa-github"></i>
+</button>
+<ul class="dropdown-menu">
+<li><a class="btn btn-sm btn-source-repository-button dropdown-item" data-bs-placement="left" data-bs-toggle="tooltip" href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1" target="_blank" title="Source repository">
 <span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
+<i class="fab fa-github"></i>
+</span>
 <span class="btn__text-container">Repository</span>
 </a>
 </li>
-      
-      
-      
-      
-      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_09.html&body=Your%20issue%20content%20here." target="_blank"
-   class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
+<li><a class="btn btn-sm btn-source-issues-button dropdown-item" data-bs-placement="left" data-bs-toggle="tooltip" href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_09.html&amp;body=Your%20issue%20content%20here." target="_blank" title="Open an issue">
 <span class="btn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
+<i class="fas fa-lightbulb"></i>
+</span>
 <span class="btn__text-container">Open issue</span>
 </a>
 </li>
-      
-  </ul>
+</ul>
 </div>
-
-
-
-
-<button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
-  title="Fullscreen mode"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
+<button class="btn btn-sm btn-fullscreen-button" data-bs-placement="bottom" data-bs-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode">
 <span class="btn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
+<i class="fas fa-expand"></i>
+</span>
 </button>
-
-
-
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -314,8 +193,6 @@ document.write(`
   </button>
 `);
 </script>
-
-
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -323,29 +200,23 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" data-bs-placement="bottom" data-bs-toggle="tooltip" for="__secondary" title="Toggle secondary sidebar">
+<span class="fa-solid fa-list"></span>
 </label>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-
-<div id="jb-print-docs-body" class="onlyprint">
-    <h1>End to End Bayesian Workflows</h1>
-    <!-- Table of contents -->
-    <div id="print-main-content">
-        <div id="jb-print-toc">
-            
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+</div>
+<div class="onlyprint" id="jb-print-docs-body">
+<h1>End to End Bayesian Workflows</h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+<div>
+<h2> Contents </h2>
+</div>
+<nav aria-label="Page">
+<ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflows-contexts-and-questions">9.1. Workflows, Contexts, and Questions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applied-example-airlines-flight-delays-problem">9.1.1. Applied Example: Airlines Flight Delays Problem</a></li>
 </ul>
@@ -405,17 +276,13 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experimental-example-comparing-between-two-groups">9.11. Experimental Example: Comparing Between Two Groups</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">9.12. Exercises</a></li>
 </ul>
-            </nav>
-        </div>
-    </div>
+</nav>
 </div>
-
-              
-                
+</div>
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
-                  
-  <section class="tex2jax_ignore mathjax_ignore" id="end-to-end-bayesian-workflows">
+<article class="bd-article" role="main">
+<section class="tex2jax_ignore mathjax_ignore" id="end-to-end-bayesian-workflows">
 <span id="chap9"></span><h1><span class="section-number">9. </span>End to End Bayesian Workflows<a class="headerlink" href="#end-to-end-bayesian-workflows" title="Permalink to this heading">#</a></h1>
 <p>Some restaurants offer a style of dining called menu <em>dégustation</em>, or
 in English a tasting menu. In this dining style, the guest is provided a
@@ -464,7 +331,7 @@ data and some prior (or domain) knowledge, some technique used to
 process the data, and an audience typically wanting a report of some
 kind with the conclusion of what we learn.</p>
 <figure class="align-default" id="fig-bayesianworkflow">
-<a class="reference internal image-reference" href="../_images/Bayesian_workflow.png"><img alt="../_images/Bayesian_workflow.png" src="../_images/Bayesian_workflow.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Bayesian_workflow.png"><img alt="../_images/Bayesian_workflow.png" src="../_images/Bayesian_workflow.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 9.1 </span><span class="caption-text">A high level generic Bayesian workflow showing the main steps involved.
 The workflow has many junctures requiring decisions, and some steps may
@@ -799,19 +666,19 @@ in <a class="reference internal" href="#fig-arrivaldistributions"><span class="s
 <div class="literal-block-wrapper docutils container" id="plot-flight-data">
 <div class="code-block-caption"><span class="caption-number">Listing 9.1 </span><span class="caption-text">plot_flight_data</span><a class="headerlink" href="#plot-flight-data" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/948363589_T_ONTIME_MARKETING.zip&quot;</span><span class="p">)</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"../data/948363589_T_ONTIME_MARKETING.zip"</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html#matplotlib.pyplot.subplots" title="matplotlib.pyplot.subplots"><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
 
-<span class="n">msn_arrivals</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;DEST&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;MSN&quot;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;ORIGIN&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s2">&quot;MSP&quot;</span><span class="p">,</span> <span class="s2">&quot;DTW&quot;</span><span class="p">])][</span><span class="s2">&quot;ARR_DELAY&quot;</span><span class="p">]</span>
+<span class="n">msn_arrivals</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s2">"DEST"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"MSN"</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">df</span><span class="p">[</span><span class="s2">"ORIGIN"</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s2">"MSP"</span><span class="p">,</span> <span class="s2">"DTW"</span><span class="p">])][</span><span class="s2">"ARR_DELAY"</span><span class="p">]</span>
 
-<span class="n">az</span><span class="o">.</span><span class="n">plot_kde</span><span class="p">(</span><span class="n">msn_arrivals</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<a class="sphinx-codeautolink-a" href="https://python.arviz.org/en/stable/api/generated/arviz.plot_kde.html#arviz.plot_kde" title="arviz.plot_kde"><span class="n">az</span><span class="o">.</span><span class="n">plot_kde</span></a><span class="p">(</span><span class="n">msn_arrivals</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Minutes late&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Minutes late"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <figure class="align-default" id="fig-arrivaldistributions">
-<a class="reference internal image-reference" href="../_images/ArrivalDistributions.png"><img alt="../_images/ArrivalDistributions.png" src="../_images/ArrivalDistributions.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/ArrivalDistributions.png"><img alt="../_images/ArrivalDistributions.png" src="../_images/ArrivalDistributions.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 9.2 </span><span class="caption-text">Kernel density estimate plot for the observed arrival delay data. Note a
 couple of interesting features. The bulk of all flight arrivals is
@@ -868,14 +735,14 @@ Skew-Normal likelihood model as an exercise for the reader.</p>
     <span class="n">normal_alpha</span> <span class="o">=</span> <span class="o">...</span>
     <span class="n">normal_sd</span> <span class="o">=</span> <span class="o">...</span>
     
-    <span class="n">normal_delay</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;delays&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sd</span><span class="p">,</span>  
+    <span class="n">normal_delay</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"delays"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sd</span><span class="p">,</span>  
                              <span class="n">observed</span><span class="o">=</span><span class="n">delays_obs</span><span class="p">)</span>
 
 <span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">gumbel_model</span><span class="p">:</span>
     <span class="n">gumbel_beta</span> <span class="o">=</span> <span class="o">...</span>
     <span class="n">gumbel_mu</span> <span class="o">=</span> <span class="o">...</span>
     
-    <span class="n">gumbel_delays</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Gumbel</span><span class="p">(</span><span class="s2">&quot;delays&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">beta</span><span class="p">,</span> 
+    <span class="n">gumbel_delays</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Gumbel</span><span class="p">(</span><span class="s2">"delays"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">beta</span><span class="p">,</span> 
                               <span class="n">observed</span><span class="o">=</span><span class="n">delays_obs</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -935,18 +802,18 @@ consistency with our domain knowledge, shown in Code Block
 <div class="literal-block-wrapper docutils container" id="airline-model-definition">
 <div class="code-block-caption"><span class="caption-number">Listing 9.3 </span><span class="caption-text">airline_model_definition</span><a class="headerlink" href="#airline-model-definition" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">normal_model</span><span class="p">:</span>
-    <span class="n">normal_sd</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfStudentT</span><span class="p">(</span><span class="s2">&quot;sd&quot;</span><span class="p">,</span><span class="n">sigma</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-    <span class="n">normal_mu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;mu&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span> 
+    <span class="n">normal_sd</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfStudentT</span><span class="p">(</span><span class="s2">"sd"</span><span class="p">,</span><span class="n">sigma</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">normal_mu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"mu"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span> 
 
-    <span class="n">normal_delay</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;delays&quot;</span><span class="p">,</span><span class="n">mu</span><span class="o">=</span><span class="n">normal_mu</span><span class="p">,</span>
+    <span class="n">normal_delay</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"delays"</span><span class="p">,</span><span class="n">mu</span><span class="o">=</span><span class="n">normal_mu</span><span class="p">,</span>
                              <span class="n">sigma</span><span class="o">=</span><span class="n">normal_sd</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">msn_arrivals</span><span class="p">)</span>
     <span class="n">normal_prior_predictive</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample_prior_predictive</span><span class="p">()</span>
     
 <span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">gumbel_model</span><span class="p">:</span>
-    <span class="n">gumbel_beta</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfStudentT</span><span class="p">(</span><span class="s2">&quot;beta&quot;</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-    <span class="n">gumbel_mu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;mu&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+    <span class="n">gumbel_beta</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfStudentT</span><span class="p">(</span><span class="s2">"beta"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">gumbel_mu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"mu"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
     
-    <span class="n">gumbel_delays</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Gumbel</span><span class="p">(</span><span class="s2">&quot;delays&quot;</span><span class="p">,</span>
+    <span class="n">gumbel_delays</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Gumbel</span><span class="p">(</span><span class="s2">"delays"</span><span class="p">,</span>
                               <span class="n">mu</span><span class="o">=</span><span class="n">gumbel_mu</span><span class="p">,</span>
                               <span class="n">beta</span><span class="o">=</span><span class="n">gumbel_beta</span><span class="p">,</span>
                               <span class="n">observed</span><span class="o">=</span><span class="n">msn_arrivals</span><span class="p">)</span>
@@ -955,7 +822,7 @@ consistency with our domain knowledge, shown in Code Block
 </div>
 </div>
 <figure class="align-default" id="fig-airline-prior-predictive">
-<a class="reference internal image-reference" href="../_images/Airline_Prior_Predictive.png"><img alt="../_images/Airline_Prior_Predictive.png" src="../_images/Airline_Prior_Predictive.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Airline_Prior_Predictive.png"><img alt="../_images/Airline_Prior_Predictive.png" src="../_images/Airline_Prior_Predictive.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 9.3 </span><span class="caption-text">Prior predictive distributions for each of the models. Prior to
 conditioning on data both distributions look reasonable for our domain
@@ -997,23 +864,23 @@ exploration should be done such as the steps we performed in Section <a class="r
 <div class="code-block-caption"><span class="caption-number">Listing 9.4 </span><span class="caption-text">airline_model_inference</span><a class="headerlink" href="#airline-model-inference" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">normal_model</span><span class="p">:</span>
     <span class="n">normal_delay_trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">random_seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">chains</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">az</span><span class="o">.</span><span class="n">plot_rank</span><span class="p">(</span><span class="n">normal_delay_trace</span><span class="p">)</span>
+<a class="sphinx-codeautolink-a" href="https://python.arviz.org/en/stable/api/generated/arviz.plot_rank.html#arviz.plot_rank" title="arviz.plot_rank"><span class="n">az</span><span class="o">.</span><span class="n">plot_rank</span></a><span class="p">(</span><span class="n">normal_delay_trace</span><span class="p">)</span>
 
 <span class="k">with</span> <span class="n">gumbel_model</span><span class="p">:</span>
     <span class="n">gumbel_delay_trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">chains</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">az</span><span class="o">.</span><span class="n">plot_rank</span><span class="p">(</span><span class="n">gumbel_delay_trace</span><span class="p">)</span>
+<a class="sphinx-codeautolink-a" href="https://python.arviz.org/en/stable/api/generated/arviz.plot_rank.html#arviz.plot_rank" title="arviz.plot_rank"><span class="n">az</span><span class="o">.</span><span class="n">plot_rank</span></a><span class="p">(</span><span class="n">gumbel_delay_trace</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <figure class="align-default" id="fig-airline-rank-plot">
-<a class="reference internal image-reference" href="../_images/rank_plot_bars_normal.png"><img alt="../_images/rank_plot_bars_normal.png" src="../_images/rank_plot_bars_normal.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/rank_plot_bars_normal.png"><img alt="../_images/rank_plot_bars_normal.png" src="../_images/rank_plot_bars_normal.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 9.4 </span><span class="caption-text">Rank plot of the posterior samples from the model with Normal
 likelihood.</span><a class="headerlink" href="#fig-airline-rank-plot" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="fig-rank-plot-bars-gumbel">
-<a class="reference internal image-reference" href="../_images/rank_plot_bars_gumbel.png"><img alt="../_images/rank_plot_bars_gumbel.png" src="../_images/rank_plot_bars_gumbel.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/rank_plot_bars_gumbel.png"><img alt="../_images/rank_plot_bars_gumbel.png" src="../_images/rank_plot_bars_gumbel.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 9.5 </span><span class="caption-text">Rank plot of the posterior samples from the model with Gumbel
 likelihood.</span><a class="headerlink" href="#fig-rank-plot-bars-gumbel" title="Permalink to this image">#</a></p>
@@ -1057,7 +924,7 @@ current fee structure or accept the airlines proposal for a new one.
 Given that a decision is the goal of our analysis, after a quick sanity
 check we continue with the workflow.</p>
 <figure class="align-default" id="fig-posterior-plot-normal">
-<a class="reference internal image-reference" href="../_images/posterior_plot_delays_normal.png"><img alt="../_images/posterior_plot_delays_normal.png" src="../_images/posterior_plot_delays_normal.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/posterior_plot_delays_normal.png"><img alt="../_images/posterior_plot_delays_normal.png" src="../_images/posterior_plot_delays_normal.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 9.6 </span><span class="caption-text">Posterior plot for Normal model. Both distributions looks reasonably
 formed and there are no divergences adding more evidence that our
@@ -1065,7 +932,7 @@ sampler has reasonably estimated the parameters.</span><a class="headerlink" hre
 </figcaption>
 </figure>
 <figure class="align-default" id="fig-posterior-plot-gumbel">
-<a class="reference internal image-reference" href="../_images/posterior_plot_delays_gumbel.png"><img alt="../_images/posterior_plot_delays_gumbel.png" src="../_images/posterior_plot_delays_gumbel.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/posterior_plot_delays_gumbel.png"><img alt="../_images/posterior_plot_delays_gumbel.png" src="../_images/posterior_plot_delays_gumbel.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 9.7 </span><span class="caption-text">Posterior plot for Gumbel model parameters. Similar to
 <a class="reference internal" href="#fig-posterior-plot-normal"><span class="std std-numref">Fig. 9.6</span></a> these estimates look well formed and
@@ -1114,7 +981,7 @@ model shown in Code Block
 </div>
 </div>
 <figure class="align-default" id="fig-delays-model-posterior-predictive">
-<a class="reference internal image-reference" href="../_images/Delays_Model_Posterior_Predictive.png"><img alt="../_images/Delays_Model_Posterior_Predictive.png" src="../_images/Delays_Model_Posterior_Predictive.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Delays_Model_Posterior_Predictive.png"><img alt="../_images/Delays_Model_Posterior_Predictive.png" src="../_images/Delays_Model_Posterior_Predictive.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 9.8 </span><span class="caption-text">Posterior predictive checks for Normal and Gumbel models. The Normal
 model does not capture the long tail well and also return more
@@ -1138,7 +1005,7 @@ flight delays than the Normal model, but does a poor job of fitting the
 proportion of on time arrivals. The Gumbel model also does a better job
 of fitting the median of flight delays.</p>
 <figure class="align-default" id="fig-arrival-test-statistics-for-gumbel-posterior-predictive">
-<a class="reference internal image-reference" href="../_images/Arrival_Test_Statistics_for_Gumbel_Posterior_Predictive.png"><img alt="../_images/Arrival_Test_Statistics_for_Gumbel_Posterior_Predictive.png" src="../_images/Arrival_Test_Statistics_for_Gumbel_Posterior_Predictive.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Arrival_Test_Statistics_for_Gumbel_Posterior_Predictive.png"><img alt="../_images/Arrival_Test_Statistics_for_Gumbel_Posterior_Predictive.png" src="../_images/Arrival_Test_Statistics_for_Gumbel_Posterior_Predictive.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 9.9 </span><span class="caption-text">Posterior predictive checks with test statistics for Gumbel model. On
 the left we see the estimated distribution of on time proportion
@@ -1168,8 +1035,8 @@ delays well, particularly compared to the Gumbel distribution. We can
 verify this observation using the comparison method in ArviZ:</p>
 <div class="literal-block-wrapper docutils container" id="delays-comparison">
 <div class="code-block-caption"><span class="caption-number">Listing 9.6 </span><span class="caption-text">delays_comparison</span><a class="headerlink" href="#delays-comparison" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">compare_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;normal&quot;</span><span class="p">:</span> <span class="n">normal_data</span><span class="p">,</span><span class="s2">&quot;gumbel&quot;</span><span class="p">:</span> <span class="n">gumbel_data</span><span class="p">}</span>
-<span class="n">comp</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">compare</span><span class="p">(</span><span class="n">compare_dict</span><span class="p">,</span> <span class="n">ic</span><span class="o">=</span><span class="s2">&quot;loo&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">compare_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"normal"</span><span class="p">:</span> <span class="n">normal_data</span><span class="p">,</span><span class="s2">"gumbel"</span><span class="p">:</span> <span class="n">gumbel_data</span><span class="p">}</span>
+<span class="n">comp</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://python.arviz.org/en/stable/api/generated/arviz.compare.html#arviz.compare" title="arviz.compare"><span class="n">az</span><span class="o">.</span><span class="n">compare</span></a><span class="p">(</span><span class="n">compare_dict</span><span class="p">,</span> <span class="n">ic</span><span class="o">=</span><span class="s2">"loo"</span><span class="p">)</span>
 <span class="n">comp</span>
 </pre></div>
 </div>
@@ -1217,7 +1084,7 @@ verify this observation using the comparison method in ArviZ:</p>
 ranked by their ELPD. It should be no surprise that the Gumbel model
 does much better job modeling the observed data.</p>
 <figure class="align-default" id="fig-loo-pit-delays">
-<a class="reference internal image-reference" href="../_images/loo_pit_delays.png"><img alt="../_images/loo_pit_delays.png" src="../_images/loo_pit_delays.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/loo_pit_delays.png"><img alt="../_images/loo_pit_delays.png" src="../_images/loo_pit_delays.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 9.10 </span><span class="caption-text">Model calibration using LOO-PIT. We can see that both models have
 problems at capturing the same portion of the data. The models are
@@ -1229,7 +1096,7 @@ Uniform distribution.</span><a class="headerlink" href="#fig-loo-pit-delays" tit
 </figcaption>
 </figure>
 <figure class="align-default" id="fig-elpd-plot-delays">
-<a class="reference internal image-reference" href="../_images/elpd_plot_delays.png"><img alt="../_images/elpd_plot_delays.png" src="../_images/elpd_plot_delays.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/elpd_plot_delays.png"><img alt="../_images/elpd_plot_delays.png" src="../_images/elpd_plot_delays.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 9.11 </span><span class="caption-text">Top panel ELPD difference between the Gumbel and Normal model. The 3
 observations with the largest deviation are annotated (157, 158 and
@@ -1255,12 +1122,12 @@ when considering the uncertainty in LOO the Gumbel model is better
 representation of the data than the Normal model.</p>
 <div class="literal-block-wrapper docutils container" id="delays-comparison-plot">
 <div class="code-block-caption"><span class="caption-number">Listing 9.7 </span><span class="caption-text">delays_comparison_plot</span><a class="headerlink" href="#delays-comparison-plot" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_compare</span><span class="p">(</span><span class="n">comp</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><a class="sphinx-codeautolink-a" href="https://python.arviz.org/en/stable/api/generated/arviz.plot_compare.html#arviz.plot_compare" title="arviz.plot_compare"><span class="n">az</span><span class="o">.</span><span class="n">plot_compare</span></a><span class="p">(</span><span class="n">comp</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <figure class="align-default" id="fig-model-comparison-airlines">
-<a class="reference internal image-reference" href="../_images/model_comparison_airlines.png"><img alt="../_images/model_comparison_airlines.png" src="../_images/model_comparison_airlines.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/model_comparison_airlines.png"><img alt="../_images/model_comparison_airlines.png" src="../_images/model_comparison_airlines.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 9.12 </span><span class="caption-text">Model comparison using LOO of the two flight delay models from Code
 Block <a class="reference internal" href="#delays-comparison-plot"><span class="std std-ref">delays_comparison_plot</span></a>. We
@@ -1352,7 +1219,7 @@ convert this statement into a reward function in Code Block
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">current_revenue</span><span class="p">(</span><span class="n">delay</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">delay</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">300</span> <span class="o">*</span> <span class="n">delay</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+    <span class="k">return</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/constants.html#numpy.nan" title="numpy.nan"><span class="n">np</span><span class="o">.</span><span class="n">nan</span></a>
 </pre></div>
 </div>
 </div>
@@ -1366,7 +1233,7 @@ both an array of revenue for each late flight, and the average estimate.</p>
 <div class="code-block-caption"><span class="caption-number">Listing 9.9 </span><span class="caption-text">reward_calculator</span><a class="headerlink" href="#reward-calculator" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">revenue_calculator</span><span class="p">(</span><span class="n">posterior_pred</span><span class="p">,</span> <span class="n">revenue_func</span><span class="p">):</span>    
     <span class="n">revenue_per_flight</span> <span class="o">=</span> <span class="n">revenue_func</span><span class="p">(</span><span class="n">posterior_pred</span><span class="p">)</span>
-    <span class="n">average_revenue</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">revenue_per_flight</span><span class="p">)</span>
+    <span class="n">average_revenue</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.nanmean.html#numpy.nanmean" title="numpy.nanmean"><span class="n">np</span><span class="o">.</span><span class="n">nanmean</span></a><span class="p">(</span><span class="n">revenue_per_flight</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">revenue_per_flight</span><span class="p">,</span> <span class="n">average_revenue</span>
 
 <span class="n">revenue_per_flight</span><span class="p">,</span> <span class="n">average_revenue</span> <span class="o">=</span> <span class="n">revenue_calculator</span><span class="p">(</span><span class="n">posterior_pred</span><span class="p">,</span>
@@ -1379,7 +1246,7 @@ both an array of revenue for each late flight, and the average estimate.</p>
 </pre></div>
 </div>
 <figure class="align-default" id="fig-late-fee-current-structure-hist">
-<a class="reference internal image-reference" href="../_images/Late_fee_current_structure_hist.png"><img alt="../_images/Late_fee_current_structure_hist.png" src="../_images/Late_fee_current_structure_hist.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Late_fee_current_structure_hist.png"><img alt="../_images/Late_fee_current_structure_hist.png" src="../_images/Late_fee_current_structure_hist.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 9.13 </span><span class="caption-text">Expected late flight revenue from current late fee structure calculated
 using reward function and posterior predictive distribution. There are
@@ -1399,9 +1266,9 @@ structure has no effect on the on time or late arrival of planes, you
 are able to estimate the revenue under the new proposal by writing a new
 cost function and reusing the previously calculated posterior predictive
 distribution.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@np</span><span class="o">.</span><span class="n">vectorize</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.vectorize.html#numpy.vectorize" title="numpy.vectorize"><span class="nd">@np</span><span class="o">.</span><span class="n">vectorize</span></a>
 <span class="k">def</span> <span class="nf">proposed_revenue</span><span class="p">(</span><span class="n">delay</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate proposed revenue for each delay &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Calculate proposed revenue for each delay """</span>
     <span class="k">if</span> <span class="n">delay</span> <span class="o">&gt;=</span> <span class="mi">100</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">30000</span>
     <span class="k">elif</span> <span class="n">delay</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">:</span>
@@ -1409,7 +1276,7 @@ distribution.</p>
     <span class="k">elif</span> <span class="n">delay</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">1000</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+        <span class="k">return</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/constants.html#numpy.nan" title="numpy.nan"><span class="n">np</span><span class="o">.</span><span class="n">nan</span></a>
 <span class="n">revenue_per_flight_proposed</span><span class="p">,</span> <span class="n">average_revenue_proposed</span> <span class="o">=</span> <span class="n">revenue_calculator</span><span class="p">(</span><span class="n">posterior_pred</span><span class="p">,</span> <span class="n">proposed_revenue</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1417,7 +1284,7 @@ distribution.</p>
 </pre></div>
 </div>
 <figure class="align-default" id="fig-late-fee-proposed-structure-hist">
-<a class="reference internal image-reference" href="../_images/Late_fee_proposed_structure_hist.png"><img alt="../_images/Late_fee_proposed_structure_hist.png" src="../_images/Late_fee_proposed_structure_hist.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Late_fee_proposed_structure_hist.png"><img alt="../_images/Late_fee_proposed_structure_hist.png" src="../_images/Late_fee_proposed_structure_hist.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 9.14 </span><span class="caption-text">Expected late flight revenue calculated using proposed reward function
 and posterior predictive distribution. Note that the posterior
@@ -1855,10 +1722,10 @@ in this experiment.</p>
 <div class="literal-block-wrapper docutils container" id="uni-model">
 <div class="code-block-caption"><span class="caption-number">Listing 9.10 </span><span class="caption-text">uni_model</span><a class="headerlink" href="#uni-model" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">unidirectional_model</span><span class="p">:</span>
-    <span class="n">sd</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfStudentT</span><span class="p">(</span><span class="s2">&quot;sd_uni&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
-    <span class="n">mu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;mu_uni&quot;</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+    <span class="n">sd</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfStudentT</span><span class="p">(</span><span class="s2">"sd_uni"</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"mu_uni"</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
     
-    <span class="n">uni_ksi</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;uni_ksi&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sd</span><span class="p">,</span> 
+    <span class="n">uni_ksi</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"uni_ksi"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sd</span><span class="p">,</span> 
                         <span class="n">observed</span><span class="o">=</span><span class="n">unidirectional</span><span class="p">)</span>
     
     <span class="n">uni_trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">draws</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
@@ -1870,11 +1737,11 @@ seen many times with the Bayesian modeling approach we get distribution
 estimates for both the mean ultimate strength and the standard deviation
 parameters, which is very helpful in understanding how reliable this
 particular material is.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_posterior</span><span class="p">(</span><span class="n">uni_data</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><a class="sphinx-codeautolink-a" href="https://python.arviz.org/en/stable/api/generated/arviz.plot_posterior.html#arviz.plot_posterior" title="arviz.plot_posterior"><span class="n">az</span><span class="o">.</span><span class="n">plot_posterior</span></a><span class="p">(</span><span class="n">uni_data</span><span class="p">)</span>
 </pre></div>
 </div>
 <figure class="align-default" id="fig-uni-sd-posterior-plot">
-<a class="reference internal image-reference" href="../_images/Posterior_Uni.png"><img alt="../_images/Posterior_Uni.png" src="../_images/Posterior_Uni.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Posterior_Uni.png"><img alt="../_images/Posterior_Uni.png" src="../_images/Posterior_Uni.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 9.15 </span><span class="caption-text">Posterior Plot of all parameters with 94% HDI and point statistic</span><a class="headerlink" href="#fig-uni-sd-posterior-plot" title="Permalink to this image">#</a></p>
 </figcaption>
@@ -1896,28 +1763,28 @@ this “one and done” comparison as shown in Code Block
 <span class="n">σ_high</span> <span class="o">=</span> <span class="mi">100</span>
 
 <span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
-    <span class="n">uni_mean</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;uni_mean&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">μ_m</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">μ_s</span><span class="p">)</span>
-    <span class="n">bi_mean</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;bi_mean&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">μ_m</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">μ_s</span><span class="p">)</span>
+    <span class="n">uni_mean</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"uni_mean"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">μ_m</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">μ_s</span><span class="p">)</span>
+    <span class="n">bi_mean</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"bi_mean"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">μ_m</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">μ_s</span><span class="p">)</span>
     
-    <span class="n">uni_std</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">&quot;uni_std&quot;</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="n">σ_low</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="n">σ_high</span><span class="p">)</span>
-    <span class="n">bi_std</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">&quot;bi_std&quot;</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="n">σ_low</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="n">σ_high</span><span class="p">)</span>
+    <span class="n">uni_std</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">"uni_std"</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="n">σ_low</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="n">σ_high</span><span class="p">)</span>
+    <span class="n">bi_std</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">"bi_std"</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="n">σ_low</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="n">σ_high</span><span class="p">)</span>
     
-    <span class="n">ν</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Exponential</span><span class="p">(</span><span class="s2">&quot;ν_minus_one&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mf">29.</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">ν</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Exponential</span><span class="p">(</span><span class="s2">"ν_minus_one"</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mf">29.</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
     
     <span class="n">λ1</span> <span class="o">=</span> <span class="n">uni_std</span><span class="o">**-</span><span class="mi">2</span>
     <span class="n">λ2</span> <span class="o">=</span> <span class="n">bi_std</span><span class="o">**-</span><span class="mi">2</span>
 
-    <span class="n">group1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">StudentT</span><span class="p">(</span><span class="s2">&quot;uni&quot;</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="n">ν</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">uni_mean</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="n">λ1</span><span class="p">,</span>
+    <span class="n">group1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">StudentT</span><span class="p">(</span><span class="s2">"uni"</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="n">ν</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">uni_mean</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="n">λ1</span><span class="p">,</span>
         <span class="n">observed</span><span class="o">=</span><span class="n">unidirectional</span><span class="p">)</span>
-    <span class="n">group2</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">StudentT</span><span class="p">(</span><span class="s2">&quot;bi&quot;</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="n">ν</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">bi_mean</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="n">λ2</span><span class="p">,</span> 
+    <span class="n">group2</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">StudentT</span><span class="p">(</span><span class="s2">"bi"</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="n">ν</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">bi_mean</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="n">λ2</span><span class="p">,</span> 
         <span class="n">observed</span><span class="o">=</span><span class="n">bidirectional</span><span class="p">)</span>
     
-    <span class="n">diff_of_means</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;difference of means&quot;</span><span class="p">,</span> 
+    <span class="n">diff_of_means</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">"difference of means"</span><span class="p">,</span> 
                                      <span class="n">uni_mean</span> <span class="o">-</span> <span class="n">bi_mean</span><span class="p">)</span>
-    <span class="n">diff_of_stds</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;difference of stds&quot;</span><span class="p">,</span>
+    <span class="n">diff_of_stds</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">"difference of stds"</span><span class="p">,</span>
                                     <span class="n">uni_std</span> <span class="o">-</span> <span class="n">bi_std</span><span class="p">)</span>
     <span class="n">pooled_std</span> <span class="o">=</span> <span class="p">((</span><span class="n">uni_std</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">bi_std</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
-    <span class="n">effect_size</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;effect size&quot;</span><span class="p">,</span>
+    <span class="n">effect_size</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">"effect size"</span><span class="p">,</span>
                                    <span class="n">diff_of_means</span> <span class="o">/</span> <span class="n">pooled_std</span><span class="p">)</span>
     
     <span class="n">t_trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">draws</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
@@ -1931,11 +1798,11 @@ Forest Plot in <a class="reference internal" href="#fig-composite-forest-plot"><
 to be much overlap between the mean of two types of samples, suggesting
 their ultimate strength is indeed different, with the unidirectional
 being stronger and perhaps even being a little bit more reliable.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>az.plot_forest(t_trace, var_names=[&quot;uni_mean&quot;,&quot;bi_mean&quot;])
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>az.plot_forest(t_trace, var_names=["uni_mean","bi_mean"])
 </pre></div>
 </div>
 <figure class="align-default" id="fig-composite-forest-plot">
-<a class="reference internal image-reference" href="../_images/Posterior_Forest_Plot.png"><img alt="../_images/Posterior_Forest_Plot.png" src="../_images/Posterior_Forest_Plot.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Posterior_Forest_Plot.png"><img alt="../_images/Posterior_Forest_Plot.png" src="../_images/Posterior_Forest_Plot.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 9.16 </span><span class="caption-text">Forest plot of the means of each group. The 94% HDI is separated
 indicating a difference in the means.</span><a class="headerlink" href="#fig-composite-forest-plot" title="Permalink to this image">#</a></p>
@@ -1945,13 +1812,13 @@ indicating a difference in the means.</span><a class="headerlink" href="#fig-com
 trick in our PPL. We can have the model automatically calculate the
 difference directly, in this case one of them being posterior
 distribution of the difference of means.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_posterior</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> 
-                  <span class="n">var_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;difference of means&quot;</span><span class="p">,</span><span class="s2">&quot;effectsize&quot;</span><span class="p">],</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><a class="sphinx-codeautolink-a" href="https://python.arviz.org/en/stable/api/generated/arviz.plot_posterior.html#arviz.plot_posterior" title="arviz.plot_posterior"><span class="n">az</span><span class="o">.</span><span class="n">plot_posterior</span></a><span class="p">(</span><span class="n">trace</span><span class="p">,</span> 
+                  <span class="n">var_names</span><span class="o">=</span><span class="p">[</span><span class="s2">"difference of means"</span><span class="p">,</span><span class="s2">"effectsize"</span><span class="p">],</span>
                   <span class="n">hdi_prob</span><span class="o">=</span><span class="mf">.95</span><span class="p">,</span> <span class="n">ref_val</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 <figure class="align-default" id="fig-composite-difference-of-means">
-<a class="reference internal image-reference" href="../_images/Composite_Difference_Of_Means.png"><img alt="../_images/Composite_Difference_Of_Means.png" src="../_images/Composite_Difference_Of_Means.png" style="width: 8.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Composite_Difference_Of_Means.png"><img alt="../_images/Composite_Difference_Of_Means.png" src="../_images/Composite_Difference_Of_Means.png" style="width: 8.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 9.17 </span><span class="caption-text">Posterior Plot of difference of means and effect size including
 reference value at 0. In both the plots a value of 0 is relatively
@@ -1959,7 +1826,7 @@ unlikely indicating there is both an effect and a difference.</span><a class="he
 </figcaption>
 </figure>
 <p>We can compare the numerical summaries for each parameter as well.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">t_trace</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;stats&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><a class="sphinx-codeautolink-a" href="https://python.arviz.org/en/stable/api/generated/arviz.summary.html#arviz.summary" title="arviz.summary"><span class="n">az</span><span class="o">.</span><span class="n">summary</span></a><span class="p">(</span><span class="n">t_trace</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"stats"</span><span class="p">)</span>
 </pre></div>
 </div>
 <table class="table">
@@ -2158,62 +2025,61 @@ isn’t familiar statistics using Matplotlib static visualization.</p></li>
 <li><p>Craft a 1 minute explanation to the same audience using the Bokeh
 plot, incorporating the additional interactivity allowed by Bokeh.</p></li>
 </ol>
-<hr class="footnotes docutils" />
+<hr class="footnotes docutils"/>
 <aside class="footnote brackets" id="id50" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id26">1</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id26" role="doc-backlink">1</a><span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Newsvendor_model">https://en.wikipedia.org/wiki/Newsvendor_model</a></p>
 </aside>
 <aside class="footnote brackets" id="id51" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id27">2</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id27" role="doc-backlink">2</a><span class="fn-bracket">]</span></span>
 <p>&lt;<a class="reference external" href="http://www.ee.columbia.edu/~vittorio/BayesProof.pdf">www.ee.columbia.edu/~vittorio/BayesProof.pdf</a>&gt;</p>
 </aside>
 <aside class="footnote brackets" id="id52" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id34">3</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id34" role="doc-backlink">3</a><span class="fn-bracket">]</span></span>
 <p>See <a class="reference external" href="https://bost.ocks.org/mike/algorithms/">https://bost.ocks.org/mike/algorithms/</a></p>
 </aside>
 <aside class="footnote brackets" id="id53" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id35">4</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id35" role="doc-backlink">4</a><span class="fn-bracket">]</span></span>
 <p>See
 <a class="reference external" href="https://elevanth.org/blog/2017/11/28/build-a-better-markov-chain/">https://elevanth.org/blog/2017/11/28/build-a-better-markov-chain/</a></p>
 </aside>
 <aside class="footnote brackets" id="id54" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id36">5</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id36" role="doc-backlink">5</a><span class="fn-bracket">]</span></span>
 <p>See
 <a class="reference external" href="https://www.nytimes.com/interactive/2020/11/03/us/elections/forecast-president.html">https://www.nytimes.com/interactive/2020/11/03/us/elections/forecast-president.html</a></p>
 </aside>
 <aside class="footnote brackets" id="id55" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id37">6</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id37" role="doc-backlink">6</a><span class="fn-bracket">]</span></span>
 <p>See <a class="reference external" href="http://presidential-plinko.com/">http://presidential-plinko.com/</a></p>
 </aside>
 <aside class="footnote brackets" id="id56" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id39">7</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id39" role="doc-backlink">7</a><span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://chi-feng.github.io/mcmc-demo/app.html">https://chi-feng.github.io/mcmc-demo/app.html</a></p>
 </aside>
 <aside class="footnote brackets" id="id57" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id42">8</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id42" role="doc-backlink">8</a><span class="fn-bracket">]</span></span>
 <p>Docker is one method to create fully reproducible environments
 that has become quite popular</p>
 </aside>
 <aside class="footnote brackets" id="id58" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id43">9</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id43" role="doc-backlink">9</a><span class="fn-bracket">]</span></span>
 <p>Much gratitude to Dr. Mehrdad Haghi and Dr. Winny Dong for funding
 and facilitating this research</p>
 </aside>
 <aside class="footnote brackets" id="id59" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id44">10</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id44" role="doc-backlink">10</a><span class="fn-bracket">]</span></span>
 <p>A recordings of the tests are available
 <a class="reference external" href="https://www.youtube.com/watch?v=u_XDUWgzs_Y">https://www.youtube.com/watch?v=u_XDUWgzs_Y</a></p>
 </aside>
 <aside class="footnote brackets" id="id60" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id45">11</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id45" role="doc-backlink">11</a><span class="fn-bracket">]</span></span>
 <p>This is in an ideal situation. Factors other than ultimate
 strength can limit the true load bearing capacity in real world
 situations.</p>
 </aside>
 </section>
 </section>
-
-    <script type="text/x-thebe-config">
+<script type="text/x-thebe-config">
     {
         requestKernel: true,
         binderOptions: {
@@ -2231,51 +2097,34 @@ situations.</p>
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
-
-                </article>
-              
-
-              
-              
-              
-              
-                <footer class="prev-next-footer">
-                  
+<script>kernelName = 'python3'</script>
+</article>
+<footer class="prev-next-footer">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="chp_08.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">8. </span>Approximate Bayesian Computation</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="chp_10.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">10. </span>Probabilistic Programming Languages</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="chp_08.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title"><span class="section-number">8. </span>Approximate Bayesian Computation</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
+</a>
+<a class="right-next" href="chp_10.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title"><span class="section-number">10. </span>Probabilistic Programming Languages</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage">
+<i class="fa-solid fa-list"></i> Contents
   </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
+<nav class="bd-toc-nav page-toc">
+<ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflows-contexts-and-questions">9.1. Workflows, Contexts, and Questions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applied-example-airlines-flight-delays-problem">9.1.1. Applied Example: Airlines Flight Delays Problem</a></li>
 </ul>
@@ -2335,57 +2184,36 @@ situations.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experimental-example-comparing-between-two-groups">9.11. Experimental Example: Comparing Between Two Groups</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">9.12. Exercises</a></li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-          </div>
-          <footer class="bd-footer-content">
-            
+</div>
+<footer class="bd-footer-content">
 <div class="bd-footer-content__inner container">
-  
-  <div class="footer-item">
-    
+<div class="footer-item">
 <p class="component-author">
 By Martin, Kumar, Lao
 </p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-
-  <p class="copyright">
+</div>
+<div class="footer-item">
+<p class="copyright">
     
       © Copyright 2022.
       <br/>
-    
-  </p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
+</p>
 </div>
-          </footer>
-        
-
-      </main>
-    </div>
-  </div>
-  
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<div class="footer-item">
+</div>
+<div class="footer-item">
+</div>
+</div>
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
 <script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
-
-  <footer class="bd-footer">
-  </footer>
-  </body>
+<footer class="bd-footer">
+</footer>
+</body>
 </html>

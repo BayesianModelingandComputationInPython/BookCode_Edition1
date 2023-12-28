@@ -1,164 +1,101 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
-    <title>3. Linear Models and Probabilistic Programming Languages &#8212; Bayesian Modeling and Computation in Python</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="Docutils 0.18.1: http://docutils.sourceforge.net/" name="generator"/>
+<title>3. Linear Models and Probabilistic Programming Languages — Bayesian Modeling and Computation in Python</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-
-  
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-codeautolink.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
-  
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
-  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
-
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet"/>
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet"/>
+<link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" rel="stylesheet" type="text/css"/>
+<link href="../_static/togglebutton.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-thebe.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-codeautolink.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" rel="stylesheet" type="text/css"/>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" rel="preload"/>
+<script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+<script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+<script src="../_static/jquery.js"></script>
+<script src="../_static/underscore.js"></script>
+<script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+<script src="../_static/doctools.js"></script>
+<script src="../_static/clipboard.min.js"></script>
+<script src="../_static/copybutton.js"></script>
+<script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../_static/togglebutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<script src="../_static/design-tabs.js"></script>
+<script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'markdown/chp_03';</script>
-    <link rel="shortcut icon" href="../_static/favicon.ico"/>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="4. Extending Linear Models" href="chp_04.html" />
-    <link rel="prev" title="2. Exploratory Analysis of Bayesian Models" href="chp_02.html" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
-  
-  
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  
-  <div id="pst-scroll-pixel-helper"></div>
-
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
+<script async="async" src="../_static/sphinx-thebe.js"></script>
+<script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+<script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'markdown/chp_03';</script>
+<link href="../_static/favicon.ico" rel="shortcut icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="chp_04.html" rel="next" title="4. Extending Linear Models"/>
+<link href="chp_02.html" rel="prev" title="2. Exploratory Analysis of Bayesian Models"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</head>
+<body data-bs-root-margin="0px 0px -60%" data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-default-mode="" data-offset="180">
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>
     Back to top
   </button>
-
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         id="search-input"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+<input class="sidebar-toggle" id="__primary" name="__primary" type="checkbox"/>
+<label class="overlay overlay-primary" for="__primary"></label>
+<input class="sidebar-toggle" id="__secondary" name="__secondary" type="checkbox"/>
+<label class="overlay overlay-secondary" for="__secondary"></label>
+<div class="search-button__wrapper">
+<div class="search-button__overlay"></div>
+<div class="search-button__search-container">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search this book..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" id="search-input" name="q" placeholder="Search this book..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
-  </div>
-  
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
-  
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      <div class="bd-sidebar-primary bd-sidebar">
-        
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-    
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-  
-
+</div>
+<nav class="bd-header navbar navbar-expand-lg bd-navbar">
+</nav>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<div class="bd-sidebar-primary bd-sidebar">
+<div class="sidebar-header-items sidebar-primary__section">
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
 <a class="navbar-brand logo" href="../welcome.html">
-  
-  
-  
-  
-  
-  
-    <p class="title logo__title">Bayesian Modeling and Computation in Python</p>
-  
+<p class="title logo__title">Bayesian Modeling and Computation in Python</p>
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item navbar-nav active">
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 0</span></p>
+<div class="sidebar-primary-item"><nav aria-label="Main" class="bd-links" id="bd-docs-nav">
+<div class="bd-toc-item navbar-nav active">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 0</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="dedication.html">Dedication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="foreword.html">Foreword</a></li>
@@ -200,111 +137,53 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../solutions/chp_01.html">Solutions 1: Bayesian Inference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../solutions/chp_02.html">Solutions 2: Exploratory Analysis of Bayesian models</a></li>
 </ul>
-
-    </div>
+</div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-  
-  <div id="rtd-footer-container"></div>
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main">
-        
-        
-
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+<div id="rtd-footer-container"></div>
+</div>
+<main class="bd-main" id="main-content">
 <div class="sbt-scroll-pixel-helper"></div>
-
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <span class="fa-solid fa-bars"></span>
+<div class="header-article-items__start">
+<div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" data-bs-placement="bottom" data-bs-toggle="tooltip" for="__primary" title="Toggle primary sidebar">
+<span class="fa-solid fa-bars"></span>
 </label></div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
-
+</div>
+<div class="header-article-items__end">
+<div class="header-article-item">
 <div class="article-header-buttons">
-
-
-
-
-
 <div class="dropdown dropdown-source-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
-    <i class="fab fa-github"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1" target="_blank"
-   class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
+<button aria-expanded="false" aria-label="Source repositories" class="btn dropdown-toggle" data-bs-toggle="dropdown" type="button">
+<i class="fab fa-github"></i>
+</button>
+<ul class="dropdown-menu">
+<li><a class="btn btn-sm btn-source-repository-button dropdown-item" data-bs-placement="left" data-bs-toggle="tooltip" href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1" target="_blank" title="Source repository">
 <span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
+<i class="fab fa-github"></i>
+</span>
 <span class="btn__text-container">Repository</span>
 </a>
 </li>
-      
-      
-      
-      
-      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_03.html&body=Your%20issue%20content%20here." target="_blank"
-   class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
+<li><a class="btn btn-sm btn-source-issues-button dropdown-item" data-bs-placement="left" data-bs-toggle="tooltip" href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_03.html&amp;body=Your%20issue%20content%20here." target="_blank" title="Open an issue">
 <span class="btn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
+<i class="fas fa-lightbulb"></i>
+</span>
 <span class="btn__text-container">Open issue</span>
 </a>
 </li>
-      
-  </ul>
+</ul>
 </div>
-
-
-
-
-<button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
-  title="Fullscreen mode"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
+<button class="btn btn-sm btn-fullscreen-button" data-bs-placement="bottom" data-bs-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode">
 <span class="btn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
+<i class="fas fa-expand"></i>
+</span>
 </button>
-
-
-
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -314,8 +193,6 @@ document.write(`
   </button>
 `);
 </script>
-
-
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -323,29 +200,23 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" data-bs-placement="bottom" data-bs-toggle="tooltip" for="__secondary" title="Toggle secondary sidebar">
+<span class="fa-solid fa-list"></span>
 </label>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-
-<div id="jb-print-docs-body" class="onlyprint">
-    <h1>Linear Models and Probabilistic Programming Languages</h1>
-    <!-- Table of contents -->
-    <div id="print-main-content">
-        <div id="jb-print-toc">
-            
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+</div>
+<div class="onlyprint" id="jb-print-docs-body">
+<h1>Linear Models and Probabilistic Programming Languages</h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+<div>
+<h2> Contents </h2>
+</div>
+<nav aria-label="Page">
+<ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-two-or-more-groups">3.1. Comparing Two (or More) Groups</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-two-ppls">3.1.1. Comparing Two PPLs</a></li>
 </ul>
@@ -369,17 +240,13 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#picking-priors-in-regression-models">3.5. Picking Priors in Regression Models</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">3.6. Exercises</a></li>
 </ul>
-            </nav>
-        </div>
-    </div>
+</nav>
 </div>
-
-              
-                
+</div>
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
-                  
-  <section class="tex2jax_ignore mathjax_ignore" id="linear-models-and-probabilistic-programming-languages">
+<article class="bd-article" role="main">
+<section class="tex2jax_ignore mathjax_ignore" id="linear-models-and-probabilistic-programming-languages">
 <span id="chap2"></span><h1><span class="section-number">3. </span>Linear Models and Probabilistic Programming Languages<a class="headerlink" href="#linear-models-and-probabilistic-programming-languages" title="Permalink to this heading">#</a></h1>
 <p>With the advent of Probabilistic Programming Languages, modern Bayesian
 modeling can be as simple as coding a model and “pressing a button”.
@@ -426,10 +293,10 @@ imputation, or imputation during modeling, we will opt to take the
 simplest approach for this chapter.</p>
 <div class="literal-block-wrapper docutils container" id="penguin-load">
 <div class="code-block-caption"><span class="caption-number">Listing 3.1 </span><span class="caption-text">penguin_load</span><a class="headerlink" href="#penguin-load" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">penguins</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/penguins.csv&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">penguins</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"../data/penguins.csv"</span><span class="p">)</span>
 <span class="c1"># Subset to the columns needed</span>
 <span class="n">missing_data</span> <span class="o">=</span> <span class="n">penguins</span><span class="o">.</span><span class="n">isnull</span><span class="p">()[</span>
-    <span class="p">[</span><span class="s2">&quot;bill_length_mm&quot;</span><span class="p">,</span> <span class="s2">&quot;flipper_length_mm&quot;</span><span class="p">,</span> <span class="s2">&quot;sex&quot;</span><span class="p">,</span> <span class="s2">&quot;body_mass_g&quot;</span><span class="p">]</span>
+    <span class="p">[</span><span class="s2">"bill_length_mm"</span><span class="p">,</span> <span class="s2">"flipper_length_mm"</span><span class="p">,</span> <span class="s2">"sex"</span><span class="p">,</span> <span class="s2">"body_mass_g"</span><span class="p">]</span>
 <span class="p">]</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="c1"># Drop rows with any missing data</span>
 <span class="n">penguins</span> <span class="o">=</span> <span class="n">penguins</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">missing_data</span><span class="p">]</span>
@@ -442,9 +309,9 @@ Code Block
 a little bit of code, the results of which are in <a class="reference internal" href="#tab-penguin-mass-parameters-point-estimates"><span class="std std-numref">Table 3.1</span></a></p>
 <div class="literal-block-wrapper docutils container" id="penguin-mass-empirical">
 <div class="code-block-caption"><span class="caption-number">Listing 3.2 </span><span class="caption-text">penguin_mass_empirical</span><a class="headerlink" href="#penguin-mass-empirical" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">summary_stats</span> <span class="o">=</span> <span class="p">(</span><span class="n">penguins</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="s2">&quot;body_mass_g&quot;</span><span class="p">]]</span>
-                         <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;species&quot;</span><span class="p">)</span>
-                         <span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;std&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">]))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">summary_stats</span> <span class="o">=</span> <span class="p">(</span><span class="n">penguins</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">"species"</span><span class="p">,</span> <span class="s2">"body_mass_g"</span><span class="p">]]</span>
+                         <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"species"</span><span class="p">)</span>
+                         <span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s2">"mean"</span><span class="p">,</span> <span class="s2">"std"</span><span class="p">,</span> <span class="s2">"count"</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
@@ -494,13 +361,13 @@ go with it. Let us translate Equation <a class="reference internal" href="#equat
 computational model.</p>
 <div class="literal-block-wrapper docutils container" id="penguin-mass">
 <div class="code-block-caption"><span class="caption-number">Listing 3.3 </span><span class="caption-text">penguin_mass</span><a class="headerlink" href="#penguin-mass" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">adelie_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">penguins</span><span class="p">[</span><span class="s2">&quot;species&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Adelie&quot;</span><span class="p">)</span>
-<span class="n">adelie_mass_obs</span> <span class="o">=</span> <span class="n">penguins</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">adelie_mask</span><span class="p">,</span> <span class="s2">&quot;body_mass_g&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">adelie_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">penguins</span><span class="p">[</span><span class="s2">"species"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Adelie"</span><span class="p">)</span>
+<span class="n">adelie_mass_obs</span> <span class="o">=</span> <span class="n">penguins</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">adelie_mask</span><span class="p">,</span> <span class="s2">"body_mass_g"</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
 
 <span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_adelie_penguin_mass</span><span class="p">:</span>
-    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfStudentT</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
-    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;μ&quot;</span><span class="p">,</span> <span class="mi">4000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">)</span>
-    <span class="n">mass</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;mass&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">μ</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">adelie_mass_obs</span><span class="p">)</span>
+    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfStudentT</span><span class="p">(</span><span class="s2">"σ"</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
+    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"μ"</span><span class="p">,</span> <span class="mi">4000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">)</span>
+    <span class="n">mass</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"mass"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">μ</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">adelie_mass_obs</span><span class="p">)</span>
 
     <span class="n">prior</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample_prior_predictive</span><span class="p">(</span><span class="n">samples</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
     <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">chains</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
@@ -522,7 +389,7 @@ However, since this is a simple model and we have a decent number of
 observations we will just note this aberration and move onto estimating
 the posterior distribution.</p>
 <figure class="align-default" id="fig-singlespecies-prior-predictive">
-<a class="reference internal image-reference" href="../_images/SingleSpecies_Prior_Predictive.png"><img alt="../_images/SingleSpecies_Prior_Predictive.png" src="../_images/SingleSpecies_Prior_Predictive.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/SingleSpecies_Prior_Predictive.png"><img alt="../_images/SingleSpecies_Prior_Predictive.png" src="../_images/SingleSpecies_Prior_Predictive.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3.1 </span><span class="caption-text">Prior samples generated in Code Block
 <a class="reference internal" href="#penguin-mass"><span class="std std-ref">penguin_mass</span></a>. The distribution estimates
@@ -577,7 +444,7 @@ acceptable and we will continue with our analysis.</p>
 </tbody>
 </table>
 <figure class="align-default" id="fig-single-penguins-rank-kde-plot">
-<a class="reference internal image-reference" href="../_images/SingleSpecies_KDE_RankPlot.png"><img alt="../_images/SingleSpecies_KDE_RankPlot.png" src="../_images/SingleSpecies_KDE_RankPlot.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/SingleSpecies_KDE_RankPlot.png"><img alt="../_images/SingleSpecies_KDE_RankPlot.png" src="../_images/SingleSpecies_KDE_RankPlot.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3.2 </span><span class="caption-text">KDE and rank plot of the posterior of the Bayesian model in Code Block
 <a class="reference internal" href="#penguin-mass"><span class="std std-ref">penguin_mass</span></a> of Adelie penguin mass. This
@@ -592,7 +459,7 @@ chains. Compare the point estimates from <a class="reference internal" href="#ta
 standard deviation with our Bayesian estimates as shown in
 <a class="reference internal" href="#fig-singlespecies-mass-posteriorplot"><span class="std std-numref">Fig. 3.3</span></a>.</p>
 <figure class="align-default" id="fig-singlespecies-mass-posteriorplot">
-<a class="reference internal image-reference" href="../_images/SingleSpecies_Mass_PosteriorPlot.png"><img alt="../_images/SingleSpecies_Mass_PosteriorPlot.png" src="../_images/SingleSpecies_Mass_PosteriorPlot.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/SingleSpecies_Mass_PosteriorPlot.png"><img alt="../_images/SingleSpecies_Mass_PosteriorPlot.png" src="../_images/SingleSpecies_Mass_PosteriorPlot.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3.3 </span><span class="caption-text">Posterior plot of the posterior of the Bayesian model in Code Block
 <a class="reference internal" href="#penguin-mass"><span class="std std-ref">penguin_mass</span></a> of Adelie penguins mass. The
@@ -618,22 +485,22 @@ species.</p>
 <div class="literal-block-wrapper docutils container" id="nocovariate-mass">
 <div class="code-block-caption"><span class="caption-number">Listing 3.4 </span><span class="caption-text">nocovariate_mass</span><a class="headerlink" href="#nocovariate-mass" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># pd.categorical makes it easy to index species below</span>
-<span class="n">all_species</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">penguins</span><span class="p">[</span><span class="s2">&quot;species&quot;</span><span class="p">])</span>
+<span class="n">all_species</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">penguins</span><span class="p">[</span><span class="s2">"species"</span><span class="p">])</span>
 
 <span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_penguin_mass_all_species</span><span class="p">:</span>
     <span class="c1"># Note the addition of the shape parameter</span>
-    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfStudentT</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;μ&quot;</span><span class="p">,</span> <span class="mi">4000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-    <span class="n">mass</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;mass&quot;</span><span class="p">,</span>
+    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfStudentT</span><span class="p">(</span><span class="s2">"σ"</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"μ"</span><span class="p">,</span> <span class="mi">4000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">mass</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"mass"</span><span class="p">,</span>
                      <span class="n">mu</span><span class="o">=</span><span class="n">μ</span><span class="p">[</span><span class="n">all_species</span><span class="o">.</span><span class="n">codes</span><span class="p">],</span>
                      <span class="n">sigma</span><span class="o">=</span><span class="n">σ</span><span class="p">[</span><span class="n">all_species</span><span class="o">.</span><span class="n">codes</span><span class="p">],</span>
-                     <span class="n">observed</span><span class="o">=</span><span class="n">penguins</span><span class="p">[</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">])</span>
+                     <span class="n">observed</span><span class="o">=</span><span class="n">penguins</span><span class="p">[</span><span class="s2">"body_mass_g"</span><span class="p">])</span>
 
     <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
     <span class="n">inf_data_model_penguin_mass_all_species</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">from_pymc3</span><span class="p">(</span>
         <span class="n">trace</span><span class="o">=</span><span class="n">trace</span><span class="p">,</span>
-        <span class="n">coords</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;μ_dim_0&quot;</span><span class="p">:</span> <span class="n">all_species</span><span class="o">.</span><span class="n">categories</span><span class="p">,</span>
-                <span class="s2">&quot;σ_dim_0&quot;</span><span class="p">:</span> <span class="n">all_species</span><span class="o">.</span><span class="n">categories</span><span class="p">})</span>
+        <span class="n">coords</span><span class="o">=</span><span class="p">{</span><span class="s2">"μ_dim_0"</span><span class="p">:</span> <span class="n">all_species</span><span class="o">.</span><span class="n">categories</span><span class="p">,</span>
+                <span class="s2">"σ_dim_0"</span><span class="p">:</span> <span class="n">all_species</span><span class="o">.</span><span class="n">categories</span><span class="p">})</span>
 </pre></div>
 </div>
 </div>
@@ -657,7 +524,7 @@ species, we plot the posterior again in a forest plot using Code Block
 across species and note that the Gentoo penguins seem to have more mass
 than Adelie or Chinstrap penguins.</p>
 <figure class="align-default" id="fig-all-penguins-rank-kde-plot">
-<a class="reference internal image-reference" href="../_images/AllSpecies_KDE_RankPlot.png"><img alt="../_images/AllSpecies_KDE_RankPlot.png" src="../_images/AllSpecies_KDE_RankPlot.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/AllSpecies_KDE_RankPlot.png"><img alt="../_images/AllSpecies_KDE_RankPlot.png" src="../_images/AllSpecies_KDE_RankPlot.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3.4 </span><span class="caption-text">KDE and rank plot for posterior estimates of parameters of masses for
 each species of penguins from the <code class="docutils literal notranslate"><span class="pre">penguins_masses</span></code> model. Note how each
@@ -666,12 +533,12 @@ species has its own pair of estimates for each parameter.</span><a class="header
 </figure>
 <div class="literal-block-wrapper docutils container" id="mass-forest-plot">
 <div class="code-block-caption"><span class="caption-number">Listing 3.5 </span><span class="caption-text">mass_forest_plot</span><a class="headerlink" href="#mass-forest-plot" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_forest</span><span class="p">(</span><span class="n">inf_data_model_penguin_mass_all_species</span><span class="p">,</span> <span class="n">var_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;μ&quot;</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><a class="sphinx-codeautolink-a" href="https://python.arviz.org/en/stable/api/generated/arviz.plot_forest.html#arviz.plot_forest" title="arviz.plot_forest"><span class="n">az</span><span class="o">.</span><span class="n">plot_forest</span></a><span class="p">(</span><span class="n">inf_data_model_penguin_mass_all_species</span><span class="p">,</span> <span class="n">var_names</span><span class="o">=</span><span class="p">[</span><span class="s2">"μ"</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <figure class="align-default" id="fig-forest-plot-means">
-<a class="reference internal image-reference" href="../_images/Independent_Model_ForestPlotMeans.png"><img alt="../_images/Independent_Model_ForestPlotMeans.png" src="../_images/Independent_Model_ForestPlotMeans.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Independent_Model_ForestPlotMeans.png"><img alt="../_images/Independent_Model_ForestPlotMeans.png" src="../_images/Independent_Model_ForestPlotMeans.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3.5 </span><span class="caption-text">Forest plot of the mean of mass of each species group in
 <code class="docutils literal notranslate"><span class="pre">model_penguin_mass_all_species</span></code>.  Each line represents one chain in the sampler, the dot is the
@@ -684,11 +551,11 @@ and easily note that the Gentoo penguins have more mass than Adelie or
 Chinstrap penguins. Let us also look at the standard deviation in
 <a class="reference internal" href="#fig-forest-plot-sigma"><span class="std std-numref">Fig. 3.6</span></a>. The 94% highest density interval of the
 posterior is reporting uncertainty in the order of 100 grams.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>az.plot_forest(inf_data_model_penguin_mass_all_species, var_names=[&quot;σ&quot;])
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>az.plot_forest(inf_data_model_penguin_mass_all_species, var_names=["σ"])
 </pre></div>
 </div>
 <figure class="align-default" id="fig-forest-plot-sigma">
-<a class="reference internal image-reference" href="../_images/Independent_Model_ForestPlotSigma.png"><img alt="../_images/Independent_Model_ForestPlotSigma.png" src="../_images/Independent_Model_ForestPlotSigma.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Independent_Model_ForestPlotSigma.png"><img alt="../_images/Independent_Model_ForestPlotSigma.png" src="../_images/Independent_Model_ForestPlotSigma.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3.6 </span><span class="caption-text">Forest plot of the standard deviations of the mass for each species
 group in <code class="docutils literal notranslate"><span class="pre">model_penguin_mass_all_species</span></code>. This plot depicts our
@@ -760,23 +627,23 @@ Block <a class="reference internal" href="#penguin-mass-tfp"><span class="std st
 <span class="n">root</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">JointDistributionCoroutine</span><span class="o">.</span><span class="n">Root</span>
 
 <span class="n">species_idx</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">all_species</span><span class="o">.</span><span class="n">codes</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
-<span class="n">body_mass_g</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">penguins</span><span class="p">[</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">],</span> <span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">body_mass_g</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">penguins</span><span class="p">[</span><span class="s2">"body_mass_g"</span><span class="p">],</span> <span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 
 <span class="nd">@tfd</span><span class="o">.</span><span class="n">JointDistributionCoroutine</span>
 <span class="k">def</span> <span class="nf">jd_penguin_mass_all_species</span><span class="p">():</span>
     <span class="n">σ</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Sample</span><span class="p">(</span>
             <span class="n">tfd</span><span class="o">.</span><span class="n">HalfStudentT</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">2000</span><span class="p">),</span>
             <span class="n">sample_shape</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;sigma&quot;</span><span class="p">))</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">"sigma"</span><span class="p">))</span>
     <span class="n">μ</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Sample</span><span class="p">(</span>
             <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">4000</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">3000</span><span class="p">),</span>
             <span class="n">sample_shape</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;mu&quot;</span><span class="p">))</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">"mu"</span><span class="p">))</span>
     <span class="n">mass</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Independent</span><span class="p">(</span>
         <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">species_idx</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">),</span>
                    <span class="n">scale</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">σ</span><span class="p">,</span> <span class="n">species_idx</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)),</span>
         <span class="n">reinterpreted_batch_ndims</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;mass&quot;</span><span class="p">)</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">"mass"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -803,7 +670,7 @@ express <span class="math notranslate nohighlight">\(y \sim \text{Normal(.)}\)</
 variables without dependencies as root nodes by wrapping them with
 <code class="docutils literal notranslate"><span class="pre">tfd.JointDistributionCoroutine.Root</span></code>. The model is written as a Python
 function with no input argument and no return value. Lastly, it is
-convenient to put <code class="docutils literal notranslate"><span class="pre">&#64;tfd.JointDistributionCoroutine</span></code> on top of the Python
+convenient to put <code class="docutils literal notranslate"><span class="pre">@tfd.JointDistributionCoroutine</span></code> on top of the Python
 function as a decorator to get the model (i.e., a
 <code class="docutils literal notranslate"><span class="pre">tfd.JointDistribution</span></code>) directly.</p>
 <p>The resulting <code class="docutils literal notranslate"><span class="pre">jd_penguin_mass_all_species</span></code> is the intercept only
@@ -869,16 +736,16 @@ PyMC3 <a class="footnote-reference brackets" href="#id37" id="id7" role="doc-not
     <span class="mi">1000</span><span class="p">,</span> <span class="n">jd_penguin_mass_all_species</span><span class="p">,</span> <span class="n">n_chains</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">num_adaptation_steps</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
     <span class="n">mass</span><span class="o">=</span><span class="n">body_mass_g</span><span class="p">)</span>
 
-<span class="n">inf_data_model_penguin_mass_all_species2</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span>
+<span class="n">inf_data_model_penguin_mass_all_species2</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://python.arviz.org/en/stable/api/generated/arviz.from_dict.html#arviz.from_dict" title="arviz.from_dict"><span class="n">az</span><span class="o">.</span><span class="n">from_dict</span></a><span class="p">(</span>
     <span class="n">posterior</span><span class="o">=</span><span class="p">{</span>
         <span class="c1"># TFP mcmc returns (num_samples, num_chains, ...), we swap</span>
         <span class="c1"># the first and second axis below for each RV so the shape</span>
         <span class="c1"># is what ArviZ expected.</span>
-        <span class="n">k</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">k</span><span class="p">:</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.swapaxes.html#numpy.swapaxes" title="numpy.swapaxes"><span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span></a><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">mcmc_samples</span><span class="o">.</span><span class="n">_asdict</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()},</span>
     <span class="n">sample_stats</span><span class="o">=</span><span class="p">{</span>
-        <span class="n">k</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="n">sampler_stats</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;target_log_prob&quot;</span><span class="p">,</span> <span class="s2">&quot;diverging&quot;</span><span class="p">,</span> <span class="s2">&quot;accept_ratio&quot;</span><span class="p">,</span> <span class="s2">&quot;n_steps&quot;</span><span class="p">]}</span>
+        <span class="n">k</span><span class="p">:</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.swapaxes.html#numpy.swapaxes" title="numpy.swapaxes"><span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span></a><span class="p">(</span><span class="n">sampler_stats</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"target_log_prob"</span><span class="p">,</span> <span class="s2">"diverging"</span><span class="p">,</span> <span class="s2">"accept_ratio"</span><span class="p">,</span> <span class="s2">"n_steps"</span><span class="p">]}</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -910,10 +777,10 @@ distribution conditioned on the posterior samples.</p>
 <span class="c1"># Be careful not to run this code twice during REPL workflow.</span>
 <span class="n">inf_data_model_penguin_mass_all_species2</span><span class="o">.</span><span class="n">add_groups</span><span class="p">(</span>
     <span class="n">prior</span><span class="o">=</span><span class="n">prior_predictive_samples</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">_asdict</span><span class="p">(),</span>
-    <span class="n">prior_predictive</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;mass&quot;</span><span class="p">:</span> <span class="n">prior_predictive_samples</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]},</span>
-    <span class="n">posterior_predictive</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;mass&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="n">ppc_samples</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)},</span>
-    <span class="n">log_likelihood</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;mass&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="n">data_log_likelihood</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)},</span>
-    <span class="n">observed_data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;mass&quot;</span><span class="p">:</span> <span class="n">body_mass_g</span><span class="p">}</span>
+    <span class="n">prior_predictive</span><span class="o">=</span><span class="p">{</span><span class="s2">"mass"</span><span class="p">:</span> <span class="n">prior_predictive_samples</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]},</span>
+    <span class="n">posterior_predictive</span><span class="o">=</span><span class="p">{</span><span class="s2">"mass"</span><span class="p">:</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.swapaxes.html#numpy.swapaxes" title="numpy.swapaxes"><span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span></a><span class="p">(</span><span class="n">ppc_samples</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)},</span>
+    <span class="n">log_likelihood</span><span class="o">=</span><span class="p">{</span><span class="s2">"mass"</span><span class="p">:</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.swapaxes.html#numpy.swapaxes" title="numpy.swapaxes"><span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span></a><span class="p">(</span><span class="n">data_log_likelihood</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)},</span>
+    <span class="n">observed_data</span><span class="o">=</span><span class="p">{</span><span class="s2">"mass"</span><span class="p">:</span> <span class="n">body_mass_g</span><span class="p">}</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -994,7 +861,7 @@ penguin model (Code Block
 <a class="reference internal" href="#nocovariate-mass"><span class="std std-ref">nocovariate_mass</span></a>), instead of
 <code class="docutils literal notranslate"><span class="pre">mu</span> <span class="pre">=</span> <span class="pre">μ[species.codes]</span></code> we can use <code class="docutils literal notranslate"><span class="pre">pandas.get_dummies</span></code> to parse the
 categorical information into a design matrix, and then write
-<code class="docutils literal notranslate"><span class="pre">mu</span> <span class="pre">=</span> <span class="pre">pd.get_dummies(penguins[&quot;species&quot;])</span> <span class="pre">&#64;</span> <span class="pre">μ</span></code>, where <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> is a Python
+<code class="docutils literal notranslate"><span class="pre">mu</span> <span class="pre">=</span> <span class="pre">pd.get_dummies(penguins["species"])</span> <span class="pre">@</span> <span class="pre">μ</span></code>, where <code class="docutils literal notranslate"><span class="pre">@</span></code> is a Python
 operator for performing matrix multiplication. There are also few other
 functions to perform one hot encoding in Python, for example,
 <code class="docutils literal notranslate"><span class="pre">sklearn.preprocessing.OneHotEncoder</span></code>, as this is a very common data
@@ -1014,7 +881,7 @@ and <span class="math notranslate nohighlight">\(Y\)</span>, and a Gaussian dist
 architectures, we may opt for different choices as we will see in
 Chapter <a class="reference internal" href="chp_04.html#chap3"><span class="std std-ref">4</span></a>.</p>
 <figure class="align-default" id="fig-3d-linear-regression">
-<a class="reference internal image-reference" href="../_images/3d_linear_regression.png"><img alt="../_images/3d_linear_regression.png" src="../_images/3d_linear_regression.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/3d_linear_regression.png"><img alt="../_images/3d_linear_regression.png" src="../_images/3d_linear_regression.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3.7 </span><span class="caption-text">A linear regression with the Gaussian likelihood function evaluated at 3
 points. Note this plot only shows one possible Gaussian distribution at
@@ -1037,18 +904,18 @@ which has now estimated three parameters <span class="math notranslate nohighlig
 <span class="math notranslate nohighlight">\(\beta_0\)</span>.</p>
 <div class="literal-block-wrapper docutils container" id="non-centered-regression">
 <div class="code-block-caption"><span class="caption-number">Listing 3.12 </span><span class="caption-text">non_centered_regression</span><a class="headerlink" href="#non-centered-regression" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">adelie_flipper_length_obs</span> <span class="o">=</span> <span class="n">penguins</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">adelie_mask</span><span class="p">,</span> <span class="s2">&quot;flipper_length_mm&quot;</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">adelie_flipper_length_obs</span> <span class="o">=</span> <span class="n">penguins</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">adelie_mask</span><span class="p">,</span> <span class="s2">"flipper_length_mm"</span><span class="p">]</span>
 
 <span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_adelie_flipper_regression</span><span class="p">:</span>
     <span class="c1"># pm.Data allows us to change the underlying value in a later code block</span>
-    <span class="n">adelie_flipper_length</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Data</span><span class="p">(</span><span class="s2">&quot;adelie_flipper_length&quot;</span><span class="p">,</span>
+    <span class="n">adelie_flipper_length</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Data</span><span class="p">(</span><span class="s2">"adelie_flipper_length"</span><span class="p">,</span>
                                     <span class="n">adelie_flipper_length_obs</span><span class="p">)</span>
-    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfStudentT</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
-    <span class="n">β_0</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β_0&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)</span>
-    <span class="n">β_1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β_1&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)</span>
-    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;μ&quot;</span><span class="p">,</span> <span class="n">β_0</span> <span class="o">+</span> <span class="n">β_1</span> <span class="o">*</span> <span class="n">adelie_flipper_length</span><span class="p">)</span>
+    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfStudentT</span><span class="p">(</span><span class="s2">"σ"</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
+    <span class="n">β_0</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"β_0"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)</span>
+    <span class="n">β_1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"β_1"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)</span>
+    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">"μ"</span><span class="p">,</span> <span class="n">β_0</span> <span class="o">+</span> <span class="n">β_1</span> <span class="o">*</span> <span class="n">adelie_flipper_length</span><span class="p">)</span>
 
-    <span class="n">mass</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;mass&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">μ</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">σ</span><span class="p">,</span> <span class="n">observed</span> <span class="o">=</span> <span class="n">adelie_mass_obs</span><span class="p">)</span>
+    <span class="n">mass</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"mass"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">μ</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">σ</span><span class="p">,</span> <span class="n">observed</span> <span class="o">=</span> <span class="n">adelie_mass_obs</span><span class="p">)</span>
 
     <span class="n">inf_data_adelie_flipper_regression</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">return_inferencedata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
@@ -1059,7 +926,7 @@ time but you should neither trust us or your sampler blindly. Instead
 you should run the diagnostics to verify you have a reliable posterior
 approximation.</p>
 <figure class="align-default" id="fig-adelie-coefficient-posterior-plots">
-<a class="reference internal image-reference" href="../_images/adelie_coefficient_posterior_plots.png"><img alt="../_images/adelie_coefficient_posterior_plots.png" src="../_images/adelie_coefficient_posterior_plots.png" style="width: 5in;" /></a>
+<a class="reference internal image-reference" href="../_images/adelie_coefficient_posterior_plots.png"><img alt="../_images/adelie_coefficient_posterior_plots.png" src="../_images/adelie_coefficient_posterior_plots.png" style="width: 5in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3.8 </span><span class="caption-text">Estimates of the parameter value distributions of our linear regression
 coefficient from <code class="docutils literal notranslate"><span class="pre">model_adelie_flipper_regression</span></code>.</span><a class="headerlink" href="#fig-adelie-coefficient-posterior-plots" title="Permalink to this image">#</a></p>
@@ -1113,7 +980,7 @@ mean model and with our linearly varying mean model in
 our estimate of the likelihood’s standard deviation has dropped from a
 mean of around <span class="math notranslate nohighlight">\(\approx 460\)</span> grams to <span class="math notranslate nohighlight">\(\approx 380\)</span> grams.</p>
 <figure class="align-default" id="fig-singlespecies-singleregression-forest-sigma-comparison">
-<a class="reference internal image-reference" href="../_images/SingleSpecies_SingleRegression_Forest_Sigma_Comparison.png"><img alt="../_images/SingleSpecies_SingleRegression_Forest_Sigma_Comparison.png" src="../_images/SingleSpecies_SingleRegression_Forest_Sigma_Comparison.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/SingleSpecies_SingleRegression_Forest_Sigma_Comparison.png"><img alt="../_images/SingleSpecies_SingleRegression_Forest_Sigma_Comparison.png" src="../_images/SingleSpecies_SingleRegression_Forest_Sigma_Comparison.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3.9 </span><span class="caption-text">By using the covariate of flipper length when estimating penguin mass
 the magnitude of the estimated error is reduced from a mean of slightly
@@ -1123,7 +990,7 @@ leverage that information to make better estimates.</span><a class="headerlink" 
 </figcaption>
 </figure>
 <figure class="align-default" id="fig-flipper-length-mass-regression">
-<a class="reference internal image-reference" href="../_images/Flipper_length_mass_regression.png"><img alt="../_images/Flipper_length_mass_regression.png" src="../_images/Flipper_length_mass_regression.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Flipper_length_mass_regression.png"><img alt="../_images/Flipper_length_mass_regression.png" src="../_images/Flipper_length_mass_regression.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3.10 </span><span class="caption-text">Observed Adelie data of flipper length vs mass as scatter plot, and mean
 estimate of the likelihood as black line, and 94% HDI of the mean as
@@ -1153,9 +1020,9 @@ mass using <code class="docutils literal notranslate"><span class="pre">PyMC3</s
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">model_adelie_flipper_regression</span><span class="p">:</span>
     <span class="c1"># Change the underlying value to the mean observed flipper length</span>
     <span class="c1"># for our posterior predictive samples</span>
-    <span class="n">pm</span><span class="o">.</span><span class="n">set_data</span><span class="p">({</span><span class="s2">&quot;adelie_flipper_length&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">adelie_flipper_length_obs</span><span class="o">.</span><span class="n">mean</span><span class="p">()]})</span>
+    <span class="n">pm</span><span class="o">.</span><span class="n">set_data</span><span class="p">({</span><span class="s2">"adelie_flipper_length"</span><span class="p">:</span> <span class="p">[</span><span class="n">adelie_flipper_length_obs</span><span class="o">.</span><span class="n">mean</span><span class="p">()]})</span>
     <span class="n">posterior_predictions</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample_posterior_predictive</span><span class="p">(</span>
-        <span class="n">inf_data_adelie_flipper_regression</span><span class="o">.</span><span class="n">posterior</span><span class="p">,</span> <span class="n">var_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;mass&quot;</span><span class="p">,</span> <span class="s2">&quot;μ&quot;</span><span class="p">])</span>
+        <span class="n">inf_data_adelie_flipper_regression</span><span class="o">.</span><span class="n">posterior</span><span class="p">,</span> <span class="n">var_names</span><span class="o">=</span><span class="p">[</span><span class="s2">"mass"</span><span class="p">,</span> <span class="s2">"μ"</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -1168,7 +1035,7 @@ posterior predictive samples of the mass at that fixed value. In
 posterior predictive distribution of the mass for penguins of average
 flipper length, along the posterior of the mean.</p>
 <figure class="align-default" id="fig-flipper-length-mass-posterior-predictive">
-<a class="reference internal image-reference" href="../_images/Flipper_length_mass_posterior_predictive.png"><img alt="../_images/Flipper_length_mass_posterior_predictive.png" src="../_images/Flipper_length_mass_posterior_predictive.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Flipper_length_mass_posterior_predictive.png"><img alt="../_images/Flipper_length_mass_posterior_predictive.png" src="../_images/Flipper_length_mass_posterior_predictive.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3.11 </span><span class="caption-text">The posterior distribution of the mean, <span class="math notranslate nohighlight">\(\mu\)</span>, evaluated at the mean
 flipper length in blue and the posterior predictive distribution
@@ -1220,14 +1087,14 @@ using TFP.</p>
     <span class="nd">@tfd</span><span class="o">.</span><span class="n">JointDistributionCoroutine</span>
     <span class="k">def</span> <span class="nf">jd_adelie_flipper_regression</span><span class="p">():</span>
         <span class="n">σ</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span>
-            <span class="n">tfd</span><span class="o">.</span><span class="n">HalfStudentT</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;sigma&quot;</span><span class="p">))</span>
-        <span class="n">β_1</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">4000</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;beta_1&quot;</span><span class="p">))</span>
-        <span class="n">β_0</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">4000</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;beta_0&quot;</span><span class="p">))</span>
+            <span class="n">tfd</span><span class="o">.</span><span class="n">HalfStudentT</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"sigma"</span><span class="p">))</span>
+        <span class="n">β_1</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">4000</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"beta_1"</span><span class="p">))</span>
+        <span class="n">β_0</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">4000</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"beta_0"</span><span class="p">))</span>
         <span class="n">μ</span> <span class="o">=</span> <span class="n">β_0</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">+</span> <span class="n">β_1</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">adelie_flipper_length</span>
         <span class="n">mass</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Independent</span><span class="p">(</span>
             <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">μ</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">σ</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]),</span>
             <span class="n">reinterpreted_batch_ndims</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;mass&quot;</span><span class="p">)</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">"mass"</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">jd_adelie_flipper_regression</span>
 
@@ -1240,19 +1107,19 @@ using TFP.</p>
     <span class="mi">1000</span><span class="p">,</span> <span class="n">jd_adelie_flipper_regression</span><span class="p">,</span> <span class="n">n_chains</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">num_adaptation_steps</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
     <span class="n">mass</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">adelie_mass_obs</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">))</span>
 
-<span class="n">inf_data_adelie_flipper_length_c</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span>
+<span class="n">inf_data_adelie_flipper_length_c</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://python.arviz.org/en/stable/api/generated/arviz.from_dict.html#arviz.from_dict" title="arviz.from_dict"><span class="n">az</span><span class="o">.</span><span class="n">from_dict</span></a><span class="p">(</span>
     <span class="n">posterior</span><span class="o">=</span><span class="p">{</span>
-        <span class="n">k</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">k</span><span class="p">:</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.swapaxes.html#numpy.swapaxes" title="numpy.swapaxes"><span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span></a><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">mcmc_samples</span><span class="o">.</span><span class="n">_asdict</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()},</span>
     <span class="n">sample_stats</span><span class="o">=</span><span class="p">{</span>
-        <span class="n">k</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="n">sampler_stats</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;target_log_prob&quot;</span><span class="p">,</span> <span class="s2">&quot;diverging&quot;</span><span class="p">,</span> <span class="s2">&quot;accept_ratio&quot;</span><span class="p">,</span> <span class="s2">&quot;n_steps&quot;</span><span class="p">]}</span>
+        <span class="n">k</span><span class="p">:</span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.swapaxes.html#numpy.swapaxes" title="numpy.swapaxes"><span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span></a><span class="p">(</span><span class="n">sampler_stats</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"target_log_prob"</span><span class="p">,</span> <span class="s2">"diverging"</span><span class="p">,</span> <span class="s2">"accept_ratio"</span><span class="p">,</span> <span class="s2">"n_steps"</span><span class="p">]}</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <figure class="align-default" id="fig-singlespecies-multipleregression-centered">
-<a class="reference internal image-reference" href="../_images/SingleSpecies_MultipleRegression_Centered.png"><img alt="../_images/SingleSpecies_MultipleRegression_Centered.png" src="../_images/SingleSpecies_MultipleRegression_Centered.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/SingleSpecies_MultipleRegression_Centered.png"><img alt="../_images/SingleSpecies_MultipleRegression_Centered.png" src="../_images/SingleSpecies_MultipleRegression_Centered.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3.12 </span><span class="caption-text">Estimates of coefficients from Code Block
 <a class="reference internal" href="#tfp-penguins-centered-predictor"><span class="std std-ref">tfp_penguins_centered_predictor</span></a>.
@@ -1304,18 +1171,18 @@ precisely.</p>
 <div class="literal-block-wrapper docutils container" id="penguin-mass-multi">
 <div class="code-block-caption"><span class="caption-number">Listing 3.16 </span><span class="caption-text">penguin_mass_multi</span><a class="headerlink" href="#penguin-mass-multi" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Binary encoding of the categorical predictor</span>
-<span class="n">sex_obs</span> <span class="o">=</span> <span class="n">penguins</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">adelie_mask</span> <span class="p">,</span><span class="s2">&quot;sex&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s2">&quot;male&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;female&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span>
+<span class="n">sex_obs</span> <span class="o">=</span> <span class="n">penguins</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">adelie_mask</span> <span class="p">,</span><span class="s2">"sex"</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s2">"male"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s2">"female"</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span>
 
 <span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_penguin_mass_categorical</span><span class="p">:</span>
-    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfStudentT</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
-    <span class="n">β_0</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β_0&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3000</span><span class="p">)</span>
-    <span class="n">β_1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β_1&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3000</span><span class="p">)</span>
-    <span class="n">β_2</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β_2&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3000</span><span class="p">)</span>
+    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfStudentT</span><span class="p">(</span><span class="s2">"σ"</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
+    <span class="n">β_0</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"β_0"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3000</span><span class="p">)</span>
+    <span class="n">β_1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"β_1"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3000</span><span class="p">)</span>
+    <span class="n">β_2</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"β_2"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3000</span><span class="p">)</span>
 
     <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span>
-        <span class="s2">&quot;μ&quot;</span><span class="p">,</span> <span class="n">β_0</span> <span class="o">+</span> <span class="n">β_1</span> <span class="o">*</span> <span class="n">adelie_flipper_length_obs</span> <span class="o">+</span> <span class="n">β_2</span> <span class="o">*</span> <span class="n">sex_obs</span><span class="p">)</span>
+        <span class="s2">"μ"</span><span class="p">,</span> <span class="n">β_0</span> <span class="o">+</span> <span class="n">β_1</span> <span class="o">*</span> <span class="n">adelie_flipper_length_obs</span> <span class="o">+</span> <span class="n">β_2</span> <span class="o">*</span> <span class="n">sex_obs</span><span class="p">)</span>
 
-    <span class="n">mass</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;mass&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">μ</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">adelie_mass_obs</span><span class="p">)</span>
+    <span class="n">mass</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"mass"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">μ</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">adelie_mass_obs</span><span class="p">)</span>
 
     <span class="n">inf_data_penguin_mass_categorical</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span>
         <span class="n">target_accept</span><span class="o">=</span><span class="mf">.9</span><span class="p">,</span> <span class="n">return_inferencedata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1328,7 +1195,7 @@ or male), we encode it as 1 and 0, respectively. For the model this
 means that the value of <span class="math notranslate nohighlight">\(\mu\)</span>, for females, is a sum over 3 terms while
 for males is a sum of two terms (as the <span class="math notranslate nohighlight">\(\beta_2\)</span> term will zero out).</p>
 <figure class="align-default" id="fig-adelie-sex-coefficient-posterior">
-<a class="reference internal image-reference" href="../_images/adelie_sex_coefficient_posterior.png"><img alt="../_images/adelie_sex_coefficient_posterior.png" src="../_images/adelie_sex_coefficient_posterior.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/adelie_sex_coefficient_posterior.png"><img alt="../_images/adelie_sex_coefficient_posterior.png" src="../_images/adelie_sex_coefficient_posterior.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3.13 </span><span class="caption-text">Estimate of coefficient for sex covariate, <span class="math notranslate nohighlight">\(\beta_{2}\)</span> in model. As male
 is encoded as 0, and female is encoded as 1, this indicates the
@@ -1352,7 +1219,7 @@ write:</p>
 <div class="literal-block-wrapper docutils container" id="bambi-categorical">
 <div class="code-block-caption"><span class="caption-number">Listing 3.17 </span><span class="caption-text">bambi_categorical</span><a class="headerlink" href="#bambi-categorical" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bambi</span> <span class="k">as</span> <span class="nn">bmb</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">bmb</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="s2">&quot;body_mass_g ~ flipper_length_mm + sex&quot;</span><span class="p">,</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">bmb</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="s2">"body_mass_g ~ flipper_length_mm + sex"</span><span class="p">,</span>
                   <span class="n">penguins</span><span class="p">[</span><span class="n">adelie_mask</span><span class="p">])</span>
 <span class="n">trace</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 </pre></div>
@@ -1373,7 +1240,7 @@ interpreting the coefficients. In this case, the coefficients provides
 the relationship of a covariate into the response variable, <strong>if</strong> all
 other covariates are held constant <a class="footnote-reference brackets" href="#id39" id="id19" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a>.</p>
 <figure class="align-default" id="fig-single-species-categorical-regression">
-<a class="reference internal image-reference" href="../_images/Single_Species_Categorical_Regression.png"><img alt="../_images/Single_Species_Categorical_Regression.png" src="../_images/Single_Species_Categorical_Regression.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Single_Species_Categorical_Regression.png"><img alt="../_images/Single_Species_Categorical_Regression.png" src="../_images/Single_Species_Categorical_Regression.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3.14 </span><span class="caption-text">Multiple regression for flipper length versus mass with male and female
 Adelie penguins coded as a categorical covariate. Note how the
@@ -1396,15 +1263,15 @@ suggests that sex does indeed provide information for estimating a
 penguin’s mass.</p>
 <div class="literal-block-wrapper docutils container" id="forest-multiple-models">
 <div class="code-block-caption"><span class="caption-number">Listing 3.18 </span><span class="caption-text">forest_multiple_models</span><a class="headerlink" href="#forest-multiple-models" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_forest</span><span class="p">([</span><span class="n">inf_data_adelie_penguin_mass</span><span class="p">,</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><a class="sphinx-codeautolink-a" href="https://python.arviz.org/en/stable/api/generated/arviz.plot_forest.html#arviz.plot_forest" title="arviz.plot_forest"><span class="n">az</span><span class="o">.</span><span class="n">plot_forest</span></a><span class="p">([</span><span class="n">inf_data_adelie_penguin_mass</span><span class="p">,</span>
         <span class="n">inf_data_adelie_flipper_regression</span><span class="p">,</span>
         <span class="n">inf_data_penguin_mass_categorical</span><span class="p">],</span>
-        <span class="n">var_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;σ&quot;</span><span class="p">],</span> <span class="n">combined</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">var_names</span><span class="o">=</span><span class="p">[</span><span class="s2">"σ"</span><span class="p">],</span> <span class="n">combined</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <figure class="align-default" id="fig-singlespecies-multipleregression-forest-sigma-comparison">
-<a class="reference internal image-reference" href="../_images/SingleSpecies_MultipleRegression_Forest_Sigma_Comparison.png"><img alt="../_images/SingleSpecies_MultipleRegression_Forest_Sigma_Comparison.png" src="../_images/SingleSpecies_MultipleRegression_Forest_Sigma_Comparison.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/SingleSpecies_MultipleRegression_Forest_Sigma_Comparison.png"><img alt="../_images/SingleSpecies_MultipleRegression_Forest_Sigma_Comparison.png" src="../_images/SingleSpecies_MultipleRegression_Forest_Sigma_Comparison.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3.15 </span><span class="caption-text">By incorporating sex as a covariate in <code class="docutils literal notranslate"><span class="pre">model_penguin_mass_categorical</span></code>
 the estimated distribution of <span class="math notranslate nohighlight">\(\sigma\)</span> from this model is centered
@@ -1449,11 +1316,11 @@ model building and inference is shown in Code Block
     <span class="nd">@tfd</span><span class="o">.</span><span class="n">JointDistributionCoroutine</span>
     <span class="k">def</span> <span class="nf">jd_flipper_bill_sex</span><span class="p">():</span>
         <span class="n">σ</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span>
-            <span class="n">tfd</span><span class="o">.</span><span class="n">HalfStudentT</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;sigma&quot;</span><span class="p">))</span>
-        <span class="n">β_0</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;beta_0&quot;</span><span class="p">))</span>
-        <span class="n">β_1</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;beta_1&quot;</span><span class="p">))</span>
-        <span class="n">β_2</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;beta_2&quot;</span><span class="p">))</span>
-        <span class="n">β_3</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;beta_3&quot;</span><span class="p">))</span>
+            <span class="n">tfd</span><span class="o">.</span><span class="n">HalfStudentT</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"sigma"</span><span class="p">))</span>
+        <span class="n">β_0</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"beta_0"</span><span class="p">))</span>
+        <span class="n">β_1</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"beta_1"</span><span class="p">))</span>
+        <span class="n">β_2</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"beta_2"</span><span class="p">))</span>
+        <span class="n">β_3</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"beta_3"</span><span class="p">))</span>
         <span class="n">μ</span> <span class="o">=</span> <span class="p">(</span><span class="n">β_0</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
              <span class="o">+</span> <span class="n">β_1</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">flipper_length</span>
              <span class="o">+</span> <span class="n">β_2</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">sex</span>
@@ -1462,11 +1329,11 @@ model building and inference is shown in Code Block
         <span class="n">mass</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Independent</span><span class="p">(</span>
             <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">μ</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">σ</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]),</span>
             <span class="n">reinterpreted_batch_ndims</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;mass&quot;</span><span class="p">)</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">"mass"</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">jd_flipper_bill_sex</span>
 
-<span class="n">bill_length_obs</span> <span class="o">=</span> <span class="n">penguins</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">adelie_mask</span><span class="p">,</span> <span class="s2">&quot;bill_length_mm&quot;</span><span class="p">]</span>
+<span class="n">bill_length_obs</span> <span class="o">=</span> <span class="n">penguins</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">adelie_mask</span><span class="p">,</span> <span class="s2">"bill_length_mm"</span><span class="p">]</span>
 <span class="n">jd_flipper_bill_sex</span> <span class="o">=</span> <span class="n">gen_jd_flipper_bill_sex</span><span class="p">(</span>
     <span class="n">adelie_flipper_length_obs</span><span class="p">,</span> <span class="n">sex_obs</span><span class="p">,</span> <span class="n">bill_length_obs</span><span class="p">)</span>
 
@@ -1488,12 +1355,12 @@ programming style approach), it is easy to condition on new predictors,
 which is useful for counterfactual analyses.</p>
 <div class="literal-block-wrapper docutils container" id="tfp-flipper-bill-sex-counterfactuals">
 <div class="code-block-caption"><span class="caption-number">Listing 3.20 </span><span class="caption-text">tfp_flipper_bill_sex_counterfactuals</span><a class="headerlink" href="#tfp-flipper-bill-sex-counterfactuals" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mean_flipper_length</span> <span class="o">=</span> <span class="n">penguins</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">adelie_mask</span><span class="p">,</span> <span class="s2">&quot;flipper_length_mm&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mean_flipper_length</span> <span class="o">=</span> <span class="n">penguins</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">adelie_mask</span><span class="p">,</span> <span class="s2">"flipper_length_mm"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 <span class="c1"># Counterfactual dimensions is set to 21 to allow us to get the mean exactly</span>
-<span class="n">counterfactual_flipper_lengths</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span>
+<span class="n">counterfactual_flipper_lengths</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.linspace.html#numpy.linspace" title="numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span>
     <span class="n">mean_flipper_length</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="n">mean_flipper_length</span><span class="o">+</span><span class="mi">20</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span>
-<span class="n">sex_male_indicator</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">counterfactual_flipper_lengths</span><span class="p">)</span>
-<span class="n">mean_bill_length</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span>
+<span class="n">sex_male_indicator</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.zeros_like.html#numpy.zeros_like" title="numpy.zeros_like"><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span></a><span class="p">(</span><span class="n">counterfactual_flipper_lengths</span><span class="p">)</span>
+<span class="n">mean_bill_length</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.ones_like.html#numpy.ones_like" title="numpy.ones_like"><span class="n">np</span><span class="o">.</span><span class="n">ones_like</span></a><span class="p">(</span>
     <span class="n">counterfactual_flipper_lengths</span><span class="p">)</span> <span class="o">*</span> <span class="n">bill_length_obs</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 
 <span class="n">jd_flipper_bill_sex_counterfactual</span> <span class="o">=</span> <span class="n">gen_jd_flipper_bill_sex</span><span class="p">(</span>
@@ -1504,7 +1371,7 @@ which is useful for counterfactual analyses.</p>
 </div>
 </div>
 <figure class="align-default" id="fig-linearcounterfactual">
-<a class="reference internal image-reference" href="../_images/Linear_CounterFactual.png"><img alt="../_images/Linear_CounterFactual.png" src="../_images/Linear_CounterFactual.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Linear_CounterFactual.png"><img alt="../_images/Linear_CounterFactual.png" src="../_images/Linear_CounterFactual.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3.16 </span><span class="caption-text">Estimated counterfactual mass values for Adelie penguins from Code Block
 <a class="reference internal" href="#tfp-flipper-bill-sex-counterfactuals"><span class="std std-ref">tfp_flipper_bill_sex_counterfactuals</span></a>
@@ -1592,7 +1459,7 @@ that must be in the range 0 and 1 by definition.</p>
 <div class="math notranslate nohighlight" id="equation-eq-logistic">
 <span class="eqno">(3.6)<a class="headerlink" href="#equation-eq-logistic" title="Permalink to this equation">#</a></span>\[p = \frac{1}{1+e^{-\mathbf{X}\beta}}\]</div>
 <figure class="align-default" id="fig-logistic">
-<a class="reference internal image-reference" href="../_images/Logistic.png"><img alt="../_images/Logistic.png" src="../_images/Logistic.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Logistic.png"><img alt="../_images/Logistic.png" src="../_images/Logistic.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3.17 </span><span class="caption-text">A plot of a sample logistic function. Note the response has been
 “squished” into the interval (0,1).</span><a class="headerlink" href="#fig-logistic" title="Permalink to this image">#</a></p>
@@ -1629,24 +1496,24 @@ covariate, bill length. We write this logistic model in Code Block
 <a class="reference internal" href="#model-logistic-penguins-bill-length"><span class="std std-ref">model_logistic_penguins_bill_length</span></a></p>
 <div class="literal-block-wrapper docutils container" id="model-logistic-penguins-bill-length">
 <div class="code-block-caption"><span class="caption-number">Listing 3.21 </span><span class="caption-text">model_logistic_penguins_bill_length</span><a class="headerlink" href="#model-logistic-penguins-bill-length" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">species_filter</span> <span class="o">=</span> <span class="n">penguins</span><span class="p">[</span><span class="s2">&quot;species&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s2">&quot;Adelie&quot;</span><span class="p">,</span> <span class="s2">&quot;Chinstrap&quot;</span><span class="p">])</span>
-<span class="n">bill_length_obs</span> <span class="o">=</span> <span class="n">penguins</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">species_filter</span><span class="p">,</span> <span class="s2">&quot;bill_length_mm&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
-<span class="n">species</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">penguins</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">species_filter</span><span class="p">,</span> <span class="s2">&quot;species&quot;</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">species_filter</span> <span class="o">=</span> <span class="n">penguins</span><span class="p">[</span><span class="s2">"species"</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s2">"Adelie"</span><span class="p">,</span> <span class="s2">"Chinstrap"</span><span class="p">])</span>
+<span class="n">bill_length_obs</span> <span class="o">=</span> <span class="n">penguins</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">species_filter</span><span class="p">,</span> <span class="s2">"bill_length_mm"</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">species</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">penguins</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">species_filter</span><span class="p">,</span> <span class="s2">"species"</span><span class="p">])</span>
 
 <span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_logistic_penguins_bill_length</span><span class="p">:</span>
-    <span class="n">β_0</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β_0&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-    <span class="n">β_1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β_1&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">β_0</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"β_0"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">β_1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"β_1"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
     <span class="n">μ</span> <span class="o">=</span> <span class="n">β_0</span> <span class="o">+</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">bill_length_obs</span><span class="p">,</span> <span class="n">β_1</span><span class="p">)</span>
 
     <span class="c1"># Application of our sigmoid  link function</span>
-    <span class="n">θ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;θ&quot;</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">μ</span><span class="p">))</span>
+    <span class="n">θ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">"θ"</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">μ</span><span class="p">))</span>
 
     <span class="c1"># Useful for plotting the decision boundary later</span>
-    <span class="n">bd</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;bd&quot;</span><span class="p">,</span> <span class="o">-</span><span class="n">β_0</span><span class="o">/</span><span class="n">β_1</span><span class="p">)</span>
+    <span class="n">bd</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">"bd"</span><span class="p">,</span> <span class="o">-</span><span class="n">β_0</span><span class="o">/</span><span class="n">β_1</span><span class="p">)</span>
 
     <span class="c1"># Note the change in likelihood</span>
-    <span class="n">yl</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Bernoulli</span><span class="p">(</span><span class="s2">&quot;yl&quot;</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">θ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">species</span><span class="o">.</span><span class="n">codes</span><span class="p">)</span>
+    <span class="n">yl</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Bernoulli</span><span class="p">(</span><span class="s2">"yl"</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">θ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">species</span><span class="o">.</span><span class="n">codes</span><span class="p">)</span>
 
     <span class="n">prior_predictive_logistic_penguins_bill_length</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample_prior_predictive</span><span class="p">()</span>
     <span class="n">trace_logistic_penguins_bill_length</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">5000</span><span class="p">,</span> <span class="n">chains</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
@@ -1667,7 +1534,7 @@ the prior predictive distribution. The classes are roughly even in
 <a class="reference internal" href="#fig-prior-predictive-logistic"><span class="std std-numref">Fig. 3.18</span></a> prior to seeing data which is
 what we would expect.</p>
 <figure class="align-default" id="fig-prior-predictive-logistic">
-<a class="reference internal image-reference" href="../_images/Prior_Predictive_Logistic.png"><img alt="../_images/Prior_Predictive_Logistic.png" src="../_images/Prior_Predictive_Logistic.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Prior_Predictive_Logistic.png"><img alt="../_images/Prior_Predictive_Logistic.png" src="../_images/Prior_Predictive_Logistic.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3.18 </span><span class="caption-text">5000 prior predictive samples of class prediction from the
 <code class="docutils literal notranslate"><span class="pre">model_logistic_penguins_bill_length</span></code>. This likelihood is discrete, more
@@ -1689,7 +1556,7 @@ the now familiar logistic curve move from 0 on the left to 1 on the
 right as the classes change, and a decision boundary where one would
 expect it given the data.</p>
 <figure class="align-default" id="fig-logistic-bill-length">
-<a class="reference internal image-reference" href="../_images/Logistic_bill_length.png"><img alt="../_images/Logistic_bill_length.png" src="../_images/Logistic_bill_length.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Logistic_bill_length.png"><img alt="../_images/Logistic_bill_length.png" src="../_images/Logistic_bill_length.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3.19 </span><span class="caption-text">Fitted logistic regression, showing probability curve, observed data
 points and decision boundary for <code class="docutils literal notranslate"><span class="pre">model_logistic_penguins_bill_length</span></code>.
@@ -1727,17 +1594,17 @@ this time using mass as a covariate. Code Block
 shows a model for that purpose.</p>
 <div class="literal-block-wrapper docutils container" id="model-logistic-penguins-mass">
 <div class="code-block-caption"><span class="caption-number">Listing 3.22 </span><span class="caption-text">model_logistic_penguins_mass</span><a class="headerlink" href="#model-logistic-penguins-mass" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mass_obs</span> <span class="o">=</span> <span class="n">penguins</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">species_filter</span><span class="p">,</span> <span class="s2">&quot;body_mass_g&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mass_obs</span> <span class="o">=</span> <span class="n">penguins</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">species_filter</span><span class="p">,</span> <span class="s2">"body_mass_g"</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
 
 <span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_logistic_penguins_mass</span><span class="p">:</span>
-    <span class="n">β_0</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β_0&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-    <span class="n">β_1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β_1&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">β_0</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"β_0"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">β_1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"β_1"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
     <span class="n">μ</span> <span class="o">=</span> <span class="n">β_0</span> <span class="o">+</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">mass_obs</span><span class="p">,</span> <span class="n">β_1</span><span class="p">)</span>
-    <span class="n">θ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;θ&quot;</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">μ</span><span class="p">))</span>
-    <span class="n">bd</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;bd&quot;</span><span class="p">,</span> <span class="o">-</span><span class="n">β_0</span><span class="o">/</span><span class="n">β_1</span><span class="p">)</span>
+    <span class="n">θ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">"θ"</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">μ</span><span class="p">))</span>
+    <span class="n">bd</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">"bd"</span><span class="p">,</span> <span class="o">-</span><span class="n">β_0</span><span class="o">/</span><span class="n">β_1</span><span class="p">)</span>
 
-    <span class="n">yl</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Bernoulli</span><span class="p">(</span><span class="s2">&quot;yl&quot;</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">θ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">species</span><span class="o">.</span><span class="n">codes</span><span class="p">)</span>
+    <span class="n">yl</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Bernoulli</span><span class="p">(</span><span class="s2">"yl"</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">θ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">species</span><span class="o">.</span><span class="n">codes</span><span class="p">)</span>
 
     <span class="n">inf_data_logistic_penguins_mass</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span>
         <span class="mi">5000</span><span class="p">,</span> <span class="n">target_accept</span><span class="o">=</span><span class="mf">.9</span><span class="p">,</span> <span class="n">return_inferencedata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1775,7 +1642,7 @@ does not find discernible difference in mass between these two species.
 This becomes quite evident once we plot the data and logistic regression
 fit in <a class="reference internal" href="#fig-logistic-mass"><span class="std std-numref">Fig. 3.20</span></a>.</p>
 <figure class="align-default" id="fig-logistic-mass">
-<a class="reference internal image-reference" href="../_images/Logistic_mass.png"><img alt="../_images/Logistic_mass.png" src="../_images/Logistic_mass.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Logistic_mass.png"><img alt="../_images/Logistic_mass.png" src="../_images/Logistic_mass.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3.20 </span><span class="caption-text">Plot of the observed data and logistic regression for
 <code class="docutils literal notranslate"><span class="pre">model_logistic_penguins_mass</span></code>. Unlike
@@ -1799,21 +1666,21 @@ visual checks have been helpful but subjective. We can quantify our fits
 numerically as well using diagnostics.</p>
 <div class="literal-block-wrapper docutils container" id="model-logistic-penguins-bill-length-mass">
 <div class="code-block-caption"><span class="caption-number">Listing 3.23 </span><span class="caption-text">model_logistic_penguins_bill_length_mass</span><a class="headerlink" href="#model-logistic-penguins-bill-length-mass" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">penguins</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">species_filter</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;bill_length_mm&quot;</span><span class="p">,</span> <span class="s2">&quot;body_mass_g&quot;</span><span class="p">]]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">penguins</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">species_filter</span><span class="p">,</span> <span class="p">[</span><span class="s2">"bill_length_mm"</span><span class="p">,</span> <span class="s2">"body_mass_g"</span><span class="p">]]</span>
 
 <span class="c1"># Add a column of 1s for the intercept</span>
-<span class="n">X</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;Intercept&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">X</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="s2">"Intercept"</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">values</span>
 
 <span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_logistic_penguins_bill_length_mass</span><span class="p">:</span>
-    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"β"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 
     <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">β</span><span class="p">)</span>
 
-    <span class="n">θ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;θ&quot;</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">μ</span><span class="p">))</span>
-    <span class="n">bd</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;bd&quot;</span><span class="p">,</span> <span class="o">-</span><span class="n">β</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">β</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">β</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">β</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">θ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">"θ"</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">μ</span><span class="p">))</span>
+    <span class="n">bd</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">"bd"</span><span class="p">,</span> <span class="o">-</span><span class="n">β</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">β</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">β</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">β</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
 
-    <span class="n">yl</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Bernoulli</span><span class="p">(</span><span class="s2">&quot;yl&quot;</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">θ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">species</span><span class="o">.</span><span class="n">codes</span><span class="p">)</span>
+    <span class="n">yl</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Bernoulli</span><span class="p">(</span><span class="s2">"yl"</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">θ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">species</span><span class="o">.</span><span class="n">codes</span><span class="p">)</span>
 
     <span class="n">inf_data_logistic_penguins_bill_length_mass</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span>
         <span class="mi">1000</span><span class="p">,</span>
@@ -1822,7 +1689,7 @@ numerically as well using diagnostics.</p>
 </div>
 </div>
 <figure class="align-default" id="fig-decision-boundary-logistic-mass-bill-length">
-<a class="reference internal image-reference" href="../_images/Decision_Boundary_Logistic_mass_bill_length.png"><img alt="../_images/Decision_Boundary_Logistic_mass_bill_length.png" src="../_images/Decision_Boundary_Logistic_mass_bill_length.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Decision_Boundary_Logistic_mass_bill_length.png"><img alt="../_images/Decision_Boundary_Logistic_mass_bill_length.png" src="../_images/Decision_Boundary_Logistic_mass_bill_length.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3.21 </span><span class="caption-text">Decision boundary of species class plotted against bill length and mass.
 We can see that most of the species separability comes from bill length
@@ -1845,19 +1712,19 @@ other calibration assessment methods like LOO-PIT) can help us to
 compare models and reveal opportunities to improve them.</p>
 <div class="literal-block-wrapper docutils container" id="separability-plot">
 <div class="code-block-caption"><span class="caption-number">Listing 3.24 </span><span class="caption-text">separability_plot</span><a class="headerlink" href="#separability-plot" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;bill&quot;</span><span class="p">:</span> <span class="n">inf_data_logistic_penguins_bill_length</span><span class="p">,</span>
-          <span class="s2">&quot;mass&quot;</span><span class="p">:</span> <span class="n">inf_data_logistic_penguins_mass</span><span class="p">,</span>
-          <span class="s2">&quot;mass bill&quot;</span><span class="p">:</span> <span class="n">inf_data_logistic_penguins_bill_length_mass</span><span class="p">}</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"bill"</span><span class="p">:</span> <span class="n">inf_data_logistic_penguins_bill_length</span><span class="p">,</span>
+          <span class="s2">"mass"</span><span class="p">:</span> <span class="n">inf_data_logistic_penguins_mass</span><span class="p">,</span>
+          <span class="s2">"mass bill"</span><span class="p">:</span> <span class="n">inf_data_logistic_penguins_bill_length_mass</span><span class="p">}</span>
 
-<span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html#matplotlib.pyplot.subplots" title="matplotlib.pyplot.subplots"><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span></a><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">for</span> <span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">model</span><span class="p">),</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">axes</span><span class="p">):</span>
-    <span class="n">az</span><span class="o">.</span><span class="n">plot_separation</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;yl&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C4&quot;</span><span class="p">)</span>
+    <a class="sphinx-codeautolink-a" href="https://python.arviz.org/en/stable/api/generated/arviz.plot_separation.html#arviz.plot_separation" title="arviz.plot_separation"><span class="n">az</span><span class="o">.</span><span class="n">plot_separation</span></a><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">"yl"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"C4"</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <figure class="align-default" id="fig-penguins-separation-plot">
-<a class="reference internal image-reference" href="../_images/Penguins_Separation_Plot.png"><img alt="../_images/Penguins_Separation_Plot.png" src="../_images/Penguins_Separation_Plot.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Penguins_Separation_Plot.png"><img alt="../_images/Penguins_Separation_Plot.png" src="../_images/Penguins_Separation_Plot.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3.22 </span><span class="caption-text">Separation plot of all three penguin models. The light versus dark value
 indicates the binary class label. In this plot its much more evident
@@ -1875,9 +1742,9 @@ the best. This is unsurprising given what we have seen from the plots,
 and now we have a numerical confirmation as well.</p>
 <div class="literal-block-wrapper docutils container" id="penguin-model-loo">
 <div class="code-block-caption"><span class="caption-number">Listing 3.25 </span><span class="caption-text">penguin_model_loo</span><a class="headerlink" href="#penguin-model-loo" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">compare</span><span class="p">({</span><span class="s2">&quot;mass&quot;</span><span class="p">:</span><span class="n">inf_data_logistic_penguins_mass</span><span class="p">,</span>
-            <span class="s2">&quot;bill&quot;</span><span class="p">:</span> <span class="n">inf_data_logistic_penguins_bill_length</span><span class="p">,</span>
-            <span class="s2">&quot;mass_bill&quot;</span><span class="p">:</span><span class="n">inf_data_logistic_penguins_bill_length_mass</span><span class="p">})</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><a class="sphinx-codeautolink-a" href="https://python.arviz.org/en/stable/api/generated/arviz.compare.html#arviz.compare" title="arviz.compare"><span class="n">az</span><span class="o">.</span><span class="n">compare</span></a><span class="p">({</span><span class="s2">"mass"</span><span class="p">:</span><span class="n">inf_data_logistic_penguins_mass</span><span class="p">,</span>
+            <span class="s2">"bill"</span><span class="p">:</span> <span class="n">inf_data_logistic_penguins_bill_length</span><span class="p">,</span>
+            <span class="s2">"mass_bill"</span><span class="p">:</span><span class="n">inf_data_logistic_penguins_bill_length_mass</span><span class="p">})</span>
 </pre></div>
 </div>
 </div>
@@ -1943,9 +1810,9 @@ pick an Adelie penguin would be 0.68 as seen in Code Block
 <div class="literal-block-wrapper docutils container" id="adelie-prob">
 <div class="code-block-caption"><span class="caption-number">Listing 3.26 </span><span class="caption-text">adelie_prob</span><a class="headerlink" href="#adelie-prob" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Class counts of each penguin species</span>
-<span class="n">counts</span> <span class="o">=</span> <span class="n">penguins</span><span class="p">[</span><span class="s2">&quot;species&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-<span class="n">adelie_count</span> <span class="o">=</span> <span class="n">counts</span><span class="p">[</span><span class="s2">&quot;Adelie&quot;</span><span class="p">],</span>
-<span class="n">chinstrap_count</span> <span class="o">=</span> <span class="n">counts</span><span class="p">[</span><span class="s2">&quot;Chinstrap&quot;</span><span class="p">]</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="n">penguins</span><span class="p">[</span><span class="s2">"species"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="n">adelie_count</span> <span class="o">=</span> <span class="n">counts</span><span class="p">[</span><span class="s2">"Adelie"</span><span class="p">],</span>
+<span class="n">chinstrap_count</span> <span class="o">=</span> <span class="n">counts</span><span class="p">[</span><span class="s2">"Chinstrap"</span><span class="p">]</span>
 <span class="n">adelie_count</span> <span class="o">/</span> <span class="p">(</span><span class="n">adelie_count</span> <span class="o">+</span> <span class="n">chinstrap_count</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1986,19 +1853,19 @@ will discuss more deeply in <a class="reference internal" href="chp_09.html#sect
 <div class="literal-block-wrapper docutils container" id="logistic-interpretation">
 <div class="code-block-caption"><span class="caption-number">Listing 3.28 </span><span class="caption-text">logistic_interpretation</span><a class="headerlink" href="#logistic-interpretation" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">45</span>
-<span class="n">β_0</span> <span class="o">=</span> <span class="n">inf_data_logistic_penguins_bill_length</span><span class="o">.</span><span class="n">posterior</span><span class="p">[</span><span class="s2">&quot;β_0&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
-<span class="n">β_1</span> <span class="o">=</span> <span class="n">inf_data_logistic_penguins_bill_length</span><span class="o">.</span><span class="n">posterior</span><span class="p">[</span><span class="s2">&quot;β_1&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+<span class="n">β_0</span> <span class="o">=</span> <span class="n">inf_data_logistic_penguins_bill_length</span><span class="o">.</span><span class="n">posterior</span><span class="p">[</span><span class="s2">"β_0"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+<span class="n">β_1</span> <span class="o">=</span> <span class="n">inf_data_logistic_penguins_bill_length</span><span class="o">.</span><span class="n">posterior</span><span class="p">[</span><span class="s2">"β_1"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
 <span class="n">bill_length</span> <span class="o">=</span> <span class="mi">45</span>
 
 <span class="n">val_1</span> <span class="o">=</span> <span class="n">β_0</span> <span class="o">+</span> <span class="n">β_1</span><span class="o">*</span><span class="n">bill_length</span>
 <span class="n">val_2</span> <span class="o">=</span> <span class="n">β_0</span> <span class="o">+</span> <span class="n">β_1</span><span class="o">*</span><span class="p">(</span><span class="n">bill_length</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="sa">f</span><span class="s2">&quot;&quot;&quot;(Class Probability change from 45mm Bill Length to 46mm:</span>
-<span class="si">{</span><span class="p">(</span><span class="n">special</span><span class="o">.</span><span class="n">expit</span><span class="p">(</span><span class="n">val_2</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w">  </span><span class="n">special</span><span class="o">.</span><span class="n">expit</span><span class="p">(</span><span class="n">val_1</span><span class="p">))</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">%)&quot;&quot;&quot;</span>
+<span class="sa">f</span><span class="s2">"""(Class Probability change from 45mm Bill Length to 46mm:</span>
+<span class="si">{</span><span class="p">(</span><span class="n">special</span><span class="o">.</span><span class="n">expit</span><span class="p">(</span><span class="n">val_2</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w">  </span><span class="n">special</span><span class="o">.</span><span class="n">expit</span><span class="p">(</span><span class="n">val_1</span><span class="p">))</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">%)"""</span>
 </pre></div>
 </div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;Class Probability change from 45mm Bill Length to 46mm: 15%&#39;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">'Class Probability change from 45mm Bill Length to 46mm: 15%'</span>
 </pre></div>
 </div>
 </section>
@@ -2021,7 +1888,7 @@ write a model for single variable regression. This time however, focus
 specifically on how priors and likelihoods should be assessed together
 and not independently.</p>
 <figure class="align-default" id="fig-beautyratio">
-<a class="reference internal image-reference" href="../_images/BeautyRatio.png"><img alt="../_images/BeautyRatio.png" src="../_images/BeautyRatio.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/BeautyRatio.png"><img alt="../_images/BeautyRatio.png" src="../_images/BeautyRatio.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3.23 </span><span class="caption-text">Data on the attractiveness of parents plotted against the gender ratio
 of their children.</span><a class="headerlink" href="#fig-beautyratio" title="Permalink to this image">#</a></p>
@@ -2029,17 +1896,17 @@ of their children.</span><a class="headerlink" href="#fig-beautyratio" title="Pe
 </figure>
 <div class="literal-block-wrapper docutils container" id="uninformative-prior-sex-ratio">
 <div class="code-block-caption"><span class="caption-number">Listing 3.29 </span><span class="caption-text">uninformative_prior_sex_ratio</span><a class="headerlink" href="#uninformative-prior-sex-ratio" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="mi">50</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">56</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.arange.html#numpy.arange" title="numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.asarray.html#numpy.asarray" title="numpy.asarray"><span class="n">np</span><span class="o">.</span><span class="n">asarray</span></a><span class="p">([</span><span class="mi">50</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">56</span><span class="p">])</span>
 
 <span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_uninformative_prior_sex_ratio</span><span class="p">:</span>
-    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Exponential</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="mf">.5</span><span class="p">)</span>
-    <span class="n">β_1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β_1&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
-    <span class="n">β_0</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β_0&quot;</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Exponential</span><span class="p">(</span><span class="s2">"σ"</span><span class="p">,</span> <span class="mf">.5</span><span class="p">)</span>
+    <span class="n">β_1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"β_1"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+    <span class="n">β_0</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"β_0"</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 
-    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;μ&quot;</span><span class="p">,</span> <span class="n">β_0</span> <span class="o">+</span> <span class="n">β_1</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">"μ"</span><span class="p">,</span> <span class="n">β_0</span> <span class="o">+</span> <span class="n">β_1</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
 
-    <span class="n">ratio</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;ratio&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">μ</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">ratio</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"ratio"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">μ</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
 
     <span class="n">prior_predictive_uninformative_prior_sex_ratio</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample_prior_predictive</span><span class="p">(</span>
         <span class="n">samples</span><span class="o">=</span><span class="mi">10000</span>
@@ -2053,7 +1920,7 @@ of their children.</span><a class="headerlink" href="#fig-beautyratio" title="Pe
 </div>
 </div>
 <figure class="align-default" id="fig-posterioruninformativelinearregression">
-<a class="reference internal image-reference" href="../_images/PosteriorUninformativeLinearRegression.png"><img alt="../_images/PosteriorUninformativeLinearRegression.png" src="../_images/PosteriorUninformativeLinearRegression.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/PosteriorUninformativeLinearRegression.png"><img alt="../_images/PosteriorUninformativeLinearRegression.png" src="../_images/PosteriorUninformativeLinearRegression.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3.24 </span><span class="caption-text">With vague or very wide priors the model shows that large differences in
 birth ratios are possible for parents rated as attractive. Some of these
@@ -2100,14 +1967,14 @@ possible ratios.</p>
 <div class="literal-block-wrapper docutils container" id="informative-prior-sex-ratio">
 <div class="code-block-caption"><span class="caption-number">Listing 3.30 </span><span class="caption-text">informative_prior_sex_ratio</span><a class="headerlink" href="#informative-prior-sex-ratio" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_informative_prior_sex_ratio</span><span class="p">:</span>
-    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Exponential</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="mf">.5</span><span class="p">)</span>
+    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Exponential</span><span class="p">(</span><span class="s2">"σ"</span><span class="p">,</span> <span class="mf">.5</span><span class="p">)</span>
 
     <span class="c1"># Note the now more informative priors</span>
-    <span class="n">β_1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β_1&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">.5</span><span class="p">)</span>
-    <span class="n">β_0</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β_0&quot;</span><span class="p">,</span> <span class="mf">48.5</span><span class="p">,</span> <span class="mf">.5</span><span class="p">)</span>
+    <span class="n">β_1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"β_1"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">.5</span><span class="p">)</span>
+    <span class="n">β_0</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"β_0"</span><span class="p">,</span> <span class="mf">48.5</span><span class="p">,</span> <span class="mf">.5</span><span class="p">)</span>
 
-    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;μ&quot;</span><span class="p">,</span> <span class="n">β_0</span> <span class="o">+</span> <span class="n">β_1</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
-    <span class="n">ratio</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;ratio&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">μ</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">"μ"</span><span class="p">,</span> <span class="n">β_0</span> <span class="o">+</span> <span class="n">β_1</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">ratio</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"ratio"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">μ</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
 
     <span class="n">prior_predictive_informative_prior_sex_ratio</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample_prior_predictive</span><span class="p">(</span>
         <span class="n">samples</span><span class="o">=</span><span class="mi">10000</span>
@@ -2120,7 +1987,7 @@ possible ratios.</p>
 </div>
 </div>
 <figure class="align-default" id="fig-posteriorinformativelinearregression">
-<a class="reference internal image-reference" href="../_images/PosteriorInformativeLinearRegression.png"><img alt="../_images/PosteriorInformativeLinearRegression.png" src="../_images/PosteriorInformativeLinearRegression.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/PosteriorInformativeLinearRegression.png"><img alt="../_images/PosteriorInformativeLinearRegression.png" src="../_images/PosteriorInformativeLinearRegression.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3.25 </span><span class="caption-text">With priors informed from other papers and domain expertise the mean
 posterior hardly changes across attractiveness ratio indicating that if
@@ -2179,7 +2046,7 @@ interpretation of this model change when compared to the centered model?</p>
 <p><strong>E5.</strong> Translate the following primitives from PyMC3 to
 TFP. Assume the model name is <code class="docutils literal notranslate"><span class="pre">pymc_model</span></code></p>
 <ol class="arabic simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">pm.StudentT(&quot;x&quot;,</span> <span class="pre">0,</span> <span class="pre">10,</span> <span class="pre">20)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pm.StudentT("x",</span> <span class="pre">0,</span> <span class="pre">10,</span> <span class="pre">20)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">pm.sample(chains=2)</span></code></p></li>
 </ol>
 <p>Hint: write the model and inference first in PyMC3, and find the similar
@@ -2274,9 +2141,9 @@ or island covariates to the penguin logistic regression help classify
 Adelie and Gentoo penguins more precisely. Justify if the additional
 covariates helped using the numerical and visual tools shown in this
 chapter.</p>
-<hr class="footnotes docutils" />
+<hr class="footnotes docutils"/>
 <aside class="footnote brackets" id="id35" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">1</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id4" role="doc-backlink">1</a><span class="fn-bracket">]</span></span>
 <p>You can find more information in the TensorFlow tutorials and
 documentations. For example,
 <a class="reference external" href="https://www.tensorflow.org/probability/examples/JointDistributionAutoBatched_A_Gentle_Tutorial">https://www.tensorflow.org/probability/examples/JointDistributionAutoBatched_A_Gentle_Tutorial</a>
@@ -2284,7 +2151,7 @@ and
 <a class="reference external" href="https://www.tensorflow.org/probability/examples/Modeling_with_JointDistribution">https://www.tensorflow.org/probability/examples/Modeling_with_JointDistribution</a>.</p>
 </aside>
 <aside class="footnote brackets" id="id36" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">2</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id5" role="doc-backlink">2</a><span class="fn-bracket">]</span></span>
 <p><code class="docutils literal notranslate"><span class="pre">tfd.Sample</span></code> and <code class="docutils literal notranslate"><span class="pre">tfd.Independent</span></code> are distribution constructors
 that takes other distributions as input and return a new
 distribution. There are other meta distribution but with different
@@ -2294,41 +2161,41 @@ purposes like <code class="docutils literal notranslate"><span class="pre">tfd.M
 <a class="reference external" href="https://www.tensorflow.org/probability/examples/TensorFlow_Distributions_Tutorial">https://www.tensorflow.org/probability/examples/TensorFlow_Distributions_Tutorial</a></p>
 </aside>
 <aside class="footnote brackets" id="id37" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">3</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id7" role="doc-backlink">3</a><span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://mc-stan.org/docs/2_23/reference-manual/hmc-algorithm-parameters.html#automatic-parameter-tuning">https://mc-stan.org/docs/2_23/reference-manual/hmc-algorithm-parameters.html#automatic-parameter-tuning</a></p>
 </aside>
 <aside class="footnote brackets" id="id38" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id18">4</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id18" role="doc-backlink">4</a><span class="fn-bracket">]</span></span>
 <p>If wanted exactly the same model we could specify the priors in
 Bambi, not shown here. For our purposes however, the models are
 “close enough”.</p>
 </aside>
 <aside class="footnote brackets" id="id39" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id19">5</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id19" role="doc-backlink">5</a><span class="fn-bracket">]</span></span>
 <p>You can also parse the design matrix differently so that
 covariates represents the contrast between 2 categories within a
 column.</p>
 </aside>
 <aside class="footnote brackets" id="id40" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id22">6</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id22" role="doc-backlink">6</a><span class="fn-bracket">]</span></span>
 <p>Maybe because collecting more data is expensive or difficult or
 even impossible</p>
 </aside>
 <aside class="footnote brackets" id="id41" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id23">7</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id23" role="doc-backlink">7</a><span class="fn-bracket">]</span></span>
 <p>Unless we are talking about large systems like rain forests, where
 the presence of plants actually have an impact in the weather.
 Nature can be hard to grasp with simple statements.</p>
 </aside>
 <aside class="footnote brackets" id="id42" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id25">8</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id25" role="doc-backlink">8</a><span class="fn-bracket">]</span></span>
 <p>Traditionally people apply functions like <span class="math notranslate nohighlight">\(\phi\)</span> to the left side
 of Equation <a class="reference internal" href="#equation-eq-generalized-linear-model">(3.5)</a>, and call them link
 functions. We instead prefer to apply them to the right-hand side
 and then to avoid confusion we use term inverse link function.</p>
 </aside>
 <aside class="footnote brackets" id="id43" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id26">9</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id26" role="doc-backlink">9</a><span class="fn-bracket">]</span></span>
 <p>Usually in the traditional Generalized Linear Models Literature,
 the likelihood of the observation need to be from the Exponential
 family, but being Bayesian we are actually not restricted by that
@@ -2336,13 +2203,12 @@ and can use any likelihood that can be parameterized by the expected
 value.</p>
 </aside>
 <aside class="footnote brackets" id="id44" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id34">10</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id34" role="doc-backlink">10</a><span class="fn-bracket">]</span></span>
 <p>Estimate shown in corresponding notebook.</p>
 </aside>
 </section>
 </section>
-
-    <script type="text/x-thebe-config">
+<script type="text/x-thebe-config">
     {
         requestKernel: true,
         binderOptions: {
@@ -2360,51 +2226,34 @@ value.</p>
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
-
-                </article>
-              
-
-              
-              
-              
-              
-                <footer class="prev-next-footer">
-                  
+<script>kernelName = 'python3'</script>
+</article>
+<footer class="prev-next-footer">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="chp_02.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">2. </span>Exploratory Analysis of Bayesian Models</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="chp_04.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">4. </span>Extending Linear Models</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="chp_02.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title"><span class="section-number">2. </span>Exploratory Analysis of Bayesian Models</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
+</a>
+<a class="right-next" href="chp_04.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title"><span class="section-number">4. </span>Extending Linear Models</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage">
+<i class="fa-solid fa-list"></i> Contents
   </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
+<nav class="bd-toc-nav page-toc">
+<ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-two-or-more-groups">3.1. Comparing Two (or More) Groups</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-two-ppls">3.1.1. Comparing Two PPLs</a></li>
 </ul>
@@ -2428,57 +2277,36 @@ value.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#picking-priors-in-regression-models">3.5. Picking Priors in Regression Models</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">3.6. Exercises</a></li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-          </div>
-          <footer class="bd-footer-content">
-            
+</div>
+<footer class="bd-footer-content">
 <div class="bd-footer-content__inner container">
-  
-  <div class="footer-item">
-    
+<div class="footer-item">
 <p class="component-author">
 By Martin, Kumar, Lao
 </p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-
-  <p class="copyright">
+</div>
+<div class="footer-item">
+<p class="copyright">
     
       © Copyright 2022.
       <br/>
-    
-  </p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
+</p>
 </div>
-          </footer>
-        
-
-      </main>
-    </div>
-  </div>
-  
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<div class="footer-item">
+</div>
+<div class="footer-item">
+</div>
+</div>
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
 <script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
-
-  <footer class="bd-footer">
-  </footer>
-  </body>
+<footer class="bd-footer">
+</footer>
+</body>
 </html>

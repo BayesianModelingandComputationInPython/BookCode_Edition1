@@ -1,164 +1,101 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
-    <title>4. Extending Linear Models &#8212; Bayesian Modeling and Computation in Python</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="Docutils 0.18.1: http://docutils.sourceforge.net/" name="generator"/>
+<title>4. Extending Linear Models — Bayesian Modeling and Computation in Python</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-
-  
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-codeautolink.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
-  
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
-  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
-
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet"/>
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet"/>
+<link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" rel="stylesheet" type="text/css"/>
+<link href="../_static/togglebutton.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-thebe.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-codeautolink.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" rel="stylesheet" type="text/css"/>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" rel="preload"/>
+<script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+<script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+<script src="../_static/jquery.js"></script>
+<script src="../_static/underscore.js"></script>
+<script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+<script src="../_static/doctools.js"></script>
+<script src="../_static/clipboard.min.js"></script>
+<script src="../_static/copybutton.js"></script>
+<script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../_static/togglebutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<script src="../_static/design-tabs.js"></script>
+<script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'markdown/chp_04';</script>
-    <link rel="shortcut icon" href="../_static/favicon.ico"/>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="5. Splines" href="chp_05.html" />
-    <link rel="prev" title="3. Linear Models and Probabilistic Programming Languages" href="chp_03.html" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
-  
-  
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  
-  <div id="pst-scroll-pixel-helper"></div>
-
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
+<script async="async" src="../_static/sphinx-thebe.js"></script>
+<script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+<script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'markdown/chp_04';</script>
+<link href="../_static/favicon.ico" rel="shortcut icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="chp_05.html" rel="next" title="5. Splines"/>
+<link href="chp_03.html" rel="prev" title="3. Linear Models and Probabilistic Programming Languages"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</head>
+<body data-bs-root-margin="0px 0px -60%" data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-default-mode="" data-offset="180">
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>
     Back to top
   </button>
-
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         id="search-input"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+<input class="sidebar-toggle" id="__primary" name="__primary" type="checkbox"/>
+<label class="overlay overlay-primary" for="__primary"></label>
+<input class="sidebar-toggle" id="__secondary" name="__secondary" type="checkbox"/>
+<label class="overlay overlay-secondary" for="__secondary"></label>
+<div class="search-button__wrapper">
+<div class="search-button__overlay"></div>
+<div class="search-button__search-container">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search this book..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" id="search-input" name="q" placeholder="Search this book..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
-  </div>
-  
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
-  
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      <div class="bd-sidebar-primary bd-sidebar">
-        
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-    
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-  
-
+</div>
+<nav class="bd-header navbar navbar-expand-lg bd-navbar">
+</nav>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<div class="bd-sidebar-primary bd-sidebar">
+<div class="sidebar-header-items sidebar-primary__section">
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
 <a class="navbar-brand logo" href="../welcome.html">
-  
-  
-  
-  
-  
-  
-    <p class="title logo__title">Bayesian Modeling and Computation in Python</p>
-  
+<p class="title logo__title">Bayesian Modeling and Computation in Python</p>
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item navbar-nav active">
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 0</span></p>
+<div class="sidebar-primary-item"><nav aria-label="Main" class="bd-links" id="bd-docs-nav">
+<div class="bd-toc-item navbar-nav active">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 0</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="dedication.html">Dedication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="foreword.html">Foreword</a></li>
@@ -200,111 +137,53 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../solutions/chp_01.html">Solutions 1: Bayesian Inference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../solutions/chp_02.html">Solutions 2: Exploratory Analysis of Bayesian models</a></li>
 </ul>
-
-    </div>
+</div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-  
-  <div id="rtd-footer-container"></div>
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main">
-        
-        
-
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+<div id="rtd-footer-container"></div>
+</div>
+<main class="bd-main" id="main-content">
 <div class="sbt-scroll-pixel-helper"></div>
-
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <span class="fa-solid fa-bars"></span>
+<div class="header-article-items__start">
+<div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" data-bs-placement="bottom" data-bs-toggle="tooltip" for="__primary" title="Toggle primary sidebar">
+<span class="fa-solid fa-bars"></span>
 </label></div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
-
+</div>
+<div class="header-article-items__end">
+<div class="header-article-item">
 <div class="article-header-buttons">
-
-
-
-
-
 <div class="dropdown dropdown-source-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
-    <i class="fab fa-github"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1" target="_blank"
-   class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
+<button aria-expanded="false" aria-label="Source repositories" class="btn dropdown-toggle" data-bs-toggle="dropdown" type="button">
+<i class="fab fa-github"></i>
+</button>
+<ul class="dropdown-menu">
+<li><a class="btn btn-sm btn-source-repository-button dropdown-item" data-bs-placement="left" data-bs-toggle="tooltip" href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1" target="_blank" title="Source repository">
 <span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
+<i class="fab fa-github"></i>
+</span>
 <span class="btn__text-container">Repository</span>
 </a>
 </li>
-      
-      
-      
-      
-      <li><a href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_04.html&body=Your%20issue%20content%20here." target="_blank"
-   class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
+<li><a class="btn btn-sm btn-source-issues-button dropdown-item" data-bs-placement="left" data-bs-toggle="tooltip" href="https://github.com/BayesianModelingandComputationInPython/BookCode_Edition1/issues/new?title=Issue%20on%20page%20%2Fmarkdown/chp_04.html&amp;body=Your%20issue%20content%20here." target="_blank" title="Open an issue">
 <span class="btn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
+<i class="fas fa-lightbulb"></i>
+</span>
 <span class="btn__text-container">Open issue</span>
 </a>
 </li>
-      
-  </ul>
+</ul>
 </div>
-
-
-
-
-<button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
-  title="Fullscreen mode"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
+<button class="btn btn-sm btn-fullscreen-button" data-bs-placement="bottom" data-bs-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode">
 <span class="btn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
+<i class="fas fa-expand"></i>
+</span>
 </button>
-
-
-
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -314,8 +193,6 @@ document.write(`
   </button>
 `);
 </script>
-
-
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -323,29 +200,23 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" data-bs-placement="bottom" data-bs-toggle="tooltip" for="__secondary" title="Toggle secondary sidebar">
+<span class="fa-solid fa-list"></span>
 </label>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-
-<div id="jb-print-docs-body" class="onlyprint">
-    <h1>Extending Linear Models</h1>
-    <!-- Table of contents -->
-    <div id="print-main-content">
-        <div id="jb-print-toc">
-            
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+</div>
+<div class="onlyprint" id="jb-print-docs-body">
+<h1>Extending Linear Models</h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+<div>
+<h2> Contents </h2>
+</div>
+<nav aria-label="Page">
+<ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transforming-covariates">4.1. Transforming Covariates</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#varying-uncertainty">4.2. Varying Uncertainty</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interaction-effects">4.3. Interaction Effects</a></li>
@@ -364,17 +235,13 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">4.7. Exercises</a></li>
 </ul>
-            </nav>
-        </div>
-    </div>
+</nav>
 </div>
-
-              
-                
+</div>
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
-                  
-  <section class="tex2jax_ignore mathjax_ignore" id="extending-linear-models">
+<article class="bd-article" role="main">
+<section class="tex2jax_ignore mathjax_ignore" id="extending-linear-models">
 <span id="chap3"></span><h1><span class="section-number">4. </span>Extending Linear Models<a class="headerlink" href="#extending-linear-models" title="Permalink to this heading">#</a></h1>
 <p>A common trope in a sales pitch is the phrase “But wait! There is
 more!” In the lead up an audience is shown a product that incredibly
@@ -419,14 +286,14 @@ the length of babies. First we will load the data and plot in Code Block
 <a class="reference internal" href="#fig-baby-length-scatter"><span class="std std-numref">Fig. 4.1</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="babies-data">
 <div class="code-block-caption"><span class="caption-number">Listing 4.1 </span><span class="caption-text">babies_data</span><a class="headerlink" href="#babies-data" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">babies</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/babies.csv&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">babies</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"../data/babies.csv"</span><span class="p">)</span>
 <span class="c1"># Add a constant term so we can use the dot product to express the intercept</span>
-<span class="n">babies</span><span class="p">[</span><span class="s2">&quot;Intercept&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">babies</span><span class="p">[</span><span class="s2">"Intercept"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 </pre></div>
 </div>
 </div>
 <figure class="align-default" id="fig-baby-length-scatter">
-<a class="reference internal image-reference" href="../_images/Baby_Length_Scatter.png"><img alt="../_images/Baby_Length_Scatter.png" src="../_images/Baby_Length_Scatter.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Baby_Length_Scatter.png"><img alt="../_images/Baby_Length_Scatter.png" src="../_images/Baby_Length_Scatter.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.1 </span><span class="caption-text">Scatter plot of the nonlinear correlation between a baby’s age in months
 and observed, or measured, length.</span><a class="headerlink" href="#fig-baby-length-scatter" title="Permalink to this image">#</a></p>
@@ -441,12 +308,12 @@ already in Chapter <a class="reference internal" href="chp_03.html#chap2"><span 
 <div class="literal-block-wrapper docutils container" id="babies-linear">
 <div class="code-block-caption"><span class="caption-number">Listing 4.2 </span><span class="caption-text">babies_linear</span><a class="headerlink" href="#babies-linear" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_baby_linear</span><span class="p">:</span>
-    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β&quot;</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"β"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
-    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;μ&quot;</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">babies</span><span class="p">[[</span><span class="s2">&quot;Intercept&quot;</span><span class="p">,</span> <span class="s2">&quot;Month&quot;</span><span class="p">]],</span> <span class="n">β</span><span class="p">))</span>
-    <span class="n">ϵ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;ϵ&quot;</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">"μ"</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">babies</span><span class="p">[[</span><span class="s2">"Intercept"</span><span class="p">,</span> <span class="s2">"Month"</span><span class="p">]],</span> <span class="n">β</span><span class="p">))</span>
+    <span class="n">ϵ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">"ϵ"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
-    <span class="n">length</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;length&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">μ</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">ϵ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">babies</span><span class="p">[</span><span class="s2">&quot;Length&quot;</span><span class="p">])</span>
+    <span class="n">length</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"length"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">μ</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">ϵ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">babies</span><span class="p">[</span><span class="s2">"Length"</span><span class="p">])</span>
 
     <span class="n">trace_linear</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">draws</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">tune</span><span class="o">=</span><span class="mi">4000</span><span class="p">)</span>
     <span class="n">pcc_linear</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample_posterior_predictive</span><span class="p">(</span><span class="n">trace_linear</span><span class="p">)</span>
@@ -469,7 +336,7 @@ estimate length at 10 months of age, and then once again underestimate
 at 25 months of age. We asked for a straight line and we got a straight
 line even if the fit is not all that great.</p>
 <figure class="align-default" id="fig-baby-length-linear">
-<a class="reference internal image-reference" href="../_images/Baby_Length_Linear_Fit.png"><img alt="../_images/Baby_Length_Linear_Fit.png" src="../_images/Baby_Length_Linear_Fit.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Baby_Length_Linear_Fit.png"><img alt="../_images/Baby_Length_Linear_Fit.png" src="../_images/Baby_Length_Linear_Fit.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.2 </span><span class="caption-text">A linear prediction of baby length, where the mean is the blue line, the
 dark gray is the 50% highest density interval of the posterior
@@ -490,18 +357,18 @@ covariate which we write in <code class="docutils literal notranslate"><span cla
 <div class="literal-block-wrapper docutils container" id="babies-transformed">
 <div class="code-block-caption"><span class="caption-number">Listing 4.3 </span><span class="caption-text">babies_transformed</span><a class="headerlink" href="#babies-transformed" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_baby_sqrt</span><span class="p">:</span>
-    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β&quot;</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"β"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
-    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;μ&quot;</span><span class="p">,</span> <span class="n">β</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">β</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">babies</span><span class="p">[</span><span class="s2">&quot;Month&quot;</span><span class="p">]))</span>
-    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">"μ"</span><span class="p">,</span> <span class="n">β</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">β</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.sqrt.html#numpy.sqrt" title="numpy.sqrt"><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span></a><span class="p">(</span><span class="n">babies</span><span class="p">[</span><span class="s2">"Month"</span><span class="p">]))</span>
+    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">"σ"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
-    <span class="n">length</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;length&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">μ</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">babies</span><span class="p">[</span><span class="s2">&quot;Length&quot;</span><span class="p">])</span>
+    <span class="n">length</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"length"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">μ</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">babies</span><span class="p">[</span><span class="s2">"Length"</span><span class="p">])</span>
     <span class="n">inf_data_sqrt</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">draws</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">tune</span><span class="o">=</span><span class="mi">4000</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <figure class="align-default" id="fig-baby-length-non-linear">
-<a class="reference internal image-reference" href="../_images/Baby_Length_Sqrt_Fit.png"><img alt="../_images/Baby_Length_Sqrt_Fit.png" src="../_images/Baby_Length_Sqrt_Fit.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Baby_Length_Sqrt_Fit.png"><img alt="../_images/Baby_Length_Sqrt_Fit.png" src="../_images/Baby_Length_Sqrt_Fit.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.3 </span><span class="caption-text">Linear prediction with transformed covariate. On the left the x-axes is
 untransformed and on the right transformed. The linearization of the
@@ -542,19 +409,19 @@ together, but as they age their lengths tend to become more dispersed.</p>
 <div class="literal-block-wrapper docutils container" id="babies-varying-variance">
 <div class="code-block-caption"><span class="caption-number">Listing 4.4 </span><span class="caption-text">babies_varying_variance</span><a class="headerlink" href="#babies-varying-variance" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_baby_vv</span><span class="p">:</span>
-    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β&quot;</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"β"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
     
     <span class="c1"># Additional variance terms</span>
-    <span class="n">δ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;δ&quot;</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">δ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">"δ"</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
-    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;μ&quot;</span><span class="p">,</span> <span class="n">β</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">β</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">babies</span><span class="p">[</span><span class="s2">&quot;Month&quot;</span><span class="p">]))</span>
-    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="n">δ</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">δ</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">babies</span><span class="p">[</span><span class="s2">&quot;Month&quot;</span><span class="p">])</span>
+    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">"μ"</span><span class="p">,</span> <span class="n">β</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">β</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.sqrt.html#numpy.sqrt" title="numpy.sqrt"><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span></a><span class="p">(</span><span class="n">babies</span><span class="p">[</span><span class="s2">"Month"</span><span class="p">]))</span>
+    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">"σ"</span><span class="p">,</span> <span class="n">δ</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">δ</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">babies</span><span class="p">[</span><span class="s2">"Month"</span><span class="p">])</span>
 
-    <span class="n">length</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;length&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">μ</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">babies</span><span class="p">[</span><span class="s2">&quot;Length&quot;</span><span class="p">])</span>
+    <span class="n">length</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"length"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">μ</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">babies</span><span class="p">[</span><span class="s2">"Length"</span><span class="p">])</span>
     
     <span class="n">trace_baby_vv</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="n">target_accept</span><span class="o">=</span><span class="mf">.95</span><span class="p">)</span>
     <span class="n">ppc_baby_vv</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample_posterior_predictive</span><span class="p">(</span><span class="n">trace_baby_vv</span><span class="p">,</span>
-                                                 <span class="n">var_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;length&quot;</span><span class="p">,</span> <span class="s2">&quot;σ&quot;</span><span class="p">])</span>
+                                                 <span class="n">var_names</span><span class="o">=</span><span class="p">[</span><span class="s2">"length"</span><span class="p">,</span> <span class="s2">"σ"</span><span class="p">])</span>
     <span class="n">inf_data_baby_vv</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">from_pymc3</span><span class="p">(</span><span class="n">trace</span><span class="o">=</span><span class="n">trace_baby_vv</span><span class="p">,</span>
                                      <span class="n">posterior_predictive</span><span class="o">=</span><span class="n">ppc_baby_vv</span><span class="p">)</span>
 </pre></div>
@@ -571,7 +438,7 @@ need to do is change the expression defining <span class="math notranslate nohig
 the PPL handle the estimation for us . The results of this model are
 plotted in <a class="reference internal" href="#fig-baby-length-sqrt-vv-fit-include-error"><span class="std std-numref">Fig. 4.4</span></a>.</p>
 <figure class="align-default" id="fig-baby-length-sqrt-vv-fit-include-error">
-<a class="reference internal image-reference" href="../_images/Baby_Length_Sqrt_VV_Fit_Include_Error.png"><img alt="../_images/Baby_Length_Sqrt_VV_Fit_Include_Error.png" src="../_images/Baby_Length_Sqrt_VV_Fit_Include_Error.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Baby_Length_Sqrt_VV_Fit_Include_Error.png"><img alt="../_images/Baby_Length_Sqrt_VV_Fit_Include_Error.png" src="../_images/Baby_Length_Sqrt_VV_Fit_Include_Error.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.4 </span><span class="caption-text">Two plots showing parameter fits of baby month versus length. In the top
 plot the expected mean prediction, represented with a blue line, is
@@ -627,20 +494,20 @@ effect between smoking and the total bill amount <a class="footnote-reference br
 smokers as an independent categorical variable in our regression.</p>
 <div class="literal-block-wrapper docutils container" id="tips-no-interaction">
 <div class="code-block-caption"><span class="caption-number">Listing 4.5 </span><span class="caption-text">tips_no_interaction</span><a class="headerlink" href="#tips-no-interaction" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tips_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/tips.csv&quot;</span><span class="p">)</span>
-<span class="n">tips</span> <span class="o">=</span> <span class="n">tips_df</span><span class="p">[</span><span class="s2">&quot;tip&quot;</span><span class="p">]</span>
-<span class="n">total_bill_c</span> <span class="o">=</span> <span class="p">(</span><span class="n">tips_df</span><span class="p">[</span><span class="s2">&quot;total_bill&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">tips_df</span><span class="p">[</span><span class="s2">&quot;total_bill&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>  
-<span class="n">smoker</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">tips_df</span><span class="p">[</span><span class="s2">&quot;smoker&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">codes</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tips_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"../data/tips.csv"</span><span class="p">)</span>
+<span class="n">tips</span> <span class="o">=</span> <span class="n">tips_df</span><span class="p">[</span><span class="s2">"tip"</span><span class="p">]</span>
+<span class="n">total_bill_c</span> <span class="o">=</span> <span class="p">(</span><span class="n">tips_df</span><span class="p">[</span><span class="s2">"total_bill"</span><span class="p">]</span> <span class="o">-</span> <span class="n">tips_df</span><span class="p">[</span><span class="s2">"total_bill"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>  
+<span class="n">smoker</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">tips_df</span><span class="p">[</span><span class="s2">"smoker"</span><span class="p">])</span><span class="o">.</span><span class="n">codes</span>
 
 <span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_no_interaction</span><span class="p">:</span>
-    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"β"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">"σ"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
     <span class="n">μ</span> <span class="o">=</span> <span class="p">(</span><span class="n">β</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span>
          <span class="n">β</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">total_bill_c</span> <span class="o">+</span> 
          <span class="n">β</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">smoker</span><span class="p">)</span>
 
-    <span class="n">obs</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;obs&quot;</span><span class="p">,</span> <span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
+    <span class="n">obs</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"obs"</span><span class="p">,</span> <span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
     <span class="n">trace_no_interaction</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">tune</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -650,8 +517,8 @@ Block <a class="reference internal" href="#tips-interaction"><span class="std st
 <div class="literal-block-wrapper docutils container" id="tips-interaction">
 <div class="code-block-caption"><span class="caption-number">Listing 4.6 </span><span class="caption-text">tips_interaction</span><a class="headerlink" href="#tips-interaction" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_interaction</span><span class="p">:</span>
-    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"β"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">"σ"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
     <span class="n">μ</span> <span class="o">=</span> <span class="p">(</span><span class="n">β</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
        <span class="o">+</span> <span class="n">β</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">total_bill_c</span>
@@ -659,13 +526,13 @@ Block <a class="reference internal" href="#tips-interaction"><span class="std st
        <span class="o">+</span> <span class="n">β</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="n">smoker</span> <span class="o">*</span> <span class="n">total_bill_c</span>
         <span class="p">)</span>
 
-    <span class="n">obs</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;obs&quot;</span><span class="p">,</span> <span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
+    <span class="n">obs</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"obs"</span><span class="p">,</span> <span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
     <span class="n">trace_interaction</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">tune</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <figure class="align-default" id="fig-smoker-tip-interaction">
-<a class="reference internal image-reference" href="../_images/Smoker_Tip_Interaction.png"><img alt="../_images/Smoker_Tip_Interaction.png" src="../_images/Smoker_Tip_Interaction.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Smoker_Tip_Interaction.png"><img alt="../_images/Smoker_Tip_Interaction.png" src="../_images/Smoker_Tip_Interaction.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.5 </span><span class="caption-text">Plots of linear estimates from our two tips models. On the right we show
 the non-interaction estimate from Code Block
@@ -742,7 +609,7 @@ from the mean are more likely to occur when <span class="math notranslate nohigh
 provides robustness to outliers when substituting a Gaussian likelihood
 with a Student’s t-distribution.</p>
 <figure class="align-default" id="fig-studentt-normal-comparison">
-<a class="reference internal image-reference" href="../_images/StudentT_Normal_Comparison.png"><img alt="../_images/StudentT_Normal_Comparison.png" src="../_images/StudentT_Normal_Comparison.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/StudentT_Normal_Comparison.png"><img alt="../_images/StudentT_Normal_Comparison.png" src="../_images/StudentT_Normal_Comparison.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.6 </span><span class="caption-text">Normal distribution, in blue, compared to 3 Student’s t-distributions
 with varying <span class="math notranslate nohighlight">\(\nu\)</span> parameters. The location and scale parameters are all
@@ -761,7 +628,7 @@ the surrounding data points. These may be days of big celebration such
 as the 25th of May or 9th of July <a class="footnote-reference brackets" href="#id31" id="id11" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a>, where people are consuming more
 empanadas than usual.</p>
 <figure class="align-default" id="fig-empanada-scatter-plot">
-<a class="reference internal image-reference" href="../_images/Empanada_Scatter_Plot.png"><img alt="../_images/Empanada_Scatter_Plot.png" src="../_images/Empanada_Scatter_Plot.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Empanada_Scatter_Plot.png"><img alt="../_images/Empanada_Scatter_Plot.png" src="../_images/Empanada_Scatter_Plot.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.7 </span><span class="caption-text">Simulated data of number of customers plotted against the pesos
 returned. The 5 dots at the top of the chart are considered outliers.</span><a class="headerlink" href="#fig-empanada-scatter-plot" title="Permalink to this image">#</a></p>
@@ -785,19 +652,19 @@ estimate of <span class="math notranslate nohighlight">\(\sigma\)</span> is quit
 <div class="literal-block-wrapper docutils container" id="non-robust-regression">
 <div class="code-block-caption"><span class="caption-number">Listing 4.7 </span><span class="caption-text">non_robust_regression</span><a class="headerlink" href="#non-robust-regression" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_non_robust</span><span class="p">:</span>
-    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
-    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">"σ"</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"β"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 
-    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;μ&quot;</span><span class="p">,</span> <span class="n">β</span> <span class="o">*</span> <span class="n">empanadas</span><span class="p">[</span><span class="s2">&quot;customers&quot;</span><span class="p">])</span>
+    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">"μ"</span><span class="p">,</span> <span class="n">β</span> <span class="o">*</span> <span class="n">empanadas</span><span class="p">[</span><span class="s2">"customers"</span><span class="p">])</span>
 
-    <span class="n">sales</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;sales&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">μ</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">empanadas</span><span class="p">[</span><span class="s2">&quot;sales&quot;</span><span class="p">])</span>
+    <span class="n">sales</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"sales"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">μ</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">empanadas</span><span class="p">[</span><span class="s2">"sales"</span><span class="p">])</span>
     
     <span class="n">inf_data_non_robust</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <figure class="align-default" id="fig-empanada-scatter-non-robust">
-<a class="reference internal image-reference" href="../_images/Empanada_Scatter_Non_Robust.png"><img alt="../_images/Empanada_Scatter_Non_Robust.png" src="../_images/Empanada_Scatter_Non_Robust.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Empanada_Scatter_Non_Robust.png"><img alt="../_images/Empanada_Scatter_Non_Robust.png" src="../_images/Empanada_Scatter_Non_Robust.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.8 </span><span class="caption-text">A plot of the data, fitted regression line, and 94% HDI of
 <code class="docutils literal notranslate"><span class="pre">model_non_robust</span></code> from Code Block
@@ -850,14 +717,14 @@ presence of outliers.</p>
 <div class="literal-block-wrapper docutils container" id="code-robust-regression">
 <div class="code-block-caption"><span class="caption-number">Listing 4.8 </span><span class="caption-text">code_robust_regression</span><a class="headerlink" href="#code-robust-regression" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_robust</span><span class="p">:</span>
-    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
-    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-    <span class="n">ν</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;ν&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">"σ"</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"β"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">ν</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">"ν"</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 
-    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;μ&quot;</span><span class="p">,</span> <span class="n">β</span> <span class="o">*</span> <span class="n">empanadas</span><span class="p">[</span><span class="s2">&quot;customers&quot;</span><span class="p">])</span>
+    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">"μ"</span><span class="p">,</span> <span class="n">β</span> <span class="o">*</span> <span class="n">empanadas</span><span class="p">[</span><span class="s2">"customers"</span><span class="p">])</span>
     
-    <span class="n">sales</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">StudentT</span><span class="p">(</span><span class="s2">&quot;sales&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">μ</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">σ</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="n">ν</span><span class="p">,</span>
-                        <span class="n">observed</span><span class="o">=</span><span class="n">empanadas</span><span class="p">[</span><span class="s2">&quot;sales&quot;</span><span class="p">])</span>
+    <span class="n">sales</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">StudentT</span><span class="p">(</span><span class="s2">"sales"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">μ</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">σ</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="n">ν</span><span class="p">,</span>
+                        <span class="n">observed</span><span class="o">=</span><span class="n">empanadas</span><span class="p">[</span><span class="s2">"sales"</span><span class="p">])</span>
 
     <span class="n">inf_data_robust</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
 </pre></div>
@@ -893,7 +760,7 @@ presence of outliers.</p>
 </tbody>
 </table>
 <figure class="align-default" id="fig-empanada-scatter-robust">
-<a class="reference internal image-reference" href="../_images/Empanada_Scatter_Robust.png"><img alt="../_images/Empanada_Scatter_Robust.png" src="../_images/Empanada_Scatter_Robust.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Empanada_Scatter_Robust.png"><img alt="../_images/Empanada_Scatter_Robust.png" src="../_images/Empanada_Scatter_Robust.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.9 </span><span class="caption-text">A plot of the data, fitted regression line of <code class="docutils literal notranslate"><span class="pre">model_robust</span></code> and 94% HDI
 from Code Block <a class="reference internal" href="#code-robust-regression"><span class="std std-ref">code_robust_regression</span></a>.
@@ -953,7 +820,7 @@ datasets, 3 days of data for the sales of salads, as well as roughly a
 year’s worth of data on pizza and sandwich sales in the same market. The
 (simulated) data is shown in <a class="reference internal" href="#fig-restaurant-order-scatter"><span class="std std-numref">Fig. 4.10</span></a>.</p>
 <figure class="align-default" id="fig-restaurant-order-scatter">
-<a class="reference internal image-reference" href="../_images/Restaurant_Order_Scatter.png"><img alt="../_images/Restaurant_Order_Scatter.png" src="../_images/Restaurant_Order_Scatter.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Restaurant_Order_Scatter.png"><img alt="../_images/Restaurant_Order_Scatter.png" src="../_images/Restaurant_Order_Scatter.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.10 </span><span class="caption-text">A simulated dataset for a real world scenario. In this case an
 organization has 3 data points for the daily sales of salads, but has
@@ -980,7 +847,7 @@ parameters and groups is visually represented in
 <a class="reference internal" href="#equation-eq-unpooled-regression">(4.4)</a>, where <span class="math notranslate nohighlight">\(j\)</span> is an index identifying each
 separated group.</p>
 <figure class="align-default" id="fig-unpooled-model">
-<a class="reference internal image-reference" href="../_images/unpooled_model.png"><img alt="../_images/unpooled_model.png" src="../_images/unpooled_model.png" style="width: 5.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/unpooled_model.png"><img alt="../_images/unpooled_model.png" src="../_images/unpooled_model.png" style="width: 5.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.11 </span><span class="caption-text">An unpooled model where each group of observations, <span class="math notranslate nohighlight">\(y_1, y_2, ..., y_j\)</span>
 has its own set of parameters, independent from any other group.</span><a class="headerlink" href="#fig-unpooled-model" title="Permalink to this image">#</a></p>
@@ -1004,29 +871,29 @@ restaurant has zero customers, total sales will also be zero, so there
 is neither any interest nor any need for the extra parameter.</p>
 <div class="literal-block-wrapper docutils container" id="model-sales-unpooled">
 <div class="code-block-caption"><span class="caption-number">Listing 4.9 </span><span class="caption-text">model_sales_unpooled</span><a class="headerlink" href="#model-sales-unpooled" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">customers</span> <span class="o">=</span> <span class="n">sales_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;customers&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
-<span class="n">sales_observed</span> <span class="o">=</span> <span class="n">sales_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;sales&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
-<span class="n">food_category</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">sales_df</span><span class="p">[</span><span class="s2">&quot;Food_Category&quot;</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">customers</span> <span class="o">=</span> <span class="n">sales_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">"customers"</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">sales_observed</span> <span class="o">=</span> <span class="n">sales_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">"sales"</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">food_category</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">sales_df</span><span class="p">[</span><span class="s2">"Food_Category"</span><span class="p">])</span>
 
 <span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_sales_unpooled</span><span class="p">:</span>
-    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">"σ"</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"β"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
     
-    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;μ&quot;</span><span class="p">,</span> <span class="n">β</span><span class="p">[</span><span class="n">food_category</span><span class="o">.</span><span class="n">codes</span><span class="p">]</span> <span class="o">*</span><span class="n">customers</span><span class="p">)</span>
+    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">"μ"</span><span class="p">,</span> <span class="n">β</span><span class="p">[</span><span class="n">food_category</span><span class="o">.</span><span class="n">codes</span><span class="p">]</span> <span class="o">*</span><span class="n">customers</span><span class="p">)</span>
     
-    <span class="n">sales</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;sales&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">μ</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">σ</span><span class="p">[</span><span class="n">food_category</span><span class="o">.</span><span class="n">codes</span><span class="p">],</span>
+    <span class="n">sales</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"sales"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">μ</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">σ</span><span class="p">[</span><span class="n">food_category</span><span class="o">.</span><span class="n">codes</span><span class="p">],</span>
                       <span class="n">observed</span><span class="o">=</span><span class="n">sales_observed</span><span class="p">)</span>
     
     <span class="n">trace_sales_unpooled</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">target_accept</span><span class="o">=</span><span class="mf">.9</span><span class="p">)</span>
     <span class="n">inf_data_sales_unpooled</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">from_pymc3</span><span class="p">(</span>
         <span class="n">trace</span><span class="o">=</span><span class="n">trace_sales_unpooled</span><span class="p">,</span> 
-        <span class="n">coords</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;β_dim_0&quot;</span><span class="p">:</span><span class="n">food_category</span><span class="o">.</span><span class="n">categories</span><span class="p">,</span>
-                <span class="s2">&quot;σ_dim_0&quot;</span><span class="p">:</span><span class="n">food_category</span><span class="o">.</span><span class="n">categories</span><span class="p">})</span>
+        <span class="n">coords</span><span class="o">=</span><span class="p">{</span><span class="s2">"β_dim_0"</span><span class="p">:</span><span class="n">food_category</span><span class="o">.</span><span class="n">categories</span><span class="p">,</span>
+                <span class="s2">"σ_dim_0"</span><span class="p">:</span><span class="n">food_category</span><span class="o">.</span><span class="n">categories</span><span class="p">})</span>
 </pre></div>
 </div>
 </div>
 <figure class="align-default" id="fig-salad-sales-basic-regression-model-unpooled">
-<a class="reference internal image-reference" href="../_images/Salad_Sales_Basic_Regression_Model_Unpooled.png"><img alt="../_images/Salad_Sales_Basic_Regression_Model_Unpooled.png" src="../_images/Salad_Sales_Basic_Regression_Model_Unpooled.png" style="width: 3.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Salad_Sales_Basic_Regression_Model_Unpooled.png"><img alt="../_images/Salad_Sales_Basic_Regression_Model_Unpooled.png" src="../_images/Salad_Sales_Basic_Regression_Model_Unpooled.png" style="width: 3.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.12 </span><span class="caption-text">A diagram of <code class="docutils literal notranslate"><span class="pre">model_sales_unpooled</span></code>. Note how the box around parameters
 <span class="math notranslate nohighlight">\(\beta\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> has a three in the lower right, indicating that the
@@ -1042,7 +909,7 @@ compared to the sandwich and pizza groups. This is what we would expect
 from our unpooled model when we have large amounts of data for some of
 the categories, but much less for others.</p>
 <figure class="align-default" id="fig-salad-sales-basic-regression-forestplot-beta">
-<a class="reference internal image-reference" href="../_images/Salad_Sales_Basic_Regression_ForestPlot_beta.png"><img alt="../_images/Salad_Sales_Basic_Regression_ForestPlot_beta.png" src="../_images/Salad_Sales_Basic_Regression_ForestPlot_beta.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Salad_Sales_Basic_Regression_ForestPlot_beta.png"><img alt="../_images/Salad_Sales_Basic_Regression_ForestPlot_beta.png" src="../_images/Salad_Sales_Basic_Regression_ForestPlot_beta.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.13 </span><span class="caption-text">Forest plot of the <span class="math notranslate nohighlight">\(\beta\)</span> parameter estimates <code class="docutils literal notranslate"><span class="pre">model_sales_unpooled</span></code>.
 As expected the estimate of the <span class="math notranslate nohighlight">\(\beta\)</span> coefficient for the salads group
@@ -1050,7 +917,7 @@ is the widest as this group has the least amount of data.</span><a class="header
 </figcaption>
 </figure>
 <figure class="align-default" id="fig-salad-sales-basic-regression-forestplot-sigma">
-<a class="reference internal image-reference" href="../_images/Salad_Sales_Basic_Regression_ForestPlot_sigma.png"><img alt="../_images/Salad_Sales_Basic_Regression_ForestPlot_sigma.png" src="../_images/Salad_Sales_Basic_Regression_ForestPlot_sigma.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Salad_Sales_Basic_Regression_ForestPlot_sigma.png"><img alt="../_images/Salad_Sales_Basic_Regression_ForestPlot_sigma.png" src="../_images/Salad_Sales_Basic_Regression_ForestPlot_sigma.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.14 </span><span class="caption-text">Forest plot of the <span class="math notranslate nohighlight">\(\sigma\)</span> parameter estimates <code class="docutils literal notranslate"><span class="pre">model_sales_unpooled</span></code>.
 Like <a class="reference internal" href="#fig-salad-sales-basic-regression-forestplot-beta"><span class="std std-numref">Fig. 4.13</span></a> the
@@ -1078,7 +945,7 @@ Conceptually, this type of model is shown in <a class="reference internal" href=
 were each group shares the same parameters and thus we also refer to
 them as common parameters.</p>
 <figure class="align-default" id="fig-pooled-model">
-<a class="reference internal image-reference" href="../_images/pooled_model.png"><img alt="../_images/pooled_model.png" src="../_images/pooled_model.png" style="width: 5.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/pooled_model.png"><img alt="../_images/pooled_model.png" src="../_images/pooled_model.png" style="width: 5.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.15 </span><span class="caption-text">A pooled model where each group of observations, <span class="math notranslate nohighlight">\(y_1, y_2, ..., y_j\)</span>
 shares parameters.</span><a class="headerlink" href="#fig-pooled-model" title="Permalink to this image">#</a></p>
@@ -1099,12 +966,12 @@ Y \sim&amp; \mathcal{N}(\mu, \sigma)
 <div class="literal-block-wrapper docutils container" id="model-sales-pooled">
 <div class="code-block-caption"><span class="caption-number">Listing 4.10 </span><span class="caption-text">model_sales_pooled</span><a class="headerlink" href="#model-sales-pooled" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_sales_pooled</span><span class="p">:</span>
-    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
-    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">"σ"</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"β"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
-    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;μ&quot;</span><span class="p">,</span> <span class="n">β</span> <span class="o">*</span> <span class="n">customers</span><span class="p">)</span>
+    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">"μ"</span><span class="p">,</span> <span class="n">β</span> <span class="o">*</span> <span class="n">customers</span><span class="p">)</span>
     
-    <span class="n">sales</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;sales&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">μ</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">σ</span><span class="p">,</span>
+    <span class="n">sales</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"sales"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">μ</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">σ</span><span class="p">,</span>
                       <span class="n">observed</span><span class="o">=</span><span class="n">sales_observed</span><span class="p">)</span>
                         
     <span class="n">inf_data_sales_pooled</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
@@ -1112,7 +979,7 @@ Y \sim&amp; \mathcal{N}(\mu, \sigma)
 </div>
 </div>
 <figure class="align-default" id="fig-salad-sales-basic-regression-model-pooled">
-<a class="reference internal image-reference" href="../_images/Salad_Sales_Basic_Regression_Model_Pooled.png"><img alt="../_images/Salad_Sales_Basic_Regression_Model_Pooled.png" src="../_images/Salad_Sales_Basic_Regression_Model_Pooled.png" style="width: 3.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Salad_Sales_Basic_Regression_Model_Pooled.png"><img alt="../_images/Salad_Sales_Basic_Regression_Model_Pooled.png" src="../_images/Salad_Sales_Basic_Regression_Model_Pooled.png" style="width: 3.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.16 </span><span class="caption-text">Diagram of <code class="docutils literal notranslate"><span class="pre">model_sales_pooled</span></code>. Unlike
 <a class="reference internal" href="#fig-salad-sales-basic-regression-model-unpooled"><span class="std std-numref">Fig. 4.12</span></a> there is only
@@ -1120,7 +987,7 @@ one instance of <span class="math notranslate nohighlight">\(\beta\)</span> and 
 </figcaption>
 </figure>
 <figure class="align-default" id="fig-salad-sales-basic-regression-forestplot-sigma-comparison">
-<a class="reference internal image-reference" href="../_images/Salad_Sales_Basic_Regression_ForestPlot_Sigma_Comparison.png"><img alt="../_images/Salad_Sales_Basic_Regression_ForestPlot_Sigma_Comparison.png" src="../_images/Salad_Sales_Basic_Regression_ForestPlot_Sigma_Comparison.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Salad_Sales_Basic_Regression_ForestPlot_Sigma_Comparison.png"><img alt="../_images/Salad_Sales_Basic_Regression_ForestPlot_Sigma_Comparison.png" src="../_images/Salad_Sales_Basic_Regression_ForestPlot_Sigma_Comparison.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.17 </span><span class="caption-text">A comparison of the estimates of the <span class="math notranslate nohighlight">\(\sigma\)</span> parameter from
 <code class="docutils literal notranslate"><span class="pre">model_pooled_sales</span></code> and <code class="docutils literal notranslate"><span class="pre">model_unpooled_sales</span></code>. Note how we only get
@@ -1144,7 +1011,7 @@ group, fails to fit any one group well. This result implies that the
 differences in the groups are too large to ignore and thus pooling the
 data it is not particularly useful for our intended purpose.</p>
 <figure class="align-default" id="fig-salad-sales-basic-regression-scatter-pooled">
-<a class="reference internal image-reference" href="../_images/Salad_Sales_Basic_Regression_Scatter_Pooled.png"><img alt="../_images/Salad_Sales_Basic_Regression_Scatter_Pooled.png" src="../_images/Salad_Sales_Basic_Regression_Scatter_Pooled.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Salad_Sales_Basic_Regression_Scatter_Pooled.png"><img alt="../_images/Salad_Sales_Basic_Regression_Scatter_Pooled.png" src="../_images/Salad_Sales_Basic_Regression_Scatter_Pooled.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.18 </span><span class="caption-text">Linear regression <code class="docutils literal notranslate"><span class="pre">model_sales_pooled</span></code> where all the data is pooled
 together. Each of the parameters is estimated using all the data but we
@@ -1210,12 +1077,12 @@ new market.</p>
 <div class="literal-block-wrapper docutils container" id="model-sales-mixed-effect">
 <div class="code-block-caption"><span class="caption-number">Listing 4.11 </span><span class="caption-text">model_sales_mixed_effect</span><a class="headerlink" href="#model-sales-mixed-effect" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_pooled_sigma_sales</span><span class="p">:</span>
-    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
-    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">"σ"</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"β"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
     
-    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;μ&quot;</span><span class="p">,</span> <span class="n">β</span><span class="p">[</span><span class="n">food_category</span><span class="o">.</span><span class="n">codes</span><span class="p">]</span> <span class="o">*</span> <span class="n">customers</span><span class="p">)</span>
+    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">"μ"</span><span class="p">,</span> <span class="n">β</span><span class="p">[</span><span class="n">food_category</span><span class="o">.</span><span class="n">codes</span><span class="p">]</span> <span class="o">*</span> <span class="n">customers</span><span class="p">)</span>
     
-    <span class="n">sales</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;sales&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">μ</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">sales_observed</span><span class="p">)</span>
+    <span class="n">sales</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"sales"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">μ</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">σ</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">sales_observed</span><span class="p">)</span>
     
     <span class="n">trace_pooled_sigma_sales</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
     <span class="n">ppc_pooled_sigma_sales</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample_posterior_predictive</span><span class="p">(</span>
@@ -1224,12 +1091,12 @@ new market.</p>
     <span class="n">inf_data_pooled_sigma_sales</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">from_pymc3</span><span class="p">(</span>
         <span class="n">trace</span><span class="o">=</span><span class="n">trace_pooled_sigma_sales</span><span class="p">,</span>
         <span class="n">posterior_predictive</span><span class="o">=</span><span class="n">ppc_pooled_sigma_sales</span><span class="p">,</span>
-        <span class="n">coords</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;β_dim_0&quot;</span><span class="p">:</span><span class="n">food_category</span><span class="o">.</span><span class="n">categories</span><span class="p">})</span>
+        <span class="n">coords</span><span class="o">=</span><span class="p">{</span><span class="s2">"β_dim_0"</span><span class="p">:</span><span class="n">food_category</span><span class="o">.</span><span class="n">categories</span><span class="p">})</span>
 </pre></div>
 </div>
 </div>
 <figure class="align-default" id="fig-salad-sales-basic-regression-model-multilevel">
-<a class="reference internal image-reference" href="../_images/Salad_Sales_Basic_Regression_Model_Multilevel.png"><img alt="../_images/Salad_Sales_Basic_Regression_Model_Multilevel.png" src="../_images/Salad_Sales_Basic_Regression_Model_Multilevel.png" style="width: 3.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Salad_Sales_Basic_Regression_Model_Multilevel.png"><img alt="../_images/Salad_Sales_Basic_Regression_Model_Multilevel.png" src="../_images/Salad_Sales_Basic_Regression_Model_Multilevel.png" style="width: 3.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.19 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">model_pooled_sigma_sales</span></code> where <span class="math notranslate nohighlight">\(\beta\)</span> is unpooled, as indicated by
 the box with 3 in the right corner, and <span class="math notranslate nohighlight">\(\sigma\)</span> is pooled, as the lack
@@ -1239,7 +1106,7 @@ label=”fig:Salad_Sales_Basic_Regression_Model_Multilevel”}</span><a class="h
 </figcaption>
 </figure>
 <figure class="align-default" id="fig-salad-sales-basic-regression-scatter-sigma-pooled-slope-unpooled">
-<a class="reference internal image-reference" href="../_images/Salad_Sales_Basic_Regression_Scatter_Sigma_Pooled_Slope_Unpooled.png"><img alt="../_images/Salad_Sales_Basic_Regression_Scatter_Sigma_Pooled_Slope_Unpooled.png" src="../_images/Salad_Sales_Basic_Regression_Scatter_Sigma_Pooled_Slope_Unpooled.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Salad_Sales_Basic_Regression_Scatter_Sigma_Pooled_Slope_Unpooled.png"><img alt="../_images/Salad_Sales_Basic_Regression_Scatter_Sigma_Pooled_Slope_Unpooled.png" src="../_images/Salad_Sales_Basic_Regression_Scatter_Sigma_Pooled_Slope_Unpooled.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.20 </span><span class="caption-text">Linear model with 50% HDI from <code class="docutils literal notranslate"><span class="pre">model_pooled_sigma_sales</span></code>. This model is
 more useful for our purposes of estimating salad sales as the slopes are
@@ -1250,7 +1117,7 @@ label=”fig:Salad_Sales_Basic_Regression_Scatter_Sigma_Pooled_Slope_Unpooled”
 </figcaption>
 </figure>
 <figure class="align-default" id="fig-salad-sales-forestplot-sigma-unpooled-multilevel-comparison">
-<a class="reference internal image-reference" href="../_images/Salad_Sales_ForestPlot_Sigma_Unpooled_Multilevel_Comparison.png"><img alt="../_images/Salad_Sales_ForestPlot_Sigma_Unpooled_Multilevel_Comparison.png" src="../_images/Salad_Sales_ForestPlot_Sigma_Unpooled_Multilevel_Comparison.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Salad_Sales_ForestPlot_Sigma_Unpooled_Multilevel_Comparison.png"><img alt="../_images/Salad_Sales_ForestPlot_Sigma_Unpooled_Multilevel_Comparison.png" src="../_images/Salad_Sales_ForestPlot_Sigma_Unpooled_Multilevel_Comparison.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.21 </span><span class="caption-text">Comparison of <span class="math notranslate nohighlight">\(\sigma\)</span> from <code class="docutils literal notranslate"><span class="pre">model_pooled_sigma_sales</span></code> and
 <code class="docutils literal notranslate"><span class="pre">model_pooled_sales</span></code>. Note how the estimated of <span class="math notranslate nohighlight">\(\sigma\)</span> in the
@@ -1277,7 +1144,7 @@ the prior itself. Conceptually this idea is shown in
 <a class="reference internal" href="#fig-partial-pooled-model"><span class="std std-numref">Fig. 4.22</span></a>. Each group gets its own parameters
 which are drawn from a common hyperprior distribution.</p>
 <figure class="align-default" id="fig-partial-pooled-model">
-<a class="reference internal image-reference" href="../_images/partial_pooled_model.png"><img alt="../_images/partial_pooled_model.png" src="../_images/partial_pooled_model.png" style="width: 5.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/partial_pooled_model.png"><img alt="../_images/partial_pooled_model.png" src="../_images/partial_pooled_model.png" style="width: 5.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.22 </span><span class="caption-text">A partially pooled model architecture where each group of observations,
 <span class="math notranslate nohighlight">\(y_1, y_2, ..., y_k\)</span> has its own set of parameters, but they are not
@@ -1314,33 +1181,33 @@ this claim.</p>
 <div class="code-block-caption"><span class="caption-number">Listing 4.12 </span><span class="caption-text">model_hierarchical_sales</span><a class="headerlink" href="#model-hierarchical-sales" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_hierarchical_sales</span><span class="p">:</span>
-    <span class="n">σ_hyperprior</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ_hyperprior&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
-    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;σ&quot;</span><span class="p">,</span> <span class="n">σ_hyperprior</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">σ_hyperprior</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">"σ_hyperprior"</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+    <span class="n">σ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">"σ"</span><span class="p">,</span> <span class="n">σ_hyperprior</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
     
-    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;β&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;μ&quot;</span><span class="p">,</span> <span class="n">β</span><span class="p">[</span><span class="n">food_category</span><span class="o">.</span><span class="n">codes</span><span class="p">]</span> <span class="o">*</span> <span class="n">customers</span><span class="p">)</span>
+    <span class="n">β</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"β"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">μ</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">"μ"</span><span class="p">,</span> <span class="n">β</span><span class="p">[</span><span class="n">food_category</span><span class="o">.</span><span class="n">codes</span><span class="p">]</span> <span class="o">*</span> <span class="n">customers</span><span class="p">)</span>
     
-    <span class="n">sales</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;sales&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">μ</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">σ</span><span class="p">[</span><span class="n">food_category</span><span class="o">.</span><span class="n">codes</span><span class="p">],</span>
+    <span class="n">sales</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">"sales"</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">μ</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">σ</span><span class="p">[</span><span class="n">food_category</span><span class="o">.</span><span class="n">codes</span><span class="p">],</span>
                       <span class="n">observed</span><span class="o">=</span><span class="n">sales_observed</span><span class="p">)</span>
     
     <span class="n">trace_hierarchical_sales</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">target_accept</span><span class="o">=</span><span class="mf">.9</span><span class="p">)</span>
     
     <span class="n">inf_data_hierarchical_sales</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">from_pymc3</span><span class="p">(</span>
         <span class="n">trace</span><span class="o">=</span><span class="n">trace_hierarchical_sales</span><span class="p">,</span> 
-        <span class="n">coords</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;β_dim_0&quot;</span><span class="p">:</span><span class="n">food_category</span><span class="o">.</span><span class="n">categories</span><span class="p">,</span>
-                <span class="s2">&quot;σ_dim_0&quot;</span><span class="p">:</span><span class="n">food_category</span><span class="o">.</span><span class="n">categories</span><span class="p">})</span>
+        <span class="n">coords</span><span class="o">=</span><span class="p">{</span><span class="s2">"β_dim_0"</span><span class="p">:</span><span class="n">food_category</span><span class="o">.</span><span class="n">categories</span><span class="p">,</span>
+                <span class="s2">"σ_dim_0"</span><span class="p">:</span><span class="n">food_category</span><span class="o">.</span><span class="n">categories</span><span class="p">})</span>
 </pre></div>
 </div>
 </div>
 <figure class="align-default" id="fig-salad-sales-hierarchial-regression-model">
-<a class="reference internal image-reference" href="../_images/Salad_Sales_Hierarchial_Regression_Model.png"><img alt="../_images/Salad_Sales_Hierarchial_Regression_Model.png" src="../_images/Salad_Sales_Hierarchial_Regression_Model.png" style="width: 3.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Salad_Sales_Hierarchial_Regression_Model.png"><img alt="../_images/Salad_Sales_Hierarchial_Regression_Model.png" src="../_images/Salad_Sales_Hierarchial_Regression_Model.png" style="width: 3.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.23 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">model_hierarchical_sales</span></code> where <span class="math notranslate nohighlight">\(\sigma_{hyperprior}\)</span> is the single
 hierarchical distribution for the three <span class="math notranslate nohighlight">\(\sigma\)</span> distributions.</span><a class="headerlink" href="#fig-salad-sales-hierarchial-regression-model" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="fig-salad-sales-forestplot-sigma-hierarchical">
-<a class="reference internal image-reference" href="../_images/Salad_Sales_ForestPlot_Sigma_Hierarchical.png"><img alt="../_images/Salad_Sales_ForestPlot_Sigma_Hierarchical.png" src="../_images/Salad_Sales_ForestPlot_Sigma_Hierarchical.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Salad_Sales_ForestPlot_Sigma_Hierarchical.png"><img alt="../_images/Salad_Sales_ForestPlot_Sigma_Hierarchical.png" src="../_images/Salad_Sales_ForestPlot_Sigma_Hierarchical.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.24 </span><span class="caption-text">Forest plot of the <span class="math notranslate nohighlight">\(\sigma\)</span> parameter estimates for
 <code class="docutils literal notranslate"><span class="pre">model_hierarchical_sales</span></code>. Note how the hyperprior tends to represent
@@ -1475,7 +1342,7 @@ setting is how big of a step to take when exploring the posterior
 surface. In complex geometries, such as with Neal’s funnel, a step size
 that works well in one area, fails miserably in another.</p>
 <figure class="align-default" id="fig-neals-funnel">
-<a class="reference internal image-reference" href="../_images/Neals_Funnel.png"><img alt="../_images/Neals_Funnel.png" src="../_images/Neals_Funnel.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Neals_Funnel.png"><img alt="../_images/Neals_Funnel.png" src="../_images/Neals_Funnel.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.25 </span><span class="caption-text">Correlated samples in a particular shape referred to as Neal’s Funnel.
 At sampling at the top of the funnel where Y is around a value 6 to 8, a
@@ -1521,7 +1388,7 @@ where a hyperprior partially pools the parameters of the slope
 Y \sim&amp; \mathcal{N}(\beta_{m} * X_m,\sigma_{m})
 \end{split}\end{split}\]</div>
 <figure class="align-default" id="fig-multiple-salad-sales-scatter">
-<a class="reference internal image-reference" href="../_images/Multiple_Salad_Sales_Scatter.png"><img alt="../_images/Multiple_Salad_Sales_Scatter.png" src="../_images/Multiple_Salad_Sales_Scatter.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Multiple_Salad_Sales_Scatter.png"><img alt="../_images/Multiple_Salad_Sales_Scatter.png" src="../_images/Multiple_Salad_Sales_Scatter.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.26 </span><span class="caption-text">Observed salad sales across 6 locations. Note how some locations have
 very few data points relative to others.</span><a class="headerlink" href="#fig-multiple-salad-sales-scatter" title="Permalink to this image">#</a></p>
@@ -1531,24 +1398,24 @@ very few data points relative to others.</span><a class="headerlink" href="#fig-
 <div class="code-block-caption"><span class="caption-number">Listing 4.13 </span><span class="caption-text">model_hierarchical_salad_sales</span><a class="headerlink" href="#model-hierarchical-salad-sales" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="k">def</span> <span class="nf">gen_hierarchical_salad_sales</span><span class="p">(</span><span class="n">input_df</span><span class="p">,</span> <span class="n">beta_prior_fn</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">):</span>
-    <span class="n">customers</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">input_df</span><span class="p">[</span><span class="s2">&quot;customers&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
-    <span class="n">location_category</span> <span class="o">=</span> <span class="n">input_df</span><span class="p">[</span><span class="s2">&quot;location&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
-    <span class="n">sales</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">input_df</span><span class="p">[</span><span class="s2">&quot;sales&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="n">customers</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">input_df</span><span class="p">[</span><span class="s2">"customers"</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="n">location_category</span> <span class="o">=</span> <span class="n">input_df</span><span class="p">[</span><span class="s2">"location"</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">sales</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">input_df</span><span class="p">[</span><span class="s2">"sales"</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
 
     <span class="nd">@tfd</span><span class="o">.</span><span class="n">JointDistributionCoroutine</span>
     <span class="k">def</span> <span class="nf">model_hierarchical_salad_sales</span><span class="p">():</span>
-        <span class="n">β_μ_hyperprior</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;beta_mu&quot;</span><span class="p">))</span>
-        <span class="n">β_σ_hyperprior</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="mf">.1</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;beta_sigma&quot;</span><span class="p">))</span>
+        <span class="n">β_μ_hyperprior</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"beta_mu"</span><span class="p">))</span>
+        <span class="n">β_σ_hyperprior</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="mf">.1</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"beta_sigma"</span><span class="p">))</span>
         <span class="n">β</span> <span class="o">=</span> <span class="k">yield from</span> <span class="n">beta_prior_fn</span><span class="p">(</span><span class="n">β_μ_hyperprior</span><span class="p">,</span> <span class="n">β_σ_hyperprior</span><span class="p">)</span>
 
-        <span class="n">σ_hyperprior</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;sigma_prior&quot;</span><span class="p">))</span>
-        <span class="n">σ</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Sample</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="n">σ_hyperprior</span><span class="p">),</span> <span class="mi">6</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;sigma&quot;</span><span class="p">)</span>
+        <span class="n">σ_hyperprior</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"sigma_prior"</span><span class="p">))</span>
+        <span class="n">σ</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Sample</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="n">σ_hyperprior</span><span class="p">),</span> <span class="mi">6</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"sigma"</span><span class="p">)</span>
 
         <span class="n">loc</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">β</span><span class="p">,</span> <span class="n">location_category</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">customers</span>
         <span class="n">scale</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">σ</span><span class="p">,</span> <span class="n">location_category</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">sales</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Independent</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="n">scale</span><span class="p">),</span>
                                       <span class="n">reinterpreted_batch_ndims</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-                                      <span class="n">name</span><span class="o">=</span><span class="s2">&quot;sales&quot;</span><span class="p">)</span>
+                                      <span class="n">name</span><span class="o">=</span><span class="s2">"sales"</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">model_hierarchical_salad_sales</span><span class="p">,</span> <span class="n">sales</span>
 </pre></div>
@@ -1566,7 +1433,7 @@ Code Block
 <div class="literal-block-wrapper docutils container" id="model-hierarchical-salad-sales-centered">
 <div class="code-block-caption"><span class="caption-number">Listing 4.14 </span><span class="caption-text">model_hierarchical_salad_sales_centered</span><a class="headerlink" href="#model-hierarchical-salad-sales-centered" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">centered_beta_prior_fn</span><span class="p">(</span><span class="n">hyper_mu</span><span class="p">,</span> <span class="n">hyper_sigma</span><span class="p">):</span>
-    <span class="n">β</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Sample</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">hyper_mu</span><span class="p">,</span> <span class="n">hyper_sigma</span><span class="p">),</span> <span class="mi">6</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;beta&quot;</span><span class="p">)</span>
+    <span class="n">β</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Sample</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">hyper_mu</span><span class="p">,</span> <span class="n">hyper_sigma</span><span class="p">),</span> <span class="mi">6</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"beta"</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">β</span>
 
 <span class="c1"># hierarchical_salad_df is the generated dataset as pandas.DataFrame</span>
@@ -1590,8 +1457,8 @@ in Code Block
     <span class="mi">1000</span><span class="p">,</span> <span class="n">centered_model</span><span class="p">,</span> <span class="n">n_chains</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">num_adaptation_steps</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
     <span class="n">sales</span><span class="o">=</span><span class="n">observed</span><span class="p">)</span>
 
-<span class="n">divergent_per_chain</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sampler_stats_centered</span><span class="p">[</span><span class="s2">&quot;diverging&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;There were </span><span class="si">{</span><span class="n">divergent_per_chain</span><span class="si">}</span><span class="s2"> divergences after tuning per chain.&quot;&quot;&quot;</span><span class="p">)</span>
+<span class="n">divergent_per_chain</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.sum.html#numpy.sum" title="numpy.sum"><span class="n">np</span><span class="o">.</span><span class="n">sum</span></a><span class="p">(</span><span class="n">sampler_stats_centered</span><span class="p">[</span><span class="s2">"diverging"</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"""There were </span><span class="si">{</span><span class="n">divergent_per_chain</span><span class="si">}</span><span class="s2"> divergences after tuning per chain."""</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1611,7 +1478,7 @@ the value <span class="math notranslate nohighlight">\(\beta_{\sigma h}\)</span>
 to sample parameter <span class="math notranslate nohighlight">\(\beta_m\)</span> collapses and the sampler is not able to
 effectively characterize this space of the posterior.</p>
 <figure class="align-default" id="fig-neals-funnel-salad-centered">
-<a class="reference internal image-reference" href="../_images/Neals_Funnel_Salad_Centered.png"><img alt="../_images/Neals_Funnel_Salad_Centered.png" src="../_images/Neals_Funnel_Salad_Centered.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Neals_Funnel_Salad_Centered.png"><img alt="../_images/Neals_Funnel_Salad_Centered.png" src="../_images/Neals_Funnel_Salad_Centered.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.27 </span><span class="caption-text">Scatter plot of the hyperprior and the slope of <span class="math notranslate nohighlight">\(\beta[4]\)</span> from
 <code class="docutils literal notranslate"><span class="pre">centered_model</span></code> defined in Code Block
@@ -1645,7 +1512,7 @@ Y \sim&amp; \mathcal{N}(\beta_{m} * X_m,\sigma_{m})
 <div class="literal-block-wrapper docutils container" id="model-hierarchical-salad-sales-non-centered">
 <div class="code-block-caption"><span class="caption-number">Listing 4.16 </span><span class="caption-text">model_hierarchical_salad_sales_non_centered</span><a class="headerlink" href="#model-hierarchical-salad-sales-non-centered" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">non_centered_beta_prior_fn</span><span class="p">(</span><span class="n">hyper_mu</span><span class="p">,</span> <span class="n">hyper_sigma</span><span class="p">):</span>
-    <span class="n">β_offset</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Sample</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">6</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;beta_offset&quot;</span><span class="p">))</span>
+    <span class="n">β_offset</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Sample</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">6</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"beta_offset"</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">β_offset</span> <span class="o">*</span> <span class="n">hyper_sigma</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">+</span> <span class="n">hyper_mu</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
 
 <span class="c1"># hierarchical_salad_df is the generated dataset as pandas.DataFrame</span>
@@ -1656,8 +1523,8 @@ Y \sim&amp; \mathcal{N}(\beta_{m} * X_m,\sigma_{m})
     <span class="mi">1000</span><span class="p">,</span> <span class="n">non_centered_model</span><span class="p">,</span> <span class="n">n_chains</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">num_adaptation_steps</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
     <span class="n">sales</span><span class="o">=</span><span class="n">observed</span><span class="p">)</span>
 
-<span class="n">divergent_per_chain</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sampler_stats_noncentered</span><span class="p">[</span><span class="s2">&quot;diverging&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There were </span><span class="si">{</span><span class="n">divergent_per_chain</span><span class="si">}</span><span class="s2"> divergences after tuning per chain.&quot;</span><span class="p">)</span>
+<span class="n">divergent_per_chain</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.sum.html#numpy.sum" title="numpy.sum"><span class="n">np</span><span class="o">.</span><span class="n">sum</span></a><span class="p">(</span><span class="n">sampler_stats_noncentered</span><span class="p">[</span><span class="s2">"diverging"</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"There were </span><span class="si">{</span><span class="n">divergent_per_chain</span><span class="si">}</span><span class="s2"> divergences after tuning per chain."</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1665,7 +1532,7 @@ Y \sim&amp; \mathcal{N}(\beta_{m} * X_m,\sigma_{m})
 </pre></div>
 </div>
 <figure class="align-default" id="fig-neals-funnel-salad-noncentered">
-<a class="reference internal image-reference" href="../_images/Neals_Funnel_Salad_NonCentered.png"><img alt="../_images/Neals_Funnel_Salad_NonCentered.png" src="../_images/Neals_Funnel_Salad_NonCentered.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Neals_Funnel_Salad_NonCentered.png"><img alt="../_images/Neals_Funnel_Salad_NonCentered.png" src="../_images/Neals_Funnel_Salad_NonCentered.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.28 </span><span class="caption-text">Scatter plot of the hyperprior and the estimated slope <span class="math notranslate nohighlight">\(\beta[4]\)</span> of
 location 4 from <code class="docutils literal notranslate"><span class="pre">non_centered_model</span></code> defined in Code Block
@@ -1697,7 +1564,7 @@ recommend you to read Michael Betancourt’s case study Hierarchical
 Modeling on this topic if you suspect model parameterization is causing
 you sampling issues <span id="id21">[<a class="reference internal" href="references.html#id164" title="Michael Betancourt. Hierarchical modeling. https://betanalpha.github.io/assets/case_studies/hierarchical_modeling.html, 11 2020.">47</a>]</span>.</p>
 <figure class="align-default" id="fig-salad-sales-hierarchical-comparison">
-<a class="reference internal image-reference" href="../_images/Salad_Sales_Hierarchical_Comparison.png"><img alt="../_images/Salad_Sales_Hierarchical_Comparison.png" src="../_images/Salad_Sales_Hierarchical_Comparison.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Salad_Sales_Hierarchical_Comparison.png"><img alt="../_images/Salad_Sales_Hierarchical_Comparison.png" src="../_images/Salad_Sales_Hierarchical_Comparison.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.29 </span><span class="caption-text">KDE of the distributions of <span class="math notranslate nohighlight">\(\beta_{\sigma h}\)</span> in both centered and
 non-centered parameterizations. The change is due to the sampler being
@@ -1739,16 +1606,16 @@ nodes for out of sample prediction. The estimates are plotted in
     <span class="n">β</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">beta_offset</span> <span class="o">*</span> <span class="n">model</span><span class="o">.</span><span class="n">beta_sigma</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">+</span> <span class="n">model</span><span class="o">.</span><span class="n">beta_mu</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
     
     <span class="n">β_group</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span>
-        <span class="n">model</span><span class="o">.</span><span class="n">beta_mu</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">beta_sigma</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;group_beta_prediction&quot;</span><span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">beta_mu</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">beta_sigma</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"group_beta_prediction"</span><span class="p">)</span>
     <span class="n">group_level_prediction</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span>
         <span class="n">β_group</span> <span class="o">*</span> <span class="n">out_of_sample_customers</span><span class="p">,</span>
         <span class="n">model</span><span class="o">.</span><span class="n">sigma_prior</span><span class="p">,</span>
-        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;group_level_prediction&quot;</span><span class="p">)</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">"group_level_prediction"</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]:</span>
         <span class="k">yield</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span>
             <span class="n">tf</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">β</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">out_of_sample_customers</span><span class="p">,</span>
             <span class="n">tf</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">sigma</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">),</span>
-            <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;location_</span><span class="si">{</span><span class="n">l</span><span class="si">}</span><span class="s2">_prediction&quot;</span><span class="p">)</span>
+            <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">"location_</span><span class="si">{</span><span class="n">l</span><span class="si">}</span><span class="s2">_prediction"</span><span class="p">)</span>
 
 <span class="n">amended_posterior</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nest</span><span class="o">.</span><span class="n">pack_sequence_as</span><span class="p">(</span>
     <span class="n">non_centered_model</span><span class="o">.</span><span class="n">sample</span><span class="p">(),</span>
@@ -1759,7 +1626,7 @@ nodes for out of sample prediction. The estimates are plotted in
 </div>
 </div>
 <figure class="align-default" id="fig-salad-sales-hierarchical-predictions">
-<a class="reference internal image-reference" href="../_images/Salad_Sales_Hierarchical_Predictions.png"><img alt="../_images/Salad_Sales_Hierarchical_Predictions.png" src="../_images/Salad_Sales_Hierarchical_Predictions.png" style="width: 7.00in;" /></a>
+<a class="reference internal image-reference" href="../_images/Salad_Sales_Hierarchical_Predictions.png"><img alt="../_images/Salad_Sales_Hierarchical_Predictions.png" src="../_images/Salad_Sales_Hierarchical_Predictions.png" style="width: 7.00in;"/></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.30 </span><span class="caption-text">Posterior predictive estimates for the revenues for two of the groups
 and for total population estimated by model
@@ -1777,19 +1644,19 @@ This is demonstrated in Code Block
 <a class="reference internal" href="#model-hierarchical-salad-sales-predictions-new-location"><span class="std std-ref">model_hierarchical_salad_sales_predictions_new_location</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="model-hierarchical-salad-sales-predictions-new-location">
 <div class="code-block-caption"><span class="caption-number">Listing 4.18 </span><span class="caption-text">model_hierarchical_salad_sales_predictions_new_location</span><a class="headerlink" href="#model-hierarchical-salad-sales-predictions-new-location" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">out_of_sample_customers2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">out_of_sample_customers2</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.arange.html#numpy.arange" title="numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
 
 <span class="nd">@tfd</span><span class="o">.</span><span class="n">JointDistributionCoroutine</span>
 <span class="k">def</span> <span class="nf">out_of_sample_prediction_model2</span><span class="p">():</span>
     <span class="n">model</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">root</span><span class="p">(</span><span class="n">non_centered_model</span><span class="p">)</span>
     
     <span class="n">β_new_loc</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span>
-        <span class="n">model</span><span class="o">.</span><span class="n">beta_mu</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">beta_sigma</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;beta_new_loc&quot;</span><span class="p">)</span>
-    <span class="n">σ_new_loc</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">tfd</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">sigma_prior</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;sigma_new_loc&quot;</span><span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">beta_mu</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">beta_sigma</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"beta_new_loc"</span><span class="p">)</span>
+    <span class="n">σ_new_loc</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">tfd</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">sigma_prior</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"sigma_new_loc"</span><span class="p">)</span>
     <span class="n">group_level_prediction</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span>
         <span class="n">β_new_loc</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">out_of_sample_customers2</span><span class="p">,</span>
         <span class="n">σ_new_loc</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
-        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;new_location_prediction&quot;</span><span class="p">)</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">"new_location_prediction"</span><span class="p">)</span>
 
 <span class="n">ppc</span> <span class="o">=</span> <span class="n">out_of_sample_prediction_model2</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">var0</span><span class="o">=</span><span class="n">amended_posterior</span><span class="p">)</span>
 </pre></div>
@@ -1987,47 +1854,46 @@ if the acceleration is <span class="math notranslate nohighlight">\(g\)</span> a
 <li><p>The velocity of the ball at each point during her measurements</p></li>
 <li><p>The estimated position of the ball from time 20 to time 30</p></li>
 </ol>
-<hr class="footnotes docutils" />
+<hr class="footnotes docutils"/>
 <aside class="footnote brackets" id="id27" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">1</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id4" role="doc-backlink">1</a><span class="fn-bracket">]</span></span>
 <p>The difference between the observed value and the estimated value
 of a quantity of interest is call the residual.</p>
 </aside>
 <aside class="footnote brackets" id="id28" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">2</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id6" role="doc-backlink">2</a><span class="fn-bracket">]</span></span>
 <p>Remember this is just a toy dataset, so the take-home message
 should be about modeling interactions and not about tips.</p>
 </aside>
 <aside class="footnote brackets" id="id29" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">3</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id9" role="doc-backlink">3</a><span class="fn-bracket">]</span></span>
 <p>Although the mean is defined only for <span class="math notranslate nohighlight">\(\nu &gt; 1\)</span>, and the value of
 <span class="math notranslate nohighlight">\(\sigma\)</span> agrees with the standard deviation only when
 <span class="math notranslate nohighlight">\(\nu \to \infty\)</span>.</p>
 </aside>
 <aside class="footnote brackets" id="id30" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">4</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id10" role="doc-backlink">4</a><span class="fn-bracket">]</span></span>
 <p>A thin dough filled with a salty or sweet preparation and baked or
 fried. The filling can include red or white meat, fish, vegetables,
 or fruit. Empanadas are common in Southern European, Latin American,
 and the Filipino cultures.</p>
 </aside>
 <aside class="footnote brackets" id="id31" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id11">5</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id11" role="doc-backlink">5</a><span class="fn-bracket">]</span></span>
 <p>The commemoration of the first Argentine government and the
 Argentine independence day respectively.</p>
 </aside>
 <aside class="footnote brackets" id="id32" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id24">6</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id24" role="doc-backlink">6</a><span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Location%E2%80%93scale_family">https://en.wikipedia.org/wiki/Location–scale_family</a></p>
 </aside>
 <aside class="footnote brackets" id="id33" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id25">7</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a href="#id25" role="doc-backlink">7</a><span class="fn-bracket">]</span></span>
 <p><a class="github reference external" href="https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations">stan-dev/stan</a></p>
 </aside>
 </section>
 </section>
-
-    <script type="text/x-thebe-config">
+<script type="text/x-thebe-config">
     {
         requestKernel: true,
         binderOptions: {
@@ -2045,51 +1911,34 @@ Argentine independence day respectively.</p>
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
-
-                </article>
-              
-
-              
-              
-              
-              
-                <footer class="prev-next-footer">
-                  
+<script>kernelName = 'python3'</script>
+</article>
+<footer class="prev-next-footer">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="chp_03.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">3. </span>Linear Models and Probabilistic Programming Languages</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="chp_05.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">5. </span>Splines</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="chp_03.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title"><span class="section-number">3. </span>Linear Models and Probabilistic Programming Languages</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
+</a>
+<a class="right-next" href="chp_05.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title"><span class="section-number">5. </span>Splines</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage">
+<i class="fa-solid fa-list"></i> Contents
   </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
+<nav class="bd-toc-nav page-toc">
+<ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transforming-covariates">4.1. Transforming Covariates</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#varying-uncertainty">4.2. Varying Uncertainty</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interaction-effects">4.3. Interaction Effects</a></li>
@@ -2108,57 +1957,36 @@ Argentine independence day respectively.</p>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">4.7. Exercises</a></li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-          </div>
-          <footer class="bd-footer-content">
-            
+</div>
+<footer class="bd-footer-content">
 <div class="bd-footer-content__inner container">
-  
-  <div class="footer-item">
-    
+<div class="footer-item">
 <p class="component-author">
 By Martin, Kumar, Lao
 </p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-
-  <p class="copyright">
+</div>
+<div class="footer-item">
+<p class="copyright">
     
       © Copyright 2022.
       <br/>
-    
-  </p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
+</p>
 </div>
-          </footer>
-        
-
-      </main>
-    </div>
-  </div>
-  
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<div class="footer-item">
+</div>
+<div class="footer-item">
+</div>
+</div>
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
 <script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
-
-  <footer class="bd-footer">
-  </footer>
-  </body>
+<footer class="bd-footer">
+</footer>
+</body>
 </html>
